@@ -1,0 +1,47 @@
+{
+  "$schema": "https://turborepo.dev/schema.json",
+  "ui": "tui",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": ["NODE_ENV"],
+  "tasks": {
+    "topo": {
+      "dependsOn": ["^topo"]
+    },
+    "//#lint": {
+      "dependsOn": [],
+      "inputs": ["$TURBO_DEFAULT$"],
+      "outputs": []
+    },
+    "//#lint:fix": {
+      "cache": false,
+      "dependsOn": [],
+      "inputs": ["$TURBO_DEFAULT$"],
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": ["^topo"],
+      "inputs": ["$TURBO_DEFAULT$"]
+    },
+    "format": {
+      "dependsOn": [],
+      "inputs": ["$TURBO_DEFAULT$"]
+    },
+    "check-types": {
+      "dependsOn": ["^topo"],
+      "inputs": ["$TURBO_DEFAULT$"]
+    },
+    "test": {
+      "dependsOn": ["^topo", "^build"],
+      "inputs": ["$TURBO_DEFAULT$"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

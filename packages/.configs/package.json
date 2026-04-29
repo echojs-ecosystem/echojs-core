@@ -1,0 +1,25 @@
+{
+  "name": "@echojs-ecosystem/oxc-config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig": "./tsconfig.json",
+    "./vitest": "./vitest.config.ts",
+    "./oxfmt": "./oxfmt.config.ts",
+    "./oxlint": "./oxlint.config.ts",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --check",
+    "format:fix": "oxfmt"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.46.0",
+    "oxlint": "^1.61.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.5"
+  }
+}

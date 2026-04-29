@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EchoJS Example Viewer</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .back {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #007acc;
+        text-decoration: none;
+      }
+      .back:hover {
+        text-decoration: underline;
+      }
+      #app {
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        min-height: 200px;
+      }
+      .loading {
+        color: #999;
+        text-align: center;
+        padding: 40px;
+      }
+      .error {
+        background: #fff2f0;
+        border: 1px solid #ffccc7;
+        color: #cf1322;
+        padding: 15px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="index.html" class="back">← Back to examples</a>
+    <div id="app">
+      <div class="loading">Loading example...</div>
+    </div>
+
+    <script type="module">
+      // Get example name from URL
+      const params = new URLSearchParams(window.location.search);
+      const example = params.get("example") || "01-counter";
+      const exampleFile = `./${example}.tsx`;
+
+      // Dynamic import with error handling
+      async function loadExample() {
+        try {
+          await import(exampleFile);
+        } catch (error) {
+          const app = document.getElementById("app");
+          app.innerHTML = `
+          <div class="error">
+            <h3>Error loading example</h3>
+            <p>Could not load: <code>${exampleFile}</code></p>
+            <p>Make sure you're running this through a dev server that supports TSX.</p>
+            <pre>${error.message}</pre>
+          </div>
+        `;
+          console.error(error);
+        }
+      }
+
+      loadExample();
+    </script>
+  </body>
+</html>
