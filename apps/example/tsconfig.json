@@ -19,7 +19,9 @@
     "paths": {
       "@echojs-ecosystem/core": ["../../packages/core/src/index.ts"],
       "@echojs-ecosystem/core/*": ["../../packages/core/src/*"],
-      "@echojs-ecosystem/reactivity": ["../../packages/reactivity/src/index.ts"]
+      "@echojs-ecosystem/reactivity": ["../../packages/reactivity/src/index.ts"],
+      "@echojs/hyperdom": ["../../packages/hyperdom/src/index.ts"],
+      "@echojs/hyperdom/*": ["../../packages/hyperdom/src/*"]
     }
   },
   "include": ["src"]

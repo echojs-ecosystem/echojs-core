@@ -1,0 +1,24 @@
+import type { Child } from "./types";
+import { createScope, disposeScope, runWithScope } from "./lifecycle/cleanup";
+import { mountChild, mountChildren } from "./dom/children";
+import { activateTree } from "./dom/bindings";
+
+export function render(view: Child, container: Element): () => void {
+  container.textContent = "";
+
+  const scope = createScope();
+
+  runWithScope(scope, () => {
+    if (Array.isArray(view)) mountChildren(container, view, null);
+    else mountChild(container, view, null);
+
+    // Activate deferred reactive props/events/regions inside the current scope.
+    activateTree(container);
+  });
+
+  return () => {
+    disposeScope(scope);
+    container.textContent = "";
+  };
+}
+

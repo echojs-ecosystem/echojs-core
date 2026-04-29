@@ -3,6 +3,7 @@ import { ConditionalComponent } from "./examples/conditional";
 import { FormComponent } from "./examples/form";
 import { TodoListComponent } from "./examples/todo";
 import { StyleComponent } from "./examples/styles";
+import { HyperdomExample } from "./examples/hyperdom";
 import { createView } from "@echojs-ecosystem/core";
 
 export const App = createView(() => (
@@ -18,6 +19,7 @@ export const App = createView(() => (
       <FormComponent />
       <TodoListComponent />
       <StyleComponent />
+      <HyperdomExample />
     </main>
 
     <footer>

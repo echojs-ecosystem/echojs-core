@@ -20,6 +20,10 @@ export default defineConfig({
         find: /^@echojs-ecosystem\/reactivity$/,
         replacement: resolve(__dirname, "../../packages/reactivity/src/index.ts"),
       },
+      {
+        find: /^@echojs\/hyperdom$/,
+        replacement: resolve(__dirname, "../../packages/hyperdom/src/index.ts"),
+      },
     ],
   },
   esbuild: {
@@ -31,6 +35,6 @@ export default defineConfig({
     open: true,
   },
   optimizeDeps: {
-    exclude: ["@echojs-ecosystem/core", "@echojs-ecosystem/reactivity"],
+    exclude: ["@echojs-ecosystem/core", "@echojs-ecosystem/reactivity", "@echojs/hyperdom"],
   },
 });
