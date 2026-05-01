@@ -8,7 +8,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@echojs-ecosystem/core": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*",
     "@echojs/hyperdom": "workspace:*"
   },

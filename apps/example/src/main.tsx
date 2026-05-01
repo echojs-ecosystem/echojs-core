@@ -1,9 +1,10 @@
 import "./style.css";
-import { mount } from "@echojs-ecosystem/core";
-import { App } from "./App";
+import { render, setStrictContextChecks } from "@echojs/hyperdom";
+import { AppView } from "./app-hyperdom";
 
 // Mount to DOM
 const root = document.getElementById("app");
 if (root) {
-  mount(root, <App />);
+  setStrictContextChecks(true);
+  render(AppView(), root);
 }

@@ -1,7 +1,12 @@
 export { h } from "./h";
 export { render } from "./render";
+export { mount } from "./mount";
+export { createModel, isInModelContext } from "./model";
+export { createView, isInViewContext } from "./view";
+export { createComponent } from "./component";
+export { setStrictContextChecks, getStrictContextChecks } from "./config";
 export { Show } from "./control/show";
 export { List } from "./control/list";
+export * from "./dsl";
 
 export type { Child, Props, Component } from "./types";
-

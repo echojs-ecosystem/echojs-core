@@ -24,7 +24,10 @@ const view = h("div", { class: "app" }, [
   h("button", { onClick: () => count.set(count.value() + 1) }, "Increment"),
   h("span", null, () => count.value()),
 
-  Show(() => count.value() > 0, () => h("p", null, "Count больше нуля")),
+  Show(
+    () => count.value() > 0,
+    () => h("p", null, "Count больше нуля"),
+  ),
 
   List(items, (item) => h("div", { class: "item" }, item)),
 ]);
@@ -112,4 +115,3 @@ List(items, (item, index) => h("div", null, [index(), ": ", item]));
   - TODO: keyed reconciliation / оптимизированный diff.
 - JSX-компилятор пока не входит в пакет.
 - TODO: расширенный синтаксис событий вида `on:event:name`.
-

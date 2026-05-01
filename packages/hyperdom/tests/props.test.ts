@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { signal } from "@echojs-ecosystem/reactivity";
 import { h } from "../src/h";
 import { render } from "../src/render";
+import { mount } from "../src/mount";
 
 describe("props", () => {
   it("ставит class/className/id/title/data-*/aria-*", () => {
@@ -62,5 +63,25 @@ describe("props", () => {
     dispose();
     expect(seen).toBe(null);
   });
-});
 
+  it("cleanup вызывает ref(null) для узлов, созданных внутри динамического региона", async () => {
+    const open = signal(true);
+    let seen: Element | null = null;
+
+    const { node, dispose } = mount(
+      h("div", null, () =>
+        open.value() ? h("span", { ref: (el) => (seen = el) }, "x") : null,
+      ),
+    );
+
+    expect(node.textContent).toBe("x");
+    expect(seen).toBeInstanceOf(Element);
+
+    open.set(false);
+    await Promise.resolve();
+    expect(node.textContent).toBe("");
+    expect(seen).toBe(null);
+
+    dispose();
+  });
+});

@@ -16,7 +16,6 @@
     "apps/example": {
       "name": "@echojs-ecosystem/example",
       "dependencies": {
-        "@echojs-ecosystem/core": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
         "@echojs/hyperdom": "workspace:*",
       },

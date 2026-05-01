@@ -1,6 +1,15 @@
 import type { Child } from "../types";
 
-export function Show(condition: () => boolean, children: () => Child, fallback?: () => Child): () => Child {
-  return () => (condition() ? children() : fallback?.() ?? null);
-}
-
+/**
+ * Conditional region helper.
+ *
+ * Returns a dynamic child that re-evaluates `condition()` and renders either `then()` or
+ * `fallback()` on each update.
+ */
+export const Show = (
+  condition: () => boolean,
+  then: () => Child,
+  fallback?: () => Child,
+): (() => Child) => {
+  return () => (condition() ? then() : (fallback ? fallback() : null));
+};

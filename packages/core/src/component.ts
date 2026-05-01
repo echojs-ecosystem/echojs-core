@@ -1,7 +1,14 @@
 import { scope, cleanup, effect, signal, computed } from "@echojs-ecosystem/reactivity";
 import type { Signal, ReadonlySignal } from "@echojs-ecosystem/reactivity";
 import { isFunction, isObject } from "./internals/utils.js";
-import type { JSXElement, JSXComponent, ComponentVM, ViewFn, ModelContext, ModelResult } from "./types.js";
+import type {
+  JSXElement,
+  JSXComponent,
+  ComponentVM,
+  ViewFn,
+  ModelContext,
+  ModelResult,
+} from "./types.js";
 
 export interface Component<VM> {
   (props?: Record<string, unknown>): JSXElement;
@@ -35,9 +42,7 @@ export interface CreateModelOptions {
  * Создает модель (ViewModel) с signals, effects и т.д.
  * Возвращает объект с данными и методами для компонента
  */
-export const createModel = <VM>(
-  modelFn: ModelFn<VM>
-): (() => VM) => {
+export const createModel = <VM>(modelFn: ModelFn<VM>): (() => VM) => {
   return (): VM => {
     const context: ModelContextType = {
       signal,
@@ -71,9 +76,7 @@ export const createModel = <VM>(
  * Создает view функцию для рендеринга JSX
  * Принимает ViewModel и возвращает JSX элемент
  */
-export const createView = <VM>(
-  viewFn: ViewFn<VM>
-): ViewFn<VM> => {
+export const createView = <VM>(viewFn: ViewFn<VM>): ViewFn<VM> => {
   return (vm: VM): JSXElement => {
     // View рендеринг должен происходить внутри scope для работы cleanup
     let result: JSXElement;
@@ -96,7 +99,7 @@ export const createView = <VM>(
  */
 export const createComponent = <VM>(
   modelOrFn: ModelFn<VM> | (() => VM),
-  view: ViewFn<VM>
+  view: ViewFn<VM>,
 ): JSXComponent<Record<string, unknown>> => {
   const ComponentFn = (props: Record<string, unknown> = {}): JSXElement => {
     let disposeComponent: (() => void) | null = null;

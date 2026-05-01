@@ -2,15 +2,27 @@ import type { Child, Component, Props } from "../types";
 import { setProps } from "./props";
 import { mountChild, mountChildren } from "./children";
 
-export type Tag = string | Component<any>;
+export type HtmlTagName = keyof HTMLElementTagNameMap;
+export type SvgTagName = keyof SVGElementTagNameMap;
+export type IntrinsicTagName = HtmlTagName | SvgTagName;
 
-export function createNode(tag: Tag, props?: Props | null, children?: Child): Child {
+export type Tag = IntrinsicTagName | Component<any>;
+
+/**
+ * Creates an element for an intrinsic tag, or calls a component function.
+ *
+ * - Intrinsic tags are created via `document.createElement(...)`
+ * - Props are applied via `setProps(...)`
+ * - Children are mounted immediately
+ */
+export const createNode = (tag: Tag, props?: Props<any> | null, children?: Child): Child => {
   if (typeof tag === "function") {
     const nextProps = { ...(props ?? {}), children } as any;
     return tag(nextProps);
   }
 
-  const el = document.createElement(tag);
+  // Note: createElement supports both HTML and SVG tag names.
+  const el = document.createElement(tag as string);
   setProps(el, props ?? null);
 
   if (children !== undefined) {
@@ -19,5 +31,4 @@ export function createNode(tag: Tag, props?: Props | null, children?: Child): Ch
   }
 
   return el;
-}
-
+};

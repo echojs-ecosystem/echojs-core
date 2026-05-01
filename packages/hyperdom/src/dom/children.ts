@@ -1,17 +1,28 @@
 import type { Child } from "../types";
-import { createScope, disposeScope, runWithScope, type Scope, getCurrentScope, onCleanup } from "../lifecycle/cleanup";
+import {
+  createScope,
+  disposeScope,
+  runWithScope,
+  type Scope,
+  getCurrentScope,
+  onCleanup,
+} from "../lifecycle/cleanup";
 import { createReactiveEffect } from "../lifecycle/reactive";
-import { clearBetween } from "./insert";
-import { addBinding } from "./bindings";
+import { clearBetween, collectBetween } from "./insert";
+import { addBinding, activateTree } from "./bindings";
 
 const isNode = (v: unknown): v is Node =>
   typeof v === "object" && v !== null && typeof (v as any).nodeType === "number";
 
-function normalizeText(v: string | number): Text {
-  return document.createTextNode(String(v));
-}
+/** Creates a DOM Text node from a primitive child. */
+const normalizeText = (v: string | number): Text => document.createTextNode(String(v));
 
-export function mountChild(parent: Node, child: Child, before: Node | null): Node[] {
+/**
+ * Mounts a single `Child` value into the DOM.
+ *
+ * Returns the list of inserted nodes for bookkeeping by higher-level mounts.
+ */
+export const mountChild = (parent: Node, child: Child, before: Node | null): Node[] => {
   if (child == null || child === false || child === true) return [];
 
   if (typeof child === "string" || typeof child === "number") {
@@ -35,18 +46,25 @@ export function mountChild(parent: Node, child: Child, before: Node | null): Nod
 
   // Unknown values: ignore
   return [];
-}
+};
 
-export function mountChildren(parent: Node, children: Child[], before: Node | null): Node[] {
+/** Mounts an array of children into the DOM. */
+export const mountChildren = (parent: Node, children: Child[], before: Node | null): Node[] => {
   const out: Node[] = [];
   for (const c of children) {
     if (Array.isArray(c)) out.push(...mountChildren(parent, c, before));
     else out.push(...mountChild(parent, c, before));
   }
   return out;
-}
+};
 
-function mountDynamic(parent: Node, compute: () => Child, before: Node | null): Node[] {
+/**
+ * Mounts a dynamic region (`() => Child`) between two comment markers.
+ *
+ * The region is activated later (via bindings) when `render()` runs inside a scope, so reactive
+ * dependencies can be tracked and cleaned up correctly.
+ */
+const mountDynamic = (parent: Node, compute: () => Child, before: Node | null): Node[] => {
   const start = document.createComment("hyperdom:start");
   const end = document.createComment("hyperdom:end");
   parent.insertBefore(end, before);
@@ -67,6 +85,11 @@ function mountDynamic(parent: Node, compute: () => Child, before: Node | null): 
 
     runWithScope(nextScope, () => {
       mountChild(parent, next, end);
+      // Activate deferred bindings (props/events/dynamic regions) created inside this region scope.
+      // Without this, reactive props/events inside dynamic regions would never start updating.
+      for (const node of collectBetween(start, end)) {
+        activateTree(node);
+      }
     });
   };
 
@@ -78,7 +101,9 @@ function mountDynamic(parent: Node, compute: () => Child, before: Node | null): 
       return;
     }
 
-    createReactiveEffect(update, () => {
+    const updateInOwnerScope = () => runWithScope(ownerScope, update);
+
+    createReactiveEffect(updateInOwnerScope, () => {
       if (regionScope) disposeScope(regionScope);
       clearBetween(start, end);
       start.parentNode?.removeChild(start);
@@ -100,5 +125,4 @@ function mountDynamic(parent: Node, compute: () => Child, before: Node | null): 
   });
 
   return [start, end];
-}
-
+};

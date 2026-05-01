@@ -3,7 +3,13 @@ import { createScope, disposeScope, runWithScope } from "./lifecycle/cleanup";
 import { mountChild, mountChildren } from "./dom/children";
 import { activateTree } from "./dom/bindings";
 
-export function render(view: Child, container: Element): () => void {
+/**
+ * Renders a `Child` view into a container element.
+ *
+ * Establishes a cleanup scope, mounts the initial tree, then activates deferred bindings.
+ * Returns a `dispose()` function that tears down reactive resources and clears the container.
+ */
+export const render = (view: Child, container: Element): (() => void) => {
   container.textContent = "";
 
   const scope = createScope();
@@ -20,5 +26,4 @@ export function render(view: Child, container: Element): () => void {
     disposeScope(scope);
     container.textContent = "";
   };
-}
-
+};

@@ -41,4 +41,3 @@ describe("render()", () => {
     expect(container.textContent).toBe("");
   });
 });
-

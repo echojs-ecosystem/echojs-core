@@ -62,11 +62,7 @@ const createFragment = (children: unknown[]): DocumentFragment => {
   return fragment;
 };
 
-const insertDynamic = (
-  parent: Node,
-  getValue: () => unknown,
-  marker: Node | null,
-): CleanupFn => {
+const insertDynamic = (parent: Node, getValue: () => unknown, marker: Node | null): CleanupFn => {
   // IMPORTANT:
   // We can't rely on replaceChild(toNode(nextValue), currentNode) when nextValue can be an array.
   // Arrays are converted to DocumentFragment, and fragments are "consumed" on insertion (no parentNode),

@@ -7,15 +7,16 @@ export interface Scope {
 
 let currentScope: Scope | null = null;
 
-export function createScope(): Scope {
-  return { cleanups: [], disposed: false };
-}
+/** Creates a fresh cleanup scope (used by render and dynamic regions). */
+export const createScope = (): Scope => ({ cleanups: [], disposed: false });
 
-export function getCurrentScope(): Scope | null {
-  return currentScope;
-}
+/** Returns the scope currently active on this call stack (if any). */
+export const getCurrentScope = (): Scope | null => currentScope;
 
-export function runWithScope<T>(scope: Scope, fn: () => T): T {
+/**
+ * Runs a function with `scope` set as current, restoring the previous scope afterwards.
+ */
+export const runWithScope = <T>(scope: Scope, fn: () => T): T => {
   const prev = currentScope;
   currentScope = scope;
   try {
@@ -23,15 +24,17 @@ export function runWithScope<T>(scope: Scope, fn: () => T): T {
   } finally {
     currentScope = prev;
   }
-}
+};
 
-export function onCleanup(fn: CleanupFn): void {
+/** Registers a cleanup callback on the current scope (no-op if no active scope). */
+export const onCleanup = (fn: CleanupFn): void => {
   const scope = currentScope;
   if (!scope || scope.disposed) return;
   scope.cleanups.push(fn);
-}
+};
 
-export function disposeScope(scope: Scope): void {
+/** Disposes a scope, running cleanups in reverse order (best-effort). */
+export const disposeScope = (scope: Scope): void => {
   if (scope.disposed) return;
   scope.disposed = true;
 
@@ -43,5 +46,4 @@ export function disposeScope(scope: Scope): void {
     }
   }
   scope.cleanups.length = 0;
-}
-
+};

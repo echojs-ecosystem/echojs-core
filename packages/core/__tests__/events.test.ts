@@ -80,11 +80,7 @@ describe("insert() dynamic", () => {
     };
 
     const stop = scope(() => {
-      insert(
-        host,
-        () => $items.value().map((item) => createItem(item)),
-        null,
-      );
+      insert(host, () => $items.value().map((item) => createItem(item)), null);
     });
 
     // Проверяем начальное состояние
@@ -129,29 +125,31 @@ describe("insert() dynamic", () => {
       };
     });
 
-    const TodoView = createView((vm: { todos: ReturnType<typeof signal<Todo[]>>; removeTodo: (id: number) => void }) => {
-      const host = document.createElement("ul");
+    const TodoView = createView(
+      (vm: { todos: ReturnType<typeof signal<Todo[]>>; removeTodo: (id: number) => void }) => {
+        const host = document.createElement("ul");
 
-      insert(
-        host,
-        () =>
-          vm.todos.value().map((todo) => {
-            const li = document.createElement("li");
-            li.textContent = todo.text;
-            li.setAttribute("data-id", String(todo.id));
+        insert(
+          host,
+          () =>
+            vm.todos.value().map((todo) => {
+              const li = document.createElement("li");
+              li.textContent = todo.text;
+              li.setAttribute("data-id", String(todo.id));
 
-            const btn = document.createElement("button");
-            btn.textContent = "x";
-            btn.onclick = () => vm.removeTodo(todo.id);
-            li.appendChild(btn);
+              const btn = document.createElement("button");
+              btn.textContent = "x";
+              btn.onclick = () => vm.removeTodo(todo.id);
+              li.appendChild(btn);
 
-            return li;
-          }),
-        null,
-      );
+              return li;
+            }),
+          null,
+        );
 
-      return host;
-    });
+        return host;
+      },
+    );
 
     const container = document.createElement("div");
     const stop = scope(() => {
@@ -256,4 +254,3 @@ describe("insert() dynamic", () => {
     stop();
   });
 });
-

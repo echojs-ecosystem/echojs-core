@@ -25,4 +25,3 @@ describe("h()", () => {
     expect(el.childNodes.length).toBe(1);
   });
 });
-

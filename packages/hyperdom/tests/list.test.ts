@@ -9,7 +9,10 @@ describe("List()", () => {
     const container = document.createElement("div");
     const items = signal(["A", "B", "C"]);
 
-    render(List(items, (item) => h("div", { class: "item" }, item)), container);
+    render(
+      List(items, (item) => h("div", { class: "item" }, item)),
+      container,
+    );
     expect(container.querySelectorAll(".item").length).toBe(3);
     expect(container.textContent).toBe("ABC");
   });
@@ -18,7 +21,10 @@ describe("List()", () => {
     const container = document.createElement("div");
     const items = signal(["A", "B"]);
 
-    render(List(items, (item) => h("div", { class: "item" }, item)), container);
+    render(
+      List(items, (item) => h("div", { class: "item" }, item)),
+      container,
+    );
     expect(container.textContent).toBe("AB");
 
     items.set(["X"]);
@@ -27,4 +33,3 @@ describe("List()", () => {
     expect(container.querySelectorAll(".item").length).toBe(1);
   });
 });
-

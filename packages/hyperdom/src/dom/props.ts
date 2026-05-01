@@ -8,7 +8,8 @@ type StyleObject = Record<string, string | number | null | undefined | false>;
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null && (v as any).constructor === Object;
 
-function setStyle(el: HTMLElement, value: unknown): void {
+/** Applies a `style` value (string or object) onto an element. */
+const setStyle = (el: HTMLElement, value: unknown): void => {
   if (value == null || value === false) {
     el.removeAttribute("style");
     return;
@@ -27,24 +28,27 @@ function setStyle(el: HTMLElement, value: unknown): void {
       }
     }
   }
-}
+};
 
-function setRef(el: Element, value: unknown): void {
+/** Applies a `ref` callback and registers cleanup to pass `null` on dispose. */
+const setRef = (el: Element, value: unknown): void => {
   if (typeof value !== "function") return;
   const ref = value as (el: Element | null) => void;
   ref(el);
   onCleanup(() => ref(null));
-}
+};
 
-function setAttr(el: Element, key: string, value: unknown): void {
+/** Sets/removes a string attribute, handling boolean-ish values. */
+const setAttr = (el: Element, key: string, value: unknown): void => {
   if (value == null || value === false) {
     el.removeAttribute(key);
     return;
   }
   el.setAttribute(key, value === true ? "" : String(value));
-}
+};
 
-function setDomProp(el: any, key: string, value: unknown): void {
+/** Sets a DOM property when it exists on the element (best-effort). */
+const setDomProp = (el: any, key: string, value: unknown): void => {
   if (value == null || value === false) {
     try {
       el[key] = key === "value" ? "" : false;
@@ -58,9 +62,14 @@ function setDomProp(el: any, key: string, value: unknown): void {
   } catch {
     // ignore
   }
-}
+};
 
-export function setProp(el: Element, key: string, value: unknown): void {
+/**
+ * Applies a single prop to an element.
+ *
+ * Events are deferred and handled by `setProps()` so they can participate in scope cleanup.
+ */
+export const setProp = (el: Element, key: string, value: unknown): void => {
   if (key === "children") return;
 
   // Events (deferred, because cleanup depends on render scope)
@@ -93,19 +102,23 @@ export function setProp(el: Element, key: string, value: unknown): void {
   }
 
   setAttr(el, key, value);
-}
+};
 
-export function setProps(el: Element, props: Record<string, unknown> | null | undefined): void {
+/**
+ * Applies a props object to an element.
+ *
+ * - Event props (`on...`, `"on:..."`) are deferred via bindings so they can be cleaned up.
+ * - Function-valued props (except `ref`) are treated as reactive getters and re-evaluated.
+ */
+export const setProps = (el: Element, props: Record<string, unknown> | null | undefined): void => {
   if (!props) return;
 
   for (const [key, raw] of Object.entries(props)) {
     if (key.startsWith("on")) {
       addBinding(el, () => {
-        setEvent(el, key, raw);
-        const eventName = key.slice(2);
-        const domEvent = eventName.charAt(0).toLowerCase() + eventName.slice(1);
-        const listener = raw as any as EventListener;
-        onCleanup(() => el.removeEventListener(domEvent, listener));
+        const bound = setEvent(el, key, raw);
+        if (!bound) return;
+        onCleanup(() => el.removeEventListener(bound.event, bound.listener));
       });
       continue;
     }
@@ -116,5 +129,4 @@ export function setProps(el: Element, props: Record<string, unknown> | null | un
       setProp(el, key, raw);
     }
   }
-}
-
+};

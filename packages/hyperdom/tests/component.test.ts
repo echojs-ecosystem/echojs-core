@@ -1,0 +1,18 @@
+import { describe, expect, it } from "vitest";
+import { createComponent } from "../src/component";
+import { createModel } from "../src/model";
+import { createView } from "../src/view";
+import { h } from "../src/h";
+
+describe("createComponent()", () => {
+  it("склеивает model и view в функцию-компонент", () => {
+    const makeModel = createModel(() => ({ n: 1 }));
+    const view = createView((vm: { n: number }) => h("div", null, String(vm.n)));
+
+    const Component = createComponent(makeModel, view);
+    const node = Component() as HTMLElement;
+
+    expect(node.tagName.toLowerCase()).toBe("div");
+    expect(node.textContent).toBe("1");
+  });
+});

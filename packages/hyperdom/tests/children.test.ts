@@ -38,4 +38,3 @@ describe("children", () => {
     expect(root.querySelector("#c")?.textContent).toBe("C");
   });
 });
-

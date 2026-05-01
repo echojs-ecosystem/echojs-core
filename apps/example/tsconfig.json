@@ -9,16 +9,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "@echojs-ecosystem/core",
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@echojs-ecosystem/core": ["../../packages/core/src/index.ts"],
-      "@echojs-ecosystem/core/*": ["../../packages/core/src/*"],
       "@echojs-ecosystem/reactivity": ["../../packages/reactivity/src/index.ts"],
       "@echojs/hyperdom": ["../../packages/hyperdom/src/index.ts"],
       "@echojs/hyperdom/*": ["../../packages/hyperdom/src/*"]

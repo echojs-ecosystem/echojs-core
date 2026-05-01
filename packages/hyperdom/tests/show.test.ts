@@ -9,7 +9,13 @@ describe("Show()", () => {
     const container = document.createElement("div");
     const open = signal(true);
 
-    render(Show(() => open.value(), () => h("div", null, "Open")), container);
+    render(
+      Show(
+        () => open.value(),
+        () => h("div", null, "Open"),
+      ),
+      container,
+    );
     expect(container.textContent).toBe("Open");
 
     open.set(false);
@@ -36,4 +42,3 @@ describe("Show()", () => {
     expect(container.textContent).toBe("Open");
   });
 });
-
