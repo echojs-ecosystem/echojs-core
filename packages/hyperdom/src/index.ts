@@ -2,7 +2,7 @@ export { h } from "./h";
 export { render } from "./render";
 export { mount } from "./mount";
 export { createModel, isInModelContext } from "./model";
-export { createView, isInViewContext } from "./view";
+export { createView, createViewWithMount, isInViewContext } from "./view";
 export { createComponent } from "./component";
 export { setStrictContextChecks, getStrictContextChecks } from "./config";
 export { Show } from "./control/show";

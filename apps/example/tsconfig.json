@@ -16,6 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@echojs-ecosystem/reactivity": ["../../packages/reactivity/src/index.ts"],
+      "@echojs/form": ["../../packages/form/src/index.ts"],
+      "@echojs/form/*": ["../../packages/form/src/*"],
       "@echojs/hyperdom": ["../../packages/hyperdom/src/index.ts"],
       "@echojs/hyperdom/*": ["../../packages/hyperdom/src/*"]
     }

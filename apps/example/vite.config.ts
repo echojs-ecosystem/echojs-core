@@ -12,6 +12,10 @@ export default defineConfig({
         find: /^@echojs\/hyperdom$/,
         replacement: resolve(__dirname, "../../packages/hyperdom/src/index.ts"),
       },
+      {
+        find: /^@echojs\/form$/,
+        replacement: resolve(__dirname, "../../packages/form/src/index.ts"),
+      },
     ],
   },
   server: {
@@ -19,6 +23,6 @@ export default defineConfig({
     open: true,
   },
   optimizeDeps: {
-    exclude: ["@echojs-ecosystem/reactivity", "@echojs/hyperdom"],
+    exclude: ["@echojs-ecosystem/reactivity", "@echojs/hyperdom", "@echojs/form"],
   },
 });

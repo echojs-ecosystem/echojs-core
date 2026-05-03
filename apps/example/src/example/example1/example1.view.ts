@@ -1,4 +1,4 @@
-import { List, Show, createView, type Child } from "@echojs/hyperdom";
+import { List, Show, createView, mount, type Child } from "@echojs/hyperdom";
 import type { Example1VM } from "./example1.model";
 import {
   article,
@@ -32,7 +32,10 @@ export const Example1View = createView((vm: Example1VM): Child => {
       h3(null, "Example1 — Counter"),
       button({ "on:click": vm.increment }, "Increment"),
       span({ style: { "margin-left": "12px", "font-weight": 700 } }, () => $count.value()),
-      Show(() => $count.value() > 0, p({ style: { "margin-top": "8px" } }, "Count больше нуля")),
+      Show(
+        () => $count.value() > 0,
+        () => p({ style: { "margin-top": "8px" } }, "Count больше нуля"),
+      ),
     ),
 
     section(

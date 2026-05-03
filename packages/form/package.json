@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/hyperdom",
+  "name": "@echojs/form",
   "version": "0.0.0",
   "private": true,
   "files": [
@@ -12,10 +12,6 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./lifecycle/mount": {
-      "types": "./dist/lifecycle/mount.d.ts",
-      "default": "./dist/lifecycle/mount.js"
-    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -25,16 +21,18 @@
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
-    "test:vitest": "vitest",
-    "test:vitest:run": "vitest run"
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
-    "@echojs-ecosystem/reactivity": "workspace:*"
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@standard-schema/spec": "^1.1.0"
   },
   "devDependencies": {
     "@echojs-ecosystem/oxc-config": "workspace:*",
-    "jsdom": "^26.1.0",
     "typescript": "5.9.2",
-    "vitest": "^4.1.4"
+    "vitest": "^4.1.4",
+    "zod": "^3.25.28"
   }
 }
+
