@@ -27,4 +27,3 @@ describe("strictContextChecks", () => {
     setStrictContextChecks(false);
   });
 });
-

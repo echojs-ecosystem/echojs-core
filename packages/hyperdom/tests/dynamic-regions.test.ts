@@ -47,9 +47,9 @@ describe("dynamic regions", () => {
     expect(root.textContent).toBe("2");
 
     // маркеры — это Comment nodes; проверяем, что их не становится больше со временем
-    const commentCount = Array.from(root.childNodes).filter((x) => x.nodeType === Node.COMMENT_NODE)
-      .length;
+    const commentCount = Array.from(root.childNodes).filter(
+      (x) => x.nodeType === Node.COMMENT_NODE,
+    ).length;
     expect(commentCount).toBeLessThanOrEqual(2);
   });
 });
-

@@ -3,14 +3,20 @@ import type { FieldArray } from "../types";
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   !!v && typeof v === "object" && !Array.isArray(v);
 
-const isField = (v: unknown): v is { set: (x: unknown) => void; $value: { value: () => unknown } } =>
-  isPlainObject(v) && typeof (v as any).set === "function" && typeof (v as any).$value?.value === "function";
+const isField = (
+  v: unknown,
+): v is { set: (x: unknown) => void; $value: { value: () => unknown } } =>
+  isPlainObject(v) &&
+  typeof (v as any).set === "function" &&
+  typeof (v as any).$value?.value === "function";
 
 const isFieldSetNode = (v: unknown): v is { fields: Record<string, unknown> } =>
   isPlainObject(v) && isPlainObject((v as any).fields);
 
 const isFieldArrayNode = (v: unknown): v is FieldArray<unknown> =>
-  isPlainObject(v) && typeof (v as any).$items?.value === "function" && typeof (v as any).append === "function";
+  isPlainObject(v) &&
+  typeof (v as any).$items?.value === "function" &&
+  typeof (v as any).append === "function";
 
 const readItems = (arr: FieldArray<unknown>): unknown[] => {
   const v = arr.$items.value();

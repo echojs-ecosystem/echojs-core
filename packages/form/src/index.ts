@@ -7,7 +7,10 @@ export { collectFormValueFromFields } from "./primitives/collect-form-value";
 export type { CreateFormOptions } from "./primitives/form";
 export type { FieldKit, FieldKitFieldOpts } from "./primitives/field-kit";
 export { hydrateFormFields } from "./primitives/hydrate";
-export { filterRootSchemaErrorsDeferredToFieldErrors, flattenValidationErrors } from "./validation/flatten-validation";
+export {
+  filterRootSchemaErrorsDeferredToFieldErrors,
+  flattenValidationErrors,
+} from "./validation/flatten-validation";
 export { wireFormModel } from "./wire/wire-form-model";
 export {
   normalizeStandardSchemaIssues,
@@ -32,4 +35,3 @@ export type {
   WireFormModel,
 } from "./types";
 export type { BindFieldControllerOptions, HyperdomFormFieldRef } from "./bindings/hyperdom";
-

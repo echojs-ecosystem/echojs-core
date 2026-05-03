@@ -98,7 +98,9 @@ export const createFieldKit = <TSeed extends Record<string, unknown>>(
     const raw = src[key];
     const options = schema.options as readonly T[];
     const initial = (
-      typeof raw === "string" && (options as readonly string[]).includes(raw) ? (raw as T) : fallback
+      typeof raw === "string" && (options as readonly string[]).includes(raw)
+        ? (raw as T)
+        : fallback
     ) as T;
     return createField(initial, { schema: schema as StandardSchemaLike<T>, ...extra });
   }
@@ -108,9 +110,7 @@ export const createFieldKit = <TSeed extends Record<string, unknown>>(
     const raw = src[key];
     const arr = Array.isArray(raw) ? raw : [];
     return createFieldArray(
-      arr.map((item, index) =>
-        rowFactory(isPlainObject(item) ? item : {}, index),
-      ),
+      arr.map((item, index) => rowFactory(isPlainObject(item) ? item : {}, index)),
     );
   };
 

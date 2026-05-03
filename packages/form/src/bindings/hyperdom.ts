@@ -1,8 +1,6 @@
 import type { Field, FieldAccessor } from "../types";
 
-type Bindable<T> =
-  | Pick<Field<T>, "bind">
-  | Pick<FieldAccessor<T>, "handlers">;
+type Bindable<T> = Pick<Field<T>, "bind"> | Pick<FieldAccessor<T>, "handlers">;
 
 /** Поле формы, к которому можно привязать Hyperdom-контроллер (`Field` или `FieldAccessor` из `wireFormModel`). */
 export type HyperdomFormFieldRef<T> = Field<T> | FieldAccessor<T>;
@@ -10,12 +8,18 @@ export type HyperdomFormFieldRef<T> = Field<T> | FieldAccessor<T>;
 const getBinding = <T>(field: Bindable<T>) => ("bind" in field ? field.bind() : field.handlers);
 
 const readFieldRef = <T>(field: HyperdomFormFieldRef<T>): T => {
-  if ("$value" in field && (field as Field<T>).$value) return (field as Field<T>).$value.value() as T;
+  if ("$value" in field && (field as Field<T>).$value)
+    return (field as Field<T>).$value.value() as T;
   return (field as FieldAccessor<T>).value() as T;
 };
 
 const writeFieldRef = <T>(field: HyperdomFormFieldRef<T>, next: T): void => {
   field.set(next);
+};
+
+const parseNumericInput = (raw: string): number => {
+  const n = Number.parseFloat(raw);
+  return Number.isFinite(n) ? n : 0;
 };
 
 const controlledStringValue = <T>(field: HyperdomFormFieldRef<T>): (() => string) => {
@@ -65,7 +69,10 @@ export type BindFieldControllerOptions =
  * Возвращаемый тип намеренно широкий: Hyperdom различает обработчики `onChange` для `input` / `select` / `textarea`,
  * а контроллер выбирается по `variant` в рантайме.
  */
-export const bindFieldController = <T>(field: HyperdomFormFieldRef<T>, opts: BindFieldControllerOptions): any => {
+export const bindFieldController = <T>(
+  field: HyperdomFormFieldRef<T>,
+  opts: BindFieldControllerOptions,
+): any => {
   const b = getBinding(field as unknown as Bindable<T>);
 
   switch (opts.variant) {
@@ -123,11 +130,14 @@ export const bindFieldController = <T>(field: HyperdomFormFieldRef<T>, opts: Bin
     }
 
     case "number": {
+      const syncFromDom = (e: Event & { currentTarget: HTMLInputElement }): void => {
+        writeFieldRef(field, parseNumericInput(e.currentTarget.value) as unknown as T);
+      };
       const onInput = (e: Event & { currentTarget: HTMLInputElement }) => {
-        b.onInputText(e as { currentTarget: HTMLInputElement | HTMLTextAreaElement });
+        syncFromDom(e);
       };
       const onChange = (e: Event & { currentTarget: HTMLInputElement }) => {
-        b.onChangeText(e as { currentTarget: HTMLInputElement | HTMLTextAreaElement });
+        syncFromDom(e);
       };
       const base = {
         type: "number" as const,
@@ -146,11 +156,14 @@ export const bindFieldController = <T>(field: HyperdomFormFieldRef<T>, opts: Bin
     }
 
     case "range": {
+      const syncFromDom = (e: Event & { currentTarget: HTMLInputElement }): void => {
+        writeFieldRef(field, parseNumericInput(e.currentTarget.value) as unknown as T);
+      };
       const onInput = (e: Event & { currentTarget: HTMLInputElement }) => {
-        b.onInputText(e as { currentTarget: HTMLInputElement | HTMLTextAreaElement });
+        syncFromDom(e);
       };
       const onChange = (e: Event & { currentTarget: HTMLInputElement }) => {
-        b.onChangeText(e as { currentTarget: HTMLInputElement | HTMLTextAreaElement });
+        syncFromDom(e);
       };
       const base = {
         type: "range" as const,
@@ -170,6 +183,5 @@ export const bindFieldController = <T>(field: HyperdomFormFieldRef<T>, opts: Bin
       };
       return { ...base, value } as const;
     }
-
   }
 };

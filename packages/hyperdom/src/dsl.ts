@@ -242,4 +242,3 @@ export const td = (props?: Props<HTMLTableCellElement> | null, ...children: Chil
 /** `<caption>` element factory. */
 export const caption = (props?: Props<HTMLTableCaptionElement> | null, ...children: Child[]) =>
   tag("caption", props, ...children);
-

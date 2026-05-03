@@ -26,10 +26,8 @@ export const createFieldArray = <Item>(initial: Item[] = []): FieldArray<Item> =
         next.splice(to, 0, item!);
         return next;
       }),
-    updateAt: (index, fn) =>
-      $items.update((prev) => prev.map((x, i) => (i === index ? fn(x) : x))),
+    updateAt: (index, fn) => $items.update((prev) => prev.map((x, i) => (i === index ? fn(x) : x))),
     replace: (next) => $items.set([...next]),
     reset: () => $items.set([...initialSnapshot]),
   };
 };
-

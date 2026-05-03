@@ -11,5 +11,5 @@ export const Show = (
   then: () => Child,
   fallback?: () => Child,
 ): (() => Child) => {
-  return () => (condition() ? then() : (fallback ? fallback() : null));
+  return () => (condition() ? then() : fallback ? fallback() : null);
 };

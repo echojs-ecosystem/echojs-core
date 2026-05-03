@@ -7,7 +7,9 @@ const isFieldNode = (v: unknown): v is { $value: { value: () => unknown } } =>
   typeof (v as any).set === "function" &&
   typeof (v as any).bind === "function";
 
-const isFieldArrayNode = (v: unknown): v is { $items: { value: () => unknown }; append: (x: unknown) => void } =>
+const isFieldArrayNode = (
+  v: unknown,
+): v is { $items: { value: () => unknown }; append: (x: unknown) => void } =>
   isPlainObject(v) &&
   typeof (v as any).$items?.value === "function" &&
   typeof (v as any).append === "function";

@@ -24,4 +24,3 @@ describe("createField()", () => {
     expect(f.validate()).toEqual([]);
   });
 });
-

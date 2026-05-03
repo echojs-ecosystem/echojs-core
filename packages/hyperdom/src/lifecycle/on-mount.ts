@@ -39,4 +39,3 @@ export const mountLifecycleHook = (fn: () => MountCleanup): Child => {
 
 /** Public name for the mount lifecycle hook. */
 export { mountLifecycleHook as mount };
-

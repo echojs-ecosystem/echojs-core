@@ -24,7 +24,9 @@ const maybeField = <T>(v: unknown): v is Field<T> =>
   typeof (v as any).bind === "function";
 
 /** Recursively wrap a field tree produced by `@echojs/form` primitives. */
-export const wireFormModel = <TTree extends Record<string, any>>(fields: TTree): WireFormModel<TTree> => {
+export const wireFormModel = <TTree extends Record<string, any>>(
+  fields: TTree,
+): WireFormModel<TTree> => {
   const wireAny = (node: unknown): unknown => {
     if (maybeField(node)) return wireFieldNode(node);
 

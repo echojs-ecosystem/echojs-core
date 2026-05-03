@@ -1,7 +1,7 @@
 export type Disposer = () => void;
 export declare const createAlienSignal: <T>(initial: T) => {
-    (): T;
-    (value: T): void;
+  (): T;
+  (value: T): void;
 };
 export declare const createAlienComputed: <T>(getter: (prev?: T) => T) => () => T;
 export declare const createAlienEffect: (fn: () => void) => Disposer;

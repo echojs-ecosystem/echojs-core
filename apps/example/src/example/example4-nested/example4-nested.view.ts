@@ -18,12 +18,19 @@ import {
 import type { Child } from "@echojs/hyperdom";
 import { ROLE_OPTIONS, type Example4NestedVM } from "./example4-nested.model";
 
-const errorLine = (errs: readonly string[]): Child | null =>
-  errs.length ? div({ class: "error" }, errs.join(", ")) : null;
+const schemaErrorBlock = (flat: Record<string, string[]> | undefined): Child | null => {
+  if (!flat || Object.keys(flat).length === 0) return null;
+  const lines = Object.entries(flat).map(([path, msgs]) =>
+    div({ key: path, class: "error" }, `${path}: ${msgs.join(", ")}`),
+  );
+  return div({ class: "error-block", style: "margin-top:8px;" }, lines);
+};
 
 export const Example4NestedView = ({
   ui,
   form,
+  $schemaErrors,
+  submitCatalog,
   appendDept,
   removeDept,
   appendEmployee,
@@ -50,28 +57,22 @@ export const Example4NestedView = ({
         ...bindFieldController(ui.catalogTitle, { variant: "text", controlledValue: true }),
       }),
     ),
-    (): Child => errorLine(ui.catalogTitle.meta().errors),
 
     div(
       { style: "margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;" },
       button({ type: "button", onClick: () => appendDept() }, "+ отдел"),
-      button(
-        {
-          type: "button",
-          onClick: async () => {
-            const res = await form.submit((v) => console.log("catalog ok", v));
-            if (!res.ok) console.log("catalog blocked", res.errors);
-          },
-        },
-        "submit (консоль)",
-      ),
+      button({ type: "button", onClick: () => void submitCatalog() }, "submit (консоль)"),
     ),
+    (): Child => schemaErrorBlock($schemaErrors.value()),
 
     hr(null),
 
     List(form.fields.departments.$items, (dept, deptIndex) =>
       div(
-        { class: "dept-card", style: "border:1px solid #ccc; padding:12px; margin:10px 0; border-radius:8px;" },
+        {
+          class: "dept-card",
+          style: "border:1px solid #ccc; padding:12px; margin:10px 0; border-radius:8px;",
+        },
         h3(null, ["Отдел #", span(null, String(deptIndex() + 1))]),
         label(
           null,
@@ -80,7 +81,6 @@ export const Example4NestedView = ({
             ...bindFieldController(dept.title, { variant: "text", controlledValue: true }),
           }),
         ),
-        (): Child => errorLine(dept.title.$meta.value().errors),
 
         div(
           { style: "display:flex; gap:8px; margin:8px 0;" },
@@ -106,7 +106,6 @@ export const Example4NestedView = ({
                 ...bindFieldController(emp.name, { variant: "text", controlledValue: true }),
               }),
             ),
-            (): Child => errorLine(emp.name.$meta.value().errors),
 
             label(
               null,
@@ -116,7 +115,6 @@ export const Example4NestedView = ({
                 ...ROLE_OPTIONS.map((o) => option({ value: o.value }, o.label)),
               ),
             ),
-            (): Child => errorLine(emp.role.$meta.value().errors),
 
             label(
               null,
@@ -127,7 +125,6 @@ export const Example4NestedView = ({
                 ...bindFieldController(emp.comment, { variant: "textarea", controlledValue: true }),
               }),
             ),
-            (): Child => errorLine(emp.comment.$meta.value().errors),
 
             div(
               { style: "display:flex; gap:8px; flex-wrap:wrap;" },
@@ -154,13 +151,15 @@ export const Example4NestedView = ({
                     ...bindFieldController(ticket.code, { variant: "text", controlledValue: true }),
                   }),
                 ),
-                (): Child => errorLine(ticket.code.$meta.value().errors),
 
                 label(
                   { style: "display:flex; flex-direction:column; gap:4px;" },
                   span(null, "ETA (дни)"),
                   input({
-                    ...bindFieldController(ticket.eta, { variant: "number", controlledValue: true }),
+                    ...bindFieldController(ticket.eta, {
+                      variant: "number",
+                      controlledValue: true,
+                    }),
                   }),
                 ),
 

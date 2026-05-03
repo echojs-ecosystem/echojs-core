@@ -106,9 +106,12 @@ describe("createForm()", () => {
 
   it("uses explicit getValue when provided (override auto snapshot)", async () => {
     const a = createField("inner");
-    const form = createForm<{ label: string }, { box: { a: typeof a } }>({ box: { a } }, {
-      getValue: () => ({ label: "mapped" }),
-    });
+    const form = createForm<{ label: string }, { box: { a: typeof a } }>(
+      { box: { a } },
+      {
+        getValue: () => ({ label: "mapped" }),
+      },
+    );
 
     const res = await form.submit((v) => {
       expect(v).toEqual({ label: "mapped" });
@@ -116,4 +119,3 @@ describe("createForm()", () => {
     expect(res.ok).toBe(true);
   });
 });
-

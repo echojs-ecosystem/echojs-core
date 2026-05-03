@@ -7,9 +7,13 @@ const isIssueLikeArray = (
   v: unknown,
 ): v is readonly { message: string; path?: ReadonlyArray<unknown> | undefined }[] =>
   Array.isArray(v) &&
-  v.every((x) => x && typeof x === "object" && typeof (x as { message?: unknown }).message === "string");
+  v.every(
+    (x) => x && typeof x === "object" && typeof (x as { message?: unknown }).message === "string",
+  );
 
-export const normalizeStandardSchemaPathSegments = (path?: ReadonlyArray<unknown> | undefined): string[] =>
+export const normalizeStandardSchemaPathSegments = (
+  path?: ReadonlyArray<unknown> | undefined,
+): string[] =>
   Array.from(path ?? []).map((segment) => {
     if (typeof segment === "string" || typeof segment === "number") return String(segment);
     if (typeof segment === "symbol") return String(segment);
@@ -77,16 +81,21 @@ export const standardSchemaIssuesForUnknown = async (
   const raw = schema["~standard"].validate(value) as unknown;
   const result = raw instanceof Promise ? await raw : raw;
 
-  const rec = typeof result === "object" && result !== null ? (result as Record<string, unknown>) : null;
-  const issuesUnknown = rec && Object.prototype.hasOwnProperty.call(rec, "issues") ? rec.issues : undefined;
+  const rec =
+    typeof result === "object" && result !== null ? (result as Record<string, unknown>) : null;
+  const issuesUnknown =
+    rec && Object.prototype.hasOwnProperty.call(rec, "issues") ? rec.issues : undefined;
 
-  if (Array.isArray(issuesUnknown) && issuesUnknown.every((x) => x && typeof (x as any).message === "string")) {
-    const issues = Array.from(issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[]).map(
-      (i) => ({
-        message: i.message,
-        path: normalizeStandardSchemaPathSegments(i.path ?? []),
-      }),
-    );
+  if (
+    Array.isArray(issuesUnknown) &&
+    issuesUnknown.every((x) => x && typeof (x as any).message === "string")
+  ) {
+    const issues = Array.from(
+      issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[],
+    ).map((i) => ({
+      message: i.message,
+      path: normalizeStandardSchemaPathSegments(i.path ?? []),
+    }));
 
     return issues.length > 0 ? { ok: false, issues } : { ok: true, issues: [] };
   }
@@ -107,23 +116,24 @@ export const standardSchemaIssuesForUnknownSync = (
   const raw = schema["~standard"].validate(value) as unknown;
   if (raw instanceof Promise) {
     throw new Error(
-      '[@echojs/form] Schema validation returned a Promise. Use field.validateAsync() / form.validateAsync(), or wrap with async handling.',
+      "[@echojs/form] Schema validation returned a Promise. Use field.validateAsync() / form.validateAsync(), or wrap with async handling.",
     );
   }
 
   const rec = typeof raw === "object" && raw !== null ? (raw as Record<string, unknown>) : null;
-  const issuesUnknown = rec && Object.prototype.hasOwnProperty.call(rec, "issues") ? rec.issues : undefined;
+  const issuesUnknown =
+    rec && Object.prototype.hasOwnProperty.call(rec, "issues") ? rec.issues : undefined;
 
   if (
     Array.isArray(issuesUnknown) &&
     issuesUnknown.every((x) => x && typeof (x as any).message === "string")
   ) {
-    const issues = Array.from(issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[]).map(
-      (i) => ({
-        message: i.message,
-        path: normalizeStandardSchemaPathSegments(i.path ?? []),
-      }),
-    );
+    const issues = Array.from(
+      issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[],
+    ).map((i) => ({
+      message: i.message,
+      path: normalizeStandardSchemaPathSegments(i.path ?? []),
+    }));
 
     return issues.length > 0 ? { ok: false, issues } : { ok: true, issues: [] };
   }

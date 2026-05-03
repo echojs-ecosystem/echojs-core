@@ -6,15 +6,16 @@ export type StandardSchemaLike<T = unknown> = {
   "~standard": {
     readonly version: 1;
     readonly vendor: string;
-    readonly validate: (
-      value: unknown,
-    ) =>
+    readonly validate: (value: unknown) =>
       | {
           readonly value: T;
           readonly issues?: undefined;
         }
       | {
-          readonly issues: ReadonlyArray<{ readonly message: string; readonly path?: ReadonlyArray<unknown> }>;
+          readonly issues: ReadonlyArray<{
+            readonly message: string;
+            readonly path?: ReadonlyArray<unknown>;
+          }>;
         }
       | Promise<
           | {
@@ -22,7 +23,10 @@ export type StandardSchemaLike<T = unknown> = {
               readonly issues?: undefined;
             }
           | {
-              readonly issues: ReadonlyArray<{ readonly message: string; readonly path?: ReadonlyArray<unknown> }>;
+              readonly issues: ReadonlyArray<{
+                readonly message: string;
+                readonly path?: ReadonlyArray<unknown>;
+              }>;
             }
         >;
   };
@@ -142,4 +146,3 @@ export type Form<TValue, TFields extends Record<string, any>> = {
   getValue: () => TValue;
   submit: (handler: (value: TValue) => void | Promise<void>) => Promise<FormSubmitResult<TValue>>;
 };
-

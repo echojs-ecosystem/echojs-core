@@ -74,4 +74,3 @@ describe("lifecycle mount()", () => {
     expect(cleaned).toHaveBeenCalledTimes(1);
   });
 });
-

@@ -58,22 +58,34 @@ export const createForm = <TValue, TFields extends Record<string, any>>(
 
   const resolvedFields = fields;
 
-  const rootSchema = (opts.validationSchema ?? opts.schema) as StandardSchemaLike<TValue> | undefined;
+  const rootSchema = (opts.validationSchema ?? opts.schema) as
+    | StandardSchemaLike<TValue>
+    | undefined;
 
   const factories = opts.fieldArrayFactories as Record<string, () => unknown> | undefined;
 
   if (opts.defaultValues && Object.keys(opts.defaultValues as object).length > 0) {
-    hydrateFormFields(resolvedFields as unknown as Record<string, unknown>, opts.defaultValues as object, factories);
+    hydrateFormFields(
+      resolvedFields as unknown as Record<string, unknown>,
+      opts.defaultValues as object,
+      factories,
+    );
   }
 
   if (opts.defaultAsyncValues) {
     void opts.defaultAsyncValues().then((extra) => {
-      hydrateFormFields(resolvedFields as unknown as Record<string, unknown>, extra as object, factories);
+      hydrateFormFields(
+        resolvedFields as unknown as Record<string, unknown>,
+        extra as object,
+        factories,
+      );
     });
   }
 
   const snapshotValue = (): TValue =>
-    (opts.getValue ? opts.getValue(resolvedFields) : (collectFormValueFromFields(resolvedFields) as TValue));
+    opts.getValue
+      ? opts.getValue(resolvedFields)
+      : (collectFormValueFromFields(resolvedFields) as TValue);
 
   const validate = (): Record<string, unknown> => {
     if (opts.validate) return opts.validate(resolvedFields);
@@ -102,7 +114,11 @@ export const createForm = <TValue, TFields extends Record<string, any>>(
   const getValue = (): TValue => snapshotValue();
 
   const hydrate = (partial: Partial<TValue>): void => {
-    hydrateFormFields(resolvedFields as unknown as Record<string, unknown>, partial as object, factories);
+    hydrateFormFields(
+      resolvedFields as unknown as Record<string, unknown>,
+      partial as object,
+      factories,
+    );
   };
 
   const submit = async (

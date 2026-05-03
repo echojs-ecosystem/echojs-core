@@ -69,9 +69,7 @@ describe("props", () => {
     let seen: Element | null = null;
 
     const { node, dispose } = mount(
-      h("div", null, () =>
-        open.value() ? h("span", { ref: (el) => (seen = el) }, "x") : null,
-      ),
+      h("div", null, () => (open.value() ? h("span", { ref: (el) => (seen = el) }, "x") : null)),
     );
 
     expect(node.textContent).toBe("x");

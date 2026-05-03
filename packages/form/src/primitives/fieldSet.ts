@@ -5,7 +5,9 @@ import type { FieldSet } from "../types";
  *
  * This version is intentionally simple: it calls `validate()`/`reset()` on children when present.
  */
-export const createFieldSet = <Shape extends Record<string, any>>(fields: Shape): FieldSet<Shape> => {
+export const createFieldSet = <Shape extends Record<string, any>>(
+  fields: Shape,
+): FieldSet<Shape> => {
   const validate = (): Record<string, string[]> => {
     const out: Record<string, string[]> = {};
     for (const [k, v] of Object.entries(fields)) {
@@ -24,4 +26,3 @@ export const createFieldSet = <Shape extends Record<string, any>>(fields: Shape)
 
   return { fields, validate, reset };
 };
-
