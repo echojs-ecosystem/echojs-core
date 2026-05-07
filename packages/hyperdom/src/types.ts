@@ -6,6 +6,23 @@ export type MaybeReactive<T> = T | (() => T);
 
 export type StyleObject = Record<string, string | number | null | undefined | false>;
 
+export type ClassObject = Record<string, boolean | null | undefined>;
+export type ClassValue =
+  | string
+  | null
+  | undefined
+  | false
+  | ClassObject
+  | readonly ClassValue[];
+
+export type StyleValue =
+  | string
+  | StyleObject
+  | null
+  | undefined
+  | false
+  | readonly (string | StyleObject | null | undefined | false)[];
+
 type NonFunctionKeys<T> = {
   [K in keyof T]-?: T[K] extends (...args: any[]) => any ? never : K;
 }[keyof T];
@@ -49,9 +66,9 @@ export type Props<E extends Element = Element> = ElementLikeProps<E> &
   OnProps<E> &
   DataAriaProps & {
     ref?: (el: E | null) => void;
-    class?: MaybeReactive<string | null | undefined | false>;
-    className?: MaybeReactive<string | null | undefined | false>;
-    style?: MaybeReactive<string | StyleObject | null | undefined | false>;
+    class?: MaybeReactive<ClassValue>;
+    className?: MaybeReactive<ClassValue>;
+    style?: MaybeReactive<StyleValue>;
     children?: Child;
   };
 

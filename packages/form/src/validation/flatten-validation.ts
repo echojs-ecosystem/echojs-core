@@ -5,8 +5,8 @@
  */
 export const flattenValidationErrors = (node: unknown, prefix = ""): Record<string, string[]> => {
   const out: Record<string, string[]> = {};
-  const join = (p: string) => (prefix.length ? `${prefix}.${p}` : p);
-  const joinIdx = (i: number) => (prefix.length ? `${prefix}.${i}` : String(i));
+  const join = (path: string) => (prefix.length ? `${prefix}.${path}` : path);
+  const joinIdx = (index: number) => (prefix.length ? `${prefix}.${index}` : String(index));
 
   if (node == null) return out;
 
@@ -18,7 +18,7 @@ export const flattenValidationErrors = (node: unknown, prefix = ""): Record<stri
   if (Array.isArray(node)) {
     if (node.length === 0) return out;
 
-    if (node.every((x) => typeof x === "string")) {
+    if (node.every((value) => typeof value === "string")) {
       const msgs = node.filter((x): x is string => typeof x === "string" && x.length > 0);
       if (msgs.length > 0) out[prefix.length ? prefix : "$root"] = msgs;
       return out;
@@ -31,8 +31,8 @@ export const flattenValidationErrors = (node: unknown, prefix = ""): Record<stri
   }
 
   if (typeof node === "object") {
-    for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
-      Object.assign(out, flattenValidationErrors(v, join(k)));
+    for (const [key, value] of Object.entries(node as Record<string, unknown>)) {
+      Object.assign(out, flattenValidationErrors(value, join(key)));
     }
     return out;
   }
@@ -52,20 +52,20 @@ export const filterRootSchemaErrorsDeferredToFieldErrors = (
 ): Record<string, string[]> => {
   const fieldKeysWithErrors = Object.entries(fieldFlat)
     .filter(([, msgs]) => msgs.length > 0)
-    .map(([k]) => k);
+    .map(([key]) => key);
 
   const filtered: Record<string, string[]> = {};
-  for (const [sk, msgs] of Object.entries(schemaFlat)) {
+  for (const [schemaKey, msgs] of Object.entries(schemaFlat)) {
     if (!msgs.length) continue;
 
     const blocked = fieldKeysWithErrors.some((fk) => {
-      if (fk === sk) return true;
-      if (fk.startsWith(`${sk}.`)) return true;
-      if (sk.startsWith(`${fk}.`)) return true;
+      if (fk === schemaKey) return true;
+      if (fk.startsWith(`${schemaKey}.`)) return true;
+      if (schemaKey.startsWith(`${fk}.`)) return true;
       return false;
     });
 
-    if (!blocked) filtered[sk] = msgs;
+    if (!blocked) filtered[schemaKey] = msgs;
   }
 
   return filtered;

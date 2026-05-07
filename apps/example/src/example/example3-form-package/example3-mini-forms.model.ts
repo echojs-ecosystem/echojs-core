@@ -28,23 +28,13 @@ type HobbiesFields = {
 };
 
 const newTagRow = (): TagRow => ({
-  tag: createField("", {
-    schema: z.string().min(2),
-    validationMode: "onBlur",
-  }),
+  tag: createField(""),
 });
 
 const loginForm = createForm<LoginValue, LoginFields>(
   {
-    email: createField("", {
-      schema: z.string().email(),
-      validationMode: "onBlur",
-    }),
-    remember: createField(false, {
-      schema: z.boolean(),
-      parseDOMChecked: (checked) => checked,
-      validationMode: "onChange",
-    }),
+    email: createField(""),
+    remember: createField(false),
   },
   {
     validationSchema: LoginSchema,

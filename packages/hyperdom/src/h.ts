@@ -1,7 +1,7 @@
 import type { Child, Component, Props } from "./types";
 import { createNode, type IntrinsicTagName, type Tag } from "./dom/create-node";
 import { getStrictContextChecks } from "./config";
-import { isInViewContext } from "./view";
+import { isInViewContext } from "./view-context";
 import { getCurrentScope } from "./lifecycle/cleanup";
 
 type ElementForIntrinsicTag<T extends IntrinsicTagName> = T extends keyof HTMLElementTagNameMap
@@ -41,12 +41,14 @@ export type H = {
     children?: Child,
     ...rest: Child[]
   ): Child;
+  <T extends IntrinsicTagName>(tag: T, children?: Child, ...rest: Child[]): Child;
   <P = any>(
     tag: Component<P>,
     props?: (P & Props<Element>) | null,
     children?: Child,
     ...rest: Child[]
   ): Child;
+  <P = any>(tag: Component<P>, children?: Child, ...rest: Child[]): Child;
 };
 
 /**

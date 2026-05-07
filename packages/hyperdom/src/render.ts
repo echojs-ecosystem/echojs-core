@@ -1,7 +1,7 @@
 import type { Child } from "./types";
 import { createScope, disposeScope, runWithScope } from "./lifecycle/cleanup";
 import { mountChild, mountChildren } from "./dom/children";
-import { activateTree } from "./dom/bindings";
+import { activateTree } from "./dom/activate-tree";
 
 /**
  * Renders a `Child` view into a container element.

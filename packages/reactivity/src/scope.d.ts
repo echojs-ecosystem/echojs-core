@@ -1,2 +1,2 @@
-export declare const scope: (fn: () => void) => () => void;
+export declare const scope: (fn: () => void) => (() => void);
 //# sourceMappingURL=scope.d.ts.map

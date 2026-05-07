@@ -1,16 +1,19 @@
-import type { Field, FieldAccessor } from "../types";
+import type { Field, FieldAccessor, FieldBinding } from "../types";
 
 type Bindable<T> = Pick<Field<T>, "bind"> | Pick<FieldAccessor<T>, "handlers">;
 
 /** Поле формы, к которому можно привязать Hyperdom-контроллер (`Field` или `FieldAccessor` из `wireFormModel`). */
 export type HyperdomFormFieldRef<T> = Field<T> | FieldAccessor<T>;
 
-const getBinding = <T>(field: Bindable<T>) => ("bind" in field ? field.bind() : field.handlers);
+const isWireField = <T>(field: HyperdomFormFieldRef<T>): field is Field<T> =>
+  "$value" in field && typeof (field as Field<T>).$value?.value === "function";
+
+const getBinding = <T>(field: Bindable<T>): FieldBinding =>
+  "bind" in field ? field.bind() : field.handlers;
 
 const readFieldRef = <T>(field: HyperdomFormFieldRef<T>): T => {
-  if ("$value" in field && (field as Field<T>).$value)
-    return (field as Field<T>).$value.value() as T;
-  return (field as FieldAccessor<T>).value() as T;
+  if (isWireField(field)) return field.$value.value() as T;
+  return field.value() as T;
 };
 
 const writeFieldRef = <T>(field: HyperdomFormFieldRef<T>, next: T): void => {
@@ -30,7 +33,37 @@ const controlledStringValue = <T>(field: HyperdomFormFieldRef<T>): (() => string
   };
 };
 
-export type BindFieldControllerOptions =
+type InvalidNumberDisplay = "empty" | "zero";
+
+const controlledNumericStringValue = <T>(
+  field: HyperdomFormFieldRef<T>,
+  whenInvalid: InvalidNumberDisplay,
+): (() => string) => {
+  return () => {
+    const v = readFieldRef(field);
+    if (v == null || (typeof v === "number" && Number.isNaN(v))) {
+      return whenInvalid === "empty" ? "" : "0";
+    }
+    return String(v);
+  };
+};
+
+const textLikeHandlers = (b: FieldBinding) =>
+  ({
+    onInput: b.onInputText,
+    onChange: b.onChangeText,
+    onFocus: b.onFocus,
+    onBlur: b.onBlur,
+  }) as const;
+
+const domNumericInputHandlers = <T>(field: HyperdomFormFieldRef<T>) => {
+  const sync = (e: Event & { currentTarget: HTMLInputElement }): void => {
+    writeFieldRef(field, parseNumericInput(e.currentTarget.value) as unknown as T);
+  };
+  return { onInput: sync, onChange: sync } as const;
+};
+
+export type bindFieldOptions =
   | {
       variant: "text" | "email" | "password" | "search" | "url";
       controlledValue?: boolean;
@@ -64,14 +97,13 @@ export type BindFieldControllerOptions =
  *
  * Для списков внутри `List` рекомендуется `controlledValue: true` у текстовых вариантов, чтобы значения
  * не терялись при пересоздании DOM.
- */
-/**
+ *
  * Возвращаемый тип намеренно широкий: Hyperdom различает обработчики `onChange` для `input` / `select` / `textarea`,
  * а контроллер выбирается по `variant` в рантайме.
  */
-export const bindFieldController = <T>(
+export const bindField = <T>(
   field: HyperdomFormFieldRef<T>,
-  opts: BindFieldControllerOptions,
+  opts: bindFieldOptions,
 ): any => {
   const b = getBinding(field as unknown as Bindable<T>);
 
@@ -81,24 +113,13 @@ export const bindFieldController = <T>(
     case "password":
     case "search":
     case "url": {
-      const base = {
-        type: opts.variant,
-        onInput: b.onInputText,
-        onChange: b.onChangeText,
-        onFocus: b.onFocus,
-        onBlur: b.onBlur,
-      } as const;
+      const base = { type: opts.variant, ...textLikeHandlers(b) } as const;
       if (!opts.controlledValue) return base;
       return { ...base, value: controlledStringValue(field) } as const;
     }
 
     case "textarea": {
-      const base = {
-        onInput: b.onInputText,
-        onChange: b.onChangeText,
-        onFocus: b.onFocus,
-        onBlur: b.onBlur,
-      } as const;
+      const base = { ...textLikeHandlers(b) } as const;
       if (!opts.controlledValue) return base;
       return { ...base, value: controlledStringValue(field) } as const;
     }
@@ -130,58 +151,30 @@ export const bindFieldController = <T>(
     }
 
     case "number": {
-      const syncFromDom = (e: Event & { currentTarget: HTMLInputElement }): void => {
-        writeFieldRef(field, parseNumericInput(e.currentTarget.value) as unknown as T);
-      };
-      const onInput = (e: Event & { currentTarget: HTMLInputElement }) => {
-        syncFromDom(e);
-      };
-      const onChange = (e: Event & { currentTarget: HTMLInputElement }) => {
-        syncFromDom(e);
-      };
+      const numeric = domNumericInputHandlers(field);
       const base = {
         type: "number" as const,
-        onInput,
-        onChange,
+        ...numeric,
         onFocus: b.onFocus,
         onBlur: b.onBlur,
       } as const;
       if (!opts.controlledValue) return base;
-      const value = (): string => {
-        const v = readFieldRef(field);
-        if (v == null || (typeof v === "number" && Number.isNaN(v))) return "";
-        return String(v);
-      };
-      return { ...base, value } as const;
+      return { ...base, value: controlledNumericStringValue(field, "empty") } as const;
     }
 
     case "range": {
-      const syncFromDom = (e: Event & { currentTarget: HTMLInputElement }): void => {
-        writeFieldRef(field, parseNumericInput(e.currentTarget.value) as unknown as T);
-      };
-      const onInput = (e: Event & { currentTarget: HTMLInputElement }) => {
-        syncFromDom(e);
-      };
-      const onChange = (e: Event & { currentTarget: HTMLInputElement }) => {
-        syncFromDom(e);
-      };
+      const numeric = domNumericInputHandlers(field);
       const base = {
         type: "range" as const,
         min: opts.min,
         max: opts.max,
         step: opts.step,
-        onInput,
-        onChange,
+        ...numeric,
         onFocus: b.onFocus,
         onBlur: b.onBlur,
       } as const;
       if (!opts.controlledValue) return base;
-      const value = (): string => {
-        const v = readFieldRef(field);
-        if (v == null || (typeof v === "number" && Number.isNaN(v))) return "0";
-        return String(v);
-      };
-      return { ...base, value } as const;
+      return { ...base, value: controlledNumericStringValue(field, "zero") } as const;
     }
   }
 };

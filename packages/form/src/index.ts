@@ -1,7 +1,9 @@
 export { createField } from "./primitives/field";
 export { createFieldArray } from "./primitives/fieldArray";
+export { defineNestedFieldArrayOps } from "./primitives/nested-field-array-ops";
 export { createFieldSet } from "./primitives/fieldSet";
 export { createForm } from "./primitives/form";
+export { createFormFor } from "./primitives/form";
 export { createFieldKit } from "./primitives/field-kit";
 export { collectFormValueFromFields } from "./primitives/collect-form-value";
 export type { CreateFormOptions } from "./primitives/form";
@@ -19,7 +21,7 @@ export {
   standardSchemaIssuesForUnknownSync,
 } from "./validation/standard-schema";
 export { flattenFieldErrors } from "./validation/flatten";
-export { bindFieldController } from "./bindings/hyperdom";
+export { bindField } from "./bindings/hyperdom";
 
 export type {
   Field,
@@ -29,9 +31,11 @@ export type {
   StandardSchemaLike,
   FieldValidationMode,
   FieldArray,
+  NestedFieldArrayOps,
   FieldSet,
   Form,
   FormSubmitResult,
   WireFormModel,
 } from "./types";
-export type { BindFieldControllerOptions, HyperdomFormFieldRef } from "./bindings/hyperdom";
+export type { bindFieldOptions, HyperdomFormFieldRef } from "./bindings/hyperdom";
+export type { FieldArrayBranchConfig } from "./primitives/nested-field-array-ops";

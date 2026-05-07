@@ -22,13 +22,13 @@ export const createNode = (tag: Tag, props?: Props<any> | null, children?: Child
   }
 
   // Note: createElement supports both HTML and SVG tag names.
-  const el = document.createElement(tag as string);
-  setProps(el, props ?? null);
+  const element = document.createElement(tag as string);
+  setProps(element, props ?? null);
 
   if (children !== undefined) {
-    if (Array.isArray(children)) mountChildren(el, children, null);
-    else mountChild(el, children, null);
+    if (Array.isArray(children)) mountChildren(element , children, null);
+    else mountChild(element, children, null);
   }
 
-  return el;
+  return element;
 };

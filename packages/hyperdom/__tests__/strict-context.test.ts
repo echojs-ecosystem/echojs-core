@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { h } from "../src/h";
 import { render } from "../src/render";
-import { createView } from "../src/view";
+import { createView } from "../src/create-view";
 import { setStrictContextChecks } from "../src/config";
 
 describe("strictContextChecks", () => {

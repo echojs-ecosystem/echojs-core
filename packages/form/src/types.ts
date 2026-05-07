@@ -54,6 +54,8 @@ export type FieldBinding = {
 
 export type FieldValidationMode = "manual" | "onChange" | "onBlur";
 
+export type FormValidationMode = "manual" | "onChange" | "onBlur" | "onFocus" | "all";
+
 export type FieldAccessor<TValue> = {
   /** Reactive read shortcut: `accessor.value()` delegates to signals. */
   value: () => ReadValue<TValue>;
@@ -120,6 +122,14 @@ export type FieldArray<Item> = {
   reset: () => void;
 };
 
+/** Операции над вложенными `FieldArray`, см. `defineNestedFieldArrayOps`. */
+export type NestedFieldArrayOps<Row extends Record<string, unknown> = Record<string, unknown>> = {
+  append: (item?: Row) => void;
+  removeAt: (index: number) => void;
+  remove: (index: number) => void;
+  at: (index: number) => Record<string, NestedFieldArrayOps> | undefined;
+};
+
 export type FieldSet<Shape extends Record<string, any>> = {
   fields: Shape;
   validate: () => Record<string, string[]>;
@@ -130,11 +140,14 @@ export type FormSubmitResult<T> =
   | { ok: true; value: T }
   | { ok: false; errors: Record<string, unknown> };
 
-export type Form<TValue, TFields extends Record<string, any>> = {
+export type Form<TValue, TFields extends Record<string, any>, TActions extends Record<string, any> = {}> = {
   fields: TFields;
 
   $submitting: Signal<boolean>;
   $submitCount: Signal<number>;
+  $errors: Signal<Record<string, unknown> | undefined>;
+  $schemaErrors: Signal<Record<string, string[]> | undefined>;
+  actions: TActions;
 
   validate: () => Record<string, unknown>;
   validateAsync: () => Promise<Record<string, unknown>>;
@@ -143,6 +156,5 @@ export type Form<TValue, TFields extends Record<string, any>> = {
   /** Подмешать значения после создания формы (тот же формат, что у `defaultAsyncValues`). */
   hydrate: (partial: Partial<TValue>) => void;
 
-  getValue: () => TValue;
   submit: (handler: (value: TValue) => void | Promise<void>) => Promise<FormSubmitResult<TValue>>;
 };

@@ -21,8 +21,9 @@
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
-    "test": "vitest",
-    "test:run": "vitest run"
+    "test:vitest": "vitest",
+    "test:vitest:run": "vitest run",
+    "test:vitest:ui": "vitest ui"
   },
   "dependencies": {
     "@echojs-ecosystem/reactivity": "workspace:*",

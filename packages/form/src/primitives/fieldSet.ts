@@ -10,17 +10,19 @@ export const createFieldSet = <Shape extends Record<string, any>>(
 ): FieldSet<Shape> => {
   const validate = (): Record<string, string[]> => {
     const out: Record<string, string[]> = {};
-    for (const [k, v] of Object.entries(fields)) {
-      if (v && typeof v.validate === "function") {
-        out[k] = v.validate();
+    for (const [key, value] of Object.entries(fields)) {
+      if (value && typeof value.validate === "function") {
+        out[key] = value.validate();
       }
     }
     return out;
   };
 
   const reset = (): void => {
-    for (const v of Object.values(fields)) {
-      if (v && typeof v.reset === "function") v.reset();
+    for (const value of Object.values(fields)) {
+      if (value && typeof value.reset === "function") {
+        value.reset();
+      }
     }
   };
 

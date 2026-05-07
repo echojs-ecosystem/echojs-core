@@ -3,7 +3,7 @@ import { h } from "../src/h";
 import { render } from "../src/render";
 import { signal } from "@echojs-ecosystem/reactivity";
 import { mount as onMount } from "../src/lifecycle/mount";
-import { createViewWithMount } from "../src/view";
+import { createViewWithMount } from "../src/create-view-with-mount";
 
 describe("lifecycle mount()", () => {
   it("вызывает callback после render и регистрирует cleanup на dispose", () => {

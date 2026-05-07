@@ -20,8 +20,15 @@ describe("collectFormValueFromFields()", () => {
 
 describe("createForm()", () => {
   it("blocks submit when validation has errors", async () => {
-    const title = createField("", { validate: [(v) => (!v.trim() ? "required" : null)] });
-    const form = createForm({ title }, {});
+    const title = createField("");
+    const form = createForm(
+      { title },
+      {
+        validate: (fields) => ({
+          title: !fields.title.$value.value().trim() ? ["required"] : [],
+        }),
+      },
+    );
 
     const handler = vi.fn();
     const res = await form.submit(handler);
@@ -30,8 +37,15 @@ describe("createForm()", () => {
   });
 
   it("submits when no errors", async () => {
-    const title = createField("ok", { validate: [(v) => (!v.trim() ? "required" : null)] });
-    const form = createForm({ title }, {});
+    const title = createField("ok");
+    const form = createForm(
+      { title },
+      {
+        validate: (fields) => ({
+          title: !fields.title.$value.value().trim() ? ["required"] : [],
+        }),
+      },
+    );
 
     const handler = vi.fn();
     const res = await form.submit(handler);
@@ -41,7 +55,7 @@ describe("createForm()", () => {
 
   it("runs nested validates + Standard Schema submit validation", async () => {
     const profile = createFieldSet({
-      email: createField("", { schema: z.string().email() }),
+      email: createField(""),
     });
 
     const form = createForm(
@@ -68,7 +82,7 @@ describe("createForm()", () => {
   });
 
   it("validationSchema alias works like schema", async () => {
-    const email = createField("not-an-email", { schema: z.string().email() });
+    const email = createField("not-an-email");
     const form = createForm(
       { email },
       { validationSchema: z.object({ email: z.string().email() }) },
@@ -83,9 +97,7 @@ describe("createForm()", () => {
   });
 
   it("submit attaches schema issues under $schema (in addition to field tree)", async () => {
-    const email = createField("x", {
-      schema: z.string().min(10),
-    });
+    const email = createField("x");
 
     const form = createForm(
       { email },
@@ -117,5 +129,31 @@ describe("createForm()", () => {
       expect(v).toEqual({ label: "mapped" });
     });
     expect(res.ok).toBe(true);
+  });
+
+  it("reset вызывает deepReset по дереву полей", () => {
+    const title = createField("a");
+    const form = createForm({ title }, {});
+    title.set("b");
+    form.reset();
+    expect(title.$value.value()).toBe("a");
+  });
+
+  it("submit: ошибка в handler попадает в errors.submit", async () => {
+    const title = createField("ok");
+    const form = createForm({ title }, {});
+    const res = await form.submit(() => {
+      throw new Error("boom");
+    });
+    expect(res.ok).toBe(false);
+    if (!res.ok) expect(res.errors.submit).toBeInstanceOf(Error);
+  });
+
+  it("кастомный validate в опциях формы", () => {
+    const title = createField("");
+    const form = createForm({ title }, {
+      validate: () => ({ title: ["custom"] }),
+    });
+    expect(form.validate()).toEqual({ title: ["custom"] });
   });
 });

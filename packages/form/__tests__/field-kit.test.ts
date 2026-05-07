@@ -42,12 +42,12 @@ describe("createFieldKit()", () => {
     };
 
     const newTagRow = (): Row => ({
-      t: createField("", { schema: z.string().min(1) }),
+      t: createField(""),
     });
 
     const form = createForm<V, Fields>(
       {
-        name: createField("", { schema: z.string().min(1) }),
+        name: createField(""),
         tags: createFieldArray<Row>([]),
       },
       {

@@ -1,4 +1,4 @@
-import type { Child, Props } from "./types";
+import type { Child, ClassValue, Props } from "./types";
 import { h } from "./h";
 
 export type IntrinsicTag = keyof HTMLElementTagNameMap | keyof SVGElementTagNameMap;
@@ -11,47 +11,64 @@ type ElementForIntrinsicTag<T extends IntrinsicTag> = T extends keyof HTMLElemen
 
 type PropsFor<T extends IntrinsicTag> = Props<ElementForIntrinsicTag<T>> | null | undefined;
 
-/**
- * Low-level tag factory: `tag("div", props, ...children)`.
- *
- * Prefer the convenience exports like `div(...)`, `button(...)`, etc. when you want strong
- * per-element typing.
- */
-export const tag = <T extends IntrinsicTag>(
-  name: T,
-  props?: PropsFor<T>,
-  ...children: Child[]
-): Child => {
-  return h(name as any, props ?? null, ...children);
+type TagFn<T extends IntrinsicTag> = {
+  (): Child;
+  (props?: PropsFor<T>): Child;
+  (props: PropsFor<T>, children?: Child, ...rest: Child[]): Child;
+  (children?: Child, ...rest: Child[]): Child;
 };
 
-export type ClassValue =
-  | string
-  | null
-  | undefined
-  | false
-  | Record<string, boolean | null | undefined>
-  | ClassValue[];
+/** True when a value looks like a props bag (not a child). */
+const isProps = (value: unknown): value is Record<string, unknown> | null | undefined => {
+  return (
+    value === null ||
+    (typeof value === "object" &&
+      value !== null &&
+      !Array.isArray(value) &&
+      !(value as any).nodeType)
+  );
+};
+
+/** Normalizes `children` arguments into a single `Child` value. */
+const normalizeChildren = (list: unknown[]): Child | undefined => {
+  if (list.length === 0) return undefined;
+  if (list.length === 1) return list[0] as Child;
+  return list as Child[];
+};
+
+const makeTag = <T extends IntrinsicTag>(name: T) => {
+  return ((arg1?: unknown, arg2?: unknown, ...rest: unknown[]): Child => {
+    // Vue-like call shapes:
+    // - div()
+    // - div(props)
+    // - div('text') / div([..]) / div(() => ...)
+    // - div(props, children, ...rest)
+    const props = isProps(arg1) ? (arg1 as PropsFor<T>) : null;
+    const childrenList = isProps(arg1) ? [arg2, ...rest] : [arg1, arg2, ...rest];
+    const children = normalizeChildren(childrenList.filter((x) => x !== undefined));
+    return h(name as any, props, children as any);
+  }) as unknown as TagFn<T>;
+};
 
 /** Small `class` builder for conditional class names. */
 export const cx = (...values: ClassValue[]): string => {
   const out: string[] = [];
-  const push = (v: ClassValue): void => {
-    if (!v) return;
-    if (typeof v === "string") {
-      const s = v.trim();
+  const push = (value: ClassValue): void => {
+    if (!value) return;
+    if (typeof value === "string") {
+      const s = value.trim();
       if (s) out.push(s);
       return;
     }
-    if (Array.isArray(v)) {
-      for (const x of v) push(x);
+    if (Array.isArray(value)) {
+      for (const x of value) push(x);
       return;
     }
-    for (const [k, ok] of Object.entries(v)) {
+    for (const [k, ok] of Object.entries(value)) {
       if (ok) out.push(k);
     }
   };
-  for (const v of values) push(v);
+  for (const value of values) push(value);
   return out.join(" ");
 };
 
@@ -84,161 +101,114 @@ export const data = {
 
 // Convenience exports (flat) — чтобы писать `button(...)`, `section(...)` и т.д.
 /** `<h1>` element factory. */
-export const h1 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h1", props, ...children);
+export const h1 = makeTag("h1");
 /** `<h2>` element factory. */
-export const h2 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h2", props, ...children);
+export const h2 = makeTag("h2");
 /** `<h3>` element factory. */
-export const h3 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h3", props, ...children);
+export const h3 = makeTag("h3");
 /** `<h4>` element factory. */
-export const h4 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h4", props, ...children);
+export const h4 = makeTag("h4");
 /** `<h5>` element factory. */
-export const h5 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h5", props, ...children);
+export const h5 = makeTag("h5");
 /** `<h6>` element factory. */
-export const h6 = (props?: Props<HTMLHeadingElement> | null, ...children: Child[]) =>
-  tag("h6", props, ...children);
+export const h6 = makeTag("h6");
 
 /** `<p>` element factory. */
-export const p = (props?: Props<HTMLParagraphElement> | null, ...children: Child[]) =>
-  tag("p", props, ...children);
+export const p = makeTag("p");
 /** `<pre>` element factory. */
-export const pre = (props?: Props<HTMLPreElement> | null, ...children: Child[]) =>
-  tag("pre", props, ...children);
+export const pre = makeTag("pre");
 /** `<blockquote>` element factory. */
-export const blockquote = (props?: Props<HTMLQuoteElement> | null, ...children: Child[]) =>
-  tag("blockquote", props, ...children);
+export const blockquote = makeTag("blockquote");
 
 /** `<span>` element factory. */
-export const span = (props?: Props<HTMLSpanElement> | null, ...children: Child[]) =>
-  tag("span", props, ...children);
+export const span = makeTag("span");
 /** `<strong>` element factory. */
-export const strong = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("strong", props as any, ...children);
+export const strong = makeTag("strong");
 /** `<em>` element factory. */
-export const em = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("em", props as any, ...children);
+export const em = makeTag("em");
 /** `<small>` element factory. */
-export const small = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("small", props as any, ...children);
+export const small = makeTag("small");
 /** `<code>` element factory. */
-export const code = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("code", props as any, ...children);
+export const code = makeTag("code");
 /** `<kbd>` element factory. */
-export const kbd = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("kbd", props as any, ...children);
+export const kbd = makeTag("kbd");
 
 /** `<div>` element factory. */
-export const div = (props?: Props<HTMLDivElement> | null, ...children: Child[]) =>
-  tag("div", props, ...children);
+export const div = makeTag("div");
 /** `<hr>` element factory. */
-export const hr = (props?: Props<HTMLHRElement> | null) => tag("hr", props);
+export const hr = makeTag("hr");
 /** `<br>` element factory. */
-export const br = (props?: Props<HTMLBRElement> | null) => tag("br", props);
+export const br = makeTag("br");
 
 /** `<header>` element factory. */
-export const header = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("header", props as any, ...children);
+export const header = makeTag("header");
 /** `<main>` element factory. */
-export const main = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("main", props as any, ...children);
+export const main = makeTag("main");
 /** `<footer>` element factory. */
-export const footer = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("footer", props as any, ...children);
+export const footer = makeTag("footer");
 /** `<nav>` element factory. */
-export const nav = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("nav", props as any, ...children);
+export const nav = makeTag("nav");
 /** `<section>` element factory. */
-export const section = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("section", props as any, ...children);
+export const section = makeTag("section");
 /** `<article>` element factory. */
-export const article = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("article", props as any, ...children);
+export const article = makeTag("article");
 /** `<aside>` element factory. */
-export const aside = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("aside", props as any, ...children);
+export const aside = makeTag("aside");
 
 /** `<ul>` element factory. */
-export const ul = (props?: Props<HTMLUListElement> | null, ...children: Child[]) =>
-  tag("ul", props, ...children);
+export const ul = makeTag("ul");
 /** `<ol>` element factory. */
-export const ol = (props?: Props<HTMLOListElement> | null, ...children: Child[]) =>
-  tag("ol", props, ...children);
+export const ol = makeTag("ol");
 /** `<li>` element factory. */
-export const li = (props?: Props<HTMLLIElement> | null, ...children: Child[]) =>
-  tag("li", props, ...children);
+export const li = makeTag("li");
 /** `<dl>` element factory. */
-export const dl = (props?: Props<HTMLDListElement> | null, ...children: Child[]) =>
-  tag("dl", props, ...children);
+export const dl = makeTag("dl");
 /** `<dt>` element factory. */
-export const dt = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("dt", props as any, ...children);
+export const dt = makeTag("dt");
 /** `<dd>` element factory. */
-export const dd = (props?: Props<HTMLElement> | null, ...children: Child[]) =>
-  tag("dd", props as any, ...children);
+export const dd = makeTag("dd");
 
 /** `<form>` element factory. */
-export const form = (props?: Props<HTMLFormElement> | null, ...children: Child[]) =>
-  tag("form", props, ...children);
+export const form = makeTag("form");
 /** `<label>` element factory. */
-export const label = (props?: Props<HTMLLabelElement> | null, ...children: Child[]) =>
-  tag("label", props, ...children);
+export const label = makeTag("label");
 /** `<input>` element factory. */
-export const input = (props?: Props<HTMLInputElement> | null) => tag("input", props);
+export const input = makeTag("input");
 /** `<textarea>` element factory. */
-export const textarea = (props?: Props<HTMLTextAreaElement> | null, ...children: Child[]) =>
-  tag("textarea", props, ...children);
+export const textarea = makeTag("textarea");
 /** `<select>` element factory. */
-export const select = (props?: Props<HTMLSelectElement> | null, ...children: Child[]) =>
-  tag("select", props, ...children);
+export const select = makeTag("select");
 /** `<option>` element factory. */
-export const option = (props?: Props<HTMLOptionElement> | null, ...children: Child[]) =>
-  tag("option", props, ...children);
+export const option = makeTag("option");
 /** `<button>` element factory. */
-export const button = (props?: Props<HTMLButtonElement> | null, ...children: Child[]) =>
-  tag("button", props, ...children);
+export const button = makeTag("button");
 
 /** `<img>` element factory. */
-export const img = (props?: Props<HTMLImageElement> | null) => tag("img", props);
+export const img = makeTag("img");
 /** `<picture>` element factory. */
-export const picture = (props?: Props<HTMLPictureElement> | null, ...children: Child[]) =>
-  tag("picture", props, ...children);
+export const picture = makeTag("picture");
 /** `<source>` element factory. */
-export const source = (props?: Props<HTMLSourceElement> | null) => tag("source", props);
+export const source = makeTag("source");
 /** `<video>` element factory. */
-export const video = (props?: Props<HTMLVideoElement> | null, ...children: Child[]) =>
-  tag("video", props, ...children);
+export const video = makeTag("video");
 /** `<audio>` element factory. */
-export const audio = (props?: Props<HTMLAudioElement> | null, ...children: Child[]) =>
-  tag("audio", props, ...children);
+export const audio = makeTag("audio");
 /** `<svg>` element factory. */
-export const svg = (props?: Props<SVGSVGElement> | null, ...children: Child[]) =>
-  tag("svg", props as any, ...children);
+export const svg = makeTag("svg");
 
 /** `<table>` element factory. */
-export const table = (props?: Props<HTMLTableElement> | null, ...children: Child[]) =>
-  tag("table", props, ...children);
+export const table = makeTag("table");
 /** `<thead>` element factory. */
-export const thead = (props?: Props<HTMLTableSectionElement> | null, ...children: Child[]) =>
-  tag("thead", props, ...children);
+export const thead = makeTag("thead");
 /** `<tbody>` element factory. */
-export const tbody = (props?: Props<HTMLTableSectionElement> | null, ...children: Child[]) =>
-  tag("tbody", props, ...children);
+export const tbody = makeTag("tbody");
 /** `<tfoot>` element factory. */
-export const tfoot = (props?: Props<HTMLTableSectionElement> | null, ...children: Child[]) =>
-  tag("tfoot", props, ...children);
+export const tfoot = makeTag("tfoot");
 /** `<tr>` element factory. */
-export const tr = (props?: Props<HTMLTableRowElement> | null, ...children: Child[]) =>
-  tag("tr", props, ...children);
+export const tr = makeTag("tr");
 /** `<th>` element factory. */
-export const th = (props?: Props<HTMLTableCellElement> | null, ...children: Child[]) =>
-  tag("th", props, ...children);
+export const th = makeTag("th");
 /** `<td>` element factory. */
-export const td = (props?: Props<HTMLTableCellElement> | null, ...children: Child[]) =>
-  tag("td", props, ...children);
+export const td = makeTag("td");
 /** `<caption>` element factory. */
-export const caption = (props?: Props<HTMLTableCaptionElement> | null, ...children: Child[]) =>
-  tag("caption", props, ...children);
+export const caption = makeTag("caption");

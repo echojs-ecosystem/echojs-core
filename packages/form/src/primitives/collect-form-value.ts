@@ -1,26 +1,26 @@
 const isPlainObject = (v: unknown): v is Record<string, unknown> =>
   !!v && typeof v === "object" && !Array.isArray(v);
 
-const isFieldNode = (v: unknown): v is { $value: { value: () => unknown } } =>
-  isPlainObject(v) &&
-  typeof (v as any).$value?.value === "function" &&
-  typeof (v as any).set === "function" &&
-  typeof (v as any).bind === "function";
+const isFieldNode = (value: unknown): value is { $value: { value: () => unknown } } =>
+  isPlainObject(value) &&
+  typeof (value as any).$value?.value === "function" &&
+  typeof (value as any).set === "function" &&
+  typeof (value as any).bind === "function";
 
 const isFieldArrayNode = (
-  v: unknown,
-): v is { $items: { value: () => unknown }; append: (x: unknown) => void } =>
-  isPlainObject(v) &&
-  typeof (v as any).$items?.value === "function" &&
-  typeof (v as any).append === "function";
+  value: unknown,
+): value is { $items: { value: () => unknown }; append: (x: unknown) => void } =>
+  isPlainObject(value) &&
+  typeof (value as any).$items?.value === "function" &&
+  typeof (value as any).append === "function";
 
 /** `createFieldSet` — объект с `fields`, без `$value` на корне. */
-const isFieldSetNode = (v: unknown): v is { fields: Record<string, unknown> } =>
-  isPlainObject(v) &&
-  isPlainObject((v as any).fields) &&
-  typeof (v as any).validate === "function" &&
-  typeof (v as any).reset === "function" &&
-  !isFieldNode(v);
+const isFieldSetNode = (value: unknown): value is { fields: Record<string, unknown> } =>
+  isPlainObject(value) &&
+  isPlainObject((value as any).fields) &&
+  typeof (value as any).validate === "function" &&
+  typeof (value as any).reset === "function" &&
+  !isFieldNode(value);
 
 /**
  * Собирает «сырое» значение формы из дерева примитивов (`Field` / `FieldSet` / `FieldArray`).
@@ -48,8 +48,8 @@ export const collectFormValueFromFields = (node: unknown): unknown => {
 
   if (isPlainObject(node)) {
     const out: Record<string, unknown> = {};
-    for (const [k, v] of Object.entries(node)) {
-      out[k] = collectFormValueFromFields(v);
+    for (const [key, value] of Object.entries(node)) {
+      out[key] = collectFormValueFromFields(value);
     }
     return out;
   }

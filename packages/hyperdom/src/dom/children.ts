@@ -8,8 +8,10 @@ import {
   onCleanup,
 } from "../lifecycle/cleanup";
 import { createReactiveEffect } from "../lifecycle/reactive";
-import { clearBetween, collectBetween } from "./insert";
-import { addBinding, activateTree } from "./bindings";
+import { clearBetween } from "./clear-between";
+import { collectBetween } from "./collect-between";
+import { addBinding } from "./add-binding";
+import { activateTree } from "./activate-tree";
 
 const isNode = (v: unknown): v is Node =>
   typeof v === "object" && v !== null && typeof (v as any).nodeType === "number";
@@ -26,9 +28,9 @@ export const mountChild = (parent: Node, child: Child, before: Node | null): Nod
   if (child == null || child === false || child === true) return [];
 
   if (typeof child === "string" || typeof child === "number") {
-    const n = normalizeText(child);
-    parent.insertBefore(n, before);
-    return [n];
+    const node = normalizeText(child);
+    parent.insertBefore(node, before);
+    return [node];
   }
 
   if (typeof child === "function") {
@@ -51,9 +53,9 @@ export const mountChild = (parent: Node, child: Child, before: Node | null): Nod
 /** Mounts an array of children into the DOM. */
 export const mountChildren = (parent: Node, children: Child[], before: Node | null): Node[] => {
   const out: Node[] = [];
-  for (const c of children) {
-    if (Array.isArray(c)) out.push(...mountChildren(parent, c, before));
-    else out.push(...mountChild(parent, c, before));
+  for (const child of children) {
+    if (Array.isArray(child)) out.push(...mountChildren(parent, child, before));
+    else out.push(...mountChild(parent, child, before));
   }
   return out;
 };

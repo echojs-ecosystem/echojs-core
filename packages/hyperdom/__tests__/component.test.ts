@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createComponent } from "../src/component";
 import { createModel } from "../src/model";
-import { createView } from "../src/view";
+import { createView } from "../src/create-view";
 import { h } from "../src/h";
 
 describe("createComponent()", () => {

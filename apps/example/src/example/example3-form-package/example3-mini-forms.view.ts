@@ -1,4 +1,4 @@
-import { bindFieldController } from "@echojs/form";
+import { bindField } from "@echojs/form";
 import { List, button, code, div, h2, hr, input, label, p, span } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
 import type { Example3MiniFormsVM } from "./example3-mini-forms.model";
@@ -21,19 +21,18 @@ export const Example3MiniFormsView = ({
         "createForm({ email: createField(...), ... }, { validationSchema, defaultValues, defaultAsyncValues })",
       ),
       ". Ошибки полей перекрывают совпадающие пути общей схемы. Для списков в Hyperdom используй ",
-      code(null, 'bindFieldController(field, { variant: "text", controlledValue: true })'),
+      code(null, 'bindField(field, { variant: "text", controlledValue: true })'),
       ", иначе после перерисовки `List` инпуты могут «терять» текст из сигналов.",
     ]),
     hr(null),
 
     div(
-      null,
       h2(null, "1) Email + checkbox (remember)"),
       label(
         null,
         div(null, "Email"),
         input({
-          ...bindFieldController(login.email, { variant: "email" }),
+          ...bindField(login.email, { variant: "email" }),
         }),
       ),
       (): Child => {
@@ -44,7 +43,7 @@ export const Example3MiniFormsView = ({
       label(
         { style: "display:flex; gap:10px; align-items:center;" },
         input({
-          ...bindFieldController(login.remember, { variant: "checkbox" }),
+          ...bindField(login.remember, { variant: "checkbox" }),
         }),
         span(null, "Запомнить"),
       ),
@@ -77,7 +76,7 @@ export const Example3MiniFormsView = ({
             { style: "display:flex; gap:10px; align-items:center;" },
             input({
               placeholder: "тег",
-              ...bindFieldController(row.tag, { variant: "text", controlledValue: true }),
+              ...bindField(row.tag, { variant: "text", controlledValue: true }),
             }),
             (): Child => {
               const errs = row.tag.$meta.value().errors;

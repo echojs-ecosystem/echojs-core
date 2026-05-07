@@ -65,44 +65,44 @@ export type FieldKit<TSeed extends Record<string, unknown>> = {
 export const createFieldKit = <TSeed extends Record<string, unknown>>(
   seed: TSeed,
 ): FieldKit<TSeed> => {
-  const str: FieldKit<TSeed>["str"] = (key, schema, parent, extra) => {
+  const str: FieldKit<TSeed>["str"] = (key, _schema, parent, _extra) => {
     const src = asRecord((parent ?? seed) as object);
     const raw = src[key];
     const initial = String(raw ?? "");
-    return createField(initial, { schema, ...extra });
+    return createField(initial);
   };
 
-  const num: FieldKit<TSeed>["num"] = (key, schema, parent, extra) => {
+  const num: FieldKit<TSeed>["num"] = (key, _schema, parent, _extra) => {
     const src = asRecord((parent ?? seed) as object);
     const raw = src[key];
     const n = typeof raw === "number" ? raw : Number.parseFloat(String(raw));
     const initial = Number.isFinite(n) ? n : 0;
-    return createField(initial, { schema, ...extra });
+    return createField(initial);
   };
 
-  const bool: FieldKit<TSeed>["bool"] = (key, schema, parent, extra) => {
+  const bool: FieldKit<TSeed>["bool"] = (key, _schema, parent, _extra) => {
     const src = asRecord((parent ?? seed) as object);
     const raw = src[key];
     const initial = Boolean(raw);
-    return createField(initial, { schema, ...extra });
+    return createField(initial);
   };
 
   function pick<T extends string>(
     key: string,
-    schema: ZodEnum<[T, ...T[]]>,
+    _schema: ZodEnum<[T, ...T[]]>,
     parent: object | undefined,
     fallback: T,
-    extra?: FieldKitFieldOpts<T>,
+    _extra?: FieldKitFieldOpts<T>,
   ): Field<T> {
     const src = asRecord((parent ?? seed) as object);
     const raw = src[key];
-    const options = schema.options as readonly T[];
+    const options = _schema.options as readonly T[];
     const initial = (
       typeof raw === "string" && (options as readonly string[]).includes(raw)
         ? (raw as T)
         : fallback
     ) as T;
-    return createField(initial, { schema: schema as StandardSchemaLike<T>, ...extra });
+    return createField(initial);
   }
 
   const list: FieldKit<TSeed>["list"] = (key, rowFactory, parent) => {

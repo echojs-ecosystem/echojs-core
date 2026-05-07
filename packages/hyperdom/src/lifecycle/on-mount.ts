@@ -1,8 +1,8 @@
 import type { Child } from "../types";
-import { addBinding } from "../dom/bindings";
+import { addBinding } from "../dom/add-binding";
 import { onCleanup, getCurrentScope } from "./cleanup";
 import { getStrictContextChecks } from "../config";
-import { isInViewContext } from "../view";
+import { isInViewContext } from "../view-context";
 
 export type MountCleanup = void | (() => void);
 

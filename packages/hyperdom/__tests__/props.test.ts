@@ -27,6 +27,18 @@ describe("props", () => {
     expect(el.getAttribute("aria-label")).toBe("label");
   });
 
+  it("поддерживает class как array/object (vue-like)", () => {
+    const container = document.createElement("div");
+    render(
+      h("div", {
+        class: ["a", { b: true, c: false }, ["d"]],
+      }),
+      container,
+    );
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.getAttribute("class")).toBe("a b d");
+  });
+
   it("поддерживает style как string и object", () => {
     const container = document.createElement("div");
     render(h("div", { style: "color: red;" }), container);
@@ -38,6 +50,32 @@ describe("props", () => {
     const el2 = container2.firstElementChild as HTMLElement;
     expect(el2.style.color).toBe("blue");
     expect(el2.style.backgroundColor).toBe("black");
+  });
+
+  it("поддерживает style как array (vue-like)", () => {
+    const container = document.createElement("div");
+    render(h("div", { style: [{ color: "red" }, { "background-color": "black" }] }), container);
+    const el = container.firstElementChild as HTMLElement;
+    expect(el.style.color).toBe("red");
+    expect(el.style.backgroundColor).toBe("black");
+  });
+
+  it("поддерживает .prop и ^attr (vue-like)", () => {
+    const container = document.createElement("div");
+    render(
+      h("div", null, [
+        h("div", { ".innerHTML": "<span>ok</span>" }),
+        h("input", { "^value": "x" }),
+      ]),
+      container,
+    );
+
+    const root = container.firstElementChild as HTMLDivElement;
+    const divEl = root.firstElementChild as HTMLDivElement;
+    expect(divEl.innerHTML).toBe("<span>ok</span>");
+
+    const inputEl = root.querySelector("input") as HTMLInputElement;
+    expect(inputEl.getAttribute("value")).toBe("x");
   });
 
   it("поддерживает reactive props", async () => {

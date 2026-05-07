@@ -10,6 +10,6 @@
     },
     "rootDir": ".."
   },
-  "include": ["src/**/*", "tests/**/*", "vitest.config.ts"],
+  "include": ["src/**/*", "__tests__/**/*", "vitest.config.ts"],
   "exclude": ["dist", "node_modules"]
 }

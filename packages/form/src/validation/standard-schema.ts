@@ -88,13 +88,13 @@ export const standardSchemaIssuesForUnknown = async (
 
   if (
     Array.isArray(issuesUnknown) &&
-    issuesUnknown.every((x) => x && typeof (x as any).message === "string")
+    issuesUnknown.every((issue) => issue && typeof (issue as any).message === "string")
   ) {
     const issues = Array.from(
       issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[],
-    ).map((i) => ({
-      message: i.message,
-      path: normalizeStandardSchemaPathSegments(i.path ?? []),
+    ).map((issue) => ({
+      message: issue.message,
+      path: normalizeStandardSchemaPathSegments(issue.path ?? []),
     }));
 
     return issues.length > 0 ? { ok: false, issues } : { ok: true, issues: [] };
@@ -126,13 +126,13 @@ export const standardSchemaIssuesForUnknownSync = (
 
   if (
     Array.isArray(issuesUnknown) &&
-    issuesUnknown.every((x) => x && typeof (x as any).message === "string")
+    issuesUnknown.every((issue) => issue && typeof (issue as any).message === "string")
   ) {
     const issues = Array.from(
       issuesUnknown as readonly { message: string; path?: ReadonlyArray<unknown> }[],
-    ).map((i) => ({
-      message: i.message,
-      path: normalizeStandardSchemaPathSegments(i.path ?? []),
+    ).map((issue) => ({
+      message: issue.message,
+      path: normalizeStandardSchemaPathSegments(issue.path ?? []),
     }));
 
     return issues.length > 0 ? { ok: false, issues } : { ok: true, issues: [] };

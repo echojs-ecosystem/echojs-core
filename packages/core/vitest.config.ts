@@ -5,7 +5,8 @@ export default mergeConfig(
   shared,
   defineConfig({
     test: {
-      environment: "happy-dom",
+      environment: "jsdom",
+      include: ["__tests__/**/*.test.ts"],
     },
   }),
 );
