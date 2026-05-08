@@ -140,14 +140,29 @@ export type FormSubmitResult<T> =
   | { ok: true; value: T }
   | { ok: false; errors: Record<string, unknown> };
 
-export type Form<TValue, TFields extends Record<string, any>, TActions extends Record<string, any> = {}> = {
+export type FormArrays<
+  TFactories extends Record<string, any> = {},
+  TActions extends Record<string, any> = {},
+> = {
+  factories: TFactories;
+  actions: TActions;
+};
+
+export type Form<
+  TValue,
+  TFields extends Record<string, any>,
+  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
+> = {
   fields: TFields;
 
   $submitting: Signal<boolean>;
   $submitCount: Signal<number>;
   $errors: Signal<Record<string, unknown> | undefined>;
   $schemaErrors: Signal<Record<string, string[]> | undefined>;
-  actions: TActions;
+  /** Unified array helpers: factories + actions */
+  arrays: TArrays;
+  /** Back-compat alias: prefer `arrays.actions`. */
+  arrayActions: TArrays["actions"];
 
   validate: () => Record<string, unknown>;
   validateAsync: () => Promise<Record<string, unknown>>;

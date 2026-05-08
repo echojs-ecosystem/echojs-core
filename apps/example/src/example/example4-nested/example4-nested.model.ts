@@ -1,12 +1,19 @@
 import { effect } from "@echojs-ecosystem/reactivity";
 import { createModel } from "@echojs/hyperdom";
-import { createField, createFieldArray, createFormFor, wireFormModel } from "@echojs/form";
+import {
+  createField,
+  createFieldArray,
+  createForm,
+  generateAppendToArray,
+  generateRemoveFromArray,
+  wireFormModel,
+} from "@echojs/form";
 import type { WireFormModel } from "@echojs/form";
 import { z } from "zod";
 
 const RoleEnum = z.enum(["dev", "pm", "qa"]);
 
-const CatalogSchema = z.object({
+const catalogSchema = z.object({
   catalogTitle: z.string().min(2),
   departments: z
     .array(
@@ -15,7 +22,7 @@ const CatalogSchema = z.object({
         employees: z
           .array(
             z.object({
-              name: z.string().min(1),
+              name: z.string().min(1), // обязательное
               role: RoleEnum,
               comment: z.string().max(120),
               tickets: z.array(
@@ -30,9 +37,17 @@ const CatalogSchema = z.object({
       }),
     )
     .min(1),
-});
+})
+  // пример async-валидации схемы (Standard Schema умеет async validate)
+  .refine(
+    async (v) => {
+      await Promise.resolve();
+      return !String(v.catalogTitle).includes("!");
+    },
+    { path: ["catalogTitle"], message: "Заголовок не должен содержать '!'" },
+  );
 
-type CatalogValue = z.infer<typeof CatalogSchema>;
+type CatalogValue = z.infer<typeof catalogSchema>;
 
 export type TicketRow = {
   code: ReturnType<typeof createField<string>>;
@@ -56,24 +71,7 @@ type CatalogFields = {
   departments: ReturnType<typeof createFieldArray<DeptRow>>;
 };
 
-const newTicketRow = (): TicketRow => ({
-  code: createField(""),
-  eta: createField(7),
-});
-
-const newEmployeeRow = (): EmployeeRow => ({
-  name: createField(""),
-  role: createField<z.infer<typeof RoleEnum>>("dev"),
-  comment: createField(""),
-  tickets: createFieldArray([newTicketRow()]),
-});
-
-const newDeptRow = (): DeptRow => ({
-  title: createField(""),
-  employees: createFieldArray([newEmployeeRow()]),
-});
-
-const catalogFields: CatalogFields = {
+const catalogForm = createForm({
   catalogTitle: createField("Каталог команд"),
   departments: createFieldArray([
     {
@@ -91,43 +89,61 @@ const catalogFields: CatalogFields = {
       ]),
     },
   ]),
-};
-
-const makeCatalogForm = createFormFor<CatalogValue>();
-
-const catalogForm = makeCatalogForm<CatalogFields>(catalogFields, {
-  validationSchema: CatalogSchema,
-  validationOn: "onChange",
+}, {
+  validationSchema: catalogSchema,
+  validationOn: "all",
   defaultAsyncValues: async () => ({
     catalogTitle: "Каталог команд (после «async»)",
   }),
-  fieldArrayFactories: {
-    departments: newDeptRow,
+  validateAsync: async () => {
+    // пример async кастомной валидации (вдобавок к schema)
+    await Promise.resolve();
+    return {};
   },
-  actions: (form) => ({
-    appendDept: (): void => {
-      form.fields.departments.append(newDeptRow());
+  arrays: {
+    factories: {
+      departments: () => ({
+        title: createField(""),
+        employees: createFieldArray([
+          {
+            name: createField(""),
+            role: createField<z.infer<typeof RoleEnum>>("dev"),
+            comment: createField(""),
+            tickets: createFieldArray([{ code: createField(""), eta: createField(7) }]),
+          },
+        ]),
+      }),
+      employee: () => ({
+        name: createField(""),
+        role: createField<z.infer<typeof RoleEnum>>("dev"),
+        comment: createField(""),
+        tickets: createFieldArray([{ code: createField(""), eta: createField(7) }]),
+      }),
+      ticket: () => ({ code: createField(""), eta: createField(7) }),
     },
-    removeDept: (index: number): void => {
-      form.fields.departments.removeAt(index);
-    },
-    appendEmployee: (deptIndex: number): void => {
-      form.fields.departments.$items.value()[deptIndex].employees.append(newEmployeeRow());
-    },
-    removeEmployee: (deptIndex: number, employeeIndex: number): void => {
-      form.fields.departments.$items.value()[deptIndex].employees.removeAt(employeeIndex);
-    },
-    appendTicket: (deptIndex: number, employeeIndex: number): void => {
-      form.fields.departments.$items
-        .value()
-        [deptIndex].employees.$items.value()[employeeIndex].tickets.append(newTicketRow());
-    },
-    removeTicket: (deptIndex: number, employeeIndex: number, ticketIndex: number): void => {
-      form.fields.departments.$items
-        .value()
-        [deptIndex].employees.$items.value()[employeeIndex].tickets.removeAt(ticketIndex);
-    },
-  }),
+    actions: (form) => ({
+      appendDept: generateAppendToArray(
+        form,
+        () => form.arrays.factories.departments(),
+        "departments",
+      ),
+      removeDept: generateRemoveFromArray(form, "departments"),
+
+      appendEmployee: generateAppendToArray(
+        form,
+        () => form.arrays.factories.employee(),
+        "departments.employees",
+      ),
+      removeEmployee: generateRemoveFromArray(form, "departments.employees"),
+
+      appendTicket: generateAppendToArray(
+        form,
+        () => form.arrays.factories.ticket(),
+        "departments.employees.tickets",
+      ),
+      removeTicket: generateRemoveFromArray(form, "departments.employees.tickets"),
+    }),
+  },
 });
 
 export const ROLE_OPTIONS: { value: z.infer<typeof RoleEnum>; label: string }[] = [
@@ -141,7 +157,7 @@ export interface Example4NestedVM {
   form: typeof catalogForm;
   $schemaErrors: typeof catalogForm.$schemaErrors;
   submitCatalog: () => Promise<void>;
-  actions: typeof catalogForm.actions;
+  arrayActions: typeof catalogForm.arrayActions;
 }
 
 export const $nestedModel = createModel((): Example4NestedVM => {
@@ -167,6 +183,6 @@ export const $nestedModel = createModel((): Example4NestedVM => {
     form: catalogForm,
     $schemaErrors: catalogForm.$schemaErrors,
     submitCatalog,
-    actions: catalogForm.actions,
+    arrayActions: catalogForm.arrayActions,
   };
 });

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createField } from "../src/primitives/field";
 import { createFieldArray } from "../src/primitives/fieldArray";
 import { createFieldKit } from "../src/primitives/field-kit";
-import { createForm } from "../src/primitives/form";
+import { createForm } from "../src/primitives/create-form";
 
 describe("createFieldKit()", () => {
   it("reads primitives and nested lists from seed", () => {

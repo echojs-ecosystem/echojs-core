@@ -1,5 +1,5 @@
 import { effect, signal } from "@echojs-ecosystem/reactivity";
-import type { Form, FormSubmitResult, FormValidationMode, StandardSchemaLike } from "../types";
+import type { Form, FormArrays, FormSubmitResult, FormValidationMode, StandardSchemaLike } from "../types";
 import { flattenFieldErrors } from "../validation/flatten";
 import { standardSchemaIssuesForUnknown } from "../validation/standard-schema";
 import { collectFormValueFromFields } from "./collect-form-value";
@@ -9,7 +9,11 @@ import { deepReset, deepValidateAsync, deepValidateSync } from "./validation-tre
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 
-export type CreateFormOptions<TValue, TFields extends Record<string, any>, TActions extends Record<string, any> = {}> = {
+export type CreateFormOptions<
+  TValue,
+  TFields extends Record<string, any>,
+  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
+> = {
   /**
    * Снимок значения для `submit` / `validationSchema`.
    *
@@ -50,16 +54,19 @@ export type CreateFormOptions<TValue, TFields extends Record<string, any>, TActi
   defaultAsyncValues?: () => Promise<Partial<TValue>>;
 
   /**
-   * Фабрики строк для верхнеуровневых `createFieldArray` — нужны, если `defaultAsyncValues` удлиняет массив.
+   * Unified array helpers (factories + actions). This replaces:
+   * - `fieldArrayFactories`
+   * - `arrayActions`
    */
-  fieldArrayFactories?: Partial<{ [K in keyof TFields]: () => unknown }>;
+  arrays?: {
+    factories?: TArrays["factories"];
+    actions?: (form: Form<TValue, TFields, FormArrays<TArrays["factories"], {}>>) => TArrays["actions"];
+  };
 
-  /**
-   * Build an actions bag next to schema/options.
-   *
-   * This lets you define array ops and other form logic once, and then just call `form.actions.*`.
-   */
-  actions?: (form: Form<TValue, TFields, {}>) => TActions;
+  /** @deprecated Use `arrays.factories` instead. */
+  fieldArrayFactories?: Partial<{ [K in keyof TFields]: () => unknown }>;
+  /** @deprecated Use `arrays.actions` instead. */
+  arrayActions?: (form: Form<TValue, TFields, FormArrays<{}, {}>>) => Record<string, any>;
 };
 
 /**
@@ -73,16 +80,26 @@ export type CreateFormOptions<TValue, TFields extends Record<string, any>, TActi
  * );
  * ```
  */
-type ActionsFromOptions<T> = T extends { actions?: (...args: any[]) => infer A } ? A : {};
-
-export const createForm = <
+export function createForm<
   TValue,
-  TFields extends Record<string, any> = Record<string, any>,
-  TOptions extends CreateFormOptions<TValue, TFields, any> = CreateFormOptions<TValue, TFields, {}>,
+  TFields extends Record<string, any>,
+  TArrays extends FormArrays<any, any>,
 >(
   fields: TFields,
-  opts: TOptions = {} as TOptions,
-): Form<TValue, TFields, ActionsFromOptions<TOptions>> => {
+  opts: CreateFormOptions<TValue, TFields, TArrays>,
+): Form<TValue, TFields, TArrays>;
+export function createForm<TValue, TFields extends Record<string, any>>(
+  fields: TFields,
+  opts?: CreateFormOptions<TValue, TFields, FormArrays<{}, {}>>,
+): Form<TValue, TFields, FormArrays<{}, {}>>;
+export function createForm<
+  TValue,
+  TFields extends Record<string, any>,
+  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
+>(
+  fields: TFields,
+  opts: CreateFormOptions<TValue, TFields, TArrays> = {} as CreateFormOptions<TValue, TFields, TArrays>,
+): Form<TValue, TFields, TArrays> {
   const $submitting = signal(false);
   const $submitCount = signal(0);
   const $errors = signal<Record<string, unknown> | undefined>(undefined);
@@ -97,7 +114,7 @@ export const createForm = <
     hydrateFormFields(
       resolvedFields as unknown as Record<string, unknown>,
       opts.defaultValues as object,
-      factories,
+      (opts.arrays?.factories as any) ?? factories,
     );
   }
 
@@ -106,7 +123,7 @@ export const createForm = <
       hydrateFormFields(
         resolvedFields as unknown as Record<string, unknown>,
         extra as object,
-        factories,
+        (opts.arrays?.factories as any) ?? factories,
       );
     });
   }
@@ -244,26 +261,23 @@ export const createForm = <
     reset,
     hydrate,
     submit,
-  } as unknown as Form<TValue, TFields, ActionsFromOptions<TOptions>>;
+  } as unknown as Form<TValue, TFields, TArrays>;
 
-  (form as any).actions = (opts.actions ? opts.actions(form as any) : {}) as ActionsFromOptions<TOptions>;
+  // Attach unified arrays bag early so actions can reference it.
+  (form as any).arrays = {
+    factories: (opts.arrays?.factories ?? {}) as TArrays["factories"],
+    actions: {} as TArrays["actions"],
+  } satisfies FormArrays<any, any>;
+
+  const actions =
+    (opts.arrays?.actions
+      ? opts.arrays.actions(form as any)
+      : opts.arrayActions
+        ? (opts.arrayActions(form as any) as any)
+        : {}) as TArrays["actions"];
+
+  (form as any).arrays.actions = actions;
+  (form as any).arrayActions = actions;
 
   return form;
-};
-
-/**
- * Curry helper to avoid partial generic inference limitations.
- *
- * Lets you write:
- * `const make = createFormFor<MyValue>(); const form = make(fields, { validationSchema, actions: ... })`
- */
-export const createFormFor =
-  <TValue>() =>
-  <
-    TFields extends Record<string, any>,
-    TOptions extends CreateFormOptions<TValue, TFields, any> = CreateFormOptions<TValue, TFields, {}>,
-  >(
-    fields: TFields,
-    opts: TOptions,
-  ): Form<TValue, TFields, ActionsFromOptions<TOptions>> =>
-    createForm<TValue, TFields, TOptions>(fields, opts);
+}

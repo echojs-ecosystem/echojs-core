@@ -2,11 +2,13 @@ export { createField } from "./primitives/field";
 export { createFieldArray } from "./primitives/fieldArray";
 export { defineNestedFieldArrayOps } from "./primitives/nested-field-array-ops";
 export { createFieldSet } from "./primitives/fieldSet";
-export { createForm } from "./primitives/form";
-export { createFormFor } from "./primitives/form";
+export { createForm } from "./primitives/create-form";
+export { generateAppendToArray } from "./primitives/generate-append-to-array";
+export { generateRemoveFromArray } from "./primitives/generate-remove-from-array";
+export type { ArrayPath } from "./primitives/array-path";
 export { createFieldKit } from "./primitives/field-kit";
 export { collectFormValueFromFields } from "./primitives/collect-form-value";
-export type { CreateFormOptions } from "./primitives/form";
+export type { CreateFormOptions } from "./primitives/create-form";
 export type { FieldKit, FieldKitFieldOpts } from "./primitives/field-kit";
 export { hydrateFormFields } from "./primitives/hydrate";
 export {

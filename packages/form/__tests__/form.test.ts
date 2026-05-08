@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createField } from "../src/primitives/field";
 import { createFieldSet } from "../src/primitives/fieldSet";
 import { collectFormValueFromFields } from "../src/primitives/collect-form-value";
-import { createForm } from "../src/primitives/form";
+import { createForm } from "../src/primitives/create-form";
 
 describe("collectFormValueFromFields()", () => {
   it("unwraps Field, FieldSet and FieldArray", () => {
