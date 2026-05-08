@@ -144,8 +144,25 @@ export type FormArrays<
   TFactories extends Record<string, any> = {},
   TActions extends Record<string, any> = {},
 > = {
+  /** @deprecated Prefer putting factory methods directly into `actions` */
   factories: TFactories;
   actions: TActions;
+};
+
+export type ArrayGenerator<TValue, TFields extends Record<string, any>> = {
+  append: <Row>(makeRow: () => Row, path: import("./primitives/array-path").ArrayPath<TFields>) => (
+    ...indices: number[]
+  ) => void;
+  remove: (path: import("./primitives/array-path").ArrayPath<TFields>) => (...indices: number[]) => void;
+};
+
+export type FormContext<
+  TValue,
+  TFields extends Record<string, any>,
+  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
+> = {
+  form: Form<TValue, TFields, TArrays>;
+  arrayGenerator: ArrayGenerator<TValue, TFields>;
 };
 
 export type Form<
@@ -163,6 +180,8 @@ export type Form<
   arrays: TArrays;
   /** Back-compat alias: prefer `arrays.actions`. */
   arrayActions: TArrays["actions"];
+  /** Convenience: generators bound to this form */
+  arrayGenerator: ArrayGenerator<TValue, TFields>;
 
   validate: () => Record<string, unknown>;
   validateAsync: () => Promise<Record<string, unknown>>;

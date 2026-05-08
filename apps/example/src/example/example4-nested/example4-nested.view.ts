@@ -360,7 +360,7 @@ export const Example4NestedView = (vm: Example4NestedVM) =>
     { class: "example4" },
     Example4NestedIntro(),
     CatalogTitleField({ catalogTitle: vm.ui.catalogTitle, $schemaErrors: vm.$schemaErrors }),
-    CatalogToolbar({ appendDept: vm.arrayActions.appendDept, submitCatalog: vm.submitCatalog }),
+    CatalogToolbar({ appendDept: vm.form.arrays.actions.appendDept, submitCatalog: vm.submitCatalog }),
     ReactiveSchemaErrors(vm.$schemaErrors),
     hr(),
     DepartmentsSection(vm),

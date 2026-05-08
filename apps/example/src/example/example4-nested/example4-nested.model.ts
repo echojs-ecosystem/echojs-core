@@ -4,8 +4,6 @@ import {
   createField,
   createFieldArray,
   createForm,
-  generateAppendToArray,
-  generateRemoveFromArray,
   wireFormModel,
 } from "@echojs/form";
 import type { WireFormModel } from "@echojs/form";
@@ -100,50 +98,37 @@ const catalogForm = createForm({
     await Promise.resolve();
     return {};
   },
-  arrays: {
-    factories: {
-      departments: () => ({
-        title: createField(""),
-        employees: createFieldArray([
-          {
-            name: createField(""),
-            role: createField<z.infer<typeof RoleEnum>>("dev"),
-            comment: createField(""),
-            tickets: createFieldArray([{ code: createField(""), eta: createField(7) }]),
-          },
-        ]),
-      }),
-      employee: () => ({
+    actions: (ctx) => ({
+      createTicket: () => ({ code: createField(""), eta: createField(7) }),
+      createEmployee: () => ({
         name: createField(""),
         role: createField<z.infer<typeof RoleEnum>>("dev"),
         comment: createField(""),
-        tickets: createFieldArray([{ code: createField(""), eta: createField(7) }]),
+        tickets: createFieldArray([ctx.form.arrays.actions.createTicket()]),
       }),
-      ticket: () => ({ code: createField(""), eta: createField(7) }),
-    },
-    actions: (form) => ({
-      appendDept: generateAppendToArray(
-        form,
-        () => form.arrays.factories.departments(),
+      createDepartment: () => ({
+        title: createField(""),
+        employees: createFieldArray([ctx.form.arrays.actions.createEmployee()]),
+      }),
+
+      appendDept: ctx.arrayGenerator.append(
+        () => ctx.form.arrays.actions.createDepartment(),
         "departments",
       ),
-      removeDept: generateRemoveFromArray(form, "departments"),
+      removeDept: ctx.arrayGenerator.remove("departments"),
 
-      appendEmployee: generateAppendToArray(
-        form,
-        () => form.arrays.factories.employee(),
+      appendEmployee: ctx.arrayGenerator.append(
+        () => ctx.form.arrays.actions.createEmployee(),
         "departments.employees",
       ),
-      removeEmployee: generateRemoveFromArray(form, "departments.employees"),
+      removeEmployee: ctx.arrayGenerator.remove("departments.employees"),
 
-      appendTicket: generateAppendToArray(
-        form,
-        () => form.arrays.factories.ticket(),
+      appendTicket: ctx.arrayGenerator.append(
+        () => ctx.form.arrays.actions.createTicket(),
         "departments.employees.tickets",
       ),
-      removeTicket: generateRemoveFromArray(form, "departments.employees.tickets"),
+      removeTicket: ctx.arrayGenerator.remove("departments.employees.tickets"),
     }),
-  },
 });
 
 export const ROLE_OPTIONS: { value: z.infer<typeof RoleEnum>; label: string }[] = [

@@ -1,10 +1,19 @@
 import { effect, signal } from "@echojs-ecosystem/reactivity";
-import type { Form, FormArrays, FormSubmitResult, FormValidationMode, StandardSchemaLike } from "../types";
+import type {
+  Form,
+  FormArrays,
+  FormContext,
+  FormSubmitResult,
+  FormValidationMode,
+  StandardSchemaLike,
+} from "../types";
 import { flattenFieldErrors } from "../validation/flatten";
 import { standardSchemaIssuesForUnknown } from "../validation/standard-schema";
 import { collectFormValueFromFields } from "./collect-form-value";
 import { hydrateFormFields } from "./hydrate";
 import { deepReset, deepValidateAsync, deepValidateSync } from "./validation-tree";
+import { generateAppendToArray } from "./generate-append-to-array";
+import { generateRemoveFromArray } from "./generate-remove-from-array";
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
@@ -54,19 +63,9 @@ export type CreateFormOptions<
   defaultAsyncValues?: () => Promise<Partial<TValue>>;
 
   /**
-   * Unified array helpers (factories + actions). This replaces:
-   * - `fieldArrayFactories`
-   * - `arrayActions`
+   * Unified array helpers (actions).
    */
-  arrays?: {
-    factories?: TArrays["factories"];
-    actions?: (form: Form<TValue, TFields, FormArrays<TArrays["factories"], {}>>) => TArrays["actions"];
-  };
-
-  /** @deprecated Use `arrays.factories` instead. */
-  fieldArrayFactories?: Partial<{ [K in keyof TFields]: () => unknown }>;
-  /** @deprecated Use `arrays.actions` instead. */
-  arrayActions?: (form: Form<TValue, TFields, FormArrays<{}, {}>>) => Record<string, any>;
+  actions?: (ctx: FormContext<TValue, TFields, TArrays>) => TArrays["actions"];
 };
 
 /**
@@ -107,14 +106,12 @@ export function createForm<
 
   const resolvedFields = fields;
   const rootSchema = opts.validationSchema ?? opts.schema;
-  const factories = opts.fieldArrayFactories as Record<string, () => unknown> | undefined;
   const validationOn = opts.validationOn ?? "manual";
 
   if (opts.defaultValues && Object.keys(opts.defaultValues as object).length > 0) {
     hydrateFormFields(
       resolvedFields as unknown as Record<string, unknown>,
       opts.defaultValues as object,
-      (opts.arrays?.factories as any) ?? factories,
     );
   }
 
@@ -123,7 +120,6 @@ export function createForm<
       hydrateFormFields(
         resolvedFields as unknown as Record<string, unknown>,
         extra as object,
-        (opts.arrays?.factories as any) ?? factories,
       );
     });
   }
@@ -210,7 +206,6 @@ export function createForm<
     hydrateFormFields(
       resolvedFields as unknown as Record<string, unknown>,
       partial as object,
-      factories,
     );
   };
 
@@ -263,21 +258,27 @@ export function createForm<
     submit,
   } as unknown as Form<TValue, TFields, TArrays>;
 
+  (form as any).arrayGenerator = {
+    append: <Row>(makeRow: () => Row, path: any) => generateAppendToArray(form as any, makeRow, path),
+    remove: (path: any) => generateRemoveFromArray(form as any, path),
+  };
+
   // Attach unified arrays bag early so actions can reference it.
   (form as any).arrays = {
-    factories: (opts.arrays?.factories ?? {}) as TArrays["factories"],
     actions: {} as TArrays["actions"],
   } satisfies FormArrays<any, any>;
 
+  const ctx: FormContext<TValue, TFields, any> = {
+    form: form as any,
+    arrayGenerator: (form as any).arrayGenerator,
+  };
+
   const actions =
-    (opts.arrays?.actions
-      ? opts.arrays.actions(form as any)
-      : opts.arrayActions
-        ? (opts.arrayActions(form as any) as any)
-        : {}) as TArrays["actions"];
+    (opts.actions
+      ? opts.actions(ctx as any)
+      : {}) as TArrays["actions"];
 
   (form as any).arrays.actions = actions;
-  (form as any).arrayActions = actions;
 
   return form;
 }
