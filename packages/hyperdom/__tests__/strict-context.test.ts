@@ -13,7 +13,7 @@ describe("strictContextChecks", () => {
 
   it("разрешает h() внутри createView()", () => {
     setStrictContextChecks(true);
-    const View = createView(() => h("div", null, "ok"));
+    const View = createView(() => h("div", null, "ok"), "StrictContextView");
     const node = View(undefined as void) as HTMLElement;
     expect(node.textContent).toBe("ok");
     setStrictContextChecks(false);

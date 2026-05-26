@@ -1,19 +1,10 @@
 import { effect, signal } from "@echojs-ecosystem/reactivity";
-import type {
-  Form,
-  FormArrays,
-  FormContext,
-  FormSubmitResult,
-  FormValidationMode,
-  StandardSchemaLike,
-} from "../types";
+import type { Form, FormSubmitResult, FormValidationMode, StandardSchemaLike } from "../types";
 import { flattenFieldErrors } from "../validation/flatten";
 import { standardSchemaIssuesForUnknown } from "../validation/standard-schema";
 import { collectFormValueFromFields } from "./collect-form-value";
 import { hydrateFormFields } from "./hydrate";
 import { deepReset, deepValidateAsync, deepValidateSync } from "./validation-tree";
-import { generateAppendToArray } from "./generate-append-to-array";
-import { generateRemoveFromArray } from "./generate-remove-from-array";
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
@@ -21,8 +12,11 @@ const isPlainObject = (value: unknown): value is Record<string, unknown> =>
 export type CreateFormOptions<
   TValue,
   TFields extends Record<string, any>,
-  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
+  TArrayActions extends Record<string, unknown> = {},
 > = {
+  /** Имя формы (отладка, логирование). */
+  name: string;
+
   /**
    * Снимок значения для `submit` / `validationSchema`.
    *
@@ -63,9 +57,21 @@ export type CreateFormOptions<
   defaultAsyncValues?: () => Promise<Partial<TValue>>;
 
   /**
-   * Unified array helpers (actions).
+   * Фабрики строк (`createTicket`, …) и append/remove через `arrayGenerator` из `@echojs/form`.
+   *
+   * @example
+   * ```ts
+   * arrayActions: (form) => {
+   *   const createRow = () => ({ title: createField("") });
+   *   return {
+   *     createRow,
+   *     appendRow: arrayGenerator.append(form, createRow, "items"),
+   *     removeRow: arrayGenerator.remove(form, "items"),
+   *   };
+   * },
+   * ```
    */
-  actions?: (ctx: FormContext<TValue, TFields, TArrays>) => TArrays["actions"];
+  arrayActions?: (form: Form<TValue, TFields, TArrayActions>) => TArrayActions;
 };
 
 /**
@@ -75,30 +81,18 @@ export type CreateFormOptions<
  * ```ts
  * const form = createForm(
  *   { title: createField(""), items: createFieldArray([]) },
- *   { validationSchema: z.object({ ... }), defaultValues: { title: "a" } },
+ *   { name: "MyForm", validationSchema: z.object({ ... }), defaultValues: { title: "a" } },
  * );
  * ```
  */
 export function createForm<
   TValue,
   TFields extends Record<string, any>,
-  TArrays extends FormArrays<any, any>,
+  TArrayActions extends Record<string, unknown> = {},
 >(
   fields: TFields,
-  opts: CreateFormOptions<TValue, TFields, TArrays>,
-): Form<TValue, TFields, TArrays>;
-export function createForm<TValue, TFields extends Record<string, any>>(
-  fields: TFields,
-  opts?: CreateFormOptions<TValue, TFields, FormArrays<{}, {}>>,
-): Form<TValue, TFields, FormArrays<{}, {}>>;
-export function createForm<
-  TValue,
-  TFields extends Record<string, any>,
-  TArrays extends FormArrays<any, any> = FormArrays<{}, {}>,
->(
-  fields: TFields,
-  opts: CreateFormOptions<TValue, TFields, TArrays> = {} as CreateFormOptions<TValue, TFields, TArrays>,
-): Form<TValue, TFields, TArrays> {
+  opts: CreateFormOptions<TValue, TFields, TArrayActions>,
+): Form<TValue, TFields, TArrayActions> {
   const $submitting = signal(false);
   const $submitCount = signal(0);
   const $errors = signal<Record<string, unknown> | undefined>(undefined);
@@ -246,39 +240,23 @@ export function createForm<
   };
 
   const form = {
+    displayName: opts.name,
     fields: resolvedFields,
     $submitting,
     $submitCount,
     $errors,
     $schemaErrors,
+    arrayActions: {} as TArrayActions,
     validate,
     validateAsync,
     reset,
     hydrate,
     submit,
-  } as unknown as Form<TValue, TFields, TArrays>;
+  } as Form<TValue, TFields, TArrayActions>;
 
-  (form as any).arrayGenerator = {
-    append: <Row>(makeRow: () => Row, path: any) => generateAppendToArray(form as any, makeRow, path),
-    remove: (path: any) => generateRemoveFromArray(form as any, path),
-  };
-
-  // Attach unified arrays bag early so actions can reference it.
-  (form as any).arrays = {
-    actions: {} as TArrays["actions"],
-  } satisfies FormArrays<any, any>;
-
-  const ctx: FormContext<TValue, TFields, any> = {
-    form: form as any,
-    arrayGenerator: (form as any).arrayGenerator,
-  };
-
-  const actions =
-    (opts.actions
-      ? opts.actions(ctx as any)
-      : {}) as TArrays["actions"];
-
-  (form as any).arrays.actions = actions;
+  if (opts.arrayActions) {
+    form.arrayActions = opts.arrayActions(form);
+  }
 
   return form;
 }

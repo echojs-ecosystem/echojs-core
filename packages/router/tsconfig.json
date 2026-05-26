@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@echojs-ecosystem/oxc-config/tsconfig",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"],
+      "@echojs/hyperdom": ["../hyperdom/src/index.ts"]
+    },
+    "rootDir": ".."
+  },
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { createModel, isInModelContext } from "../src/model";
+import { createModel, isInModelContext } from "../src/create-model";
 
 describe("createModel()", () => {
   it("оборачивает фабрику модели в модельный контекст", () => {
     const make = createModel(() => {
       expect(isInModelContext()).toBe(true);
       return { ok: true };
-    });
+    }, "TestModel");
 
     expect(isInModelContext()).toBe(false);
     const vm = make();

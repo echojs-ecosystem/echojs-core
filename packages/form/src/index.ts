@@ -3,6 +3,7 @@ export { createFieldArray } from "./primitives/fieldArray";
 export { defineNestedFieldArrayOps } from "./primitives/nested-field-array-ops";
 export { createFieldSet } from "./primitives/fieldSet";
 export { createForm } from "./primitives/create-form";
+export { arrayGenerator } from "./primitives/array-generator";
 export { generateAppendToArray } from "./primitives/generate-append-to-array";
 export { generateRemoveFromArray } from "./primitives/generate-remove-from-array";
 export type { ArrayPath } from "./primitives/array-path";

@@ -64,6 +64,7 @@ describe("lifecycle mount()", () => {
         mounted();
         return () => cleaned();
       },
+      "MountHookView",
       () => h("div", null, "x"),
     );
 

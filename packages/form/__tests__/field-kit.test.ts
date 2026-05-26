@@ -51,6 +51,7 @@ describe("createFieldKit()", () => {
         tags: createFieldArray<Row>([]),
       },
       {
+        name: "FieldKitForm",
         validationSchema: schema,
         defaultValues: { name: "Ada", tags: [{ t: "one" }] },
         fieldArrayFactories: { tags: newTagRow },

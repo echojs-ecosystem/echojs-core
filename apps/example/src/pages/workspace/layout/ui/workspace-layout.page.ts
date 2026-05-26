@@ -1,0 +1,136 @@
+import { createLayoutView } from "@echojs/router";
+import type { AnyPage } from "@echojs/router";
+import type { Child } from "@echojs/hyperdom";
+import { $isLoggedIn } from "@app/router/auth.js";
+import { $activePageTitle } from "@app/router/model.js";
+import { USERS } from "@entities/user/index.js";
+import { catalogVariantPage } from "@pages/workspace/catalog/variant/ui/page.js";
+import { filesPage } from "@pages/workspace/files/ui/page.js";
+import { slowPage } from "@pages/workspace/slow/ui/page.js";
+import { lazyPage } from "@pages/workspace/lazy/ui/page.js";
+import { settingsPage } from "@pages/workspace/settings/ui/page.js";
+import { userPage } from "@pages/workspace/users/detail/ui/page.js";
+import { usersListPage } from "@pages/workspace/users/list/ui/page.js";
+import { workspaceSprintPage } from "@pages/workspace/sprint/ui/page.js";
+import { workspaceHomePage } from "@pages/workspace/home/ui/page.js";
+import {
+  aside,
+  button,
+  div,
+  h4,
+  nav,
+  p,
+  pre,
+  section,
+  Show,
+  ul,
+  li,
+  NavLink,
+} from "@pages/workspace/ui/common.js";
+
+const trackedPages: AnyPage[] = [
+  workspaceHomePage,
+  usersListPage,
+  userPage,
+  settingsPage,
+  slowPage,
+  lazyPage,
+  filesPage,
+  workspaceSprintPage,
+  catalogVariantPage,
+];
+
+const navGroup = (title: string, items: Child[]): Child =>
+  div({ class: "workspace-subnav__group" }, [
+    p({ class: "workspace-subnav__title" }, title),
+    ul(null, items),
+  ]);
+
+const navItem = (
+  page: AnyPage,
+  label: string,
+  opts?: { params?: Record<string, string>; query?: Record<string, string> },
+): Child =>
+  li(null, [
+    NavLink({
+      to: page,
+      params: opts?.params,
+      query: opts?.query,
+      activeClass: "workspace-subnav__link--active",
+      class: "workspace-subnav__link",
+      children: label,
+    }),
+  ]);
+
+export const workspaceLayoutPage = createLayoutView({
+  name: "workspace-layout",
+  view: ({ outlet }) =>
+    div({ class: "workspace-shell" }, [
+      nav({ class: "workspace-subnav" }, [
+        p({ class: "workspace-subnav__heading" }, () => $activePageTitle.value()),
+        navGroup("Обзор", [navItem(workspaceHomePage, "Старт workspace")]),
+        navGroup("Команда", [
+          navItem(usersListPage, "Пользователи"),
+          navItem(userPage, "Профиль #1", { params: { id: "1" }, query: { tab: "profile" } }),
+        ]),
+        navGroup("Спринты", [
+          navItem(workspaceSprintPage, "Acme / S24", {
+            params: { orgId: "acme", teamId: "platform", sprintId: "s24" },
+            query: { tab: "board" },
+          }),
+          navItem(workspaceSprintPage, "North / Ops", {
+            params: { orgId: "north", teamId: "ops", sprintId: "ops-3" },
+            query: { tab: "overview" },
+          }),
+        ]),
+        navGroup("Каталог", [
+          navItem(catalogVariantPage, "Phone 128GB", {
+            params: { categoryId: "electronics", productId: "phone", variantId: "128gb" },
+            query: { tab: "specs" },
+          }),
+          navItem(catalogVariantPage, "Заказ лампы", {
+            params: { categoryId: "home", productId: "lamp", variantId: "rgb" },
+            query: { tab: "order" },
+          }),
+        ]),
+        navGroup("Ещё", [
+          navItem(settingsPage, "Настройки"),
+          navItem(slowPage, "Медленная загрузка"),
+          navItem(lazyPage, "Lazy chunk"),
+          navItem(filesPage, "Файлы", { params: { "*": "docs/readme.md" } }),
+        ]),
+        Show(
+          () => !$isLoggedIn.value(),
+          () => p({ class: "workspace-subnav__hint" }, "Настройки доступны после входа."),
+        ),
+      ]),
+      div({ class: "workspace-shell__content" }, outlet() as Child),
+      aside({ class: "workspace-shell__debug" }, [
+        h4(null, "Router"),
+        pre(null, () => {
+          const active = trackedPages.find((page) => page.$isOpened.value());
+          return JSON.stringify(
+            {
+              page: active?.name ?? null,
+              path: active?.$path.value() ?? null,
+              params: active?.$params.value() ?? null,
+              query: active?.$query.value() ?? null,
+            },
+            null,
+            2,
+          );
+        }),
+        button(
+          {
+            type: "button",
+            class: "secondary",
+            "on:click": () => {
+              const user = USERS[Math.floor(Math.random() * USERS.length)]!;
+              userPage.go({ id: user.id }, { query: { tab: "profile" } });
+            },
+          },
+          "Random user",
+        ),
+      ]),
+    ]) as Child,
+});

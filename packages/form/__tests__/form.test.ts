@@ -19,11 +19,17 @@ describe("collectFormValueFromFields()", () => {
 });
 
 describe("createForm()", () => {
+  it("задаёт displayName из opts.name", () => {
+    const form = createForm({ title: createField("") }, { name: "NamedForm" });
+    expect(form.displayName).toBe("NamedForm");
+  });
+
   it("blocks submit when validation has errors", async () => {
     const title = createField("");
     const form = createForm(
       { title },
       {
+        name: "SubmitBlockedForm",
         validate: (fields) => ({
           title: !fields.title.$value.value().trim() ? ["required"] : [],
         }),
@@ -41,6 +47,7 @@ describe("createForm()", () => {
     const form = createForm(
       { title },
       {
+        name: "SubmitOkForm",
         validate: (fields) => ({
           title: !fields.title.$value.value().trim() ? ["required"] : [],
         }),
@@ -61,6 +68,7 @@ describe("createForm()", () => {
     const form = createForm(
       { profile },
       {
+        name: "NestedSchemaForm",
         schema: z.object({
           profile: z.object({
             email: z.string().email(),
@@ -85,7 +93,7 @@ describe("createForm()", () => {
     const email = createField("not-an-email");
     const form = createForm(
       { email },
-      { validationSchema: z.object({ email: z.string().email() }) },
+      { name: "ValidationSchemaAliasForm", validationSchema: z.object({ email: z.string().email() }) },
     );
 
     const bad = await form.submit(vi.fn());
@@ -102,6 +110,7 @@ describe("createForm()", () => {
     const form = createForm(
       { email },
       {
+        name: "SchemaErrorsForm",
         schema: z.object({
           email: z.string().email(),
         }),
@@ -121,6 +130,7 @@ describe("createForm()", () => {
     const form = createForm<{ label: string }, { box: { a: typeof a } }>(
       { box: { a } },
       {
+        name: "GetValueOverrideForm",
         getValue: () => ({ label: "mapped" }),
       },
     );
@@ -133,7 +143,7 @@ describe("createForm()", () => {
 
   it("reset вызывает deepReset по дереву полей", () => {
     const title = createField("a");
-    const form = createForm({ title }, {});
+    const form = createForm({ title }, { name: "ResetForm" });
     title.set("b");
     form.reset();
     expect(title.$value.value()).toBe("a");
@@ -141,7 +151,7 @@ describe("createForm()", () => {
 
   it("submit: ошибка в handler попадает в errors.submit", async () => {
     const title = createField("ok");
-    const form = createForm({ title }, {});
+    const form = createForm({ title }, { name: "ResetForm" });
     const res = await form.submit(() => {
       throw new Error("boom");
     });
@@ -152,6 +162,7 @@ describe("createForm()", () => {
   it("кастомный validate в опциях формы", () => {
     const title = createField("");
     const form = createForm({ title }, {
+      name: "CustomValidateForm",
       validate: () => ({ title: ["custom"] }),
     });
     expect(form.validate()).toEqual({ title: ["custom"] });

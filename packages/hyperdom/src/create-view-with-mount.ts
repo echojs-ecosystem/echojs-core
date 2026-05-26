@@ -5,8 +5,8 @@ import { createView } from "./create-view";
 
 export const createViewWithMount = <VM = void>(
   onMount: (vm: VM) => MountCleanup,
+  name: string,
   viewFn: (vm: VM) => Child,
 ): ((vm: VM) => Child) => {
-  return createView((vm: VM): Child => [mount(() => onMount(vm)), viewFn(vm)]);
+  return createView((vm: VM): Child => [mount(() => onMount(vm)), viewFn(vm)], name);
 };
-

@@ -9,6 +9,7 @@
         "@echojs-ecosystem/oxc-config": "workspace:*",
         "oxfmt": "^0.46.0",
         "oxlint": "^1.61.0",
+        "stylelint-standard": "^1.2.3",
         "turbo": "^2.9.6",
         "typescript": "^5.9.2",
       },
@@ -19,6 +20,9 @@
         "@echojs-ecosystem/reactivity": "workspace:*",
         "@echojs/form": "workspace:*",
         "@echojs/hyperdom": "workspace:*",
+        "@echojs/persist": "workspace:*",
+        "@echojs/router": "workspace:*",
+        "@echojs/store": "workspace:*",
         "zod": "^3.25.28",
       },
       "devDependencies": {
@@ -90,6 +94,21 @@
         "vitest": "^4.1.4",
       },
     },
+    "packages/persist": {
+      "name": "@echojs/persist",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs-ecosystem/reactivity": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/store": "workspace:*",
+        "fake-indexeddb": "^6.0.0",
+        "jsdom": "^26.1.0",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
     "packages/reactivity": {
       "name": "@echojs-ecosystem/reactivity",
       "version": "0.0.0",
@@ -99,6 +118,32 @@
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
         "oxlint": "^1.60.0",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
+    "packages/router": {
+      "name": "@echojs/router",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/hyperdom": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "jsdom": "^26.1.0",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
+    "packages/store": {
+      "name": "@echojs/store",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs-ecosystem/reactivity": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs-ecosystem/oxc-config": "workspace:*",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
       },
@@ -166,6 +211,12 @@
     "@echojs/form": ["@echojs/form@workspace:packages/form"],
 
     "@echojs/hyperdom": ["@echojs/hyperdom@workspace:packages/hyperdom"],
+
+    "@echojs/persist": ["@echojs/persist@workspace:packages/persist"],
+
+    "@echojs/router": ["@echojs/router@workspace:packages/router"],
+
+    "@echojs/store": ["@echojs/store@workspace:packages/store"],
 
     "@emnapi/core": ["@emnapi/core@1.10.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.2.1", "tslib": "^2.4.0" } }, "sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw=="],
 
@@ -497,6 +548,8 @@
 
     "extendable-error": ["extendable-error@0.1.7", "", {}, "sha512-UOiS2in6/Q0FK0R0q6UY9vYpQ21mr/Qn1KOnte7vsACuNJf514WvCCUHSRCPcgjPT2bAhNIJdlE6bVap1GKmeg=="],
 
+    "fake-indexeddb": ["fake-indexeddb@6.2.5", "", {}, "sha512-CGnyrvbhPlWYMngksqrSSUT1BAVP49dZocrHuK0SvtR0D5TMs5wP0o3j7jexDJW01KSadjBp1M/71o/KR3nD1w=="],
+
     "fast-glob": ["fast-glob@3.3.3", "", { "dependencies": { "@nodelib/fs.stat": "^2.0.2", "@nodelib/fs.walk": "^1.2.3", "glob-parent": "^5.1.2", "merge2": "^1.3.0", "micromatch": "^4.0.8" } }, "sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg=="],
 
     "fastq": ["fastq@1.20.1", "", { "dependencies": { "reusify": "^1.0.4" } }, "sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw=="],
@@ -684,6 +737,8 @@
     "strip-ansi": ["strip-ansi@6.0.1", "", { "dependencies": { "ansi-regex": "^5.0.1" } }, "sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A=="],
 
     "strip-bom": ["strip-bom@3.0.0", "", {}, "sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA=="],
+
+    "stylelint-standard": ["stylelint-standard@1.2.3", "", {}, "sha512-7mZGxoArzZ5kW0CAslfvEJGNKf6UmpReaaNCNWZx25MVz4rU8aIwDH9wg9AI8uzCOo+OtYlGZFMedhSN3gjXgA=="],
 
     "symbol-tree": ["symbol-tree@3.2.4", "", {}, "sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw=="],
 

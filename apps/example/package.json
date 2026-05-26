@@ -11,6 +11,9 @@
     "@echojs-ecosystem/reactivity": "workspace:*",
     "@echojs/form": "workspace:*",
     "@echojs/hyperdom": "workspace:*",
+    "@echojs/router": "workspace:*",
+    "@echojs/store": "workspace:*",
+    "@echojs/persist": "workspace:*",
     "zod": "^3.25.28"
   },
   "devDependencies": {

@@ -1,139 +1,85 @@
-# EchoJS Example App
+# EchoJS Lab
 
-Полноценное демо-приложение на EchoJS с Vite.
+Интерактивное приложение для изучения экосистемы EchoJS: каждый раздел — рабочий модуль (формы, сессия, workspace), а не отдельный сниппет.
 
 ## Быстрый старт
 
 ```bash
-# 1. Перейди в папку приложения
 cd apps/example
-
-# 2. Установи зависимости
 bun install
-
-# 3. Запусти dev server
 bun dev
 ```
 
 Открой http://localhost:3000
 
-## Что внутри
+## Модули
 
-Приложение демонстрирует 5 примеров:
+| Путь | Назначение |
+|------|------------|
+| `/` | Обзор платформы и быстрые ссылки |
+| `/reactivity` | Сигналы, эффекты, обновление DOM |
+| `/forms`, `/forms/nested` | Формы и вложенные массивы полей |
+| `/state` | `@echojs/store` — store, select, actions |
+| `/persistence` | Обзор `@echojs/persist` |
+| `/account` | Профиль и persist (требует входа) |
+| `/workspace/*` | Продуктовый сценарий `@echojs/router` |
+| `/auth/login`, `/auth/signup` | Mock-авторизация (cookie + localStorage) |
 
-1. **Counter** - базовые сигналы и вычисляемые значения
-2. **Conditional** - директивы if/else и show
-3. **Form Events** - модификаторы событий (prevent, stop, once)
-4. **Todo List** - работа со списками и фильтрация
-5. **Reactive Styles** - реактивные стили и классы
+Старые URL (`/example1`, `/store`, `/persist`, …) перенаправляются на новые маршруты.
 
-## Структура
+## Структура (FSD)
 
 ```
-apps/example/
-├── index.html          # Entry point
-├── package.json        # Зависимости
-├── tsconfig.json       # TS конфиг
-├── vite.config.ts      # Vite конфиг
-├── README.md           # Этот файл
-└── src/
-    ├── main.tsx        # Главный файл с примерами
-    └── style.css       # Стили
+apps/example/src/
+├── main.ts
+    ├── app/
+    │   ├── config/lab-modules.ts
+    │   ├── layout/shell-layout.page.ts
+    │   └── router/index.ts       # реэкспорт entities/__routes__
+    ├── entities/
+    │   └── __routes__/           # дерево маршрутов, guards, redirects, router
+    ├── features/                 # UI-логика модулей (forms, reactivity, …)
+    ├── widgets/app-shell/
+    ├── pages/
+    │   ├── dashboard|reactivity|forms|…/
+    │   ├── workspace/            # users, catalog, sprint, …
+    │   ├── auth/
+    │   └── router-states/        # loading / error / 404
+    ├── entities/session|user|catalog|workspace/
+    └── shared/lib/               # мост form ↔ persist
 ```
+
+Роутинг: `entities/__routes__/app.routes.ts`, старт в `entities/__routes__/index.ts`. Точка входа приложения: `app/router/index.ts`.
+
+## Импорты (alias)
+
+Слои FSD — через alias (настроены в `tsconfig.json` и `vite.config.ts`):
+
+| Alias | Путь |
+|-------|------|
+| `@app/*` | `src/app/*` |
+| `@pages/*` | `src/pages/*` |
+| `@entities/*` | `src/entities/*` |
+| `@features/*` | `src/features/*` |
+| `@widgets/*` | `src/widgets/*` |
+| `@shared/*` | `src/shared/*` |
+
+Пример: `import { appRouter } from "@entities/__routes__/index.js"`.
 
 ## Команды
 
-| Команда              | Описание                |
-| -------------------- | ----------------------- |
-| `bun dev`            | Dev server с hot reload |
-| `bun run build`      | Сборка для production   |
-| `bun run preview`    | Предпросмотр сборки     |
-| `bun run type-check` | Проверка типов          |
+| Команда | Описание |
+|---------|----------|
+| `bun dev` | Dev server |
+| `bun run build` | Production сборка |
+| `bun run preview` | Предпросмотр `dist/` |
+| `bun run type-check` | Проверка типов |
 
-## Как это работает
+## Пакеты в монорепо
 
-### JSX Transform
-
-Vite использует `vite.config.ts` где настроен автоматический JSX:
-
-```ts
-esbuild: {
-  jsx: 'automatic',
-  jsxImportSource: '@echojs-ecosystem/jsx-runtime',
-}
-```
-
-Это значит все `.tsx` файлы автоматически компилируются с нашим runtime.
-
-### Пример компонента
-
-```tsx
-import { createComponent, signal, computed } from "@echojs-ecosystem/jsx-runtime";
-
-const Counter = createComponent(
-  // ViewModel - логика
-  () => {
-    const count = signal(0);
-    const double = computed(() => count.value() * 2);
-
-    return {
-      count,
-      double,
-      increment: () => count.update((n) => n + 1),
-    };
-  },
-  // View - JSX
-  (vm) => (
-    <div>
-      <span>{vm.count}</span> (×2 = {vm.double})<button on:click={vm.increment}>+</button>
-    </div>
-  ),
-);
-```
-
-### Особенности
-
-- **Нет Virtual DOM** - JSX создает реальные DOM ноды
-- **Fine-grained updates** - обновляются только конкретные текстовые ноды
-- **Автоматические подписки** - не нужно указывать зависимости
-- **Component scope** - каждый компонент имеет свой реактивный scope
-
-## Production сборка
-
-```bash
-bun run build
-```
-
-Сборка появится в `dist/`. Это статические файлы которые можно разместить на любом хостинге.
+- `@echojs-ecosystem/reactivity`, `@echojs/hyperdom`, `@echojs/form`, `@echojs/router`
+- `@echojs/store`, `@echojs/persist` — алиасы в `vite.config.ts` на `packages/*/src`
 
 ## Troubleshooting
 
-### Ошибка "Cannot resolve module"
-
-Убедись что запустил `bun install` в корне проекта:
-
-```bash
-cd /home/jombozana/Desktop/echojs/echojs-core
-bun install
-```
-
-### Ошибка типов
-
-Проверь что пакеты собраны:
-
-```bash
-cd packages/jsx-runtime
-bun run build
-
-cd packages/reactivity
-bun run build
-```
-
-### Hot reload не работает
-
-Попробуй перезапустить dev server:
-
-```bash
-# Ctrl+C чтобы остановить
-bun dev
-```
+Из корня монорепо: `bun install`. При ошибках типов соберите зависимые пакеты в `packages/`.

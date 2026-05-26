@@ -1,7 +1,7 @@
 export { h } from "./h";
 export { render } from "./render";
 export { mount } from "./mount";
-export { createModel, isInModelContext } from "./model";
+export { createModel, isInModelContext } from "./create-model";
 export { createView } from "./create-view";
 export { createViewWithMount } from "./create-view-with-mount";
 export { isInViewContext } from "./view-context";
