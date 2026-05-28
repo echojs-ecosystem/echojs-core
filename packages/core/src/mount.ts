@@ -1,5 +1,5 @@
-import { scope, effect } from "@echojs-ecosystem/reactivity";
-import type { Signal } from "@echojs-ecosystem/reactivity";
+import { scope, effect } from "@echojs/reactivity";
+import type { Signal } from "@echojs/reactivity";
 import { isSignalish, isFunction, isArray } from "./internals/utils";
 import type { JSXElement } from "./types";
 

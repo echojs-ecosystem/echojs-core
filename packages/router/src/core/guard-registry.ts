@@ -1,6 +1,6 @@
-import { getRouteState } from "./route.js";
-import { resolveRoutePath } from "./navigation.js";
-import type { Route, RouterHistory } from "./types.js";
+import { getRouteState } from "./route";
+import { resolveRoutePath } from "./navigation";
+import type { Route, RouterHistory } from "./types";
 
 export type GuardRouteOptions = {
   route: Route<any, any>;

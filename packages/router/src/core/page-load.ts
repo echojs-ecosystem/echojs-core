@@ -4,4 +4,4 @@ export {
   runBeforeLoadChain,
   runPageBeforeLoad,
   type BeforeLoadContext,
-} from "./page.js";
+} from "./page";

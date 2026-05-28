@@ -1,4 +1,4 @@
-import type { Route } from "../core/types.js";
+import type { Route } from "../core/types";
 
 export type RedirectOptions<
   FromParams = Record<string, unknown>,

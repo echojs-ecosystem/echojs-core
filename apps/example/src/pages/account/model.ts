@@ -1,8 +1,7 @@
 import { collectFormValueFromFields, createField, createFieldArray, createForm, wireFormModel } from "@echojs/form";
-import { persist, withLocalStorage } from "@echojs/persist";
+import { withLocalStorage } from "@echojs/persist";
 import { createStore } from "@echojs/store";
 import { z } from "zod";
-import { fieldArrayAsPersistable, fieldAsPersistable } from "@shared/lib/persist-form.js";
 
 const profileSchema = z.object({
   name: z.string().min(1, "Укажите имя"),
@@ -12,22 +11,15 @@ const profileSchema = z.object({
 
 export const profileForm = createForm(
   {
-    name: createField(""),
-    email: createField(""),
-    phones: createFieldArray<string>([]),
+    name: createField("").extend(withLocalStorage({ key: "echojs:profile:name" })),
+    email: createField("").extend(withLocalStorage({ key: "echojs:profile:email" })),
+    phones: createFieldArray<string>([]).extend(withLocalStorage({ key: "echojs:profile:phones" })),
   },
   {
     name: "ProfileForm",
     validationSchema: profileSchema,
     defaultValues: { name: "", email: "", phones: [] as string[] },
   },
-);
-
-persist(fieldAsPersistable(profileForm.fields.name), withLocalStorage({ key: "echojs:profile:name" }));
-persist(fieldAsPersistable(profileForm.fields.email), withLocalStorage({ key: "echojs:profile:email" }));
-persist(
-  fieldArrayAsPersistable(profileForm.fields.phones),
-  withLocalStorage({ key: "echojs:profile:phones" }),
 );
 
 export const profileFormSnapshotStore = createStore(

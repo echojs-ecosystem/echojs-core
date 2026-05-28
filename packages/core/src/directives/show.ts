@@ -1,7 +1,7 @@
-import { effect, cleanup } from "@echojs-ecosystem/reactivity";
-import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import { isSignalish } from "../internals/utils.js";
-import type { Signalish } from "../types.js";
+import { effect, cleanup } from "@echojs/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import { isSignalish } from "../internals/utils";
+import type { Signalish } from "../types";
 
 export const applyShowDirective = (element: HTMLElement, condition: Signalish<boolean>): void => {
   if (isSignalish(condition)) {

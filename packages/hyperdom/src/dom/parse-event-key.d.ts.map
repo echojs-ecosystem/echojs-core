@@ -1,1 +1,0 @@
-{"version":3,"file":"parse-event-key.d.ts","sourceRoot":"","sources":["parse-event-key.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,aAAa,GAAG,SAAS,GAAG,MAAM,CAAC;AAK/C,eAAO,MAAM,aAAa,GACxB,KAAK,MAAM,KACV;IAAE,KAAK,EAAE,MAAM,CAAC;IAAC,SAAS,EAAE,aAAa,EAAE,CAAA;CAAE,GAAG,IAkClD,CAAC"}

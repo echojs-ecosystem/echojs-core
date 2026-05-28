@@ -1,5 +1,5 @@
-import { createRouteModel } from "./route.js";
-import type { NamedRoute, Route } from "./types.js";
+import { createRouteModel } from "./route";
+import type { NamedRoute, Route } from "./types";
 
 export const createRoute = <
   const Name extends string,

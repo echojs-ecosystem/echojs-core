@@ -1,10 +1,10 @@
 import { signal } from "@echojs-ecosystem/reactivity";
 import type { Signal } from "@echojs-ecosystem/reactivity";
-import { buildPath, joinLocation } from "./path.js";
-import { createRouteEvent, type RouteEventEmitter } from "./route-event.js";
-import { mapQueryToRecord, stringifyQuery, type QueryRecord } from "./query.js";
-import type { GoOptions, Route, RouteOpenedPayload } from "./types.js";
-import type { RouterInternal } from "./router.js";
+import { buildPath, joinLocation } from "./path";
+import { createRouteEvent, type RouteEventEmitter } from "./route-event";
+import { mapQueryToRecord, stringifyQuery, type QueryRecord } from "./query";
+import type { GoOptions, Route, RouteOpenedPayload } from "./types";
+import type { RouterInternal } from "./router";
 
 export type RouteInternalState<Params, Query> = {
   name?: string;

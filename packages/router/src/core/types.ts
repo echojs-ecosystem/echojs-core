@@ -145,14 +145,14 @@ export type PageViewRenderer<
   Query = Record<string, unknown>,
 > = (context: PageViewRenderContext<Params, Query>) => unknown;
 
-import type { RouterHistoryConfig } from "./history-config.js";
+import type { RouterHistoryConfig } from "./history-config";
 import type { Child } from "@echojs/hyperdom";
 import type {
   CollectRoutePaths,
   RouteTreeEntry,
   RouteTreeInput,
   RouteTreeNode,
-} from "./path-types.js";
+} from "./path-types";
 
 export type {
   CollectNamedRoutes,
@@ -162,12 +162,12 @@ export type {
   RouteTreeNode,
   RouteTreeBranch,
   JoinPaths,
-} from "./path-types.js";
+} from "./path-types";
 export type {
   MemoryHistoryConfig,
   RouterHistoryConfig,
   RouterHistoryKind,
-} from "./history-config.js";
+} from "./history-config";
 
 /** @deprecated Use RouteTreeEntry */
 export type RouterRouteDefinition = RouteTreeEntry;
@@ -181,7 +181,7 @@ export type {
   RedirectRouteEntry,
   PageRouteEntry,
   LayoutRouteEntry,
-} from "./path-types.js";
+} from "./path-types";
 
 export type LayoutPage = AnyPage & {
   readonly __layout?: unique symbol;

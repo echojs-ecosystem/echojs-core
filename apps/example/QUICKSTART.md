@@ -24,21 +24,7 @@ bun dev
 
 ## Как это работает
 
-```tsx
-// Компонент = ViewModel + View
-const Counter = createComponent(
-  // ViewModel - логика
-  () => {
-    const count = signal(0);
-    return {
-      count,
-      increment: () => count.update((n) => n + 1),
-    };
-  },
-  // View - JSX
-  (vm) => <button onClick={vm.increment}>{vm.count.value()}</button>,
-);
-```
+Пример использует `@echojs/hyperdom` (без JSX) и пакеты из workspace.
 
 ## Структура
 
@@ -67,8 +53,4 @@ apps/example/
 # Установи зависимости
 cd /home/jombozana/Desktop/echojs/echojs-core
 bun install
-
-# Собери пакеты
-cd packages/jsx-runtime
-bun run build
 ```

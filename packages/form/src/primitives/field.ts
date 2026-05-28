@@ -1,5 +1,6 @@
 import { signal } from "@echojs-ecosystem/reactivity";
-import type { Field, FieldBinding, FieldMeta } from "../types";
+import type { Field, FieldBinding, FieldCore, FieldMeta } from "../types";
+import { attachFieldPersist } from "./field-persist";
 
 const defaultMeta = (): FieldMeta => ({
   dirty: false,
@@ -63,7 +64,7 @@ export const createField = <T>(initial: T): Field<T> => {
   const validate = (): string[] => [];
   const validateAsync = async (): Promise<string[]> => [];
 
-  return {
+  const core: FieldCore<T> = {
     $value,
     $meta,
 
@@ -83,4 +84,6 @@ export const createField = <T>(initial: T): Field<T> => {
     validateAsync,
     clearErrors: () => $meta.update((prev) => ({ ...prev, errors: [] })),
   };
+
+  return attachFieldPersist(core);
 };

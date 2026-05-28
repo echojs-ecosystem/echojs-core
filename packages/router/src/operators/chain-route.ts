@@ -1,5 +1,5 @@
 import { signal } from "@echojs-ecosystem/reactivity";
-import type { Route, ChainedRoute } from "../core/types.js";
+import type { Route, ChainedRoute } from "../core/types";
 
 export type ChainRouteOptions<Params, Query, Result = void> = {
   route: Route<Params, Query>;

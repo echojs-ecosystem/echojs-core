@@ -1,7 +1,6 @@
 import { createField, createForm, wireFormModel } from "@echojs/form";
-import { persist, withLocalStorage } from "@echojs/persist";
+import { withLocalStorage } from "@echojs/persist";
 import { z } from "zod";
-import { fieldAsPersistable } from "@shared/lib/persist-form.js";
 
 const signupSchema = z
   .object({
@@ -18,8 +17,8 @@ const signupSchema = z
 
 export const authSignupForm = createForm(
   {
-    name: createField(""),
-    email: createField(""),
+    name: createField("").extend(withLocalStorage({ key: "echojs:signup:name" })),
+    email: createField("").extend(withLocalStorage({ key: "echojs:signup:email" })),
     password: createField(""),
     confirmPassword: createField(""),
     acceptTerms: createField(false),
@@ -36,8 +35,5 @@ export const authSignupForm = createForm(
     },
   },
 );
-
-persist(fieldAsPersistable(authSignupForm.fields.name), withLocalStorage({ key: "echojs:signup:name" }));
-persist(fieldAsPersistable(authSignupForm.fields.email), withLocalStorage({ key: "echojs:signup:email" }));
 
 export const authSignupUi = wireFormModel(authSignupForm.fields);

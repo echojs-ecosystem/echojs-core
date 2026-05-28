@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { computed, signal } from "../src/index.js";
+import { computed, signal } from "../src/index";
 
 describe("computed()", () => {
   it("бросает TypeError на неправильный getter", () => {

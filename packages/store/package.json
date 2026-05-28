@@ -24,10 +24,10 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@echojs-ecosystem/reactivity": "workspace:*"
+    "@echojs/reactivity": "workspace:*"
   },
   "devDependencies": {
-    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs/oxc-config": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
   }

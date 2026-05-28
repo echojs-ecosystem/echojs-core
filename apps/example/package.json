@@ -1,5 +1,5 @@
 {
-  "name": "@echojs-ecosystem/example",
+  "name": "@echojs/example",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs/reactivity": "workspace:*",
     "@echojs/form": "workspace:*",
     "@echojs/hyperdom": "workspace:*",
     "@echojs/router": "workspace:*",

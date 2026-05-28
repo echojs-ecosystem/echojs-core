@@ -1,6 +1,7 @@
 import { createLayoutView } from "@echojs/router";
 import type { AnyPage } from "@echojs/router";
-import type { Child } from "@echojs/hyperdom";
+import { h, type Child } from "@echojs/hyperdom";
+import { appRouter } from "@app/router/index.js";
 import { $isLoggedIn } from "@app/router/auth.js";
 import { $activePageTitle } from "@app/router/model.js";
 import { USERS } from "@entities/user/index.js";
@@ -25,7 +26,6 @@ import {
   Show,
   ul,
   li,
-  NavLink,
 } from "@pages/workspace/ui/common.js";
 
 const trackedPages: AnyPage[] = [
@@ -50,17 +50,27 @@ const navItem = (
   page: AnyPage,
   label: string,
   opts?: { params?: Record<string, string>; query?: Record<string, string> },
-): Child =>
-  li(null, [
-    NavLink({
-      to: page,
-      params: opts?.params,
-      query: opts?.query,
-      activeClass: "workspace-subnav__link--active",
-      class: "workspace-subnav__link",
-      children: label,
-    }),
+): Child => {
+  const params = opts?.params ?? {};
+  const query = opts?.query;
+
+  return li(null, [
+    h(
+      "a",
+      {
+        class: "workspace-subnav__link",
+        href: () =>
+          appRouter.resolve(page, params, {
+            query: query as Record<string, unknown> | undefined,
+          }),
+        "on:click:prevent": () => {
+          page.go(params as never, { query: query as never });
+        },
+      },
+      label,
+    ),
   ]);
+};
 
 export const workspaceLayoutPage = createLayoutView({
   name: "workspace-layout",

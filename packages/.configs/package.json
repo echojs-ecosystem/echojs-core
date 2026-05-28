@@ -1,5 +1,5 @@
 {
-  "name": "@echojs-ecosystem/oxc-config",
+  "name": "@echojs/oxc-config",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,8 @@
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "format": "oxfmt --check",
-    "format:fix": "oxfmt"
+    "format:fix": "oxfmt",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "devDependencies": {
     "oxfmt": "^0.46.0",

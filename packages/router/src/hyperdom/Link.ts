@@ -1,8 +1,8 @@
 import { h } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
-import { getRouteState } from "../core/route.js";
-import type { Route } from "../core/types.js";
-import type { QueryRecord } from "../core/query.js";
+import { getRouteState } from "../core/route";
+import type { Route } from "../core/types";
+import type { QueryRecord } from "../core/query";
 
 export type LinkProps<Params = Record<string, string>, Query = QueryRecord> = {
   to?: Route<Params, Query>;
@@ -23,7 +23,7 @@ export const Link = <Params = Record<string, string>, Query = QueryRecord>(
     if (!to) return "#";
     const state = getRouteState(to);
     if (!state.router || !state.pathTemplate) return "#";
-    return state.router.resolve(to as import("../core/types.js").AnyRoute, (params ?? {}) as Record<
+    return state.router.resolve(to as import("../core/types").AnyRoute, (params ?? {}) as Record<
       string,
       string
     >, { query: query as Record<string, unknown> | undefined });

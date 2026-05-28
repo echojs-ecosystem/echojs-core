@@ -1,5 +1,5 @@
-import type { LazyRouteViewLoader } from "./lazy-view.js";
-import type { BeforeLoadContext, CreateRouteViewOptions } from "./page.js";
+import type { LazyRouteViewLoader } from "./lazy-view";
+import type { BeforeLoadContext, CreateRouteViewOptions } from "./page";
 
 export type LazyRouteViewOptionsConstraint = {
   readonly name: string;

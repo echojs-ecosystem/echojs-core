@@ -8,12 +8,9 @@ export {
   batch,
   isSignal as isSignalBase,
   isReadonlySignal as isReadonlySignalBase,
-} from "@echojs-ecosystem/reactivity";
+} from "@echojs/reactivity";
 
-export type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs-ecosystem/reactivity";
-
-// JSX Runtime
-export { jsx, jsxs, jsxDEV, Fragment } from "./jsx-runtime.js";
+export type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs/reactivity";
 
 // Component system - новый API с createModel и createView
 export {
@@ -22,21 +19,21 @@ export {
   createView,
   isComponent,
   getComponentDispose,
-} from "./component.js";
+} from "./component";
 
 // Mount utilities
-export { mount, unmount, render, renderToString, createRoot } from "./mount.js";
+export { mount, unmount, render, renderToString, createRoot } from "./mount";
 
 // Directive helpers (for advanced use)
-export { _$if, _$switch } from "./directives/if.js";
-export { showDirective, applyShowDirective } from "./directives/show.js";
+export { _$if, _$switch } from "./directives/if";
+export { showDirective, applyShowDirective } from "./directives/show";
 
 // Internal utilities (for advanced use)
-export { insert } from "./insert.js";
-export { createTextNode, createReactiveText } from "./text.js";
-export { createElement, setProp, setProps } from "./element.js";
-export { setEvent, setEvents } from "./events.js";
-export { isSignalish, isFunction } from "./internals/utils.js";
+export { insert } from "./insert";
+export { createTextNode, createReactiveText } from "./text";
+export { createElement, setProp, setProps } from "./element";
+export { setEvent, setEvents } from "./events";
+export { isSignalish, isFunction } from "./internals/utils";
 
 // Types
 export type {
@@ -55,9 +52,7 @@ export type {
   HTMLAttributeValue,
   ReactiveAttributeConfig,
   MountResult,
-} from "./types.js";
+} from "./types";
 
-export type { Component, ModelFn, ModelContextType } from "./component.js";
+export type { Component, ModelFn, ModelContextType } from "./component";
 
-// JSX Types for TypeScript support
-export type { JSX } from "./jsx-types.js";

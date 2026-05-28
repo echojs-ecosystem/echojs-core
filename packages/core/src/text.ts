@@ -1,6 +1,6 @@
-import { effect, cleanup } from "@echojs-ecosystem/reactivity";
-import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import { isSignalish, normalizeValue } from "./internals/utils.js";
+import { effect, cleanup } from "@echojs/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import { isSignalish, normalizeValue } from "./internals/utils";
 
 export const createTextNode = (value: unknown): Text => {
   return document.createTextNode(normalizeValue(value));

@@ -1,14 +1,14 @@
-import { createRouteViewModel } from "./page.js";
-import type { LazyRouteViewLoader } from "./lazy-view.js";
+import { createRouteViewModel } from "./page";
+import type { LazyRouteViewLoader } from "./lazy-view";
 import type {
   LazyRouteViewDataFromOptions,
   LazyRouteViewNameFromOptions,
   LazyRouteViewOptionsConstraint,
   LazyRouteViewParamsFromOptions,
   LazyRouteViewQueryFromOptions,
-} from "./lazy-route-view-options-types.js";
-import type { BeforeLoadContext, CreateRouteViewOptions } from "./page.js";
-import type { NamedPage, RouteLoadingView, RouteErrorView } from "./types.js";
+} from "./lazy-route-view-options-types";
+import type { BeforeLoadContext, CreateRouteViewOptions } from "./page";
+import type { NamedPage, RouteLoadingView, RouteErrorView } from "./types";
 
 export type CreateLazyRouteViewOptions<
   Params = Record<string, never>,

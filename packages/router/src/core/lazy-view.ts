@@ -1,7 +1,7 @@
-import { getPageState } from "./page.js";
-import { getRouteState } from "./route.js";
-import type { RouterInternal } from "./router.js";
-import type { AnyPage, RouteView } from "./types.js";
+import { getPageState } from "./page";
+import { getRouteState } from "./route";
+import type { RouterInternal } from "./router";
+import type { AnyPage, RouteView } from "./types";
 
 export type LazyRouteViewModule<
   Params = Record<string, unknown>,

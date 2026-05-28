@@ -1,16 +1,8 @@
-import { defineConfig, mergeConfig } from "vitest/config";
-import { resolve } from "path";
-import shared from "@echojs-ecosystem/oxc-config/vitest";
+import { defineConfig } from "vitest/config";
+import { echoVitestConfig } from "../.configs/vitest.config";
 
-export default mergeConfig(
-  shared,
-  defineConfig({
-    resolve: {
-      alias: {
-        "@echojs-ecosystem/reactivity": resolve(__dirname, "../reactivity/src/index.ts"),
-        "@echojs/hyperdom": resolve(__dirname, "../hyperdom/src/index.ts"),
-      },
-    },
+export default defineConfig(
+  echoVitestConfig(__dirname, {
     test: {
       environment: "node",
       include: ["tests/**/*.test.ts"],

@@ -51,8 +51,16 @@ export const mockLogin = (input: { email: string; password: string; name?: strin
 };
 
 export const logout = (): void => {
-  authTokenStore.set(null);
-  authUserStore.set(null);
-  void authTokenStore.persist.clear();
-  void authUserStore.persist.clear();
+  void (async () => {
+    authTokenStore.persist.pause();
+    authUserStore.persist.pause();
+    try {
+      authTokenStore.set(null);
+      authUserStore.set(null);
+      await Promise.all([authTokenStore.persist.clear(), authUserStore.persist.clear()]);
+    } finally {
+      authTokenStore.persist.resume();
+      authUserStore.persist.resume();
+    }
+  })();
 };

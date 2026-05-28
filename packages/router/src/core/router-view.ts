@@ -1,14 +1,14 @@
 import type { Child } from "@echojs/hyperdom";
-import { assertPage, getPageState, isLayoutPage, isPage } from "./page.js";
-import { resolveBeforeLoad } from "./page.js";
-import type { RouteTreeEntry } from "./path-types.js";
+import { assertPage, getPageState, isLayoutPage, isPage } from "./page";
+import { resolveBeforeLoad } from "./page";
+import type { RouteTreeEntry } from "./path-types";
 import type {
   AnyPage,
   RouteErrorView,
   RouteLoadingView,
   RouteView,
   Router,
-} from "./types.js";
+} from "./types";
 
 const entryPage = (def: RouteTreeEntry): AnyPage | undefined =>
   "layoutView" in def ? def.layoutView : "routeView" in def ? def.routeView : undefined;

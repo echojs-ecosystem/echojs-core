@@ -1,0 +1,45 @@
+{
+  "name": "@echojs/bench",
+  "version": "0.0.0",
+  "private": true,
+  "files": ["dist"],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "default": "./dist/cli.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "echojs-bench": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "check-types": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "esbuild": "^0.25.9"
+  },
+  "devDependencies": {
+    "@echojs/oxc-config": "workspace:*",
+    "@echojs/reactivity": "workspace:*",
+    "@echojs/store": "workspace:*",
+    "@echojs/router": "workspace:*",
+    "typescript": "5.9.2",
+    "vitest": "^4.1.4"
+  }
+}
+

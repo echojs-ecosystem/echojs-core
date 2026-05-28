@@ -1,7 +1,7 @@
 import type { Child } from "@echojs/hyperdom";
-import { createRouterViewComponent } from "../core/router-view.js";
-import type { Page, RouteView, Router } from "../core/types.js";
-import type { RouterRouteDefinition } from "../core/types.js";
+import { createRouterViewComponent } from "../core/router-view";
+import type { Page, RouteView, Router } from "../core/types";
+import type { RouterRouteDefinition } from "../core/types";
 
 export type RouterViewContext<Params, Query> = {
   params: Params;

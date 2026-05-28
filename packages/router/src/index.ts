@@ -1,25 +1,25 @@
-export { createRoute } from "./core/create-route.js";
-export { createRouteView } from "./core/create-route-view.js";
-export { createLazyRouteView } from "./core/create-lazy-route-view.js";
-export { isLazyRouteView } from "./core/lazy-view.js";
-export { createLayoutView, isLayoutPage } from "./core/create-layout-view.js";
-export type { NamedLayoutView } from "./core/create-layout-view.js";
-export { createRouter } from "./core/create-router.js";
-export { createRoutes } from "./core/create-routes.js";
-export type { RoutesFromConfig } from "./core/create-routes.js";
-export { resolveHistory } from "./core/history-config.js";
-export { isPage, assertPage } from "./core/page.js";
-export { matchPath, buildPath, normalizePathname, splitLocation, joinLocation, joinRoutePaths } from "./core/path.js";
-export { flattenRouteTree, matchRouteChain } from "./core/route-tree.js";
-export { buildNamedRoutes } from "./core/build-named-routes.js";
-export type { NamedRoutesMap } from "./core/build-named-routes.js";
-export { parseQuery, stringifyQuery, parseQueryValues } from "./core/query.js";
-export type { CreateRouteViewOptions, BeforeLoadContext } from "./core/page.js";
-export type { CreateLazyRouteViewOptions } from "./core/create-lazy-route-view.js";
+export { createRoute } from "./core/create-route";
+export { createRouteView } from "./core/create-route-view";
+export { createLazyRouteView } from "./core/create-lazy-route-view";
+export { isLazyRouteView } from "./core/lazy-view";
+export { createLayoutView, isLayoutPage } from "./core/create-layout-view";
+export type { NamedLayoutView } from "./core/create-layout-view";
+export { createRouter } from "./core/create-router";
+export { createRoutes } from "./core/create-routes";
+export type { RoutesFromConfig } from "./core/create-routes";
+export { resolveHistory } from "./core/history-config";
+export { isPage, assertPage } from "./core/page";
+export { matchPath, buildPath, normalizePathname, splitLocation, joinLocation, joinRoutePaths } from "./core/path";
+export { flattenRouteTree, matchRouteChain } from "./core/route-tree";
+export { buildNamedRoutes } from "./core/build-named-routes";
+export type { NamedRoutesMap } from "./core/build-named-routes";
+export { parseQuery, stringifyQuery, parseQueryValues } from "./core/query";
+export type { CreateRouteViewOptions, BeforeLoadContext } from "./core/page";
+export type { CreateLazyRouteViewOptions } from "./core/create-lazy-route-view";
 export type {
   LazyRouteViewLoader,
   LazyRouteViewModule,
-} from "./core/lazy-view.js";
+} from "./core/lazy-view";
 export type {
   Route,
   NamedRoute,
@@ -75,15 +75,15 @@ export type {
   PageViewRenderer,
   PageErrorComponent,
   AnyPage,
-} from "./core/types.js";
+} from "./core/types";
 
-export { createBrowserHistory } from "./histories/browser-history.js";
-export { createMemoryHistory } from "./histories/memory-history.js";
-export { createHashHistory } from "./histories/hash-history.js";
+export { createBrowserHistory } from "./histories/browser-history";
+export { createMemoryHistory } from "./histories/memory-history";
+export { createHashHistory } from "./histories/hash-history";
 
-export { guardRoute } from "./operators/guard.js";
-export type { GuardRouteOptions } from "./operators/guard.js";
-export { redirect } from "./operators/redirect.js";
-export type { RedirectOptions } from "./operators/redirect.js";
-export { chainRoute } from "./operators/chain-route.js";
-export type { ChainRouteOptions } from "./operators/chain-route.js";
+export { guardRoute } from "./operators/guard";
+export type { GuardRouteOptions } from "./operators/guard";
+export { redirect } from "./operators/redirect";
+export type { RedirectOptions } from "./operators/redirect";
+export { chainRoute } from "./operators/chain-route";
+export type { ChainRouteOptions } from "./operators/chain-route";

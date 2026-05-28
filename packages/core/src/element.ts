@@ -1,7 +1,7 @@
-import { effect, cleanup } from "@echojs-ecosystem/reactivity";
-import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import { isSignalish, isObject, isString, isArray, isFunction } from "./internals/utils.js";
-import type { Signalish } from "./types.js";
+import { effect, cleanup } from "@echojs/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import { isSignalish, isObject, isString, isArray, isFunction } from "./internals/utils";
+import type { Signalish } from "./types";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const MATHML_NS = "http://www.w3.org/1998/Math/MathML";

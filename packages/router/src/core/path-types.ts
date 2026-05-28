@@ -1,4 +1,4 @@
-import type { AnyPage, AnyRoute, LayoutPage } from "./types.js";
+import type { AnyPage, AnyRoute, LayoutPage } from "./types";
 
 export type RouteViewConfig<
   P extends string = string,

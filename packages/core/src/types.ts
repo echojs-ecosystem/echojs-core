@@ -1,5 +1,5 @@
-import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import type { ModelContextType, ModelFn } from "./component.js";
+import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import type { ModelContextType, ModelFn } from "./component";
 
 export type Signalish<T> = T | Signal<T> | ReadonlySignal<T>;
 
@@ -20,9 +20,7 @@ export type JSXProps = {
   children?: JSXElement;
 };
 
-// JSX-компонент должен возвращать JSX.Element из нашего jsx-runtime,
-// чтобы TypeScript разрешал использовать результат как <Component />
-export type JSXComponent<P = object> = (props: P) => import("./jsx-runtime.js").JSX.Element;
+export type JSXComponent<P = object> = (props: P) => JSXElement;
 
 export type ComponentVM = Record<string, unknown>;
 

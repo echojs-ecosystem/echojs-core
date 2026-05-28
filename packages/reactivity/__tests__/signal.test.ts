@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { expectTypeOf } from "vitest";
-import { __isDevModeForTests } from "../src/freeze.js";
-import { isReadonlySignal, isSignal, readonly, signal } from "../src/index.js";
+import { __isDevModeForTests } from "../src/freeze";
+import { isReadonlySignal, isSignal, readonly, signal } from "../src/index";
 
 describe("signal()", () => {
   it("бросает TypeError если initial не передан", () => {

@@ -1,29 +1,29 @@
 import { computed, signal } from "@echojs-ecosystem/reactivity";
-import { runAuthorizationGuard } from "./auth-guard.js";
-import { buildRouteLocation, parseLocation } from "./navigation.js";
+import { runAuthorizationGuard } from "./auth-guard";
+import { buildRouteLocation, parseLocation } from "./navigation";
 import {
   flattenRouteTree,
   matchParamsForEntry,
   matchRouteChain,
   type FlatRouteEntry,
-} from "./route-tree.js";
+} from "./route-tree";
 import {
   applyRouteClosed,
   applyRouteOpened,
   bindRouteToRouter,
   getRouteState,
   rawQueryToTyped,
-} from "./route.js";
-import { runRouteGuards } from "./guard-registry.js";
-import { toRouteConfigs } from "./route-config.js";
-import { buildNamedRoutes } from "./build-named-routes.js";
+} from "./route";
+import { runRouteGuards } from "./guard-registry";
+import { toRouteConfigs } from "./route-config";
+import { buildNamedRoutes } from "./build-named-routes";
 import {
   resolveErrorViewOption,
   resolveLoadingViewOption,
   resolveNotFoundViewOption,
-} from "./resolve-route-view.js";
-import { createRouterViewComponent } from "./router-view.js";
-import { cancelPageLoads, getPageState, isPage, runBeforeLoadChain } from "./page.js";
+} from "./resolve-route-view";
+import { createRouterViewComponent } from "./router-view";
+import { cancelPageLoads, getPageState, isPage, runBeforeLoadChain } from "./page";
 import type {
   AnyRoute,
   RouteErrorView,
@@ -32,19 +32,19 @@ import type {
   Router,
   RouterRoutes,
   RouterViewComponent,
-} from "./types.js";
+} from "./types";
 
 export type RouterModelOptions = {
-  history: import("./types.js").RouterHistory;
-  routes: readonly import("./path-types.js").RouteTreeEntry[];
-  authorizationGuard?: import("./types.js").AuthorizationGuardOptions;
-  loadingView?: RouteLoadingView | import("./types.js").AnyPage;
-  errorView?: RouteErrorView | import("./types.js").AnyPage;
-  notFoundView?: RouteView | import("./types.js").AnyPage;
+  history: import("./types").RouterHistory;
+  routes: readonly import("./path-types").RouteTreeEntry[];
+  authorizationGuard?: import("./types").AuthorizationGuardOptions;
+  loadingView?: RouteLoadingView | import("./types").AnyPage;
+  errorView?: RouteErrorView | import("./types").AnyPage;
+  notFoundView?: RouteView | import("./types").AnyPage;
 };
 
 export type RouterInternal = Router & {
-  readonly history: import("./types.js").RouterHistory;
+  readonly history: import("./types").RouterHistory;
   readonly flatRoutes: FlatRouteEntry[];
   readonly options: RouterModelOptions;
   readonly loadingView?: RouteLoadingView;
@@ -187,7 +187,7 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
       return buildRouteLocation(
         state.pathTemplate,
         (params ?? {}) as Record<string, string>,
-        opts?.query as import("./query.js").QueryRecord | undefined,
+        opts?.query as import("./query").QueryRecord | undefined,
       );
     },
 

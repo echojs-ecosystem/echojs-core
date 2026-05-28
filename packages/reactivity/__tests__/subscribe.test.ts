@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { computed, scope, signal } from "../src/index.js";
+import { computed, scope, signal } from "../src/index";
 
 describe("subscribe()", () => {
   it("вызывается только на реальные изменения и умеет unsubscribe", () => {

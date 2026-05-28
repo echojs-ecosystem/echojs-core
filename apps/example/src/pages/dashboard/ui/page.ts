@@ -1,4 +1,5 @@
 import { createRouteView } from "@echojs/router";
+import type { AnyPage } from "@echojs/router";
 import { NavLink } from "@echojs/router/hyperdom";
 import { button, code, div, h3, li, p, section, Show, ul } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
@@ -6,7 +7,22 @@ import { labModules, platformModules } from "@app/config/lab-modules.js";
 import { $authUser, $isLoggedIn } from "@app/router/auth.js";
 import { authLoginPage } from "@pages/auth/login/ui/page.js";
 import { accountPage } from "@pages/account/ui/page.js";
+import { formsPage } from "@pages/forms/ui/page.js";
+import { formsNestedPage } from "@pages/forms/nested/ui/page.js";
+import { persistencePage } from "@pages/persistence/ui/page.js";
+import { reactivityPage } from "@pages/reactivity/ui/page.js";
+import { statePage } from "@pages/state/ui/page.js";
 import { workspaceHomePage } from "@pages/workspace/home/ui/page.js";
+
+const labPageById: Record<string, AnyPage> = {
+  reactivity: reactivityPage,
+  forms: formsPage,
+  "forms-nested": formsNestedPage,
+  state: statePage,
+  persistence: persistencePage,
+  workspace: workspaceHomePage,
+  account: accountPage,
+};
 
 const ModuleCard = (meta: (typeof labModules)[0]): Child =>
   section({ class: "dashboard-card" }, [
@@ -14,7 +30,7 @@ const ModuleCard = (meta: (typeof labModules)[0]): Child =>
     h3(null, meta.title),
     p({ class: "dashboard-card__desc" }, meta.description),
     NavLink({
-      href: meta.path,
+      to: labPageById[meta.id]!,
       class: "dashboard-card__link",
       children: "Открыть модуль →",
     }),

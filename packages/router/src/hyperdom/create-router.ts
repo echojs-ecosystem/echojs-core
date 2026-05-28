@@ -1,6 +1,6 @@
-import { createRouter as createRouterCore } from "../core/create-router.js";
-import type { CollectNamedRoutes, RouteTreeBranch } from "../core/path-types.js";
-import type { CreateRouterOptions, Router } from "../core/types.js";
+import { createRouter as createRouterCore } from "../core/create-router";
+import type { CollectNamedRoutes, RouteTreeBranch } from "../core/path-types";
+import type { CreateRouterOptions, Router } from "../core/types";
 import type { Child } from "@echojs/hyperdom";
 
 export type HyperdomRouter<TRoutes extends Router["routes"] = Router["routes"]> = Omit<

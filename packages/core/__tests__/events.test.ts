@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
-import { scope, signal, computed } from "@echojs-ecosystem/reactivity";
-import { setEvent } from "../src/events.js";
-import { insert } from "../src/insert.js";
-import { createModel, createView, createComponent } from "../src/component.js";
+import { scope, signal, computed } from "@echojs/reactivity";
+import { setEvent } from "../src/events";
+import { insert } from "../src/insert";
+import { createModel, createView, createComponent } from "../src/component";
 
 describe("setEvent()", () => {
   it("поддерживает onClick / on:click / on-click", () => {

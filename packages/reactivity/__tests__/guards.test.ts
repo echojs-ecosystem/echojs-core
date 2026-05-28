@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computed, isReadonlySignal, isSignal, signal } from "../src/index.js";
+import { computed, isReadonlySignal, isSignal, signal } from "../src/index";
 
 describe("isSignal / isReadonlySignal", () => {
   it("false на произвольных значениях", () => {

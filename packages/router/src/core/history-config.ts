@@ -1,7 +1,7 @@
-import { createBrowserHistory } from "../histories/browser-history.js";
-import { createHashHistory } from "../histories/hash-history.js";
-import { createMemoryHistory } from "../histories/memory-history.js";
-import type { RouterHistory } from "./types.js";
+import { createBrowserHistory } from "../histories/browser-history";
+import { createHashHistory } from "../histories/hash-history";
+import { createMemoryHistory } from "../histories/memory-history";
+import type { RouterHistory } from "./types";
 
 export type RouterHistoryKind = "browser" | "hash" | "memory";
 

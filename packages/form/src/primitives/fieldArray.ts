@@ -1,5 +1,6 @@
 import { signal } from "@echojs-ecosystem/reactivity";
-import type { FieldArray } from "../types";
+import type { FieldArray, FieldArrayCore } from "../types";
+import { attachFieldArrayPersist } from "./field-persist";
 
 /**
  * Creates a dynamic array helper for form state (append/remove/move/update).
@@ -46,7 +47,7 @@ export const createFieldArray = <Item>(initial: Item[] = []): FieldArray<Item> =
     $items.set([...initialSnapshot]);
   };
 
-  return {
+  const core: FieldArrayCore<Item> = {
     $items,
     append,
     prepend,
@@ -56,4 +57,6 @@ export const createFieldArray = <Item>(initial: Item[] = []): FieldArray<Item> =
     replace,
     reset,
   };
+
+  return attachFieldArrayPersist(core);
 };

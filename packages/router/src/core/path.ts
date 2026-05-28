@@ -1,4 +1,4 @@
-import type { MatchResult } from "./types.js";
+import type { MatchResult } from "./types";
 
 export const normalizePathname = (pathname: string): string => {
   let path = pathname;

@@ -30,6 +30,10 @@
       "dependsOn": ["^topo"],
       "inputs": ["$TURBO_DEFAULT$"]
     },
+    "typecheck": {
+      "dependsOn": ["^topo"],
+      "inputs": ["$TURBO_DEFAULT$"]
+    },
     "test": {
       "dependsOn": ["^topo", "^build"],
       "inputs": ["$TURBO_DEFAULT$"]

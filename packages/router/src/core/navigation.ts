@@ -1,7 +1,7 @@
-import { buildPath, joinLocation, splitLocation } from "./path.js";
-import { parseQuery, stringifyQuery, type QueryRecord } from "./query.js";
-import type { Route } from "./types.js";
-import { getRouteState } from "./route.js";
+import { buildPath, joinLocation, splitLocation } from "./path";
+import { parseQuery, stringifyQuery, type QueryRecord } from "./query";
+import type { Route } from "./types";
+import { getRouteState } from "./route";
 
 export const buildRouteLocation = (
   pathTemplate: string,

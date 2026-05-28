@@ -1,5 +1,5 @@
-import { normalizePathname } from "../core/path.js";
-import type { RouterHistory } from "../core/types.js";
+import { normalizePathname } from "../core/path";
+import type { RouterHistory } from "../core/types";
 
 const readHashPath = (): string => {
   const hash = window.location.hash;

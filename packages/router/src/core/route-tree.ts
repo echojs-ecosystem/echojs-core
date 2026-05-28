@@ -1,6 +1,6 @@
-import { joinRoutePaths, matchPath } from "./path.js";
-import type { RouteConfig } from "./types.js";
-import type { AnyRoute } from "./types.js";
+import { joinRoutePaths, matchPath } from "./path";
+import type { RouteConfig } from "./types";
+import type { AnyRoute } from "./types";
 
 export type FlatRouteEntry = {
   path: string;

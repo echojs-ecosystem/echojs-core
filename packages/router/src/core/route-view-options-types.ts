@@ -1,4 +1,4 @@
-import type { CreateRouteViewOptions } from "./page.js";
+import type { CreateRouteViewOptions } from "./page";
 
 export type RouteViewOptionsConstraint = CreateRouteViewOptions<unknown, unknown, unknown> & {
   readonly name: string;

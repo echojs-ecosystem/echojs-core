@@ -1,5 +1,5 @@
-import { joinLocation, splitLocation } from "../core/path.js";
-import type { RouterHistory } from "../core/types.js";
+import { joinLocation, splitLocation } from "../core/path";
+import type { RouterHistory } from "../core/types";
 
 const readLocation = (): string => {
   const { pathname, search } = window.location;

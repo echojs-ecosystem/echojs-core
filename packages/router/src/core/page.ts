@@ -1,8 +1,8 @@
 import { signal } from "@echojs-ecosystem/reactivity";
 import type { Signal } from "@echojs-ecosystem/reactivity";
-import { createRouteModel, getRouteState, type RouteInternalState } from "./route.js";
-import type { RouterInternal } from "./router.js";
-import { resolveRoutePath } from "./navigation.js";
+import { createRouteModel, getRouteState, type RouteInternalState } from "./route";
+import type { RouterInternal } from "./router";
+import { resolveRoutePath } from "./navigation";
 import type {
   Page,
   PageLoaderContext,
@@ -10,15 +10,15 @@ import type {
   RouteErrorView,
   RouteLoadingView,
   RouteView,
-} from "./types.js";
-import { matchParamsForEntry, type FlatRouteEntry } from "./route-tree.js";
-import { rawQueryToTyped } from "./route.js";
-import type { AnyPage } from "./types.js";
+} from "./types";
+import { matchParamsForEntry, type FlatRouteEntry } from "./route-tree";
+import { rawQueryToTyped } from "./route";
+import type { AnyPage } from "./types";
 import {
   cancelLazyViewLoads,
   ensureLazyViewLoaded,
   type LazyRouteViewLoader,
-} from "./lazy-view.js";
+} from "./lazy-view";
 
 export type BeforeLoadContext<Params, Query> = PageLoaderContext<Params, Query> & {
   navigationId: number;
@@ -166,12 +166,12 @@ export const createRouteViewModel = <
     loadingView: resolved.loadingView,
     errorView: resolved.errorView,
     replace(
-      ...args: [Params?, import("./types.js").GoOptions<Query>?]
+      ...args: [Params?, import("./types").GoOptions<Query>?]
     ): void {
       const [params, options] = args;
       page.go(
         params as Params,
-        { ...options, replace: true } as import("./types.js").GoOptions<Query>,
+        { ...options, replace: true } as import("./types").GoOptions<Query>,
       );
     },
     resolve(

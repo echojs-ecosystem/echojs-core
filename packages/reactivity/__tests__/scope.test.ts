@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { effect, scope, signal } from "../src/index.js";
+import { effect, scope, signal } from "../src/index";
 
 describe("scope()", () => {
   it("бросает TypeError на неправильный fn", () => {

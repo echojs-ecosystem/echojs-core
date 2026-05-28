@@ -28,11 +28,11 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs/reactivity": "workspace:*",
     "@echojs/hyperdom": "workspace:*"
   },
   "devDependencies": {
-    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs/oxc-config": "workspace:*",
     "jsdom": "^26.1.0",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"

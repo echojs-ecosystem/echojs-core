@@ -1,12 +1,12 @@
-import { createRouteViewModel, getPageState, type CreateRouteViewOptions } from "./page.js";
+import { createRouteViewModel, getPageState, type CreateRouteViewOptions } from "./page";
 import type {
   RouteViewDataFromOptions,
   RouteViewNameFromOptions,
   RouteViewOptionsConstraint,
   RouteViewParamsFromOptions,
   RouteViewQueryFromOptions,
-} from "./route-view-options-types.js";
-import type { LayoutPage, NamedPage } from "./types.js";
+} from "./route-view-options-types";
+import type { LayoutPage, NamedPage } from "./types";
 
 export type NamedLayoutView<
   Name extends string,
@@ -33,4 +33,4 @@ export const createLayoutView = <const O extends RouteViewOptionsConstraint>(
   >;
 };
 
-export { isLayoutPage } from "./page.js";
+export { isLayoutPage } from "./page";

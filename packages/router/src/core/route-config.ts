@@ -1,6 +1,6 @@
-import { assertLayoutPage, assertPage, getPageState, isLayoutPage } from "./page.js";
-import type { RouteViewEntry, RouteTreeEntry } from "./path-types.js";
-import type { AnyRoute, RouteConfig } from "./types.js";
+import { assertLayoutPage, assertPage, getPageState, isLayoutPage } from "./page";
+import type { RouteViewEntry, RouteTreeEntry } from "./path-types";
+import type { AnyRoute, RouteConfig } from "./types";
 
 const isRouteViewEntry = (item: RouteTreeEntry): item is RouteViewEntry =>
   "routeView" in item && !("layoutView" in item);
@@ -26,7 +26,7 @@ export const toRouteConfigs = (definitions: readonly RouteTreeEntry[]): RouteCon
       if ("layoutView" in item) {
         const { layoutView, children, path: segment } = item;
         assertLayoutPage(
-          layoutView as import("./types.js").Route,
+          layoutView as import("./types").Route,
           `routes[{ path: "${segment}", layoutView }]`,
         );
         if (!children?.length) {

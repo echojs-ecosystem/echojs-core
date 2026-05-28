@@ -1,12 +1,12 @@
-import { createRouteViewModel, type CreateRouteViewOptions } from "./page.js";
+import { createRouteViewModel, type CreateRouteViewOptions } from "./page";
 import type {
   RouteViewDataFromOptions,
   RouteViewNameFromOptions,
   RouteViewOptionsConstraint,
   RouteViewParamsFromOptions,
   RouteViewQueryFromOptions,
-} from "./route-view-options-types.js";
-import type { NamedPage } from "./types.js";
+} from "./route-view-options-types";
+import type { NamedPage } from "./types";
 
 export function createRouteView<const O extends RouteViewOptionsConstraint>(
   options: O,

@@ -1,8 +1,8 @@
-import { resolveHistory } from "./history-config.js";
-import { createRouterModel } from "./router.js";
-import type { CollectNamedRoutes, RouteTreeBranch } from "./path-types.js";
-import type { RouterModelOptions } from "./router.js";
-import type { CreateRouterOptions, Router } from "./types.js";
+import { resolveHistory } from "./history-config";
+import { createRouterModel } from "./router";
+import type { CollectNamedRoutes, RouteTreeBranch } from "./path-types";
+import type { RouterModelOptions } from "./router";
+import type { CreateRouterOptions, Router } from "./types";
 
 export const createRouter = <const TRoutes extends readonly RouteTreeBranch[]>(
   options: CreateRouterOptions<TRoutes>,

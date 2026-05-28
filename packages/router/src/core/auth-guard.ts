@@ -1,4 +1,4 @@
-import { matchPath, normalizePathname } from "./path.js";
+import { matchPath, normalizePathname } from "./path";
 
 const isDevMode = (): boolean => {
   try {
@@ -12,7 +12,7 @@ import type {
   AuthorizationGuardRedirectContext,
   AuthorizationGuardRedirectTarget,
   RouterHistory,
-} from "./types.js";
+} from "./types";
 
 const resolveRedirectTarget = <Paths extends string>(
   target: AuthorizationGuardRedirectTarget<Paths> | undefined,

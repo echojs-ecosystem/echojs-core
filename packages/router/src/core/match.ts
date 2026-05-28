@@ -1,1 +1,1 @@
-export { buildPath, matchPath, normalizePathname } from "./path.js";
+export { buildPath, matchPath, normalizePathname } from "./path";

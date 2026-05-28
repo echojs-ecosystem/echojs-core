@@ -1,5 +1,5 @@
-import type { RouterHistory } from "../core/types.js";
-import { splitLocation } from "../core/path.js";
+import type { RouterHistory } from "../core/types";
+import { splitLocation } from "../core/path";
 
 export const createMemoryHistory = (initialPath = "/"): RouterHistory => {
   let index = 0;

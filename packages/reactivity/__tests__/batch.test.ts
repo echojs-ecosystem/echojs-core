@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { batch, effect, signal } from "../src/index.js";
+import { batch, effect, signal } from "../src/index";
 
 describe("batch()", () => {
   it("бросает TypeError на неправильный fn", () => {

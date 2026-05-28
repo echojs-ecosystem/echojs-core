@@ -1,6 +1,6 @@
-import { cleanup } from "@echojs-ecosystem/reactivity";
-import type { EventHandler, EventModifiers } from "./types.js";
-import { isFunction } from "./internals/utils.js";
+import { cleanup } from "@echojs/reactivity";
+import type { EventHandler, EventModifiers } from "./types";
+import { isFunction } from "./internals/utils";
 
 const parseEventName = (fullName: string): { event: string; modifiers: EventModifiers } => {
   const parts = fullName.split(":");

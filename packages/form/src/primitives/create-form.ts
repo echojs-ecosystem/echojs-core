@@ -57,6 +57,11 @@ export type CreateFormOptions<
   defaultAsyncValues?: () => Promise<Partial<TValue>>;
 
   /**
+   * Фабрики строк для `FieldArray` при гидратации `defaultValues` / `defaultAsyncValues`.
+   */
+  fieldArrayFactories?: Record<string, () => unknown>;
+
+  /**
    * Фабрики строк (`createTicket`, …) и append/remove через `arrayGenerator` из `@echojs/form`.
    *
    * @example
@@ -106,6 +111,7 @@ export function createForm<
     hydrateFormFields(
       resolvedFields as unknown as Record<string, unknown>,
       opts.defaultValues as object,
+      opts.fieldArrayFactories,
     );
   }
 

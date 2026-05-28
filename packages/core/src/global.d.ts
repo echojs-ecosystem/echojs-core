@@ -1,4 +1,4 @@
-import { JSX as CoreJSX } from "./jsx-types.js";
+import { JSX as CoreJSX } from "./jsx-types";
 
 declare global {
   namespace JSX {

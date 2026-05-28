@@ -6,7 +6,7 @@
       "name": "echojs-core",
       "devDependencies": {
         "@changesets/cli": "^2.31.0",
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "oxfmt": "^0.46.0",
         "oxlint": "^1.61.0",
         "stylelint-standard": "^1.2.3",
@@ -15,12 +15,12 @@
       },
     },
     "apps/example": {
-      "name": "@echojs-ecosystem/example",
+      "name": "@echojs/example",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
         "@echojs/form": "workspace:*",
         "@echojs/hyperdom": "workspace:*",
         "@echojs/persist": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
         "@echojs/router": "workspace:*",
         "@echojs/store": "workspace:*",
         "zod": "^3.25.28",
@@ -31,7 +31,7 @@
       },
     },
     "packages/.configs": {
-      "name": "@echojs-ecosystem/oxc-config",
+      "name": "@echojs/oxc-config",
       "version": "0.1.0",
       "devDependencies": {
         "oxfmt": "^0.46.0",
@@ -40,14 +40,32 @@
         "vitest": "^4.1.5",
       },
     },
-    "packages/core": {
-      "name": "@echojs-ecosystem/core",
+    "packages/bench": {
+      "name": "@echojs/bench",
       "version": "0.0.0",
+      "bin": {
+        "echojs-bench": "./dist/cli.js",
+      },
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "esbuild": "^0.25.9",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
+        "@echojs/router": "workspace:*",
+        "@echojs/store": "workspace:*",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
+    "packages/core": {
+      "name": "@echojs/core",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs/reactivity": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs/oxc-config": "workspace:*",
         "happy-dom": "^18.0.1",
         "oxlint": "^1.60.0",
         "typescript": "5.9.2",
@@ -58,11 +76,12 @@
       "name": "@echojs/form",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/persist": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
         "@standard-schema/spec": "^1.1.0",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
         "zod": "^3.25.28",
@@ -72,23 +91,23 @@
       "name": "@echojs/hyperdom",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "jsdom": "^26.1.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
       },
     },
     "packages/jsx-runtime": {
-      "name": "@echojs-ecosystem/jsx-runtime",
+      "name": "@echojs/jsx-runtime",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "oxlint": "^1.60.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
@@ -98,10 +117,10 @@
       "name": "@echojs/persist",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "@echojs/store": "workspace:*",
         "fake-indexeddb": "^6.0.0",
         "jsdom": "^26.1.0",
@@ -110,13 +129,13 @@
       },
     },
     "packages/reactivity": {
-      "name": "@echojs-ecosystem/reactivity",
+      "name": "@echojs/reactivity",
       "version": "0.0.0",
       "dependencies": {
         "alien-signals": "^3.1.2",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "oxlint": "^1.60.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
@@ -126,11 +145,11 @@
       "name": "@echojs/router",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
         "@echojs/hyperdom": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
         "jsdom": "^26.1.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
@@ -140,10 +159,23 @@
       "name": "@echojs/store",
       "version": "0.0.0",
       "dependencies": {
-        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs/reactivity": "workspace:*",
       },
       "devDependencies": {
-        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs/oxc-config": "workspace:*",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
+    "packages/ui": {
+      "name": "@echojs/ui",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs/hyperdom": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs/oxc-config": "workspace:*",
+        "jsdom": "^26.1.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
       },
@@ -198,25 +230,29 @@
 
     "@csstools/css-tokenizer": ["@csstools/css-tokenizer@3.0.4", "", {}, "sha512-Vd/9EVDiu6PPJt9yAh6roZP6El1xHrdvIVGjyBsHR0RYwNHgL7FJPyIIW4fANJNG6FtyZfvlRPpFI4ZM/lubvw=="],
 
-    "@echojs-ecosystem/core": ["@echojs-ecosystem/core@workspace:packages/core"],
+    "@echojs/bench": ["@echojs/bench@workspace:packages/bench"],
 
-    "@echojs-ecosystem/example": ["@echojs-ecosystem/example@workspace:apps/example"],
+    "@echojs/core": ["@echojs/core@workspace:packages/core"],
 
-    "@echojs-ecosystem/jsx-runtime": ["@echojs-ecosystem/jsx-runtime@workspace:packages/jsx-runtime"],
-
-    "@echojs-ecosystem/oxc-config": ["@echojs-ecosystem/oxc-config@workspace:packages/.configs"],
-
-    "@echojs-ecosystem/reactivity": ["@echojs-ecosystem/reactivity@workspace:packages/reactivity"],
+    "@echojs/example": ["@echojs/example@workspace:apps/example"],
 
     "@echojs/form": ["@echojs/form@workspace:packages/form"],
 
     "@echojs/hyperdom": ["@echojs/hyperdom@workspace:packages/hyperdom"],
 
+    "@echojs/jsx-runtime": ["@echojs/jsx-runtime@workspace:packages/jsx-runtime"],
+
+    "@echojs/oxc-config": ["@echojs/oxc-config@workspace:packages/.configs"],
+
     "@echojs/persist": ["@echojs/persist@workspace:packages/persist"],
+
+    "@echojs/reactivity": ["@echojs/reactivity@workspace:packages/reactivity"],
 
     "@echojs/router": ["@echojs/router@workspace:packages/router"],
 
     "@echojs/store": ["@echojs/store@workspace:packages/store"],
+
+    "@echojs/ui": ["@echojs/ui@workspace:packages/ui"],
 
     "@emnapi/core": ["@emnapi/core@1.10.0", "", { "dependencies": { "@emnapi/wasi-threads": "1.2.1", "tslib": "^2.4.0" } }, "sha512-yq6OkJ4p82CAfPl0u9mQebQHKPJkY7WrIuk205cTYnYe+k2Z8YBh11FrbRG/H6ihirqcacOgl2BIO8oyMQLeXw=="],
 

@@ -1,5 +1,5 @@
-import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import { isSignal as isReactiveSignal, isReadonlySignal } from "@echojs-ecosystem/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import { isSignal as isReactiveSignal, isReadonlySignal } from "@echojs/reactivity";
 
 export { isReactiveSignal as isSignal, isReadonlySignal };
 

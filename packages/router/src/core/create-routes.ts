@@ -1,4 +1,4 @@
-import type { CollectNamedRoutes, RouteTreeNode } from "./path-types.js";
+import type { CollectNamedRoutes, RouteTreeNode } from "./path-types";
 
 /**
  * Builds a typed route tree for `createRouter({ routes })`.

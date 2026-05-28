@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { computed, readonly, signal } from "../src/index.js";
+import { computed, readonly, signal } from "../src/index";
 
 describe("readonly()", () => {
   it("возвращает тот же объект, если сигнал уже readonly", () => {

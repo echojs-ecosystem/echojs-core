@@ -15,6 +15,12 @@ export const saveToStorage = async <Value, Snapshot>(
   const value = target.value();
   const snapshot = options.select(value);
 
+  if (snapshot == null) {
+    await resolveAsync(adapter.removeItem(options.key));
+    options.onSave?.({ value, snapshot });
+    return;
+  }
+
   const existing = await readPersistRecord<Snapshot>(adapter, options.key, options.serializer).catch(
     () => null,
   );

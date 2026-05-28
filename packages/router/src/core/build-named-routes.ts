@@ -1,5 +1,5 @@
-import type { AnyRoute } from "./types.js";
-import type { RouteTreeEntry } from "./path-types.js";
+import type { AnyRoute } from "./types";
+import type { RouteTreeEntry } from "./path-types";
 
 export type NamedRoutesMap = Readonly<Record<string, AnyRoute>>;
 

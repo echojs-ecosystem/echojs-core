@@ -1,6 +1,6 @@
-import { scope, cleanup, effect, signal, computed } from "@echojs-ecosystem/reactivity";
-import type { Signal, ReadonlySignal } from "@echojs-ecosystem/reactivity";
-import { isFunction, isObject } from "./internals/utils.js";
+import { scope, cleanup, effect, signal, computed } from "@echojs/reactivity";
+import type { Signal, ReadonlySignal } from "@echojs/reactivity";
+import { isFunction, isObject } from "./internals/utils";
 import type {
   JSXElement,
   JSXComponent,
@@ -8,7 +8,7 @@ import type {
   ViewFn,
   ModelContext,
   ModelResult,
-} from "./types.js";
+} from "./types";
 
 export interface Component<VM> {
   (props?: Record<string, unknown>): JSXElement;

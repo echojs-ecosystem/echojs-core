@@ -1,12 +1,13 @@
 {
-  "extends": "@echojs-ecosystem/oxc-config/tsconfig",
+  "extends": "../.configs/tsconfig.json",
   "compilerOptions": {
+    "noEmit": true,
     "outDir": "./dist",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"]
+      "@echojs/reactivity": ["../reactivity/src/index.ts"]
     },
     "rootDir": ".."
   },

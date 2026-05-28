@@ -1,4 +1,5 @@
 import type { ReadValue, Signal } from "@echojs-ecosystem/reactivity";
+import type { FieldArrayPersistMethods, FieldPersistMethods } from "./primitives/field-persist";
 
 export type FieldValidator<T> = (value: ReadValue<T>) => string | null;
 
@@ -92,7 +93,7 @@ export type WireFormModel<TTree> = FieldTreeWire<TTree> & {
   reindex?: () => void;
 };
 
-export type Field<T> = {
+export type FieldCore<T> = {
   $value: Signal<T>;
   $meta: Signal<FieldMeta>;
 
@@ -110,7 +111,9 @@ export type Field<T> = {
   clearErrors: () => void;
 };
 
-export type FieldArray<Item> = {
+export type Field<T> = FieldCore<T> & FieldPersistMethods<T>;
+
+export type FieldArrayCore<Item> = {
   $items: Signal<Item[]>;
 
   append: (item: Item) => void;
@@ -121,6 +124,8 @@ export type FieldArray<Item> = {
   replace: (next: Item[]) => void;
   reset: () => void;
 };
+
+export type FieldArray<Item> = FieldArrayCore<Item> & FieldArrayPersistMethods<Item>;
 
 /** Операции над вложенными `FieldArray`, см. `defineNestedFieldArrayOps`. */
 export type NestedFieldArrayOps<Row extends Record<string, unknown> = Record<string, unknown>> = {

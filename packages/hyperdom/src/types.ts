@@ -62,9 +62,21 @@ type DataAriaProps = {
   [K in `aria-${string}`]?: Primitive;
 };
 
+/**
+ * Vue-like prop modifiers:
+ * - `.propName` sets an element property directly
+ * - `^attrName` forces an attribute (even when a same-named property exists)
+ */
+type ModifierProps = {
+  [K in `.${string}`]?: unknown;
+} & {
+  [K in `^${string}`]?: Primitive;
+};
+
 export type Props<E extends Element = Element> = ElementLikeProps<E> &
   OnProps<E> &
-  DataAriaProps & {
+  DataAriaProps &
+  ModifierProps & {
     ref?: (el: E | null) => void;
     class?: MaybeReactive<ClassValue>;
     className?: MaybeReactive<ClassValue>;

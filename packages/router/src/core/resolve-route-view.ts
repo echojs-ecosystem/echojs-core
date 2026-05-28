@@ -1,11 +1,11 @@
-import { getPageState } from "./page.js";
+import { getPageState } from "./page";
 import type {
   AnyPage,
   RouteErrorView,
   RouteLoadingView,
   RouteView,
   RouterNotFoundView,
-} from "./types.js";
+} from "./types";
 
 const emptyOutlet = (): null => null;
 

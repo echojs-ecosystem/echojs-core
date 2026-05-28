@@ -1,4 +1,4 @@
-import type { RouteEvent } from "./types.js";
+import type { RouteEvent } from "./types";
 
 export type RouteEventEmitter<T> = RouteEvent<T> & {
   emit(payload: T): void;
