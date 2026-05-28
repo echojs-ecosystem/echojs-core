@@ -70,7 +70,7 @@ export type FieldPersistMethods<T> = {
   subscribe(listener: (value: T, prevValue: T) => void): () => void;
   extend<Snapshot = T>(
     extension: PersistExtension<T, Snapshot>,
-  ): FieldPersistMethods<T> & PersistExtensionResult<T, Snapshot>;
+  ): Field<T> & PersistExtensionResult<T, Snapshot>;
 };
 
 export type FieldArrayPersistMethods<T> = {
@@ -79,5 +79,5 @@ export type FieldArrayPersistMethods<T> = {
   subscribe(listener: (value: T[], prevValue: T[]) => void): () => void;
   extend<Snapshot = T[]>(
     extension: PersistExtension<T[], Snapshot>,
-  ): FieldArrayPersistMethods<T> & PersistExtensionResult<T[], Snapshot>;
+  ): FieldArray<T> & PersistExtensionResult<T[], Snapshot>;
 };

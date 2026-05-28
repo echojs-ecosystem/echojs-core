@@ -32,7 +32,7 @@ const allProducts = (): Array<{ categoryId: string; categoryName: string; produc
 // Demo: “в наличии” — просто мокаем по id, чтобы было что фильтровать.
 const isInStock = (productId: string): boolean => productId.length % 2 === 0;
 
-const productsQuerySchema = {
+const productUrlQuery = createQueryParams({
   q: parseAsString.withDefault(""),
   page: parseAsInteger.withDefault(1),
   inStock: parseAsBoolean.withDefault(false),
@@ -41,23 +41,15 @@ const productsQuerySchema = {
   ),
   view: parseAsLiteral(["grid", "list"] as const).withDefault("grid" satisfies ViewMode),
   tag: parseAsArrayOf(parseAsString).withDefault([]),
-} as const;
-
-let productsQuery: QueryParamsState<typeof productsQuerySchema> | null = null;
-
-const getProductsQuery = (): QueryParamsState<typeof productsQuerySchema> => {
-  if (productsQuery) return productsQuery;
-  productsQuery = createQueryParams(productsQuerySchema, {
-    adapter: createRouterUrlStateAdapter(appRouter),
-    // Чтобы набор символов в input не спамил history/URL.
-    limitUrlUpdates: debounce(150),
-    clearOnDefault: true,
-    shallow: true,
-    history: "replace",
-    urlKeys: { inStock: "stock" },
-  });
-  return productsQuery;
-};
+}, {
+  adapter: createRouterUrlStateAdapter(appRouter),
+  // Чтобы набор символов в input не спамил history/URL.
+  limitUrlUpdates: debounce(500),
+  clearOnDefault: true,
+  shallow: true,
+  history: "replace",
+  urlKeys: { inStock: "stock" },
+})
 
 const tagBtn = (active: boolean): Record<string, string> => ({
   padding: "6px 10px",
@@ -71,42 +63,41 @@ const tagBtn = (active: boolean): Record<string, string> => ({
 export const workspaceProductsPage = createRouteView({
   name: "workspace-products",
   view: (): Child => {
-    const state = getProductsQuery();
-    const q = state.value();
+    const urlSearchParams = productUrlQuery.value()
 
     const source = allProducts();
     const filtered = source
       .filter((item) => {
-        if (!q.q.trim()) return true;
-        const needle = q.q.trim().toLowerCase();
+        if (!urlSearchParams.q.trim()) return true;
+        const needle = urlSearchParams.q.trim().toLowerCase();
         return (
           item.product.name.toLowerCase().includes(needle) ||
           item.categoryName.toLowerCase().includes(needle) ||
           item.product.id.toLowerCase().includes(needle)
         );
       })
-      .filter((item) => (q.inStock ? isInStock(item.product.id) : true))
+      .filter((item) => (urlSearchParams.inStock ? isInStock(item.product.id) : true))
       .filter((item) =>
-        q.tag.length ? q.tag.some((t: string) => item.product.name.toLowerCase().includes(t)) : true,
+        urlSearchParams.tag.length ? urlSearchParams.tag.some((t: string) => item.product.name.toLowerCase().includes(t)) : true,
       );
 
     const sorted = [...filtered].sort((a, b) => {
-      if (q.sort === "name") return a.product.name.localeCompare(b.product.name);
-      if (q.sort === "price_asc") return a.product.id.localeCompare(b.product.id);
-      if (q.sort === "price_desc") return b.product.id.localeCompare(a.product.id);
+      if (urlSearchParams.sort === "name") return a.product.name.localeCompare(b.product.name);
+      if (urlSearchParams.sort === "price_asc") return a.product.id.localeCompare(b.product.id);
+      if (urlSearchParams.sort === "price_desc") return b.product.id.localeCompare(a.product.id);
       return 0;
     });
 
     const pageSize = 4;
     const totalPages = Math.max(1, Math.ceil(sorted.length / pageSize));
-    const safePage = Math.min(Math.max(1, q.page), totalPages);
+    const safePage = Math.min(Math.max(1, urlSearchParams.page), totalPages);
     const start = (safePage - 1) * pageSize;
     const items = sorted.slice(start, start + pageSize);
 
-    if (safePage !== q.page) state.set({ page: safePage });
+    if (safePage !== urlSearchParams.page) productUrlQuery.set({ page: safePage });
 
     const setPage = (next: number): void => {
-      state.set({ page: next }, { history: "push" });
+      productUrlQuery.set({ page: next }, { history: "push" });
     };
 
     const ProductCard = (item: (typeof items)[number]): Child =>
@@ -134,12 +125,12 @@ export const workspaceProductsPage = createRouteView({
       );
 
     const toggleTag = (tag: string): void => {
-      const current = state.value().tag;
+      const current = urlSearchParams.tag;
       const next = current.includes(tag) ? current.filter((t: string) => t !== tag) : [...current, tag];
-      state.set({ tag: next, page: 1 });
+      productUrlQuery.set({ tag: next, page: 1 });
     };
 
-    const activeTags = state.value().tag;
+    const activeTags = urlSearchParams.tag;
     const tags = ["phone", "lamp", "pad"] as const;
 
     return div({ class: "router-page" }, [
@@ -158,10 +149,10 @@ export const workspaceProductsPage = createRouteView({
           p({ class: "router-form-label" }, "Поиск (q)"),
           input({
             class: "control",
-            value: q.q,
+            value: urlSearchParams.q,
             placeholder: "например: phone / lamp / electronics",
             "on:input": (e: { currentTarget: HTMLInputElement }) => {
-              state.set({ q: e.currentTarget.value, page: 1 });
+              productUrlQuery.set({ q: e.currentTarget.value, page: 1 });
             },
           }),
         ]),
@@ -169,9 +160,9 @@ export const workspaceProductsPage = createRouteView({
         label({ style: { display: "flex", gap: "10px", "align-items": "center" } }, [
           input({
             type: "checkbox",
-            checked: q.inStock,
+            checked: urlSearchParams.inStock,
             "on:change": (e: { currentTarget: HTMLInputElement }) => {
-              state.set({ inStock: e.currentTarget.checked, page: 1 });
+              productUrlQuery.set({ inStock: e.currentTarget.checked, page: 1 });
             },
           }),
           span(null, ["Только в наличии (", code(null, "stock"), ")"]),
@@ -191,7 +182,7 @@ export const workspaceProductsPage = createRouteView({
               ),
             ),
             button(
-              { type: "button", class: "secondary", "on:click": () => state.set({ tag: [], page: 1 }) },
+              { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ tag: [], page: 1 }) },
               "Очистить",
             ),
           ]),
@@ -199,34 +190,34 @@ export const workspaceProductsPage = createRouteView({
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center", "flex-wrap": "wrap" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ sort: "relevance", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "relevance", page: 1 }) },
             "Sort: relevance",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ sort: "name", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "name", page: 1 }) },
             "Sort: name",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ sort: "price_asc", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "price_asc", page: 1 }) },
             "Sort: price_asc",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ sort: "price_desc", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "price_desc", page: 1 }) },
             "Sort: price_desc",
           ),
         ]),
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ view: "grid" }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ view: "grid" }) },
             "View: grid",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => state.set({ view: "list" }) },
+            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ view: "list" }) },
             "View: list",
           ),
-          button({ type: "button", class: "secondary", "on:click": () => state.reset() }, "Reset"),
-          button({ type: "button", class: "secondary", "on:click": () => state.clear() }, "Clear"),
+          button({ type: "button", class: "secondary", "on:click": () => productUrlQuery.reset() }, "Reset"),
+          button({ type: "button", class: "secondary", "on:click": () => productUrlQuery.clear() }, "Clear"),
         ]),
       ]),
 
@@ -234,7 +225,7 @@ export const workspaceProductsPage = createRouteView({
       div(
         {
           style:
-            q.view === "grid"
+          productUrlQuery.value().view === "grid"
               ? { display: "grid", gap: "10px", "grid-template-columns": "repeat(2, minmax(0, 1fr))" }
               : { display: "grid", gap: "10px" },
         },
@@ -256,7 +247,7 @@ export const workspaceProductsPage = createRouteView({
         JSON.stringify(
           {
             url: appRouter.$fullPath.value(),
-            queryState: state.value(),
+            queryState: productUrlQuery.value(),
           },
           null,
           2,

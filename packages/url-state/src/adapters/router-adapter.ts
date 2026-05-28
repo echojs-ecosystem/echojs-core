@@ -24,7 +24,8 @@ const splitFullPath = (
   return { pathname: pathname || "/", search: normalizeSearch(search), hash };
 };
 
-export const createRouterUrlStateAdapter = (router: RouterLike): UrlStateAdapter => {
+export const createRouterUrlStateAdapter = (router: RouterLike): UrlStateAdapter | undefined => {
+  if (!router) return undefined;
   return {
     kind: "router",
     getSearch() {

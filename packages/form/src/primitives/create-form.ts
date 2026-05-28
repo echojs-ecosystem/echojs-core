@@ -133,20 +133,20 @@ export function createForm<
   };
 
   const validateAsync = async (): Promise<Record<string, unknown>> => {
-    const fieldTree = opts.validateAsync
-      ? await opts.validateAsync(resolvedFields)
-      : opts.validate
-        ? opts.validate(resolvedFields)
-        : ((await deepValidateAsync(resolvedFields)) as Record<string, unknown>);
+    const getFieldTree = (async () => {
+      if (opts.validateAsync) return await opts.validateAsync(resolvedFields);
+      if (opts.validate) return opts.validate(resolvedFields);
+      return await deepValidateAsync(resolvedFields) as Record<string, unknown>;
+    })
 
-    if (!rootSchema) return fieldTree;
+    if (!rootSchema) return await getFieldTree();
 
     const value = snapshotValue();
     const res = await standardSchemaIssuesForUnknown(rootSchema as any, value);
     const schemaFlat = flattenFieldErrors(res.ok ? [] : res.issues);
     const rootSchemaErrors = Object.keys(schemaFlat).length > 0 ? { $schema: schemaFlat } : {};
 
-    return { ...fieldTree, ...rootSchemaErrors };
+    return { ...(await getFieldTree()), ...rootSchemaErrors };
   };
 
   const updateErrorsSignals = (errs: Record<string, unknown>): void => {
