@@ -1,12 +1,12 @@
 import { signal, type Signal } from "@echojs/reactivity";
 import { defaultEquals } from "../utils/equality";
-import type { Parser, ParserWithDefault, QueryStateOptions, QueryStateSetOptions, UrlStateAdapter } from "./types";
+import type { Parser, QueryStateOptions, QueryStateSetOptions, UrlStateAdapter } from "./types";
 import { resolveSetOptions } from "./options";
+import { hasDefault } from "./parser-meta";
 import { getSearchParam, type SearchParamValue } from "./url";
 import { queueUrlUpdate } from "./update-queue";
 
-export const hasDefault = <Value>(parser: Parser<Value>): parser is ParserWithDefault<Value> =>
-  Object.prototype.hasOwnProperty.call(parser, "defaultValue");
+export { hasDefault } from "./parser-meta";
 
 export const parseRaw = <Value>(parser: Parser<Value>, raw: SearchParamValue): Value | null => {
   const parsed = parser.parse(raw);
@@ -29,16 +29,7 @@ export const readRawValue = (adapter: UrlStateAdapter, key: string): SearchParam
   return getSearchParam(adapter.getSearch(), key);
 };
 
-export const shouldClearOnDefault = <Value>(
-  value: Value,
-  parser: Parser<Value>,
-  options: QueryStateSetOptions,
-): boolean => {
-  if (!options.clearOnDefault) return false;
-  if (!hasDefault(parser)) return false;
-  const equals = options.equals === false ? null : (options.equals ?? defaultEquals);
-  return equals ? equals(value, parser.defaultValue) : false;
-};
+export { shouldClearOnDefault, shouldHideDefaultInUrl } from "./default-visibility";
 
 export const createSyncedSignals = <Value>(args: {
   adapter: UrlStateAdapter;

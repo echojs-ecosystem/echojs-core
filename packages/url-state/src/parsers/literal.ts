@@ -24,4 +24,3 @@ export const parseAsLiteral = <const Values extends readonly (string | number)[]
 export const parseAsStringLiteral = <const Values extends readonly string[]>(values: Values) => parseAsLiteral(values);
 
 export const parseAsNumberLiteral = <const Values extends readonly number[]>(values: Values) => parseAsLiteral(values);
-

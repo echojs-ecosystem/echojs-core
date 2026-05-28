@@ -46,19 +46,25 @@ filters.clear();
 
 ## Router integration
 
-```ts
-import { createQueryParams, createRouterUrlStateAdapter, parseAsInteger, parseAsString } from "@echojs/url-state";
-import { appRouter } from "./router";
+`createRouter` from `@echojs/router/hyperdom` регистрирует router для url-state и добавляет `router.createQueryParams`.
 
-const filters = createQueryParams(
-  {
-    q: parseAsString.withDefault(""),
-    page: parseAsInteger.withDefault(1),
-  },
-  {
-    adapter: createRouterUrlStateAdapter(appRouter),
-  },
-);
+```ts
+import { createRouter } from "@echojs/router/hyperdom";
+import { createQueryParams, parseAsInteger, parseAsString } from "@echojs/url-state";
+
+export const appRouter = createRouter({ routes });
+
+// Вариант 1: на роутере (adapter подставляется автоматически)
+export const filters = appRouter.createQueryParams({
+  q: parseAsString.withDefault(""),
+  page: parseAsInteger.withDefault(1),
+});
+
+// Вариант 2: в модуле страницы без импорта appRouter (нет цикла с routes)
+export const filters = createQueryParams({
+  q: parseAsString.withDefault(""),
+  page: parseAsInteger.withDefault(1),
+});
 ```
 
 ## urlKeys (remapping)
@@ -89,17 +95,23 @@ const page = createQueryParam("page", parseAsInteger.withDefault(1));
 page.set(2, { history: "push" });
 ```
 
-## clearOnDefault
+## defaultVisibility
+
+Одна настройка на всю группу query params:
 
 ```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
+const filters = createQueryParams(
+  { page: parseAsInteger.withDefault(1) },
+  { defaultVisibility: "hide" }, // default не попадают в URL
+);
 
-const page = createQueryParam("page", parseAsInteger.withDefault(1), {
-  clearOnDefault: true,
-});
-
-page.set(1); // URL stays clean (no ?page=1)
+const verbose = createQueryParams(
+  { page: parseAsInteger.withDefault(1) },
+  { defaultVisibility: "show" }, // ?page=1
+);
 ```
+
+`clearOnDefault: true | false` по-прежнему работает (`true` → hide, `false` → show).
 
 ## Parsers
 
@@ -108,10 +120,40 @@ page.set(1); // URL stays clean (no ?page=1)
 - `parseAsFloat`
 - `parseAsBoolean`
 - `parseAsLiteral` / `parseAsStringLiteral` / `parseAsNumberLiteral`
-- `parseAsArrayOf`
-- `parseAsJson`
+- `parseAsArrayOf` — массив (повтор ключей или separator в одном ключе)
+- `parseAsNativeArrayOf` — только нативный формат `?tag=a&tag=b` ([nuqs](https://nuqs.dev/docs/parsers/built-in#native-arrays))
+- `parseAsJson` — JSON + optional Standard Schema ([nuqs](https://nuqs.dev/docs/parsers/built-in#json))
 - `parseAsIsoDate`
 - `parseAsTimestamp`
+
+### Custom parsers
+
+```ts
+import { createCustomParser, createCustomMultiParser } from "@echojs/url-state";
+
+const parseAsStars = createCustomParser({
+  parse: (value) => { /* string | string[] | null */ },
+  serialize: (value) => "★★★",
+  eq: (a, b) => a === b, // для defaultVisibility: "hide"
+});
+
+const parseAsIds = createCustomMultiParser({
+  parse: (values) => values.map(Number),
+  serialize: (ids) => ids.map(String),
+});
+```
+
+См. [custom parsers в nuqs](https://nuqs.dev/docs/parsers/making-your-own).
+
+### parseAsJson + Zod
+
+```ts
+import { z } from "zod";
+import { parseAsJson } from "@echojs/url-state";
+
+const schema = z.object({ pkg: z.string(), version: z.number() });
+const json = parseAsJson(schema);
+```
 
 ## Adapters
 
@@ -125,20 +167,11 @@ const q = createQueryParam("q", parseAsString.withDefault(""), {
 });
 ```
 
-### Memory adapter (tests/SSR)
+### Memory adapter (tests)
 
 ```ts
-import { createMemoryUrlStateAdapter, createQueryParam, parseAsInteger } from "@echojs/url-state";
+import { createMemoryUrlStateAdapter, createQueryParams, parseAsString } from "@echojs/url-state";
 
-const adapter = createMemoryUrlStateAdapter("?page=1");
-const page = createQueryParam("page", parseAsInteger.withDefault(1), { adapter });
+const adapter = createMemoryUrlStateAdapter("?q=hello");
+const state = createQueryParams({ q: parseAsString.withDefault("") }, { adapter });
 ```
-
-## Limitations (v1)
-
-- нет server cache как в `nuqs`
-- нет framework-specific adapters кроме EchoJS router/browser/memory
-- `shallow` имеет смысл только на уровне adapter (core просто прокидывает опцию)
-- нет type inference из URL string
-- query state не предназначен для больших данных (URL — это small state)
-

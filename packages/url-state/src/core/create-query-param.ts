@@ -1,11 +1,12 @@
 import type { Parser, QueryParamState, QueryStateOptions, QueryStateSetOptions } from "./types";
-import { createSyncedSignals, hasDefault, shouldClearOnDefault } from "./query-state";
+import { shouldHideDefaultInUrl } from "./default-visibility";
+import { createSyncedSignals, hasDefault } from "./query-state";
 import { getDefaultUrlStateAdapter } from "../adapters/adapter";
 
 export const createQueryParam = <Value>(
   key: string,
   parser: Parser<Value>,
-  options: QueryStateOptions = {},
+  options: QueryStateOptions = { defaultVisibility: "show" },
 ): QueryParamState<Value> => {
   const adapter = options.adapter ?? getDefaultUrlStateAdapter();
 
@@ -34,7 +35,7 @@ export const createQueryParam = <Value>(
       return;
     }
 
-    if (shouldClearOnDefault(value, parser, resolved)) {
+    if (shouldHideDefaultInUrl(value, parser, resolved)) {
       state.write(null, resolved);
       return;
     }

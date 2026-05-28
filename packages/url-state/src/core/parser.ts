@@ -5,6 +5,7 @@ export const createParser = <Value>(impl: {
   serialize(value: Value): string | string[] | null;
 }): Parser<Value> => {
   const base: Parser<Value> = {
+    parserMode: "single",
     parse: impl.parse,
     serialize: impl.serialize,
 

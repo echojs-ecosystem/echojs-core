@@ -29,7 +29,8 @@
   },
   "dependencies": {
     "@echojs/reactivity": "workspace:*",
-    "@echojs/hyperdom": "workspace:*"
+    "@echojs/hyperdom": "workspace:*",
+    "@echojs/url-state": "workspace:*"
   },
   "devDependencies": {
     "@echojs/oxc-config": "workspace:*",

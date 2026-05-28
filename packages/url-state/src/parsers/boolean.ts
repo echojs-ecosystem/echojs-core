@@ -21,4 +21,3 @@ export const parseAsBoolean = createParser<boolean>({
     return value ? "true" : "false";
   },
 });
-

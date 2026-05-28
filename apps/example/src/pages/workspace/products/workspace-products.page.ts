@@ -1,17 +1,16 @@
 import { createRouteView } from "@echojs/router";
 import type { Child } from "@echojs/hyperdom";
 import { input, label } from "@echojs/hyperdom";
-import { createQueryParams, createRouterUrlStateAdapter } from "@echojs/url-state";
-import type { QueryParamsState } from "@echojs/url-state";
 import {
+  createQueryParams,
   debounce,
+  getUrlStateRouter,
   parseAsArrayOf,
   parseAsBoolean,
   parseAsInteger,
   parseAsLiteral,
   parseAsString,
 } from "@echojs/url-state";
-import { appRouter } from "@app/router/index.js";
 import { CATALOG_CATEGORIES, type CatalogProduct } from "@entities/catalog/demo-data.js";
 import { Breadcrumbs } from "@pages/workspace/ui/breadcrumbs.js";
 import { button, code, div, h4, p, pre, section, span } from "@pages/workspace/ui/common.js";
@@ -29,27 +28,28 @@ const allProducts = (): Array<{ categoryId: string; categoryName: string; produc
   return out;
 };
 
-// Demo: “в наличии” — просто мокаем по id, чтобы было что фильтровать.
+// Demo: «в наличии» — просто мокаем по id, чтобы было что фильтровать.
 const isInStock = (productId: string): boolean => productId.length % 2 === 0;
 
-const productUrlQuery = createQueryParams({
-  q: parseAsString.withDefault(""),
-  page: parseAsInteger.withDefault(1),
-  inStock: parseAsBoolean.withDefault(false),
-  sort: parseAsLiteral(["relevance", "price_asc", "price_desc", "name"] as const).withDefault(
-    "relevance" satisfies SortMode,
-  ),
-  view: parseAsLiteral(["grid", "list"] as const).withDefault("grid" satisfies ViewMode),
-  tag: parseAsArrayOf(parseAsString).withDefault([]),
-}, {
-  adapter: createRouterUrlStateAdapter(appRouter),
-  // Чтобы набор символов в input не спамил history/URL.
-  limitUrlUpdates: debounce(500),
-  clearOnDefault: true,
-  shallow: true,
-  history: "replace",
-  urlKeys: { inStock: "stock" },
-})
+const productsQueryParams = createQueryParams(
+  {
+    q: parseAsString.withDefault(""),
+    page: parseAsInteger.withDefault(1),
+    inStock: parseAsBoolean.withDefault(false),
+    sort: parseAsLiteral(["relevance", "price_asc", "price_desc", "name"] as const).withDefault(
+      "relevance" satisfies SortMode,
+    ),
+    view: parseAsLiteral(["grid", "list"] as const).withDefault("grid" satisfies ViewMode),
+    tag: parseAsArrayOf(parseAsString).withDefault([]),
+  },
+  {
+    // limitUrlUpdates: debounce(500),
+    defaultVisibility: "show",
+    shallow: true,
+    history: "replace",
+    urlKeys: { inStock: "stock" },
+  },
+);
 
 const tagBtn = (active: boolean): Record<string, string> => ({
   padding: "6px 10px",
@@ -63,7 +63,7 @@ const tagBtn = (active: boolean): Record<string, string> => ({
 export const workspaceProductsPage = createRouteView({
   name: "workspace-products",
   view: (): Child => {
-    const urlSearchParams = productUrlQuery.value()
+    const urlSearchParams = productsQueryParams.value()
 
     const source = allProducts();
     const filtered = source
@@ -94,10 +94,10 @@ export const workspaceProductsPage = createRouteView({
     const start = (safePage - 1) * pageSize;
     const items = sorted.slice(start, start + pageSize);
 
-    if (safePage !== urlSearchParams.page) productUrlQuery.set({ page: safePage });
+    if (safePage !== urlSearchParams.page) productsQueryParams.set({ page: safePage });
 
     const setPage = (next: number): void => {
-      productUrlQuery.set({ page: next }, { history: "push" });
+      productsQueryParams.set({ page: next }, { history: "push" });
     };
 
     const ProductCard = (item: (typeof items)[number]): Child =>
@@ -125,9 +125,9 @@ export const workspaceProductsPage = createRouteView({
       );
 
     const toggleTag = (tag: string): void => {
-      const current = urlSearchParams.tag;
+      const current = productsQueryParams.value().tag;
       const next = current.includes(tag) ? current.filter((t: string) => t !== tag) : [...current, tag];
-      productUrlQuery.set({ tag: next, page: 1 });
+      productsQueryParams.set({ tag: next, page: 1 });
     };
 
     const activeTags = urlSearchParams.tag;
@@ -152,7 +152,7 @@ export const workspaceProductsPage = createRouteView({
             value: urlSearchParams.q,
             placeholder: "например: phone / lamp / electronics",
             "on:input": (e: { currentTarget: HTMLInputElement }) => {
-              productUrlQuery.set({ q: e.currentTarget.value, page: 1 });
+              productsQueryParams.set({ q: e.currentTarget.value, page: 1 });
             },
           }),
         ]),
@@ -162,7 +162,7 @@ export const workspaceProductsPage = createRouteView({
             type: "checkbox",
             checked: urlSearchParams.inStock,
             "on:change": (e: { currentTarget: HTMLInputElement }) => {
-              productUrlQuery.set({ inStock: e.currentTarget.checked, page: 1 });
+              productsQueryParams.set({ inStock: e.currentTarget.checked, page: 1 });
             },
           }),
           span(null, ["Только в наличии (", code(null, "stock"), ")"]),
@@ -182,7 +182,7 @@ export const workspaceProductsPage = createRouteView({
               ),
             ),
             button(
-              { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ tag: [], page: 1 }) },
+              { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ tag: [], page: 1 }) },
               "Очистить",
             ),
           ]),
@@ -190,34 +190,34 @@ export const workspaceProductsPage = createRouteView({
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center", "flex-wrap": "wrap" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "relevance", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "relevance", page: 1 }) },
             "Sort: relevance",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "name", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "name", page: 1 }) },
             "Sort: name",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "price_asc", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "price_asc", page: 1 }) },
             "Sort: price_asc",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ sort: "price_desc", page: 1 }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "price_desc", page: 1 }) },
             "Sort: price_desc",
           ),
         ]),
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ view: "grid" }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ view: "grid" }) },
             "View: grid",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productUrlQuery.set({ view: "list" }) },
+            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ view: "list" }) },
             "View: list",
           ),
-          button({ type: "button", class: "secondary", "on:click": () => productUrlQuery.reset() }, "Reset"),
-          button({ type: "button", class: "secondary", "on:click": () => productUrlQuery.clear() }, "Clear"),
+          button({ type: "button", class: "secondary", "on:click": () => productsQueryParams.reset() }, "Reset"),
+          button({ type: "button", class: "secondary", "on:click": () => productsQueryParams.clear() }, "Clear"),
         ]),
       ]),
 
@@ -225,7 +225,7 @@ export const workspaceProductsPage = createRouteView({
       div(
         {
           style:
-          productUrlQuery.value().view === "grid"
+            urlSearchParams.view === "grid"
               ? { display: "grid", gap: "10px", "grid-template-columns": "repeat(2, minmax(0, 1fr))" }
               : { display: "grid", gap: "10px" },
         },
@@ -246,8 +246,8 @@ export const workspaceProductsPage = createRouteView({
       pre({ class: "router-playground-code" }, () =>
         JSON.stringify(
           {
-            url: appRouter.$fullPath.value(),
-            queryState: productUrlQuery.value(),
+            url: getUrlStateRouter()?.$fullPath.value() ?? "",
+            queryState: productsQueryParams.value(),
           },
           null,
           2,
@@ -256,4 +256,3 @@ export const workspaceProductsPage = createRouteView({
     ]);
   },
 });
-

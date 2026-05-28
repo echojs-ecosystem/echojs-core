@@ -19,4 +19,3 @@ export const parseAsInteger = createParser<number>({
     return String(Math.trunc(value));
   },
 });
-

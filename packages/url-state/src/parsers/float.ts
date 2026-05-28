@@ -9,7 +9,7 @@ const first = (value: string | string[] | null): string | null => {
 export const parseAsFloat = createParser<number>({
   parse(value) {
     const v = first(value);
-    if (v === null) return null;
+    if (v === null || v === "") return null;
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
   },
@@ -18,4 +18,3 @@ export const parseAsFloat = createParser<number>({
     return String(value);
   },
 });
-

@@ -19,4 +19,3 @@ export const parseAsTimestamp = createParser<number>({
     return String(value);
   },
 });
-

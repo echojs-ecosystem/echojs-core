@@ -10,8 +10,10 @@ import { resolveSetOptions } from "./options";
 import { defaultEquals } from "../utils/equality";
 import { getSearchParam, type SearchParamValue } from "./url";
 import { queueUrlUpdate } from "./update-queue";
-import { getDefaultUrlStateAdapter } from "../adapters/adapter";
-import { hasDefault, parseRaw, shouldClearOnDefault } from "./query-state";
+import { createAutoRouterUrlStateAdapter } from "../adapters/auto-router-adapter";
+import { onUrlStateRouterReady } from "../adapters/router-registry";
+import { resolveDefaultVisibility, shouldHideDefaultInUrl } from "./default-visibility";
+import { hasDefault, parseRaw } from "./query-state";
 
 const getUrlKey = <Schema extends Record<string, Parser<any>>>(
   schemaKey: keyof Schema,
@@ -21,22 +23,12 @@ const getUrlKey = <Schema extends Record<string, Parser<any>>>(
   return (override ?? (schemaKey as string)) as string;
 };
 
-const rawEquals = (a: SearchParamValue, b: SearchParamValue): boolean => {
-  if (a === b) return true;
-  if (a === null || b === null) return false;
-  if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return false;
-    return true;
-  }
-  return false;
-};
-
 export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
   schema: Schema,
   options: CreateQueryParamsOptions<Schema> = {},
 ): QueryParamsState<Schema> => {
-  const adapter = options.adapter ?? getDefaultUrlStateAdapter();
+  const adapter = options.adapter ?? createAutoRouterUrlStateAdapter();
+  const usesAutoRouter = options.adapter === undefined;
 
   const resolveOptions = (setOptions?: QueryStateSetOptions): QueryStateSetOptions =>
     resolveSetOptions({ createOptions: options, parserOptions: undefined, setOptions });
@@ -99,6 +91,46 @@ export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
     return out as ParsedSchema<Schema>;
   };
 
+  const buildUrlOpsFromSnapshot = (
+    snapshot: ParsedSchema<Schema>,
+    resolved: QueryStateSetOptions,
+  ): { key: string; value: SearchParamValue }[] => {
+    const ops: { key: string; value: SearchParamValue }[] = [];
+    for (const key of Object.keys(schema) as (keyof Schema)[]) {
+      const parser = schema[key]!;
+      const fieldValue = snapshot[key];
+      const urlKey = getUrlKey(key, options);
+
+      if (fieldValue === null) {
+        ops.push({ key: urlKey, value: null });
+        continue;
+      }
+
+      if (shouldHideDefaultInUrl(fieldValue, parser, resolved)) {
+        ops.push({ key: urlKey, value: null });
+      } else {
+        ops.push({ key: urlKey, value: parser.serialize(fieldValue) });
+      }
+    }
+    return ops;
+  };
+
+  const syncDefaultsToUrl = (setOptions?: QueryStateSetOptions): void => {
+    const resolved = resolveOptions(setOptions);
+    if (resolveDefaultVisibility(resolved) !== "show") return;
+    const snapshot = $value.peek() as ParsedSchema<Schema>;
+    writeOps(buildUrlOpsFromSnapshot(snapshot, resolved), snapshot, resolved);
+  };
+
+  if (usesAutoRouter) {
+    onUrlStateRouterReady(() => {
+      syncFromAdapter();
+      syncDefaultsToUrl();
+    });
+  } else {
+    queueMicrotask(() => syncDefaultsToUrl());
+  }
+
   const set: QueryParamsState<Schema>["set"] = (partialOrNull, setOptions) => {
     const resolved = resolveOptions(setOptions);
 
@@ -131,7 +163,7 @@ export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
 
       next[schemaKey as string] = value;
 
-      if (shouldClearOnDefault(value, parser, resolved)) {
+      if (shouldHideDefaultInUrl(value, parser, resolved)) {
         ops.push({ key: urlKey, value: null });
       } else {
         ops.push({ key: urlKey, value: parser.serialize(value) });
@@ -161,7 +193,7 @@ export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
         continue;
       }
 
-      if (shouldClearOnDefault(value, parser, resolved)) ops.push({ key: urlKey, value: null });
+      if (shouldHideDefaultInUrl(value, parser, resolved)) ops.push({ key: urlKey, value: null });
       else ops.push({ key: urlKey, value: parser.serialize(value) });
     }
 

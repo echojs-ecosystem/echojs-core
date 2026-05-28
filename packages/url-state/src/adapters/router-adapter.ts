@@ -1,7 +1,7 @@
 import type { UrlStateAdapter } from "../core/types";
 import { normalizeSearch } from "../core/url";
 
-type RouterLike = {
+export type RouterLike = {
   readonly $fullPath: { value(): string; subscribe(fn: () => void): () => void };
   go(path: string, options?: { replace?: boolean }): void;
   replace?(path: string): void;

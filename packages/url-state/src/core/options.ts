@@ -13,11 +13,15 @@ export const resolveSetOptions = (args: {
   parserOptions?: Partial<QueryStateOptions> | undefined;
   setOptions?: QueryStateSetOptions | undefined;
 }): QueryStateSetOptions => {
-  return {
+  const merged: QueryStateSetOptions = {
     ...DEFAULT_QUERY_STATE_OPTIONS,
-    ...(args.parserOptions ?? {}),
     ...(args.createOptions ?? {}),
+    ...(args.parserOptions ?? {}),
     ...(args.setOptions ?? {}),
   };
-};
 
+  if (merged.defaultVisibility === "show") merged.clearOnDefault = false;
+  else if (merged.defaultVisibility === "hide") merged.clearOnDefault = true;
+
+  return merged;
+};

@@ -16,4 +16,3 @@ export const parseAsString = createParser<string>({
     return value;
   },
 });
-
