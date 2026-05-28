@@ -1,12 +1,12 @@
 import { computed } from "@echojs-ecosystem/reactivity";
-import { catalogVariantPage } from "@pages/workspace/catalog/variant/ui/page.js";
-import { filesPage } from "@pages/workspace/files/ui/page.js";
-import { slowPage } from "@pages/workspace/slow/ui/page.js";
-import { settingsPage } from "@pages/workspace/settings/ui/page.js";
-import { userPage } from "@pages/workspace/users/detail/ui/page.js";
-import { usersListPage } from "@pages/workspace/users/list/ui/page.js";
-import { workspaceSprintPage } from "@pages/workspace/sprint/ui/page.js";
-import { workspaceHomePage } from "@pages/workspace/home/ui/page.js";
+import { catalogVariantPage } from "@pages/workspace/catalog/catalog-variant.page.js";
+import { filesPage } from "@pages/workspace/files/workspace-files.page.js";
+import { slowPage } from "@pages/workspace/slow/workspace-slow.page.js";
+import { settingsPage } from "@pages/workspace/settings/workspace-settings.page.js";
+import { userPage } from "@pages/workspace/users/user-detail.page.js";
+import { usersListPage } from "@pages/workspace/users/users-list.page.js";
+import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.page.js";
+import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
 import { findModuleByPath } from "@app/config/lab-modules.js";
 
 export const $activePageTitle = computed(() => {

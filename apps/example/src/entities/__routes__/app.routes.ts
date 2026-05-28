@@ -1,30 +1,31 @@
 import { createRoutes } from "@echojs/router";
 import { shellLayoutPage } from "@app/layout/shell-layout.page.js";
-import { dashboardPage } from "@pages/dashboard/ui/page.js";
-import { reactivityPage } from "@pages/reactivity/ui/page.js";
-import { formsPage } from "@pages/forms/ui/page.js";
-import { formsNestedPage } from "@pages/forms/nested/ui/page.js";
-import { statePage } from "@pages/state/ui/page.js";
-import { persistencePage } from "@pages/persistence/ui/page.js";
-import { accountPage } from "@pages/account/ui/page.js";
-import { authShellLayoutPage } from "@pages/auth/layout/ui/page.js";
-import { authLoginPage } from "@pages/auth/login/ui/page.js";
-import { authSignupPage } from "@pages/auth/signup/ui/page.js";
-import { workspaceHomePage } from "@pages/workspace/home/ui/page.js";
+import { dashboardPage } from "@pages/dashboard/dashboard.page.js";
+import { reactivityPage } from "@pages/reactivity/reactivity.page.js";
+import { formsPage } from "@pages/forms/forms.page.js";
+import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
+import { statePage } from "@pages/state/state.page.js";
+import { persistencePage } from "@pages/persistence/persistence.page.js";
+import { accountPage } from "@pages/account/account.page.js";
+import { authShellLayoutPage } from "@pages/auth/layout/auth-shell-layout.page.js";
+import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
+import { authSignupPage } from "@pages/auth/signup/auth-signup.page.js";
+import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
 import { workspaceLayoutPage } from "@pages/workspace/layout/ui/workspace-layout.page.js";
-import { filesPage } from "@pages/workspace/files/ui/page.js";
-import { settingsPage } from "@pages/workspace/settings/ui/page.js";
-import { slowPage } from "@pages/workspace/slow/ui/page.js";
-import { lazyPage } from "@pages/workspace/lazy/ui/page.js";
-import { usersListPage } from "@pages/workspace/users/list/ui/page.js";
-import { userPage } from "@pages/workspace/users/detail/ui/page.js";
-import { usersLayoutPage } from "@pages/workspace/users/layout/ui/page.js";
-import { workspaceOrgLayoutPage } from "@pages/workspace/org/layout/ui/page.js";
-import { workspaceTeamLayoutPage } from "@pages/workspace/team/layout/ui/page.js";
-import { workspaceSprintPage } from "@pages/workspace/sprint/ui/page.js";
-import { catalogCategoryLayoutPage } from "@pages/workspace/catalog/category-layout/ui/page.js";
-import { catalogProductLayoutPage } from "@pages/workspace/catalog/product-layout/ui/page.js";
-import { catalogVariantPage } from "@pages/workspace/catalog/variant/ui/page.js";
+import { filesPage } from "@pages/workspace/files/workspace-files.page.js";
+import { settingsPage } from "@pages/workspace/settings/workspace-settings.page.js";
+import { slowPage } from "@pages/workspace/slow/workspace-slow.page.js";
+import { lazyPage } from "@pages/workspace/lazy/workspace-lazy.page.js";
+import { usersListPage } from "@pages/workspace/users/users-list.page.js";
+import { userPage } from "@pages/workspace/users/user-detail.page.js";
+import { usersLayoutPage } from "@pages/workspace/users/users-layout.page.js";
+import { workspaceOrgLayoutPage } from "@pages/workspace/org/workspace-org-layout.page.js";
+import { workspaceTeamLayoutPage } from "@pages/workspace/team/workspace-team-layout.page.js";
+import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.page.js";
+import { catalogCategoryLayoutPage } from "@pages/workspace/catalog/catalog-category-layout.page.js";
+import { catalogProductLayoutPage } from "@pages/workspace/catalog/catalog-product-layout.page.js";
+import { catalogVariantPage } from "@pages/workspace/catalog/catalog-variant.page.js";
+import { workspaceProductsPage } from "@pages/workspace/products/workspace-products.page.js";
 import {
   legacyExample1Route,
   legacyExample3Route,
@@ -115,6 +116,7 @@ export const appRoutes = createRoutes([
             ],
           },
           { path: "settings", name: "settings", routeView: settingsPage },
+          { path: "products", name: "workspace-products", routeView: workspaceProductsPage },
           { path: "slow", name: "slow", routeView: slowPage },
           { path: "lazy", name: "lazy", routeView: lazyPage },
           { path: "files/*", name: "files", routeView: filesPage },

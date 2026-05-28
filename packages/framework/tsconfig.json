@@ -1,0 +1,23 @@
+{
+  "extends": "../.configs/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@echojs/core": ["../core/src/index.ts"],
+      "@echojs/reactivity": ["../reactivity/src/index.ts"],
+      "@echojs/router": ["../router/src/index.ts"],
+      "@echojs/router/hyperdom": ["../router/src/hyperdom/index.ts"],
+      "@echojs/hyperdom": ["../hyperdom/src/index.ts"],
+      "@echojs/form": ["../form/src/index.ts"],
+      "@echojs/persist": ["../persist/src/index.ts"],
+      "@echojs/store": ["../store/src/index.ts"],
+      "@echojs/ui": ["../ui/src/index.ts"]
+    },
+    "rootDir": ".."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"]
+}
+

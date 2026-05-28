@@ -1,8 +1,8 @@
 import { guardRoute } from "@echojs/router";
 import { $isLoggedIn } from "@entities/session/index.js";
-import { authLoginPage } from "@pages/auth/login/ui/page.js";
-import { accountPage } from "@pages/account/ui/page.js";
-import { settingsPage } from "@pages/workspace/settings/ui/page.js";
+import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
+import { accountPage } from "@pages/account/account.page.js";
+import { settingsPage } from "@pages/workspace/settings/workspace-settings.page.js";
 
 guardRoute({
   route: settingsPage,

@@ -7,12 +7,12 @@ import {
   legacyStoreRoute,
   legacyUserRoute,
 } from "@entities/__routes__/legacy.routes.js";
-import { userPage } from "@pages/workspace/users/detail/ui/page.js";
-import { reactivityPage } from "@pages/reactivity/ui/page.js";
-import { formsPage } from "@pages/forms/ui/page.js";
-import { formsNestedPage } from "@pages/forms/nested/ui/page.js";
-import { statePage } from "@pages/state/ui/page.js";
-import { persistencePage } from "@pages/persistence/ui/page.js";
+import { userPage } from "@pages/workspace/users/user-detail.page.js";
+import { reactivityPage } from "@pages/reactivity/reactivity.page.js";
+import { formsPage } from "@pages/forms/forms.page.js";
+import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
+import { statePage } from "@pages/state/state.page.js";
+import { persistencePage } from "@pages/persistence/persistence.page.js";
 
 redirect({
   from: legacyUserRoute,

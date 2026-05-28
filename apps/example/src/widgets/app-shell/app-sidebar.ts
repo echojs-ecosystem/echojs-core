@@ -3,15 +3,15 @@ import type { Child } from "@echojs/hyperdom";
 import { aside, button, div, nav, p, Show } from "@echojs/hyperdom";
 import { platformModules } from "@app/config/lab-modules.js";
 import { $authUser, $isLoggedIn, logout } from "@app/router/auth.js";
-import { authLoginPage } from "@pages/auth/login/ui/page.js";
-import { dashboardPage } from "@pages/dashboard/ui/page.js";
-import { accountPage } from "@pages/account/ui/page.js";
-import { formsPage } from "@pages/forms/ui/page.js";
-import { formsNestedPage } from "@pages/forms/nested/ui/page.js";
-import { persistencePage } from "@pages/persistence/ui/page.js";
-import { reactivityPage } from "@pages/reactivity/ui/page.js";
-import { statePage } from "@pages/state/ui/page.js";
-import { workspaceHomePage } from "@pages/workspace/home/ui/page.js";
+import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
+import { dashboardPage } from "@pages/dashboard/dashboard.page.js";
+import { accountPage } from "@pages/account/account.page.js";
+import { formsPage } from "@pages/forms/forms.page.js";
+import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
+import { persistencePage } from "@pages/persistence/persistence.page.js";
+import { reactivityPage } from "@pages/reactivity/reactivity.page.js";
+import { statePage } from "@pages/state/state.page.js";
+import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
 import type { AnyPage } from "@echojs/router";
 
 const navLink = (page: AnyPage, label: string): Child =>

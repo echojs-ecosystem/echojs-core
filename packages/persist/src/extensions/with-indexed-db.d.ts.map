@@ -1,0 +1,1 @@
+{"version":3,"file":"with-indexed-db.d.ts","sourceRoot":"","sources":["with-indexed-db.ts"],"names":[],"mappings":"AAEA,OAAO,KAAK,EAAE,uBAAuB,EAAE,gBAAgB,EAAE,MAAM,eAAe,CAAC;AAE/E,eAAO,MAAM,aAAa,GAAI,KAAK,EAAE,QAAQ,GAAG,KAAK,EACnD,SAAS,uBAAuB,CAAC,KAAK,EAAE,QAAQ,CAAC,KAChD,gBAAgB,CAAC,KAAK,EAAE,QAAQ,CAIlC,CAAC"}

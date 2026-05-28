@@ -23,6 +23,7 @@ export const echoWorkspaceAliases = (fromDir: string): NonNullable<ViteUserConfi
     "@echojs/persist": resolve(fromDir, "../persist/src/index.ts"),
     "@echojs/form": resolve(fromDir, "../form/src/index.ts"),
     "@echojs/ui": resolve(fromDir, "../ui/src/index.ts"),
+    "@echojs/url-state": resolve(fromDir, "../url-state/src/index.ts"),
   };
 };
 

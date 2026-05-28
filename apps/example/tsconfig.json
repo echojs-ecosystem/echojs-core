@@ -29,7 +29,8 @@
       "@echojs/router": ["../../packages/router/src/index.ts"],
       "@echojs/router/hyperdom": ["../../packages/router/src/hyperdom/index.ts"],
       "@echojs/store": ["../../packages/store/src/index.ts"],
-      "@echojs/persist": ["../../packages/persist/src/index.ts"]
+      "@echojs/persist": ["../../packages/persist/src/index.ts"],
+      "@echojs/url-state": ["../../packages/url-state/src/index.ts"]
     }
   },
   "include": ["src"]

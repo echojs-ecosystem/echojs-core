@@ -1,0 +1,1 @@
+{"version":3,"file":"with-local-storage.js","sourceRoot":"","sources":["with-local-storage.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,yBAAyB,EAAE,MAAM,2BAA2B,CAAC;AACtE,OAAO,EAAE,WAAW,EAAE,MAAM,sBAAsB,CAAC;AAGnD,MAAM,CAAC,MAAM,gBAAgB,GAAG,CAC9B,OAAwC,EACL,EAAE;IACrC,MAAM,OAAO,GAAG,yBAAyB,EAAE,CAAC;IAC5C,OAAO,WAAW,CAAC,OAAO,EAAE,OAAO,CAAC,CAAC;AACvC,CAAC,CAAC"}

@@ -6,8 +6,7 @@
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "./dist"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["tests", "**/*.test.ts", "**/*.spec.ts"]

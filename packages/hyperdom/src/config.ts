@@ -1,4 +1,4 @@
-let strictContextChecks = false;
+let strictContextChecks = true;
 
 /** Enables/disables strict context checks for UI construction. */
 export const setStrictContextChecks = (enabled: boolean): void => {

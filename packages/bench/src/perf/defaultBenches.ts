@@ -1,4 +1,4 @@
-import type { BenchCase } from "./types";
+import type { BenchCase } from "./types.js";
 
 export async function createDefaultBenches(enabledPackages?: string[]): Promise<BenchCase[]> {
   const allow = (name: string) => !enabledPackages?.length || enabledPackages.includes(name);
@@ -25,11 +25,11 @@ export async function createDefaultBenches(enabledPackages?: string[]): Promise<
         warmupIterations: 1,
         fn: () => {
           const a = reactivity.signal(1);
-          const b = reactivity.computed(() => a() + 1);
+          const b = reactivity.computed(() => a.value() + 1);
           let acc = 0;
           for (let i = 0; i < 1_000_000; i++) {
             a.set(i);
-            acc += b();
+            acc += b.value();
           }
           if (acc === Number.MIN_SAFE_INTEGER) throw new Error("unreachable");
         },

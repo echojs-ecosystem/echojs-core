@@ -1,4 +1,4 @@
-import type { BundleSizeReport } from "./types";
+import type { BundleSizeReport } from "./types.js";
 
 function formatBytes(n: number): string {
   if (n < 1024) return `${n} B`;

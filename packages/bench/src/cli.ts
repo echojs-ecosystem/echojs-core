@@ -2,10 +2,11 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
-import { measureWorkspaceBundleSizes } from "./size/measureWorkspaceBundleSizes";
-import { formatBundleSizeMarkdown } from "./size/formatBundleSizeMarkdown";
-import { runPerfSuite } from "./perf/runPerfSuite";
-import { formatPerfMarkdown } from "./perf/formatPerfMarkdown";
+import { measureWorkspaceBundleSizes } from "./size/measureWorkspaceBundleSizes.js";
+import { measureEntriesBundleSizes } from "./size/measureEntriesBundleSizes.js";
+import { formatBundleSizeMarkdown } from "./size/formatBundleSizeMarkdown.js";
+import { runPerfSuite } from "./perf/runPerfSuite.js";
+import { formatPerfMarkdown } from "./perf/formatPerfMarkdown.js";
 
 type Command = "size" | "perf";
 
@@ -58,6 +59,7 @@ async function main() {
         "  --root <path>         Workspace root (default: cwd)",
         "  --outDir <path>       Output directory (default: <root>/bench-results)",
         "  --packages <csv>      Filter packages, e.g. core,reactivity,store",
+        "  --entries <csv>       Measure exact entries, e.g. framework/core,framework/router/hyperdom",
         "  --from <src|dist>     Entry source for bundle size (default: src)",
         "  --format <esm|iife>   Bundle format (default: esm)",
         "  --no-minify          Disable minification",
@@ -67,19 +69,28 @@ async function main() {
   }
 
   const packages = splitCsv(getArg("--packages"));
+  const entries = splitCsv(getArg("--entries"));
 
   if (cmd === "size") {
     const from = (getArg("--from") ?? "src") as "src" | "dist";
     const format = (getArg("--format") ?? "esm") as "esm" | "iife";
     const minify = hasFlag("--no-minify") ? false : true;
 
-    const report = await measureWorkspaceBundleSizes({
-      root,
-      packages,
-      from,
-      format,
-      minify,
-    });
+    const report = entries?.length
+      ? await measureEntriesBundleSizes({
+          root,
+          entries,
+          from,
+          format,
+          minify,
+        })
+      : await measureWorkspaceBundleSizes({
+          root,
+          packages,
+          from,
+          format,
+          minify,
+        });
     const md = formatBundleSizeMarkdown(report);
 
     await writeReportFiles(outDir, "bundle-size", report, md);

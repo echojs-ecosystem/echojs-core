@@ -1,0 +1,57 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-05-28T08:59:39.780Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "framework/reactivity",
+      "entry": "packages/framework/src/reactivity.ts",
+      "bytes": 6592,
+      "gzipBytes": 2469,
+      "brotliBytes": 2281
+    },
+    {
+      "package": "framework/store",
+      "entry": "packages/framework/src/store.ts",
+      "bytes": 7985,
+      "gzipBytes": 3070,
+      "brotliBytes": 2826
+    },
+    {
+      "package": "framework/persist",
+      "entry": "packages/framework/src/persist.ts",
+      "bytes": 12295,
+      "gzipBytes": 4644,
+      "brotliBytes": 4189
+    },
+    {
+      "package": "framework/form",
+      "entry": "packages/framework/src/form.ts",
+      "bytes": 18982,
+      "gzipBytes": 6478,
+      "brotliBytes": 5888
+    },
+    {
+      "package": "framework/ui",
+      "entry": "packages/framework/src/ui.ts",
+      "bytes": 19602,
+      "gzipBytes": 6890,
+      "brotliBytes": 6259
+    },
+    {
+      "package": "framework/router",
+      "entry": "packages/framework/src/router.ts",
+      "bytes": 24524,
+      "gzipBytes": 8438,
+      "brotliBytes": 7707
+    },
+    {
+      "package": "framework/router/hyperdom",
+      "entry": "packages/framework/src/router-hyperdom.ts",
+      "bytes": 30326,
+      "gzipBytes": 10377,
+      "brotliBytes": 9387
+    }
+  ]
+}
