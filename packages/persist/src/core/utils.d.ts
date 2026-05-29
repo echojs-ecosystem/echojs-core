@@ -1,9 +1,0 @@
-export declare const isDev: () => boolean;
-export declare const warnDev: (message: string) => void;
-export declare const resolveAsync: <T>(value: T | Promise<T>) => Promise<T>;
-export declare const hasWindow: () => boolean;
-export declare const hasDocument: () => boolean;
-export declare const hasLocalStorage: () => boolean;
-export declare const hasSessionStorage: () => boolean;
-export declare const hasIndexedDB: () => boolean;
-//# sourceMappingURL=utils.d.ts.map
