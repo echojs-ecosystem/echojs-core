@@ -1,17 +1,17 @@
-import { describe, expect, it } from "vitest";
-import { parseAsString } from "@echojs/url-state";
+import { describe, expect, it } from 'vitest'
 
-describe("parseAsString", () => {
-  it("parse: string -> string", () => {
-    expect(parseAsString.parse("hello")).toBe("hello");
-  });
+import { parseAsString } from '@echojs/url-state'
 
-  it("parse: null -> null", () => {
-    expect(parseAsString.parse(null)).toBeNull();
-  });
+describe('parseAsString', () => {
+  it('parse: string -> string', () => {
+    expect(parseAsString.parse('hello')).toBe('hello')
+  })
 
-  it("serialize: string -> string", () => {
-    expect(parseAsString.serialize("hello")).toBe("hello");
-  });
-});
+  it('parse: null -> null', () => {
+    expect(parseAsString.parse(null)).toBeNull()
+  })
 
+  it('serialize: string -> string', () => {
+    expect(parseAsString.serialize('hello')).toBe('hello')
+  })
+})

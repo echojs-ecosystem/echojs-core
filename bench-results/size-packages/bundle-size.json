@@ -1,0 +1,71 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-05-29T10:02:27.974Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "reactivity",
+      "entry": "packages/reactivity/src/index.ts",
+      "bytes": 6592,
+      "gzipBytes": 2469,
+      "brotliBytes": 2281
+    },
+    {
+      "package": "store",
+      "entry": "packages/store/src/index.ts",
+      "bytes": 7985,
+      "gzipBytes": 3070,
+      "brotliBytes": 2826
+    },
+    {
+      "package": "hyperdom",
+      "entry": "packages/hyperdom/src/index.ts",
+      "bytes": 11359,
+      "gzipBytes": 4382,
+      "brotliBytes": 3982
+    },
+    {
+      "package": "persist",
+      "entry": "packages/persist/src/index.ts",
+      "bytes": 12295,
+      "gzipBytes": 4644,
+      "brotliBytes": 4189
+    },
+    {
+      "package": "core",
+      "entry": "packages/core/src/index.ts",
+      "bytes": 16001,
+      "gzipBytes": 5706,
+      "brotliBytes": 5188
+    },
+    {
+      "package": "url-state",
+      "entry": "packages/url-state/src/index.ts",
+      "bytes": 17012,
+      "gzipBytes": 6005,
+      "brotliBytes": 5428
+    },
+    {
+      "package": "form",
+      "entry": "packages/form/src/index.ts",
+      "bytes": 19009,
+      "gzipBytes": 6483,
+      "brotliBytes": 5904
+    },
+    {
+      "package": "ui",
+      "entry": "packages/ui/src/index.ts",
+      "bytes": 19602,
+      "gzipBytes": 6889,
+      "brotliBytes": 6270
+    },
+    {
+      "package": "router",
+      "entry": "packages/router/src/index.ts",
+      "bytes": 24524,
+      "gzipBytes": 8438,
+      "brotliBytes": 7707
+    }
+  ]
+}

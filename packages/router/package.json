@@ -17,7 +17,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "check-types": "tsc -p tsconfig.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "oxlint .",
@@ -25,11 +25,12 @@
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/reactivity": "workspace:*",
     "@echojs/hyperdom": "workspace:*",
+    "@echojs/reactivity": "workspace:*",
     "@echojs/url-state": "workspace:*"
   },
   "devDependencies": {

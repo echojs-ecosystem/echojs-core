@@ -15,20 +15,22 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "check-types": "tsc -p tsconfig.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt .",
+    "test": "vitest run",
     "test:vitest": "vitest",
     "test:vitest:run": "vitest run",
-    "test:vitest:ui": "vitest ui"
+    "test:vitest:ui": "vitest ui",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/reactivity": "workspace:*",
     "@echojs/persist": "workspace:*",
+    "@echojs/reactivity": "workspace:*",
     "@standard-schema/spec": "^1.1.0"
   },
   "devDependencies": {

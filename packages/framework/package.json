@@ -46,10 +46,14 @@
       "types": "./dist/hyperdom.d.ts",
       "default": "./dist/hyperdom.js"
     },
+    "./url-state": {
+      "types": "./dist/url-state.d.ts",
+      "default": "./dist/url-state.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "check-types": "tsc -p tsconfig.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "oxlint .",
@@ -65,7 +69,8 @@
     "@echojs/form": "workspace:*",
     "@echojs/persist": "workspace:*",
     "@echojs/store": "workspace:*",
-    "@echojs/ui": "workspace:*"
+    "@echojs/ui": "workspace:*",
+    "@echojs/url-state": "workspace:*"
   },
   "devDependencies": {
     "@echojs/oxc-config": "workspace:*",
@@ -73,4 +78,3 @@
     "typescript": "5.9.2"
   }
 }
-

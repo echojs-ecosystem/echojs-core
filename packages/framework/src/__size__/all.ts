@@ -1,0 +1,11 @@
+/** Bench entry: all public @echojs/framework subpaths in one browser bundle. */
+export * from '../core.js'
+export * from '../reactivity.js'
+export * from '../router.js'
+export * from '../router-hyperdom.js'
+export * from '../form.js'
+export * from '../persist.js'
+export * from '../store.js'
+export * from '../ui.js'
+export * from '../hyperdom.js'
+export * from '../url-state.js'
