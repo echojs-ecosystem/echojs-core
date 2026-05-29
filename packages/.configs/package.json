@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./tsconfig": "./tsconfig.json",
+    "./tsup": "./tsup.ts",
     "./vitest": "./vitest.config.ts",
     "./oxfmt": "./oxfmt.config.ts",
     "./oxlint": "./oxlint.config.ts",
@@ -20,6 +21,7 @@
   "devDependencies": {
     "oxfmt": "^0.46.0",
     "oxlint": "^1.61.0",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.0",
     "vitest": "^4.1.5"
   }
