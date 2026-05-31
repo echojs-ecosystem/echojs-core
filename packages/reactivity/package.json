@@ -16,8 +16,9 @@
   },
   "scripts": {
     "build": "tsup",
-    "check-types": "tsc -p tsconfig.json --noEmit",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check-types": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "test:types": "tsc -p tsconfig.typing.json --noEmit",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --check .",

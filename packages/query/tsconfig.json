@@ -3,7 +3,7 @@
   "extends": "../.configs/tsconfig.json",
   "compilerOptions": {
     "skipLibCheck": true,
-    "types": ["vitest/globals"],
+    "types": [],
     "baseUrl": ".",
     "paths": {
       "@echojs/reactivity": ["../reactivity/src/index.ts"],
@@ -16,7 +16,8 @@
     "dist",
     "node_modules",
     "**/*.test.ts",
+    "**/*.test-d.ts",
     "**/*.errors.test-d.ts",
-    "src/typetests/**/*.errors.test-d.ts"
+    "**/*.spec.ts"
   ]
 }

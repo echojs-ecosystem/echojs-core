@@ -5,10 +5,10 @@
     "types": ["vitest/globals"],
     "noEmit": true
   },
-    "include": [
-      "src/**/*.test-d.ts",
-      "src/**/*.test-d.tsx",
-      "src/typetests/**/*.errors.test-d.ts"
-    ],
+  "include": [
+    "src/**/*.test-d.ts",
+    "src/**/*.test-d.tsx",
+    "src/**/*.errors.test-d.ts"
+  ],
   "exclude": ["dist", "node_modules"]
 }

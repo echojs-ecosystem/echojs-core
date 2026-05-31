@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
 import { resetDefaultQueryClient } from '../client/default-client'
+import { createInfiniteQuery } from '../query/create-infinite-query'
+import { createQuery } from '../query/create-query'
 import { resetQueryProvider } from './context'
-import { createQueryProvider, setQueryProvider } from './query-provider'
+import { createQueryProvider, QueryProvider, setQueryProvider } from './query-provider'
 
 describe('QueryProvider', () => {
   it('merges defaultOptions into createQuery', async () => {
@@ -73,5 +75,32 @@ describe('QueryProvider', () => {
 
     await expect(m.run(undefined as void)).rejects.toThrow('fail')
     expect(attempts).toBe(1)
+  })
+
+  it('createInfiniteQuery returns infinite definition', () => {
+    const provider = createQueryProvider()
+    const def = provider.createInfiniteQuery({
+      queryKey: () => ['provider-infinite'],
+      initialPageParam: null,
+      queryFn: async () => ({ items: [], next: null }),
+      getNextPageParam: (page) => page.next,
+    })
+    expect(def.kind).toBe('infinite-query-definition')
+  })
+
+  it('QueryProvider client helpers delegate to QueryClient', async () => {
+    const provider = new QueryProvider()
+    const def = provider.createQuery({
+      queryKey: () => ['provider-helpers'],
+      queryFn: async () => 'ok',
+    })
+
+    await provider.client.fetchQuery(def, {})
+    provider.invalidateQueries(['provider-helpers'])
+    await provider.refetchQueries(['provider-helpers'])
+    provider.cancelQueries(['provider-helpers'])
+    provider.removeQueries(['provider-helpers'])
+
+    expect(provider.client.queryCache.getByKey(['provider-helpers'])).toBeUndefined()
   })
 })

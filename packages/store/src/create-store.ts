@@ -1,9 +1,8 @@
 import { signal } from "@echojs-ecosystem/reactivity";
-import {
-  applyStoreUpdate,
-  attachExtend,
-  createStoreInternals,
-} from "./store";
+
+import { applyStoreUpdate } from "./apply-store-update";
+import { attachExtend } from "./attach-extend";
+import { createStoreInternals } from "./create-store-internals";
 import type { Store, StoreOptions } from "./types";
 
 export const createStore = <State>(

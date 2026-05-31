@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { createQuery } from '../query/create-query'
 import { createTestClient, flush } from '../test-utils'
-import { focusManager } from './focus-manager'
+import { FocusManager, focusManager } from './focus-manager'
 
 describe('FocusManager', () => {
   it('refetches stale active queries on focus', async () => {
@@ -31,5 +31,25 @@ describe('FocusManager', () => {
     focusManager.setFocused(false)
     expect(listener).toHaveBeenCalled()
     unsub()
+  })
+
+  it('onClientRegistered refetches stale active queries when focused', async () => {
+    const client = createTestClient()
+    let calls = 0
+
+    const q = createQuery({
+      queryKey: () => ['focus-register'],
+      staleTime: 0,
+      queryFn: async () => {
+        calls += 1
+        return calls
+      },
+    }).with({}, { client, refetchOnWindowFocus: true, refetchOnMount: false })
+
+    await q.refetch()
+    const manager = new FocusManager()
+    manager.onClientRegistered(client)
+    await flush()
+    expect(calls).toBeGreaterThan(1)
   })
 })

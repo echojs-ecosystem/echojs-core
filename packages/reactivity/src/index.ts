@@ -8,4 +8,4 @@ export { signal } from "./signal";
 
 export type { DeepReadonly, ReadonlySignal, ReadValue, Signal } from "./types";
 
-export { isReadonlySignal, isSignal } from "./publicGuards";
+export { isReadonlySignal, isSignal } from "./public-guards";

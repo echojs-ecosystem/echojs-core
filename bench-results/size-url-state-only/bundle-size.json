@@ -1,0 +1,15 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-05-31T19:57:08.002Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "url-state",
+      "entry": "packages/url-state/src/index.ts",
+      "bytes": 17012,
+      "gzipBytes": 6005,
+      "brotliBytes": 5428
+    }
+  ]
+}

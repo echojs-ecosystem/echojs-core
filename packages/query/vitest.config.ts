@@ -6,12 +6,14 @@ export default defineConfig(
   echoVitestConfig(__dirname, {
     test: {
       environment: 'node',
-      include: ['src/**/*.test.ts', 'src/**/*.test-d.ts', 'src/**/*.test-d.tsx'],
-      exclude: ['**/*.errors.test-d.ts', 'src/typetests/**'],
+      exclude: ['**/*.errors.test-d.ts'],
+      coverage: {
+        exclude: ['src/test-utils.ts'],
+      },
       typecheck: {
         enabled: true,
         include: ['src/**/*.test-d.ts', 'src/**/*.test-d.tsx'],
-        tsconfig: './tsconfig.json',
+        tsconfig: './tsconfig.typing.json',
       },
     },
   }),

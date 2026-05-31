@@ -13,5 +13,10 @@
     "types": []
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["tests", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.test-d.ts",
+    "**/*.errors.test-d.ts",
+    "**/*.spec.ts"
+  ]
 }
