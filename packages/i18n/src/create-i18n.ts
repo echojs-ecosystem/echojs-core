@@ -18,21 +18,26 @@ import {
 import { createLocaleState } from "./core/locale";
 import { createTranslator } from "./core/translator";
 import type {
+  AnyLocalesMap,
   CreateI18nOptions,
   I18n,
+  InferLocaleFromLocalesMap,
+  InferMessagesFromLocalesMap,
   LocaleSource,
-  LocalesMap,
   MessageSchema,
   Messages,
 } from "./types";
 
-const registerEagerLocales = <TLocale extends string, TMessages extends MessageSchema>(
-  locales: LocalesMap<TLocale, TMessages>,
+const registerEagerLocales = (
+  locales: AnyLocalesMap,
   messageStore: Record<string, Messages>,
   loadedLocales: Set<string>,
 ): void => {
-  for (const locale of Object.keys(locales) as TLocale[]) {
+  for (const locale of Object.keys(locales)) {
     const source = locales[locale];
+    if (source === undefined) {
+      continue;
+    }
     const eager = resolveLocaleModuleSync(source);
     if (eager !== undefined) {
       messageStore[locale] = deepMerge({}, eager);
@@ -41,10 +46,12 @@ const registerEagerLocales = <TLocale extends string, TMessages extends MessageS
   }
 };
 
-export function createI18n<
-  TLocale extends string,
-  TMessages extends MessageSchema,
->(options: CreateI18nOptions<TLocale, TMessages>): I18n<TLocale, TMessages> {
+export function createI18n<const TLocales extends AnyLocalesMap>(
+  options: CreateI18nOptions<TLocales>,
+): I18n<InferLocaleFromLocalesMap<TLocales>, InferMessagesFromLocalesMap<TLocales>> {
+  type TLocale = InferLocaleFromLocalesMap<TLocales>;
+  type TMessages = InferMessagesFromLocalesMap<TLocales>;
+
   const {
     defaultLocale,
     fallbackLocale,
@@ -54,19 +61,19 @@ export function createI18n<
 
   const supportedLocales = Object.keys(locales) as TLocale[];
 
-  if (!supportedLocales.includes(defaultLocale)) {
+  if (!supportedLocales.includes(defaultLocale as TLocale)) {
     throw new RangeError(
-      `createI18n: defaultLocale "${defaultLocale}" is not listed in locales`,
+      `createI18n: defaultLocale "${String(defaultLocale)}" is not listed in locales`,
     );
   }
 
-  if (!supportedLocales.includes(fallbackLocale)) {
+  if (!supportedLocales.includes(fallbackLocale as TLocale)) {
     throw new RangeError(
-      `createI18n: fallbackLocale "${fallbackLocale}" is not listed in locales`,
+      `createI18n: fallbackLocale "${String(fallbackLocale)}" is not listed in locales`,
     );
   }
 
-  const state = createLocaleState(defaultLocale, fallbackLocale);
+  const state = createLocaleState(defaultLocale as TLocale, fallbackLocale as TLocale);
   const messageStore = cloneLocaleMessages({});
   const loadedLocales = new Set<string>();
 
@@ -74,7 +81,7 @@ export function createI18n<
 
   const { translate } = createTranslator({
     getLocale: () => state.$locale.value(),
-    fallbackLocale,
+    fallbackLocale: fallbackLocale as TLocale,
     messages: messageStore,
     missingKeyStrategy,
   });
@@ -90,7 +97,7 @@ export function createI18n<
       return;
     }
 
-    const source = locales[locale] as LocaleSource<TMessages> | undefined;
+    const source = locales[locale];
     if (!source) {
       return;
     }
@@ -115,7 +122,8 @@ export function createI18n<
   };
 
   const setLocale = async (locale: TLocale): Promise<void> => {
-    if (!loadedLocales.has(locale) && isLocaleImporter(locales[locale])) {
+    const source = locales[locale];
+    if (!loadedLocales.has(locale) && source !== undefined && isLocaleImporter(source)) {
       await loadLocale(locale);
     }
 
@@ -128,12 +136,12 @@ export function createI18n<
     locale: (): TLocale => state.$locale.peek() as TLocale,
     setLocale,
 
-    fallbackLocale: () => fallbackLocale,
+    fallbackLocale: (): TLocale => fallbackLocale as TLocale,
 
     t: translate,
 
     exists: (key) =>
-      hasMessage(messageStore, state.$locale.peek(), fallbackLocale, key),
+      hasMessage(messageStore, state.$locale.peek(), fallbackLocale as TLocale, key),
 
     addMessages,
 

@@ -1,9 +1,13 @@
 export { createI18n } from "./create-i18n";
 
 export type {
+  AnyLocalesMap,
   CreateI18nOptions,
+  CreateI18nOptionsLegacy,
   I18n,
   I18nOptions,
+  InferLocaleFromLocalesMap,
+  InferMessagesFromLocalesMap,
   LocaleImporter,
   LocaleLoader,
   LocaleLoaderResult,

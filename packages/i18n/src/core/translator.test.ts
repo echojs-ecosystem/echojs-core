@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { createI18n } from "../src/create-i18n";
+import { createI18n } from "../create-i18n";
 
 describe("translator", () => {
-  const messages = {
+  const locales = {
     ru: {
       common: {
         save: "Сохранить",
@@ -27,7 +27,7 @@ describe("translator", () => {
     const i18n = createI18n({
       defaultLocale: "ru",
       fallbackLocale: "en",
-      locales: messages,
+      locales,
     });
 
     expect(i18n.t("common.save")).toBe("Сохранить");
@@ -37,7 +37,7 @@ describe("translator", () => {
     const i18n = createI18n({
       defaultLocale: "ru",
       fallbackLocale: "en",
-      locales: messages,
+      locales,
     });
 
     expect(i18n.t("auth.login.title")).toBe("Вход");
@@ -47,7 +47,7 @@ describe("translator", () => {
     const i18n = createI18n({
       defaultLocale: "ru",
       fallbackLocale: "en",
-      locales: messages,
+      locales,
     });
 
     expect(i18n.exists("common.save")).toBe(true);

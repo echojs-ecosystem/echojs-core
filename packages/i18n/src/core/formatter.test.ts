@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 
+import { createI18n } from "../create-i18n";
 import {
   formatCurrency,
   formatDate,
   formatNumber,
   formatRelativeTime,
-} from "../src/core/formatter";
-import { createI18n } from "../src/create-i18n";
+} from "./formatter";
 
 describe("formatter", () => {
   it("formats numbers with locale", () => {

@@ -32,7 +32,29 @@ export type LocalesMap<
   TMessages extends MessageSchema,
 > = Record<TLocale, LocaleSource<TMessages>>;
 
-export type CreateI18nOptions<
+/** Any `locales` map accepted by `createI18n` (used for inference). */
+export type AnyLocalesMap = Record<string, LocaleSource<MessageSchema>>;
+
+/** Message schema from eager entries in `locales` (e.g. `typeof ru`). */
+export type InferMessagesFromLocalesMap<TLocales extends AnyLocalesMap> =
+  Extract<TLocales[keyof TLocales], MessageSchema> extends infer E
+    ? E extends MessageSchema
+      ? E
+      : MessageSchema
+    : MessageSchema;
+
+export type InferLocaleFromLocalesMap<TLocales extends AnyLocalesMap> =
+  keyof TLocales & string;
+
+export type CreateI18nOptions<TLocales extends AnyLocalesMap> = {
+  defaultLocale: InferLocaleFromLocalesMap<TLocales>;
+  fallbackLocale: InferLocaleFromLocalesMap<TLocales>;
+  locales: TLocales;
+  missingKeyStrategy?: MissingKeyStrategy;
+};
+
+/** @deprecated Prefer `CreateI18nOptions` with inferred `locales` */
+export type CreateI18nOptionsLegacy<
   TLocale extends string,
   TMessages extends MessageSchema,
 > = {
@@ -88,7 +110,7 @@ export type I18n<
 export type I18nOptions<
   TLocale extends string = string,
   TMessages extends MessageSchema = MessageSchema,
-> = CreateI18nOptions<TLocale, TMessages>;
+> = CreateI18nOptionsLegacy<TLocale, TMessages>;
 
 /** Plural message buckets keyed by Intl plural category. */
 export type PluralMessages = Partial<

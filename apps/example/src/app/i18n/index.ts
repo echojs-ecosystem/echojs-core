@@ -1,7 +1,6 @@
 import { effect } from "@echojs/reactivity";
 import { createI18n } from "@echojs/i18n";
 
-import type { AppMessages } from "./messages.js";
 import { ru } from "./messages.js";
 
 const LOCALE_STORAGE_KEY = "echojs-lab-locale";
@@ -11,6 +10,7 @@ const appLocales = {
   en: () => import("../../../public/locales/en.json"),
 } as const;
 
+/** Локали объявлены в `appLocales` / `createI18n({ locales })`. */
 export type AppLocale = keyof typeof appLocales;
 
 const isAppLocale = (value: string): value is AppLocale =>
@@ -32,7 +32,7 @@ export const detectInitialLocale = (): AppLocale => {
   return "en";
 };
 
-export const i18n = createI18n<AppLocale, AppMessages>({
+export const i18n = createI18n({
   defaultLocale: detectInitialLocale(),
   fallbackLocale: "en",
   locales: {

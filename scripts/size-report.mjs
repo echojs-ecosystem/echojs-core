@@ -21,6 +21,7 @@ const PACKAGES = [
   'ui',
   'router',
   'url-state',
+  'i18n',
 ]
 
 const FRAMEWORK_ENTRIES = [
@@ -80,7 +81,7 @@ function* walk(dir) {
 
 const measureAllFramework = async () => {
   const { measureBundle } = await import(
-    join(root, 'packages/bench/dist/size/measureBundle.js')
+    join(root, 'packages/bench/dist/index.js')
   )
   const entry = join(root, 'packages/framework/src/__size__/all.ts')
   return measureBundle({ absEntryPath: entry, format: 'esm', minify: true })

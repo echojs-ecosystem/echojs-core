@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createI18n } from "../src/create-i18n";
+import { createI18n } from "../create-i18n";
 
 const ruItems = {
   one: "{count} товар",

@@ -5,7 +5,6 @@ export default defineConfig(
   echoVitestConfig(__dirname, {
     test: {
       environment: "node",
-      include: ["tests/**/*.test.ts"],
     },
   }),
 );

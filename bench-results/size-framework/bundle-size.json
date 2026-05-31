@@ -1,6 +1,6 @@
 {
   "kind": "bundle-size",
-  "generatedAt": "2026-05-29T10:02:28.414Z",
+  "generatedAt": "2026-05-31T19:41:42.879Z",
   "node": "v22.22.0",
   "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
   "rows": [
@@ -14,23 +14,23 @@
     {
       "package": "framework/store",
       "entry": "packages/framework/src/store.ts",
-      "bytes": 7985,
-      "gzipBytes": 3070,
-      "brotliBytes": 2826
+      "bytes": 7959,
+      "gzipBytes": 3055,
+      "brotliBytes": 2827
     },
     {
       "package": "framework/hyperdom",
       "entry": "packages/framework/src/hyperdom.ts",
-      "bytes": 11359,
-      "gzipBytes": 4382,
-      "brotliBytes": 3972
+      "bytes": 11409,
+      "gzipBytes": 4411,
+      "brotliBytes": 4019
     },
     {
       "package": "framework/persist",
       "entry": "packages/framework/src/persist.ts",
-      "bytes": 12295,
-      "gzipBytes": 4644,
-      "brotliBytes": 4189
+      "bytes": 12280,
+      "gzipBytes": 4639,
+      "brotliBytes": 4212
     },
     {
       "package": "framework/core",
@@ -42,37 +42,37 @@
     {
       "package": "framework/url-state",
       "entry": "packages/framework/src/url-state.ts",
-      "bytes": 17012,
-      "gzipBytes": 6005,
-      "brotliBytes": 5428
+      "bytes": 16879,
+      "gzipBytes": 5973,
+      "brotliBytes": 5413
     },
     {
       "package": "framework/form",
       "entry": "packages/framework/src/form.ts",
-      "bytes": 19009,
-      "gzipBytes": 6483,
-      "brotliBytes": 5904
+      "bytes": 18990,
+      "gzipBytes": 6481,
+      "brotliBytes": 5878
     },
     {
       "package": "framework/ui",
       "entry": "packages/framework/src/ui.ts",
-      "bytes": 19602,
-      "gzipBytes": 6889,
-      "brotliBytes": 6270
+      "bytes": 19659,
+      "gzipBytes": 6890,
+      "brotliBytes": 6266
     },
     {
       "package": "framework/router",
       "entry": "packages/framework/src/router.ts",
-      "bytes": 24524,
-      "gzipBytes": 8438,
-      "brotliBytes": 7707
+      "bytes": 24507,
+      "gzipBytes": 8429,
+      "brotliBytes": 7680
     },
     {
       "package": "framework/router/hyperdom",
       "entry": "packages/framework/src/router-hyperdom.ts",
-      "bytes": 37335,
-      "gzipBytes": 12593,
-      "brotliBytes": 11373
+      "bytes": 37314,
+      "gzipBytes": 12591,
+      "brotliBytes": 11389
     }
   ]
 }

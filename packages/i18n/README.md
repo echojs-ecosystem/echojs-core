@@ -14,27 +14,20 @@ bun add @echojs/i18n @echojs/reactivity
 
 ```ts
 import { createI18n } from "@echojs/i18n";
+import ru from "./locales/ru.json";
 
-type Messages = {
-  common: {
-    save: string;
-    cancel: string;
-  };
-};
+const appLocales = {
+  ru,
+  en: () => import("./locales/en.json"),
+} as const;
 
-const i18n = createI18n<"ru" | "en", Messages>({
+const i18n = createI18n({
   defaultLocale: "ru",
   fallbackLocale: "en",
-  locales: {
-    ru: {
-      common: { save: "Сохранить", cancel: "Отмена" },
-    },
-    en: {
-      common: { save: "Save", cancel: "Cancel" },
-    },
-  },
+  locales: appLocales,
 });
 
+type AppLocale = keyof typeof appLocales; // "ru" | "en"
 i18n.supportedLocales; // readonly ["ru", "en"]
 i18n.locale(); // "ru"
 i18n.$locale.value(); // "ru"
@@ -42,14 +35,15 @@ i18n.$locale.value(); // "ru"
 
 ## Typed keys
 
-Ключи перевода типизируются по схеме сообщений — поддерживается вложенность:
+Ключи выводятся из **eager**-локали в `locales` (например `typeof ru`):
 
 ```ts
 i18n.t("common.save"); // ok
 // i18n.t("common.unknown"); // TS error
 ```
 
-Тип `TranslationKey<TMessages>` строит union всех путей до строковых листьев и plural-объектов.
+Тип `TranslationKey<TMessages>` — union вложенных путей (`common.save`, `modules.dashboard.title`, …).  
+`TMessages` = `InferMessagesFromLocalesMap<typeof appLocales>`, дженерики вручную не нужны.
 
 ## Translation
 
@@ -89,7 +83,7 @@ i18n.relativeTime(-1, "day");
 ```ts
 import ru from "./locales/ru.json";
 
-const i18n = createI18n<"ru" | "en", typeof ru>({
+const i18n = createI18n({
   defaultLocale: "ru",
   fallbackLocale: "en",
   locales: {
