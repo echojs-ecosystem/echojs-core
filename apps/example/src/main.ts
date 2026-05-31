@@ -1,3 +1,4 @@
+import '@app/query/query-provider.js';
 import "./style.css";
 import { render, setStrictContextChecks } from "@echojs/hyperdom";
 import { AppView } from "@app/ui/app.js";

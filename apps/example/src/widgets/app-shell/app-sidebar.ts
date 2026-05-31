@@ -9,6 +9,7 @@ import { accountPage } from "@pages/account/account.page.js";
 import { formsPage } from "@pages/forms/forms.page.js";
 import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
 import { persistencePage } from "@pages/persistence/persistence.page.js";
+import { queryPage } from "@pages/query/query.page.js";
 import { reactivityPage } from "@pages/reactivity/reactivity.page.js";
 import { statePage } from "@pages/state/state.page.js";
 import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
@@ -31,6 +32,7 @@ const platformPageById: Record<string, AnyPage> = {
   "forms-nested": formsNestedPage,
   state: statePage,
   persistence: persistencePage,
+  query: queryPage,
 };
 
 export const AppSidebar = (): Child =>

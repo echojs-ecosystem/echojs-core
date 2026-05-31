@@ -6,6 +6,7 @@ import { formsPage } from "@pages/forms/forms.page.js";
 import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
 import { statePage } from "@pages/state/state.page.js";
 import { persistencePage } from "@pages/persistence/persistence.page.js";
+import { queryPage } from "@pages/query/query.page.js";
 import { accountPage } from "@pages/account/account.page.js";
 import { authShellLayoutPage } from "@pages/auth/layout/auth-shell-layout.page.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
@@ -56,6 +57,7 @@ export const appRoutes = createRoutes([
       { path: "forms/nested", name: "forms-nested", routeView: formsNestedPage },
       { path: "state", name: "state", routeView: statePage },
       { path: "persistence", name: "persistence", routeView: persistencePage },
+      { path: "query", name: "query", routeView: queryPage },
       { path: "account", name: "account", routeView: accountPage },
       { path: "example1", name: "legacy-example1", route: legacyExample1Route },
       { path: "example3", name: "legacy-example3", route: legacyExample3Route },

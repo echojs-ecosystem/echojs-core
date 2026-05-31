@@ -20,7 +20,7 @@ export const labModules: LabModuleMeta[] = [
   {
     id: "reactivity",
     title: "Реактивность",
-    description: "Сигналы, эффекты и обновление DOM без виртуального дерева.",
+    description: "signal, computed, batch, effect, scope/cleanup и интеграция с hyperdom.",
     package: "@echojs/reactivity",
     path: "/reactivity",
     section: "platform",
@@ -55,6 +55,14 @@ export const labModules: LabModuleMeta[] = [
     description: "Адаптеры storage, hydrate и persist для полей формы.",
     package: "@echojs/persist",
     path: "/persistence",
+    section: "platform",
+  },
+  {
+    id: "query",
+    title: "Query",
+    description: "Кэш, fetch, retry и mutations на JSONPlaceholder API.",
+    package: "@echojs/query",
+    path: "/query",
     section: "platform",
   },
   {

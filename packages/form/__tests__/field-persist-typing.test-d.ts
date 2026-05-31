@@ -9,7 +9,7 @@ describe("field.extend() typing", () => {
   it("preserves Field core after persist extension", () => {
     const email = createField("").extend(withMemoryStorage({ key: "form:email" }));
 
-    expectTypeOf(email).toMatchTypeOf<Field<string>>();
+    expectTypeOf(email).toMatchObjectType<Field<string>>();
     expectTypeOf(email.set).toBeFunction();
     expectTypeOf(email.$value).toBeObject();
     expectTypeOf(email.persist.hydrate).toBeFunction();
@@ -20,7 +20,7 @@ describe("field.extend() typing", () => {
       withMemoryStorage({ key: "form:phones" }),
     );
 
-    expectTypeOf(phones).toMatchTypeOf<FieldArray<string>>();
+    expectTypeOf(phones).toMatchObjectType<FieldArray<string>>();
     expectTypeOf(phones.$items).toBeObject();
     expectTypeOf(phones.append).toBeFunction();
     expectTypeOf(phones.replace).toBeFunction();
