@@ -1,7 +1,8 @@
 import { createLayoutView } from "@echojs/router";
 import { NavLink } from "@echojs/router/hyperdom";
 import type { Child } from "@echojs/hyperdom";
-import { article, button, code, div, footer, h1, header, nav, p } from "@echojs/hyperdom";
+import { article, button, div, footer, h1, header, nav, p } from "@echojs/hyperdom";
+import { i18n } from "@app/i18n/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { authSignupPage } from "@pages/auth/signup/auth-signup.page.js";
 import { dashboardPage } from "@pages/dashboard/dashboard.page.js";
@@ -12,27 +13,21 @@ export const authShellLayoutPage = createLayoutView({
     div({ class: "auth-screen" }, [
       div({ class: "auth-screen__panel" }, [
         header(null, [
-          h1(null, "EchoJS Auth"),
-          p({ class: "auth-screen__lead" }, [
-            "Вход в ",
-            "EchoJS Lab",
-            ". Сессия сохраняется через ",
-            code(null, "@echojs/persist"),
-            " (cookie + localStorage).",
-          ]),
+          h1(null, () => i18n.t("auth.layoutTitle")),
+          p({ class: "auth-screen__lead" }, () => i18n.t("auth.layoutLead")),
         ]),
         nav({ class: "auth-screen__tabs" }, [
           NavLink({
             to: authLoginPage,
             activeClass: "auth-screen__tab--active",
             class: "auth-screen__tab",
-            children: "Вход",
+            children: () => i18n.t("auth.loginTab"),
           }),
           NavLink({
             to: authSignupPage,
             activeClass: "auth-screen__tab--active",
             class: "auth-screen__tab",
-            children: "Регистрация",
+            children: () => i18n.t("auth.signupTab"),
           }),
         ]),
         article({ class: "auth-screen__card" }, outlet() as Child),
@@ -43,10 +38,9 @@ export const authShellLayoutPage = createLayoutView({
               class: "secondary",
               "on:click": () => dashboardPage.go({}),
             },
-            "← На главную",
+            () => i18n.t("auth.backHome"),
           ),
         ]),
       ]),
     ]) as Child,
 });
-

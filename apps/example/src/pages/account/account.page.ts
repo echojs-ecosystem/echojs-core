@@ -8,6 +8,7 @@ import {
   logout,
 } from "@entities/session/index.js";
 import { getModule } from "@app/config/lab-modules.js";
+import { i18n } from "@app/i18n/index.js";
 import { profileForm, profileUi, saveProfileSnapshot } from "@pages/account/account.model.js";
 import type { Child } from "@echojs/hyperdom";
 import {
@@ -44,11 +45,16 @@ export const accountPage = createRouteView({
         () =>
           div({ class: "account" }, [
             section({ class: "account__session" }, [
-              h4(null, "Сессия"),
-              p(null, ["Имя: ", span({ class: "account__strong" }, () => $authUser.value()?.name ?? "—")]),
-              p(null, ["Email: ", () => $authUser.value()?.email ?? "—"]),
+              h4(null, () => i18n.t("account.sessionTitle")),
               p(null, [
-                "Token: ",
+                () => i18n.t("account.nameLabel"),
+                " ",
+                span({ class: "account__strong" }, () => $authUser.value()?.name ?? "—"),
+              ]),
+              p(null, [() => i18n.t("account.emailLabel"), " ", () => $authUser.value()?.email ?? "—"]),
+              p(null, [
+                () => i18n.t("account.tokenLabel"),
+                " ",
                 code(null, () => {
                   const t = authTokenStore.value();
                   return t ? `${t.slice(0, 28)}…` : "—";
@@ -64,23 +70,26 @@ export const accountPage = createRouteView({
                   2,
                 ),
               ),
-              button({ type: "button", class: "secondary", "on:click": logout }, "Выйти"),
+              button(
+                { type: "button", class: "secondary", "on:click": logout },
+                () => i18n.t("common.logout"),
+              ),
             ]),
             section({ class: "account__profile" }, [
-              h4(null, "Профиль (форма + persist)"),
-              p({ class: "page__hint" }, "Поля и массив телефонов сохраняются в localStorage автоматически."),
+              h4(null, () => i18n.t("account.profileTitle")),
+              p({ class: "page__hint" }, () => i18n.t("account.profileHint")),
               label(null, [
-                span({ class: "router-form-label" }, "Имя"),
+                span({ class: "router-form-label" }, () => i18n.t("account.nameField")),
                 input({ ...bindField(ui.name, { variant: "text", controlledValue: true }) }),
                 () => fieldError(ui.name.meta().errors),
               ]),
               label(null, [
-                span({ class: "router-form-label" }, "Email"),
+                span({ class: "router-form-label" }, () => i18n.t("account.emailField")),
                 input({ ...bindField(ui.email, { variant: "email" }) }),
                 () => fieldError(ui.email.meta().errors),
               ]),
               div({ class: "demo-persist__phones" }, [
-                p({ class: "router-form-label" }, "Телефоны"),
+                p({ class: "router-form-label" }, () => i18n.t("account.phones")),
                 () =>
                   phonesField.$items.value().map((phone, index) =>
                     div({ class: "demo-persist__phone-row" }, [
@@ -103,7 +112,7 @@ export const accountPage = createRouteView({
                   ),
                 button(
                   { type: "button", class: "secondary", "on:click": () => phonesField.append("") },
-                  "+ телефон",
+                  () => i18n.t("account.addPhone"),
                 ),
               ]),
               div({ class: "router-form-actions" }, [
@@ -114,18 +123,20 @@ export const accountPage = createRouteView({
                       await profileForm.submit(async () => saveProfileSnapshot());
                     },
                   },
-                  "Сохранить снимок формы",
+                  () => i18n.t("account.saveSnapshot"),
                 ),
               ]),
             ]),
           ]),
         () =>
           div({ class: "account__guest" }, [
-            p(null, "Раздел доступен после входа — используется mock-авторизация с persist."),
-            button({ type: "button", "on:click": () => authLoginPage.go({}) }, "Войти"),
+            p(null, () => i18n.t("account.guestHint")),
+            button(
+              { type: "button", "on:click": () => authLoginPage.go({}) },
+              () => i18n.t("common.login"),
+            ),
           ]),
       ),
     ]);
   },
 });
-

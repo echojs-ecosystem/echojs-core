@@ -1,11 +1,12 @@
 import { div, h4, p } from "@echojs/hyperdom";
 import type { RouteView } from "@echojs/router";
+import { i18n } from "@app/i18n/index.js";
 
 const lazyChunkView: RouteView = () =>
   div({ class: "router-page" }, [
-    h4(null, "Lazy route (code split)"),
-    p(null, "Этот view загружается через createLazyRouteView + dynamic import."),
-    p(null, "Повторный заход не перезагружает чанк — модуль кэшируется."),
+    h4(null, () => i18n.t("workspace.lazy.title")),
+    p(null, () => i18n.t("workspace.lazy.hint")),
+    p(null, () => i18n.t("workspace.lazy.cacheHint")),
   ]);
 
 export default lazyChunkView;

@@ -23,7 +23,9 @@
       "dependencies": {
         "@echojs/form": "workspace:*",
         "@echojs/hyperdom": "workspace:*",
+        "@echojs/i18n": "workspace:*",
         "@echojs/persist": "workspace:*",
+        "@echojs/query": "workspace:*",
         "@echojs/reactivity": "workspace:*",
         "@echojs/router": "workspace:*",
         "@echojs/store": "workspace:*",
@@ -78,6 +80,15 @@
         "vitest": "^4.1.4",
       },
     },
+    "packages/devtools-core": {
+      "name": "@echojs/devtools-core",
+      "version": "0.0.0",
+      "devDependencies": {
+        "@echojs/oxc-config": "workspace:*",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
     "packages/form": {
       "name": "@echojs/form",
       "version": "0.0.0",
@@ -122,6 +133,18 @@
       "devDependencies": {
         "@echojs/oxc-config": "workspace:*",
         "jsdom": "^26.1.0",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
+    "packages/i18n": {
+      "name": "@echojs/i18n",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs/reactivity": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs/oxc-config": "workspace:*",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
       },
@@ -284,6 +307,8 @@
 
     "@echojs/core": ["@echojs/core@workspace:packages/core"],
 
+    "@echojs/devtools-core": ["@echojs/devtools-core@workspace:packages/devtools-core"],
+
     "@echojs/example": ["@echojs/example@workspace:apps/example"],
 
     "@echojs/form": ["@echojs/form@workspace:packages/form"],
@@ -291,6 +316,8 @@
     "@echojs/framework": ["@echojs/framework@workspace:packages/framework"],
 
     "@echojs/hyperdom": ["@echojs/hyperdom@workspace:packages/hyperdom"],
+
+    "@echojs/i18n": ["@echojs/i18n@workspace:packages/i18n"],
 
     "@echojs/oxc-config": ["@echojs/oxc-config@workspace:packages/.configs"],
 

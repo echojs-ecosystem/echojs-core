@@ -1,4 +1,5 @@
-import { List, Show, createView, mount, type Child } from "@echojs/hyperdom";
+import { List, Show, createView, type Child } from "@echojs/hyperdom";
+import { i18n } from "@app/i18n/index.js";
 import type { CounterVM } from "@features/reactivity-counter/model/counter.model.js";
 import {
   article,
@@ -29,33 +30,36 @@ export const CounterView = createView((vm: CounterVM): Child => {
     null,
     section(
       { class: cx("section", { "is-positive": $count.value() > 0 }) },
-      h3(null, "Счётчик"),
-      button({ "on:click": vm.increment }, "Increment"),
+      h3(null, () => i18n.t("counter.title")),
+      button({ "on:click": vm.increment }, () => i18n.t("counter.increment")),
       span({ style: { "margin-left": "12px", "font-weight": 700 } }, () => $count.value()),
       Show(
         () => $count.value() > 0,
-        () => p({ style: { "margin-top": "8px" } }, "Count больше нуля"),
+        () => p({ style: { "margin-top": "8px" } }, () => i18n.t("counter.positive")),
       ),
     ),
 
     section(
       { class: "section" },
-      h3(null, "Реактивный ввод"),
-      p(null, ["Пишем без JSX через ", code(null, "@echojs/hyperdom"), "."]),
+      h3(null, () => i18n.t("counter.inputTitle")),
+      p(null, () => i18n.t("counter.inputHint")),
       input({
         type: "text",
         value: $name.value(),
         "on:change": (e) => vm.setName(e.currentTarget.value),
       }),
-      div({ style: { "margin-top": "8px" } }, ["Hello, ", strong(null, () => $name.value())]),
+      div({ style: { "margin-top": "8px" } }, [
+        () => i18n.t("counter.hello"),
+        strong(null, () => $name.value()),
+      ]),
     ),
 
     section(
       { class: "section" },
-      h3(null, "Список"),
+      h3(null, () => i18n.t("counter.listTitle")),
       div({ style: { display: "flex", gap: "8px", "margin-bottom": "8px" } }, [
-        button({ "on:click": vm.appendItem }, "Append"),
-        button({ class: "secondary", "on:click": vm.resetItems }, "Reset"),
+        button({ "on:click": vm.appendItem }, () => i18n.t("counter.append")),
+        button({ class: "secondary", "on:click": vm.resetItems }, () => i18n.t("counter.reset")),
       ]),
       div(
         null,

@@ -48,6 +48,10 @@ export default defineConfig({
         find: /^@echojs\/query$/,
         replacement: resolve(__dirname, "../../packages/query/src/index.ts"),
       },
+      {
+        find: /^@echojs\/i18n$/,
+        replacement: resolve(__dirname, "../../packages/i18n/src/index.ts"),
+      },
     ],
   },
   server: {
@@ -64,6 +68,7 @@ export default defineConfig({
       "@echojs/persist",
       "@echojs/url-state",
       "@echojs/query",
+      "@echojs/i18n",
     ],
   },
 });

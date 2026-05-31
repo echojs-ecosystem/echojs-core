@@ -12,6 +12,7 @@ import {
   slowCreatePostMutation,
   slowUserQuery,
 } from "@features/query-demo/api/jsonplaceholder.queries.js";
+import { i18n } from "@app/i18n/index.js";
 import { abortLabel, timestamp } from "@features/query-demo/utils/query-demo.utils.js";
 import type { JpPost, JpUser } from "@shared/api/jsonplaceholder.js";
 
@@ -74,7 +75,7 @@ export const createQueryDemoModel = createModel((): QueryDemoVM => {
   const $draftTitle = signal("EchoJS query demo");
   const $slowUserId = signal(1);
   const $postsEnabled = signal(true);
-  const $playgroundLog = signal("Playground готов — жми кнопки ниже.");
+  const $playgroundLog = signal(i18n.t("queryDemo.playgroundReady"));
   const $routeSession = signal(1);
 
   let manualRefetchAc: AbortController | null = null;

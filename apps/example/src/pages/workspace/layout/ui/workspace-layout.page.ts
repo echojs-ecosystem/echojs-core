@@ -2,6 +2,8 @@ import { createLayoutView } from "@echojs/router";
 import type { AnyPage } from "@echojs/router";
 import { h, type Child } from "@echojs/hyperdom";
 import { appRouter } from "@app/router/index.js";
+import { i18n } from "@app/i18n/index.js";
+import type { TKey } from "@app/i18n/keys.js";
 import { $isLoggedIn } from "@app/router/auth.js";
 import { $activePageTitle } from "@app/router/model.js";
 import { USERS } from "@entities/user/index.js";
@@ -42,15 +44,15 @@ const trackedPages: AnyPage[] = [
   workspaceProductsPage,
 ];
 
-const navGroup = (title: string, items: Child[]): Child =>
+const navGroup = (titleKey: TKey, items: Child[]): Child =>
   div({ class: "workspace-subnav__group" }, [
-    p({ class: "workspace-subnav__title" }, title),
+    p({ class: "workspace-subnav__title" }, () => i18n.t(titleKey)),
     ul(null, items),
   ]);
 
 const navItem = (
   page: AnyPage,
-  label: string,
+  label: TKey | string,
   opts?: { params?: Record<string, string>; query?: Record<string, string> },
 ): Child => {
   const params = opts?.params ?? {};
@@ -69,7 +71,7 @@ const navItem = (
           page.go(params as never, { query: query as never });
         },
       },
-      label,
+      () => (typeof label === "string" && label.includes(".") ? i18n.t(label as TKey) : label),
     ),
   ]);
 };
@@ -80,12 +82,12 @@ export const workspaceLayoutPage = createLayoutView({
     div({ class: "workspace-shell" }, [
       nav({ class: "workspace-subnav" }, [
         p({ class: "workspace-subnav__heading" }, () => $activePageTitle.value()),
-        navGroup("Обзор", [navItem(workspaceHomePage, "Старт workspace")]),
-        navGroup("Команда", [
-          navItem(usersListPage, "Пользователи"),
-          navItem(userPage, "Профиль #1", { params: { id: "1" }, query: { tab: "profile" } }),
+        navGroup("workspace.nav.overview", [navItem(workspaceHomePage, "workspace.nav.start")]),
+        navGroup("workspace.nav.team", [
+          navItem(usersListPage, "workspace.nav.users"),
+          navItem(userPage, "workspace.nav.profile1", { params: { id: "1" }, query: { tab: "profile" } }),
         ]),
-        navGroup("Спринты", [
+        navGroup("workspace.nav.sprints", [
           navItem(workspaceSprintPage, "Acme / S24", {
             params: { orgId: "acme", teamId: "platform", sprintId: "s24" },
             query: { tab: "board" },
@@ -95,31 +97,31 @@ export const workspaceLayoutPage = createLayoutView({
             query: { tab: "overview" },
           }),
         ]),
-        navGroup("Каталог", [
+        navGroup("workspace.nav.catalog", [
           navItem(catalogVariantPage, "Phone 128GB", {
             params: { categoryId: "electronics", productId: "phone", variantId: "128gb" },
             query: { tab: "specs" },
           }),
-          navItem(catalogVariantPage, "Заказ лампы", {
+          navItem(catalogVariantPage, "workspace.nav.lampOrder", {
             params: { categoryId: "home", productId: "lamp", variantId: "rgb" },
             query: { tab: "order" },
           }),
-          navItem(workspaceProductsPage, "Товары (URL state)"),
+          navItem(workspaceProductsPage, "workspace.nav.products"),
         ]),
-        navGroup("Ещё", [
-          navItem(settingsPage, "Настройки"),
-          navItem(slowPage, "Медленная загрузка"),
-          navItem(lazyPage, "Lazy chunk"),
-          navItem(filesPage, "Файлы", { params: { "*": "docs/readme.md" } }),
+        navGroup("workspace.nav.more", [
+          navItem(settingsPage, "workspace.nav.settings"),
+          navItem(slowPage, "workspace.nav.slow"),
+          navItem(lazyPage, "workspace.nav.lazy"),
+          navItem(filesPage, "workspace.nav.files", { params: { "*": "docs/readme.md" } }),
         ]),
         Show(
           () => !$isLoggedIn.value(),
-          () => p({ class: "workspace-subnav__hint" }, "Настройки доступны после входа."),
+          () => p({ class: "workspace-subnav__hint" }, () => i18n.t("workspace.nav.loginHint")),
         ),
       ]),
       div({ class: "workspace-shell__content" }, outlet() as Child),
       aside({ class: "workspace-shell__debug" }, [
-        h4(null, "Router"),
+        h4(null, () => i18n.t("workspace.nav.router")),
         pre(null, () => {
           const active = trackedPages.find((page) => page.$isOpened.value());
           return JSON.stringify(
@@ -142,7 +144,7 @@ export const workspaceLayoutPage = createLayoutView({
               userPage.go({ id: user.id }, { query: { tab: "profile" } });
             },
           },
-          "Random user",
+          () => i18n.t("workspace.nav.randomUser"),
         ),
       ]),
     ]) as Child,

@@ -4,6 +4,7 @@ import { NavLink } from "@echojs/router/hyperdom";
 import { button, code, div, h3, li, p, section, Show, ul } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
 import { labModules, platformModules } from "@app/config/lab-modules.js";
+import { i18n } from "@app/i18n/index.js";
 import { $authUser, $isLoggedIn } from "@app/router/auth.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { accountPage } from "@pages/account/account.page.js";
@@ -29,12 +30,12 @@ const labPageById: Record<string, AnyPage> = {
 const ModuleCard = (meta: (typeof labModules)[0]): Child =>
   section({ class: "dashboard-card" }, [
     p({ class: "dashboard-card__package" }, code(null, meta.package)),
-    h3(null, meta.title),
-    p({ class: "dashboard-card__desc" }, meta.description),
+    h3(null, () => i18n.t(meta.titleKey)),
+    p({ class: "dashboard-card__desc" }, () => i18n.t(meta.descriptionKey)),
     NavLink({
       to: labPageById[meta.id]!,
       class: "dashboard-card__link",
-      children: "Открыть модуль →",
+      children: () => i18n.t("common.openModule"),
     }),
   ]);
 
@@ -43,46 +44,48 @@ export const dashboardPage = createRouteView({
   view: () =>
     div({ class: "page dashboard" }, [
       section({ class: "dashboard-hero" }, [
-        h3(null, "EchoJS Lab"),
-        p(null, [
-          "Интерактивное приложение для изучения экосистемы EchoJS. Каждый раздел — ",
-          "рабочий функционал",
-          ", а не изолированный сниппет: формы сохраняются, сессия переживает перезагрузку, ",
-          "workspace ведёт себя как продукт.",
-        ]),
+        h3(null, () => i18n.t("dashboard.heroTitle")),
+        p(null, () => i18n.t("dashboard.heroBody")),
         Show(
           () => $isLoggedIn.value(),
           () =>
             p({ class: "dashboard-hero__session" }, [
-              "Вы вошли как ",
-              code(null, () => $authUser.value()?.email ?? ""),
-              ". Токен в cookie, профиль в localStorage.",
+              () =>
+                i18n.t("dashboard.loggedInAs", {
+                  email: $authUser.value()?.email ?? "",
+                }),
             ]),
           () =>
             div({ class: "dashboard-hero__actions" }, [
-              p(null, "Войдите, чтобы открыть аккаунт и защищённые разделы workspace."),
-              button({ type: "button", "on:click": () => authLoginPage.go({}) }, "Войти"),
+              p(null, () => i18n.t("dashboard.loginHint")),
+              button(
+                { type: "button", "on:click": () => authLoginPage.go({}) },
+                () => i18n.t("common.login"),
+              ),
             ]),
         ),
       ]),
       section({ class: "dashboard-section" }, [
-        p({ class: "dashboard-section__title" }, "Платформа"),
+        p({ class: "dashboard-section__title" }, () => i18n.t("dashboard.sectionPlatform")),
         div({ class: "dashboard-grid" }, platformModules.map(ModuleCard)),
       ]),
       section({ class: "dashboard-section" }, [
-        p({ class: "dashboard-section__title" }, "Продукт"),
+        p({ class: "dashboard-section__title" }, () => i18n.t("dashboard.sectionProduct")),
         div({ class: "dashboard-grid" }, [
           ModuleCard(labModules.find((m) => m.id === "workspace")!),
           ModuleCard(labModules.find((m) => m.id === "account")!),
         ]),
       ]),
       section({ class: "dashboard-note" }, [
-        p(null, "Быстрые ссылки:"),
+        p(null, () => i18n.t("dashboard.quickLinks")),
         ul(null, [
-          li(null, [NavLink({ to: workspaceHomePage, children: "Workspace — маршруты и layouts" })]),
-          li(null, [NavLink({ to: accountPage, children: "Аккаунт — профиль и persist" })]),
+          li(null, [
+            NavLink({ to: workspaceHomePage, children: () => i18n.t("dashboard.linkWorkspace") }),
+          ]),
+          li(null, [
+            NavLink({ to: accountPage, children: () => i18n.t("dashboard.linkAccount") }),
+          ]),
         ]),
       ]),
     ]),
 });
-

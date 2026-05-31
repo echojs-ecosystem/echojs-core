@@ -1,4 +1,6 @@
 import { computed } from "@echojs-ecosystem/reactivity";
+import { i18n } from "@app/i18n/index.js";
+import { findModuleByPath } from "@app/config/lab-modules.js";
 import { catalogVariantPage } from "@pages/workspace/catalog/catalog-variant.page.js";
 import { filesPage } from "@pages/workspace/files/workspace-files.page.js";
 import { slowPage } from "@pages/workspace/slow/workspace-slow.page.js";
@@ -7,14 +9,13 @@ import { userPage } from "@pages/workspace/users/user-detail.page.js";
 import { usersListPage } from "@pages/workspace/users/users-list.page.js";
 import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.page.js";
 import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
-import { findModuleByPath } from "@app/config/lab-modules.js";
 
 export const $activePageTitle = computed(() => {
   const path = typeof location !== "undefined" ? location.pathname : "/";
 
   const module = findModuleByPath(path);
   if (module && module.section !== "workspace") {
-    return module.title;
+    return i18n.t(module.titleKey);
   }
 
   if (
@@ -23,29 +24,39 @@ export const $activePageTitle = computed(() => {
     !workspaceSprintPage.$isOpened.value() &&
     !catalogVariantPage.$isOpened.value()
   ) {
-    return "Workspace";
+    return i18n.t("workspace.title");
   }
   if (usersListPage.$isOpened.value() && !userPage.$isOpened.value()) {
-    return "Пользователи";
+    return i18n.t("workspace.pages.users");
   }
   if (userPage.$isOpened.value()) {
     const tab = userPage.$query.value()?.tab;
-    return `Пользователь #${userPage.$params.value()?.id ?? "?"}${tab ? ` · ${tab}` : ""}`;
+    const id = userPage.$params.value()?.id ?? "?";
+    return i18n.t("workspace.userProfile", {
+      id,
+      tab: tab ? i18n.t("workspace.userTabSuffix", { tab }) : "",
+    });
   }
   if (workspaceSprintPage.$isOpened.value()) {
     const p = workspaceSprintPage.$params.value();
     const tab = workspaceSprintPage.$query.value()?.tab ?? "overview";
-    return `Спринт ${p?.sprintId} · ${tab}`;
+    return i18n.t("workspace.pages.sprint", { sprintId: p?.sprintId ?? "?", tab });
   }
   if (catalogVariantPage.$isOpened.value()) {
     const p = catalogVariantPage.$params.value();
     const tab = catalogVariantPage.$query.value()?.tab ?? "specs";
-    return `${p?.productId} / ${p?.variantId} · ${tab}`;
+    return i18n.t("workspace.pages.catalog", {
+      productId: p?.productId ?? "?",
+      variantId: p?.variantId ?? "?",
+      tab,
+    });
   }
-  if (slowPage.$isOpened.value()) return "Медленная загрузка";
-  if (settingsPage.$isOpened.value()) return "Настройки workspace";
+  if (slowPage.$isOpened.value()) return i18n.t("workspace.pages.slow");
+  if (settingsPage.$isOpened.value()) return i18n.t("workspace.pages.settings");
   if (filesPage.$isOpened.value()) {
-    return `Файлы: ${filesPage.$params.value()?.["*"] ?? ""}`;
+    return i18n.t("workspace.pages.files", {
+      path: filesPage.$params.value()?.["*"] ?? "",
+    });
   }
-  return "Workspace";
+  return i18n.t("workspace.title");
 });

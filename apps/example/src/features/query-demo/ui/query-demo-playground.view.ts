@@ -1,11 +1,16 @@
 import { Show, createView, type Child } from "@echojs/hyperdom";
 import { button, code, div, h4, input, label, p, pre, section, span, strong } from "@echojs/hyperdom";
 
+import { i18n } from "@app/i18n/index.js";
+import { cardHintKey, cardTitleKey, type QueryPlaygroundCardBase } from "@app/i18n/keys.js";
 import type { QueryDemoVM } from "@features/query-demo/model/query-demo.model.js";
 import type { JpUser } from "@shared/api/jsonplaceholder.js";
 
-const PlaygroundCard = (title: string, body: Child): Child =>
-  div({ class: "demo-query__card" }, [h4(null, title), body]);
+const PlaygroundCard = (baseKey: QueryPlaygroundCardBase, body: Child): Child =>
+  div({ class: "demo-query__card" }, [
+    h4(null, () => i18n.t(cardTitleKey(baseKey))),
+    body,
+  ]);
 
 export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
   const { slowUser, routeBoundUser, postsWhenEnabled, slowCreatePost, $slowUserId, $postsEnabled, $playgroundLog, $routeSession } = vm;
@@ -17,22 +22,12 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
     ]);
 
   return section({ class: "demo-query__playground" }, [
-    h4(null, "Playground — тестирование API"),
-    p({ class: "demo-query__hint" }, [
-      "Сценарии для ",
-      code(null, "createQuery"),
-      ", ",
-      code(null, "createInfiniteQuery"),
-      ", ",
-      code(null, "createMutation"),
-      " и ",
-      code(null, "AbortController"),
-      ".",
-    ]),
+    h4(null, () => i18n.t("queryDemo.playgroundTitle")),
+    p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.playgroundHint")),
 
     div({ class: "demo-query__playground-grid" }, [
-      PlaygroundCard("Slow query (~4s)", [
-        p({ class: "demo-query__hint" }, "Задержка перед fetch — успей нажать Abort."),
+      PlaygroundCard("queryDemo.cards.slow", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.slow.hint")),
         div({ class: "demo-query__card-row" }, [
           label(null, [
             "user id ",
@@ -58,11 +53,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
         ),
       ]),
 
-      PlaygroundCard("Manual AbortController", [
-        p({ class: "demo-query__hint" }, [
-          code(null, "user.refetch({ abortController })"),
-          " — свой контроллер на один refetch.",
-        ]),
+      PlaygroundCard("queryDemo.cards.manual", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.manual.hint")),
         div({ class: "demo-query__card-actions" }, [
           button({ type: "button", "on:click": vm.refetchWithManualController }, "Start refetch"),
           button({ type: "button", class: "secondary", "on:click": vm.abortManualController }, "AC.abort()"),
@@ -71,12 +63,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
         signalRow("fetching", () => String(vm.user.isFetching())),
       ]),
 
-      PlaygroundCard("External signal (route)", [
-        p({ class: "demo-query__hint" }, [
-          "Instance с ",
-          code(null, "{ signal: routeAc.signal }"),
-          " — как abort при уходе со страницы.",
-        ]),
+      PlaygroundCard("queryDemo.cards.route", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.route.hint")),
         div({ class: "demo-query__card-actions" }, [
           button({ type: "button", class: "secondary", "on:click": vm.simulateRouteLeave }, "Route leave"),
           button({ type: "button", "on:click": vm.simulateRouteEnter }, "Route enter"),
@@ -86,8 +74,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
         signalRow("name", () => (routeBoundUser.data() as JpUser | undefined)?.name ?? "—"),
       ]),
 
-      PlaygroundCard("enabled + cache", [
-        p({ class: "demo-query__hint" }, "enabled: false останавливает fetch. Client cache API."),
+      PlaygroundCard("queryDemo.cards.cache", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.cache.hint")),
         div({ class: "demo-query__card-actions" }, [
           button({ type: "button", "on:click": vm.togglePostsEnabled }, () =>
             $postsEnabled.value() ? "Disable posts" : "Enable posts",
@@ -101,11 +89,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
         signalRow("cached name", () => vm.readCachedUserName() ?? "—"),
       ]),
 
-      PlaygroundCard("Infinite + abort", [
-        p({ class: "demo-query__hint" }, [
-          code(null, "fetchNextPage({ abortController })"),
-          " — отмена подгрузки страницы.",
-        ]),
+      PlaygroundCard("queryDemo.cards.infinite", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.infinite.hint")),
         div({ class: "demo-query__card-actions" }, [
           button({ type: "button", "on:click": vm.loadMoreWithManualAbort }, "Load page (manual AC)"),
           button({ type: "button", class: "secondary", "on:click": vm.abortInfiniteLoad }, "Abort page load"),
@@ -115,8 +100,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
         signalRow("fetchingNext", () => String(vm.postsInfinite.fetchingNextPage())),
       ]),
 
-      PlaygroundCard("Slow mutation (~5s)", [
-        p({ class: "demo-query__hint" }, "Долгий POST — cancel / abort во время pending."),
+      PlaygroundCard("queryDemo.cards.mutation", [
+        p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.mutation.hint")),
         div({ class: "demo-query__card-actions" }, [
           button(
             {
@@ -135,7 +120,7 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
     ]),
 
     div({ class: "demo-query__log" }, [
-      strong(null, "Log"),
+      strong(null, () => i18n.t("queryDemo.log")),
       pre(null, () => $playgroundLog.value()),
     ]),
   ]);

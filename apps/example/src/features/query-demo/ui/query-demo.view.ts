@@ -15,6 +15,7 @@ import {
   ul,
 } from "@echojs/hyperdom";
 
+import { i18n } from "@app/i18n/index.js";
 import type { QueryDemoVM } from "@features/query-demo/model/query-demo.model.js";
 import { QueryDemoPlaygroundView } from "@features/query-demo/ui/query-demo-playground.view.js";
 import type { JpPost, JpUser } from "@shared/api/jsonplaceholder.js";
@@ -45,11 +46,7 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
     );
 
   return article({ class: "demo-query" }, [
-    p({ class: "demo-query__api" }, [
-      "Публичное API: ",
-      code(null, "https://jsonplaceholder.typicode.com"),
-      " — фейковый REST backend (данные не сохраняются на сервере).",
-    ]),
+    p({ class: "demo-query__api" }, () => i18n.t("queryDemo.apiHint")),
 
     div({ class: "demo-query__toolbar" }, [
       StatusBadge("users", () => users.status(), () => users.isFetching()),
@@ -61,17 +58,26 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
         () => postsInfinite.fetching(),
       ),
       span({ class: "demo-query__pending" }, () => `pending: ${user.$pendingCount.value()}`),
-      button({ type: "button", "on:click": () => void vm.refetchAll() }, "Refetch all"),
-      button({ type: "button", class: "secondary", "on:click": vm.invalidatePosts }, "Invalidate posts"),
-      button({ type: "button", class: "secondary", "on:click": vm.cancelActive }, "Cancel"),
+      button(
+        { type: "button", "on:click": () => void vm.refetchAll() },
+        () => i18n.t("queryDemo.refetchAll"),
+      ),
+      button(
+        { type: "button", class: "secondary", "on:click": vm.invalidatePosts },
+        () => i18n.t("queryDemo.invalidatePosts"),
+      ),
+      button(
+        { type: "button", class: "secondary", "on:click": vm.cancelActive },
+        () => i18n.t("queryDemo.cancel"),
+      ),
     ]),
 
     div({ class: "demo-query__layout" }, [
       section({ class: "demo-query__panel" }, [
-        h4(null, "Users"),
+        h4(null, () => i18n.t("queryDemo.users")),
         Show(
           () => users.isPending() && !users.hasData(),
-          () => p({ class: "demo-query__hint" }, "Загрузка списка…"),
+          () => p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.loadingUsers")),
         ),
         Show(
           () => users.isError(),
@@ -84,14 +90,14 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
       ]),
 
       section({ class: "demo-query__panel demo-query__panel--main" }, [
-        h4(null, "Profile"),
+        h4(null, () => i18n.t("queryDemo.profile")),
         Show(
           () => user.isFetching() && user.hasData(),
-          () => p({ class: "demo-query__hint" }, "Обновление профиля (keepPreviousData)…"),
+          () => p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.updatingProfile")),
         ),
         Show(
           () => user.isPending() && !user.hasData(),
-          () => p({ class: "demo-query__hint" }, "Загрузка профиля…"),
+          () => p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.loadingProfile")),
         ),
         Show(
           () => user.isError(),
@@ -115,10 +121,10 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
           },
         ),
 
-        h4({ style: { "margin-top": "20px" } }, "Posts"),
+        h4({ style: { "margin-top": "20px" } }, () => i18n.t("queryDemo.posts")),
         Show(
           () => posts.isPending() && !posts.hasData(),
-          () => p({ class: "demo-query__hint" }, "Загрузка постов…"),
+          () => p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.loadingPosts")),
         ),
         ul(
           { class: "demo-query__posts" },
@@ -135,19 +141,11 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
     ]),
 
     section({ class: "demo-query__infinite" }, [
-      h4(null, "Infinite query (createInfiniteQuery)"),
-      p({ class: "demo-query__hint" }, [
-        "Посты подгружаются страницами по 3 шт. через ",
-        code(null, "fetchNextPage()"),
-        ". JSONPlaceholder: ",
-        code(null, "_start"),
-        " / ",
-        code(null, "_limit"),
-        ".",
-      ]),
+      h4(null, () => i18n.t("queryDemo.infiniteTitle")),
+      p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.infiniteHint")),
       Show(
         () => postsInfinite.pending() && postsInfinite.pages().length === 0,
-        () => p({ class: "demo-query__hint" }, "Загрузка первой страницы…"),
+        () => p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.loadingFirstPage")),
       ),
       Show(
         () => postsInfinite.error() !== null,
@@ -179,11 +177,14 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
               !postsInfinite.hasNextPage() || postsInfinite.fetchingNextPage(),
             "on:click": () => void vm.loadMorePosts(),
           },
-          () => (postsInfinite.fetchingNextPage() ? "Loading…" : "Load more"),
+          () =>
+            postsInfinite.fetchingNextPage()
+              ? i18n.t("queryDemo.loading")
+              : i18n.t("queryDemo.loadMore"),
         ),
         button(
           { type: "button", class: "secondary", "on:click": vm.resetPostsInfinite },
-          "Reset",
+          () => i18n.t("queryDemo.reset"),
         ),
         button(
           {
@@ -191,23 +192,19 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
             class: "secondary",
             "on:click": () => void postsInfinite.refetch(),
           },
-          "Refetch",
+          () => i18n.t("queryDemo.refetch"),
         ),
       ]),
     ]),
 
     section({ class: "demo-query__mutation" }, [
-      h4(null, "Mutation (POST /posts)"),
-      p({ class: "demo-query__hint" }, [
-        "После ",
-        code(null, "createMutation.run()"),
-        " кэш постов инвалидируется и refetch'ится.",
-      ]),
+      h4(null, () => i18n.t("queryDemo.mutationTitle")),
+      p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.mutationHint")),
       div({ class: "demo-query__mutation-form" }, [
         input({
           type: "text",
           value: $draftTitle.value(),
-          placeholder: "Post title",
+          placeholder: i18n.t("queryDemo.postTitle"),
           "on:change": (e) => $draftTitle.set(e.currentTarget.value),
         }),
         button(
@@ -216,12 +213,16 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
             disabled: () => vm.createPost.isPending(),
             "on:click": () => void vm.submitPost(),
           },
-          () => (vm.createPost.isPending() ? "Sending…" : "Create post"),
+          () =>
+            vm.createPost.isPending() ? i18n.t("queryDemo.sending") : i18n.t("queryDemo.createPost"),
         ),
       ]),
       Show(
         () => vm.createPost.isSuccess(),
-        () => p({ class: "demo-query__success" }, () => `Created id=${vm.createPost.data()?.id}`),
+        () =>
+          p({ class: "demo-query__success" }, () =>
+            i18n.t("queryDemo.createdId", { id: vm.createPost.data()?.id ?? "?" }),
+          ),
       ),
       Show(
         () => vm.createPost.isError(),

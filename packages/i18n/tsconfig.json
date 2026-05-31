@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../.configs/tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@echojs/reactivity": ["../reactivity/src/index.ts"]
+    },
+    "rootDir": ".."
+  },
+  "include": ["src/**/*"],
+  "exclude": ["dist", "node_modules"]
+}

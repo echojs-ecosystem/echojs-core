@@ -1,6 +1,8 @@
 import { createRouteView } from "@echojs/router";
 import { $isLoggedIn } from "@app/router/auth.js";
 import { getModule } from "@app/config/lab-modules.js";
+import { i18n } from "@app/i18n/index.js";
+import type { TKey } from "@app/i18n/keys.js";
 import { legacyUserRoute } from "@entities/__routes__/legacy.routes.js";
 import { USERS } from "@entities/user/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
@@ -14,24 +16,23 @@ import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.pa
 import type { Child } from "@echojs/hyperdom";
 import {
   button,
-  code,
   div,
   h4,
-  li,
   p,
   pre,
   section,
   Show,
-  span,
   strong,
-  ul,
 } from "@pages/workspace/ui/common.js";
 import { ModuleHeader } from "@widgets/app-shell/module-header.js";
 
 const meta = getModule("workspace")!;
 
-const demoCard = (title: string, body: Child): Child =>
-  section({ class: "workspace-card" }, [h4(null, title), body]);
+const demoCard = (titleKey: TKey, body: Child): Child =>
+  section({ class: "workspace-card" }, [
+    h4(null, () => i18n.t(titleKey)),
+    body,
+  ]);
 
 const actionRow = (...buttons: Child[]): Child =>
   div({ class: "workspace-card__actions" }, buttons);
@@ -41,19 +42,22 @@ export const workspaceHomePage = createRouteView({
   view: () =>
     div({ class: "page workspace-home" }, [
       ModuleHeader(meta),
-      p({ class: "page__hint" }, "Используйте боковую навигацию workspace справа → для сценариев продукта."),
+      p({ class: "page__hint" }, () => i18n.t("workspace.home.hint")),
 
-      demoCard("Пользователи и профили", [
-        p(null, "Список, карточка с query tab, replace без перезагрузки layout."),
+      demoCard("workspace.home.usersTitle", [
+        p(null, () => i18n.t("workspace.home.usersDesc")),
         actionRow(
-          button({ "on:click": () => usersListPage.go() }, "Список"),
-          button({
-            "on:click": () => userPage.go({ id: "1" }, { query: { tab: "profile" } }),
-          }, "User #1"),
+          button({ "on:click": () => usersListPage.go() }, () => i18n.t("workspace.home.list")),
+          button(
+            {
+              "on:click": () => userPage.go({ id: "1" }, { query: { tab: "profile" } }),
+            },
+            "User #1",
+          ),
         ),
       ]),
 
-      demoCard("Организации и спринты", [
+      demoCard("workspace.home.orgsTitle", [
         actionRow(
           button({
             "on:click": () =>
@@ -72,7 +76,7 @@ export const workspaceHomePage = createRouteView({
         ),
       ]),
 
-      demoCard("Каталог", [
+      demoCard("workspace.home.catalogTitle", [
         actionRow(
           button({
             "on:click": () =>
@@ -95,26 +99,35 @@ export const workspaceHomePage = createRouteView({
         ),
       ]),
 
-      demoCard("Служебное", [
+      demoCard("workspace.home.utilityTitle", [
         actionRow(
-          button({ "on:click": () => settingsPage.go({}) }, "Настройки (guard)"),
+          button(
+            { "on:click": () => settingsPage.go({}) },
+            () => i18n.t("workspace.home.settingsGuard"),
+          ),
           button({ "on:click": () => slowPage.go({}) }, "Slow load"),
           button({ "on:click": () => filesPage.go({ "*": "docs/readme.md" }) }, "Files *"),
           button({ "on:click": () => legacyUserRoute.go({ id: "3" }) }, "Legacy redirect"),
         ),
       ]),
 
-      demoCard("Состояние", [
+      demoCard("workspace.home.stateTitle", [
         p(null, [
-          "Авторизация: ",
-          strong(null, () => ($isLoggedIn.value() ? "да" : "нет")),
+          () => i18n.t("workspace.home.authLabel"),
+          " ",
+          strong(null, () =>
+            i18n.t($isLoggedIn.value() ? "workspace.home.authYes" : "workspace.home.authNo"),
+          ),
         ]),
         Show(
           () => !$isLoggedIn.value(),
           () =>
             p({ class: "router-muted" }, [
-              "Раздел настроек требует входа — ",
-              button({ type: "button", "on:click": () => authLoginPage.go({}) }, "войти"),
+              () => i18n.t("workspace.home.settingsNeedLogin"),
+              button(
+                { type: "button", "on:click": () => authLoginPage.go({}) },
+                () => i18n.t("workspace.home.login"),
+              ),
             ]),
         ),
         pre({ class: "workspace-card__code" }, () =>
@@ -130,4 +143,3 @@ export const workspaceHomePage = createRouteView({
       ]),
     ]),
 });
-

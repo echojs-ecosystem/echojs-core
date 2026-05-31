@@ -17,12 +17,14 @@ import {
   ul,
 } from "@echojs/hyperdom";
 
+import { i18n } from "@app/i18n/index.js";
+import { cardHintKey, cardTitleKey, type ReactivityCardBase } from "@app/i18n/keys.js";
 import type { ReactivityLabVM, TodoItem } from "@features/reactivity-lab/model/reactivity-lab.model.js";
 
-const LabCard = (title: string, hint: string, body: Child): Child =>
+const LabCard = (baseKey: ReactivityCardBase, body: Child): Child =>
   div({ class: "demo-reactivity__card" }, [
-    h4(null, title),
-    p({ class: "demo-reactivity__hint" }, hint),
+    h4(null, () => i18n.t(cardTitleKey(baseKey))),
+    p({ class: "demo-reactivity__hint" }, () => i18n.t(cardHintKey(baseKey))),
     body,
   ]);
 
@@ -78,25 +80,10 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
     ]);
 
   return article({ class: "demo-reactivity" }, [
-    p({ class: "demo-reactivity__intro" }, [
-      "Интерактивные примеры ",
-      code(null, "@echojs/reactivity"),
-      " + интеграция с ",
-      code(null, "@echojs/hyperdom"),
-      " (",
-      code(null, "Show"),
-      ", ",
-      code(null, "List"),
-      ", ",
-      code(null, "createModel"),
-      ").",
-    ]),
+    p({ class: "demo-reactivity__intro" }, () => i18n.t("reactivityLab.intro")),
 
     div({ class: "demo-reactivity__grid" }, [
-      LabCard(
-        "signal — базовое состояние",
-        "signal(initial), .set(), .update(), реактивный DOM через функции-геттеры.",
-        div(null, [
+      LabCard("reactivityLab.cards.signal", div(null, [
           section(
             {
               class: () =>
@@ -111,17 +98,14 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
               strong({ class: "demo-reactivity__count" }, () => $count.value()),
               Show(
                 () => $count.value() > 0,
-                () => p({ class: "demo-reactivity__badge" }, "count > 0"),
+                () => p({ class: "demo-reactivity__badge" }, () => i18n.t("reactivityLab.countPositive")),
               ),
             ],
           ),
         ]),
       ),
 
-      LabCard(
-        "computed — производные значения",
-        "computed(() => …) пересчитывается при изменении зависимостей.",
-        div(null, [
+      LabCard("reactivityLab.cards.computed", div(null, [
           div({ class: "demo-reactivity__form-row" }, [
             label(null, [
               "first ",
@@ -145,10 +129,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "batch — группировка обновлений",
-        "batch() объединяет несколько .set/.update в одну реактивную транзакцию.",
-        div(null, [
+      LabCard("reactivityLab.cards.batch", div(null, [
           MetaRow("A", () => $batchA.value()),
           MetaRow("B", () => $batchB.value()),
           MetaRow("effect runs", () => $batchEffectRuns.value()),
@@ -157,14 +138,11 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
             button({ type: "button", class: "secondary", "on:click": vm.runSequentialUpdate }, "sequential +1"),
             button({ type: "button", class: "secondary", "on:click": vm.resetBatch }, "reset"),
           ]),
-          p({ class: "demo-reactivity__note" }, "Sequential даст +2 effect runs, batch — +1."),
+          p({ class: "demo-reactivity__note" }, () => i18n.t("reactivityLab.batchNote")),
         ]),
       ),
 
-      LabCard(
-        "object state — вложенное состояние",
-        "Обновление через immutable .update(prev => ({ …prev, tags: [...] })).",
-        div(null, [
+      LabCard("reactivityLab.cards.object", div(null, [
           div({ class: "demo-reactivity__form-row" }, [
             input({
               type: "text",
@@ -185,14 +163,11 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "array + List — список задач",
-        "Массив в signal + hyperdom List() для эффективного рендера.",
-        div(null, [
+      LabCard("reactivityLab.cards.todos", div(null, [
           div({ class: "demo-reactivity__form-row" }, [
             input({
               type: "text",
-              placeholder: "Новая задача",
+              placeholder: i18n.t("reactivityLab.todoPlaceholder"),
               value: $todoDraft.value(),
               "on:change": (e) => vm.setTodoDraft(e.currentTarget.value),
               "on:keydown": (e) => {
@@ -207,10 +182,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "peek vs value",
-        "peek() читает без подписки — effect с peek не перезапускается.",
-        div(null, [
+      LabCard("reactivityLab.cards.peek", div(null, [
           MetaRow("peekTarget", () => $peekTarget.value()),
           MetaRow("effect runs", () => $peekEffectRuns.value()),
           div({ class: "demo-reactivity__actions" }, [
@@ -220,10 +192,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "readonly — только чтение",
-        "readonly(signal) для передачи наружу без мутации.",
-        div(null, [
+      LabCard("reactivityLab.cards.readonly", div(null, [
           MetaRow("writable", () => $writable.value()),
           MetaRow("readonlyView", () => $readonlyView.value()),
           div({ class: "demo-reactivity__actions" }, [
@@ -233,10 +202,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "scope + cleanup — таймер",
-        "scope/effect/cleanup: interval стартует и очищается при toggle.",
-        div(null, [
+      LabCard("reactivityLab.cards.clock", div(null, [
           MetaRow("enabled", () => String($clockEnabled.value())),
           MetaRow("clock", () => $clock.value()),
           div({ class: "demo-reactivity__actions" }, [
@@ -248,10 +214,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "computed cart — интеграция",
-        "Паттерн «мини-store»: signal + computed total, как в e-commerce UI.",
-        div(null, [
+      LabCard("reactivityLab.cards.cart", div(null, [
           div({ class: "demo-reactivity__actions" }, [
             button({ type: "button", "on:click": () => vm.addCartItem("cpu") }, "+ CPU"),
             button({ type: "button", "on:click": () => vm.addCartItem("ram") }, "+ RAM"),
@@ -264,24 +227,9 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         ]),
       ),
 
-      LabCard(
-        "hyperdom + createModel",
-        "createModel() создаёт VM один раз; Show/List/cx реагируют на signal.",
-        div(null, [
-          p(null, [
-            "Эта страница собрана через ",
-            code(null, "createReactivityLabModel()"),
-            " и ",
-            code(null, "ReactivityLabView"),
-            ".",
-          ]),
-          p(null, [
-            "Сравни с ",
-            code(null, "@echojs/store"),
-            " на странице State и ",
-            code(null, "@echojs/query"),
-            " — там signal уже внутри query instances.",
-          ]),
+      LabCard("reactivityLab.cards.model", div(null, [
+          p(null, () => i18n.t("reactivityLab.modelNote1")),
+          p(null, () => i18n.t("reactivityLab.modelNote2")),
           MetaRow("model", () => "ReactivityLabModel"),
         ]),
       ),
@@ -289,7 +237,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
 
     section({ class: "demo-reactivity__log" }, [
       div({ class: "demo-reactivity__log-header" }, [
-        strong(null, "subscribe / effect log"),
+        strong(null, () => i18n.t("reactivityLab.logTitle")),
         button({ type: "button", class: "secondary", "on:click": vm.clearLogs }, "clear"),
       ]),
       pre(null, () => $logs.value().join("\n") || "—"),

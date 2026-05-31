@@ -1,7 +1,9 @@
+import type { TKey } from "@app/i18n/keys.js";
+
 export type LabModuleMeta = {
   id: string;
-  title: string;
-  description: string;
+  titleKey: TKey;
+  descriptionKey: TKey;
   package: string;
   path: string;
   requiresAuth?: boolean;
@@ -11,72 +13,72 @@ export type LabModuleMeta = {
 export const labModules: LabModuleMeta[] = [
   {
     id: "dashboard",
-    title: "Обзор",
-    description: "Карта модулей платформы EchoJS и статус сессии.",
+    titleKey: "modules.dashboard.title",
+    descriptionKey: "modules.dashboard.description",
     package: "echojs-core",
     path: "/",
     section: "overview",
   },
   {
     id: "reactivity",
-    title: "Реактивность",
-    description: "signal, computed, batch, effect, scope/cleanup и интеграция с hyperdom.",
+    titleKey: "modules.reactivity.title",
+    descriptionKey: "modules.reactivity.description",
     package: "@echojs/reactivity",
     path: "/reactivity",
     section: "platform",
   },
   {
     id: "forms",
-    title: "Формы",
-    description: "Поля, Zod-схемы, submit и wireFormModel.",
+    titleKey: "modules.forms.title",
+    descriptionKey: "modules.forms.description",
     package: "@echojs/form",
     path: "/forms",
     section: "platform",
   },
   {
     id: "forms-nested",
-    title: "Вложенные формы",
-    description: "Динамические массивы полей и вложенные структуры каталога.",
+    titleKey: "modules.formsNested.title",
+    descriptionKey: "modules.formsNested.description",
     package: "@echojs/form",
     path: "/forms/nested",
     section: "platform",
   },
   {
     id: "state",
-    title: "Состояние",
-    description: "Store, производные значения и типизированные actions.",
+    titleKey: "modules.state.title",
+    descriptionKey: "modules.state.description",
     package: "@echojs/store",
     path: "/state",
     section: "platform",
   },
   {
     id: "persistence",
-    title: "Сохранение",
-    description: "Адаптеры storage, hydrate и persist для полей формы.",
+    titleKey: "modules.persistence.title",
+    descriptionKey: "modules.persistence.description",
     package: "@echojs/persist",
     path: "/persistence",
     section: "platform",
   },
   {
     id: "query",
-    title: "Query",
-    description: "Кэш, fetch, retry и mutations на JSONPlaceholder API.",
+    titleKey: "modules.query.title",
+    descriptionKey: "modules.query.description",
     package: "@echojs/query",
     path: "/query",
     section: "platform",
   },
   {
     id: "workspace",
-    title: "Workspace",
-    description: "Продуктовый сценарий: пользователи, спринты, каталог и guards.",
+    titleKey: "modules.workspace.title",
+    descriptionKey: "modules.workspace.description",
     package: "@echojs/router",
     path: "/workspace",
     section: "workspace",
   },
   {
     id: "account",
-    title: "Аккаунт",
-    description: "Профиль, mock-сессия и персональные настройки.",
+    titleKey: "modules.account.title",
+    descriptionKey: "modules.account.description",
     package: "@echojs/store + @echojs/persist",
     path: "/account",
     requiresAuth: true,

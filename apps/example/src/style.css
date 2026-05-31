@@ -56,6 +56,36 @@ body.echojs-lab #app {
   }
 }
 
+.locale-switcher {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 4px;
+  flex-wrap: wrap;
+}
+
+.locale-switcher__label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #94a3b8;
+}
+
+.locale-switcher__btn {
+  border: 1px solid #475569;
+  background: transparent;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.locale-switcher__btn--active {
+  background: #334155;
+  border-color: #94a3b8;
+}
+
 .app-shell__sidebar {
   background: #1e293b;
   color: #f8fafc;
