@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   filterRootSchemaErrorsDeferredToFieldErrors,
   flattenValidationErrors,
-} from "../src/validation/flatten-validation";
+} from "./flatten-validation";
 
 describe("flattenValidationErrors()", () => {
   it("строка с пробелами не даёт ключ при пустом prefix", () => {

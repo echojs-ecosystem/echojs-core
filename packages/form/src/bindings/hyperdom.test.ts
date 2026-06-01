@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { bindField } from "../src/bindings/hyperdom";
-import { createField } from "../src/primitives/field";
-import { wireFormModel } from "../src/wire/wire-form-model";
+import { bindField } from "./hyperdom";
+import { createField } from "../primitives/field";
 
 const inputEvt = (value: string) =>
   ({ currentTarget: { value } } as Event & { currentTarget: HTMLInputElement });
@@ -26,12 +25,11 @@ describe("bindField()", () => {
     expect(c.value()).toBe("x");
   });
 
-  it("работает с FieldAccessor из wireFormModel", () => {
+  it("работает с value/meta API поля напрямую", () => {
     const f = createField(2);
-    const w = wireFormModel({ f }).f;
-    const c = bindField(w, { variant: "number", controlledValue: true });
+    const c = bindField(f, { variant: "number", controlledValue: true });
     c.onInput(inputEvt("5"));
-    expect(w.value()).toBe(5);
+    expect(f.value()).toBe(5);
     expect(c.value()).toBe("5");
   });
 

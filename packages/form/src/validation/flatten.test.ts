@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { flattenFieldErrors } from "../src/validation/flatten";
+import { flattenFieldErrors } from "./flatten";
 
 describe("flattenFieldErrors()", () => {
   it("склеивает путь через точку", () => {

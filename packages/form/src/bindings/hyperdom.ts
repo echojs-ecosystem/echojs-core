@@ -1,20 +1,11 @@
-import type { Field, FieldAccessor, FieldBinding } from "../types";
+import type { Field, FieldBinding } from "../types";
 
-type Bindable<T> = Pick<Field<T>, "bind"> | Pick<FieldAccessor<T>, "handlers">;
+/** Поле формы для Hyperdom (`createField` / `form.fields.*`). */
+export type HyperdomFormFieldRef<T> = Field<T>;
 
-/** Поле формы, к которому можно привязать Hyperdom-контроллер (`Field` или `FieldAccessor` из `wireFormModel`). */
-export type HyperdomFormFieldRef<T> = Field<T> | FieldAccessor<T>;
+const getBinding = <T>(field: HyperdomFormFieldRef<T>): FieldBinding => field.handlers;
 
-const isWireField = <T>(field: HyperdomFormFieldRef<T>): field is Field<T> =>
-  "$value" in field && typeof (field as Field<T>).$value?.value === "function";
-
-const getBinding = <T>(field: Bindable<T>): FieldBinding =>
-  "bind" in field ? field.bind() : field.handlers;
-
-const readFieldRef = <T>(field: HyperdomFormFieldRef<T>): T => {
-  if (isWireField(field)) return field.$value.value() as T;
-  return field.value() as T;
-};
+const readFieldRef = <T>(field: HyperdomFormFieldRef<T>): T => field.value() as T;
 
 const writeFieldRef = <T>(field: HyperdomFormFieldRef<T>, next: T): void => {
   field.set(next);
@@ -105,7 +96,7 @@ export const bindField = <T>(
   field: HyperdomFormFieldRef<T>,
   opts: bindFieldOptions,
 ): any => {
-  const b = getBinding(field as unknown as Bindable<T>);
+  const b = getBinding(field);
 
   switch (opts.variant) {
     case "text":

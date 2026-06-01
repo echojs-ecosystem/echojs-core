@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { createField } from "../src/primitives/field";
-import { createFieldArray } from "../src/primitives/fieldArray";
-import { createFieldSet } from "../src/primitives/fieldSet";
-import { deepReset, deepValidateAsync, deepValidateSync } from "../src/primitives/validation-tree";
+import { createField } from "./field";
+import { createFieldArray } from "./fieldArray";
+import { createFieldSet } from "./fieldSet";
+import { deepReset, deepValidateAsync, deepValidateSync } from "./validation-tree";
 
 describe("deepValidateSync()", () => {
   it("у Field без своих правил validate возвращает []", () => {

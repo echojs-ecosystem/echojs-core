@@ -109,7 +109,7 @@ router.go("/");
 Рабочий пример из `apps/example/src/pages/auth/login/model.ts`:
 
 ```ts
-import { createField, createForm, wireFormModel } from "@echojs/form";
+import { createField, createForm, bindField } from "@echojs/form";
 import { withLocalStorage } from "@echojs/persist";
 import { z } from "zod";
 
@@ -118,7 +118,7 @@ const schema = z.object({
   remember: z.boolean(),
 });
 
-const form = createForm(
+export const loginForm = createForm(
   {
     email: createField("").extend(withLocalStorage({ key: "echojs:login:email" })),
     remember: createField(false).extend(withLocalStorage({ key: "echojs:login:remember" })),
@@ -126,10 +126,11 @@ const form = createForm(
   { name: "LoginForm", validationSchema: schema },
 );
 
-export const ui = wireFormModel(form.fields);
+// В UI: bindField(loginForm.fields.email, { variant: "email" })
+// Ошибки: loginForm.fields.email.meta().errors
 ```
 
-Bindings для UI (Hyperdom) живут в `@echojs/form` как `bindField(...)` (см. `apps/example/src/features/forms-mini/ui/mini-forms.view.ts`).
+Bindings для UI (Hyperdom) — `bindField(form.fields.*, …)`; поля уже дают `.value()`, `.meta()`, `.handlers` (см. `apps/example/src/pages/account/account.page.ts`).
 
 ## Структура репозитория
 

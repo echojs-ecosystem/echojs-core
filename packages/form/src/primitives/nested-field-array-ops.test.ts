@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { createField } from "../src/primitives/field";
-import { createFieldArray } from "../src/primitives/fieldArray";
-import { defineNestedFieldArrayOps } from "../src/primitives/nested-field-array-ops";
+import { createField } from "./field";
+import { createFieldArray } from "./fieldArray";
+import { defineNestedFieldArrayOps } from "./nested-field-array-ops";
 
 type Child = { id: ReturnType<typeof createField<number>> };
 type Row = { name: ReturnType<typeof createField<string>>; kids: ReturnType<typeof createFieldArray<Child>> };

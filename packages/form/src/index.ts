@@ -16,7 +16,6 @@ export {
   filterRootSchemaErrorsDeferredToFieldErrors,
   flattenValidationErrors,
 } from "./validation/flatten-validation";
-export { wireFormModel } from "./wire/wire-form-model";
 export {
   normalizeStandardSchemaIssues,
   normalizeStandardSchemaPathSegments,
@@ -38,7 +37,6 @@ export type {
   FieldSet,
   Form,
   FormSubmitResult,
-  WireFormModel,
 } from "./types";
 export type { bindFieldOptions, HyperdomFormFieldRef } from "./bindings/hyperdom";
 export type { FieldArrayBranchConfig } from "./primitives/nested-field-array-ops";

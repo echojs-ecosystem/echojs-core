@@ -4,7 +4,7 @@ import {
   normalizeStandardSchemaPathSegments,
   standardSchemaIssuesForUnknown,
   standardSchemaIssuesForUnknownSync,
-} from "../src/validation/standard-schema";
+} from "./standard-schema";
 
 describe("normalizeStandardSchemaPathSegments()", () => {
   it("нормализует сегмент с key как у Zod", () => {

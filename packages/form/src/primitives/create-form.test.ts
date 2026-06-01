@@ -1,22 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
-import { createField } from "../src/primitives/field";
-import { createFieldSet } from "../src/primitives/fieldSet";
-import { collectFormValueFromFields } from "../src/primitives/collect-form-value";
-import { createForm } from "../src/primitives/create-form";
 
-describe("collectFormValueFromFields()", () => {
-  it("unwraps Field, FieldSet and FieldArray", () => {
-    const title = createField("root");
-    const profile = createFieldSet({
-      email: createField("a@b.c"),
-    });
-    expect(collectFormValueFromFields({ title, profile })).toEqual({
-      title: "root",
-      profile: { email: "a@b.c" },
-    });
-  });
-});
+import { arrayGenerator, createField, createFieldArray } from "../index";
+import { createFieldSet } from "./fieldSet";
+import { createForm } from "./create-form";
 
 describe("createForm()", () => {
   it("задаёт displayName из opts.name", () => {
@@ -166,5 +153,34 @@ describe("createForm()", () => {
       validate: () => ({ title: ["custom"] }),
     });
     expect(form.validate()).toEqual({ title: ["custom"] });
+  });
+});
+
+describe("arrayActions + arrayGenerator", () => {
+  it("append/remove по вложенным FieldArray", () => {
+    type Item = { label: ReturnType<typeof createField<string>> };
+
+    const form = createForm(
+      {
+        items: createFieldArray<Item>([{ label: createField("a") }]),
+      },
+      {
+        name: "ArrayActionsForm",
+        arrayActions: (f) => {
+          const createItem = (): Item => ({ label: createField("") });
+          return {
+            createItem,
+            appendItem: arrayGenerator.append(f, createItem, "items"),
+            removeItem: arrayGenerator.remove(f, "items"),
+          };
+        },
+      },
+    );
+
+    expect(form.fields.items.$items.value()).toHaveLength(1);
+    form.arrayActions.appendItem();
+    expect(form.fields.items.$items.value()).toHaveLength(2);
+    form.arrayActions.removeItem(1);
+    expect(form.fields.items.$items.value()).toHaveLength(1);
   });
 });

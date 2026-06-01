@@ -9,7 +9,7 @@ import {
 } from "@entities/session/index.js";
 import { getModule } from "@app/config/lab-modules.js";
 import { i18n } from "@app/i18n/index.js";
-import { profileForm, profileUi, saveProfileSnapshot } from "@pages/account/account.model.js";
+import { profileForm, saveProfileSnapshot } from "@pages/account/account.model.js";
 import type { Child } from "@echojs/hyperdom";
 import {
   button,
@@ -35,8 +35,7 @@ const fieldError = (errors: readonly string[]): Child =>
 export const accountPage = createRouteView({
   name: "account",
   view: () => {
-    const ui = profileUi;
-    const phonesField = profileForm.fields.phones;
+    const { name, email, phones: phonesField } = profileForm.fields;
 
     return section({ class: "page page--feature" }, [
       ModuleHeader(meta),
@@ -80,13 +79,13 @@ export const accountPage = createRouteView({
               p({ class: "page__hint" }, () => i18n.t("account.profileHint")),
               label(null, [
                 span({ class: "router-form-label" }, () => i18n.t("account.nameField")),
-                input({ ...bindField(ui.name, { variant: "text", controlledValue: true }) }),
-                () => fieldError(ui.name.meta().errors),
+                input({ ...bindField(name, { variant: "text", controlledValue: true }) }),
+                () => fieldError(name.meta().errors),
               ]),
               label(null, [
                 span({ class: "router-form-label" }, () => i18n.t("account.emailField")),
-                input({ ...bindField(ui.email, { variant: "email" }) }),
-                () => fieldError(ui.email.meta().errors),
+                input({ ...bindField(email, { variant: "email" }) }),
+                () => fieldError(email.meta().errors),
               ]),
               div({ class: "demo-persist__phones" }, [
                 p({ class: "router-form-label" }, () => i18n.t("account.phones")),

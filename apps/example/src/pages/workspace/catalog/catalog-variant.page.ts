@@ -1,6 +1,6 @@
 import { createRouteView } from "@echojs/router";
 import { bindField } from "@echojs/form";
-import { createField, createForm, wireFormModel } from "@echojs/form";
+import { createField, createForm } from "@echojs/form";
 import { button, div, h4, input, label, p, pre, span } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
 import { z } from "zod";
@@ -29,8 +29,6 @@ const orderForm = createForm(
   { name: "CatalogVariantOrderForm", validationSchema: orderSchema, defaultValues: { quantity: 1, note: "" } },
 );
 
-const orderUi = wireFormModel(orderForm.fields);
-
 const fieldError = (errors: readonly string[]): Child =>
   errors.length ? div({ class: "router-form-error" }, errors.join(", ")) : null;
 
@@ -40,6 +38,7 @@ export const catalogVariantPage = createRouteView<
 >({
   name: "catalog-variant",
   view: ({ params, query }) => {
+    const { quantity, note } = orderForm.fields;
     const tab = query.tab ?? "specs";
     const found = findVariant(params.categoryId, params.productId, params.variantId);
     const setTab = (next: VariantTab): void => {
@@ -87,14 +86,14 @@ export const catalogVariantPage = createRouteView<
               label(null, [
                 span({ class: "router-form-label" }, "Количество"),
                 input({
-                  ...bindField(orderUi.quantity, { variant: "number", controlledValue: true }),
+                  ...bindField(quantity, { variant: "number", controlledValue: true }),
                 }),
-                () => fieldError(orderUi.quantity.meta().errors),
+                () => fieldError(quantity.meta().errors),
               ]),
               label(null, [
                 span({ class: "router-form-label" }, "Комментарий"),
                 input({
-                  ...bindField(orderUi.note, { variant: "text", controlledValue: true }),
+                  ...bindField(note, { variant: "text", controlledValue: true }),
                 }),
               ]),
               button(

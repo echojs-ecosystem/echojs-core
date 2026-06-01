@@ -5,7 +5,7 @@ import { createRouteView } from "@echojs/router";
 import { i18n } from "@app/i18n/index.js";
 import { mockLogin } from "@entities/session/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
-import { authSignupForm, authSignupUi } from "@pages/auth/signup/auth-signup.model.js";
+import { authSignupForm } from "@pages/auth/signup/auth-signup.model.js";
 
 const fieldError = (errors: readonly string[]): Child =>
   errors.length ? div({ class: "router-form-error" }, errors.join(", ")) : null;
@@ -13,36 +13,36 @@ const fieldError = (errors: readonly string[]): Child =>
 export const authSignupPage = createRouteView({
   name: "auth-signup",
   view: () => {
-    const ui = authSignupUi;
+    const { name, email, password, confirmPassword, acceptTerms } = authSignupForm.fields;
 
     return div({ class: "router-auth-form" }, [
       h4(null, () => i18n.t("auth.signupTitle")),
       p({ class: "router-muted" }, () => i18n.t("auth.signupHint")),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.nameField")),
-        input({ ...bindField(ui.name, { variant: "text", controlledValue: true }) }),
-        () => fieldError(ui.name.meta().errors),
+        input({ ...bindField(name, { variant: "text", controlledValue: true }) }),
+        () => fieldError(name.meta().errors),
         p({ class: "router-form-hint" }, () => i18n.t("auth.nameDraftHint")),
       ]),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.email")),
-        input({ ...bindField(ui.email, { variant: "email" }) }),
-        () => fieldError(ui.email.meta().errors),
+        input({ ...bindField(email, { variant: "email" }) }),
+        () => fieldError(email.meta().errors),
       ]),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.password")),
-        input({ ...bindField(ui.password, { variant: "password" }) }),
-        () => fieldError(ui.password.meta().errors),
+        input({ ...bindField(password, { variant: "password" }) }),
+        () => fieldError(password.meta().errors),
       ]),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.confirmPassword")),
-        input({ ...bindField(ui.confirmPassword, { variant: "password" }) }),
-        () => fieldError(ui.confirmPassword.meta().errors),
+        input({ ...bindField(confirmPassword, { variant: "password" }) }),
+        () => fieldError(confirmPassword.meta().errors),
       ]),
       label({ class: "router-form-check" }, [
-        input({ ...bindField(ui.acceptTerms, { variant: "checkbox" }) }),
+        input({ ...bindField(acceptTerms, { variant: "checkbox" }) }),
         span(null, () => i18n.t("auth.acceptTerms")),
-        () => fieldError(ui.acceptTerms.meta().errors),
+        () => fieldError(acceptTerms.meta().errors),
       ]),
       div({ class: "router-form-actions" }, [
         button(

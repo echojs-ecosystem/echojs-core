@@ -6,7 +6,7 @@ import { i18n } from "@app/i18n/index.js";
 import { mockLogin } from "@entities/session/index.js";
 import { dashboardPage } from "@pages/dashboard/dashboard.page.js";
 import { authSignupPage } from "@pages/auth/signup/auth-signup.page.js";
-import { authLoginForm, authLoginUi } from "@pages/auth/login/auth-login.model.js";
+import { authLoginForm } from "@pages/auth/login/auth-login.model.js";
 
 const fieldError = (errors: readonly string[]): Child =>
   errors.length ? div({ class: "router-form-error" }, errors.join(", ")) : null;
@@ -14,24 +14,24 @@ const fieldError = (errors: readonly string[]): Child =>
 export const authLoginPage = createRouteView({
   name: "auth-login",
   view: () => {
-    const ui = authLoginUi;
+    const { email, password, remember } = authLoginForm.fields;
 
     return div({ class: "router-auth-form" }, [
       h4(null, () => i18n.t("auth.loginTitle")),
       p({ class: "router-muted" }, () => i18n.t("auth.loginHint")),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.email")),
-        input({ ...bindField(ui.email, { variant: "email" }) }),
-        () => fieldError(ui.email.meta().errors),
+        input({ ...bindField(email, { variant: "email" }) }),
+        () => fieldError(email.meta().errors),
         p({ class: "router-form-hint" }, () => i18n.t("auth.emailDraftHint")),
       ]),
       label(null, [
         span({ class: "router-form-label" }, () => i18n.t("auth.password")),
-        input({ ...bindField(ui.password, { variant: "password" }) }),
-        () => fieldError(ui.password.meta().errors),
+        input({ ...bindField(password, { variant: "password" }) }),
+        () => fieldError(password.meta().errors),
       ]),
       label({ class: "router-form-check" }, [
-        input({ ...bindField(ui.remember, { variant: "checkbox" }) }),
+        input({ ...bindField(remember, { variant: "checkbox" }) }),
         span(null, () => i18n.t("auth.remember")),
       ]),
       div({ class: "router-form-actions" }, [

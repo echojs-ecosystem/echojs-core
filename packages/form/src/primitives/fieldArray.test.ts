@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createFieldArray } from "../src/primitives/fieldArray";
+import { createFieldArray } from "./fieldArray";
 
 describe("createFieldArray()", () => {
   it("move: from === to не меняет массив", () => {

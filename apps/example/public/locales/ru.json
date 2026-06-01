@@ -39,7 +39,7 @@
     },
     "forms": {
       "title": "Формы",
-      "description": "Поля, Zod-схемы, submit и wireFormModel."
+      "description": "Поля, Zod-схемы и submit через createForm."
     },
     "formsNested": {
       "title": "Вложенные формы",
@@ -365,7 +365,7 @@
     "addTag": "+ тег"
   },
   "nestedCatalog": {
-    "intro": "Вложенные массивы + select/textarea + wireFormModel для каталога.",
+    "intro": "Вложенные массивы + select/textarea + bindField для каталога.",
     "catalogName": "Название каталога",
     "addDept": "+ отдел",
     "employee": "Сотрудник",

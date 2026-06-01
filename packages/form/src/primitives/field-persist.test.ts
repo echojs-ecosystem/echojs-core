@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { withMemoryStorage } from "@echojs/persist";
-import { createField } from "../src/primitives/field";
-import { createFieldArray } from "../src/primitives/fieldArray";
+import { createField } from "./field";
+import { createFieldArray } from "./fieldArray";
 
 const flushMicrotasks = async (): Promise<void> => {
   await Promise.resolve();

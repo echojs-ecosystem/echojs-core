@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { createField } from "../src/primitives/field";
-import { createFieldArray } from "../src/primitives/fieldArray";
-import { createFieldSet } from "../src/primitives/fieldSet";
-import { collectFormValueFromFields } from "../src/primitives/collect-form-value";
+import { createField } from "./field";
+import { createFieldArray } from "./fieldArray";
+import { createFieldSet } from "./fieldSet";
+import { collectFormValueFromFields } from "./collect-form-value";
 
 describe("collectFormValueFromFields()", () => {
   it("null проходит как null", () => {

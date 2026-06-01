@@ -39,7 +39,7 @@
     },
     "forms": {
       "title": "Forms",
-      "description": "Fields, Zod schemas, submit and wireFormModel."
+      "description": "Fields, Zod schemas, and submit via createForm."
     },
     "formsNested": {
       "title": "Nested forms",
@@ -365,7 +365,7 @@
     "addTag": "+ tag"
   },
   "nestedCatalog": {
-    "intro": "Nested arrays + select/textarea + wireFormModel for catalog.",
+    "intro": "Nested arrays + select/textarea + bindField for catalog.",
     "catalogName": "Catalog name",
     "addDept": "+ department",
     "employee": "Employee",

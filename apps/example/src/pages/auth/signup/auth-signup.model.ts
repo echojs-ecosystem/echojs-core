@@ -1,4 +1,4 @@
-import { createField, createForm, wireFormModel } from "@echojs/form";
+import { createField, createForm } from "@echojs/form";
 import { withLocalStorage } from "@echojs/persist";
 import { z } from "zod";
 
@@ -35,6 +35,4 @@ export const authSignupForm = createForm(
     },
   },
 );
-
-export const authSignupUi = wireFormModel(authSignupForm.fields);
 

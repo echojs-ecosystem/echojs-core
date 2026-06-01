@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
-import { createField } from "../src/primitives/field";
-import { createFieldArray } from "../src/primitives/fieldArray";
-import { createFieldKit } from "../src/primitives/field-kit";
-import { createForm } from "../src/primitives/create-form";
+import { createField } from "./field";
+import { createFieldArray } from "./fieldArray";
+import { createFieldKit } from "./field-kit";
+import { createForm } from "./create-form";
 
 describe("createFieldKit()", () => {
   it("reads primitives and nested lists from seed", () => {

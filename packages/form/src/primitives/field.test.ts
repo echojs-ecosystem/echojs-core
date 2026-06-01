@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createField } from "../src/primitives/field";
+import { createField } from "./field";
 
 describe("createField()", () => {
   it("отмечает dirty при set", () => {
@@ -40,5 +40,16 @@ describe("createField()", () => {
   it("bind() возвращает тот же singleton", () => {
     const f = createField("a");
     expect(f.bind()).toBe(f.bind());
+  });
+
+  it("value/meta/handlers — UI shortcuts для bindField", () => {
+    const f = createField("hi");
+    expect(f.value()).toBe("hi");
+    expect(f.meta().dirty).toBe(false);
+    expect(f.handlers).toBe(f.bind());
+
+    f.set("bye");
+    expect(f.value()).toBe("bye");
+    expect(f.$value.value()).toBe("bye");
   });
 });

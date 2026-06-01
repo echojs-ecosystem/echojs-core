@@ -1,4 +1,4 @@
-import { collectFormValueFromFields, createField, createFieldArray, createForm, wireFormModel } from "@echojs/form";
+import { collectFormValueFromFields, createField, createFieldArray, createForm } from "@echojs/form";
 import { withLocalStorage } from "@echojs/persist";
 import { createStore } from "@echojs/store";
 import { z } from "zod";
@@ -43,8 +43,6 @@ export const profileFormSnapshotStore = createStore(
   }),
 );
 
-export const profileUi = wireFormModel(profileForm.fields);
-
 export const saveProfileSnapshot = (): void => {
   const snapshot = collectFormValueFromFields(profileForm.fields) as {
     name: string;
@@ -53,4 +51,3 @@ export const saveProfileSnapshot = (): void => {
   };
   profileFormSnapshotStore.set(snapshot);
 };
-

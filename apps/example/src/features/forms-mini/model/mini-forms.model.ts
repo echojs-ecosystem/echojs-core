@@ -1,5 +1,5 @@
 import { createModel } from "@echojs/hyperdom";
-import { createField, createFieldArray, createForm, wireFormModel } from "@echojs/form";
+import { createField, createFieldArray, createForm } from "@echojs/form";
 import { z } from "zod";
 
 type LoginValue = z.infer<typeof LoginSchema>;
@@ -61,9 +61,9 @@ const hobbiesForm = createForm<HobbiesValue, HobbiesFields>(
 );
 
 export interface MiniFormsVM {
-  login: ReturnType<typeof wireFormModel<LoginFields>>;
+  login: LoginFields;
   loginForm: typeof loginForm;
-  hobbies: ReturnType<typeof wireFormModel<HobbiesFields>>;
+  hobbies: HobbiesFields;
   hobbiesForm: typeof hobbiesForm;
   appendTag: () => void;
   removeTag: (index: number) => void;
@@ -71,9 +71,9 @@ export interface MiniFormsVM {
 
 export const $miniFormsModel = createModel((): MiniFormsVM => {
   return {
-    login: wireFormModel(loginForm.fields),
+    login: loginForm.fields,
     loginForm,
-    hobbies: wireFormModel(hobbiesForm.fields),
+    hobbies: hobbiesForm.fields,
     hobbiesForm,
     appendTag: () => hobbiesForm.fields.tags.append(newTagRow()),
     removeTag: (index) => hobbiesForm.fields.tags.removeAt(index),

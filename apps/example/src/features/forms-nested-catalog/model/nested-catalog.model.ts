@@ -5,9 +5,7 @@ import {
   createField,
   createFieldArray,
   createForm,
-  wireFormModel,
 } from "@echojs/form";
-import type { WireFormModel } from "@echojs/form";
 import { z } from "zod";
 
 const RoleEnum = z.enum(["dev", "pm", "qa"]);
@@ -147,7 +145,7 @@ export const ROLE_OPTIONS: { value: z.infer<typeof RoleEnum>; label: string }[] 
 ];
 
 export interface NestedCatalogVM {
-  ui: WireFormModel<CatalogFields>;
+  ui: CatalogFields;
   form: typeof catalogForm;
   $schemaErrors: typeof catalogForm.$schemaErrors;
   submitCatalog: () => Promise<void>;
@@ -173,7 +171,7 @@ export const $nestedCatalogModel = createModel((): NestedCatalogVM => {
   });
 
   return {
-    ui: wireFormModel(catalogForm.fields),
+    ui: catalogForm.fields,
     form: catalogForm,
     $schemaErrors: catalogForm.$schemaErrors,
     submitCatalog,

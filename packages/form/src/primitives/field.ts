@@ -68,6 +68,12 @@ export const createField = <T>(initial: T): Field<T> => {
     $value,
     $meta,
 
+    value: () => $value.value(),
+    meta: () => $meta.value(),
+    get handlers() {
+      return bind();
+    },
+
     set: (next) => setValue(next),
     reset: (next) => {
       $value.set(next !== undefined ? next : initial);

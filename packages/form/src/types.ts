@@ -57,45 +57,16 @@ export type FieldValidationMode = "manual" | "onChange" | "onBlur";
 
 export type FormValidationMode = "manual" | "onChange" | "onBlur" | "onFocus" | "all";
 
-export type FieldAccessor<TValue> = {
-  /** Reactive read shortcut: `accessor.value()` delegates to signals. */
-  value: () => ReadValue<TValue>;
-  meta: () => FieldMeta;
-
-  /** Same as underlying `createField()` `set()`, but ergonomically spelled for bindings. */
-  set: (next: TValue) => void;
-  reset: (next?: TValue) => void;
-
-  /** Mirrors common DOM lifecycle hooks (`on:input`, `on:change`, `on:focus`, `on:blur`). */
-  handlers: FieldBinding;
-
-  validate: () => string[];
-  validateAsync: () => Promise<string[]>;
-  clearErrors: () => void;
-};
-
-export type FieldTreeWire<TTree> =
-  TTree extends Field<infer TValue>
-    ? FieldAccessor<TValue>
-    : TTree extends FieldSet<infer Shape>
-      ? { fields: { [K in keyof Shape]: FieldTreeWire<Shape[K]> } }
-      : TTree extends FieldArray<infer Item>
-        ? FieldArray<Item>
-        : TTree extends Record<string, unknown>
-          ? { [K in keyof TTree]: FieldTreeWire<TTree[K]> }
-          : never;
-
-export type WireFormModel<TTree> = FieldTreeWire<TTree> & {
-  /**
-   * Rebuild accessors after inserting/removing array items whose models are keyed by index.
-   * (Use stable ids + Map models if possible; `reindex` is escape hatch.)
-   */
-  reindex?: () => void;
-};
-
 export type FieldCore<T> = {
   $value: Signal<T>;
   $meta: Signal<FieldMeta>;
+
+  /** Shortcut for `$value.value()` — use in views and `bindField`. */
+  value: () => ReadValue<T>;
+  /** Shortcut for `$meta.value()`. */
+  meta: () => FieldMeta;
+  /** Same handlers as `bind()` — for Hyperdom `bindField` and custom inputs. */
+  handlers: FieldBinding;
 
   set: (next: T) => void;
   reset: (next?: T) => void;
@@ -104,6 +75,7 @@ export type FieldCore<T> = {
   blur: () => void;
   touch: () => void;
 
+  /** @deprecated Prefer `.handlers` — kept for backward compatibility. */
   bind: () => FieldBinding;
 
   validate: () => string[];
