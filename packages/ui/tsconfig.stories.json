@@ -1,0 +1,7 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {},
+  "include": ["src/**/*.stories.ts", ".storybook/**/*.ts"],
+  "exclude": ["dist", "node_modules", "storybook-static"]
+}

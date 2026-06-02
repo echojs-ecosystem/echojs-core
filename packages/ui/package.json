@@ -8,14 +8,91 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./button": {
+      "types": "./dist/button.d.ts",
+      "import": "./dist/button.js",
+      "default": "./dist/button.js"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button.d.ts",
+      "import": "./dist/icon-button.js",
+      "default": "./dist/icon-button.js"
+    },
+    "./input": {
+      "types": "./dist/input.d.ts",
+      "import": "./dist/input.js",
+      "default": "./dist/input.js"
+    },
+    "./input-mask": {
+      "types": "./dist/input-mask.d.ts",
+      "import": "./dist/input-mask.js",
+      "default": "./dist/input-mask.js"
+    },
+    "./input-otp": {
+      "types": "./dist/input-otp.d.ts",
+      "import": "./dist/input-otp.js",
+      "default": "./dist/input-otp.js"
+    },
+    "./input-tags": {
+      "types": "./dist/input-tags.d.ts",
+      "import": "./dist/input-tags.js",
+      "default": "./dist/input-tags.js"
+    },
+    "./textarea": {
+      "types": "./dist/textarea.d.ts",
+      "import": "./dist/textarea.js",
+      "default": "./dist/textarea.js"
+    },
+    "./label": {
+      "types": "./dist/label.d.ts",
+      "import": "./dist/label.js",
+      "default": "./dist/label.js"
+    },
+    "./field": {
+      "types": "./dist/field.d.ts",
+      "import": "./dist/field.js",
+      "default": "./dist/field.js"
+    },
+    "./checkbox": {
+      "types": "./dist/checkbox.d.ts",
+      "import": "./dist/checkbox.js",
+      "default": "./dist/checkbox.js"
+    },
+    "./provider": {
+      "types": "./dist/provider.d.ts",
+      "import": "./dist/provider.js",
+      "default": "./dist/provider.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js",
+      "default": "./dist/theme.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.js",
+      "default": "./dist/utils.js"
+    },
+    "./primitives": {
+      "types": "./dist/primitives.d.ts",
+      "import": "./dist/primitives.js",
+      "default": "./dist/primitives.js"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsup",
-    "check-types": "tsc -p tsconfig.json --noEmit",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "check-types": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "test:types": "tsc -p tsconfig.typing.json --noEmit",
     "lint": "oxlint .",
     "lint:fix": "oxlint . --fix",
     "format": "oxfmt --check .",
@@ -23,15 +100,26 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:vitest:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build -o storybook-static"
   },
   "dependencies": {
     "@echojs/hyperdom": "workspace:*"
   },
   "devDependencies": {
     "@echojs/oxc-config": "workspace:*",
+    "@storybook/addon-a11y": "^8.6.14",
+    "@storybook/addon-essentials": "^8.6.14",
+    "@storybook/addon-links": "^8.6.14",
+    "@storybook/html": "^8.6.14",
+    "@storybook/html-vite": "^8.6.14",
+    "@tailwindcss/vite": "^4.1.8",
     "jsdom": "^26.1.0",
+    "storybook": "^8.6.14",
+    "tailwindcss": "^4.1.8",
     "typescript": "5.9.2",
+    "vite": "^6.0.0",
     "vitest": "^4.1.4"
   }
 }

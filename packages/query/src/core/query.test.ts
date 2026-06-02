@@ -75,9 +75,10 @@ describe('Query', () => {
   it('fetch returns same promise while already fetching', async () => {
     const client = createTestClient()
     const d = deferred<number>()
+    const queryFn = vi.fn(() => d.promise)
     const def = createQuery({
       queryKey: () => ['dedupe'],
-      queryFn: () => d.promise,
+      queryFn,
     })
     const instance = def.with({}, { client, refetchOnMount: false })
     const p1 = instance.refetch()
@@ -87,5 +88,6 @@ describe('Query', () => {
     d.resolve(1)
     expect(await p1).toBe(1)
     expect(await p2).toBe(1)
+    expect(queryFn).toHaveBeenCalledTimes(1)
   })
 })

@@ -38,7 +38,7 @@ export const authLoginPage = createRouteView({
         button(
           {
             type: "button",
-            "on:click": async () => {
+            onClick: async () => {
               const res = await authLoginForm.submit(async (values) => {
                 mockLogin({
                   email: String(values.email),
@@ -56,7 +56,7 @@ export const authLoginPage = createRouteView({
             type: "button",
             class: "router-form-link",
             style: "background:transparent;border:none;cursor:pointer;padding:0;",
-            "on:click": () => authSignupPage.go({}),
+            onClick: () => authSignupPage.go({}),
           },
           () => i18n.t("auth.createAccount"),
         ),

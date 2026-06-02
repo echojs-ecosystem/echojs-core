@@ -12,3 +12,7 @@ export const dataDisabled = (disabled?: boolean): DataAttributeProps =>
 /** `data-invalid` — present when invalid. */
 export const dataInvalid = (invalid?: boolean): DataAttributeProps =>
   invalid ? { "data-invalid": "" } : {};
+
+/** `data-pending` — present while async action is in progress (HeroUI-style). */
+export const dataPending = (pending?: boolean): DataAttributeProps =>
+  pending ? { "data-pending": "" } : {};

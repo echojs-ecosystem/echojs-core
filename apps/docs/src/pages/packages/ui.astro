@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="@echojs/ui" description="UI-компоненты EchoJS поверх @echojs/hyperdom: кнопки, инпуты, тема, провайдеры.">
+  <section class="section">
+    <div class="container">
+      <p class="kicker">Пакет</p>
+
+      <div class="grid">
+        <div class="card col8">
+          <div class="cardPad">
+            <p class="cardTitle"><span class="mono">@echojs/ui</span></p>
+            <p class="cardText">
+              Набор UI-компонентов и инфраструктуры (provider/theme/utils), построенных поверх
+              <span class="mono">@echojs/hyperdom</span>. В монорепо есть Storybook для живой документации компонентов.
+            </p>
+          </div>
+        </div>
+
+        <div class="card col4">
+          <div class="cardPad">
+            <p class="cardTitle">Storybook</p>
+            <p class="cardText">
+              Запуск из корня: <span class="mono">bun run storybook</span> (фильтр на <span class="mono">@echojs/ui</span>).
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

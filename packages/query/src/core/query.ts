@@ -179,8 +179,7 @@ export class Query<TData, TParams = void, TError = unknown, TQueryData = TData> 
   ): Promise<TData> {
     if (
       this.state.fetchStatus !== 'idle' &&
-      this.#retryer &&
-      this.state.data !== undefined
+      this.#retryer
     ) {
       if (options?.cancelRefetch) {
         await this.cancel({ silent: true })

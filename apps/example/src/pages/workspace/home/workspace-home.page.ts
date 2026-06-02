@@ -47,10 +47,10 @@ export const workspaceHomePage = createRouteView({
       demoCard("workspace.home.usersTitle", [
         p(null, () => i18n.t("workspace.home.usersDesc")),
         actionRow(
-          button({ "on:click": () => usersListPage.go() }, () => i18n.t("workspace.home.list")),
+          button({ onClick: () => usersListPage.go() }, () => i18n.t("workspace.home.list")),
           button(
             {
-              "on:click": () => userPage.go({ id: "1" }, { query: { tab: "profile" } }),
+              onClick: () => userPage.go({ id: "1" }, { query: { tab: "profile" } }),
             },
             "User #1",
           ),
@@ -60,14 +60,14 @@ export const workspaceHomePage = createRouteView({
       demoCard("workspace.home.orgsTitle", [
         actionRow(
           button({
-            "on:click": () =>
+            onClick: () =>
               workspaceSprintPage.go(
                 { orgId: "acme", teamId: "platform", sprintId: "s24" },
                 { query: { tab: "board" } },
               ),
           }, "Acme / S24"),
           button({
-            "on:click": () =>
+            onClick: () =>
               workspaceSprintPage.go(
                 { orgId: "north", teamId: "ops", sprintId: "ops-3" },
                 { query: { tab: "retro" } },
@@ -79,7 +79,7 @@ export const workspaceHomePage = createRouteView({
       demoCard("workspace.home.catalogTitle", [
         actionRow(
           button({
-            "on:click": () =>
+            onClick: () =>
               catalogVariantPage.go(
                 {
                   categoryId: "electronics",
@@ -90,7 +90,7 @@ export const workspaceHomePage = createRouteView({
               ),
           }, "Phone specs"),
           button({
-            "on:click": () =>
+            onClick: () =>
               catalogVariantPage.go(
                 { categoryId: "home", productId: "lamp", variantId: "rgb" },
                 { query: { tab: "order" } },
@@ -102,12 +102,12 @@ export const workspaceHomePage = createRouteView({
       demoCard("workspace.home.utilityTitle", [
         actionRow(
           button(
-            { "on:click": () => settingsPage.go({}) },
+            { onClick: () => settingsPage.go({}) },
             () => i18n.t("workspace.home.settingsGuard"),
           ),
-          button({ "on:click": () => slowPage.go({}) }, "Slow load"),
-          button({ "on:click": () => filesPage.go({ "*": "docs/readme.md" }) }, "Files *"),
-          button({ "on:click": () => legacyUserRoute.go({ id: "3" }) }, "Legacy redirect"),
+          button({ onClick: () => slowPage.go({}) }, "Slow load"),
+          button({ onClick: () => filesPage.go({ "*": "docs/readme.md" }) }, "Files *"),
+          button({ onClick: () => legacyUserRoute.go({ id: "3" }) }, "Legacy redirect"),
         ),
       ]),
 
@@ -125,7 +125,7 @@ export const workspaceHomePage = createRouteView({
             p({ class: "router-muted" }, [
               () => i18n.t("workspace.home.settingsNeedLogin"),
               button(
-                { type: "button", "on:click": () => authLoginPage.go({}) },
+                { type: "button", onClick: () => authLoginPage.go({}) },
                 () => i18n.t("workspace.home.login"),
               ),
             ]),

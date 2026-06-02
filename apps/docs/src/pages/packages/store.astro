@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="@echojs/store" description="Минимальный store layer поверх @echojs/reactivity, SSR-friendly и framework-agnostic.">
+  <section class="section">
+    <div class="container">
+      <p class="kicker">Пакет</p>
+
+      <div class="grid">
+        <div class="card col8">
+          <div class="cardPad">
+            <p class="cardTitle"><span class="mono">@echojs/store</span></p>
+            <p class="cardText">
+              Минимальный store layer: <span class="mono">set</span>/<span class="mono">update</span>/<span class="mono">reset</span>,
+              события изменений, <span class="mono">subscribe</span>, и расширение через <span class="mono">.extend()</span> (actions/debug/readonly).
+            </p>
+          </div>
+        </div>
+
+        <div class="card col4">
+          <div class="cardPad">
+            <p class="cardTitle">Примечание</p>
+            <p class="cardText">
+              Persistence вынесен отдельно: <a href="/packages/persist"><span class="mono">@echojs/persist</span></a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+

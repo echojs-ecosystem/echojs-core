@@ -21,7 +21,7 @@ export const composeEventHandlers = <E extends Event>(
 
   return (event) => {
     userHandler(event);
-    if (checkDefaultPrevented && event.defaultPrevented) return;
+    if (checkDefaultPrevented && event?.defaultPrevented) return;
     internalHandler(event);
   };
 };

@@ -70,7 +70,7 @@ export const accountPage = createRouteView({
                 ),
               ),
               button(
-                { type: "button", class: "secondary", "on:click": logout },
+                { type: "button", class: "secondary", onClick: logout },
                 () => i18n.t("common.logout"),
               ),
             ]),
@@ -95,7 +95,7 @@ export const accountPage = createRouteView({
                       input({
                         class: "control",
                         value: phone,
-                        "on:input": (e: { currentTarget: HTMLInputElement }) => {
+                        onInput: (e: { currentTarget: HTMLInputElement }) => {
                           phonesField.updateAt(index, () => e.currentTarget.value);
                         },
                       }),
@@ -103,14 +103,14 @@ export const accountPage = createRouteView({
                         {
                           type: "button",
                           class: "secondary",
-                          "on:click": () => phonesField.removeAt(index),
+                          onClick: () => phonesField.removeAt(index),
                         },
                         "×",
                       ),
                     ]),
                   ),
                 button(
-                  { type: "button", class: "secondary", "on:click": () => phonesField.append("") },
+                  { type: "button", class: "secondary", onClick: () => phonesField.append("") },
                   () => i18n.t("account.addPhone"),
                 ),
               ]),
@@ -118,7 +118,7 @@ export const accountPage = createRouteView({
                 button(
                   {
                     type: "button",
-                    "on:click": async () => {
+                    onClick: async () => {
                       await profileForm.submit(async () => saveProfileSnapshot());
                     },
                   },
@@ -131,7 +131,7 @@ export const accountPage = createRouteView({
           div({ class: "account__guest" }, [
             p(null, () => i18n.t("account.guestHint")),
             button(
-              { type: "button", "on:click": () => authLoginPage.go({}) },
+              { type: "button", onClick: () => authLoginPage.go({}) },
               () => i18n.t("common.login"),
             ),
           ]),

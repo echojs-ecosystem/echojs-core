@@ -1,0 +1,18 @@
+---
+import DocsLayout from "../../../../layouts/DocsLayout.astro";
+import { packageNav } from "../../../../lib/docs-nav";
+
+const nav = packageNav.reactivity;
+---
+
+<DocsLayout title="effect" description="API: effect(() => { ... })" nav={nav}>
+  <h1 class="docH1"><span class="mono">effect(fn)</span></h1>
+  <p class="docLead">
+    Запускает эффект синхронно. Возвращает disposer для остановки.
+  </p>
+
+  <hr class="docHr" />
+
+  <div class="callout">Дальше: lifecycle, cleanup и примеры.</div>
+</DocsLayout>
+

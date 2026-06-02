@@ -287,12 +287,12 @@ const DepartmentCard = createView(
           {
             type: "button",
             class: "secondary",
-            "on:click": () => props.appendEmployee(props.deptIndex()),
+            onClick: () => props.appendEmployee(props.deptIndex()),
           },
           "+ сотрудник",
         ),
         button(
-          { type: "button", class: "danger", "on:click": () => props.removeDept(props.deptIndex()) },
+          { type: "button", class: "danger", onClick: () => props.removeDept(props.deptIndex()) },
           "удалить отдел",
         ),
       ),

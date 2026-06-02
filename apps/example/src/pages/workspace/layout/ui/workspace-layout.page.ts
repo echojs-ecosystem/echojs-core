@@ -67,7 +67,8 @@ const navItem = (
           appRouter.resolve(page, params, {
             query: query as Record<string, unknown> | undefined,
           }),
-        "on:click:prevent": () => {
+        onClick: (e) => {
+          e.preventDefault();
           page.go(params as never, { query: query as never });
         },
       },
@@ -139,7 +140,7 @@ export const workspaceLayoutPage = createLayoutView({
           {
             type: "button",
             class: "secondary",
-            "on:click": () => {
+            onClick: () => {
               const user = USERS[Math.floor(Math.random() * USERS.length)]!;
               userPage.go({ id: user.id }, { query: { tab: "profile" } });
             },

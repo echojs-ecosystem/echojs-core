@@ -71,7 +71,7 @@ export const AppSidebar = (): Child =>
             p({ class: "app-shell__session-label" }, () => i18n.t("common.session")),
             p({ class: "app-shell__session-user" }, () => $authUser.value()?.name ?? i18n.t("common.user")),
             button(
-              { type: "button", class: "secondary app-shell__session-btn", "on:click": logout },
+              { type: "button", class: "secondary app-shell__session-btn", onClick: logout },
               () => i18n.t("common.logout"),
             ),
           ]),
@@ -79,7 +79,7 @@ export const AppSidebar = (): Child =>
           div(null, [
             p({ class: "app-shell__session-label" }, () => i18n.t("common.guest")),
             button(
-              { type: "button", class: "app-shell__session-btn", "on:click": () => authLoginPage.go({}) },
+              { type: "button", class: "app-shell__session-btn", onClick: () => authLoginPage.go({}) },
               () => i18n.t("common.login"),
             ),
           ]),

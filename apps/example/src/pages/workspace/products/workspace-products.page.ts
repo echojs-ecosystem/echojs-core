@@ -151,7 +151,7 @@ export const workspaceProductsPage = createRouteView({
             class: "control",
             value: urlSearchParams.q,
             placeholder: "например: phone / lamp / electronics",
-            "on:input": (e: { currentTarget: HTMLInputElement }) => {
+            onInput: (e: { currentTarget: HTMLInputElement }) => {
               productsQueryParams.set({ q: e.currentTarget.value, page: 1 });
             },
           }),
@@ -161,7 +161,7 @@ export const workspaceProductsPage = createRouteView({
           input({
             type: "checkbox",
             checked: urlSearchParams.inStock,
-            "on:change": (e: { currentTarget: HTMLInputElement }) => {
+            onChange: (e: { currentTarget: HTMLInputElement }) => {
               productsQueryParams.set({ inStock: e.currentTarget.checked, page: 1 });
             },
           }),
@@ -176,13 +176,13 @@ export const workspaceProductsPage = createRouteView({
                 {
                   type: "button",
                   style: tagBtn(activeTags.includes(t)),
-                  "on:click": () => toggleTag(t),
+                  onClick: () => toggleTag(t),
                 },
                 t,
               ),
             ),
             button(
-              { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ tag: [], page: 1 }) },
+              { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ tag: [], page: 1 }) },
               "Очистить",
             ),
           ]),
@@ -190,34 +190,34 @@ export const workspaceProductsPage = createRouteView({
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center", "flex-wrap": "wrap" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "relevance", page: 1 }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ sort: "relevance", page: 1 }) },
             "Sort: relevance",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "name", page: 1 }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ sort: "name", page: 1 }) },
             "Sort: name",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "price_asc", page: 1 }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ sort: "price_asc", page: 1 }) },
             "Sort: price_asc",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ sort: "price_desc", page: 1 }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ sort: "price_desc", page: 1 }) },
             "Sort: price_desc",
           ),
         ]),
 
         div({ style: { display: "flex", gap: "10px", "align-items": "center" } }, [
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ view: "grid" }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ view: "grid" }) },
             "View: grid",
           ),
           button(
-            { type: "button", class: "secondary", "on:click": () => productsQueryParams.set({ view: "list" }) },
+            { type: "button", class: "secondary", onClick: () => productsQueryParams.set({ view: "list" }) },
             "View: list",
           ),
-          button({ type: "button", class: "secondary", "on:click": () => productsQueryParams.reset() }, "Reset"),
-          button({ type: "button", class: "secondary", "on:click": () => productsQueryParams.clear() }, "Clear"),
+          button({ type: "button", class: "secondary", onClick: () => productsQueryParams.reset() }, "Reset"),
+          button({ type: "button", class: "secondary", onClick: () => productsQueryParams.clear() }, "Clear"),
         ]),
       ]),
 
@@ -234,11 +234,11 @@ export const workspaceProductsPage = createRouteView({
 
       div({ style: { display: "flex", gap: "8px", margin: "12px 0" } }, [
         button(
-          { type: "button", class: "secondary", "on:click": () => setPage(Math.max(1, safePage - 1)) },
+          { type: "button", class: "secondary", onClick: () => setPage(Math.max(1, safePage - 1)) },
           "← Prev",
         ),
         button(
-          { type: "button", class: "secondary", "on:click": () => setPage(Math.min(totalPages, safePage + 1)) },
+          { type: "button", class: "secondary", onClick: () => setPage(Math.min(totalPages, safePage + 1)) },
           "Next →",
         ),
       ]),

@@ -74,9 +74,9 @@ export const catalogVariantPage = createRouteView<
         span({ class: "router-param-pill" }, ["tab = ", span(null, tab)]),
       ]),
       div({ class: "router-tabs", style: { display: "flex", gap: "8px", margin: "12px 0" } }, [
-        button({ style: tabBtn(tab === "specs"), "on:click": () => setTab("specs") }, "Характеристики"),
-        button({ style: tabBtn(tab === "stock"), "on:click": () => setTab("stock") }, "Склад"),
-        button({ style: tabBtn(tab === "order"), "on:click": () => setTab("order") }, "Заказ"),
+        button({ style: tabBtn(tab === "specs"), onClick: () => setTab("specs") }, "Характеристики"),
+        button({ style: tabBtn(tab === "stock"), onClick: () => setTab("stock") }, "Склад"),
+        button({ style: tabBtn(tab === "order"), onClick: () => setTab("order") }, "Заказ"),
       ]),
       tab === "specs"
         ? p(null, () => `SKU: ${found?.variant.sku ?? "—"}`)
@@ -99,7 +99,7 @@ export const catalogVariantPage = createRouteView<
               button(
                 {
                   type: "button",
-                  "on:click": async () => {
+                  onClick: async () => {
                     await orderForm.submit(async (value) => {
                       console.log("order", { ...value, sku: found?.variant.sku });
                     });

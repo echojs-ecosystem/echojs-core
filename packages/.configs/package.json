@@ -6,6 +6,7 @@
   "exports": {
     "./tsconfig": "./tsconfig.json",
     "./tsup": "./tsup.ts",
+    "./package-aliases": "./package-aliases.ts",
     "./vitest": "./vitest.config.ts",
     "./oxfmt": "./oxfmt.config.ts",
     "./oxlint": "./oxlint.config.ts",

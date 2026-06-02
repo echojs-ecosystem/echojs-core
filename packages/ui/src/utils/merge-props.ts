@@ -20,7 +20,11 @@ const mergePair = (target: MergeableProps, source: MergeableProps | undefined): 
     if (value === undefined) continue;
 
     if (CLASS_KEYS.has(key)) {
-      target[key] = mergeClassValues(target[key], value);
+      const mergedClass = mergeClassValues(target.className, value);
+      if (mergedClass !== undefined) {
+        target.className = mergedClass;
+        target.class = mergedClass;
+      }
       continue;
     }
 

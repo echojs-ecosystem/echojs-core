@@ -1,29 +1,9 @@
-import type { Child, Props } from "@echojs/hyperdom";
-import type { UIComponentBaseProps } from "../../core/types";
+import type { Props } from "@echojs/hyperdom";
+import type { InputFieldProps } from "../input-shared/field.types";
 
-export type InputVariant = "outline" | "filled" | "ghost";
-export type InputSize = "sm" | "md" | "lg";
+export type { InputSize, InputVariant } from "../input-shared/field.types";
 
-export type InputProps = UIComponentBaseProps &
-  Omit<Props<HTMLInputElement>, "children" | "type" | "value" | "defaultValue" | "size"> & {
-    value?: string;
-    defaultValue?: string;
-
+export type InputProps = InputFieldProps &
+  Omit<Props<HTMLInputElement>, keyof InputFieldProps> & {
     type?: "text" | "email" | "url" | "tel" | "search" | "password";
-
-    name?: string;
-    placeholder?: string;
-    autocomplete?: string;
-
-    disabled?: boolean;
-    readonly?: boolean;
-    required?: boolean;
-    invalid?: boolean;
-
-    size?: InputSize;
-    variant?: InputVariant;
-
-    startContent?: Child;
-    endContent?: Child;
   };
-

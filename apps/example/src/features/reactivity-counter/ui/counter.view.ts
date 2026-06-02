@@ -31,7 +31,7 @@ export const CounterView = createView((vm: CounterVM): Child => {
     section(
       { class: cx("section", { "is-positive": $count.value() > 0 }) },
       h3(null, () => i18n.t("counter.title")),
-      button({ "on:click": vm.increment }, () => i18n.t("counter.increment")),
+      button({ onClick: vm.increment }, () => i18n.t("counter.increment")),
       span({ style: { "margin-left": "12px", "font-weight": 700 } }, () => $count.value()),
       Show(
         () => $count.value() > 0,
@@ -46,7 +46,7 @@ export const CounterView = createView((vm: CounterVM): Child => {
       input({
         type: "text",
         value: $name.value(),
-        "on:change": (e) => vm.setName(e.currentTarget.value),
+        onChange: (e) => vm.setName(e.currentTarget.value),
       }),
       div({ style: { "margin-top": "8px" } }, [
         () => i18n.t("counter.hello"),
@@ -58,8 +58,8 @@ export const CounterView = createView((vm: CounterVM): Child => {
       { class: "section" },
       h3(null, () => i18n.t("counter.listTitle")),
       div({ style: { display: "flex", gap: "8px", "margin-bottom": "8px" } }, [
-        button({ "on:click": vm.appendItem }, () => i18n.t("counter.append")),
-        button({ class: "secondary", "on:click": vm.resetItems }, () => i18n.t("counter.reset")),
+        button({ onClick: vm.appendItem }, () => i18n.t("counter.append")),
+        button({ class: "secondary", onClick: vm.resetItems }, () => i18n.t("counter.reset")),
       ]),
       div(
         null,

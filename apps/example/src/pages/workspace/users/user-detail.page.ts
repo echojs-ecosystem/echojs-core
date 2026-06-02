@@ -39,15 +39,15 @@ export const userPage = createRouteView<
                   },
                   [
                     button(
-                      { style: tabBtn(tab === "profile"), "on:click": () => setTab("profile") },
+                      { style: tabBtn(tab === "profile"), onClick: () => setTab("profile") },
                       "Профиль",
                     ),
                     button(
-                      { style: tabBtn(tab === "settings"), "on:click": () => setTab("settings") },
+                      { style: tabBtn(tab === "settings"), onClick: () => setTab("settings") },
                       "Настройки",
                     ),
                     button(
-                      { style: tabBtn(tab === "activity"), "on:click": () => setTab("activity") },
+                      { style: tabBtn(tab === "activity"), onClick: () => setTab("activity") },
                       "Активность",
                     ),
                   ],

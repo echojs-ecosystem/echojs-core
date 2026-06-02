@@ -1,0 +1,26 @@
+/**
+ * Design tokens (HeroUI v3–inspired).
+ * Import in app entry / Storybook: `@import "@echojs/ui/theme/tokens.css";`
+ */
+@theme {
+  --color-accent: var(--color-zinc-900);
+  --color-accent-hover: var(--color-zinc-800);
+  --color-accent-foreground: var(--color-white);
+
+  --color-default: var(--color-zinc-100);
+  --color-default-hover: var(--color-zinc-200);
+  --color-default-foreground: var(--color-zinc-900);
+
+  --color-border: var(--color-zinc-300);
+
+  --color-danger: var(--color-red-600);
+  --color-danger-hover: var(--color-red-700);
+  --color-danger-foreground: var(--color-white);
+
+  --color-danger-soft: var(--color-red-50);
+  --color-danger-soft-hover: var(--color-red-100);
+  --color-danger-soft-foreground: var(--color-red-700);
+
+  --ease-smooth: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+}

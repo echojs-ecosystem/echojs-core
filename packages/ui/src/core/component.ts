@@ -2,6 +2,7 @@ import { h, type Child, type Props } from "@echojs/hyperdom";
 import type { UIContextValue } from "../theme/theme-context";
 import { getUIContextOrDefault } from "../theme/theme-context";
 import { resolveVariantClasses } from "../theme/variants";
+import { resolveVariantOptions } from "./variant-keys";
 import { cn } from "../utils/cn";
 import { mergeProps } from "../utils/merge-props";
 import type { UIComponentBaseProps } from "./types";
@@ -29,17 +30,6 @@ export type CreateUIComponentConfig<
 };
 
 const themeKeyFromName = (name: string): string => name.charAt(0).toLowerCase() + name.slice(1);
-
-const pickVariantProps = (
-  props: Record<string, unknown>,
-  variantKeys: string[],
-): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const key of variantKeys) {
-    if (props[key] !== undefined) out[key] = props[key];
-  }
-  return out;
-};
 
 /**
  * Factory for hyperdom UI components with theme, provider, and headless support.
@@ -73,11 +63,11 @@ export const createUIComponent = <
       props as Record<string, unknown>,
     ) as TProps & Record<string, unknown>;
 
-    const variantKeys = Object.keys(themeSlice?.defaultVariants ?? {});
-    const variantOptions = {
-      ...themeSlice?.defaultVariants,
-      ...pickVariantProps(merged, variantKeys),
-    };
+    const variantOptions = resolveVariantOptions(
+      config.variants as Parameters<typeof resolveVariantOptions>[0],
+      themeSlice?.defaultVariants,
+      merged,
+    );
 
     const variantClass = resolveVariantClasses(config.variants, variantOptions, headless);
 

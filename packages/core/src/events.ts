@@ -70,18 +70,13 @@ const addEventListener = (
 };
 
 const isEventProp = (name: string): boolean => {
-  // Support on:click, on-click, onClick
-  return name.startsWith("on:") || name.startsWith("on-") || /^on[A-Z]/.test(name);
+  return name.startsWith("on-") || /^on[A-Z]/.test(name);
 };
 
 const normalizeEventName = (name: string): string => {
-  if (name.startsWith("on:")) {
-    return name.slice(3);
-  }
   if (name.startsWith("on-")) {
     return name.slice(3);
   }
-  // onClick -> click
   if (name.startsWith("on") && name.length > 2) {
     const eventName = name.slice(2);
     return eventName[0]!.toLowerCase() + eventName.slice(1);

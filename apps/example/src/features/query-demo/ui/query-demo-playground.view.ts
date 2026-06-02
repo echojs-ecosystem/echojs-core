@@ -36,14 +36,14 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
               min: "1",
               max: "10",
               value: String($slowUserId.value()),
-              "on:change": (e) => $slowUserId.set(Number(e.currentTarget.value) || 1),
+              onChange: (e) => $slowUserId.set(Number(e.currentTarget.value) || 1),
             }),
           ]),
         ]),
         div({ class: "demo-query__card-actions" }, [
-          button({ type: "button", "on:click": vm.startSlowFetch }, "refetch()"),
-          button({ type: "button", class: "secondary", "on:click": () => vm.abortSlowFetch() }, "abort()"),
-          button({ type: "button", class: "secondary", "on:click": () => vm.slowUser.cancel() }, "cancel()"),
+          button({ type: "button", onClick: vm.startSlowFetch }, "refetch()"),
+          button({ type: "button", class: "secondary", onClick: () => vm.abortSlowFetch() }, "abort()"),
+          button({ type: "button", class: "secondary", onClick: () => vm.slowUser.cancel() }, "cancel()"),
         ]),
         signalRow("status", () => slowUser.status()),
         signalRow("abortSignal", () => vm.abortSignalLabel("slow")),
@@ -56,8 +56,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
       PlaygroundCard("queryDemo.cards.manual", [
         p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.manual.hint")),
         div({ class: "demo-query__card-actions" }, [
-          button({ type: "button", "on:click": vm.refetchWithManualController }, "Start refetch"),
-          button({ type: "button", class: "secondary", "on:click": vm.abortManualController }, "AC.abort()"),
+          button({ type: "button", onClick: vm.refetchWithManualController }, "Start refetch"),
+          button({ type: "button", class: "secondary", onClick: vm.abortManualController }, "AC.abort()"),
         ]),
         signalRow("user.abortSignal", () => vm.abortSignalLabel("user")),
         signalRow("fetching", () => String(vm.user.isFetching())),
@@ -66,8 +66,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
       PlaygroundCard("queryDemo.cards.route", [
         p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.route.hint")),
         div({ class: "demo-query__card-actions" }, [
-          button({ type: "button", class: "secondary", "on:click": vm.simulateRouteLeave }, "Route leave"),
-          button({ type: "button", "on:click": vm.simulateRouteEnter }, "Route enter"),
+          button({ type: "button", class: "secondary", onClick: vm.simulateRouteLeave }, "Route leave"),
+          button({ type: "button", onClick: vm.simulateRouteEnter }, "Route enter"),
         ]),
         signalRow("session", () => String($routeSession.value())),
         signalRow("routeBound", () => routeBoundUser.status()),
@@ -77,12 +77,12 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
       PlaygroundCard("queryDemo.cards.cache", [
         p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.cache.hint")),
         div({ class: "demo-query__card-actions" }, [
-          button({ type: "button", "on:click": vm.togglePostsEnabled }, () =>
+          button({ type: "button", onClick: vm.togglePostsEnabled }, () =>
             $postsEnabled.value() ? "Disable posts" : "Enable posts",
           ),
-          button({ type: "button", class: "secondary", "on:click": () => void vm.prefetchSelectedUser() }, "prefetch user"),
-          button({ type: "button", class: "secondary", "on:click": vm.patchSelectedUserName }, "setQueryData patch"),
-          button({ type: "button", class: "secondary", "on:click": vm.clearUserCache }, "removeQueries"),
+          button({ type: "button", class: "secondary", onClick: () => void vm.prefetchSelectedUser() }, "prefetch user"),
+          button({ type: "button", class: "secondary", onClick: vm.patchSelectedUserName }, "setQueryData patch"),
+          button({ type: "button", class: "secondary", onClick: vm.clearUserCache }, "removeQueries"),
         ]),
         signalRow("posts enabled", () => String($postsEnabled.value())),
         signalRow("postsWhenEnabled", () => postsWhenEnabled.status()),
@@ -92,8 +92,8 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
       PlaygroundCard("queryDemo.cards.infinite", [
         p({ class: "demo-query__hint" }, () => i18n.t("queryDemo.cards.infinite.hint")),
         div({ class: "demo-query__card-actions" }, [
-          button({ type: "button", "on:click": vm.loadMoreWithManualAbort }, "Load page (manual AC)"),
-          button({ type: "button", class: "secondary", "on:click": vm.abortInfiniteLoad }, "Abort page load"),
+          button({ type: "button", onClick: vm.loadMoreWithManualAbort }, "Load page (manual AC)"),
+          button({ type: "button", class: "secondary", onClick: vm.abortInfiniteLoad }, "Abort page load"),
         ]),
         signalRow("pages", () => String(vm.postsInfinite.pages().length)),
         signalRow("abortSignal", () => vm.abortSignalLabel("infinite")),
@@ -107,12 +107,12 @@ export const QueryDemoPlaygroundView = createView((vm: QueryDemoVM): Child => {
             {
               type: "button",
               disabled: () => slowCreatePost.isPending(),
-              "on:click": () => void vm.submitSlowPost(),
+              onClick: () => void vm.submitSlowPost(),
             },
             () => (slowCreatePost.isPending() ? "Pending…" : "run() slow"),
           ),
-          button({ type: "button", class: "secondary", "on:click": vm.abortSlowMutation }, "abort()"),
-          button({ type: "button", class: "secondary", "on:click": () => slowCreatePost.cancel() }, "cancel()"),
+          button({ type: "button", class: "secondary", onClick: vm.abortSlowMutation }, "abort()"),
+          button({ type: "button", class: "secondary", onClick: () => slowCreatePost.cancel() }, "cancel()"),
         ]),
         signalRow("status", () => slowCreatePost.status()),
         signalRow("abortSignal", () => vm.abortSignalLabel("mutation")),

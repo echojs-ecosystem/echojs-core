@@ -1,5 +1,5 @@
 import { isFunction } from "./utils";
-import { batch as alienBatch } from "./internals/alien";
+import { batch as alienBatch } from "@internals/alien";
 
 export const batch = <T>(fn: () => T): T => {
   if (!isFunction(fn)) {

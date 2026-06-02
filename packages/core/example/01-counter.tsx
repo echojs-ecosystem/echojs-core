@@ -30,9 +30,9 @@ const counterView = createView((vm) => (
       <small> (Double: {vm.double.value()})</small>
     </div>
     <div class="buttons">
-      <button on:click={vm.decrement}>-</button>
-      <button on:click={vm.reset}>Reset</button>
-      <button on:click={vm.increment}>+</button>
+      <button onClick={vm.decrement}>-</button>
+      <button onClick={vm.reset}>Reset</button>
+      <button onClick={vm.increment}>+</button>
     </div>
   </div>
 ));

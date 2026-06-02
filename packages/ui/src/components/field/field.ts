@@ -56,6 +56,7 @@ export const Field = (props: FieldProps): Child => {
       "aria-labelledby": labelId,
       "aria-describedby": describedBy,
       "aria-invalid": invalid ? "true" : undefined,
+      "aria-required": required ? "true" : undefined,
       required: required || undefined,
       disabled: disabled || undefined,
       invalid: invalid || undefined,
@@ -73,8 +74,9 @@ export const Field = (props: FieldProps): Child => {
     errorProps: errorId ? { id: errorId, role: "alert" } : undefined,
   };
 
-  const slots = fieldStyles({} as any);
-  const rootClass = headless ? undefined : cn(slots.root(), merged.className as any, merged.class as any);
+  const rootClass = headless
+    ? undefined
+    : cn(fieldStyles.root(), merged.className as string | undefined, merged.class as string | undefined);
 
   const content = isFnChild(merged.children) ? merged.children(ctx) : merged.children;
 
@@ -102,7 +104,10 @@ export const Field = (props: FieldProps): Child => {
         merged.description
           ? h(
               "div",
-              { id: descriptionId, className: headless ? undefined : slots.description() } as any,
+              {
+                id: descriptionId,
+                className: headless ? undefined : fieldStyles.description(),
+              } as any,
               merged.description as Child,
             )
           : null,
@@ -110,7 +115,11 @@ export const Field = (props: FieldProps): Child => {
         merged.error
           ? h(
               "div",
-              { id: errorId, role: "alert", className: headless ? undefined : slots.error() } as any,
+              {
+                id: errorId,
+                role: "alert",
+                className: headless ? undefined : fieldStyles.error(),
+              } as any,
               merged.error as Child,
             )
           : null,

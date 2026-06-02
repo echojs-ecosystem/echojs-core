@@ -114,4 +114,3 @@ List(items, (item, index) => h("div", null, [index(), ": ", item]));
 - `List()` пока делает **полный re-render** списка при изменении массива.
   - TODO: keyed reconciliation / оптимизированный diff.
 - JSX-компилятор пока не входит в пакет.
-- TODO: расширенный синтаксис событий вида `on:event:name`.

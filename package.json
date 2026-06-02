@@ -10,6 +10,8 @@
     "build": "turbo run build",
     "build:http": "turbo run build --filter=@echojs/network-http",
     "dev": "turbo run dev",
+    "storybook": "turbo run storybook --filter=@echojs/ui",
+    "storybook:build": "turbo run storybook:build --filter=@echojs/ui",
     "check-types": "turbo run check-types",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage && node scripts/coverage-report.mjs",

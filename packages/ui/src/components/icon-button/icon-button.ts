@@ -1,28 +1,37 @@
+import { createUIComponent } from "../../core/component";
 import { Button } from "../button/button";
-import { cn } from "../../utils/cn";
 import { iconButtonStyles } from "./icon-button.styles";
 import type { IconButtonProps } from "./icon-button.types";
 
 const isDev = (): boolean => {
-  const env = (globalThis as any)?.process?.env?.NODE_ENV;
+  const env = (globalThis as { process?: { env?: { NODE_ENV?: string } } }).process?.env?.NODE_ENV;
   return env !== "production";
 };
 
-export const IconButton = (props: IconButtonProps) => {
-  const ariaLabel = (props as any)["aria-label"] as string | undefined;
-  if (isDev() && (!ariaLabel || ariaLabel.trim().length === 0)) {
-    throw new Error(
-      'IconButton: проп \"aria-label\" обязателен (например: IconButton({ \"aria-label\": \"Close\", children: ... })).',
-    );
-  }
-
-  const { size = "md", className, class: klass, ...rest } = props as any;
-
-  return Button({
-    ...rest,
+export const IconButton = createUIComponent<IconButtonProps, HTMLElement>({
+  name: "IconButton",
+  defaultTag: "button",
+  defaultProps: {
+    variant: "ghost",
     size: "md",
-    className: cn(iconButtonStyles({ size } as any), className, klass),
-    children: props.children,
-  } as any);
-};
+  },
+  variants: (options) => iconButtonStyles(options as Record<string, unknown>),
+  render: ({ props, className, headless }) => {
+    const ariaLabel = props["aria-label"];
+    if (isDev() && (!ariaLabel || String(ariaLabel).trim().length === 0)) {
+      throw new Error(
+        'IconButton: prop "aria-label" is required (e.g. IconButton({ "aria-label": "Close", children: ... })).',
+      );
+    }
 
+    const { size: _iconSize, children, ...rest } = props;
+
+    return Button({
+      ...rest,
+      headless,
+      size: "md",
+      className,
+      children,
+    });
+  },
+});

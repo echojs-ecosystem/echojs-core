@@ -16,6 +16,7 @@ export type FieldContext = {
     "aria-labelledby": string;
     "aria-describedby"?: string;
     "aria-invalid"?: "true";
+    "aria-required"?: "true";
     required?: boolean;
     disabled?: boolean;
     invalid?: boolean;

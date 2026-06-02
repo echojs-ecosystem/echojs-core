@@ -63,7 +63,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
         input({
           type: "checkbox",
           checked: item.done,
-          "on:change": () => vm.toggleTodo(item.id),
+          onChange: () => vm.toggleTodo(item.id),
         }),
         span(null, item.text),
       ]),
@@ -74,8 +74,8 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
       span(null, line.label),
       span(null, () => `${line.qty} × ${line.price} ₽`),
       div({ class: "demo-reactivity__cart-actions" }, [
-        button({ type: "button", class: "secondary", "on:click": () => vm.changeCartQty(line.sku, -1) }, "−"),
-        button({ type: "button", class: "secondary", "on:click": () => vm.changeCartQty(line.sku, 1) }, "+"),
+        button({ type: "button", class: "secondary", onClick: () => vm.changeCartQty(line.sku, -1) }, "−"),
+        button({ type: "button", class: "secondary", onClick: () => vm.changeCartQty(line.sku, 1) }, "+"),
       ]),
     ]);
 
@@ -91,9 +91,9 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
             },
             [
               div({ class: "demo-reactivity__actions" }, [
-                button({ type: "button", "on:click": vm.decrement }, "−"),
-                button({ type: "button", "on:click": vm.increment }, "+"),
-                button({ type: "button", class: "secondary", "on:click": vm.resetCount }, "reset"),
+                button({ type: "button", onClick: vm.decrement }, "−"),
+                button({ type: "button", onClick: vm.increment }, "+"),
+                button({ type: "button", class: "secondary", onClick: vm.resetCount }, "reset"),
               ]),
               strong({ class: "demo-reactivity__count" }, () => $count.value()),
               Show(
@@ -112,7 +112,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
               input({
                 type: "text",
                 value: $firstName.value(),
-                "on:change": (e) => vm.setFirstName(e.currentTarget.value),
+                onChange: (e) => vm.setFirstName(e.currentTarget.value),
               }),
             ]),
             label(null, [
@@ -120,7 +120,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
               input({
                 type: "text",
                 value: $lastName.value(),
-                "on:change": (e) => vm.setLastName(e.currentTarget.value),
+                onChange: (e) => vm.setLastName(e.currentTarget.value),
               }),
             ]),
           ]),
@@ -134,9 +134,9 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
           MetaRow("B", () => $batchB.value()),
           MetaRow("effect runs", () => $batchEffectRuns.value()),
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": vm.runBatchUpdate }, "batch +1"),
-            button({ type: "button", class: "secondary", "on:click": vm.runSequentialUpdate }, "sequential +1"),
-            button({ type: "button", class: "secondary", "on:click": vm.resetBatch }, "reset"),
+            button({ type: "button", onClick: vm.runBatchUpdate }, "batch +1"),
+            button({ type: "button", class: "secondary", onClick: vm.runSequentialUpdate }, "sequential +1"),
+            button({ type: "button", class: "secondary", onClick: vm.resetBatch }, "reset"),
           ]),
           p({ class: "demo-reactivity__note" }, () => i18n.t("reactivityLab.batchNote")),
         ]),
@@ -147,17 +147,17 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
             input({
               type: "text",
               value: () => $profile.value().name,
-              "on:change": (e) => vm.renameProfile(e.currentTarget.value),
+              onChange: (e) => vm.renameProfile(e.currentTarget.value),
             }),
             input({
               type: "text",
               value: () => $profile.value().role,
-              "on:change": (e) => vm.setProfileRole(e.currentTarget.value),
+              onChange: (e) => vm.setProfileRole(e.currentTarget.value),
             }),
           ]),
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": vm.addProfileTag }, "add tag"),
-            button({ type: "button", class: "secondary", "on:click": vm.removeLastTag }, "pop tag"),
+            button({ type: "button", onClick: vm.addProfileTag }, "add tag"),
+            button({ type: "button", class: "secondary", onClick: vm.removeLastTag }, "pop tag"),
           ]),
           div({ class: "demo-reactivity__tags" }, List(() => $profile.value().tags, (tag) => span({ class: "demo-reactivity__tag" }, tag))),
         ]),
@@ -169,16 +169,16 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
               type: "text",
               placeholder: i18n.t("reactivityLab.todoPlaceholder"),
               value: $todoDraft.value(),
-              "on:change": (e) => vm.setTodoDraft(e.currentTarget.value),
-              "on:keydown": (e) => {
+              onChange: (e) => vm.setTodoDraft(e.currentTarget.value),
+              onKeyDown: (e) => {
                 if (e.key === "Enter") vm.addTodo();
               },
             }),
-            button({ type: "button", "on:click": vm.addTodo }, "Add"),
+            button({ type: "button", onClick: vm.addTodo }, "Add"),
           ]),
           MetaRow("done", () => `${$doneCount.value()} / ${$todos.value().length}`),
           ul({ class: "demo-reactivity__todos" }, List(() => $todos.value(), todoRow)),
-          button({ type: "button", class: "secondary", "on:click": vm.clearDoneTodos }, "Clear done"),
+          button({ type: "button", class: "secondary", onClick: vm.clearDoneTodos }, "Clear done"),
         ]),
       ),
 
@@ -186,8 +186,8 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
           MetaRow("peekTarget", () => $peekTarget.value()),
           MetaRow("effect runs", () => $peekEffectRuns.value()),
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": vm.bumpPeekTarget }, "peekTarget++"),
-            button({ type: "button", class: "secondary", "on:click": vm.resetPeekDemo }, "reset"),
+            button({ type: "button", onClick: vm.bumpPeekTarget }, "peekTarget++"),
+            button({ type: "button", class: "secondary", onClick: vm.resetPeekDemo }, "reset"),
           ]),
         ]),
       ),
@@ -196,8 +196,8 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
           MetaRow("writable", () => $writable.value()),
           MetaRow("readonlyView", () => $readonlyView.value()),
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": vm.bumpWritable }, "writable++"),
-            button({ type: "button", class: "secondary", "on:click": vm.tryMutateReadonly }, "readonly info"),
+            button({ type: "button", onClick: vm.bumpWritable }, "writable++"),
+            button({ type: "button", class: "secondary", onClick: vm.tryMutateReadonly }, "readonly info"),
           ]),
         ]),
       ),
@@ -206,20 +206,20 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
           MetaRow("enabled", () => String($clockEnabled.value())),
           MetaRow("clock", () => $clock.value()),
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": vm.toggleClock }, () =>
+            button({ type: "button", onClick: vm.toggleClock }, () =>
               $clockEnabled.value() ? "Stop clock" : "Start clock",
             ),
-            button({ type: "button", class: "secondary", "on:click": vm.resetClock }, "reset tick"),
+            button({ type: "button", class: "secondary", onClick: vm.resetClock }, "reset tick"),
           ]),
         ]),
       ),
 
       LabCard("reactivityLab.cards.cart", div(null, [
           div({ class: "demo-reactivity__actions" }, [
-            button({ type: "button", "on:click": () => vm.addCartItem("cpu") }, "+ CPU"),
-            button({ type: "button", "on:click": () => vm.addCartItem("ram") }, "+ RAM"),
-            button({ type: "button", "on:click": () => vm.addCartItem("ssd") }, "+ SSD"),
-            button({ type: "button", class: "secondary", "on:click": vm.clearCart }, "clear"),
+            button({ type: "button", onClick: () => vm.addCartItem("cpu") }, "+ CPU"),
+            button({ type: "button", onClick: () => vm.addCartItem("ram") }, "+ RAM"),
+            button({ type: "button", onClick: () => vm.addCartItem("ssd") }, "+ SSD"),
+            button({ type: "button", class: "secondary", onClick: vm.clearCart }, "clear"),
           ]),
           ul({ class: "demo-reactivity__cart" }, List(() => $cart.value(), cartRow)),
           MetaRow("items", () => $cartItemsCount.value()),
@@ -238,7 +238,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
     section({ class: "demo-reactivity__log" }, [
       div({ class: "demo-reactivity__log-header" }, [
         strong(null, () => i18n.t("reactivityLab.logTitle")),
-        button({ type: "button", class: "secondary", "on:click": vm.clearLogs }, "clear"),
+        button({ type: "button", class: "secondary", onClick: vm.clearLogs }, "clear"),
       ]),
       pre(null, () => $logs.value().join("\n") || "—"),
     ]),

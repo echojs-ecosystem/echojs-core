@@ -1,5 +1,5 @@
 import { isFunction } from "./utils";
-import { createAlienEffect } from "./internals/alien";
+import { createAlienEffect } from "@internals/alien";
 
 export const effect = (fn: () => void): (() => void) => {
   if (!isFunction(fn)) {

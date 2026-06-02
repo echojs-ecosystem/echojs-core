@@ -40,20 +40,8 @@ export type DomEventHandler<E extends Element, K extends EventName> = (
   event: GlobalEventHandlersEventMap[K] & { currentTarget: E },
 ) => void;
 
-type EventModifier = "prevent" | "stop";
-type ModifierSuffix =
-  | ""
-  | `:${EventModifier}`
-  | `:${EventModifier}:${EventModifier}`
-  | `:${EventModifier}:${EventModifier}:${EventModifier}`
-  | `:${EventModifier}:${EventModifier}:${EventModifier}:${EventModifier}`;
-
 type OnProps<E extends Element> = {
-  [K in EventName as `on:${K}${ModifierSuffix}`]?: DomEventHandler<E, K>;
-} & {
   [K in EventName as `on${Capitalize<K>}`]?: DomEventHandler<E, K>;
-} & {
-  [K in `on:[${string}]${ModifierSuffix}`]?: (event: Event & { currentTarget: E }) => void;
 };
 
 type DataAriaProps = {

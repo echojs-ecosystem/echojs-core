@@ -1,0 +1,18 @@
+---
+import DocsLayout from "../../../../layouts/DocsLayout.astro";
+import { packageNav } from "../../../../lib/docs-nav";
+
+const nav = packageNav.reactivity;
+---
+
+<DocsLayout title="batch" description="API: batch(() => { ... })" nav={nav}>
+  <h1 class="docH1"><span class="mono">batch(fn)</span></h1>
+  <p class="docLead">
+    Группирует обновления так, чтобы реакции/эффекты обработались один раз после батча.
+  </p>
+
+  <hr class="docHr" />
+
+  <div class="callout">Дальше: примеры и типичные сценарии (формы, массовые апдейты).</div>
+</DocsLayout>
+

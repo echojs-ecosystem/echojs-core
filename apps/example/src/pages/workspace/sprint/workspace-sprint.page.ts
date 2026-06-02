@@ -59,11 +59,11 @@ export const workspaceSprintPage = createRouteView<
       ]),
       div({ class: "router-tabs", style: { display: "flex", gap: "8px", margin: "12px 0" } }, [
         button(
-          { style: tabBtn(tab === "overview"), "on:click": () => setTab("overview") },
+          { style: tabBtn(tab === "overview"), onClick: () => setTab("overview") },
           "Overview",
         ),
-        button({ style: tabBtn(tab === "board"), "on:click": () => setTab("board") }, "Board"),
-        button({ style: tabBtn(tab === "retro"), "on:click": () => setTab("retro") }, "Retro"),
+        button({ style: tabBtn(tab === "board"), onClick: () => setTab("board") }, "Board"),
+        button({ style: tabBtn(tab === "retro"), onClick: () => setTab("retro") }, "Retro"),
       ]),
       p(null, tabCopy[tab]),
       pre({ class: "router-playground-code" }, () => JSON.stringify({ params, query: { tab } }, null, 2)),

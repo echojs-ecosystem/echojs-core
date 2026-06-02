@@ -1,6 +1,6 @@
 import { createSubscribe } from "./subscribe";
-import { createAlienComputed, untrack } from "./internals/alien";
-import { brandReadonly } from "./internals/guards";
+import { createAlienComputed, untrack } from "@internals/alien";
+import { brandReadonly } from "@internals/guards";
 import type { ReadonlySignal, ReadValue } from "./types";
 import { isFunction } from "./utils";
 

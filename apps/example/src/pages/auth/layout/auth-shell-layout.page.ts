@@ -36,7 +36,7 @@ export const authShellLayoutPage = createLayoutView({
             {
               type: "button",
               class: "secondary",
-              "on:click": () => dashboardPage.go({}),
+              onClick: () => dashboardPage.go({}),
             },
             () => i18n.t("auth.backHome"),
           ),

@@ -40,13 +40,13 @@ export const statePage = createRouteView({
             span({ class: "demo-store__badge" }, () => themeStore.value()),
           ]),
           div({ class: "demo-store__actions" }, [
-            button({ type: "button", "on:click": () => themeStore.toggle() }, () => i18n.t("state.toggle")),
+            button({ type: "button", onClick: () => themeStore.toggle() }, () => i18n.t("state.toggle")),
             button(
-              { type: "button", class: "secondary", "on:click": () => themeStore.setDark() },
+              { type: "button", class: "secondary", onClick: () => themeStore.setDark() },
               () => i18n.t("state.dark"),
             ),
             button(
-              { type: "button", class: "secondary", "on:click": () => themeStore.setLight() },
+              { type: "button", class: "secondary", onClick: () => themeStore.setLight() },
               () => i18n.t("state.light"),
             ),
           ]),
@@ -59,9 +59,9 @@ export const statePage = createRouteView({
             code(null, () => counterLabel.value()),
           ]),
           div({ class: "demo-store__actions" }, [
-            button({ type: "button", "on:click": () => counterStore.decrement() }, "−"),
-            button({ type: "button", "on:click": () => counterStore.increment() }, "+"),
-            button({ type: "button", class: "secondary", "on:click": () => counterStore.add(5) }, "+5"),
+            button({ type: "button", onClick: () => counterStore.decrement() }, "−"),
+            button({ type: "button", onClick: () => counterStore.increment() }, "+"),
+            button({ type: "button", class: "secondary", onClick: () => counterStore.add(5) }, "+5"),
           ]),
         ]),
       ]),

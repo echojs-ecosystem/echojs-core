@@ -7,24 +7,23 @@
 export type TVVariantsShape = Record<string, Record<string, string>>;
 export type TVBooleanVariantShape = Record<string, { true?: string; false?: string }>;
 
+export type TVCompoundVariant = Record<string, string | boolean> & { class: string };
+
 export type TVConfig = {
   base?: string;
   variants?: TVVariantsShape & TVBooleanVariantShape;
+  compoundVariants?: TVCompoundVariant[];
   defaultVariants?: Record<string, string | boolean>;
   slots?: Record<string, string>;
 };
 
-export type TVResult<T extends TVConfig> =
-  T extends { slots: Record<string, any> }
-    ? {
-        (options?: Record<string, unknown>): Record<keyof T["slots"], (slotOptions?: Record<string, unknown>) => string>;
-        /** base for debugging/inspection */
-        _config: T;
-      }
-    : {
-        (options?: Record<string, unknown>): string;
-        _config: T;
-      };
+export type TVSlotResult<T extends TVConfig & { slots: Record<string, string> }> = {
+  [K in keyof T["slots"]]: (slotOptions?: Record<string, unknown>) => string;
+} & { _config: T };
+
+export type TVResult<T extends TVConfig> = T extends { slots: Record<string, any> }
+  ? TVSlotResult<T & { slots: Record<string, string> }>
+  : ((options?: Record<string, unknown>) => string) & { _config: T };
 
 /** Roughly compatible `tv()` subset (Stage 2). */
 export const tv = <T extends TVConfig>(config: T): TVResult<T> => {
@@ -45,6 +44,12 @@ export const tv = <T extends TVConfig>(config: T): TVResult<T> => {
       const key = typeof value === "boolean" ? (value ? "true" : "false") : String(value);
       const cls = (map as any)[key] as string | undefined;
       if (cls) parts.push(cls);
+    }
+
+    for (const compound of config.compoundVariants ?? []) {
+      const { class: compoundClass, ...conditions } = compound;
+      const matches = Object.entries(conditions).every(([name, value]) => resolved[name] === value);
+      if (matches && compoundClass) parts.push(compoundClass);
     }
 
     return parts.filter(Boolean).join(" ");

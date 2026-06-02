@@ -1,0 +1,17 @@
+@import "tailwindcss";
+@import "../theme/tokens.css";
+
+.echo-sb-story {
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  padding: 1rem;
+}
+
+.sb-show-main.sb-main-centered #storybook-root {
+  padding: 2rem;
+}

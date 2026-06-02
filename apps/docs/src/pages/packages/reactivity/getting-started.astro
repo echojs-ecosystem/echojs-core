@@ -1,0 +1,21 @@
+---
+import DocsLayout from "../../../layouts/DocsLayout.astro";
+import { packageNav } from "../../../lib/docs-nav";
+
+const nav = packageNav.reactivity;
+---
+
+<DocsLayout title="Getting Started" description="Первые шаги с @echojs/reactivity." nav={nav}>
+  <h1 class="docH1">Getting Started</h1>
+  <p class="docLead">
+    Минимальный набор: <span class="mono">signal</span>, <span class="mono">computed</span>, <span class="mono">effect</span>, <span class="mono">batch</span>.
+    Дальше на этой базе строятся <span class="mono">@echojs/store</span>, <span class="mono">@echojs/router</span>, <span class="mono">@echojs/query</span>.
+  </p>
+
+  <hr class="docHr" />
+
+  <div class="callout">
+    Здесь мы дальше добавим: установку (bun/npm), первый пример “counter”, и чек-лист типичных ошибок.
+  </div>
+</DocsLayout>
+

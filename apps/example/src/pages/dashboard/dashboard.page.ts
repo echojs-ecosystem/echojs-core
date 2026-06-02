@@ -59,7 +59,7 @@ export const dashboardPage = createRouteView({
             div({ class: "dashboard-hero__actions" }, [
               p(null, () => i18n.t("dashboard.loginHint")),
               button(
-                { type: "button", "on:click": () => authLoginPage.go({}) },
+                { type: "button", onClick: () => authLoginPage.go({}) },
                 () => i18n.t("common.login"),
               ),
             ]),

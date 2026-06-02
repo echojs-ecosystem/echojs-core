@@ -11,16 +11,10 @@ export const setEvent = (
   if (!parsed) return null;
   if (typeof handler !== "function") return null;
 
-  const { event, modifiers } = parsed;
-
+  const { event } = parsed;
   const user = handler as (e: Event) => void;
-  const listener: EventListener = (event) => {
-    if (modifiers.includes("prevent")) event.preventDefault();
-    if (modifiers.includes("stop")) event.stopPropagation();
-    user(event);
-  };
+  const listener: EventListener = (event) => user(event);
 
   element.addEventListener(event, listener);
   return { event, listener };
 };
-

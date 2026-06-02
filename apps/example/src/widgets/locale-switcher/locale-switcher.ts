@@ -18,7 +18,7 @@ export const LocaleSwitcher = (): Child =>
             i18n.locale() === locale
               ? "locale-switcher__btn locale-switcher__btn--active"
               : "locale-switcher__btn",
-          "on:click": () => void setAppLocale(locale),
+          onClick: () => void setAppLocale(locale),
         },
         localeLabel[locale],
       ),

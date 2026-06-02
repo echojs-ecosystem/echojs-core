@@ -175,7 +175,7 @@ export const setProp = (el: Element, key: string, value: unknown): void => {
 /**
  * Applies a props object to an element.
  *
- * - Event props (`on...`, `"on:..."`) are deferred via bindings so they can be cleaned up.
+ * - Event props (`onClick`, `onInput`, …) are deferred via bindings so they can be cleaned up.
  * - Function-valued props (except `ref`) are treated as reactive getters and re-evaluated.
  */
 export const setProps = (el: Element, props: Record<string, unknown> | null | undefined): void => {

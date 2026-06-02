@@ -5,18 +5,17 @@ import { insert } from "../src/insert";
 import { createModel, createView, createComponent } from "../src/component";
 
 describe("setEvent()", () => {
-  it("поддерживает onClick / on:click / on-click", () => {
+  it("поддерживает onClick / on-click", () => {
     const btn = document.createElement("button");
     const onClick = vi.fn();
 
     const stop = scope(() => {
       setEvent(btn, "onClick", onClick);
-      setEvent(btn, "on:click", onClick);
       setEvent(btn, "on-click", onClick);
     });
 
     btn.click();
-    expect(onClick).toHaveBeenCalledTimes(3);
+    expect(onClick).toHaveBeenCalledTimes(2);
 
     stop();
   });
@@ -32,7 +31,7 @@ describe("setEvent()", () => {
     parent.addEventListener("click", onParent);
 
     const stop = scope(() => {
-      setEvent(btn, "on:click:prevent:stop", (e) => onBtn(e));
+      setEvent(btn, "click:prevent:stop", (e) => onBtn(e));
     });
 
     const ev = new MouseEvent("click", { bubbles: true, cancelable: true });

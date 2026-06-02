@@ -75,7 +75,7 @@ export const cx = (...values: ClassValue[]): string => {
 /**
  * Tiny helpers for common DOM event props using `onXxx` form.
  *
- * If you want per-element `currentTarget` typing, prefer using `"on:..."`/`onXxx` directly on the
+ * If you want per-element `currentTarget` typing, prefer using `onClick` / `onInput` on the
  * element props so it can be inferred from the tag.
  */
 export const on = {

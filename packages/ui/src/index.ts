@@ -10,6 +10,7 @@ export {
   getUIContextOrDefault,
   runWithUIContext,
   createUIContextValue,
+  resetUIContextStack,
 } from "./theme/theme-context";
 export type { UIContextValue, CreateUIContextInput } from "./theme/theme-context";
 export { createComponentVariants, resolveVariantClasses } from "./theme/variants";
@@ -41,7 +42,14 @@ export type { PortalProps } from "./primitives/portal";
 
 // Components
 export { Button } from "./components/button/index";
-export type { ButtonProps, ButtonSize, ButtonVariant } from "./components/button/index";
+export type {
+  ButtonProps,
+  ButtonSize,
+  ButtonVariant,
+  ButtonRadius,
+  ButtonVariantProps,
+} from "./components/button/index";
+export { defaultButtonSpinner, buttonStyles } from "./components/button/index";
 
 export { IconButton } from "./components/icon-button/index";
 export type { IconButtonProps, IconButtonSize } from "./components/icon-button/index";
@@ -49,14 +57,38 @@ export type { IconButtonProps, IconButtonSize } from "./components/icon-button/i
 export { Input } from "./components/input/index";
 export type { InputProps, InputSize, InputVariant } from "./components/input/index";
 
+export { InputMask } from "./components/input-mask/index";
+export type { InputMaskProps } from "./components/input-mask/index";
+
+export { InputOtp } from "./components/input-otp/index";
+export type { InputOtpProps } from "./components/input-otp/index";
+
+export { InputTags } from "./components/input-tags/index";
+export type { InputTagsProps } from "./components/input-tags/index";
+
+export { inputStyles } from "./components/input-shared/index";
+export type { InputFieldProps } from "./components/input-shared/index";
+
+export {
+  attachInputMask,
+  formatMaskedValue,
+  parseMaskPattern,
+  MASK_PRESETS,
+  resolveMaskPattern,
+} from "./utils/input-mask";
+export type { MaskPattern, MaskPreset, MaskValue } from "./utils/input-mask";
+
 export { Textarea } from "./components/textarea/index";
 export type { TextareaProps, TextareaSize, TextareaVariant, TextareaResize } from "./components/textarea/index";
 
 export { Label } from "./components/label/index";
 export type { LabelProps } from "./components/label/index";
 
-export { Field, getFieldContext } from "./components/field/index";
+export { Field, getFieldContext, mergeFieldControlProps } from "./components/field/index";
 export type { FieldProps, FieldContext } from "./components/field/index";
+
+export { Checkbox } from "./components/checkbox/index";
+export type { CheckboxProps, CheckboxSize, CheckboxVariantProps } from "./components/checkbox/index";
 
 // Re-export hyperdom types used by consumers
 export type { Child, Props, Component } from "@echojs/hyperdom";

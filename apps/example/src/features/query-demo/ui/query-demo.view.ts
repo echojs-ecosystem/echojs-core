@@ -40,7 +40,7 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
           $selectedUserId.value() === u.id
             ? "demo-query__user demo-query__user--active"
             : "demo-query__user",
-        "on:click": () => vm.selectUser(u.id),
+        onClick: () => vm.selectUser(u.id),
       },
       [strong(null, u.name), span(null, `@${u.username}`)],
     );
@@ -59,15 +59,15 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
       ),
       span({ class: "demo-query__pending" }, () => `pending: ${user.$pendingCount.value()}`),
       button(
-        { type: "button", "on:click": () => void vm.refetchAll() },
+        { type: "button", onClick: () => void vm.refetchAll() },
         () => i18n.t("queryDemo.refetchAll"),
       ),
       button(
-        { type: "button", class: "secondary", "on:click": vm.invalidatePosts },
+        { type: "button", class: "secondary", onClick: vm.invalidatePosts },
         () => i18n.t("queryDemo.invalidatePosts"),
       ),
       button(
-        { type: "button", class: "secondary", "on:click": vm.cancelActive },
+        { type: "button", class: "secondary", onClick: vm.cancelActive },
         () => i18n.t("queryDemo.cancel"),
       ),
     ]),
@@ -175,7 +175,7 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
             type: "button",
             disabled: () =>
               !postsInfinite.hasNextPage() || postsInfinite.fetchingNextPage(),
-            "on:click": () => void vm.loadMorePosts(),
+            onClick: () => void vm.loadMorePosts(),
           },
           () =>
             postsInfinite.fetchingNextPage()
@@ -183,14 +183,14 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
               : i18n.t("queryDemo.loadMore"),
         ),
         button(
-          { type: "button", class: "secondary", "on:click": vm.resetPostsInfinite },
+          { type: "button", class: "secondary", onClick: vm.resetPostsInfinite },
           () => i18n.t("queryDemo.reset"),
         ),
         button(
           {
             type: "button",
             class: "secondary",
-            "on:click": () => void postsInfinite.refetch(),
+            onClick: () => void postsInfinite.refetch(),
           },
           () => i18n.t("queryDemo.refetch"),
         ),
@@ -205,13 +205,13 @@ export const QueryDemoView = createView((vm: QueryDemoVM): Child => {
           type: "text",
           value: $draftTitle.value(),
           placeholder: i18n.t("queryDemo.postTitle"),
-          "on:change": (e) => $draftTitle.set(e.currentTarget.value),
+          onChange: (e) => $draftTitle.set(e.currentTarget.value),
         }),
         button(
           {
             type: "button",
             disabled: () => vm.createPost.isPending(),
-            "on:click": () => void vm.submitPost(),
+            onClick: () => void vm.submitPost(),
           },
           () =>
             vm.createPost.isPending() ? i18n.t("queryDemo.sending") : i18n.t("queryDemo.createPost"),
