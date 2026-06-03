@@ -75,7 +75,7 @@ export const accountPage = createRouteView({
               ),
             ]),
             section({ class: "account__profile" }, [
-              h4(null, () => i18n.t("account.profileTitle")),
+              h4(i18n.t("account.profileTitle")),
               p({ class: "page__hint" }, () => i18n.t("account.profileHint")),
               label(null, [
                 span({ class: "router-form-label" }, () => i18n.t("account.nameField")),
@@ -95,7 +95,7 @@ export const accountPage = createRouteView({
                       input({
                         class: "control",
                         value: phone,
-                        onInput: (e: { currentTarget: HTMLInputElement }) => {
+                        onInput: (e) => {
                           phonesField.updateAt(index, () => e.currentTarget.value);
                         },
                       }),
