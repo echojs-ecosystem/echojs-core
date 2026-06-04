@@ -1,4 +1,4 @@
-import { createAlienScope } from "@internals/alien";
+import { createAlienScope } from "./internals/alien.js";
 import { __withCleanupBucket, __wrapDisposerWithCleanup } from "./cleanup";
 import { isFunction } from "./utils";
 

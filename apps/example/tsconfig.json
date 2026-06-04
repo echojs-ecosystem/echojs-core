@@ -32,7 +32,10 @@
       "@echojs/persist": ["../../packages/persist/src/index.ts"],
       "@echojs/url-state": ["../../packages/url-state/src/index.ts"],
       "@echojs/query": ["../../packages/query/src/index.ts"],
-      "@echojs/i18n": ["../../packages/i18n/src/index.ts"]
+      "@echojs/i18n": ["../../packages/i18n/src/index.ts"],
+      "@echojs/framework": ["../../packages/framework/src/index.ts"],
+      "@echojs/framework/app": ["../../packages/framework/src/app/index.ts"],
+      "@echojs/ui": ["../../packages/ui/src/index.ts"]
     }
   },
   "include": ["src", "public/locales/*.json"]

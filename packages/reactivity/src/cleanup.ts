@@ -1,5 +1,5 @@
 import { isFunction } from "./utils";
-import type { Disposer } from "@internals/alien";
+import type { Disposer } from "./internals/alien.js";
 
 type CleanupFn = () => void;
 

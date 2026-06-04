@@ -13,5 +13,6 @@ export default echoTsupConfig({
     ui: 'src/ui.ts',
     hyperdom: 'src/hyperdom.ts',
     'url-state': 'src/url-state.ts',
+    app: 'src/app/index.ts',
   },
 })

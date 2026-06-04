@@ -15,6 +15,40 @@
     "error": "Ошибка: {message}",
     "loadingPage": "Загрузка страницы…"
   },
+  "hub": {
+    "title": "EchoJS Lab",
+    "lead": "Выберите модуль: документация и демо пакетов или продуктовый workspace.",
+    "hint": "Маршруты: /docs — Docs Example, /workspace — Workspace.",
+    "openModule": "Открыть →",
+    "docs": {
+      "title": "Docs Example",
+      "description": "Демо @echojs/reactivity, form, store, persist, query с обзором пакетов."
+    },
+    "workspace": {
+      "title": "Workspace",
+      "description": "Продуктовый сценарий: пользователи, спринты, каталог, guards и вложенные layouts."
+    }
+  },
+  "docs": {
+    "home": {
+      "heroTitle": "Docs Example",
+      "heroBody": "Интерактивные демо пакетов EchoJS. Каждый раздел — рабочий код, не сниппет.",
+      "loggedInAs": "Вы вошли как {email}.",
+      "loginHint": "Войдите для раздела «Аккаунт» и защищённых сценариев workspace.",
+      "sectionModules": "Демо пакетов",
+      "backHint": "Вернуться к выбору модулей:",
+      "backToHub": "← Главная"
+    },
+    "shell": {
+      "brandName": "Docs Example",
+      "brandTag": "демо пакетов EchoJS",
+      "sectionNav": "Навигация",
+      "hub": "← Все модули",
+      "overview": "Обзор",
+      "account": "Аккаунт",
+      "sectionModules": "Пакеты"
+    }
+  },
   "shell": {
     "brandName": "EchoJS Lab",
     "brandTag": "интерактивная платформа",

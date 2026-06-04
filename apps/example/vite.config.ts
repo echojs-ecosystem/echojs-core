@@ -52,6 +52,18 @@ export default defineConfig({
         find: /^@echojs\/i18n$/,
         replacement: resolve(__dirname, "../../packages/i18n/src/index.ts"),
       },
+      {
+        find: /^@echojs\/framework\/app$/,
+        replacement: resolve(__dirname, "../../packages/framework/src/app/index.ts"),
+      },
+      {
+        find: /^@echojs\/framework$/,
+        replacement: resolve(__dirname, "../../packages/framework/src/index.ts"),
+      },
+      {
+        find: /^@echojs\/ui$/,
+        replacement: resolve(__dirname, "../../packages/ui/src/index.ts"),
+      },
     ],
   },
   server: {
@@ -69,6 +81,8 @@ export default defineConfig({
       "@echojs/url-state",
       "@echojs/query",
       "@echojs/i18n",
+      "@echojs/framework",
+      "@echojs/ui",
     ],
   },
 });

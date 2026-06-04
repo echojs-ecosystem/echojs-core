@@ -4,14 +4,14 @@ import { resetDefaultQueryClient } from '../client/default-client'
 import { createInfiniteQuery } from '../query/create-infinite-query'
 import { createQuery } from '../query/create-query'
 import { resetQueryProvider } from './context'
-import { createQueryProvider, QueryProvider, setQueryProvider } from './query-provider'
+import { QueryProvider, setQueryProvider } from './query-provider'
 
 describe('QueryProvider', () => {
   it('merges defaultOptions into createQuery', async () => {
     resetQueryProvider()
     resetDefaultQueryClient()
 
-    const provider = createQueryProvider({
+    const provider = new QueryProvider({
       defaultOptions: {
         queries: { staleTime: 60_000 },
       },
@@ -32,7 +32,7 @@ describe('QueryProvider', () => {
   })
 
   it('transform runs after queryFn', async () => {
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
 
     const q = provider.createQuery({
       queryKey: () => ['transform'],
@@ -45,7 +45,7 @@ describe('QueryProvider', () => {
   })
 
   it('setQueryProvider registers active provider', () => {
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
     setQueryProvider(provider)
     const q = provider.createQuery({
       queryKey: () => ['via-provider'],
@@ -55,7 +55,7 @@ describe('QueryProvider', () => {
   })
 
   it('merges default mutation options', async () => {
-    const provider = createQueryProvider({
+    const provider = new QueryProvider({
       defaultOptions: {
         mutations: {
           retry: false,
@@ -78,7 +78,7 @@ describe('QueryProvider', () => {
   })
 
   it('createInfiniteQuery returns infinite definition', () => {
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
     const def = provider.createInfiniteQuery({
       queryKey: () => ['provider-infinite'],
       initialPageParam: null,
@@ -95,7 +95,7 @@ describe('QueryProvider', () => {
       queryFn: async () => 'ok',
     })
 
-    await provider.client.fetchQuery(def, {})
+    await provider.client.fetchQuery(def)
     provider.invalidateQueries(['provider-helpers'])
     await provider.refetchQueries(['provider-helpers'])
     provider.cancelQueries(['provider-helpers'])

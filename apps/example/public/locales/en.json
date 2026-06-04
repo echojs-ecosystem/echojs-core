@@ -15,6 +15,40 @@
     "error": "Error: {message}",
     "loadingPage": "Loading page…"
   },
+  "hub": {
+    "title": "EchoJS Lab",
+    "lead": "Choose a module: package docs & demos or the product workspace.",
+    "hint": "Routes: /docs — Docs Example, /workspace — Workspace.",
+    "openModule": "Open →",
+    "docs": {
+      "title": "Docs Example",
+      "description": "Demos for @echojs/reactivity, form, store, persist, query with a package overview."
+    },
+    "workspace": {
+      "title": "Workspace",
+      "description": "Product scenario: users, sprints, catalog, guards and nested layouts."
+    }
+  },
+  "docs": {
+    "home": {
+      "heroTitle": "Docs Example",
+      "heroBody": "Interactive EchoJS package demos. Each section is working code, not a snippet.",
+      "loggedInAs": "Signed in as {email}.",
+      "loginHint": "Sign in for Account and protected workspace routes.",
+      "sectionModules": "Package demos",
+      "backHint": "Back to module picker:",
+      "backToHub": "← Home"
+    },
+    "shell": {
+      "brandName": "Docs Example",
+      "brandTag": "EchoJS package demos",
+      "sectionNav": "Navigation",
+      "hub": "← All modules",
+      "overview": "Overview",
+      "account": "Account",
+      "sectionModules": "Packages"
+    }
+  },
   "shell": {
     "brandName": "EchoJS Lab",
     "brandTag": "interactive platform",

@@ -1,6 +1,6 @@
 import { createRouteView } from "@echojs/router";
 import { code, div, h4, p, Show } from "@echojs/hyperdom";
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 import { $authUser, $isLoggedIn, authTokenStore } from "@entities/session/index.js";
 
 export const settingsPage = createRouteView({

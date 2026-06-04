@@ -2,7 +2,7 @@ import { signal } from "@echojs/reactivity";
 import type { Signal } from "@echojs/reactivity";
 import { createModel } from "@echojs/hyperdom";
 
-import { queryProvider } from "@app/query/query-provider.js";
+import { getQueryProvider } from "@echojs/query";
 import {
   createPostMutation,
   getUserPostsInfiniteQuery,
@@ -12,7 +12,7 @@ import {
   slowCreatePostMutation,
   slowUserQuery,
 } from "@features/query-demo/api/jsonplaceholder.queries.js";
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 import { abortLabel, timestamp } from "@features/query-demo/utils/query-demo.utils.js";
 import type { JpPost, JpUser } from "@shared/api/jsonplaceholder.js";
 
@@ -103,7 +103,7 @@ export const createQueryDemoModel = createModel((): QueryDemoVM => {
   const createPost = createPostMutation.create();
   const slowCreatePost = slowCreatePostMutation.create();
 
-  const client = queryProvider.client;
+  const client = getQueryProvider()!.client;
 
   return {
     users,
@@ -125,7 +125,7 @@ export const createQueryDemoModel = createModel((): QueryDemoVM => {
     selectUser: (id) => $selectedUserId.set(id),
     refetchAll: () => Promise.all([users.refetch(), user.refetch(), posts.refetch()]),
     invalidatePosts: () => {
-      queryProvider.invalidateQueries(["jsonplaceholder", "posts"], { refetch: "active" });
+      getQueryProvider()!.invalidateQueries(["jsonplaceholder", "posts"], { refetch: "active" });
       log($playgroundLog, "invalidateQueries(['posts'])");
     },
     cancelActive: () => {

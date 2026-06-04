@@ -1,6 +1,6 @@
 import { computed } from "@echojs-ecosystem/reactivity";
-import { i18n } from "@app/i18n/index.js";
-import { findModuleByPath } from "@app/config/lab-modules.js";
+import { i18n } from "@app/providers/i18n.js";
+import { findDocsModuleByPath } from "@app/config/docs-modules.js";
 import { catalogVariantPage } from "@pages/workspace/catalog/catalog-variant.page.js";
 import { filesPage } from "@pages/workspace/files/workspace-files.page.js";
 import { slowPage } from "@pages/workspace/slow/workspace-slow.page.js";
@@ -13,9 +13,13 @@ import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js"
 export const $activePageTitle = computed(() => {
   const path = typeof location !== "undefined" ? location.pathname : "/";
 
-  const module = findModuleByPath(path);
-  if (module && module.section !== "workspace") {
-    return i18n.t(module.titleKey);
+  if (path === "/" || path.startsWith("/auth")) {
+    return i18n.t("hub.title");
+  }
+
+  const docsModule = findDocsModuleByPath(path);
+  if (docsModule) {
+    return i18n.t(docsModule.titleKey);
   }
 
   if (

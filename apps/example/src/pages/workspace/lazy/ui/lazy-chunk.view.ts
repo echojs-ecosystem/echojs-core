@@ -1,6 +1,6 @@
 import { div, h4, p } from "@echojs/hyperdom";
 import type { RouteView } from "@echojs/router";
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 
 const lazyChunkView: RouteView = () =>
   div({ class: "router-page" }, [

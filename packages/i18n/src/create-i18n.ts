@@ -15,6 +15,8 @@ import {
   resolveLocaleModule,
   resolveLocaleModuleSync,
 } from "./core/locale-source";
+import { detectLocale } from "./plugin/detect-locale";
+import { effect } from "@echojs/reactivity";
 import { createLocaleState } from "./core/locale";
 import { createTranslator } from "./core/translator";
 import type {
@@ -23,8 +25,6 @@ import type {
   I18n,
   InferLocaleFromLocalesMap,
   InferMessagesFromLocalesMap,
-  LocaleSource,
-  MessageSchema,
   Messages,
 } from "./types";
 
@@ -46,6 +46,13 @@ const registerEagerLocales = (
   }
 };
 
+const hasBrowserOptions = <TLocales extends AnyLocalesMap>(
+  options: CreateI18nOptions<TLocales>,
+): boolean =>
+  options.storageKey !== undefined ||
+  options.navigatorRules !== undefined ||
+  options.documentTitleKey !== undefined;
+
 export function createI18n<const TLocales extends AnyLocalesMap>(
   options: CreateI18nOptions<TLocales>,
 ): I18n<InferLocaleFromLocalesMap<TLocales>, InferMessagesFromLocalesMap<TLocales>> {
@@ -53,13 +60,36 @@ export function createI18n<const TLocales extends AnyLocalesMap>(
   type TMessages = InferMessagesFromLocalesMap<TLocales>;
 
   const {
-    defaultLocale,
+    defaultLocale: defaultLocaleOption,
     fallbackLocale,
     locales,
     missingKeyStrategy = "key",
+    storageKey,
+    navigatorRules,
+    syncDocument = true,
+    documentTitleKey,
   } = options;
 
+  const browser = hasBrowserOptions(options);
   const supportedLocales = Object.keys(locales) as TLocale[];
+
+  const resolveDetectedLocale = (): TLocale =>
+    detectLocale({
+      supported: supportedLocales,
+      fallback: fallbackLocale as TLocale,
+      storageKey,
+      navigatorRules,
+    });
+
+  const defaultLocale = (defaultLocaleOption ?? (browser ? resolveDetectedLocale() : undefined)) as
+    | TLocale
+    | undefined;
+
+  if (defaultLocale === undefined) {
+    throw new Error(
+      "createI18n: `defaultLocale` is required when browser options are not set",
+    );
+  }
 
   if (!supportedLocales.includes(defaultLocale as TLocale)) {
     throw new RangeError(
@@ -130,11 +160,45 @@ export function createI18n<const TLocales extends AnyLocalesMap>(
     state.$locale.set(locale);
   };
 
+  const start = (): Promise<void> => {
+    if (!browser) {
+      return Promise.resolve();
+    }
+
+    const locale = resolveDetectedLocale();
+    state.$locale.set(locale);
+
+    effect(() => {
+      const current = state.$locale.value();
+      if (typeof document !== "undefined" && syncDocument) {
+        document.documentElement.lang = current;
+        if (documentTitleKey) {
+          document.title = translate(documentTitleKey);
+        }
+      }
+      if (storageKey && typeof localStorage !== "undefined") {
+        localStorage.setItem(storageKey, current);
+      }
+    });
+
+    const source = locales[locale];
+    if (
+      !loadedLocales.has(locale) &&
+      source !== undefined &&
+      isLocaleImporter(source)
+    ) {
+      void loadLocale(locale);
+    }
+
+    return Promise.resolve();
+  };
+
   return {
     supportedLocales,
 
     locale: (): TLocale => state.$locale.peek() as TLocale,
     setLocale,
+    start,
 
     fallbackLocale: (): TLocale => fallbackLocale as TLocale,
 

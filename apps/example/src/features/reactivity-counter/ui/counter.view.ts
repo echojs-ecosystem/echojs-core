@@ -1,5 +1,5 @@
 import { List, Show, createView, type Child } from "@echojs/hyperdom";
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 import type { CounterVM } from "@features/reactivity-counter/model/counter.model.js";
 import {
   article,

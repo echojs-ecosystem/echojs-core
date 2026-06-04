@@ -3,9 +3,6 @@
   "extends": "../.configs/tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": {
-      "@internals/*": ["src/internals/*"]
-    },
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
     "module": "ES2022",

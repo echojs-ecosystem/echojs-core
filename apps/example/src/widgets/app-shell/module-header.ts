@@ -1,10 +1,10 @@
 import { code, div, h3, p, span } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
-import { i18n } from "@app/i18n/index.js";
-import type { LabModuleMeta } from "@app/config/lab-modules.js";
+import { i18n } from "@app/providers/i18n.js";
+import type { DocsModuleMeta } from "@app/config/docs-modules.js";
 
 export const ModuleHeader = (
-  module: Pick<LabModuleMeta, "titleKey" | "descriptionKey" | "package">,
+  module: Pick<DocsModuleMeta, "titleKey" | "descriptionKey" | "package">,
 ): Child =>
   div({ class: "module-header" }, [
     div({ class: "module-header__top" }, [

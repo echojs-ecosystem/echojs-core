@@ -5,13 +5,23 @@ export {
   getDefaultQueryClient,
   setDefaultQueryClient,
 } from './client/default-client'
+export { QueryProvider, setQueryProvider } from './provider/query-provider'
+export {
+  getQueryProvider,
+  requireQueryProvider,
+  resetQueryProvider,
+} from './provider/context'
 export {
   createQueryProvider,
-  QueryProvider,
-  setQueryProvider,
-  getQueryProvider,
-  resetQueryProvider,
-} from './provider/query-provider'
+  createQueryPlugin,
+  queryPlugin,
+  QUERY_PROVIDER_KEY,
+  type EchoQueryProvider,
+  type EchoQueryPlugin,
+  type QueryPlugin,
+  type QueryProviderHost,
+  type QueryPluginHost,
+} from './plugin/query-plugin'
 export { createMutation } from './mutation/create-mutation'
 export { FocusManager, focusManager } from './managers/focus-manager'
 export { OnlineManager, onlineManager } from './managers/online-manager'

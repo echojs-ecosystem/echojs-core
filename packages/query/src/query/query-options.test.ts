@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { createQueryProvider } from '../provider/query-provider'
+import { QueryProvider } from '../provider/query-provider'
 import {
   defaultQueryOptions,
   mergeQueryDefinitionOptions,
@@ -23,7 +23,7 @@ describe('query-options', () => {
   })
 
   it('mergeQueryDefinitionOptions merges provider defaults', () => {
-    const provider = createQueryProvider({
+    const provider = new QueryProvider({
       defaultOptions: { queries: { staleTime: 10_000 } },
     })
     const merged = mergeQueryDefinitionOptions(

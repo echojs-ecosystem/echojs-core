@@ -30,9 +30,9 @@ bun dev
 
 ```
 apps/example/
-├── src/main.tsx       # Все примеры
-├── src/style.css      # Стили
-├── index.html         # Entry point
+├── src/app/main.ts           # Точка входа
+├── src/app/styles/global.css # Стили
+├── index.html                # Подключает app/main.ts
 ├── vite.config.ts     # Vite настройки
 └── package.json       # Зависимости
 ```

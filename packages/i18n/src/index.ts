@@ -1,4 +1,6 @@
 export { createI18n } from "./create-i18n";
+export { createI18nProvider, type EchoI18nProvider } from "./plugin/i18n-provider";
+export { detectLocale } from "./plugin/detect-locale";
 
 export type {
   AnyLocalesMap,

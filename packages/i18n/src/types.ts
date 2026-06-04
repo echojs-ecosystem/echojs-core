@@ -47,10 +47,23 @@ export type InferLocaleFromLocalesMap<TLocales extends AnyLocalesMap> =
   keyof TLocales & string;
 
 export type CreateI18nOptions<TLocales extends AnyLocalesMap> = {
-  defaultLocale: InferLocaleFromLocalesMap<TLocales>;
+  /**
+   * Required unless browser options are set (`storageKey`, `navigatorRules`, or `documentTitleKey`).
+   * Then the initial locale is detected automatically.
+   */
+  defaultLocale?: InferLocaleFromLocalesMap<TLocales>;
   fallbackLocale: InferLocaleFromLocalesMap<TLocales>;
   locales: TLocales;
   missingKeyStrategy?: MissingKeyStrategy;
+  /** Persist / restore locale in `localStorage`. Enables auto-detect when set. */
+  storageKey?: string;
+  navigatorRules?: ReadonlyArray<{
+    prefix: string;
+    locale: InferLocaleFromLocalesMap<TLocales>;
+  }>;
+  /** Sync `document.documentElement.lang` (default `true` when browser options are used). */
+  syncDocument?: boolean;
+  documentTitleKey?: TranslationKey<InferMessagesFromLocalesMap<TLocales>>;
 };
 
 /** @deprecated Prefer `CreateI18nOptions` with inferred `locales` */
@@ -104,6 +117,12 @@ export type I18n<
   readonly $locale: Signal<TLocale>;
   readonly $pending: Signal<boolean>;
   readonly $error: Signal<unknown | null>;
+
+  /**
+   * Detect locale, sync document/storage, register effects.
+   * Lazy locale chunks load in the background — does not block app mount.
+   */
+  start(): Promise<void>;
 };
 
 /** @deprecated Use `CreateI18nOptions` */

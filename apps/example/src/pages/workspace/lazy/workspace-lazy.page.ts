@@ -1,6 +1,6 @@
 import { createLazyRouteView } from "@echojs/router";
 import { div } from "@echojs/hyperdom";
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 
 export const lazyPage = createLazyRouteView({
   name: "lazy",

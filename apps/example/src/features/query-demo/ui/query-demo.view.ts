@@ -15,7 +15,7 @@ import {
   ul,
 } from "@echojs/hyperdom";
 
-import { i18n } from "@app/i18n/index.js";
+import { i18n } from "@app/providers/i18n.js";
 import type { QueryDemoVM } from "@features/query-demo/model/query-demo.model.js";
 import { QueryDemoPlaygroundView } from "@features/query-demo/ui/query-demo-playground.view.js";
 import type { JpPost, JpUser } from "@shared/api/jsonplaceholder.js";

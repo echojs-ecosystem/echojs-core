@@ -7,3 +7,12 @@ export { Link } from "./Link";
 export type { LinkProps } from "./Link";
 export { NavLink } from "./NavLink";
 export type { NavLinkProps } from "./NavLink";
+export {
+  createRouterProvider,
+  routerPlugin,
+  isRouterLike,
+  ROUTER_KEY,
+  type RouterLike,
+  type RouterProvider,
+  type RouterPlugin,
+} from "../plugin/router-plugin";

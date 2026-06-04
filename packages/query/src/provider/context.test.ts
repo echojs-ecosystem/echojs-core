@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { createQueryProvider } from './query-provider'
+import { QueryProvider } from './query-provider'
 import {
   getQueryProvider,
   resetQueryProvider,
@@ -12,7 +12,7 @@ describe('query provider context', () => {
     resetQueryProvider()
     expect(getQueryProvider()).toBeNull()
 
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
     setActiveQueryProvider(provider)
     expect(getQueryProvider()).toBe(provider)
 

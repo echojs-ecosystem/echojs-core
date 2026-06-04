@@ -1,6 +1,6 @@
 import { button, div, span } from "@echojs/hyperdom";
 import type { Child } from "@echojs/hyperdom";
-import { i18n, setAppLocale, type AppLocale } from "@app/i18n/index.js";
+import { i18n, setAppLocale, type AppLocale } from "@app/providers/i18n.js";
 
 const localeLabel: Record<AppLocale, string> = {
   ru: "RU",

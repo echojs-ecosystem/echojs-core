@@ -1,9 +1,12 @@
-import { queryProvider } from '@app/query/query-provider.js'
+import {
+  createInfiniteQuery,
+  createMutation,
+  createQuery,
+  getQueryProvider,
+} from "@echojs/query";
 import type { JpPost, JpUser } from '@shared/api/jsonplaceholder.js'
 import { jpFetch } from '@shared/api/jsonplaceholder.js'
 import { delay } from '@features/query-demo/utils/query-demo.utils.js'
-
-const { createQuery, createMutation, createInfiniteQuery } = queryProvider
 
 const POSTS_PAGE_SIZE = 3
 const SLOW_QUERY_MS = 4_000
@@ -94,7 +97,7 @@ export const createPostMutation = createMutation<
     }),
   onSuccess: ({ variables, queryClient }) => {
     queryClient.invalidateQueries(['jsonplaceholder', 'posts'], { refetch: 'active' })
-    void queryProvider.refetchQueries({
+    void getQueryProvider()?.refetchQueries({
       queryKey: ['jsonplaceholder', 'posts', { userId: variables.userId }],
     })
   },

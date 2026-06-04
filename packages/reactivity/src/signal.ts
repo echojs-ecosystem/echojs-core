@@ -1,7 +1,7 @@
 import { freezeIfDev } from "./freeze";
 import { createSubscribe } from "./subscribe";
-import { createAlienSignal, untrack } from "@internals/alien";
-import { brandReadonly, brandWritable } from "@internals/guards";
+import { createAlienSignal, untrack } from "./internals/alien.js";
+import { brandReadonly, brandWritable } from "./internals/guards.js";
 import type { ReadonlySignal, ReadValue, Signal } from "./types";
 import { isFunction } from "./utils";
 

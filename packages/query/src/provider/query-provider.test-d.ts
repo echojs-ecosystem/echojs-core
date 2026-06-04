@@ -1,11 +1,11 @@
 import { describe, expectTypeOf, it } from 'vitest'
 
-import { createQueryProvider } from './query-provider'
+import { QueryProvider } from './query-provider'
 import type { MutationInstance, QueryDefinition, QueryInstance } from '../types'
 
 describe('QueryProvider', () => {
   it('createQuery preserves definition generics', () => {
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
 
     const def = provider.createQuery<number, { id: number }>({
       queryKey: ({ id }) => ['item', id],
@@ -18,7 +18,7 @@ describe('QueryProvider', () => {
   })
 
   it('createMutation preserves mutation generics', () => {
-    const provider = createQueryProvider()
+    const provider = new QueryProvider()
 
     const def = provider.createMutation<boolean, { on: boolean }>({
       mutationFn: async ({ variables }) => variables.on,

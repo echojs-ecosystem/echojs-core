@@ -8,11 +8,11 @@ import {
   legacyUserRoute,
 } from "@entities/__routes__/legacy.routes.js";
 import { userPage } from "@pages/workspace/users/user-detail.page.js";
-import { reactivityPage } from "@pages/reactivity/reactivity.page.js";
-import { formsPage } from "@pages/forms/forms.page.js";
-import { formsNestedPage } from "@pages/forms/nested/forms-nested.page.js";
-import { statePage } from "@pages/state/state.page.js";
-import { persistencePage } from "@pages/persistence/persistence.page.js";
+import { reactivityPage } from "@pages/docs/reactivity/reactivity.page.js";
+import { formsPage } from "@pages/docs/forms/forms.page.js";
+import { formsNestedPage } from "@pages/docs/forms/nested/forms-nested.page.js";
+import { statePage } from "@pages/docs/state/state.page.js";
+import { persistencePage } from "@pages/docs/persistence/persistence.page.js";
 
 redirect({
   from: legacyUserRoute,

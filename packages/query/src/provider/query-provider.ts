@@ -83,6 +83,3 @@ export const setQueryProvider = (provider: QueryProvider): void => {
   setActiveQueryProvider(provider)
   setDefaultQueryClient(provider.client)
 }
-
-export const createQueryProvider = (config: QueryProviderConfig = {}): QueryProvider =>
-  new QueryProvider(config)

@@ -17,8 +17,8 @@ import {
   ul,
 } from "@echojs/hyperdom";
 
-import { i18n } from "@app/i18n/index.js";
-import { cardHintKey, cardTitleKey, type ReactivityCardBase } from "@app/i18n/keys.js";
+import { i18n } from "@app/providers/i18n.js";
+import { cardHintKey, cardTitleKey, type ReactivityCardBase } from "@app/providers/i18n.js";
 import type { ReactivityLabVM, TodoItem } from "@features/reactivity-lab/model/reactivity-lab.model.js";
 
 const LabCard = (baseKey: ReactivityCardBase, body: Child): Child =>
@@ -170,7 +170,7 @@ export const ReactivityLabView = createView((vm: ReactivityLabVM): Child => {
               placeholder: i18n.t("reactivityLab.todoPlaceholder"),
               value: $todoDraft.value(),
               onChange: (e) => vm.setTodoDraft(e.currentTarget.value),
-              onKeyDown: (e) => {
+              onKeydown: (e: KeyboardEvent) => {
                 if (e.key === "Enter") vm.addTodo();
               },
             }),
