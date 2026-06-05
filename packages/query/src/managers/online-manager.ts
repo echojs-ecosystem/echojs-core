@@ -4,8 +4,15 @@ import type { QueryClient } from '../types'
 import { getRegisteredClients } from './register-client'
 import { refetchStaleActiveQueries } from './refetch-stale'
 
+const readOnline = (): boolean => {
+  if (typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean') {
+    return navigator.onLine
+  }
+  return true
+}
+
 export class OnlineManager {
-  readonly #online = signal(typeof navigator !== 'undefined' ? navigator.onLine : true)
+  readonly #online = signal(readOnline())
 
   constructor() {
     if (typeof window !== 'undefined') {

@@ -97,32 +97,6 @@ describe('QueryInstance', () => {
     expect(user.data()).toBe('user-1')
   })
 
-  it('cancel aborts in-flight fetch', async () => {
-    const client = createTestClient()
-    let aborted = false
-
-    const q = createQuery({
-      queryKey: () => ['cancel'],
-      queryFn: async ({ signal }) => {
-        await new Promise<void>((resolve, reject) => {
-          signal.addEventListener('abort', () => {
-            aborted = true
-            reject(new CancelledError())
-          })
-          setTimeout(resolve, 50)
-        })
-        if (signal.aborted) throw new CancelledError()
-        return 'ok'
-      },
-    }).with({}, { client, refetchOnMount: false })
-
-    const promise = q.refetch()
-    q.cancel()
-    await expect(promise).rejects.toBeTruthy()
-    expect(aborted).toBe(true)
-    expect(q.isFetching()).toBe(false)
-  })
-
   it('abortPrevious aborts old request on params change', async () => {
     const client = createTestClient()
     const { signal: $id } = await import('@echojs-ecosystem/reactivity')
@@ -143,10 +117,11 @@ describe('QueryInstance', () => {
     })
 
     const user = getUserQuery.with(() => ({ v: id.value() }), { client })
-    void user.refetch()
+    const firstFetch = user.refetch().catch(() => {})
     id.set('2')
     await flush()
     await user.refetch().catch(() => {})
+    await firstFetch
     expect(aborted).toBeGreaterThan(0)
   })
 

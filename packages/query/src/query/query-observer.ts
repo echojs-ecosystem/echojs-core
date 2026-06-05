@@ -154,8 +154,8 @@ export class QueryObserver<
     }
   }
 
-  cancel(options?: CancelOptions): void {
-    void this.#query?.cancel(options)
+  cancel(options?: CancelOptions): Promise<void> {
+    return this.#query?.cancel(options) ?? Promise.resolve()
   }
 
   remove(): void {

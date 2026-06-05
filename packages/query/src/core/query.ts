@@ -167,6 +167,9 @@ export class Query<TData, TParams = void, TError = unknown, TQueryData = TData> 
   cancel(options?: CancelOptions): Promise<void> {
     abortWithReason(this.#abortController, options?.reason)
     const promise = this.#retryer?.promise
+    if (promise) {
+      void promise.catch(() => undefined)
+    }
     this.#retryer?.cancel(options)
     this.#retryer = undefined
     this.#clearAbortHandle()
