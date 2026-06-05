@@ -1,42 +1,54 @@
+<div align="center">
+
 # @echojs/architect
 
-Единый пакет архитектурного линтера EchoJS: ядро анализа + CLI.
+**Architecture linter for EchoJS — enforce layers, public APIs, and import boundaries.**
 
-Вдохновлено [Evolution Design](https://github.com/evolution-design/evolution-design).
+[![npm](https://img.shields.io/npm/v/@echojs/architect)](https://www.npmjs.com/package/@echojs/architect)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/architect)
 
-## Структура
+</div>
 
-```
-src/
-  abstraction/     # описание архитектуры (дерево абстракций)
-  config/          # загрузка architect.config.ts
-  dependencies/    # граф импортов
-  rule/            # движок правил
-  presets/         # встроенные правила (FSD и др.)
-  vfs/             # виртуальная файловая система
-  shared/          # внутренние утилиты
-  linter/          # запуск правил + reporter
-  cli/             # echo-architect
-  index.ts         # публичный API
-```
+---
 
-## Установка
+Lint **folder structure and dependency direction** from `architect.config.ts`. Used in CI on the EchoJS docs site and example apps. Inspired by [Evolution Design](https://github.com/evolution-design/evolution-design).
+
+## Features
+
+- **Layer rules** — e.g. `pages → widgets → entities → shared`
+- **Public API enforcement** — no deep imports; use `index.ts` barrels
+- **CLI** — `echo-architect lint`, `--watch`, `--fix`
+- **Programmatic API** — `lint()`, `watchConfig()` for custom tooling
+- **Presets** — Feature-Sliced Design rules out of the box
+
+## Install
 
 ```bash
-bun add -D @echojs/architect
+npm install -D @echojs/architect
 ```
 
 ## CLI
 
 ```bash
-echo-architect lint
-echo-architect lint --watch
-echo-architect lint --fix
+npx echo-architect lint
+npx echo-architect lint --watch
+npx echo-architect lint --fix
 ```
 
-## Конфигурация
+Add to `package.json`:
 
-`architect.config.ts` в корне проекта:
+```json
+{
+  "scripts": {
+    "architect": "echo-architect lint",
+    "architect:watch": "echo-architect lint --watch"
+  }
+}
+```
+
+## Configuration
+
+`architect.config.ts` in your project root:
 
 ```ts
 import {
@@ -44,37 +56,34 @@ import {
   defineConfig,
   dependenciesDirection,
   publicAbstraction,
-  requiredChildren,
-} from '@echojs/architect'
+} from "@echojs/architect";
 
 export default defineConfig({
   root: abstraction({
-    name: 'root',
+    name: "root",
     children: {
       src: abstraction({
-        name: 'src',
-        children: { '**/*': abstraction({ name: 'module' }) },
+        name: "src",
+        children: { "pages/**": abstraction({ name: "pages" }) },
         rules: [
-          dependenciesDirection(['pages', 'widgets', 'features', 'entities', 'shared']),
-          publicAbstraction('module'),
-          requiredChildren(),
+          dependenciesDirection(["app", "pages", "widgets", "entities", "shared"]),
+          publicAbstraction("pages"),
         ],
       }),
     },
   }),
-})
+});
 ```
 
 ## Programmatic API
 
 ```ts
-import { lint, watchConfig, defineConfig } from '@echojs/architect'
+import { lint, defineConfig } from "@echojs/architect";
+
+const result = await lint({ configPath: "./architect.config.ts" });
+console.log(result.errors);
 ```
 
-## Скрипты
+## Documentation
 
-```bash
-bun run build
-bun run typecheck
-bun run test
-```
+[echojs.dev/docs/packages/architect](https://echojs.dev/docs/packages/architect)

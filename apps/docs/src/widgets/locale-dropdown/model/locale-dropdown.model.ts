@@ -1,5 +1,5 @@
 import { createModel } from "@echojs/hyperdom";
-import { i18n, setAppLocale, type AppLocale } from "@app/providers/i18n.js";
+import { i18n, setAppLocale, type AppLocale } from "@core/providers/index.js";
 import type { HeaderDropdownProps } from "@widgets/header-dropdown/model/header-dropdown.model.js";
 
 const localeKeys: Record<AppLocale, "locale.en" | "locale.ru"> = {

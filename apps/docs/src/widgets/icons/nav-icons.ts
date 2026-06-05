@@ -1,8 +1,8 @@
 import type { Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
-import type { NavIconId } from "@shared/content/nav-icon-id.js";
+import type { NavIconId } from "@core/content/nav-icon-id.js";
 import { FRAMEWORK_NAV_ICON_SVGS } from "@widgets/icons/framework-nav-icons.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 
 const stroke =
   'fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"';

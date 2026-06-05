@@ -118,7 +118,7 @@ Views use `query.isPending()`, `query.data()`, `query.error()` — no manual loa
 | Reusable widget | `widgets/<name>/model/` |
 | Feature | `features/<name>/model/` |
 
-Do not import models from `pages/` into other pages — lift shared logic to `features/` or `shared/`.
+Do not import models from `pages/` into other pages — lift shared logic to `features/` or `core/`.
 
 ## Related
 

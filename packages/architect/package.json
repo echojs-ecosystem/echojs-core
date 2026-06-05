@@ -1,9 +1,10 @@
 {
   "name": "@echojs/architect",
   "version": "0.0.0",
-  "private": true,
   "description": "Architecture linter for EchoJS projects — core engine and CLI",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -54,5 +55,13 @@
     "@types/is-glob": "^4.0.4",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/architect"
   }
 }

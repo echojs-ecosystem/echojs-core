@@ -1,177 +1,86 @@
+<div align="center">
+
 # @echojs/url-state
 
-`@echojs/url-state` — **type-safe state manager для URL search params** в стиле EchoJS.
+**Type-safe URL search params — nuqs-style, signal-native.**
 
-По идее он похож на `nuqs` (query params как state), но сделан для EchoJS:
+[![npm](https://img.shields.io/npm/v/@echojs/url-state)](https://www.npmjs.com/package/@echojs/url-state)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/url-state)
 
-- без React hooks
-- без React/Vue/Solid
-- на signals
-- с adapter-архитектурой (browser/router/memory)
-- с type-safe парсерами, default values и контролем history push/replace
+</div>
 
-## Basic query param
+---
 
-```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
+Manage **query string state** with typed parsers, defaults, and router integration. Built for EchoJS signals — no React hooks.
 
-const page = createQueryParam("page", parseAsInteger.withDefault(1));
+## Features
 
-page.value(); // 1
-page.set(2); // ?page=2
-page.update((p) => p + 1); // ?page=3
-page.reset(); // back to default
+- **`createQueryParam`** — single typed param
+- **`createQueryParams`** — object of params with batch updates
+- **Rich parsers** — string, int, float, bool, literal, array, JSON + Standard Schema
+- **Router adapter** — auto-sync with `@echojs/router/hyperdom`
+- **History control** — `push` / `replace` per update
+- **`urlKeys`** — remap param names in the URL
+
+## Install
+
+```bash
+npm install @echojs/url-state @echojs/reactivity
 ```
 
-## Query params group
+## Quick start
 
 ```ts
-import { createQueryParams, parseAsBoolean, parseAsInteger, parseAsLiteral, parseAsString } from "@echojs/url-state";
+import {
+  createQueryParams,
+  parseAsInteger,
+  parseAsString,
+  parseAsBoolean,
+} from "@echojs/url-state";
 
 const filters = createQueryParams({
   q: parseAsString.withDefault(""),
   page: parseAsInteger.withDefault(1),
   inStock: parseAsBoolean.withDefault(false),
-  view: parseAsLiteral(["grid", "list"] as const).withDefault("grid"),
 });
 
-filters.value();
-// { q: "", page: 1, inStock: false, view: "grid" }
-
+filters.value(); // { q: "", page: 1, inStock: false }
 filters.set({ q: "bike", page: 2 });
 filters.update((v) => ({ ...v, page: v.page + 1 }));
 filters.reset();
-filters.clear();
 ```
 
-## Router integration
-
-`createRouter` from `@echojs/router/hyperdom` регистрирует router для url-state и добавляет `router.createQueryParams`.
+### With router
 
 ```ts
 import { createRouter } from "@echojs/router/hyperdom";
-import { createQueryParams, parseAsInteger, parseAsString } from "@echojs/url-state";
 
 export const appRouter = createRouter({ routes });
 
-// Вариант 1: на роутере (adapter подставляется автоматически)
 export const filters = appRouter.createQueryParams({
   q: parseAsString.withDefault(""),
   page: parseAsInteger.withDefault(1),
 });
-
-// Вариант 2: в модуле страницы без импорта appRouter (нет цикла с routes)
-export const filters = createQueryParams({
-  q: parseAsString.withDefault(""),
-  page: parseAsInteger.withDefault(1),
-});
 ```
-
-## urlKeys (remapping)
-
-```ts
-import { createQueryParams, parseAsFloat } from "@echojs/url-state";
-
-const coordinates = createQueryParams(
-  {
-    latitude: parseAsFloat.withDefault(45.18),
-    longitude: parseAsFloat.withDefault(5.72),
-  },
-  {
-    urlKeys: {
-      latitude: "lat",
-      longitude: "lng",
-    },
-  },
-);
-```
-
-## History
-
-```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
-
-const page = createQueryParam("page", parseAsInteger.withDefault(1));
-page.set(2, { history: "push" });
-```
-
-## defaultVisibility
-
-Одна настройка на всю группу query params:
-
-```ts
-const filters = createQueryParams(
-  { page: parseAsInteger.withDefault(1) },
-  { defaultVisibility: "hide" }, // default не попадают в URL
-);
-
-const verbose = createQueryParams(
-  { page: parseAsInteger.withDefault(1) },
-  { defaultVisibility: "show" }, // ?page=1
-);
-```
-
-`clearOnDefault: true | false` по-прежнему работает (`true` → hide, `false` → show).
 
 ## Parsers
 
-- `parseAsString`
-- `parseAsInteger`
-- `parseAsFloat`
-- `parseAsBoolean`
-- `parseAsLiteral` / `parseAsStringLiteral` / `parseAsNumberLiteral`
-- `parseAsArrayOf` — массив (повтор ключей или separator в одном ключе)
-- `parseAsNativeArrayOf` — только нативный формат `?tag=a&tag=b` ([nuqs](https://nuqs.dev/docs/parsers/built-in#native-arrays))
-- `parseAsJson` — JSON + optional Standard Schema ([nuqs](https://nuqs.dev/docs/parsers/built-in#json))
-- `parseAsIsoDate`
-- `parseAsTimestamp`
+| Parser | Example |
+|--------|---------|
+| `parseAsString` | `?q=hello` |
+| `parseAsInteger` / `parseAsFloat` | `?page=2` |
+| `parseAsBoolean` | `?open=true` |
+| `parseAsLiteral(["a","b"])` | Enum values |
+| `parseAsArrayOf` | `?tag=a&tag=b` |
+| `parseAsJson(schema)` | Complex objects |
 
-### Custom parsers
+## Related packages
 
-```ts
-import { createCustomParser, createCustomMultiParser } from "@echojs/url-state";
+| Package | Role |
+|---------|------|
+| [`@echojs/router`](https://www.npmjs.com/package/@echojs/router) | SPA URL sync |
+| [`@echojs/reactivity`](https://www.npmjs.com/package/@echojs/reactivity) | Signal-backed param state |
 
-const parseAsStars = createCustomParser({
-  parse: (value) => { /* string | string[] | null */ },
-  serialize: (value) => "★★★",
-  eq: (a, b) => a === b, // для defaultVisibility: "hide"
-});
+## Documentation
 
-const parseAsIds = createCustomMultiParser({
-  parse: (values) => values.map(Number),
-  serialize: (ids) => ids.map(String),
-});
-```
-
-См. [custom parsers в nuqs](https://nuqs.dev/docs/parsers/making-your-own).
-
-### parseAsJson + Zod
-
-```ts
-import { z } from "zod";
-import { parseAsJson } from "@echojs/url-state";
-
-const schema = z.object({ pkg: z.string(), version: z.number() });
-const json = parseAsJson(schema);
-```
-
-## Adapters
-
-### Browser adapter
-
-```ts
-import { createBrowserUrlStateAdapter, createQueryParam, parseAsString } from "@echojs/url-state";
-
-const q = createQueryParam("q", parseAsString.withDefault(""), {
-  adapter: createBrowserUrlStateAdapter(),
-});
-```
-
-### Memory adapter (tests)
-
-```ts
-import { createMemoryUrlStateAdapter, createQueryParams, parseAsString } from "@echojs/url-state";
-
-const adapter = createMemoryUrlStateAdapter("?q=hello");
-const state = createQueryParams({ q: parseAsString.withDefault("") }, { adapter });
-```
+[echojs.dev/docs/packages/url-state](https://echojs.dev/docs/packages/url-state)

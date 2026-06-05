@@ -1,7 +1,6 @@
 {
   "name": "@echojs/hyperdom",
   "version": "0.0.0",
-  "private": true,
   "files": [
     "dist"
   ],
@@ -40,5 +39,13 @@
     "jsdom": "^26.1.0",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/hyperdom"
   }
 }

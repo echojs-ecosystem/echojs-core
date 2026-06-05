@@ -1,4 +1,4 @@
-import type { DocTocEntry } from "@shared/content/extract-toc.js";
+import type { DocTocEntry } from "@core/content/extract-toc.js";
 
 export type DocTocProps = {
   entries: DocTocEntry[];

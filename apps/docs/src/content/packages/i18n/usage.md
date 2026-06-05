@@ -144,7 +144,7 @@ Fallback chain: active locale → `fallbackLocale`.
 ## HyperDOM / models
 
 ```ts
-import { i18n } from "@app/providers/i18n.js";
+import { i18n } from "@core/providers/i18n.js";
 
 const label = () => i18n.t("locale.en");
 

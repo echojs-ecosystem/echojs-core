@@ -22,33 +22,33 @@ Opens at http://localhost:3001
 
 ```
 src/
-  app/          bootstrap, providers, styles
+  app/          bootstrap, router, styles
+  core/         app-wide shared modules
+    providers/  query, ui, i18n, theme
+    styles/     tailwind-variants helpers
+    content/    markdown engine
+    seo/        meta tags
+    ui/         bind-model-view, …
   content/      markdown sources
   entities/     routes
   pages/        home + doc shell
-  shared/
-    styles/     tailwind-variants (shell, home, doc, search, …)
-    content/    markdown engine
-    search/     local index
-    seo/        meta tags
-    theme/      dark mode store
   widgets/      sidebar, search, code blocks
 ```
 
 ## Styling
 
 - **Tokens** — `src/app/styles/global.css` (`@theme` colors/fonts, `@layer base` for `body`)
-- **Components** — `src/shared/styles/*.ts` via `tv()` from `tailwind-variants`
-- **Merge** — `cn()` helper (`tailwind-merge`) when combining classes manually
+- **Components** — co-located `*.styles.ts` via `tv()` from `tailwind-variants`
+- **Merge** — `cn()` in `src/core/styles/cn.ts` (`tailwind-merge`) when combining classes manually
 
 Example:
 
 ```ts
-import { navLinkStyles } from "@shared/styles/index.js";
+import { cn } from "@core/styles/cn.js";
 
-NavLink({ class: navLinkStyles(), activeClass: navLinkStyles({ active: true }) });
+NavLink({ class: cn(navLinkStyles(), isActive && navLinkStyles({ active: true })) });
 ```
 
 ## Roadmap
 
-See `src/shared/content/future.ts` for planned features (playground, versioning, i18n docs).
+See `src/core/content/future.ts` for planned features (playground, versioning, i18n docs).

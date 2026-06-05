@@ -1,4 +1,6 @@
 import { signal } from "@echojs/reactivity";
+import { DOC_VERSION_HISTORY } from "@core/content/doc-version-history.generated.js";
+import { ECOSYSTEM_VERSION } from "@core/content/ecosystem-version.generated.js";
 
 export type DocVersionEntry = {
   id: string;
@@ -10,18 +12,36 @@ export type DocVersionEntry = {
   disabled?: boolean;
 };
 
+const docVersionId = (() => {
+  const [major = "0", minor = "0"] = ECOSYSTEM_VERSION.split(".");
+  return `${major}.${minor}`;
+})();
+
 export const DOC_VERSIONS: DocVersionEntry[] = [
-  { id: "0.1", label: "v0.1", badge: "Latest", current: true },
-  { id: "0.0", label: "v0.0", disabled: true },
+  ...DOC_VERSION_HISTORY.map(
+    (entry): DocVersionEntry => ({
+      id: entry.id,
+      label: entry.label,
+      href: entry.href,
+      disabled: entry.disabled,
+      current: false,
+    }),
+  ),
+  {
+    id: docVersionId,
+    label: `v${ECOSYSTEM_VERSION}`,
+    badge: "Latest",
+    current: true,
+  },
 ];
 
 const STORAGE_KEY = "echojs-docs-version";
 
 const initialVersion = (): string => {
-  if (typeof window === "undefined") return "0.1";
+  if (typeof window === "undefined") return docVersionId;
   const stored = localStorage.getItem(STORAGE_KEY);
   const valid = DOC_VERSIONS.find((v) => v.id === stored && !v.disabled);
-  return valid?.id ?? DOC_VERSIONS.find((v) => v.current)?.id ?? "0.1";
+  return valid?.id ?? DOC_VERSIONS.find((v) => v.current)?.id ?? docVersionId;
 };
 
 export const $docVersionId = signal(initialVersion());

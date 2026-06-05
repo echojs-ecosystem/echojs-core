@@ -15,7 +15,7 @@ cd apps/docs
 bun run architect:watch
 ```
 
-Edit a file that violates layer rules (e.g. import a page from `shared/`) and watch the diagnostic appear.
+Edit a file that violates layer rules (e.g. import a page from `core/`) and watch the diagnostic appear.
 
 ## Experiment with config
 

@@ -1,6 +1,6 @@
 import { createRouteView } from "@echojs/router";
 import { Home } from "@entities/home/index.js";
-import { applySeo } from "@shared/seo/apply-seo.js";
+import { applySeo } from "@core/seo/apply-seo.js";
 
 export const homePage = createRouteView({
   name: "home",

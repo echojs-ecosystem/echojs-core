@@ -1,6 +1,6 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { div, p, Show } from "@echojs/hyperdom";
-import { extractDocToc } from "@shared/content/extract-toc.js";
+import { extractDocToc } from "@core/content/extract-toc.js";
 import {
   docArticlePageStyles,
   docLayoutStyles,

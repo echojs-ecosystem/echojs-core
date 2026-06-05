@@ -63,7 +63,7 @@ Keep everything that changes together in one folder:
 - Styles scoped to the feature → `constants/` or `*.styles.ts` next to views
 - Tests (when added) → beside the module they cover
 
-Move to `shared/` only when **two or more** features/pages need the same helper.
+Move to `core/` only when **two or more** features/pages need the same helper.
 
 ## Widgets that are “almost features”
 

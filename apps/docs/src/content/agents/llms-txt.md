@@ -29,7 +29,7 @@ Short contract for tools that edit **`apps/docs`**. The canonical plain-text cop
 ## Wiring
 
 ```typescript
-import { bindModelView, bindModelViewWith } from "@shared/ui/bind-model-view.js";
+import { bindModelView, bindModelViewWith } from "@core/ui/bind-model-view.js";
 import { createHomeModel } from "./model/home.model.js";
 import { HomeView } from "./ui/home.view.js";
 
@@ -68,7 +68,7 @@ export const homePage = createRouteView({
 ## New documentation page
 
 1. Add `src/content/<section>/<slug>.md`
-2. Register in `shared/content/nav.ts` via `item(...)`
+2. Register in `core/content/nav.ts` via `item(...)`
 3. Routes are generated from `allDocsNavItems` automatically
 
 ## See also

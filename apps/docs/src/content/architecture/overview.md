@@ -22,19 +22,19 @@ An EchoJS application is a **client-side SPA** built from a small number of laye
 ├─────────────────────────────────────────────┤
 │  entities/     routes, domain, doc registry │
 ├─────────────────────────────────────────────┤
-│  shared/       styles, utils, content engine  │
+│  core/         providers, styles, content engine  │
 └─────────────────────────────────────────────┘
          ▲ imports only upward in this diagram
 ```
 
 | Layer | Owns | Example in `apps/docs` |
 | --- | --- | --- |
-| **app** | `createEchoApp`, provider registration, `main.ts` | `bootstrap.ts`, `providers/router.ts` |
+| **app** | `createEchoApp`, router wiring, `main.ts` | `bootstrap.ts`, `router-provider.ts` |
 | **pages** | Route views, page-level models | `pages/home`, `pages/doc` |
 | **widgets** | Reusable sections across pages | `site-header`, `docs-sidebar`, `code-block` |
 | **features** | Focused behavior + UI | `docs-search` (if under features) |
 | **entities** | Router tables, caches keyed by domain | `entities/__routes__`, `doc-pages.ts` |
-| **shared** | Design tokens, `bindModelView`, markdown | `shared/styles`, `parse-markdown.ts` |
+| **core** | Providers, design helpers, `bindModelView`, markdown | `core/providers`, `core/styles`, `parse-markdown.ts` |
 
 ## Runtime flow
 
@@ -69,21 +69,21 @@ Layouts run `beforeLoad` before children; a failing layout blocks child loads.
 | --- | --- |
 | UI selection (tab index, panel open) | Page or widget **model** |
 | Server data | `@echojs/query` in model (`createQuery.with`) |
-| Global theme / locale | Provider-backed stores (`shared/theme`, i18n) |
+| Global theme / locale | Provider-backed stores (`core/providers`) |
 | URL shareable state | `@echojs/url-state` + router query |
 | Cross-feature client store | `@echojs/store` (sparingly) |
 
 > [!RECOMMENDATION]
-> Prefer feature-local models over a single global store. Promote to `shared/` only when two features need the same source of truth.
+> Prefer feature-local models over a single global store. Promote to `core/` only when two features need the same source of truth.
 
 ## Documentation app specifics
 
 `apps/docs` adds:
 
 - **`content/`** — markdown sources (`contentId` → URL)
-- **`shared/content/nav.ts`** — sidebar + search index
+- **`core/content/nav.ts`** — sidebar + search index
 - **`widgets/doc-content`** — renderer, TOC, Shiki code blocks
-- **Persistent docs chrome** — sidebar/header outside remounting `router.View` (see app `providers/router.ts`)
+- **Persistent docs chrome** — sidebar/header outside remounting `router.View` (see `app/router-provider.ts`)
 
 The example lab (`apps/example`) uses the same layers with Hub → Docs module / Workspace instead of marketing home.
 

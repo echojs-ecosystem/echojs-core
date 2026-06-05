@@ -92,7 +92,7 @@ Call `i18n.t()` inside reactive contexts so UI updates on locale change:
 
 ```ts
 import { effect } from "@echojs/reactivity";
-import { i18n } from "@app/providers/i18n.js";
+import { i18n } from "@core/providers/i18n.js";
 
 // In createView — function child re-runs when locale signal updates
 p(null, () => i18n.t("common.session"));
@@ -134,4 +134,4 @@ Locale in the **path** (`/en/docs/...`) is an app choice — combine with route 
 - [i18n package](/docs/packages/i18n/overview)
 - [Providers](/docs/architecture/providers)
 - Example locales — `apps/example/public/locales/`
-- Docs provider — `apps/docs/src/app/providers/i18n.ts`
+- Docs provider — `apps/docs/src/core/providers/i18n.ts`

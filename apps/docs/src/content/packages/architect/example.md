@@ -61,7 +61,7 @@ export default defineConfig({
     rules: [
       dependenciesDirection(
         ["app", "pages", "entities", "widgets", "features", "shared"],
-        { allowDownward: ["**/app/router/**", "**/app/providers/**"] },
+        { allowDownward: ["**/app/router/**", "**/core/providers/**"] },
       ),
     ],
   }),
@@ -73,7 +73,7 @@ export default defineConfig({
 | Message | Fix |
 | --- | --- |
 | `Forbidden dependency "widgets" <= "entities"` | Move import to a higher layer or adjust layer order |
-| `cross imports are not allowed` | Import via `index.ts` or lift shared code to `shared/` |
+| `cross imports are not allowed` | Import via `index.ts` or lift shared code to `core/` |
 | `bypassing the public api` | Export from slice `index.ts`; consumers use barrel |
 | `Unabstraction files` | Move file into declared segment or add pattern to config |
 

@@ -7,7 +7,7 @@ import {
   restrictCrossImports,
 } from "@echojs/architect";
 
-/** `app/` — shell: entrypoints, router tables, providers, global styles. */
+/** `app/` — shell: entrypoints, router tables, global styles. */
 const appLayer = abstraction({
   name: "app",
   children: {
@@ -18,6 +18,18 @@ const appLayer = abstraction({
       },
       rules: [noUnabstractionFiles()],
     }),
+    styles: abstraction("styles"),
+    "main.ts": abstraction("entry"),
+    "bootstrap.ts": abstraction("entry"),
+    "router-provider.ts": abstraction("router-provider"),
+  },
+  rules: [noUnabstractionFiles()],
+});
+
+/** `core/` — app-wide modules: providers, content engine, styles, utilities. */
+const coreLayer = abstraction({
+  name: "core",
+  children: {
     providers: abstraction({
       name: "providers",
       children: {
@@ -26,11 +38,23 @@ const appLayer = abstraction({
       },
       rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
     }),
-    styles: abstraction("styles"),
-    "main.ts": abstraction("entry"),
-    "bootstrap.ts": abstraction("entry"),
+    content: abstraction({
+      name: "content",
+      children: { "**/*": abstraction("content-module") },
+    }),
+    styles: abstraction({
+      name: "styles",
+      children: { "**/*": abstraction("style-module") },
+    }),
+    seo: abstraction({
+      name: "seo",
+      children: { "**/*": abstraction("seo-module") },
+    }),
+    ui: abstraction({
+      name: "ui",
+      children: { "**/*": abstraction("ui-module") },
+    }),
   },
-  rules: [noUnabstractionFiles()],
 });
 
 /** `pages/<name>/` — `*.page.ts` is the route entry; `index.ts` re-exports. */
@@ -108,17 +132,14 @@ export default defineConfig({
         name: "entities",
         children: { "*": entitySlice },
       }),
-      shared: abstraction({
-        name: "shared",
-        children: { "**/*": abstraction("shared-module") },
-      }),
+      core: coreLayer,
       content: abstraction("content"),
     },
     rules: [
       dependenciesDirection(
-        ["app", "pages", "entities", "widgets", "features", "shared"],
+        ["app", "pages", "entities", "widgets", "features", "core"],
         {
-          allowDownward: ["**/app/router/**", "**/app/providers/**"],
+          allowDownward: ["**/app/router/**"],
         },
       ),
     ],

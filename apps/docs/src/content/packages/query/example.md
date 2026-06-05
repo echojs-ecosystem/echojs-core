@@ -10,7 +10,7 @@ package: "@echojs/query"
 
 ```ts
 import { createQuery } from "@echojs/query";
-import { jpFetch } from "@shared/api/jsonplaceholder.js";
+import { jpFetch } from "@core/api/jsonplaceholder.js";
 
 export const listUsersQuery = createQuery({
   name: "jp-users",
@@ -89,7 +89,7 @@ const query = docContentQuery.with(() => ({ contentId: props.contentId }));
 ## Provider defaults
 
 ```ts
-// apps/docs/src/app/providers/query.ts
+// apps/docs/src/core/providers/query.ts
 import { createQueryProvider } from "@echojs/query";
 
 export const queryProvider = createQueryProvider({

@@ -4,11 +4,11 @@ import { appRouter } from "@app/router/router.js";
 import type { AnyPage } from "@echojs/router";
 import type { Child } from "@echojs/hyperdom";
 import { button, div, span } from "@echojs/hyperdom";
-import { packageIdFromPathname, type PackageNavGroup } from "@shared/content/package-nav.js";
-import { resolveNavIcon, resolvePackageGroupIcon } from "@shared/content/resolve-nav-icon.js";
+import { packageIdFromPathname, type PackageNavGroup } from "@core/content/package-nav.js";
+import { resolveNavIcon, resolvePackageGroupIcon } from "@core/content/resolve-nav-icon.js";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { navLinkStyles, shellStyles } from "@widgets/docs-shell/docs-shell.styles.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 
 const shell = shellStyles();

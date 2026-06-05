@@ -1,6 +1,6 @@
 import type { FrameworkColumn } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 
 const cmp = frameworkComparisonStyles();
 

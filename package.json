@@ -8,6 +8,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "build:packages": "turbo run build --filter='./packages/*' --filter='!./packages/bench'",
     "build:http": "turbo run build --filter=@echojs/network-http",
     "dev": "turbo run dev",
     "storybook": "turbo run storybook --filter=@echojs/ui",
@@ -22,17 +23,18 @@
     "format:fix": "oxfmt .",
     "lint:and:format": "bun run oxlint && bun run oxfmt",
     "changeset": "changeset",
-    "version:all": "changeset version",
-    "publish:all": "changeset publish",
+    "sync-versions": "node scripts/sync-package-versions.mjs",
+    "version:all": "changeset version && node scripts/sync-package-versions.mjs",
+    "publish:all": "bun run release",
     "clean": "turbo run clean",
     "graph": "npx nx graph ",
-    "release": "changeset publish",
-    "release:canary": "changeset publish --no-git-tag",
+    "release": "bun run build:packages && changeset publish",
+    "release:canary": "bun run build:packages && changeset publish --no-git-tag",
     "start": "turbo run start --filter=./packages/*",
     "typecheck": "turbo run typecheck --continue --filter='./packages/*'",
     "upgrade": "npx taze -r -w --exclude pnpm",
-    "version": "changeset version",
-    "version:canary": "changeset version --snapshot canary"
+    "version": "changeset version && node scripts/sync-package-versions.mjs",
+    "version:canary": "changeset version --snapshot canary && node scripts/sync-package-versions.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

@@ -2,10 +2,10 @@ import { createEchoApp } from "@echojs/framework/app";
 import {
   i18nProvider,
   queryProvider,
-  routerProvider,
   themeProvider,
   uiProvider,
-} from "@app/providers/index.js";
+} from "@core/providers/index.js";
+import { routerProvider } from "@app/router-provider.js";
 
 export const bootstrap = (): Promise<() => void> =>
   createEchoApp({

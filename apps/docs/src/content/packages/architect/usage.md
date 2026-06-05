@@ -57,13 +57,13 @@ Upper layers (left) may import lower layers (right). Importing upward is an erro
 
 ## Downward exceptions (`allowDownward`)
 
-Some app-shell modules are intentionally shared downward — e.g. route tables in `app/router` or i18n in `app/providers`:
+Some app-shell modules are intentionally shared downward — e.g. route tables in `app/router`. App-wide providers live in `core/providers`:
 
 ```ts
 dependenciesDirection(
-  ["app", "pages", "entities", "widgets", "features", "shared"],
+  ["app", "pages", "entities", "widgets", "features", "core"],
   {
-    allowDownward: ["**/app/router/**", "**/app/providers/**"],
+    allowDownward: ["**/app/router/**"],
   },
 );
 ```
@@ -75,9 +75,9 @@ Glob patterns match dependency **file paths**. Matching imports skip the layer-o
 When `publicAbstraction("public-api")` is on a slice, external code must import `index.ts` (or another declared public segment like `*.page.ts` on pages).
 
 **Error:** `Imports of "providers" bypassing the public api are forbidden`  
-**Meaning:** something imported `app/providers/theme-store.ts` instead of `app/providers/index.ts`.
+**Meaning:** something imported `core/providers/theme-store.ts` instead of `core/providers/index.ts`.
 
-**Fix:** re-export from `providers/index.ts` and import the barrel.
+**Fix:** re-export from `core/providers/index.ts` and import the barrel (`@core/providers/index.js`).
 
 ## Docs site reference
 

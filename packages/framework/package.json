@@ -1,8 +1,9 @@
 {
   "name": "@echojs/framework",
   "version": "0.0.0",
-  "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -80,5 +81,13 @@
     "@echojs/oxc-config": "workspace:*",
     "oxlint": "^1.60.0",
     "typescript": "5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/framework"
   }
 }

@@ -29,7 +29,7 @@ Optional when binding params from stores:
 ## Framework bootstrap
 
 ```ts
-// app/providers/query.ts
+// core/providers/query.ts
 import { createQueryProvider } from "@echojs/query";
 
 export const queryProvider = createQueryProvider({

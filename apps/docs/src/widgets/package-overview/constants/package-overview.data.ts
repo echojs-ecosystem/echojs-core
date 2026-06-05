@@ -1,4 +1,4 @@
-import type { ContentId } from "@shared/content/types.js";
+import type { ContentId } from "@core/content/types.js";
 
 export type PackagePillar = { title: string; body: string; icon: string };
 export type PackageLearnStep = { title: string; description: string; contentId: ContentId };

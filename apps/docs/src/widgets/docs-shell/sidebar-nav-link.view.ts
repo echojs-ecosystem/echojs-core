@@ -2,9 +2,9 @@ import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import type { AnyPage } from "@echojs/router";
 import { h, span } from "@echojs/hyperdom";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 import { navLinkStyles, shellStyles } from "@widgets/docs-shell/docs-shell.styles.js";
-import type { NavIconId } from "@shared/content/nav-icon-id.js";
+import type { NavIconId } from "@core/content/nav-icon-id.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 
 const shell = shellStyles();

@@ -89,7 +89,7 @@ effect(() => {
 
 ## Docs site examples
 
-- `shared/theme/theme-store.ts` — **not** local (global theme)
+- `core/providers.ts` — **not** local (global theme)
 - `shared/layout/mobile-nav.ts` — shell-level signal (shared layout, still not a product store)
 - Home hero code tab index — **local** to home model
 

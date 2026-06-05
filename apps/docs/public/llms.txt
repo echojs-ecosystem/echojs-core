@@ -61,6 +61,6 @@ export const Foo = (props: FooProps): Child =>
 
 ## Docs content
 
-- New doc page: add markdown under `src/content/` + entry in `shared/content/nav.ts` (or `agents-nav.ts`)
+- New doc page: add markdown under `src/content/` + entry in `core/content/nav.ts` (or `agents-nav.ts`)
 
 Full guide: /docs/agents/agents

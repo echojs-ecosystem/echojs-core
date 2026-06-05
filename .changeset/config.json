@@ -1,0 +1,28 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.1.4/schema.json",
+  "changelog": "@changesets/cli/changelog",
+  "commit": false,
+  "fixed": [
+    [
+      "@echojs/reactivity",
+      "@echojs/core",
+      "@echojs/hyperdom",
+      "@echojs/framework",
+      "@echojs/router",
+      "@echojs/form",
+      "@echojs/persist",
+      "@echojs/store",
+      "@echojs/query",
+      "@echojs/url-state",
+      "@echojs/i18n",
+      "@echojs/ui",
+      "@echojs/architect",
+      "@echojs/devtools-core"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@echojs/bench", "@echojs/oxc-config"]
+}

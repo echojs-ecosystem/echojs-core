@@ -46,7 +46,7 @@ Each `.use(provider)` runs `setup(app)` immediately (registration order). At `mo
 ### Package providers (convention)
 
 ```ts
-// app/providers/index.ts
+// core/providers/index.ts
 export { queryProvider } from "./query.js";
 export { routerProvider } from "./router.js";
 export { uiProvider } from "./ui.js";

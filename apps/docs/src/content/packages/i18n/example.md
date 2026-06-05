@@ -44,7 +44,7 @@ export const setAppLocale = (locale: AppLocale) => i18n.setLocale(locale);
 ## HyperDOM view
 
 ```ts
-import { i18n, setAppLocale } from "@app/providers/i18n.js";
+import { i18n, setAppLocale } from "@core/providers/i18n.js";
 
 button({ onClick: () => void setAppLocale("ru") }, () => i18n.t("locale.ru"));
 span(null, () => i18n.t("shell.documentTitle"));
@@ -54,7 +54,7 @@ span(null, () => i18n.t("shell.documentTitle"));
 
 ```ts
 // widgets/locale-dropdown/model/locale-dropdown.model.ts
-import { i18n, setAppLocale, type AppLocale } from "@app/providers/i18n.js";
+import { i18n, setAppLocale, type AppLocale } from "@core/providers/i18n.js";
 
 export const createLocaleDropdownModel = createModel(() => ({
   locale: () => i18n.locale(),
@@ -84,7 +84,7 @@ const i18n = createI18n({
 
 | Resource | Path |
 | --- | --- |
-| Provider | `apps/docs/src/app/providers/i18n.ts` |
+| Provider | `apps/docs/src/core/providers/i18n.ts` |
 | Locales | `apps/docs/public/locales/*.json` |
 | Switcher | `apps/docs/src/widgets/locale-dropdown/` |
 | Example lab | `apps/example` — counter uses `i18n.t("counter.title")` |

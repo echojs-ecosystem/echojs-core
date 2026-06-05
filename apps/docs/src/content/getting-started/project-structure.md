@@ -1,6 +1,6 @@
 ---
 title: Project Structure
-description: Feature-first folder layout for EchoJS apps — app, pages, widgets, features, entities, shared.
+description: Feature-first folder layout for EchoJS apps — app, pages, widgets, features, entities, core.
 ---
 
 # Project Structure
@@ -10,12 +10,12 @@ EchoJS apps in this monorepo follow **feature-first** layering. The goal is simp
 ## Layer diagram
 
 ```
-app/           → bootstrap, providers, global CSS
+app/           → bootstrap, router, global CSS
 pages/         → route entries (*.page.ts) + page-local MV
 widgets/       → composite UI (header, sidebar, doc renderer)
 features/      → user stories (search, theme toggle, query demo)
 entities/      → routes, domain types, shared route tables
-shared/        → styles, i18n keys, utilities, bindModelView
+core/          → providers, styles, content engine, SEO, utilities
 content/       → markdown sources (docs site only)
 ```
 
@@ -25,10 +25,10 @@ content/       → markdown sources (docs site only)
 | --- | --- |
 | `main.ts` | Entry: CSS + `bootstrap()` |
 | `bootstrap.ts` | `createEchoApp().use(...).mount()` |
-| `providers/*.ts` | Router, query, UI, i18n, theme |
+| `router-provider.ts` | Wires `appRouter` into `createRouterProvider` |
 | `styles/global.css` | Tailwind / tokens |
 
-Providers stay here — not inside individual pages.
+App-wide providers live in `core/providers/` — not inside individual pages.
 
 ## `pages/` — routes
 
@@ -62,7 +62,7 @@ features/query-demo/
   ui/
 ```
 
-Features are imported by pages or widgets — not by `shared/`.
+Features are imported by pages or widgets — not by `core/`.
 
 ## `entities/` — routing & domain
 
@@ -76,16 +76,17 @@ entities/__routes__/
 
 Keep path tables and `createRouter` wiring out of views.
 
-## `shared/` — lowest app layer
+## `core/` — lowest app layer
 
-- `styles/` — `tailwind-variants` (`tv()`) design tokens
+- `providers/` — query, UI, i18n, theme (import via `@core/providers/index.js`)
+- `styles/` — `tailwind-variants` (`tv()`) helpers (`cn()`)
 - `ui/bind-model-view.ts` — page glue helper
 - `content/` — nav config, markdown loader (docs)
-- `seo/`, `search/`, `layout/` — cross-cutting utilities
+- `seo/` — meta tags and document title helpers
 
 ## `content/` (documentation app)
 
-Markdown files map 1:1 to URLs via `contentId` (`guides/routing` → `/docs/guides/routing`). Nav lives in `shared/content/nav.ts`.
+Markdown files map 1:1 to URLs via `contentId` (`guides/routing` → `/docs/guides/routing`). Nav lives in `core/content/nav.ts`.
 
 ## Path aliases
 
@@ -98,7 +99,7 @@ Markdown files map 1:1 to URLs via `contentId` (`guides/routing` → `/docs/guid
 | `@widgets/*` | `src/widgets/*` |
 | `@features/*` | `src/features/*` |
 | `@entities/*` | `src/entities/*` |
-| `@shared/*` | `src/shared/*` |
+| `@core/*` | `src/core/*` |
 
 Use the same aliases in Vite (`resolve.alias`) so imports match TypeScript.
 
@@ -106,14 +107,14 @@ Use the same aliases in Vite (`resolve.alias`) so imports match TypeScript.
 
 | From | May import |
 | --- | --- |
-| `pages` | widgets, features, entities, shared |
-| `widgets` | features, entities, shared |
-| `features` | entities, shared |
-| `entities` | shared |
-| `shared` | packages (`@echojs/*`) only |
+| `pages` | widgets, features, entities, core |
+| `widgets` | features, entities, core |
+| `features` | entities, core |
+| `entities` | core |
+| `core` | packages (`@echojs/*`) only |
 
 > [!WARNING]
-> Do not import `pages/` from `features/` or `widgets/`. Lift shared logic to `features/` or `shared/`.
+> Do not import `pages/` from `features/` or `widgets/`. Lift shared logic to `features/` or `core/`.
 
 ## Reference repos
 

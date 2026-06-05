@@ -232,7 +232,7 @@ router.resolve(userPage, { id: "1" }, { query: { tab: "a" } });
 { path: "guides/routing", name: "docs-guides-routing", routeView: getDocPage("guides/routing") }
 ```
 
-Single source in `shared/content/nav.ts` + `canonicalDocsRouteItems()` for deduped routes.
+Single source in `core/content/nav.ts` + `canonicalDocsRouteItems()` for deduped routes.
 
 ## Related
 

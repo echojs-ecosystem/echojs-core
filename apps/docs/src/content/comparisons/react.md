@@ -234,7 +234,7 @@ EchoJS classifies state **by kind** so you do not dump everything into Redux or 
 | **MobX** | Observable OOP | `signal` + `computed` (similar mental model) |
 | **Context** | DI + theme + session | `provide` / `inject`, `@echojs/ui` theme |
 | **Apollo Client (local)** | Cache + local state | `@echojs/query` for server; store for UI |
-| **react-use** misc | One-off hooks | model methods or `shared/` utils |
+| **react-use** misc | One-off hooks | model methods or `core/` utils |
 | **Immer** | Immutable patches | `store.update` / `set` with spread |
 | **xstate** | State machines | model + explicit transitions (or port machine in shared) |
 

@@ -6,6 +6,7 @@ import {
   ecosystemPackages,
   type EcosystemPackage,
 } from "@widgets/ecosystem/constants/ecosystem-packages.js";
+import { getPackageVersion } from "@core/content/ecosystem-version.generated.js";
 import {
   getPackageOverview,
   type PackageOverviewData,
@@ -52,6 +53,8 @@ const OverviewBody = (data: PackageOverviewData): Child => {
   const related = data.relatedIds
     .map(toEcosystemCard)
     .filter((p): p is EcosystemPackage => p !== null);
+  const version = getPackageVersion(data.npmPackage);
+  const packageLabel = version ? `${data.npmPackage}@${version}` : data.npmPackage;
 
   return div({ class: ui.root() }, [
     div({ class: ui.hero() }, [
@@ -59,7 +62,7 @@ const OverviewBody = (data: PackageOverviewData): Child => {
       div({ class: ui.heroInner() }, [
         div({ class: ui.heroIconWrap() }, [span({ class: ui.heroIcon() }, data.icon)]),
         div({ class: ui.heroContent() }, [
-          p({ class: ui.heroEyebrow() }, data.npmPackage),
+          p({ class: ui.heroEyebrow() }, packageLabel),
           p({ class: ui.heroHeadline() }, data.tagline),
           p({ class: ui.heroSummary() }, data.summary),
           div({ class: ui.pillRow() }, [

@@ -10,7 +10,7 @@ import {
   archLayerStyles,
   homeArchitectureStyles,
 } from "@entities/home/ui/home-architecture.view.styles.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 
 const home = homeArchitectureStyles();
 const layer = archLayerStyles();

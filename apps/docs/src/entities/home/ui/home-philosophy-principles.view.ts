@@ -7,7 +7,7 @@ import {
   homePhilosophyStyles,
   philosophyCardStyles,
 } from "@entities/home/ui/home-philosophy-principles.view.styles.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 
 const home = homePhilosophyStyles();
 const cardTones = ["honey", "wheat", "sand"] as const;

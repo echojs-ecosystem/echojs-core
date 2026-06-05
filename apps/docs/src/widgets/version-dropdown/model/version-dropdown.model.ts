@@ -1,5 +1,5 @@
 import { createModel } from "@echojs/hyperdom";
-import { i18n } from "@app/providers/i18n.js";
+import { i18n } from "@core/providers/index.js";
 import {
   $docVersionId,
   DOC_VERSIONS,

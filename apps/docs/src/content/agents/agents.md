@@ -16,10 +16,11 @@ EchoJS separates **what changes** (model: signals, effects, actions) from **what
 
 | Path | Role |
 |------|------|
-| `src/app/` | Bootstrap, providers, global CSS |
+| `src/app/` | Bootstrap, router, global CSS |
+| `src/core/providers/` | Query, UI, i18n, theme providers |
 | `src/pages/` | Route-level features (home, sponsors, doc article) |
 | `src/widgets/` | Reusable UI (header, sidebar, code-block, …) |
-| `src/shared/` | Styles (`tv()`), content engine, SEO, search |
+| `src/core/` | Styles (`tv()`), content engine, SEO, search |
 | `src/content/` | Markdown sources |
 | `src/entities/__routes__/` | Router tables, doc page cache |
 | `public/llms.txt` | Compact rules for LLM tools |
@@ -110,7 +111,7 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 ## Styling
 
 - Design tokens in `src/app/styles/global.css` (`@theme`)
-- Component styles: `shared/styles/*.ts` with `tv({ slots: { … }, variants: { … } })`
+- Component styles: `core/styles/*.ts` with `tv({ slots: { … }, variants: { … } })`
 - Do not hardcode one-off colors in views when a token exists (`echo-*`, `surface`, `fg-muted`)
 
 ## Content & sidebar
@@ -118,11 +119,11 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 - Markdown: `src/content/<path>.md` with YAML frontmatter (`title`, `description`)
 - Install panel (same widget as home hero): standalone line `:::install @echojs/reactivity` — do not duplicate `:::tabs` bash blocks for package adds
 - Package badge line: `@echojs/reactivity` under frontmatter
-- Nav: `shared/content/nav.ts` — `docsNavSections` + `item(slug, title, contentId)`
+- Nav: `core/content/nav.ts` — `docsNavSections` + `item(slug, title, contentId)`
 - Package docs: Overview · Installation · Usage · Example · **Playground** · API (`package-nav.ts`)
 - Interactive embed: standalone line `:::playground reactivity` → `widgets/package-playground` (live UI + JSON state)
 - Static code: `packages/<id>/example.md` from `apps/docs` / `apps/example`
-- Agent docs: `shared/content/agents-nav.ts` — sidebar block **For agents**
+- Agent docs: `core/content/agents-nav.ts` — sidebar block **For agents**
 - Routes: auto via `docPageByContentId` from `allDocsNavItems`
 
 ## Queries & SEO

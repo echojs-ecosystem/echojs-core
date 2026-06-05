@@ -1,6 +1,6 @@
 import type { AnyPage } from "@echojs/router";
-import { allDocsNavItems } from "@shared/content/nav.js";
-import type { ContentId } from "@shared/content/types.js";
+import { allDocsNavItems } from "@core/content/nav.js";
+import type { ContentId } from "@core/content/types.js";
 import { createDocPage } from "@pages/doc/doc.page.js";
 
 const cache = new Map<ContentId, AnyPage>();

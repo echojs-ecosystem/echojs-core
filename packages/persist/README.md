@@ -1,249 +1,83 @@
+<div align="center">
+
 # @echojs/persist
 
-Универсальный persistence-layer для [`@echojs/store`](../store) и любых **persistable** primitives с контрактом `value` / `set` / `subscribe`.
+**Storage extensions for stores and form fields — localStorage, cookies, IndexedDB, and more.**
 
-Persistence подключается через `.extend()` — `@echojs/store` не знает про browser storage.
+[![npm](https://img.shields.io/npm/v/@echojs/persist)](https://www.npmjs.com/package/@echojs/persist)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/persist)
 
-## Philosophy
+</div>
 
-`@echojs/persist` — storage/persistence layer для:
+---
 
-- `@echojs/store`
-- будущего `@echojs/form` (`createField`, `createFieldArray`, `createForm`)
-- любых объектов, реализующих `Persistable<Value>`
+Universal persistence via **`.extend()`**. Works with [`@echojs/store`](https://www.npmjs.com/package/@echojs/store) and any object matching the persistable contract (`value` / `set` / `subscribe`).
 
-Пакет **не зависит** от `@echojs/form` — только от общего контракта.
+## Features
 
-## Установка
+- **Adapters** — `localStorage`, `sessionStorage`, `cookie`, `IndexedDB`, in-memory
+- **`.extend(withLocalStorage(...))`** — plug-and-play for stores & fields
+- **Versioning & migration** — schema version with `migrate` callback
+- **TTL** — auto-expire stale records on hydrate
+- **Select / merge** — persist slices of state (e.g. token only)
+- **SSR-safe** — memory fallback when `window` is unavailable
+
+## Install
 
 ```bash
-bun add @echojs/persist @echojs/store
+npm install @echojs/persist @echojs/store
 ```
 
-## Basic store persistence
+## Quick start
 
 ```ts
 import { createStore } from "@echojs/store";
 import { withLocalStorage } from "@echojs/persist";
 
-export const themeStore = createStore("dark", {
-  name: "theme",
-}).extend(
-  withLocalStorage({
-    key: "app-theme",
-  }),
+export const themeStore = createStore("dark", { name: "theme" }).extend(
+  withLocalStorage({ key: "app-theme", version: 1 }),
 );
+
+// Imperative control
+await themeStore.persist.hydrate();
+await themeStore.persist.save();
+themeStore.persist.$hydrated.value();
 ```
 
-## Manual hydrate
+## Adapters
 
 ```ts
-const draft = createStore("").extend(
-  withLocalStorage({
-    key: "draft",
-    hydrate: false,
-  }),
-);
+import { withSessionStorage, withCookie, withIndexedDB } from "@echojs/persist";
 
-await draft.persist.hydrate();
-```
-
-## Session / Cookie / IndexedDB
-
-```ts
-import {
-  withSessionStorage,
-  withCookie,
-  withIndexedDB,
-} from "@echojs/persist";
-
-const filtersStore = createStore({ search: "", category: null }).extend(
-  withSessionStorage({ key: "catalog-filters", version: 1 }),
-);
-
-const tokenStore = createStore<string | null>(null).extend(
-  withCookie({
-    key: "access-token",
-    path: "/",
-    sameSite: "lax",
-    secure: true,
-  }),
-);
-
-const cacheStore = createStore<Record<string, Product>>({}).extend(
-  withIndexedDB({
-    key: "products-cache",
-    dbName: "echojs",
-    storeName: "kv",
-  }),
-);
-```
-
-## Form field persistence (будущий API)
-
-```ts
-const nameField = createField("", { name: "name" }).extend(
-  withLocalStorage({
-    key: "profile:name",
-  }),
-);
-
-const phonesFieldArray = createFieldArray<string>([], { name: "phones" }).extend(
-  withLocalStorage({
-    key: "profile:phones",
-  }),
-);
-```
-
-Без `.extend()`:
-
-```ts
-import { persist, withLocalStorage } from "@echojs/persist";
-
-persist(nameField, withLocalStorage({ key: "profile:name" }));
-```
-
-## Whole form persistence
-
-```ts
-const profileForm = createForm({
-  fields: {
-    name: createField(""),
-    email: createField(""),
-    phones: createFieldArray<string>([]),
-  },
-}).extend(
-  withLocalStorage({
-    key: "profile-form",
-  }),
-);
-```
-
-## Persist API
-
-После `.extend()` доступен объект `persist`:
-
-```ts
-await userStore.persist.hydrate();
-await userStore.persist.save();
-await userStore.persist.clear();
-
-userStore.persist.pause();
-userStore.persist.resume();
-
-userStore.persist.$hydrated.value();
-userStore.persist.$pending.value();
-userStore.persist.$error.value();
+createStore(filters).extend(withSessionStorage({ key: "filters", version: 1 }));
+createStore(token).extend(withCookie({ key: "token", path: "/", sameSite: "lax" }));
+createStore(cache).extend(withIndexedDB({ key: "cache", dbName: "echojs", storeName: "kv" }));
 ```
 
 ## Persist record
 
-В storage сохраняется record:
-
 ```ts
-type PersistRecord<Snapshot> = {
+type PersistRecord<T> = {
   version: number;
   createdAt: number;
   updatedAt: number;
   expiresAt?: number;
-  data: Snapshot;
+  data: T;
 };
 ```
 
-## TTL
+## API
 
-```ts
-withLocalStorage({
-  key: "draft",
-  ttl: 1000 * 60 * 60,
-});
-```
-
-Просроченные записи удаляются при hydrate.
-
-## Migration
-
-```ts
-withLocalStorage({
-  key: "settings",
-  version: 2,
-  migrate: ({ data, version }) => {
-    if (version === 1) {
-      return migrateV1ToV2(data);
-    }
-    return data as Settings;
-  },
-});
-```
-
-## Select / Merge
-
-```ts
-const auth = createStore({
-  token: null,
-  user: null,
-}).extend(
-  withCookie({
-    key: "token",
-    select: (state) => state.token,
-    merge: (state, token) => ({
-      ...state,
-      token,
-    }),
-  }),
-);
-```
-
-## Cookie warning
-
-- Cookie **маленькие** (≈4KB на домен).
-- Cookie **отправляются на сервер** с каждым запросом.
-- Не храните большие JSON и чувствительные данные без понимания рисков.
-
-## IndexedDB
-
-- `hydrate` / `save` — **async**
-- `$pending` — `true` во время операций
-- `$hydrated` / `$error` — статус hydration
-
-Если IndexedDB недоступен — fallback в in-memory storage (dev warning).
-
-## Custom adapter
-
-```ts
-import { createStore } from "@echojs/store";
-import { withStorage } from "@echojs/persist";
-
-const customStorage = {
-  kind: "custom",
-  getItem: (key) => externalStorage.get(key),
-  setItem: (key, value) => externalStorage.set(key, value),
-  removeItem: (key) => externalStorage.delete(key),
-};
-
-const store = createStore(0).extend(
-  withStorage(customStorage, {
-    key: "counter",
-  }),
-);
-```
-
-## SSR / tests
-
-- `withMemoryStorage()` / `createMemoryStorageAdapter()` — для тестов и SSR fallback.
-- Browser adapters проверяют `window` / `document` / `indexedDB` и не падают без них.
-
-## Public API
-
-| Export | Описание |
-|--------|----------|
-| `withStorage` | Generic extension с adapter |
-| `withLocalStorage` | localStorage (+ `syncTabs`) |
+| Export | Description |
+|--------|-------------|
+| `withLocalStorage` | Browser localStorage (+ optional tab sync) |
 | `withSessionStorage` | sessionStorage |
 | `withCookie` | document.cookie |
-| `withIndexedDB` | IndexedDB KV |
-| `withMemoryStorage` | In-memory |
-| `persist` | Helper для target без `.extend()` |
-| `persistField` / `persistFieldArray` | Алиасы для form-like targets |
-| `create*StorageAdapter` | Низкоуровневые adapters |
-| `jsonSerializer` | JSON serializer по умолчанию |
+| `withIndexedDB` | Async IndexedDB KV |
+| `withMemoryStorage` | Tests & SSR |
+| `withStorage` | Custom adapter |
+| `persist` | Attach without `.extend()` |
+
+## Documentation
+
+[echojs.dev/docs/packages/persist](https://echojs.dev/docs/packages/persist)

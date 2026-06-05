@@ -68,7 +68,7 @@ import { createTheme } from "@echojs/ui/theme";
 | --- | --- |
 | README + stories | `packages/ui/README.md`, `packages/ui/.storybook` |
 | Home snippet | `apps/docs` → home constants |
-| Lab provider | `apps/example/src/app/providers/ui.ts` |
+| Lab provider | `apps/example/src/core/providers/ui.ts` |
 
 ## See also
 

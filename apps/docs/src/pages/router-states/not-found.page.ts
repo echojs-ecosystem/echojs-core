@@ -1,6 +1,6 @@
 import { createRouteView } from "@echojs/router";
 import { RouterNotFoundView } from "@entities/router-states/ui/not-found.view.js";
-import { applySeo } from "@shared/seo/apply-seo.js";
+import { applySeo } from "@core/seo/apply-seo.js";
 
 export const routerNotFoundPage = createRouteView({
   name: "not-found",

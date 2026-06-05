@@ -19,7 +19,7 @@
       "@pages/*": ["src/pages/*"],
       "@entities/*": ["src/entities/*"],
       "@widgets/*": ["src/widgets/*"],
-      "@shared/*": ["src/shared/*"],
+      "@core/*": ["src/core/*"],
       "@content/*": ["src/content/*"],
       "@echojs/reactivity": ["../../packages/reactivity/src/index.ts"],
       "@echojs/hyperdom": ["../../packages/hyperdom/src/index.ts"],

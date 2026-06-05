@@ -13,7 +13,7 @@ export default defineConfig({
       { find: "@pages", replacement: resolve(src, "pages") },
       { find: "@entities", replacement: resolve(src, "entities") },
       { find: "@widgets", replacement: resolve(src, "widgets") },
-      { find: "@shared", replacement: resolve(src, "shared") },
+      { find: "@core", replacement: resolve(src, "core") },
       { find: "@content", replacement: resolve(src, "content") },
       {
         find: /^@echojs\/reactivity$/,

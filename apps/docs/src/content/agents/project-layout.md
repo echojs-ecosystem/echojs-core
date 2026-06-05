@@ -47,7 +47,7 @@ widgets/<name>/
   index.ts        # public export
 ```
 
-## `shared/content/`
+## `core/content/`
 
 - `nav.ts` — main sidebar sections
 - `agents-nav.ts` — **For agents** sidebar block

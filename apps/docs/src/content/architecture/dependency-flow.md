@@ -11,11 +11,11 @@ Layers exist to keep refactors local. **Imports may only go down the stack** —
 ## Allowed directions
 
 ```
-pages  →  widgets, features, entities, shared, @echojs/*
-widgets  →  features, entities, shared, @echojs/*
-features  →  entities, shared, @echojs/*
-entities  →  shared, @echojs/*
-shared  →  @echojs/*
+pages  →  widgets, features, entities, core, @echojs/*
+widgets  →  features, entities, core, @echojs/*
+features  →  entities, core, @echojs/*
+entities  →  core, @echojs/*
+core  →  @echojs/*
 ```
 
 ```mermaid
@@ -23,21 +23,21 @@ flowchart TB
   pages --> widgets
   pages --> features
   pages --> entities
-  pages --> shared
+  pages --> core
   widgets --> features
   widgets --> entities
-  widgets --> shared
+  widgets --> core
   features --> entities
-  features --> shared
-  entities --> shared
-  shared --> echojs["@echojs/*"]
+  features --> core
+  entities --> core
+  core --> echojs["@echojs/*"]
 ```
 
 ## Forbidden (will rot quickly)
 
 | Import | Why |
 | --- | --- |
-| `shared` → `pages` | Shared must stay generic |
+| `core` → `pages` | Core must stay generic |
 | `features` → `pages` | Features cannot know routes |
 | `entities` → `widgets` | Domain must not depend on UI |
 | `widgets` → `pages` | Shell blocks are not route-specific |
@@ -54,7 +54,7 @@ Typical `tsconfig` paths:
 | `@widgets/*` | `src/widgets/*` |
 | `@features/*` | `src/features/*` |
 | `@entities/*` | `src/entities/*` |
-| `@shared/*` | `src/shared/*` |
+| `@core/*` | `src/core/*` |
 
 Vite `resolve.alias` should mirror the same map so dev and typecheck agree.
 
@@ -71,19 +71,19 @@ Packages **must not** import application folders (`@pages`, etc.).
 
 | Module | May import |
 | --- | --- |
-| `entities/__routes__` | `pages/*.page.ts`, `shared/content` |
-| `shared/content/nav.ts` | `entities/__routes__/doc-pages` for `docPageByContentId` |
-| `pages/doc/*` | `shared/content/load-content`, widgets |
+| `entities/__routes__` | `pages/*.page.ts`, `core/content` |
+| `core/content/nav.ts` | `entities/__routes__/doc-pages` for `docPageByContentId` |
+| `pages/doc/*` | `core/content/load-content`, widgets |
 
-Avoid `shared/content` importing widgets — keep content engine UI-agnostic.
+Avoid `core/content` importing widgets — keep content engine UI-agnostic.
 
 ## Circular dependency traps
 
-1. **Nav ↔ routes** — `docPageByContentId` maps `contentId` → page objects; nav config lives in `shared/content`, route table in `entities`. Break cycles by keeping a single registry (`doc-pages.ts`).
+1. **Nav ↔ routes** — `docPageByContentId` maps `contentId` → page objects; nav config lives in `core/content`, route table in `entities`. Break cycles by keeping a single registry (`doc-pages.ts`).
 
-2. **Theme store ↔ header** — both use `shared/theme`; neither imports the other’s widget folder.
+2. **Theme store ↔ header** — both use `core/providers` (theme store); neither imports the other’s widget folder.
 
-3. **Router provider ↔ DocsChrome** — provider imports chrome widget; chrome imports `appRouter` from entities. Do not import `app/providers` from widgets.
+3. **Router provider ↔ DocsChrome** — `app/router-provider.ts` wires the router; chrome imports `appRouter` from `app/router`. Import providers from `@core/providers/index.js`, not deep paths.
 
 ## Enforcement
 
@@ -100,7 +100,7 @@ Today boundaries are **convention + review**. Optional hardening:
 - [ ] No `pages/` imports from lower layers
 - [ ] Features expose `index.ts` public API
 - [ ] Route definitions only in `entities/__routes__`
-- [ ] Styles use `shared/styles` tokens, not magic strings in views
+- [ ] Styles use `core/styles` tokens, not magic strings in views
 
 ## Related
 

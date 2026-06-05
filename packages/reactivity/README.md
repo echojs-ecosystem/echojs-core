@@ -1,201 +1,78 @@
-# `echojs-reactivity`
+<div align="center">
 
-Минималистичная **строгая** реактивность для Echo JS, построенная поверх `alien-signals`, но с **собственным surface API**.
+# @echojs/reactivity
 
-## Зачем отдельный API поверх `alien-signals`
+**Fine-grained reactive primitives — signals, computed, effects, and batching.**
 
-`alien-signals` — быстрый низкоуровневый движок, но его публичный API (callable-сигналы, `trigger()` и т.д.) не совпадает с тем, как удобно и безопасно писать Echo-код.
+[![npm](https://img.shields.io/npm/v/@echojs/reactivity)](https://www.npmjs.com/package/@echojs/reactivity)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/reactivity)
 
-Цели этого пакета:
+</div>
 
-- **объектный API**, который проще читать и сложнее использовать неправильно
-- **строгое разделение** writable / readonly
-- **запрет случайных мутаций** через `.value()`
-- **изолировать движок**: сегодня `alien-signals` внутри, завтра можно заменить engine без слома API
+---
 
-## Установка
+The reactive foundation of EchoJS. Built on a fast signal engine, wrapped in a **strict, object-oriented API** that encourages predictable updates and immutable patterns.
 
-Внутри монорепы:
+## Features
+
+- **`signal`** — writable cells with `.value()`, `.set()`, `.update()`, `.peek()`, `.subscribe()`
+- **`computed`** — lazy derived values with automatic dependency tracking
+- **`effect` / `scope`** — side effects with automatic cleanup
+- **`batch`** — coalesce multiple writes into one notification wave
+- **`DeepReadonly`** — object reads cannot be mutated through `.value()`; use `.set()` / `.update()`
+
+## Install
 
 ```bash
-bun add echojs-reactivity
+npm install @echojs/reactivity
+# bun add @echojs/reactivity
+# pnpm add @echojs/reactivity
 ```
 
-## Примеры
-
-Живые примеры лежат в `examples/`:
-
-- `examples/basic.ts`
-- `examples/object-state.ts`
-- `examples/peek-and-subscribe.ts`
-
-## Быстрый старт
+## Quick start
 
 ```ts
-import { signal, computed, effect } from "echojs-reactivity";
+import { signal, computed, effect, batch } from "@echojs/reactivity";
 
 const $count = signal(0);
 const $double = computed(() => $count.value() * 2);
 
 effect(() => {
-  console.log($double.value());
+  console.log("count:", $count.value(), "double:", $double.value());
 });
 
-$count.set(2);
-$count.update((v) => v + 1);
-```
-
-## Документация / API
-
-## Модель исполнения (важно)
-
-- **`effect()` запускается сразу** (синхронно) и затем перезапускается при изменении зависимостей.
-- **`computed()` ленивый**: он пересчитывается по требованию (когда его читают) и инвалидируется при изменении зависимостей.
-- **`batch()`** откладывает обработку реакций/эффектов до конца батча.
-
-### `signal(initial)`
-
-Создаёт writable signal (объект).
-
-- **читать**: `.value()` (с трекингом)
-- **читать без трекинга**: `.peek()`
-- **писать**: `.set(next)`
-- **обновлять от предыдущего**: `.update(prev => next)`
-- **подписаться**: `.subscribe(fn)` → `unsubscribe`
-- **readonly facade**: `.readonly()`
-
-#### Контракт
-
-- `.value()` и `.peek()` возвращают текущее значение.
-- `.value()` **участвует** в трекинге зависимостей.
-- `.peek()` **не участвует** в трекинге (полезно внутри эффектов, чтобы не подписываться).
-- `.set(next)` и `.update(fn)` — единственные поддерживаемые способы записи.
-- `.subscribe(fn)` вызывает `fn` **только когда значение реально изменилось** (по `Object.is`).
-- `.subscribe(fn)` **не вызывает** `fn` сразу при подписке (только на изменения).
-
-#### Ошибки
-
-- `signal()` без аргумента бросает `TypeError`.
-
-### `computed(() => value)`
-
-Создаёт readonly/computed signal (объект) с методами:
-
-- `.value()`
-- `.peek()`
-- `.subscribe(fn)`
-
-#### Ошибки
-
-- `computed(getter)` бросает `TypeError`, если `getter` не функция.
-
-### `effect(fn)`
-
-Запускает эффект. Возвращает disposer:
-
-```ts
-const stop = effect(() => {
-  console.log("count:", $count.value());
-});
-
-stop();
-```
-
-#### Ошибки
-
-- `effect(fn)` бросает `TypeError`, если `fn` не функция.
-
-### `batch(fn)`
-
-Группирует несколько обновлений так, чтобы реакции/эффекты обработались один раз после батча:
-
-```ts
 batch(() => {
-  $a.set(1);
-  $b.set(2);
+  $count.set(1);
+  $count.update((n) => n + 1);
 });
 ```
 
-#### Ошибки
+## API
 
-- `batch(fn)` бросает `TypeError`, если `fn` не функция.
+| Export | Description |
+|--------|-------------|
+| `signal(initial)` | Writable reactive cell |
+| `computed(getter)` | Readonly derived signal |
+| `effect(fn)` | Runs immediately, re-runs on dependency changes; returns disposer |
+| `scope(fn)` | Effect scope — nested effects cleaned up together |
+| `batch(fn)` | Defer reactions until the batch completes |
+| `readonly($sig)` | Readonly facade without `.set()` / `.update()` |
+| `isSignal` / `isReadonlySignal` | Runtime type guards |
 
-### `scope(fn)`
+### Design notes
 
-Запускает effect-scope. Возвращает disposer. Всё, что создано внутри `scope`, будет очищено на `stopScope()`:
+- **Write only via `.set()` / `.update()`** — no public `trigger()` API
+- **`subscribe()`** fires on changes only, not on initial subscribe
+- **Dev mode** deep-freezes object/array values written to signals
 
-```ts
-const stopScope = scope(() => {
-  effect(() => {
-    console.log($count.value());
-  });
-});
+## Related packages
 
-stopScope();
-```
+| Package | Role |
+|---------|------|
+| [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom) | DOM views wired to signals |
+| [`@echojs/store`](https://www.npmjs.com/package/@echojs/store) | Structured app state on top of signals |
+| [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework) | Meta-package — entire ecosystem via subpath imports |
 
-#### Ошибки
+## Documentation
 
-- `scope(fn)` бросает `TypeError`, если `fn` не функция.
-
-### `readonly($signal)`
-
-Возвращает readonly facade (без `.set()`/`.update()`), чтобы нельзя было случайно мутировать состояние.
-
-### `isSignal(x)` / `isReadonlySignal(x)`
-
-Проверки на экземпляры сигналов этого пакета.
-
-## `.value()` и запрет мутаций
-
-Главное правило: **запись только через `.set()`/`.update()`**.
-
-На уровне типов `.value()` для объектов/массивов возвращает `DeepReadonly<T>`, чтобы у вас не появлялся соблазн делать:
-
-```ts
-const $user = signal({ name: "Vova", tags: ["a"] });
-
-const user = $user.value();
-// user.name = "x"      // TS error
-// user.tags.push("b")  // TS error
-```
-
-Правильный способ — immutable update:
-
-```ts
-const $state = signal({
-  user: { name: "Vova" },
-  tags: ["a"],
-});
-
-$state.update((prev) => ({
-  ...prev,
-  tags: [...prev.tags, "b"],
-}));
-```
-
-## Dev freeze
-
-В dev-режиме (когда `NODE_ENV !== "production"`) значения-объекты/массивы, записанные в сигнал, **deep-freeze**-ятся.
-
-Это означает, что любые прямые мутации будут падать предсказуемо (обычно `TypeError`), и вы быстро увидите неправильное место в коде.
-
-## Intentionally not implemented (v0)
-
-- **Публичный `trigger()`** — намеренно не экспортируется. Мы не хотим поддерживать паттерн «мутируй руками и потом триггери».
-- **Proxy-based deep mutations / draft API** (`mutate(draft => ...)`, `alien-deepsignals`, и т.п.) — сознательно не входят в core v0.
-
-## FAQ
-
-### Почему `.value()` возвращает `DeepReadonly` для объектов/массивов?
-
-Чтобы не поощрять паттерн “прочитал объект → мутировал поле”. Запись должна происходить через `.set()`/`.update()`, чтобы реактивность была предсказуемой и без `trigger()`.
-
-### Почему `subscribe()` не вызывает callback сразу?
-
-Это намеренный контракт: `subscribe()` — только про **изменения**. Если нужно “сразу и дальше”, делайте:
-
-```ts
-fn();
-const unsub = $sig.subscribe(fn);
-```
+[echojs.dev/docs/packages/reactivity](https://echojs.dev/docs/packages/reactivity)

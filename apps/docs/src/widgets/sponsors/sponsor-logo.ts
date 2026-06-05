@@ -2,7 +2,7 @@ import type { Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
 import type { MockSponsor } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorLogoStyles } from "@widgets/sponsors/sponsor-logo.styles.js";
-import { cn } from "@shared/styles/cn.js";
+import { cn } from "@core/styles/cn.js";
 
 type SponsorLogoProps = {
   sponsor: Pick<MockSponsor, "initials" | "name" | "logoGradient">;

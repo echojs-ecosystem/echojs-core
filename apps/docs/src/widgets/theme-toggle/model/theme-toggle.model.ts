@@ -1,5 +1,5 @@
 import { createModel } from "@echojs/hyperdom";
-import { $themeMode, toggleTheme } from "@app/providers/theme-store.js";
+import { $themeMode, toggleTheme } from "@core/providers/index.js";
 
 export type ThemeToggleVM = {
   isDarkMode: () => boolean;

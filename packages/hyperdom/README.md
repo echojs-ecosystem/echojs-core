@@ -1,116 +1,82 @@
+<div align="center">
+
 # @echojs/hyperdom
 
-`@echojs/hyperdom` — минимальный DOM runtime для экосистемы EchoJS: **без Virtual DOM**, с hyperscript API (`h`) и базовыми control-хелперами (`Show`, `List`).
+**Direct DOM rendering — no virtual DOM, no JSX required.**
 
-Этот пакет задуман как **фундамент для будущего JSX-компилятора**: позже JSX будет компилироваться в вызовы `h()`/`Show()`/`List()`, но сам JSX в этот пакет не входит.
+[![npm](https://img.shields.io/npm/v/@echojs/hyperdom)](https://www.npmjs.com/package/@echojs/hyperdom)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/hyperdom)
 
-## Зачем
+</div>
 
-- **Прямой DOM**: `h()` создаёт реальные DOM-узлы.
-- **Реактивность**: динамические children и reactive props обновляются через `@echojs-ecosystem/reactivity`.
-- **Cleanup**: `render()` возвращает `dispose()`, который снимает эффекты/подписки и очищает DOM.
+---
 
-## Быстрый старт
+The view layer of EchoJS. Maps **views to real DOM nodes** with a hyperscript API (`h`), reactive children, and control helpers (`Show`, `List`). Designed as the foundation for a future JSX compiler.
+
+## Features
+
+- **`h()`** — create elements, components, and reactive regions
+- **`createView` / `createModel`** — structured UI with context checks
+- **`Show` / `List`** — conditional and list rendering
+- **Reactive props & children** — `() => value` registers effects; only what changed updates
+- **`render()` + `dispose()`** — mount with full cleanup (listeners, effects, DOM)
+
+## Install
+
+```bash
+npm install @echojs/hyperdom @echojs/reactivity
+```
+
+## Quick start
 
 ```ts
-import { h, render, Show, List } from "@echojs/hyperdom";
-import { signal } from "@echojs-ecosystem/reactivity";
+import { h, render, Show, button, div, span } from "@echojs/hyperdom";
+import { signal } from "@echojs/reactivity";
 
-const count = signal(0);
-const items = signal(["A", "B", "C"]);
+const $count = signal(0);
 
-const view = h("div", { class: "app" }, [
-  h("h1", null, "Counter"),
-  h("button", { onClick: () => count.set(count.value() + 1) }, "Increment"),
-  h("span", null, () => count.value()),
-
+const view = div({ class: "app" }, [
+  button({ onClick: () => $count.update((n) => n + 1) }, "Increment"),
+  span(null, () => String($count.value())),
   Show(
-    () => count.value() > 0,
-    () => h("p", null, "Count больше нуля"),
+    () => $count.value() > 0,
+    () => span(null, "Count is positive"),
   ),
-
-  List(items, (item) => h("div", { class: "item" }, item)),
 ]);
 
 const dispose = render(view, document.getElementById("app")!);
-
-// позже:
-dispose();
+// dispose() when unmounting
 ```
 
-## `h()`
+## API
 
-Поддерживает:
+| Export | Description |
+|--------|-------------|
+| `h`, `div`, `button`, … | Hyperscript & HTML DSL |
+| `render(view, container)` | Mount view, return `dispose()` |
+| `createView` / `createModel` | View/model factories |
+| `createComponent` | Model + view composition |
+| `Show` / `List` | Control-flow helpers |
+| `mount` | Lifecycle mount helper |
+
+### Reactive patterns
 
 ```ts
-h("div");
-h("div", null);
-h("div", { class: "box" });
-h("div", { id: "app" }, "text");
-h("div", null, ["a", "b"]);
-h("div", null, () => count.value()); // reactive child region
-h(MyComponent, { some: "prop" });
+// Reactive child
+h("span", null, () => $count.value());
+
+// Reactive prop
+h("input", { value: () => $text.value(), onInput: (e) => $text.set(e.currentTarget.value) });
 ```
 
-Типы children:
+## Related packages
 
-- `string` / `number` → `Text` node
-- `boolean` / `null` / `undefined` → **не рендерятся**
-- `Node` → вставляется как есть
-- массивы → flatten (включая вложенные)
-- `() => Child` → динамический реактивный регион (marker comment nodes)
+| Package | Role |
+|---------|------|
+| [`@echojs/reactivity`](https://www.npmjs.com/package/@echojs/reactivity) | Signals for dynamic regions |
+| [`@echojs/router`](https://www.npmjs.com/package/@echojs/router) | SPA routing bindings |
+| [`@echojs/ui`](https://www.npmjs.com/package/@echojs/ui) | Accessible UI components |
 
-## `render(view, container)`
+## Documentation
 
-- очищает `container` перед вставкой
-- монтирует `view`
-- возвращает `dispose()`
-- `dispose()` чистит эффекты/подписки, снимает event listeners и очищает DOM
-
-## Props
-
-Поддерживаются:
-
-- `class` / `className`
-- `style`: `string` или объект
-- `id`, `title`, `value`, `checked`, `disabled`
-- `data-*`, `aria-*`
-- `ref: (el) => void`
-
-Props могут быть:
-
-- обычным значением
-- функцией `() => value` — будет реактивно обновлять prop
-
-## Events
-
-События навешиваются через `addEventListener` и снимаются при cleanup:
-
-```ts
-h("button", { onClick: () => {} }, "Click");
-h("input", { onInput: (e) => {} });
-```
-
-Сейчас поддерживается формат `onClick/onInput/...` (переводится в `click/input/...`).
-
-## `Show()`
-
-```ts
-Show(
-  () => isOpen.value(),
-  () => h("div", null, "Open"),
-  () => h("div", null, "Closed"),
-);
-```
-
-## `List()`
-
-```ts
-List(items, (item, index) => h("div", null, [index(), ": ", item]));
-```
-
-### Ограничения первой версии
-
-- `List()` пока делает **полный re-render** списка при изменении массива.
-  - TODO: keyed reconciliation / оптимизированный diff.
-- JSX-компилятор пока не входит в пакет.
+[echojs.dev/docs/packages/hyperdom](https://echojs.dev/docs/packages/hyperdom)

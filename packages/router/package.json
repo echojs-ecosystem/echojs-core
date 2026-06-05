@@ -1,8 +1,9 @@
 {
   "name": "@echojs/router",
   "version": "0.0.0",
-  "private": true,
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -47,5 +48,13 @@
     "typescript": "5.9.2",
     "vite": "^6.0.0",
     "vitest": "^4.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/router"
   }
 }

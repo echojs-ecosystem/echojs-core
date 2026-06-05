@@ -48,7 +48,7 @@ export const appRouter = createRouter({
   routes: appRoutes,
 });
 
-// app/providers/router.ts
+// core/providers/router.ts
 import { createRouterProvider } from "@echojs/router/hyperdom";
 
 export const routerProvider = createRouterProvider(appRouter);

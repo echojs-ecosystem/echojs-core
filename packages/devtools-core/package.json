@@ -1,9 +1,10 @@
 {
   "name": "@echojs/devtools-core",
   "version": "0.0.0",
-  "private": true,
   "description": "Runtime registry and timeline infrastructure for EchoJS DevTools",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "type": "module",
   "sideEffects": false,
   "exports": {
@@ -29,5 +30,13 @@
     "@echojs/oxc-config": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/devtools-core"
   }
 }

@@ -1,7 +1,7 @@
 import { effect, signal } from "@echojs/reactivity";
 import type { Signal } from "@echojs/reactivity";
 import { createModel } from "@echojs/hyperdom";
-import { $themeMode } from "@app/providers/theme-store.js";
+import { $themeMode } from "@core/providers/index.js";
 import { highlightCode } from "@widgets/code-block/helpers/shiki/highlighter.js";
 import { resolveShikiTheme } from "@widgets/code-block/helpers/shiki/resolve-theme.js";
 

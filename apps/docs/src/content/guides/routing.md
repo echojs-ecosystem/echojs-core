@@ -83,7 +83,7 @@ Typical page export:
 
 ```ts
 import { createRouteView } from "@echojs/router";
-import { bindModelView } from "@shared/ui/bind-model-view.js";
+import { bindModelView } from "@core/ui/bind-model-view.js";
 import { createSettingsModel } from "./model/settings.model.js";
 import { SettingsView } from "./ui/settings.view.js";
 
@@ -190,7 +190,7 @@ Chunk default export must be a `RouteView`. Call `reportsPage.preload()` to warm
 
 ## Docs site pattern
 
-`apps/docs` maps markdown `contentId` to routes and keeps nav in `shared/content/nav.ts`:
+`apps/docs` maps markdown `contentId` to routes and keeps nav in `core/content/nav.ts`:
 
 ```ts
 { path: "guides/routing", name: "docs-guides-routing", routeView: getDocPage("guides/routing") }

@@ -17,7 +17,7 @@ import {
   routerProvider,
   themeProvider,
   uiProvider,
-} from "@app/providers/index.js";
+} from "@core/providers/index.js";
 
 export const bootstrap = (): Promise<() => void> =>
   createEchoApp({

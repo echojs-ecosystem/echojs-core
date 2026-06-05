@@ -10,7 +10,7 @@ package: "@echojs/router"
 
 ```ts
 import { createRoutes } from "@echojs/router";
-import { canonicalDocsRouteItems } from "@shared/content/nav.js";
+import { canonicalDocsRouteItems } from "@core/content/nav.js";
 import { getDocPage } from "@entities/__routes__/doc-pages.js";
 import { docsShellLayoutPage } from "@pages/docs/layout/docs-shell-layout.page.js";
 

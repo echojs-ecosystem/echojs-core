@@ -1,134 +1,85 @@
+<div align="center">
+
 # @echojs/devtools-core
 
-Runtime infrastructure for EchoJS DevTools — **no UI**, **no browser extension**, **no overlay**.
+**Runtime registry and event timeline for EchoJS DevTools — no UI, zero overhead when disabled.**
 
-This package provides a global registry, snapshots, and an event timeline that other EchoJS packages integrate with automatically (store, query, router, persist, url-state, ui).
+[![npm](https://img.shields.io/npm/v/@echojs/devtools-core)](https://www.npmjs.com/package/@echojs/devtools-core)
+[![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/devtools)
+
+</div>
+
+---
+
+Infrastructure layer for future EchoJS DevTools. Provides a **global bridge**, **node registry**, and **FIFO event timeline**. Integrating packages (store, query, router, …) register automatically — end users rarely call these APIs directly.
+
+## Features
+
+- **Registry** — nodes with `type`, `id`, `name`, optional `getSnapshot()`
+- **Timeline** — event log (default max 500 events) with subscribe API
+- **Global bridge** — `globalThis.__ECHOJS_DEVTOOLS__`
+- **Production-safe** — `setDevtoolsEnabled(false)` makes all APIs no-ops
+- **Zero dependencies** — `sideEffects: false`, tree-shakeable
 
 ## Install
 
 ```bash
-bun add @echojs/devtools-core
+npm install @echojs/devtools-core
 ```
-
-Zero runtime dependencies. `sideEffects: false` — safe to tree-shake when DevTools are disabled.
-
-## Concepts
-
-| Piece | Role |
-|-------|------|
-| **Registry** | Registered nodes (store, query, router, …) with optional `getSnapshot()` |
-| **Timeline** | FIFO event log (default max **500** events) |
-| **Bridge** | Singleton on `globalThis.__ECHOJS_DEVTOOLS__` |
 
 ## Quick start
 
-### Register a node (e.g. store)
-
 ```ts
-import { registerDevtoolsNode, emitDevtoolsEvent } from '@echojs/devtools-core'
+import {
+  registerDevtoolsNode,
+  emitDevtoolsEvent,
+  subscribeTimeline,
+  setDevtoolsEnabled,
+} from "@echojs/devtools-core";
+
+// Disable in production
+setDevtoolsEnabled(import.meta.env.DEV);
 
 const node = registerDevtoolsNode({
-  type: 'store',
-  id: 'auth',
-  name: 'authStore',
-  getSnapshot: () => ({ value: authStore.value() }),
-})
+  type: "store",
+  id: "auth",
+  name: "authStore",
+  getSnapshot: () => ({ token: authStore.value() }),
+});
 
-// later
-node.unregister()
-```
-
-### Emit timeline event
-
-```ts
 emitDevtoolsEvent({
-  source: 'store',
-  type: 'changed',
-  nodeId: 'auth',
+  source: "store",
+  type: "changed",
+  nodeId: "auth",
   payload: { value, prevValue },
-})
+});
+
+subscribeTimeline((event) => console.log(event));
+node.unregister();
 ```
-
-### Read snapshots
-
-```ts
-import { getNodeSnapshot, getAllSnapshots } from '@echojs/devtools-core'
-
-getNodeSnapshot('auth')
-// { id, type, name, state, timestamp }
-
-getAllSnapshots()
-```
-
-### Subscribe to timeline
-
-```ts
-import { subscribeTimeline } from '@echojs/devtools-core'
-
-const unsub = subscribeTimeline((event) => {
-  console.log(event.source, event.type, event.payload)
-})
-```
-
-### Global bridge (for DevTools UI / adapters)
-
-```ts
-import { getDevtoolsBridge } from '@echojs/devtools-core'
-
-const bridge = getDevtoolsBridge()
-// bridge.registry — register / snapshots
-// bridge.timeline — events / subscribe
-
-// Also available globally:
-globalThis.__ECHOJS_DEVTOOLS__
-```
-
-## Production
-
-Disable DevTools at startup — all public APIs become no-ops:
-
-```ts
-import { setDevtoolsEnabled } from '@echojs/devtools-core'
-
-setDevtoolsEnabled(false)
-```
-
-When disabled:
-
-- `registerDevtoolsNode()` → `{ unregister() {} }`
-- `emitDevtoolsEvent()` → `null`
-- `getAllSnapshots()` → `[]`
-- `getTimelineEvents()` → `[]`
-
-Integrating packages should call `setDevtoolsEnabled(import.meta.env.DEV)` (or equivalent) so production builds have **zero overhead**.
 
 ## Node types
 
 `store` · `query` · `mutation` · `router` · `persist` · `url-state` · `ui-provider` · `signal` · `custom`
 
-## Utilities
+## API
 
-```ts
-import { createDevtoolsId, safeSerialize } from '@echojs/devtools-core'
+| Export | Description |
+|--------|-------------|
+| `registerDevtoolsNode` | Register inspectable node |
+| `emitDevtoolsEvent` | Append timeline event |
+| `getNodeSnapshot` / `getAllSnapshots` | Read current state |
+| `subscribeTimeline` | Listen to events |
+| `getDevtoolsBridge` | Full bridge access |
+| `setDevtoolsEnabled` | Toggle all DevTools APIs |
+| `createDevtoolsId`, `safeSerialize` | Utilities |
 
-createDevtoolsId('store') // store_1, store_2, …
+## When disabled
 
-safeSerialize(circularOrBigIntValue) // never throws
-```
+- `registerDevtoolsNode()` → `{ unregister() {} }`
+- `emitDevtoolsEvent()` → `null`
+- `getAllSnapshots()` → `[]`
 
-## Integration (future)
+## Documentation
 
-Packages register themselves internally — **end users do not call register manually**:
-
-| Package | Node type | Typical events |
-|---------|-----------|----------------|
-| `@echojs/store` | `store` | `changed` |
-| `@echojs/query` | `query`, `mutation` | `fetch`, `success`, `error` |
-| `@echojs/router` | `router` | `navigate` |
-| `@echojs/persist` | `persist` | `hydrate`, `persist` |
-| `@echojs/url-state` | `url-state` | `sync` |
-| `@echojs/ui` | `ui-provider` | `theme`, `config` |
-
-## License
-
-Private monorepo package.
+[echojs.dev/docs/packages/devtools](https://echojs.dev/docs/packages/devtools)

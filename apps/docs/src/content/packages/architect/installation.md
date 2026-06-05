@@ -49,7 +49,7 @@ export default defineConfig({
 
 ## TypeScript
 
-Architect resolves imports using your app `tsconfig.json` paths (`@pages/*`, `@shared/*`, …). Keep aliases aligned with Vite `resolve.alias`.
+Architect resolves imports using your app `tsconfig.json` paths (`@pages/*`, `@core/*`, …). Keep aliases aligned with Vite `resolve.alias`.
 
 ## See also
 

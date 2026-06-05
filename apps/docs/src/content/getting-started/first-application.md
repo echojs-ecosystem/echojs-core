@@ -69,7 +69,7 @@ export const bootstrap = (): Promise<() => void> =>
 
 ## 4. Router provider
 
-`src/app/providers/router.ts` (simplified):
+`src/core/providers/router.ts` (simplified):
 
 ```ts
 import { createRouterProvider } from "@echojs/router/hyperdom";
@@ -110,7 +110,7 @@ export const appRouter = createRouter({
 
 ```ts
 import { createRouteView } from "@echojs/router";
-import { bindModelView } from "@shared/ui/bind-model-view.js";
+import { bindModelView } from "@core/ui/bind-model-view.js";
 import { createHomeModel } from "./model/home.model.js";
 import { HomeView } from "./ui/home.view.js";
 

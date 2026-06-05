@@ -20,13 +20,13 @@ import {
   tr,
   ul,
 } from "@echojs/hyperdom";
-import { renderInlineMarkdown } from "@shared/content/inline-markdown.js";
+import { renderInlineMarkdown } from "@core/content/inline-markdown.js";
 import {
   calloutDefaultTitle,
   calloutIcon,
   type CalloutVariant,
-} from "@shared/content/callout-variants.js";
-import type { DocBlock, DocDocument } from "@shared/content/types.js";
+} from "@core/content/callout-variants.js";
+import type { DocBlock, DocDocument } from "@core/content/types.js";
 import {
   calloutStyles,
   docHeadingStyles,
@@ -34,6 +34,7 @@ import {
   tabButtonStyles,
 } from "@widgets/doc-content/doc-renderer.styles.js";
 import { CodeBlock } from "@widgets/code-block/index.js";
+import { getPackageVersion } from "@core/content/ecosystem-version.generated.js";
 import { PackageInstallAdd } from "@widgets/package-install/index.js";
 import { PackageOverview } from "@widgets/package-overview/index.js";
 import { PackagePlayground } from "@widgets/package-playground/index.js";
@@ -103,8 +104,11 @@ const renderBlock = (block: DocBlock): Child => {
       return Callout(block);
     case "tabs":
       return DocTabs(block);
-    case "package-badge":
-      return div({ class: docUi.badge() }, block.name);
+    case "package-badge": {
+      const version = getPackageVersion(block.name);
+      const label = version ? `${block.name}@${version}` : block.name;
+      return div({ class: docUi.badge() }, label);
+    }
     case "package-install":
       return div({ class: docUi.packageInstall() }, PackageInstallAdd(block.packageName));
     case "playground":
