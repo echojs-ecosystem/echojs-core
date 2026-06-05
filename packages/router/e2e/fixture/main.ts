@@ -1,7 +1,7 @@
 import type { Child } from "@echojs-ecosystem/hyperdom";
 import { div, main, nav, render } from "@echojs-ecosystem/hyperdom";
 import { createLayoutView, createRouteView, createRoutes } from "@echojs-ecosystem/router";
-import { createRouter, NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { createRouter, NavLink } from "@echojs-ecosystem/router";
 
 const homePage = createRouteView({
   name: "e2e-home",

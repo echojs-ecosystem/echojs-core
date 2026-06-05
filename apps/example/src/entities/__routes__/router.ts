@@ -1,4 +1,4 @@
-import { createRouter } from "@echojs-ecosystem/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router";
 import { appRoutes } from "@entities/__routes__/app.routes.js";
 import { routerErrorPage } from "@pages/router-states/ui/error.page.js";
 import { routerLoadingPage } from "@pages/router-states/ui/loading.page.js";

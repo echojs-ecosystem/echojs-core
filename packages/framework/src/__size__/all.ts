@@ -2,7 +2,6 @@
 export * from '../core.js'
 export * from '../reactivity.js'
 export * from '../router.js'
-export * from '../router-hyperdom.js'
 export * from '../form.js'
 export * from '../persist.js'
 export * from '../store.js'

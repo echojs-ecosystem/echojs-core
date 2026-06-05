@@ -16,10 +16,6 @@ export default defineConfig({
       { find: "@core", replacement: resolve(src, "core") },
       { find: "@content", replacement: resolve(src, "content") },
       {
-        find: /^@echojs-ecosystem\/framework\/router\/hyperdom$/,
-        replacement: resolve(frameworkRoot, "router-hyperdom.ts"),
-      },
-      {
         find: /^@echojs-ecosystem\/framework\/hyperdom\/lifecycle\/mount$/,
         replacement: resolve(frameworkRoot, "hyperdom-lifecycle-mount.ts"),
       },
@@ -30,6 +26,10 @@ export default defineConfig({
       {
         find: /^@echojs-ecosystem\/framework\/app$/,
         replacement: resolve(frameworkRoot, "app/index.ts"),
+      },
+      {
+        find: /^@echojs-ecosystem\/framework\/router\/hyperdom$/,
+        replacement: resolve(frameworkRoot, "router.ts"),
       },
       {
         find: /^@echojs-ecosystem\/framework\/(.+)$/,

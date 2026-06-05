@@ -12,8 +12,8 @@
       "import": "./dist/index.js"
     },
     "./hyperdom": {
-      "types": "./dist/hyperdom/index.d.ts",
-      "import": "./dist/hyperdom/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },

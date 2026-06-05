@@ -27,7 +27,7 @@
       "@echojs-ecosystem/hyperdom": ["../../packages/hyperdom/src/index.ts"],
       "@echojs-ecosystem/hyperdom/*": ["../../packages/hyperdom/src/*"],
       "@echojs-ecosystem/router": ["../../packages/router/src/index.ts"],
-      "@echojs-ecosystem/router/hyperdom": ["../../packages/router/src/hyperdom/index.ts"],
+      "@echojs-ecosystem/router/hyperdom": ["../../packages/router/src/index.ts"],
       "@echojs-ecosystem/store": ["../../packages/store/src/index.ts"],
       "@echojs-ecosystem/persist": ["../../packages/persist/src/index.ts"],
       "@echojs-ecosystem/url-state": ["../../packages/url-state/src/index.ts"],

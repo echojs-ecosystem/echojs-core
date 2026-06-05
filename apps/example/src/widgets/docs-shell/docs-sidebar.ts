@@ -1,4 +1,4 @@
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router";
 import type { Child } from "@echojs-ecosystem/hyperdom";
 import { aside, button, div, nav, p, Show } from "@echojs-ecosystem/hyperdom";
 import { docsModules } from "@app/config/docs-modules.js";

@@ -37,8 +37,8 @@
       "default": "./dist/router.js"
     },
     "./router/hyperdom": {
-      "types": "./dist/router-hyperdom.d.ts",
-      "default": "./dist/router-hyperdom.js"
+      "types": "./dist/router.d.ts",
+      "default": "./dist/router.js"
     },
     "./form": {
       "types": "./dist/form.d.ts",

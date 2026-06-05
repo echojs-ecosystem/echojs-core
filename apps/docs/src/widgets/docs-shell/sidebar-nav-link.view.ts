@@ -1,5 +1,5 @@
 import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router";
 import type { AnyPage } from "@echojs-ecosystem/framework/router";
 import { h, span } from "@echojs-ecosystem/framework/hyperdom";
 import { cn } from "@core/styles/cn.js";

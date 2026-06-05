@@ -25,11 +25,7 @@ export default defineConfig({
         replacement: resolve(__dirname, "../../packages/form/src/index.ts"),
       },
       {
-        find: /^@echojs-ecosystem\/router\/hyperdom$/,
-        replacement: resolve(__dirname, "../../packages/router/src/hyperdom/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/router$/,
+        find: /^@echojs-ecosystem\/router(\/hyperdom)?$/,
         replacement: resolve(__dirname, "../../packages/router/src/index.ts"),
       },
       {

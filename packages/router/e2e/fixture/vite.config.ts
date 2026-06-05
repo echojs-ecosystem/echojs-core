@@ -30,10 +30,6 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      {
-        find: "@echojs-ecosystem/router/hyperdom",
-        replacement: resolve(packagesDir, "router/src/hyperdom/index.ts"),
-      },
       { find: "@echojs-ecosystem/router", replacement: resolve(packagesDir, "router/src/index.ts") },
       { find: "@echojs-ecosystem/reactivity", replacement: resolve(packagesDir, "reactivity/src/index.ts") },
       { find: "@echojs-ecosystem/hyperdom", replacement: resolve(packagesDir, "hyperdom/src/index.ts") },

@@ -1,5 +1,5 @@
 import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router";
 import { button, div, h, header, nav as navEl, p } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";

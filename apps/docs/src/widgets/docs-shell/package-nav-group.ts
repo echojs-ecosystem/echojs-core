@@ -1,5 +1,5 @@
 import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
-import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router";
 import { appRouter } from "@app/router/router.js";
 import type { AnyPage } from "@echojs-ecosystem/framework/router";
 import type { Child } from "@echojs-ecosystem/framework/hyperdom";

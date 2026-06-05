@@ -28,7 +28,6 @@ export default echoTsupConfig({
     core: 'src/core.ts',
     reactivity: 'src/reactivity.ts',
     router: 'src/router.ts',
-    'router-hyperdom': 'src/router-hyperdom.ts',
     form: 'src/form.ts',
     persist: 'src/persist.ts',
     store: 'src/store.ts',

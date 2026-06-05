@@ -1,4 +1,4 @@
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router";
 import type { AnyPage } from "@echojs-ecosystem/router";
 import type { Child } from "@echojs-ecosystem/hyperdom";
 import { button, code, div, h3, li, p, section, Show, ul } from "@echojs-ecosystem/hyperdom";
