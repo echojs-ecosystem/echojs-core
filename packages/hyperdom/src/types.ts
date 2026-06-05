@@ -45,9 +45,9 @@ type OnProps<E extends Element> = {
 };
 
 type DataAriaProps = {
-  [K in `data-${string}`]?: Primitive;
+  [K in `data-${string}`]?: MaybeReactive<Primitive>;
 } & {
-  [K in `aria-${string}`]?: Primitive;
+  [K in `aria-${string}`]?: MaybeReactive<Primitive>;
 };
 
 /**

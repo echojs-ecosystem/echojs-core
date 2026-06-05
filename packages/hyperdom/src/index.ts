@@ -4,7 +4,12 @@ export { mount } from "./mount";
 export { createModel, isInModelContext } from "./create-model";
 export { createView } from "./create-view";
 export { isInViewContext } from "./view-context";
-export { createComponent } from "./component";
+export {
+  createComponent,
+  type ModelFactory,
+  type ViewFn,
+  type CreateComponentOptions,
+} from "./component";
 export { setStrictContextChecks, getStrictContextChecks } from "./config";
 export { Show } from "./control/show";
 export { List } from "./control/list";

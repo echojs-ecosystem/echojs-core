@@ -1,0 +1,153 @@
+import { signal } from "@echojs/reactivity";
+import type { Child } from "@echojs/hyperdom";
+import {
+  button,
+  div,
+  h1,
+  h2,
+  h3,
+  h4,
+  hr,
+  li,
+  ol,
+  p,
+  span,
+  table,
+  tbody,
+  td,
+  th,
+  thead,
+  tr,
+  ul,
+} from "@echojs/hyperdom";
+import { renderInlineMarkdown } from "@shared/content/inline-markdown.js";
+import {
+  calloutDefaultTitle,
+  calloutIcon,
+  type CalloutVariant,
+} from "@shared/content/callout-variants.js";
+import type { DocBlock, DocDocument } from "@shared/content/types.js";
+import {
+  calloutStyles,
+  docHeadingStyles,
+  docStyles,
+  tabButtonStyles,
+} from "@shared/styles/index.js";
+import { CodeBlock } from "@widgets/code-block/index.js";
+import { PackageInstallAdd } from "@widgets/package-install/index.js";
+import { PackageOverview } from "@widgets/package-overview/index.js";
+import { PackagePlayground } from "@widgets/package-playground/index.js";
+
+const docUi = docStyles();
+
+const inlineOpts = () => ({
+  linkClass: docUi.proseLink(),
+  codeClass: docUi.inlineCode(),
+});
+
+const inline = (text: string): Child[] => renderInlineMarkdown(text, inlineOpts());
+
+const Callout = (block: Extract<DocBlock, { type: "callout" }>): Child => {
+  const variant = block.variant as CalloutVariant;
+  const callout = calloutStyles({ variant });
+  const title = block.title ?? calloutDefaultTitle[variant];
+
+  return div({ class: callout.root() }, [
+    div({ class: callout.header() }, [
+      span({ class: callout.icon() }, calloutIcon[variant]),
+      div({ class: callout.headerText() }, [p({ class: callout.title() }, inline(title))]),
+    ]),
+    ...block.body
+      .split(/\n\n+/)
+      .map((chunk) => chunk.trim())
+      .filter(Boolean)
+      .map((chunk) => p({ class: callout.body() }, inline(chunk))),
+  ]);
+};
+
+const DocTabs = (block: Extract<DocBlock, { type: "tabs" }>): Child => {
+  const $active = signal(0);
+  return div({ class: docUi.tabs() }, [
+    div({ class: docUi.tabsList() }, [
+      ...block.items.map((tab, index) =>
+        button(
+          {
+            type: "button",
+            class: () => tabButtonStyles({ active: $active.value() === index }),
+            onClick: () => $active.set(index),
+          },
+          tab.label,
+        ),
+      ),
+    ]),
+    div({ class: docUi.tabsPanel() }, () => renderBlocks(block.items[$active.value()]?.blocks ?? [])),
+  ]);
+};
+
+const renderBlock = (block: DocBlock): Child => {
+  switch (block.type) {
+    case "heading": {
+      const Tag = block.level === 1 ? h1 : block.level === 2 ? h2 : block.level === 3 ? h3 : h4;
+      return Tag(
+        { id: block.id, class: docHeadingStyles({ level: block.level }) },
+        inline(block.text),
+      );
+    }
+    case "paragraph":
+      return p({ class: docUi.paragraph() }, inline(block.text));
+    case "hr":
+      return hr({ class: docUi.hr() });
+    case "code":
+      return CodeBlock({ language: block.language, code: block.value });
+    case "callout":
+      return Callout(block);
+    case "tabs":
+      return DocTabs(block);
+    case "package-badge":
+      return div({ class: docUi.badge() }, block.name);
+    case "package-install":
+      return div({ class: docUi.packageInstall() }, PackageInstallAdd(block.packageName));
+    case "playground":
+      return PackagePlayground({ packageId: block.packageId });
+    case "package-overview":
+      return PackageOverview({ packageId: block.packageId });
+    case "table":
+      return div({ class: docUi.tableWrap() }, [
+        table({ class: docUi.table() }, [
+          thead({ class: docUi.tableHead() }, [
+            tr(null, block.headers.map((h) => th({ class: docUi.th() }, inline(h)))),
+          ]),
+          tbody(null, [
+            ...block.rows.map((row) =>
+              tr({ class: docUi.tr() }, row.map((cell) => td({ class: docUi.td() }, inline(cell)))),
+            ),
+          ]),
+        ]),
+      ]);
+    case "list": {
+      const Tag = block.ordered ? ol : ul;
+      return Tag(
+        { class: block.ordered ? docUi.orderedList() : docUi.list() },
+        [...block.items.map((item) => li(null, inline(item)))],
+      );
+    }
+    default:
+      return null;
+  }
+};
+
+export const renderBlocks = (blocks: DocBlock[]): Child[] => blocks.map(renderBlock);
+
+export const DocRenderer = (document: DocDocument): Child => {
+  const hasPackageOverview = document.blocks.some((b) => b.type === "package-overview");
+
+  return div({ class: docUi.prose() }, [
+    hasPackageOverview
+      ? null
+      : h1({ id: "page-title", class: docUi.title() }, document.frontmatter.title),
+    document.frontmatter.description
+      ? p({ class: docUi.lead() }, inline(document.frontmatter.description))
+      : null,
+    ...renderBlocks(document.blocks),
+  ]);
+};

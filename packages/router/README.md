@@ -172,6 +172,26 @@ NavLink({ to: homePage, activeClass: "active", children: "Home" });
 - Simple 404 via `notFoundComponent`
 - Browser/hash histories are minimal wrappers
 
+## E2E (Playwright)
+
+Browser integration tests live under `e2e/`:
+
+| Path | Role |
+|------|------|
+| `e2e/fixture/` | Minimal Vite app (layout + outlet + `NavLink`) |
+| `e2e/tests/*.spec.ts` | Playwright specs (URL, shell, history) |
+| `playwright.config.ts` | Starts fixture via `bun run e2e:serve` |
+
+```bash
+cd packages/router
+bun run test:e2e:install   # download Chromium (once per machine/CI image)
+bun run test:e2e           # headless run
+bun run test:e2e:ui        # interactive UI mode
+bun run test:all           # vitest + playwright
+```
+
+Add new specs in `e2e/tests/`. Reuse `data-testid` hooks from the fixture or extend `e2e/fixture/main.ts` for new scenarios.
+
 ## License
 
 Private monorepo package.

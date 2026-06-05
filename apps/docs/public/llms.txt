@@ -1,0 +1,66 @@
+# EchoJS Documentation Site (apps/docs)
+
+> Machine-readable rules for AI assistants editing this repo.
+
+## Stack
+
+- EchoJS: @echojs/framework, @echojs/hyperdom, @echojs/router, @echojs/reactivity, @echojs/query, @echojs/i18n
+- UI: hyperdom + tailwind-variants (`tv()`), no React
+- Content: markdown under `apps/docs/src/content/`
+
+## Mandatory pattern (logic vs view)
+
+NEVER mix state/effects and markup in one file.
+
+1. **Model** — `createModel` from `@echojs/hyperdom` in `model/*.model.ts`
+   - Signals, effects, queries, actions, derived state
+2. **View** — `createView` in `ui/*.view.ts` — ONLY presentation (hyperdom tree)
+3. **Wire** — `bindModelView(createXModel, XView)` or `bindModelViewWith(props, (p) => createXModel(p), XView)` from `shared/ui/bind-model-view.ts`
+4. **Types** — `types/*.types.ts` (VM, props)
+5. **Constants** — `constants/*.constants.ts` (static copy, config arrays)
+6. **Public API** — `index.ts` exports the component function
+
+## Folder layout
+
+```
+pages/<feature>/
+  constants/
+  types/
+  model/
+  ui/
+  index.ts
+  <feature>.page.ts    # route: SEO + bindModelView
+
+widgets/<name>/
+  model/
+  ui/
+  types/               # if needed
+  index.ts
+```
+
+## Pages
+
+- Route: `createRouteView({ view: () => bindModelView(createModel, View) })`
+- SEO: `applySeo()` in page or model effect — not in view
+
+## Widgets with props
+
+```ts
+export const createFooModel = (props: FooProps) =>
+  createModel((): FooVM => ({ props, ... }), "FooModel");
+
+export const Foo = (props: FooProps): Child =>
+  bindModelViewWith(props, createFooModel, FooView);
+```
+
+## Do not
+
+- Export `(): Child =>` views without `createView`
+- Put `signal()`, `effect()`, or `createQuery` in `.view.ts`
+- Put business logic in `constants/` or `types/`
+
+## Docs content
+
+- New doc page: add markdown under `src/content/` + entry in `shared/content/nav.ts` (or `agents-nav.ts`)
+
+Full guide: /docs/agents/agents

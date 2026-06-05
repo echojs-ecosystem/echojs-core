@@ -1,0 +1,13 @@
+{
+  "shell": {
+    "documentTitle": "EchoJS Documentation",
+    "locale": "Language",
+    "version": "Version",
+    "localeMenu": "Choose language",
+    "versionMenu": "Choose documentation version"
+  },
+  "locale": {
+    "en": "English",
+    "ru": "Русский"
+  }
+}

@@ -77,5 +77,7 @@ describe("NavLink", () => {
     await Promise.resolve();
     expect(links[0]!.className).not.toContain("active");
     expect(links[1]!.className).toContain("active");
+    expect(links[0]!.getAttribute("aria-current")).toBeNull();
+    expect(links[1]!.getAttribute("aria-current")).toBe("page");
   });
 });

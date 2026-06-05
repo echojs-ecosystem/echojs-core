@@ -15,4 +15,16 @@ describe("createComponent()", () => {
     expect(node.tagName.toLowerCase()).toBe("div");
     expect(node.textContent).toBe("1");
   });
+
+  it("принимает model factory с props: createModel(props)", () => {
+    const makeModel = (props: { label: string }) =>
+      createModel(() => ({ label: props.label }), "PropsModel");
+    const view = createView((vm: { label: string }) => h("span", null, vm.label), "PropsView");
+
+    const a = createComponent(makeModel({ label: "a" }), view)() as HTMLElement;
+    const b = createComponent(makeModel({ label: "b" }), view)() as HTMLElement;
+
+    expect(a.textContent).toBe("a");
+    expect(b.textContent).toBe("b");
+  });
 });

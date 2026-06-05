@@ -43,6 +43,14 @@
       "inputs": ["$TURBO_DEFAULT$"],
       "outputs": ["coverage/**"]
     },
+    "test:e2e": {
+      "dependsOn": ["^topo"],
+      "cache": false,
+      "inputs": ["$TURBO_DEFAULT$", "e2e/**", "playwright.config.ts"]
+    },
+    "test:e2e:install": {
+      "cache": false
+    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],

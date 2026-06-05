@@ -53,11 +53,14 @@ export const NavLink = <Params = Record<string, string>, Query = QueryRecord>(
     }
   };
 
+  const ariaCurrent = (): string | undefined => (to?.$isOpened.value() ? "page" : undefined);
+
   return h(
     "a",
     {
       href: resolvedHref,
       class: classProp,
+      "aria-current": ariaCurrent,
       onClick: to ? onClick : undefined,
     },
     children ?? null,

@@ -1,0 +1,301 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Accent scale — warm amber (brand), mapped as echo-* for existing utilities */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-echo-50: #fffbeb;
+  --color-echo-100: #fef3c7;
+  --color-echo-200: #fde68a;
+  --color-echo-300: #fcd34d;
+  --color-echo-400: #fbbf24;
+  --color-echo-500: #f59e0b;
+  --color-echo-600: #d97706;
+  --color-echo-700: #b45309;
+  --color-echo-800: #92400e;
+  --color-echo-900: #78350f;
+  --color-echo-950: #451a03;
+  /* Light theme — neutral stone, amber only as accent */
+  --color-surface: #f5f5f4;
+  --color-surface-elevated: #fafaf9;
+  --color-surface-muted: #eceae8;
+  --color-border: #e0ddd8;
+  --color-fg: #1a1510;
+  --color-fg-muted: #5c5248;
+  --color-fg-subtle: #9a8f82;
+  --color-code-bg: #1c1917;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth bg-surface;
+  }
+
+  body {
+    @apply min-h-dvh bg-surface font-sans text-fg antialiased;
+  }
+
+  .doc-prose code:not(pre code) {
+    @apply rounded-md bg-surface-muted px-1.5 py-0.5 font-mono text-sm text-echo-800 dark:bg-surface-muted dark:text-echo-200;
+  }
+
+  .doc-prose a {
+    @apply font-medium text-echo-700 underline decoration-echo-500/30 underline-offset-2 transition hover:text-echo-600 dark:text-echo-400 dark:hover:text-echo-300;
+  }
+
+  .doc-prose strong {
+    @apply font-semibold text-fg;
+  }
+
+  .echo-scrollbar,
+  .sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-echo-500) 55%, var(--color-surface-muted))
+      transparent;
+  }
+
+  .echo-scrollbar::-webkit-scrollbar,
+  .sidebar-scrollbar::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  .echo-scrollbar::-webkit-scrollbar-track,
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    margin: 4px 0;
+    background: transparent;
+  }
+
+  .echo-scrollbar::-webkit-scrollbar-thumb,
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    background-color: color-mix(in srgb, var(--color-echo-500) 45%, var(--color-border));
+  }
+
+  .echo-scrollbar::-webkit-scrollbar-thumb:hover,
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--color-echo-500) 70%, var(--color-echo-600));
+  }
+
+  .dark .echo-scrollbar,
+  .dark .sidebar-scrollbar {
+    scrollbar-color: color-mix(in srgb, var(--color-echo-500) 40%, var(--color-surface-muted))
+      transparent;
+  }
+
+  .dark .echo-scrollbar::-webkit-scrollbar-thumb,
+  .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--color-echo-600) 55%, var(--color-border));
+  }
+
+  .dark .echo-scrollbar::-webkit-scrollbar-thumb:hover,
+  .dark .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--color-echo-500) 65%, var(--color-echo-400));
+  }
+
+}
+
+.dark {
+  --color-surface: #0c0a09;
+  --color-surface-elevated: #1c1917;
+  --color-surface-muted: #292524;
+  --color-border: #44403c;
+  --color-fg: #fafaf9;
+  --color-fg-muted: #a8a29e;
+  --color-fg-subtle: #78716c;
+  --color-code-bg: #0c0a09;
+}
+
+@layer utilities {
+  /* Soft ambient light — subtle accent only */
+  .bg-hero-mesh {
+    background-image:
+      radial-gradient(
+        ellipse 90% 55% at 50% -15%,
+        color-mix(in srgb, var(--color-echo-400) 18%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 88% 10%,
+        color-mix(in srgb, var(--color-echo-300) 10%, transparent),
+        transparent 62%
+      );
+  }
+
+  .dark .bg-hero-mesh {
+    background-image:
+      radial-gradient(
+        ellipse 90% 55% at 50% -15%,
+        color-mix(in srgb, var(--color-echo-500) 16%, transparent),
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 85% 8%,
+        color-mix(in srgb, var(--color-echo-600) 10%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        ellipse 40% 35% at 0% 70%,
+        color-mix(in srgb, var(--color-echo-700) 10%, transparent),
+        transparent 60%
+      );
+  }
+
+  /* Section accents — centered, stay inside content column */
+  .bg-amber-wash-contained {
+    background-image: radial-gradient(
+      ellipse 100% 100% at 50% 100%,
+      color-mix(in srgb, var(--color-echo-400) 16%, transparent),
+      transparent 72%
+    );
+  }
+
+  .dark .bg-amber-wash-contained {
+    background-image: radial-gradient(
+      ellipse 100% 100% at 50% 100%,
+      color-mix(in srgb, var(--color-echo-500) 12%, transparent),
+      transparent 72%
+    );
+  }
+
+  .bg-amber-wash-contained-side {
+    background-image: radial-gradient(
+      ellipse 90% 80% at 65% 50%,
+      color-mix(in srgb, var(--color-echo-300) 12%, transparent),
+      transparent 70%
+    );
+  }
+
+  .dark .bg-amber-wash-contained-side {
+    background-image: radial-gradient(
+      ellipse 90% 80% at 65% 50%,
+      color-mix(in srgb, var(--color-echo-600) 10%, transparent),
+      transparent 70%
+    );
+  }
+
+  .bg-amber-wash-contained-left {
+    background-image: radial-gradient(
+      ellipse 90% 80% at 35% 50%,
+      color-mix(in srgb, var(--color-echo-200) 12%, transparent),
+      transparent 70%
+    );
+  }
+
+  .dark .bg-amber-wash-contained-left {
+    background-image: radial-gradient(
+      ellipse 90% 80% at 35% 50%,
+      color-mix(in srgb, var(--color-echo-600) 9%, transparent),
+      transparent 70%
+    );
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-echo-500) 12%, var(--color-border)) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-echo-500) 12%, var(--color-border)) 1px,
+        transparent 1px
+      );
+    background-size: 56px 56px;
+  }
+
+  .dark .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--color-border) 45%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-border) 45%, transparent) 1px, transparent 1px);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-br from-echo-800 via-echo-600 to-echo-500 bg-clip-text text-transparent;
+  }
+
+  .dark .text-gradient {
+    @apply from-echo-50 via-echo-300 to-echo-500;
+  }
+
+  .text-gradient-subtle {
+    @apply bg-gradient-to-r from-echo-800 via-echo-600 to-echo-500 bg-clip-text text-transparent;
+  }
+
+  .dark .text-gradient-subtle {
+    @apply from-echo-300 via-echo-400 to-echo-500;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2.4s ease-in-out infinite;
+  }
+
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-400 {
+    animation-delay: 400ms;
+  }
+  .delay-500 {
+    animation-delay: 500ms;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-float,
+  .animate-pulse-soft {
+    animation: none;
+  }
+}
