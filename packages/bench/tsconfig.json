@@ -1,17 +1,10 @@
 {
   "extends": "../.configs/tsconfig.json",
   "compilerOptions": {
-    "noEmit": true,
     "outDir": "./dist",
     "baseUrl": ".",
-    "rootDir": "..",
-    "paths": {
-      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"],
-      "@echojs-ecosystem/store": ["../store/src/index.ts"],
-      "@echojs-ecosystem/router": ["../router/src/index.ts"]
-    }
+    "rootDir": "."
   },
   "include": ["src/**/*"],
   "exclude": ["dist", "node_modules"]
 }
-

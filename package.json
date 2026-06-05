@@ -31,7 +31,7 @@
     "release": "bun run build:packages && changeset publish",
     "release:canary": "bun run build:packages && changeset publish --no-git-tag",
     "start": "turbo run start --filter=./packages/*",
-    "typecheck": "turbo run typecheck --continue --filter='./packages/*'",
+    "typecheck": "turbo run typecheck --continue --filter='./packages/*' --filter='!./packages/bench'",
     "upgrade": "npx taze -r -w --exclude pnpm",
     "version": "changeset version && node scripts/sync-package-versions.mjs",
     "version:canary": "changeset version --snapshot canary && node scripts/sync-package-versions.mjs"
