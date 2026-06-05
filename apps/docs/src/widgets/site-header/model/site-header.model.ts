@@ -2,6 +2,7 @@ import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import type { ContentId } from "@core/content/types.js";
 import { toggleMobileNav } from "@widgets/docs-shell/model/mobile-nav.js";
+import { toggleHomeNav } from "@widgets/site-header/model/home-mobile-nav.js";
 import { homeHeaderStyles } from "@widgets/site-header/ui/site-header.view.styles.js";
 
 export const siteHeaderNavItems = [
@@ -38,7 +39,7 @@ export const createSiteHeaderModel = (options: SiteHeaderOptions = {}) =>
           scrolled: mode === "docs",
         }),
       navItems: siteHeaderNavItems,
-      showMenu: mode === "docs",
-      openMobileNav: toggleMobileNav,
+      showMenu: true,
+      openMobileNav: mode === "docs" ? toggleMobileNav : toggleHomeNav,
     };
   }, "SiteHeaderModel");

@@ -21,12 +21,12 @@
       "@widgets/*": ["src/widgets/*"],
       "@core/*": ["src/core/*"],
       "@content/*": ["src/content/*"],
-      "@echojs-ecosystem/framework": ["../../packages/framework/src/index.ts"],
-      "@echojs-ecosystem/framework/app": ["../../packages/framework/src/app/index.ts"],
-      "@echojs-ecosystem/framework/router/hyperdom": ["../../packages/framework/src/router.ts"],
-      "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": ["../../packages/framework/src/hyperdom-lifecycle-mount.ts"],
-      "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
-      "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"]
+      // "@echojs-ecosystem/framework": ["../../packages/framework/src/index.ts"],
+      // "@echojs-ecosystem/framework/app": ["../../packages/framework/src/app/index.ts"],
+      // "@echojs-ecosystem/framework/router/hyperdom": ["../../packages/framework/src/router.ts"],
+      // "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": ["../../packages/framework/src/hyperdom-lifecycle-mount.ts"],
+      // "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
+      // "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"]
     }
   },
   "include": ["src", "src/vite-env.d.ts"]

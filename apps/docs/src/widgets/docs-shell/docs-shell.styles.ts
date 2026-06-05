@@ -9,7 +9,8 @@ export const shellStyles = tv({
     topbarBrand: "text-sm font-bold tracking-tight lg:hidden",
     topbarActions: "flex items-center gap-2",
     searchWrap: "flex-1 max-w-xl",
-    overlay: "fixed inset-0 z-30 bg-black/50 backdrop-blur-sm lg:hidden",
+    overlay:
+      "fixed inset-x-0 bottom-0 top-[3.75rem] z-30 bg-black/40 backdrop-blur-[2px] sm:top-[4.25rem] lg:hidden",
     sidebarWrap: "lg:w-[18.5rem] lg:shrink-0 lg:px-4 lg:py-4",
     sidebarBrand: "border-b border-border/70 px-4 py-4 dark:border-white/10",
     sidebarBrandLink: "flex items-center gap-3 transition opacity-90 hover:opacity-100",
@@ -18,7 +19,8 @@ export const shellStyles = tv({
     sidebarBrandText: "min-w-0",
     sidebarBrandName: "text-base font-bold tracking-tight text-fg",
     sidebarBrandTag: "text-xs text-fg-subtle",
-    sidebarNav: "echo-scrollbar mr-2.5 min-h-0 flex-1 overflow-y-auto px-2 py-3",
+    sidebarNav:
+      "echo-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 lg:mr-2.5 lg:px-2",
     sidebarQuick: "mb-1 flex flex-col gap-0.5 border-b border-border/60 pb-3 dark:border-white/10",
     sidebarNavIcon:
       "text-fg-subtle transition group-hover:text-fg group-[.font-medium]:text-echo-600 dark:group-[.font-medium]:text-echo-400",
@@ -67,7 +69,7 @@ export const shellStyles = tv({
 
 export const sidebarPanelStyles = tv({
   base: [
-    "flex h-full w-72 max-w-[85vw] flex-col",
+    "flex flex-col",
     "lg:h-auto lg:max-h-[calc(100vh-2rem)] lg:w-full",
     "lg:rounded-2xl lg:border lg:border-border/80 lg:bg-surface-elevated/90",
     "lg:shadow-lg lg:shadow-black/5 lg:ring-1 lg:ring-black/[0.04]",
@@ -75,7 +77,13 @@ export const sidebarPanelStyles = tv({
   ].join(" "),
   variants: {
     mobileOpen: {
-      true: "fixed inset-y-0 left-0 z-40 border-r border-border bg-surface-elevated shadow-2xl lg:static lg:border lg:shadow-lg",
+      true: [
+        "fixed inset-x-0 bottom-0 top-[3.75rem] z-40 w-full max-w-none",
+        "max-h-[calc(100dvh-3.75rem)] border-t border-border bg-surface-elevated shadow-xl",
+        "sm:top-[4.25rem] sm:max-h-[calc(100dvh-4.25rem)]",
+        "lg:static lg:inset-auto lg:top-auto lg:max-h-[calc(100vh-2rem)] lg:w-full lg:max-w-none",
+        "lg:border lg:shadow-lg",
+      ].join(" "),
       false: "hidden lg:sticky lg:top-4 lg:flex lg:self-start",
     },
   },

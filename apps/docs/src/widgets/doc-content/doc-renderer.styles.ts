@@ -3,8 +3,8 @@ import { tv } from "tailwind-variants";
 export const docStyles = tv({
   slots: {
     prose: "doc-prose",
-    title: "text-4xl font-bold tracking-tight text-fg",
-    lead: "mt-3 text-lg leading-relaxed text-fg-muted",
+    title: "text-3xl font-bold tracking-tight text-fg sm:text-4xl",
+    lead: "mt-3 text-base leading-relaxed text-fg-muted sm:text-lg",
     paragraph: "my-4 leading-7 text-fg-muted",
     hr: "my-10 border-0 border-t border-border/80 dark:border-white/10",
     inlineCode:
@@ -32,10 +32,10 @@ export const docHeadingStyles = tv({
   base: "scroll-mt-28 font-bold tracking-tight text-fg group",
   variants: {
     level: {
-      1: "mt-2 mb-4 text-3xl",
-      2: "mt-12 mb-3 text-2xl font-semibold border-b border-border/60 pb-2 dark:border-white/10",
-      3: "mt-8 mb-2 text-xl font-semibold",
-      4: "mt-6 mb-2 text-lg font-medium",
+      1: "mt-2 mb-4 text-2xl sm:text-3xl",
+      2: "mt-10 mb-3 border-b border-border/60 pb-2 text-xl font-semibold sm:mt-12 sm:text-2xl dark:border-white/10",
+      3: "mt-7 mb-2 text-lg font-semibold sm:mt-8 sm:text-xl",
+      4: "mt-5 mb-2 text-base font-medium sm:mt-6 sm:text-lg",
     },
   },
   defaultVariants: {

@@ -3,19 +3,18 @@ import { tv } from "tailwind-variants";
 export const homeHeaderStyles = tv({
   slots: {
     root: "sticky top-0 z-50 border-b border-transparent bg-transparent shadow-none",
-    inner: "flex w-full items-center gap-3 px-5 py-4 sm:gap-4 sm:px-8",
-    brand: "flex items-center gap-2.5",
+    inner: "flex w-full min-w-0 items-center gap-2 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4",
+    brand: "flex min-w-0 items-center gap-2 sm:gap-2.5",
     logo:
-      "flex h-9 w-9 items-center justify-center rounded-xl bg-echo-500 text-sm font-bold text-stone-950 shadow-md shadow-echo-600/20 ring-1 ring-echo-600/30",
-    brandName: "text-base font-bold tracking-tight text-fg",
+      "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-echo-500 text-sm font-bold text-stone-950 shadow-md shadow-echo-600/20 ring-1 ring-echo-600/30",
+    brandName: "truncate text-base font-bold tracking-tight text-fg",
     brandTag: "hidden text-xs text-fg-subtle sm:block",
-    menuBtn:
-      "rounded-lg border border-border px-2.5 py-1.5 text-sm font-medium text-fg-muted transition hover:bg-surface-muted hover:text-fg lg:hidden",
+    menuBtn: "shrink-0 lg:hidden",
     nav: "hidden items-center gap-1 lg:flex",
     navLink:
       "rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition hover:bg-surface-muted hover:text-fg",
-    searchWrap: "hidden min-w-0 flex-1 md:block md:max-w-xs lg:max-w-sm",
-    actions: "ml-auto flex shrink-0 items-center gap-2",
+    searchWrap: "flex min-w-0 flex-1 items-center justify-end md:max-w-xs lg:max-w-sm",
+    actions: "flex shrink-0 items-center gap-1.5 sm:gap-2",
     githubBtn: "inline-flex",
   },
   variants: {
@@ -31,6 +30,13 @@ export const homeHeaderStyles = tv({
     },
   },
   compoundVariants: [
+    {
+      layout: "docs",
+      class: {
+        inner: "gap-2 px-4 py-3 sm:px-8 sm:py-4",
+        brandName: "max-w-[8.5rem] sm:max-w-none",
+      },
+    },
     {
       layout: "home",
       class: {

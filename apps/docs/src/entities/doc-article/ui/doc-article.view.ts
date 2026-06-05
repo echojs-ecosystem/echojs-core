@@ -9,6 +9,7 @@ import {
 import { routerStateStyles } from "@entities/router-states/ui/router-states.view.styles.js";
 import { DocRenderer } from "@widgets/doc-content/doc-renderer.js";
 import { DocToc } from "@widgets/doc-content/doc-toc.js";
+import { DocTocMobile } from "@widgets/doc-content/doc-toc-mobile.js";
 import { DocPager } from "@widgets/doc-pager/index.js";
 import type { DocArticleVM } from "@entities/doc-article/model/doc-article.model.js";
 
@@ -40,6 +41,7 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
             return div({ class: articleLayout.article() }, [
               div({ class: articleLayout.main() }, [
                 div({ class: articleLayout.mainInner() }, [
+                  DocTocMobile(toc),
                   DocRenderer(doc),
                   DocPager(vm.props.contentId),
                 ]),

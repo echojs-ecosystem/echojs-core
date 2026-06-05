@@ -5,10 +5,12 @@ import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
 import { headerIconBtnStyles } from "@widgets/site-header/ui/site-header.view.styles.js";
 import { GitHubIcon } from "@widgets/icons/github-icon.js";
+import { MenuIcon } from "@widgets/icons/menu-icon.js";
 import { DocsSearch } from "@widgets/search/index.js";
 import { LocaleDropdown } from "@widgets/locale-dropdown/index.js";
 import { ThemeToggle } from "@widgets/theme-toggle/index.js";
 import { VersionDropdown } from "@widgets/version-dropdown/index.js";
+import { HomeMobileNav } from "@widgets/site-header/ui/home-mobile-nav.view.js";
 import type { SiteHeaderVM } from "@widgets/site-header/model/site-header.model.js";
 
 export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
@@ -20,11 +22,11 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
         ? button(
             {
               type: "button",
-              class: hdr().menuBtn(),
-              onclick: vm.openMobileNav,
+              class: [hdr().menuBtn(), headerIconBtnStyles()].join(" "),
+              onClick: vm.openMobileNav,
               "aria-label": "Open navigation",
             },
-            "Menu",
+            [MenuIcon()],
           )
         : null,
       NavLink({
@@ -70,5 +72,6 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
         ThemeToggle(),
       ]),
     ]),
+    vm.mode === "home" ? HomeMobileNav() : null,
   ]);
 }, "SiteHeaderView");

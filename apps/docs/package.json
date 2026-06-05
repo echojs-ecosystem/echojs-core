@@ -12,13 +12,13 @@
     "architect:fix": "echo-architect lint --fix"
   },
   "dependencies": {
-    "@echojs-ecosystem/framework": "workspace:*",
+    "@echojs-ecosystem/framework": "^0.1.0",
     "shiki": "^3.4.0",
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^1.0.0"
   },
   "devDependencies": {
-    "@echojs-ecosystem/architect": "workspace:*",
+    "@echojs-ecosystem/architect": "^0.1.0",
     "@tailwindcss/vite": "^4.1.8",
     "tailwindcss": "^4.1.8",
     "typescript": "5.9.2",

@@ -72,7 +72,7 @@ const SidebarPanel = (): Child =>
         {
           class: shell.sidebarNav(),
           ref: sidebarScrollRef,
-          onclick: closeMobileNavOnLinkClick,
+          onClick: closeMobileNavOnLinkClick,
         },
         [
         ...docsNavSections.flatMap((section) => {

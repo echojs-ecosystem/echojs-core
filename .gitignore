@@ -44,3 +44,5 @@ tools/bench-results/
 # Misc
 .DS_Store
 *.pem
+
+.npmrc

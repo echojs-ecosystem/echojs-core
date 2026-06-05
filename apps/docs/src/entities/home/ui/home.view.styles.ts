@@ -26,8 +26,8 @@ export const homeStyles = tv({
       "rounded-full border border-border/80 bg-surface-elevated px-3 py-1 text-xs font-medium text-fg-muted dark:border-white/10 dark:bg-white/5",
     heroActions: "mt-10 flex flex-wrap items-center gap-3",
     heroStats:
-      "mt-14 grid grid-cols-3 gap-6 border-t border-border/80 pt-10 sm:max-w-lg",
-    heroStatValue: "text-2xl font-bold tracking-tight text-fg sm:text-3xl",
+      "mt-14 grid grid-cols-3 gap-3 border-t border-border/80 pt-8 sm:max-w-lg sm:gap-6 sm:pt-10",
+    heroStatValue: "text-xl font-bold tracking-tight text-fg sm:text-3xl",
     heroStatLabel: "mt-1 text-xs font-medium uppercase tracking-wider text-fg-subtle",
 
     heroVisual: "relative z-10",

@@ -33,7 +33,7 @@ export const frameworkComparisonStyles = tv({
     perfBest: "font-semibold text-echo-700 dark:text-echo-300",
     perfUnit: "ml-0.5 text-xs text-fg-subtle",
     disclaimer: "mt-4 text-xs leading-relaxed text-fg-subtle",
-    reasons: "mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4",
+    reasons: "mt-8 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 sm:gap-4 lg:grid-cols-4",
     reasonCard: [
       "group relative flex flex-col rounded-2xl border border-border/70 bg-surface-elevated p-4",
       "transition duration-300 hover:-translate-y-0.5 hover:border-echo-500/25 hover:shadow-md hover:shadow-black/5",

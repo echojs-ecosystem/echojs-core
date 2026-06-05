@@ -6,24 +6,37 @@ import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
 import { searchDocs, type SearchEntry } from "@widgets/search/helpers/search-index.js";
 
+/** Shared with mobile scroll lock — one search instance per header. */
+export const $mobileSearchOpen = signal(false);
+
 export type DocsSearchVM = {
   $query: Signal<string>;
   $open: Signal<boolean>;
+  $mobilePanel: Signal<boolean>;
   results: () => SearchEntry[];
   pageForEntry: (entry: SearchEntry) => AnyPage | null;
   onInput: (e: Event) => void;
   onFocus: () => void;
   onBlur: () => void;
   showDropdown: () => boolean;
+  openMobilePanel: () => void;
+  closeMobilePanel: () => void;
 };
 
 export const createDocsSearchModel = createModel((): DocsSearchVM => {
   const $query = signal("");
   const $open = signal(false);
+  const $mobilePanel = $mobileSearchOpen;
+
+  const closeMobilePanel = (): void => {
+    $mobilePanel.set(false);
+    $open.set(false);
+  };
 
   return {
     $query,
     $open,
+    $mobilePanel,
     results: () => searchDocs($query.value()),
     pageForEntry: (entry) => {
       if (entry.id === "home") return homePage;
@@ -39,5 +52,7 @@ export const createDocsSearchModel = createModel((): DocsSearchVM => {
     },
     onBlur: () => setTimeout(() => $open.set(false), 150),
     showDropdown: () => $open.value() && searchDocs($query.value()).length > 0,
+    openMobilePanel: () => $mobilePanel.set(true),
+    closeMobilePanel,
   };
 }, "DocsSearchModel");
