@@ -1,4 +1,4 @@
-import type { FrameworkColumn } from "@shared/home/framework-comparison.js";
+import type { FrameworkColumn } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import { cn } from "@shared/styles/cn.js";
 

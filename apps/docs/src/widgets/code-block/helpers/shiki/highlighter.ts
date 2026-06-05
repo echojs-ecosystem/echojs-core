@@ -1,5 +1,5 @@
 import { createHighlighter, type Highlighter } from "shiki";
-import type { ShikiThemeName } from "@shared/shiki/resolve-theme.js";
+import type { ShikiThemeName } from "./resolve-theme.js";
 
 let highlighterPromise: Promise<Highlighter> | undefined;
 

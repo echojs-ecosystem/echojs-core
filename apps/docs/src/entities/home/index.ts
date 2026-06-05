@@ -17,6 +17,10 @@ export { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.
 export { HomeCtaView } from "@entities/home/ui/home-cta.view.js";
 export { HomeHeroCodeWindowView } from "@entities/home/ui/home-hero-code-window.view.js";
 export {
+  HomeArchitectureBridgeView,
+  HomeArchitectureView,
+} from "@entities/home/ui/home-architecture.view.js";
+export {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
 } from "@entities/home/ui/home-philosophy-principles.view.js";

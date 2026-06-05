@@ -2,11 +2,14 @@ import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, h2, h3, p, span } from "@echojs/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
-import { ecosystemPackages, type EcosystemPackage } from "@shared/home/ecosystem-packages.js";
+import {
+  ecosystemPackages,
+  type EcosystemPackage,
+} from "@widgets/ecosystem/constants/ecosystem-packages.js";
 import {
   getPackageOverview,
   type PackageOverviewData,
-} from "@shared/content/package-overview-data.js";
+} from "@widgets/package-overview/constants/package-overview.data.js";
 import {
   featureCardStyles,
   packageOverviewStyles,

@@ -1,4 +1,4 @@
-import { $themeMode } from "@shared/theme/theme-store.js";
+import { $themeMode } from "@app/providers/theme-store.js";
 
 export type ShikiThemeName = "github-light" | "github-dark";
 

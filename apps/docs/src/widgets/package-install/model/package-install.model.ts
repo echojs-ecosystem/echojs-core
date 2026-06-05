@@ -5,7 +5,7 @@ import {
   projectScaffoldManagers,
   type PackageManager,
   type PackageManagerId,
-} from "@shared/home/install-commands.js";
+} from "@widgets/package-install/constants/install-commands.js";
 import type {
   PackageInstallMode,
   PackageInstallProps,

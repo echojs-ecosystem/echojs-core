@@ -1,6 +1,6 @@
 import type { Child } from "@echojs/hyperdom";
 import { div } from "@echojs/hyperdom";
-import { goldTier, silverTier, sponsorTierGroups } from "@shared/sponsors/data.js";
+import { goldTier, silverTier, sponsorTierGroups } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorsBoardStyles } from "@widgets/sponsors/sponsors-board.styles.js";
 import { SponsorsTierPanel } from "@widgets/sponsors/sponsors-tier-panel.js";
 

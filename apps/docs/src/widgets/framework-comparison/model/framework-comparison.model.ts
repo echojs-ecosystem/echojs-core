@@ -1,5 +1,5 @@
-import { comparisonFrameworks } from "@shared/home/framework-comparison.js";
-import type { FrameworkId, PerformanceRow } from "@shared/home/framework-comparison.js";
+import { comparisonFrameworks } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
+import type { FrameworkId, PerformanceRow } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 
 export const bestPerformanceIds = (row: PerformanceRow): Set<FrameworkId> => {
   const entries = comparisonFrameworks.map((f) => ({

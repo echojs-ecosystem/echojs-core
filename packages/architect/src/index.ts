@@ -33,6 +33,7 @@ export {
   requiredChildren,
   restrictCrossImports,
   warn,
+  type DependenciesDirectionOptions,
 } from "./presets";
 
 export { lint } from "./linter";

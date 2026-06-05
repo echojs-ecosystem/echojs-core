@@ -42,8 +42,8 @@ export const homeHeaderStyles = tv({
       scrolled: true,
       class: {
         root: [
-          "border-border/80 bg-surface/95 shadow-sm shadow-black/5 backdrop-blur-md",
-          "dark:border-white/10 dark:bg-surface/95",
+          "border-transparent bg-surface/95 shadow-sm shadow-black/5 backdrop-blur-md",
+          "dark:bg-surface/95",
         ].join(" "),
       },
     },

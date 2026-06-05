@@ -51,6 +51,12 @@ export const packageNavGroups: PackageNavGroup[] = [
   { id: "i18n", title: "i18n", npmPackage: "@echojs/i18n", children: packageDocPages("i18n", "i18n", "@echojs/i18n") },
   { id: "devtools", title: "DevTools", npmPackage: "@echojs/devtools", children: packageDocPages("devtools", "DevTools", "@echojs/devtools") },
   { id: "cli", title: "CLI", npmPackage: "@echojs/cli", children: packageDocPages("cli", "CLI", "@echojs/cli") },
+  {
+    id: "architect",
+    title: "Architect",
+    npmPackage: "@echojs/architect",
+    children: packageDocPages("architect", "Architect", "@echojs/architect"),
+  },
 ];
 
 export const allPackageNavItems = packageNavGroups.flatMap((g) => g.children);

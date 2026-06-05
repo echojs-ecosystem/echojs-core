@@ -1,6 +1,6 @@
 import type { Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
-import type { NavIconId } from "@widgets/icons/nav-icon-id.js";
+import type { NavIconId } from "@shared/content/nav-icon-id.js";
 import { FRAMEWORK_NAV_ICON_SVGS } from "@widgets/icons/framework-nav-icons.js";
 import { cn } from "@shared/styles/cn.js";
 

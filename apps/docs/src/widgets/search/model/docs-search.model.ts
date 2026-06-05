@@ -4,7 +4,7 @@ import { createModel } from "@echojs/hyperdom";
 import type { AnyPage } from "@echojs/router";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
-import { searchDocs, type SearchEntry } from "@shared/search/search-index.js";
+import { searchDocs, type SearchEntry } from "@widgets/search/helpers/search-index.js";
 
 export type DocsSearchVM = {
   $query: Signal<string>;

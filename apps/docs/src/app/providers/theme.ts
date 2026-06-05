@@ -1,5 +1,5 @@
 import { createProvider } from "@echojs/framework/app";
-import { initTheme, type ThemeMode } from "@shared/theme/theme-store.js";
+import { initTheme, type ThemeMode } from "./theme-store.js";
 
 export const themeProvider = createProvider({
   name: "theme",

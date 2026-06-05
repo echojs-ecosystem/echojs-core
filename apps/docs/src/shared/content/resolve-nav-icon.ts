@@ -1,5 +1,5 @@
 import type { ContentId } from "./types.js";
-import type { NavIconId } from "@widgets/icons/nav-icon-id.js";
+import type { NavIconId } from "./nav-icon-id.js";
 
 const byContentId: Record<ContentId, NavIconId> = {
   "introduction/what-is-echojs": "book",
@@ -57,6 +57,7 @@ const packageGroupIcon: Record<string, NavIconId> = {
   i18n: "globe",
   devtools: "wrench",
   cli: "terminal",
+  architect: "layers",
 };
 
 const packagePageIcon: Record<string, NavIconId> = {

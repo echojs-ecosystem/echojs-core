@@ -2,7 +2,7 @@ import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, h, h2, p, section, span } from "@echojs/hyperdom";
 import { sponsorsPage } from "@app/router/page-links.js";
-import { becomeSponsorUrl } from "@shared/sponsors/data.js";
+import { becomeSponsorUrl } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorsSectionStyles } from "@widgets/sponsors/ui/sponsors-section.view.styles.js";
 import { SponsorsBoard } from "@widgets/sponsors/sponsors-board.js";
 

@@ -18,7 +18,7 @@ export const shellStyles = tv({
     sidebarBrandText: "min-w-0",
     sidebarBrandName: "text-base font-bold tracking-tight text-fg",
     sidebarBrandTag: "text-xs text-fg-subtle",
-    sidebarNav: "echo-scrollbar flex-1 overflow-y-auto px-2 py-3",
+    sidebarNav: "echo-scrollbar mr-2.5 min-h-0 flex-1 overflow-y-auto px-2 py-3",
     sidebarQuick: "mb-1 flex flex-col gap-0.5 border-b border-border/60 pb-3 dark:border-white/10",
     sidebarNavIcon:
       "text-fg-subtle transition group-hover:text-fg group-[.font-medium]:text-echo-600 dark:group-[.font-medium]:text-echo-400",

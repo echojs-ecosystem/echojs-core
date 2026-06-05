@@ -98,6 +98,39 @@ describe("dependenciesDirection", () => {
     expect(diagnostics[0]?.message).toContain("features");
   });
 
+  it("allows imports from allowDownward path patterns", async () => {
+    const root = projectRoot();
+    const src = join(root, "src");
+    const widgetFile = join(src, "widgets", "search", "model.ts");
+    const providerFile = join(src, "app", "providers", "i18n.ts");
+    const vfs = buildVfs(src, [widgetFile, providerFile]);
+
+    const app = abstraction({
+      name: "src",
+      children: {
+        app: abstraction("app"),
+        widgets: abstraction("widgets"),
+      },
+    });
+    const instance = parseInstance(app, vfs);
+
+    const dependenciesMap = emptyDependenciesMap();
+    initDependenciesForFiles(dependenciesMap, [widgetFile, providerFile]);
+    linkDependency(dependenciesMap, widgetFile, providerFile);
+
+    const preset = dependenciesDirection(["app", "widgets"], {
+      allowDownward: ["**/app/providers/**"],
+    });
+
+    const { diagnostics } = await preset.check({
+      root: vfs,
+      instance,
+      dependenciesMap,
+    });
+
+    expect(diagnostics).toHaveLength(0);
+  });
+
   it("allows downward layer imports", async () => {
     const root = projectRoot();
     const src = join(root, "src");

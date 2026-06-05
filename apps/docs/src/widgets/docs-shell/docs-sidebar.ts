@@ -1,20 +1,14 @@
-import { NavLink } from "@echojs/router/hyperdom";
 import type { Child } from "@echojs/hyperdom";
-import { aside, div, nav, p, Show, span } from "@echojs/hyperdom";
-import { $mobileNavOpen } from "@shared/layout/mobile-nav.js";
-import { sidebarScrollRef } from "@shared/layout/sidebar-scroll.js";
+import { aside, div, nav, p, Show } from "@echojs/hyperdom";
+import { $mobileNavOpen } from "@widgets/docs-shell/model/mobile-nav.js";
+import { sidebarScrollRef } from "@widgets/docs-shell/helpers/sidebar-scroll.js";
 import { agentsNavItems, agentsNavSection, docsNavSections } from "@shared/content/nav.js";
 import { packageNavGroups } from "@shared/content/package-nav.js";
 import { resolveNavIcon, resolveNavIconClass } from "@shared/content/resolve-nav-icon.js";
-import {
-  sidebarQuickLinks,
-  sidebarResourceLinks,
-  type SidebarLink,
-} from "@shared/content/sidebar-extras.js";
+import { sidebarResourceLinks, type SidebarLink } from "@widgets/docs-shell/sidebar-extras.js";
 import { docPageByContentId } from "@app/router/doc-pages.js";
-import { homePage } from "@app/router/page-links.js";
 import { shellStyles, sidebarPanelStyles } from "@widgets/docs-shell/docs-shell.styles.js";
-import type { NavIconId } from "@widgets/icons/nav-icon-id.js";
+import type { NavIconId } from "@shared/content/nav-icon-id.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 import { AgentNavLinkView } from "@widgets/docs-shell/agent-nav-link.view.js";
 import { PackageNavGroupView } from "@widgets/docs-shell/package-nav-group.js";
@@ -74,19 +68,6 @@ const SidebarPanel = (): Child =>
       class: () => sidebarPanelStyles({ mobileOpen: $mobileNavOpen.value() }),
     },
     [
-      div({ class: shell.sidebarBrand() }, [
-        NavLink({
-          to: homePage,
-          class: shell.sidebarBrandLink(),
-          children: [
-            span({ class: shell.sidebarBrandMark() }, NavIcon("zap", "h-5 w-5 text-echo-600 dark:text-echo-400")),
-            span({ class: shell.sidebarBrandText() }, [
-              p({ class: shell.sidebarBrandName() }, "EchoJS"),
-              p({ class: shell.sidebarBrandTag() }, "Documentation"),
-            ]),
-          ],
-        }),
-      ]),
       nav(
         {
           class: shell.sidebarNav(),
@@ -94,11 +75,6 @@ const SidebarPanel = (): Child =>
           onclick: closeMobileNavOnLinkClick,
         },
         [
-        div({ class: shell.sidebarQuick() }, [
-          ...sidebarQuickLinks.map((link) =>
-            SidebarNavLinkView({ page: link.page, label: link.label, icon: link.icon }),
-          ),
-        ]),
         ...docsNavSections.flatMap((section) => {
           if (section.id === "packages") {
             return sectionNav(

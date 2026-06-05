@@ -1,10 +1,27 @@
 import { extname, join } from "node:path";
+import { minimatch } from "minimatch";
 import { getAbstractionInstanceLabel } from "../abstraction/instance/get-label";
 import { rule } from "../rule/rule";
 import type { Diagnostic, Rule } from "../rule/types";
 import { getFlattenFiles } from "../vfs/get-flatten-files";
 import { getNodesRecord } from "../vfs/get-nodes-record";
 import isGlob from "is-glob";
+
+export type DependenciesDirectionOptions = {
+  /** Glob patterns on dependency paths; matching imports bypass layer-order checks. */
+  allowDownward?: readonly string[];
+};
+
+const matchesAllowDownward = (
+  dependencyPath: string,
+  patterns: readonly string[],
+): boolean => {
+  const normalized = dependencyPath.replace(/\\/g, "/");
+  return patterns.some(
+    (pattern) =>
+      minimatch(normalized, pattern) || minimatch(normalized, `**/${pattern}`),
+  );
+};
 
 export const off = <T extends Rule | Rule[]>(rule: T): T => {
   if (Array.isArray(rule)) {
@@ -181,13 +198,17 @@ cross imports are not allowed!`,
     },
   });
 
-export const dependenciesDirection = (order: string[]) =>
+export const dependenciesDirection = (
+  order: string[],
+  options?: DependenciesDirectionOptions,
+) =>
   rule({
     name: `default/dependencies-direction`,
     severity: "error",
     check: async ({ root, instance, dependenciesMap }) => {
       const diagnostics: Array<Diagnostic> = [];
       const nodesRecord = getNodesRecord(root);
+      const allowDownward = options?.allowDownward ?? [];
 
       const childFilesEntires = instance.children.flatMap((childInstance) => {
         const instanceNode = nodesRecord[childInstance.path];
@@ -203,6 +224,13 @@ export const dependenciesDirection = (order: string[]) =>
         const instanceNameIndex = order.indexOf(instance.abstraction.name);
 
         for (const dependency of dependencies) {
+          if (
+            allowDownward.length > 0 &&
+            matchesAllowDownward(dependency, allowDownward)
+          ) {
+            continue;
+          }
+
           const dependencyInstance = childFilesIndex[dependency];
           if (dependencyInstance === undefined) {
             continue;

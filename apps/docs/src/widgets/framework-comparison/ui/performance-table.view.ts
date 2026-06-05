@@ -3,7 +3,7 @@ import { div } from "@echojs/hyperdom";
 import {
   comparisonFrameworks,
   performanceComparisonRows,
-} from "@shared/home/framework-comparison.js";
+} from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import {
   comparisonFeatureBodyCell,

@@ -4,7 +4,7 @@ import {
   $docVersionId,
   DOC_VERSIONS,
   setDocVersionId,
-} from "@shared/docs/versions.js";
+} from "@widgets/version-dropdown/constants/doc-versions.js";
 import type { HeaderDropdownProps } from "@widgets/header-dropdown/model/header-dropdown.model.js";
 
 export type VersionDropdownVM = {

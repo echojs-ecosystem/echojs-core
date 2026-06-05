@@ -1,4 +1,4 @@
-import type { ContentId } from "./types.js";
+import type { ContentId } from "@shared/content/types.js";
 
 export type PackagePillar = { title: string; body: string; icon: string };
 export type PackageLearnStep = { title: string; description: string; contentId: ContentId };
@@ -329,6 +329,31 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
       step("cli", "api", "API", "Planned."),
     ],
     relatedIds: ["framework"],
+  },
+  architect: {
+    id: "architect",
+    npmPackage: "@echojs/architect",
+    icon: "🏛",
+    tagline: "Architecture linter",
+    summary:
+      "Lint layer imports, public APIs, and folder contracts from architect.config.ts — the same rules the docs site runs in CI.",
+    pills: ["layers", "public-api", "CI"],
+    pillars: [
+      { icon: "▦", title: "Layers", body: "Enforce dependency direction across app, pages, widgets, entities, shared." },
+      { icon: "◉", title: "Public API", body: "Slices expose index.ts; deep imports are flagged." },
+      { icon: "✓", title: "CI-ready", body: "echo-architect lint in watch or one-shot mode." },
+    ],
+    whenToUse: ["Monorepo apps", "Feature-first folders", "Onboarding & code review"],
+    whenNot: ["Runtime behavior", "Unit test assertions"],
+    dependsOn: [],
+    powers: ["Layer graphs", "Import diagnostics", "Auto-fix stubs"],
+    learnPath: [
+      step("architect", "installation", "Installation", "Add to apps/docs or your app."),
+      step("architect", "usage", "Usage", "Presets and allowDownward."),
+      step("architect", "example", "Example", "Full docs-site config."),
+      step("architect", "api", "API", "Programmatic lint API."),
+    ],
+    relatedIds: ["framework", "cli"],
   },
 };
 

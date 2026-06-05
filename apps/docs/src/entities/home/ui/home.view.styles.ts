@@ -49,36 +49,5 @@ export const homeStyles = tv({
     archLink:
       "group mt-8 inline-flex items-center gap-2 text-sm font-semibold text-echo-600 transition hover:gap-3 dark:text-echo-400",
     archLinkArrow: "transition group-hover:translate-x-0.5",
-    archDiagram:
-      "relative overflow-hidden rounded-2xl border border-border/80 bg-surface-elevated p-8 shadow-lg shadow-black/5 dark:border-white/10 dark:bg-surface-elevated/40 dark:shadow-black/25",
-    archDiagramGlow:
-      "pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-gradient-to-bl from-echo-400/25 via-echo-500/10 to-transparent blur-2xl dark:from-echo-500/20",
-    archDiagramInner: "relative z-10 mx-auto flex max-w-sm flex-col items-center gap-2.5",
-    archConnector: "h-2 w-px bg-border",
   },
-});
-
-export const archLayerStyles = tv({
-  slots: {
-    wrap: "flex w-full flex-col items-center",
-    layer: [
-      "w-full rounded-xl border px-4 py-3 text-center transition duration-300",
-      "hover:-translate-y-0.5 hover:shadow-md",
-    ].join(" "),
-    name: "text-sm font-semibold",
-    hint: "mt-0.5 text-[10px] font-medium uppercase tracking-wider opacity-70",
-  },
-  variants: {
-    emphasis: {
-      default: {
-        layer:
-          "border-border bg-surface-elevated text-fg dark:border-white/10 dark:bg-surface-elevated/90",
-      },
-      foundation: {
-        layer:
-          "border-echo-500/30 bg-echo-50 text-echo-900 ring-1 ring-echo-500/15 dark:border-echo-500/35 dark:bg-echo-950/50 dark:text-echo-100 dark:ring-echo-500/20",
-      },
-    },
-  },
-  defaultVariants: { emphasis: "default" },
 });

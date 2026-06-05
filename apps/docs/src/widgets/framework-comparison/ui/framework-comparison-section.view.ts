@@ -2,7 +2,7 @@ import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, p, span } from "@echojs/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
-import { performanceDisclaimer } from "@shared/home/framework-comparison.js";
+import { performanceDisclaimer } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import { ComparisonGuideCardsView } from "@widgets/framework-comparison/ui/comparison-guide-cards.view.js";
 import { WhyChooseCardsView } from "@widgets/framework-comparison/ui/why-choose-cards.view.js";

@@ -1,5 +1,5 @@
 import type { Signal } from "@echojs/reactivity";
-import type { CommandToken, PackageManager, PackageManagerId } from "@shared/home/install-commands.js";
+import type { CommandToken, PackageManager, PackageManagerId } from "@widgets/package-install/constants/install-commands.js";
 
 export type PackageInstallMode =
   | { kind: "scaffold" }

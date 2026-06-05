@@ -1,6 +1,6 @@
 import type { Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
-import type { PackageManagerId } from "@shared/home/install-commands.js";
+import type { PackageManagerId } from "@widgets/package-install/constants/install-commands.js";
 
 /** Package manager marks for install tabs. */
 export const PackageManagerIcon = (id: PackageManagerId): Child => {

@@ -1,69 +1,11 @@
 import {
   abstraction,
   defineConfig,
-  getFlattenFiles,
-  getNodesRecord,
+  dependenciesDirection,
   noUnabstractionFiles,
   publicAbstraction,
   restrictCrossImports,
-  rule,
-  type Diagnostic,
 } from "@echojs/architect";
-
-const isRouterImport = (path: string) => /[/\\]app[/\\]router[/\\]/.test(path);
-
-/** Layer order with `app/router` importable from any layer below `app`. */
-const dependenciesDirection = (
-  order: string[],
-  allowDownward?: (dependencyPath: string) => boolean,
-) =>
-  rule({
-    name: "echo/dependencies-direction",
-    severity: "error",
-    check: async ({ root, instance, dependenciesMap }) => {
-      const diagnostics: Diagnostic[] = [];
-      const nodesRecord = getNodesRecord(root);
-
-      const childFilesEntires = instance.children.flatMap((childInstance) => {
-        const instanceNode = nodesRecord[childInstance.path];
-        const files = getFlattenFiles(instanceNode);
-
-        return files.map((file) => [file.path, childInstance] as const);
-      });
-
-      const childFilesIndex = Object.fromEntries(childFilesEntires);
-
-      for (const [path, fileInstance] of childFilesEntires) {
-        const dependencies = dependenciesMap.dependencies[path];
-        const instanceNameIndex = order.indexOf(fileInstance.abstraction.name);
-
-        for (const dependency of dependencies ?? []) {
-          if (allowDownward?.(dependency)) {
-            continue;
-          }
-
-          const dependencyInstance = childFilesIndex[dependency];
-          if (dependencyInstance === undefined) {
-            continue;
-          }
-
-          const dependencyInstanceNameIndex = order.indexOf(
-            dependencyInstance.abstraction.name,
-          );
-
-          if (dependencyInstanceNameIndex < instanceNameIndex) {
-            diagnostics.push({
-              message: `Forbidden dependency "${fileInstance.abstraction.name}" <= "${dependencyInstance.abstraction.name}".
-allowed dependencies order: ${order.join(" <= ")}`,
-              location: { path },
-            });
-          }
-        }
-      }
-
-      return { diagnostics };
-    },
-  });
 
 /** `app/` — shell: entrypoints, router tables, providers, global styles. */
 const appLayer = abstraction({
@@ -79,8 +21,8 @@ const appLayer = abstraction({
     providers: abstraction({
       name: "providers",
       children: {
-        "index.ts": abstraction("public-api"),
         "*.ts": abstraction("provider"),
+        "index.ts": abstraction("public-api"),
       },
       rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
     }),
@@ -91,50 +33,51 @@ const appLayer = abstraction({
   rules: [noUnabstractionFiles()],
 });
 
-/** `pages/<name>/` — route entry + optional layout, public `index.ts`. */
+/** `pages/<name>/` — `*.page.ts` is the route entry; `index.ts` re-exports. */
 const pageSlice = abstraction({
   name: "page",
   children: {
-    "index.ts": abstraction("public-api"),
     "*.page.ts": abstraction("page"),
     "*.page.styles.ts": abstraction("page-styles"),
     "*.layout.ts": abstraction("layout"),
     "*.layout.styles.ts": abstraction("layout-styles"),
+    "index.ts": abstraction("public-api"),
   },
-  rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+  rules: [
+    publicAbstraction("page"),
+    publicAbstraction("public-api"),
+    noUnabstractionFiles(),
+  ],
 });
 
-/** `widgets/` / `features/` — composite UI with optional playgrounds & root modules. */
+/** `widgets/` / `features/` */
 const widgetSlice = abstraction({
   name: "slice",
   children: {
-    "index.ts": abstraction("public-api"),
     model: abstraction("model"),
     ui: abstraction("ui"),
     types: abstraction("types"),
+    constants: abstraction("constants"),
     helpers: abstraction("helpers"),
     playgrounds: abstraction("playgrounds"),
     icons: abstraction("icons"),
     "*.ts": abstraction("module"),
     "*.styles.ts": abstraction("styles"),
+    "index.ts": abstraction("public-api"),
   },
   rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
 });
 
-/**
- * `entities/<name>/` — MV slice.
- * `model/` holds `*.model.ts`, `*.validation.ts`, `*.types.ts`, `*.constants.ts`.
- * `ui/` holds `*.view.ts`, `*.styles.ts`, `*.view.styles.ts`.
- */
+/** `entities/<name>/` — MV slice */
 const entitySlice = abstraction({
   name: "slice",
   children: {
-    "index.ts": abstraction("public-api"),
     model: abstraction("model"),
     ui: abstraction("ui"),
     helpers: abstraction("helpers"),
     types: abstraction("types"),
     constants: abstraction("constants"),
+    "index.ts": abstraction("public-api"),
   },
   rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
 });
@@ -173,8 +116,10 @@ export default defineConfig({
     },
     rules: [
       dependenciesDirection(
-        ["app", "pages", "widgets", "features", "entities", "shared"],
-        isRouterImport,
+        ["app", "pages", "entities", "widgets", "features", "shared"],
+        {
+          allowDownward: ["**/app/router/**", "**/app/providers/**"],
+        },
       ),
     ],
   }),

@@ -6,18 +6,16 @@ import type { HomeVM } from "@entities/home/types/home.types.js";
 import { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.js";
 import { HomeCtaView } from "@entities/home/ui/home-cta.view.js";
 import { HomeHeroCodeWindowView } from "@entities/home/ui/home-hero-code-window.view.js";
+import { HomeArchitectureView } from "@entities/home/ui/home-architecture.view.js";
 import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
 } from "@entities/home/ui/home-philosophy-principles.view.js";
-import {
-  architectureLayers,
-  ecosystemPackages,
-  heroPills,
-  homeStats,
-} from "@shared/home/ecosystem-packages.js";
+import { heroPills, homeStats } from "@entities/home/constants/home-landing.data.js";
+import { ecosystemPackages } from "@widgets/ecosystem/constants/ecosystem-packages.js";
 import { homeButtonStyles } from "@entities/home/ui/home-button.styles.js";
-import { archLayerStyles, homeStyles } from "@entities/home/ui/home.view.styles.js";
+import { HomeFrameworkStrengthView } from "@entities/home/ui/home-framework-strength.view.js";
+import { homeStyles } from "@entities/home/ui/home.view.styles.js";
 import { EcosystemPackageCard } from "@widgets/ecosystem/index.js";
 import { FrameworkComparisonSection } from "@widgets/framework-comparison/index.js";
 import { HomeFooter } from "@widgets/home-shell/index.js";
@@ -101,6 +99,19 @@ export const HomeView = createView((vm: HomeVM): Child => {
         section({ class: home.section() }, [
           div({ class: home.sectionInner() }, [
             div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, "Architecture"),
+              h2({ class: home.sectionTitle() }, "Structure that scales with your team"),
+              p({ class: home.sectionLead() }, [
+                "EchoJS is not only fast at runtime — it replaces ad-hoc folders with six predictable layers, feature-first slices, and enforceable import rules.",
+              ]),
+            ]),
+            HomeArchitectureView(),
+          ]),
+        ]),
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
               p({ class: home.sectionEyebrow() }, "Ecosystem"),
               h2({ class: home.sectionTitle() }, "One framework, many packages"),
               p({ class: home.sectionLead() }, [
@@ -139,42 +150,21 @@ export const HomeView = createView((vm: HomeVM): Child => {
           div({ class: home.sectionInner() }, [
             div({ class: home.archGrid() }, [
               div({ class: home.archContent() }, [
-                p({ class: home.sectionEyebrow() }, "Architecture"),
-                h2({ class: home.archTitle() }, "Layers that scale with your team"),
+                p({ class: home.sectionEyebrow() }, "Runtime"),
+                h2({ class: home.archTitle() }, "Surgical updates, not tree diffs"),
                 p({ class: home.archBody() }, [
-                  "EchoJS promotes feature-first structure with explicit dependency flow — from app shell down to shared utilities.",
+                  "Signals track exactly what your UI depends on. HyperDOM updates only the nodes that changed — no virtual tree, no reconciliation pass, predictable cost as apps grow.",
                 ]),
                 NavLink({
-                  to: docPageByContentId["architecture/feature-first"]!,
+                  to: docPageByContentId["packages/reactivity"]!,
                   class: home.archLink(),
                   children: [
-                    "Explore feature-first design",
+                    "Explore signals & HyperDOM",
                     span({ class: home.archLinkArrow() }, "→"),
                   ],
                 }),
               ]),
-              div({ class: home.archDiagram() }, [
-                div({ class: home.archDiagramGlow() }),
-                div({ class: home.archDiagramInner() }, [
-                  ...architectureLayers.flatMap((layer, i) => {
-                    const layerStyles = archLayerStyles({
-                      emphasis: layer.name === "Shared" ? "foundation" : "default",
-                    });
-                    const nodes: Child[] = [
-                      div({ class: [layerStyles.wrap(), layer.width].join(" ") }, [
-                        div({ class: layerStyles.layer() }, [
-                          p({ class: layerStyles.name() }, layer.name),
-                          p({ class: layerStyles.hint() }, layer.hint),
-                        ]),
-                      ]),
-                    ];
-                    if (i < architectureLayers.length - 1) {
-                      nodes.push(div({ class: home.archConnector() }));
-                    }
-                    return nodes;
-                  }),
-                ]),
-              ]),
+              HomeFrameworkStrengthView(),
             ]),
           ]),
         ]),
