@@ -1,17 +1,17 @@
 <div align="center">
 
-# @echojs-ecosystem/devtools-core
+# @echojs-ecosystem/devtools
 
 **Runtime registry and event timeline for EchoJS DevTools — no UI, zero overhead when disabled.**
 
-[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/devtools-core)](https://www.npmjs.com/package/@echojs-ecosystem/devtools-core)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/devtools)](https://www.npmjs.com/package/@echojs-ecosystem/devtools)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/devtools)
 
 </div>
 
 ---
 
-Infrastructure layer for future EchoJS DevTools. Provides a **global bridge**, **node registry**, and **FIFO event timeline**. Integrating packages (store, query, router, …) register automatically — end users rarely call these APIs directly.
+Infrastructure layer for EchoJS DevTools. Provides a **global bridge**, **node registry**, and **FIFO event timeline**. Integrating packages (store, query, router, …) register automatically — end users rarely call these APIs directly.
 
 ## Features
 
@@ -24,7 +24,17 @@ Infrastructure layer for future EchoJS DevTools. Provides a **global bridge**, *
 ## Install
 
 ```bash
-npm install @echojs-ecosystem/devtools-core
+npm install @echojs-ecosystem/devtools
+```
+
+Or via the meta-package:
+
+```bash
+npm install @echojs-ecosystem/framework
+```
+
+```ts
+import { setDevtoolsEnabled } from "@echojs-ecosystem/framework/devtools";
 ```
 
 ## Quick start
@@ -35,9 +45,8 @@ import {
   emitDevtoolsEvent,
   subscribeTimeline,
   setDevtoolsEnabled,
-} from "@echojs-ecosystem/devtools-core";
+} from "@echojs-ecosystem/devtools";
 
-// Disable in production
 setDevtoolsEnabled(import.meta.env.DEV);
 
 const node = registerDevtoolsNode({
@@ -73,12 +82,6 @@ node.unregister();
 | `getDevtoolsBridge` | Full bridge access |
 | `setDevtoolsEnabled` | Toggle all DevTools APIs |
 | `createDevtoolsId`, `safeSerialize` | Utilities |
-
-## When disabled
-
-- `registerDevtoolsNode()` → `{ unregister() {} }`
-- `emitDevtoolsEvent()` → `null`
-- `getAllSnapshots()` → `[]`
 
 ## Documentation
 

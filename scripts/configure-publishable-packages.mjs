@@ -25,7 +25,7 @@ const PUBLISHABLE = [
   { name: "@echojs-ecosystem/i18n", dir: "i18n" },
   { name: "@echojs-ecosystem/ui", dir: "ui" },
   { name: "@echojs-ecosystem/architect", dir: "architect" },
-  { name: "@echojs-ecosystem/devtools-core", dir: "devtools-core" },
+  { name: "@echojs-ecosystem/devtools", dir: "devtools" },
 ];
 
 for (const { name, dir } of PUBLISHABLE) {

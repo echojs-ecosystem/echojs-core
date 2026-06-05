@@ -10,4 +10,4 @@ keywords: [devtools, debug]
 :::install @echojs-ecosystem/devtools
 
 > [!note]
-> Package roadmap only — not published in the monorepo yet. Overview cards describe the intended experience.
+> Runtime registry (`@echojs-ecosystem/devtools`) is available today. Browser overlay UI is still on the roadmap.

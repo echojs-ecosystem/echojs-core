@@ -23,7 +23,7 @@ const stubs: PackagePlaygroundDef[] = [
   createStubPlayground(
     "devtools",
     "DevTools",
-    "@echojs-ecosystem/devtools is not in the monorepo yet.",
+    "Runtime registry and timeline — enable with setDevtoolsEnabled(import.meta.env.DEV).",
   ),
   createStubPlayground("cli", "CLI", "@echojs-ecosystem/cli is not released yet."),
 ];

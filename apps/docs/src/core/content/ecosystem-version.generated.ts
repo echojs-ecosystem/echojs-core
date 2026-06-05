@@ -5,7 +5,7 @@ export const packageVersions = {
   "@echojs-ecosystem/architect": "0.0.0",
   "@echojs-ecosystem/bench": "0.0.0",
   "@echojs-ecosystem/core": "0.0.0",
-  "@echojs-ecosystem/devtools-core": "0.0.0",
+  "@echojs-ecosystem/devtools": "0.0.0",
   "@echojs-ecosystem/form": "0.0.0",
   "@echojs-ecosystem/framework": "0.0.0",
   "@echojs-ecosystem/hyperdom": "0.0.0",

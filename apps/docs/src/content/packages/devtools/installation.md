@@ -1,21 +1,36 @@
 ---
 title: Installation
-description: @echojs-ecosystem/devtools — coming soon.
+description: Install @echojs-ecosystem/devtools for runtime inspection infrastructure.
 package: "@echojs-ecosystem/devtools"
-status: draft
 ---
 
 # Installation
 
-> [!NOTE]
-> **Пакет `@echojs-ecosystem/devtools` ещё не добавлен в monorepo.** Страница будет обновлена при появлении первого релиза.
+DevTools core is a **runtime registry** (no UI overlay yet). Install as a dependency or import via `@echojs-ecosystem/framework/devtools`.
 
-## Planned content
+:::install @echojs-ecosystem/devtools
 
-- Dev-only install (`devDependencies`)
-- Provider или Vite plugin
-- Не включать в production bundle
+## Via framework
+
+```bash
+npm install @echojs-ecosystem/framework
+```
+
+```ts
+import { setDevtoolsEnabled } from "@echojs-ecosystem/framework/devtools";
+```
+
+## Production
+
+Disable at bootstrap — all public APIs become no-ops with zero overhead:
+
+```ts
+import { setDevtoolsEnabled } from "@echojs-ecosystem/devtools";
+
+setDevtoolsEnabled(import.meta.env.DEV);
+```
 
 ## See also
 
 - [DevTools overview](/docs/packages/devtools)
+- [Usage](/docs/packages/devtools/usage)

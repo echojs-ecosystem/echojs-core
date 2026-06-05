@@ -1,5 +1,5 @@
 {
-  "name": "@echojs-ecosystem/devtools-core",
+  "name": "@echojs-ecosystem/devtools",
   "version": "0.0.0",
   "description": "Runtime registry and timeline infrastructure for EchoJS DevTools",
   "files": [
@@ -37,6 +37,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/echojs-ecosystem/echojs-core.git",
-    "directory": "packages/devtools-core"
+    "directory": "packages/devtools"
   }
 }

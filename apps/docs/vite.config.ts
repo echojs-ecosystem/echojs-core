@@ -60,6 +60,14 @@ export default defineConfig({
         replacement: resolve(packages, "i18n/src/index.ts"),
       },
       {
+        find: /^@echojs-ecosystem\/framework\/query$/,
+        replacement: resolve(packages, "framework/src/query.ts"),
+      },
+      {
+        find: /^@echojs-ecosystem\/framework\/i18n$/,
+        replacement: resolve(packages, "framework/src/i18n.ts"),
+      },
+      {
         find: /^@echojs-ecosystem\/framework\/app$/,
         replacement: resolve(packages, "framework/src/app/index.ts"),
       },

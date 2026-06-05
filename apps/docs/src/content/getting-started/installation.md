@@ -5,7 +5,7 @@ description: Install EchoJS packages with Bun, npm, pnpm, or yarn.
 
 # Installation
 
-EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. Use the ones your app needs — a minimal SPA usually starts with **framework**, **hyperdom**, **reactivity**, and **router**.
+EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. For new apps, install **`@echojs-ecosystem/framework`** once — it re-exports the full runtime (`reactivity`, `hyperdom`, `router`, `query`, `i18n`, `store`, `ui`, …) via subpath imports.
 
 ## Requirements
 
@@ -13,11 +13,21 @@ EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. Use the ones yo
 - **TypeScript** 5.x recommended
 - A bundler with ESM support (**Vite** is used in `apps/docs` and `apps/example`)
 
-## Minimal set
-
-Install core packages (same UI as on the home page — tabs + copy):
+## Recommended — one package
 
 :::install @echojs-ecosystem/framework
+
+Then import subpaths, for example:
+
+- `@echojs-ecosystem/framework/app` — bootstrap
+- `@echojs-ecosystem/framework/reactivity` — signals
+- `@echojs-ecosystem/framework/query` — data fetching
+- `@echojs-ecosystem/framework/i18n` — translations
+- `@echojs-ecosystem/framework/ui/button` — UI components
+
+## À la carte (optional)
+
+If you prefer explicit dependencies instead of the meta-package:
 
 :::install @echojs-ecosystem/reactivity
 
@@ -25,13 +35,11 @@ Install core packages (same UI as on the home page — tabs + copy):
 
 :::install @echojs-ecosystem/router
 
-## Full stack (docs / lab parity)
+## Full stack extras
 
-Matches the provider pipeline in the official docs and example apps. Add each package you need:
+When not using `framework`, add each package you need:
 
 :::install @echojs-ecosystem/query
-
-:::install @echojs-ecosystem/ui
 
 :::install @echojs-ecosystem/i18n
 
@@ -40,6 +48,8 @@ Matches the provider pipeline in the official docs and example apps. Add each pa
 :::install @echojs-ecosystem/url-state
 
 :::install @echojs-ecosystem/persist
+
+:::install @echojs-ecosystem/ui
 
 ## Working inside the EchoJS monorepo
 

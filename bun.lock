@@ -20,6 +20,7 @@
     },
     "apps/docs": {
       "name": "@echojs-ecosystem/docs",
+      "version": "0.0.0",
       "dependencies": {
         "@echojs-ecosystem/framework": "workspace:*",
         "@echojs-ecosystem/hyperdom": "workspace:*",
@@ -141,8 +142,8 @@
         "vitest": "^4.1.4",
       },
     },
-    "packages/devtools-core": {
-      "name": "@echojs-ecosystem/devtools-core",
+    "packages/devtools": {
+      "name": "@echojs-ecosystem/devtools",
       "version": "0.0.0",
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
@@ -170,9 +171,12 @@
       "version": "0.0.0",
       "dependencies": {
         "@echojs-ecosystem/core": "workspace:*",
+        "@echojs-ecosystem/devtools": "workspace:*",
         "@echojs-ecosystem/form": "workspace:*",
         "@echojs-ecosystem/hyperdom": "workspace:*",
+        "@echojs-ecosystem/i18n": "workspace:*",
         "@echojs-ecosystem/persist": "workspace:*",
+        "@echojs-ecosystem/query": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
         "@echojs-ecosystem/router": "workspace:*",
         "@echojs-ecosystem/store": "workspace:*",
@@ -387,7 +391,7 @@
 
     "@echojs-ecosystem/core": ["@echojs-ecosystem/core@workspace:packages/core"],
 
-    "@echojs-ecosystem/devtools-core": ["@echojs-ecosystem/devtools-core@workspace:packages/devtools-core"],
+    "@echojs-ecosystem/devtools": ["@echojs-ecosystem/devtools@workspace:packages/devtools"],
 
     "@echojs-ecosystem/docs": ["@echojs-ecosystem/docs@workspace:apps/docs"],
 

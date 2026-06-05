@@ -13,7 +13,9 @@
       "@echojs-ecosystem/form": ["../form/src/index.ts"],
       "@echojs-ecosystem/persist": ["../persist/src/index.ts"],
       "@echojs-ecosystem/store": ["../store/src/index.ts"],
-      "@echojs-ecosystem/ui": ["../ui/src/index.ts"]
+      "@echojs-ecosystem/ui": ["../ui/src/index.ts"],
+      "@echojs-ecosystem/i18n": ["../i18n/src/index.ts"],
+      "@echojs-ecosystem/query": ["../query/src/index.ts"]
     },
     "rootDir": ".."
   },

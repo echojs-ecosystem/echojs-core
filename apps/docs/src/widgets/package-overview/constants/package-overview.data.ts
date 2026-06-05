@@ -287,7 +287,8 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     npmPackage: "@echojs-ecosystem/devtools",
     icon: "🔧",
     tagline: "DevTools (planned)",
-    summary: "Future overlay for signals, query cache, and routes. Package not in monorepo yet.",
+    summary:
+      "Runtime registry and timeline for EchoJS DevTools. Integrates with store, query, router — UI overlay planned.",
     pills: ["planned"],
     pillars: [
       { icon: "👁", title: "Signals", body: "Dependency inspect." },

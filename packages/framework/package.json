@@ -1,15 +1,18 @@
 {
   "name": "@echojs-ecosystem/framework",
   "version": "0.0.0",
-  "files": [
-    "dist"
-  ],
+  "description": "EchoJS meta-package — app bootstrap, providers, and tree-shakeable subpath re-exports for the full ecosystem",
+  "files": ["dist"],
   "type": "module",
   "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./app": {
+      "types": "./dist/app.d.ts",
+      "default": "./dist/app.js"
     },
     "./core": {
       "types": "./dist/core.d.ts",
@@ -18,6 +21,10 @@
     "./reactivity": {
       "types": "./dist/reactivity.d.ts",
       "default": "./dist/reactivity.js"
+    },
+    "./hyperdom": {
+      "types": "./dist/hyperdom.d.ts",
+      "default": "./dist/hyperdom.js"
     },
     "./router": {
       "types": "./dist/router.d.ts",
@@ -31,29 +38,93 @@
       "types": "./dist/form.d.ts",
       "default": "./dist/form.js"
     },
-    "./persist": {
-      "types": "./dist/persist.d.ts",
-      "default": "./dist/persist.js"
-    },
     "./store": {
       "types": "./dist/store.d.ts",
       "default": "./dist/store.js"
     },
-    "./ui": {
-      "types": "./dist/ui.d.ts",
-      "default": "./dist/ui.js"
+    "./query": {
+      "types": "./dist/query.d.ts",
+      "default": "./dist/query.js"
     },
-    "./hyperdom": {
-      "types": "./dist/hyperdom.d.ts",
-      "default": "./dist/hyperdom.js"
+    "./persist": {
+      "types": "./dist/persist.d.ts",
+      "default": "./dist/persist.js"
     },
     "./url-state": {
       "types": "./dist/url-state.d.ts",
       "default": "./dist/url-state.js"
     },
-    "./app": {
-      "types": "./dist/app.d.ts",
-      "default": "./dist/app.js"
+    "./i18n": {
+      "types": "./dist/i18n.d.ts",
+      "default": "./dist/i18n.js"
+    },
+    "./devtools": {
+      "types": "./dist/devtools.d.ts",
+      "default": "./dist/devtools.js"
+    },
+    "./ui": {
+      "types": "./dist/ui.d.ts",
+      "default": "./dist/ui.js"
+    },
+    "./ui/button": {
+      "types": "./dist/ui/button.d.ts",
+      "default": "./dist/ui/button.js"
+    },
+    "./ui/icon-button": {
+      "types": "./dist/ui/icon-button.d.ts",
+      "default": "./dist/ui/icon-button.js"
+    },
+    "./ui/input": {
+      "types": "./dist/ui/input.d.ts",
+      "default": "./dist/ui/input.js"
+    },
+    "./ui/input-mask": {
+      "types": "./dist/ui/input-mask.d.ts",
+      "default": "./dist/ui/input-mask.js"
+    },
+    "./ui/input-otp": {
+      "types": "./dist/ui/input-otp.d.ts",
+      "default": "./dist/ui/input-otp.js"
+    },
+    "./ui/input-tags": {
+      "types": "./dist/ui/input-tags.d.ts",
+      "default": "./dist/ui/input-tags.js"
+    },
+    "./ui/textarea": {
+      "types": "./dist/ui/textarea.d.ts",
+      "default": "./dist/ui/textarea.js"
+    },
+    "./ui/label": {
+      "types": "./dist/ui/label.d.ts",
+      "default": "./dist/ui/label.js"
+    },
+    "./ui/field": {
+      "types": "./dist/ui/field.d.ts",
+      "default": "./dist/ui/field.js"
+    },
+    "./ui/checkbox": {
+      "types": "./dist/ui/checkbox.d.ts",
+      "default": "./dist/ui/checkbox.js"
+    },
+    "./ui/provider": {
+      "types": "./dist/ui/provider.d.ts",
+      "default": "./dist/ui/provider.js"
+    },
+    "./ui/theme": {
+      "types": "./dist/ui/theme.d.ts",
+      "default": "./dist/ui/theme.js"
+    },
+    "./ui/core": {
+      "types": "./dist/ui/core.d.ts",
+      "default": "./dist/ui/core.js"
+    },
+    "./ui/utils": {
+      "types": "./dist/ui/utils.d.ts",
+      "default": "./dist/ui/utils.js"
+    },
+    "./ui/primitives": {
+      "types": "./dist/ui/primitives.d.ts",
+      "default": "./dist/ui/primitives.js"
     },
     "./package.json": "./package.json"
   },
@@ -68,11 +139,14 @@
   },
   "dependencies": {
     "@echojs-ecosystem/core": "workspace:*",
+    "@echojs-ecosystem/devtools": "workspace:*",
+    "@echojs-ecosystem/form": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/i18n": "workspace:*",
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/query": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*",
     "@echojs-ecosystem/router": "workspace:*",
-    "@echojs-ecosystem/hyperdom": "workspace:*",
-    "@echojs-ecosystem/form": "workspace:*",
-    "@echojs-ecosystem/persist": "workspace:*",
     "@echojs-ecosystem/store": "workspace:*",
     "@echojs-ecosystem/ui": "workspace:*",
     "@echojs-ecosystem/url-state": "workspace:*"

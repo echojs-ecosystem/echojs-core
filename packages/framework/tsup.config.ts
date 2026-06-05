@@ -1,5 +1,27 @@
 import { echoTsupConfig } from '@echojs-ecosystem/oxc-config/tsup'
 
+const uiSubpaths = [
+  'button',
+  'icon-button',
+  'input',
+  'input-mask',
+  'input-otp',
+  'input-tags',
+  'textarea',
+  'label',
+  'field',
+  'checkbox',
+  'provider',
+  'theme',
+  'core',
+  'utils',
+  'primitives',
+] as const
+
+const uiEntries = Object.fromEntries(
+  uiSubpaths.map((sub) => [`ui/${sub}`, `src/ui/${sub}.ts`]),
+)
+
 export default echoTsupConfig({
   entry: {
     index: 'src/index.ts',
@@ -10,9 +32,13 @@ export default echoTsupConfig({
     form: 'src/form.ts',
     persist: 'src/persist.ts',
     store: 'src/store.ts',
+    query: 'src/query.ts',
+    i18n: 'src/i18n.ts',
+    devtools: 'src/devtools.ts',
     ui: 'src/ui.ts',
     hyperdom: 'src/hyperdom.ts',
     'url-state': 'src/url-state.ts',
     app: 'src/app/index.ts',
+    ...uiEntries,
   },
 })
