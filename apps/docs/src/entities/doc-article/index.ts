@@ -1,5 +1,5 @@
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import { createComponent } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
 import { createDocArticleModel } from "@entities/doc-article/model/doc-article.model.js";
 import type { DocArticleProps } from "@entities/doc-article/types/doc-article.types.js";
 import { DocArticleView } from "@entities/doc-article/ui/doc-article.view.js";

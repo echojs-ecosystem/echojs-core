@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { div, button } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { div, button } from "@echojs-ecosystem/framework/hyperdom";
 import type { CodeBlockVM } from "@widgets/code-block/model/code-block.model.js";
 import { codeBlockStyles } from "@widgets/code-block/ui/code-block.view.styles.js";
 

@@ -1,4 +1,4 @@
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import type { ContentId } from "@core/content/types.js";
 import { toggleMobileNav } from "@widgets/docs-shell/model/mobile-nav.js";

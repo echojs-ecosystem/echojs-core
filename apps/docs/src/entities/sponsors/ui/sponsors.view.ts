@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { div, h, h1, main, p } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { div, h, h1, main, p } from "@echojs-ecosystem/framework/hyperdom";
 import type { SponsorsVM } from "@entities/sponsors/types/sponsors.types.js";
 import { becomeSponsorUrl } from "@widgets/sponsors/constants/sponsors.data.js";
 import { homeButtonStyles } from "@entities/home/ui/home-button.styles.js";

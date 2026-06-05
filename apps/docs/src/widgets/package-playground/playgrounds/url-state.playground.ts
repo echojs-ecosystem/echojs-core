@@ -1,11 +1,11 @@
-import { effect, signal } from "@echojs-ecosystem/reactivity";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
 import {
   createMemoryUrlStateAdapter,
   createQueryParams,
   parseAsInteger,
   parseAsString,
-} from "@echojs-ecosystem/url-state";
-import { button, div, input, p } from "@echojs-ecosystem/hyperdom";
+} from "@echojs-ecosystem/framework/url-state";
+import { button, div, input, p } from "@echojs-ecosystem/framework/hyperdom";
 import type { PackagePlaygroundDef, PlaygroundInstance } from "../types.js";
 import { pg } from "../playground-ui.js";
 

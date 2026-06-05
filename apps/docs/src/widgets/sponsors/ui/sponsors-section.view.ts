@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
-import { div, h, h2, p, section, span } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { div, h, h2, p, section, span } from "@echojs-ecosystem/framework/hyperdom";
 import { sponsorsPage } from "@app/router/page-links.js";
 import { becomeSponsorUrl } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorsSectionStyles } from "@widgets/sponsors/ui/sponsors-section.view.styles.js";

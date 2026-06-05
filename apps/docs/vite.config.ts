@@ -3,7 +3,7 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 const src = resolve(__dirname, "src");
-const packages = resolve(__dirname, "../../packages");
+const frameworkRoot = resolve(__dirname, "../../packages/framework/src");
 
 export default defineConfig({
   plugins: [tailwindcss()],
@@ -16,68 +16,28 @@ export default defineConfig({
       { find: "@core", replacement: resolve(src, "core") },
       { find: "@content", replacement: resolve(src, "content") },
       {
-        find: /^@echojs-ecosystem\/reactivity$/,
-        replacement: resolve(packages, "reactivity/src/index.ts"),
+        find: /^@echojs-ecosystem\/framework\/router\/hyperdom$/,
+        replacement: resolve(frameworkRoot, "router-hyperdom.ts"),
       },
       {
-        find: /^@echojs-ecosystem\/hyperdom$/,
-        replacement: resolve(packages, "hyperdom/src/index.ts"),
+        find: /^@echojs-ecosystem\/framework\/hyperdom\/lifecycle\/mount$/,
+        replacement: resolve(frameworkRoot, "hyperdom-lifecycle-mount.ts"),
       },
       {
-        find: /^@echojs-ecosystem\/hyperdom\/lifecycle\/mount$/,
-        replacement: resolve(packages, "hyperdom/src/lifecycle/mount.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/hyperdom\/lifecycle\/reactive$/,
-        replacement: resolve(packages, "hyperdom/src/lifecycle/reactive.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/router\/hyperdom$/,
-        replacement: resolve(packages, "router/src/hyperdom/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/router$/,
-        replacement: resolve(packages, "router/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/store$/,
-        replacement: resolve(packages, "store/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/persist$/,
-        replacement: resolve(packages, "persist/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/url-state$/,
-        replacement: resolve(packages, "url-state/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/query$/,
-        replacement: resolve(packages, "query/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/i18n$/,
-        replacement: resolve(packages, "i18n/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/framework\/query$/,
-        replacement: resolve(packages, "framework/src/query.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/framework\/i18n$/,
-        replacement: resolve(packages, "framework/src/i18n.ts"),
+        find: /^@echojs-ecosystem\/framework\/ui\/(.+)$/,
+        replacement: `${resolve(frameworkRoot, "ui")}/$1.ts`,
       },
       {
         find: /^@echojs-ecosystem\/framework\/app$/,
-        replacement: resolve(packages, "framework/src/app/index.ts"),
+        replacement: resolve(frameworkRoot, "app/index.ts"),
+      },
+      {
+        find: /^@echojs-ecosystem\/framework\/(.+)$/,
+        replacement: `${frameworkRoot}/$1.ts`,
       },
       {
         find: /^@echojs-ecosystem\/framework$/,
-        replacement: resolve(packages, "framework/src/index.ts"),
-      },
-      {
-        find: /^@echojs-ecosystem\/ui$/,
-        replacement: resolve(packages, "ui/src/index.ts"),
+        replacement: resolve(frameworkRoot, "index.ts"),
       },
     ],
   },
@@ -86,16 +46,6 @@ export default defineConfig({
     open: true,
   },
   optimizeDeps: {
-    exclude: [
-      "@echojs-ecosystem/reactivity",
-      "@echojs-ecosystem/hyperdom",
-      "@echojs-ecosystem/router",
-      "@echojs-ecosystem/store",
-      "@echojs-ecosystem/url-state",
-      "@echojs-ecosystem/query",
-      "@echojs-ecosystem/i18n",
-      "@echojs-ecosystem/framework",
-      "@echojs-ecosystem/ui",
-    ],
+    exclude: ["@echojs-ecosystem/framework"],
   },
 });

@@ -1,4 +1,4 @@
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 import { i18n } from "@core/providers/index.js";
 import {
   $docVersionId,

@@ -18,7 +18,7 @@ const stubs: PackagePlaygroundDef[] = [
   createStubPlayground(
     "ui",
     "UI",
-    "Component playground will ship with @echojs-ecosystem/ui Storybook integration.",
+    "Component playground will ship with @echojs-ecosystem/framework/ui Storybook integration.",
   ),
   createStubPlayground(
     "devtools",

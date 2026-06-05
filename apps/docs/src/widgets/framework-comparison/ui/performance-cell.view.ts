@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { span } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { span } from "@echojs-ecosystem/framework/hyperdom";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import { cn } from "@core/styles/cn.js";
 import { bestPerformanceIds } from "@widgets/framework-comparison/model/framework-comparison.model.js";

@@ -1,7 +1,7 @@
-import { effect, signal } from "@echojs-ecosystem/reactivity";
-import { createRouteView, createRoutes } from "@echojs-ecosystem/router";
-import { createRouter } from "@echojs-ecosystem/router/hyperdom";
-import { button, div, p, type Child } from "@echojs-ecosystem/hyperdom";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
+import { createRouteView, createRoutes } from "@echojs-ecosystem/framework/router";
+import { createRouter } from "@echojs-ecosystem/framework/router/hyperdom";
+import { button, div, p, type Child } from "@echojs-ecosystem/framework/hyperdom";
 import type { PackagePlaygroundDef, PlaygroundInstance } from "../types.js";
 import { pg } from "../playground-ui.js";
 

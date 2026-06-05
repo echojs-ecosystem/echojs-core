@@ -1,5 +1,5 @@
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import { span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import { span } from "@echojs-ecosystem/framework/hyperdom";
 import type { PackageManagerId } from "@widgets/package-install/constants/install-commands.js";
 
 /** Package manager marks for install tabs. */

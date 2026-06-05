@@ -1,4 +1,4 @@
-import type { AnyPage } from "@echojs-ecosystem/router";
+import type { AnyPage } from "@echojs-ecosystem/framework/router";
 import { allDocsNavItems } from "@core/content/nav.js";
 import type { ContentId } from "@core/content/types.js";
 import { createDocPage } from "@pages/doc/doc.page.js";

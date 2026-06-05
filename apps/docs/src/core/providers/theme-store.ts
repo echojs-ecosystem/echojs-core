@@ -1,4 +1,4 @@
-import { effect, signal } from "@echojs-ecosystem/reactivity";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
 
 export type ThemeMode = "light" | "dark" | "system";
 

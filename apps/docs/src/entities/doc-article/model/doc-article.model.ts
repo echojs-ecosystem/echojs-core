@@ -1,6 +1,6 @@
-import { createQuery } from "@echojs-ecosystem/query";
-import { effect } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { createQuery } from "@echojs-ecosystem/framework/query";
+import { effect } from "@echojs-ecosystem/framework/reactivity";
+import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 import { loadContentRaw } from "@core/content/load-content.js";
 import { parseMarkdown } from "@core/content/parse-markdown.js";
 import { findNavItemByContentId } from "@core/content/nav.js";

@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { span } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { span } from "@echojs-ecosystem/framework/hyperdom";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import type { RatingCellViewProps } from "@widgets/framework-comparison/types/framework-comparison.types.js";
 

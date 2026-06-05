@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import type { AnyPage } from "@echojs-ecosystem/router";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/framework/router";
 import type { NavIconId } from "@core/content/nav-icon-id.js";
 import { SidebarNavLinkView } from "@widgets/docs-shell/sidebar-nav-link.view.js";
 

@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
-import { div, footer, h, p } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { div, footer, h, p } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homeFooterLinks } from "@widgets/home-shell/constants/home-footer.links.js";
 import { sponsorsPage } from "@app/router/page-links.js";

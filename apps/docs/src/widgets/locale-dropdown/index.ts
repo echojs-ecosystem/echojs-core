@@ -1,4 +1,4 @@
-import { createComponent } from "@echojs-ecosystem/hyperdom";
+import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
 import { createLocaleDropdownModel } from "@widgets/locale-dropdown/model/locale-dropdown.model.js";
 import { LocaleDropdownView } from "@widgets/locale-dropdown/ui/locale-dropdown.view.js";
 

@@ -1,5 +1,5 @@
-import { signal } from "@echojs-ecosystem/reactivity";
-import type { Child } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/framework/reactivity";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
 import {
   button,
   div,
@@ -19,7 +19,7 @@ import {
   thead,
   tr,
   ul,
-} from "@echojs-ecosystem/hyperdom";
+} from "@echojs-ecosystem/framework/hyperdom";
 import { renderInlineMarkdown } from "@core/content/inline-markdown.js";
 import {
   calloutDefaultTitle,

@@ -1,5 +1,5 @@
-import { createView } from "@echojs-ecosystem/hyperdom";
-import { div, span } from "@echojs-ecosystem/hyperdom";
+import { createView } from "@echojs-ecosystem/framework/hyperdom";
+import { div, span } from "@echojs-ecosystem/framework/hyperdom";
 import { bootstrapExample } from "@entities/home/constants/home.constants.js";
 import { codeDots } from "@entities/home/helpers/code-dots.js";
 import { homeHeroCodeWindowStyles } from "@entities/home/ui/home-hero-code-window.view.styles.js";

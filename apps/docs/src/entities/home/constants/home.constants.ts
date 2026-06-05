@@ -13,7 +13,7 @@ createEchoApp({ strictContextChecks: true })
   .use(routerProvider)
   .mount("#app")`;
 
-export const queryExample = `import { createQuery } from "@echojs-ecosystem/query"
+export const queryExample = `import { createQuery } from "@echojs-ecosystem/framework/query"
 
 export const usersQuery = createQuery({
   name: "users",
@@ -24,8 +24,8 @@ export const usersQuery = createQuery({
 // In a page model — reactive cache, no hooks
 const users = usersQuery.with()`;
 
-export const modelViewExample = `import { signal } from "@echojs-ecosystem/reactivity"
-import { createModel, createView, button } from "@echojs-ecosystem/hyperdom"
+export const modelViewExample = `import { signal } from "@echojs-ecosystem/framework/reactivity"
+import { createModel, createView, button } from "@echojs-ecosystem/framework/hyperdom"
 
 export const createCounterModel = createModel((): CounterVM => {
   const $count = signal(0)
@@ -40,7 +40,7 @@ export const CounterView = createView((vm: CounterVM): Child =>
   "CounterView",
 )`;
 
-export const uiExample = `import { Button } from "@echojs-ecosystem/ui"
+export const uiExample = `import { Button } from "@echojs-ecosystem/framework/ui"
 
 Button({
   variant: "primary",

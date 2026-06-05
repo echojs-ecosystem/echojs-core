@@ -1,5 +1,5 @@
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import { createComponent } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
 import { createPackageInstallModel } from "@widgets/package-install/model/package-install.model.js";
 import type { PackageInstallProps } from "@widgets/package-install/types/package-install.types.js";
 import { PackageInstallView } from "@widgets/package-install/ui/package-install.view.js";

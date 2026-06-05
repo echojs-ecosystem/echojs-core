@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
-import { div, p, span } from "@echojs-ecosystem/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
+import { div, p, span } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { performanceDisclaimer } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";

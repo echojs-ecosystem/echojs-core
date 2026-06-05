@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import { div, input, li, p, ul } from "@echojs-ecosystem/hyperdom";
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
+import { div, input, li, p, ul } from "@echojs-ecosystem/framework/hyperdom";
+import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
 import { searchStyles } from "@widgets/search/ui/docs-search.view.styles.js";
 import type { DocsSearchVM } from "@widgets/search/model/docs-search.model.js";
 

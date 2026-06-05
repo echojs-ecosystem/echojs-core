@@ -1,5 +1,5 @@
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import { aside, div, nav, p, Show } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import { aside, div, nav, p, Show } from "@echojs-ecosystem/framework/hyperdom";
 import { $mobileNavOpen } from "@widgets/docs-shell/model/mobile-nav.js";
 import { sidebarScrollRef } from "@widgets/docs-shell/helpers/sidebar-scroll.js";
 import { agentsNavItems, agentsNavSection, docsNavSections } from "@core/content/nav.js";

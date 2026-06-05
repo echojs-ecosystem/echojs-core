@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs-ecosystem/router";
+import { createRouteView } from "@echojs-ecosystem/framework/router";
 import { RouterNotFoundView } from "@entities/router-states/ui/not-found.view.js";
 import { applySeo } from "@core/seo/apply-seo.js";
 

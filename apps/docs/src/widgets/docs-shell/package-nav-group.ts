@@ -1,9 +1,9 @@
-import { effect, signal } from "@echojs-ecosystem/reactivity";
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
+import { NavLink } from "@echojs-ecosystem/framework/router/hyperdom";
 import { appRouter } from "@app/router/router.js";
-import type { AnyPage } from "@echojs-ecosystem/router";
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import { button, div, span } from "@echojs-ecosystem/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/framework/router";
+import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import { button, div, span } from "@echojs-ecosystem/framework/hyperdom";
 import { packageIdFromPathname, type PackageNavGroup } from "@core/content/package-nav.js";
 import { resolveNavIcon, resolvePackageGroupIcon } from "@core/content/resolve-nav-icon.js";
 import { docPageByContentId } from "@app/router/doc-pages.js";

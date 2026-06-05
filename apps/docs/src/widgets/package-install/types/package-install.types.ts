@@ -1,4 +1,4 @@
-import type { Signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from "@echojs-ecosystem/framework/reactivity";
 import type { CommandToken, PackageManager, PackageManagerId } from "@widgets/package-install/constants/install-commands.js";
 
 export type PackageInstallMode =

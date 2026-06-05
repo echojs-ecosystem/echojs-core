@@ -26,6 +26,10 @@
       "types": "./dist/hyperdom.d.ts",
       "default": "./dist/hyperdom.js"
     },
+    "./hyperdom/lifecycle/mount": {
+      "types": "./dist/hyperdom-lifecycle-mount.d.ts",
+      "default": "./dist/hyperdom-lifecycle-mount.js"
+    },
     "./router": {
       "types": "./dist/router.d.ts",
       "default": "./dist/router.js"

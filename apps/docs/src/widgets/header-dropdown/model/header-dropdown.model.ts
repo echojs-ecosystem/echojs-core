@@ -1,6 +1,6 @@
-import { signal } from "@echojs-ecosystem/reactivity";
-import type { Signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/framework/reactivity";
+import type { Signal } from "@echojs-ecosystem/framework/reactivity";
+import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 
 export type HeaderDropdownOption = {
   id: string;

@@ -1,4 +1,4 @@
-import { createRoutes } from "@echojs-ecosystem/router";
+import { createRoutes } from "@echojs-ecosystem/framework/router";
 import { canonicalDocsRouteItems } from "@core/content/nav.js";
 import { getDocPage } from "@app/router/doc-pages.js";
 import { docsShellLayoutPage } from "@pages/doc/docs.layout.js";
