@@ -110,7 +110,7 @@
         "typescript": ">=5",
       },
     },
-    "packages/bench": {
+    "tools/bench": {
       "name": "@echojs-ecosystem/bench",
       "version": "0.0.0",
       "bin": {
@@ -387,7 +387,7 @@
 
     "@echojs-ecosystem/architect": ["@echojs-ecosystem/architect@workspace:packages/architect"],
 
-    "@echojs-ecosystem/bench": ["@echojs-ecosystem/bench@workspace:packages/bench"],
+    "@echojs-ecosystem/bench": ["@echojs-ecosystem/bench@workspace:tools/bench"],
 
     "@echojs-ecosystem/core": ["@echojs-ecosystem/core@workspace:packages/core"],
 

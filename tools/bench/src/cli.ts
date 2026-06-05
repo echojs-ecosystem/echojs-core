@@ -43,7 +43,7 @@ async function writeReportFiles(
 async function main() {
   const cmd = (process.argv[2] ?? "") as Command;
   const root = resolve(getArg("--root") ?? process.cwd());
-  const outDir = resolve(getArg("--outDir") ?? join(root, "bench-results"));
+  const outDir = resolve(getArg("--outDir") ?? join(root, "tools/bench-results"));
 
   if (cmd !== "size" && cmd !== "perf") {
     // eslint-disable-next-line no-console
@@ -57,7 +57,7 @@ async function main() {
         "",
         "Options:",
         "  --root <path>         Workspace root (default: cwd)",
-        "  --outDir <path>       Output directory (default: <root>/bench-results)",
+        "  --outDir <path>       Output directory (default: <root>/tools/bench-results)",
         "  --packages <csv>      Filter packages, e.g. core,reactivity,store",
         "  --entries <csv>       Measure exact entries, e.g. framework/core,framework/router/hyperdom",
         "  --from <src|dist>     Entry source for bundle size (default: src)",

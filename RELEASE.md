@@ -5,8 +5,8 @@
 ## Как это устроено
 
 - Все **публикуемые** пакеты экосистемы в одной **fixed**-группе — если меняется **хотя бы один** пакет, при релизе **одна версия поднимается у всех** (`@echojs-ecosystem/reactivity`, `@echojs-ecosystem/framework`, …).
-- Внутренние пакеты **не версионируются**: `@echojs-ecosystem/bench`, `@echojs-ecosystem/oxc-config`.
-- После `changeset version` скрипт `scripts/sync-package-versions.mjs` обновляет:
+- Внутренние инструменты **не версионируются**: `tools/bench` (`@echojs-ecosystem/bench`), `@echojs-ecosystem/oxc-config`.
+- После `changeset version` скрипт `tools/scripts/sync-package-versions.mjs` обновляет:
   - `apps/docs/src/core/content/ecosystem-version.generated.ts` — версии для документации;
   - `apps/docs/src/core/content/doc-version-history.generated.ts` — архив прошлых версий docs;
   - `apps/docs/package.json` — поле `version`;

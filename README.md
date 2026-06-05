@@ -37,8 +37,6 @@ bun run format
 - **`@echojs-ecosystem/form`** — поля/формы + валидация (Standard Schema) + bindings для Hyperdom.
 - **`@echojs-ecosystem/persist`** — универсальный слой persistence для store/form-like primitives.
 - **`@echojs-ecosystem/store`** — стор (используется в `persist`).
-- **`@echojs-ecosystem/bench`** — CLI/утилиты для performance/size бенчей.
-
 ## Примеры
 
 Ниже примеры “как сейчас принято” использовать публичные API. Для более развёрнутых примеров смотри `apps/example/`.
@@ -145,7 +143,10 @@ packages/
   form/
   persist/
   store/
-  bench/
+tools/
+  bench/              # CLI: bundle size + perf (не публикуется)
+  bench-results/      # отчёты bench/size
+  scripts/            # скрипты монорепо (version sync, coverage, size report)
 ```
 
 ## Ссылки на README внутри пакетов

@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
  * Workspace bundle + dist size report.
- * Usage: node scripts/size-report.mjs
+ * Usage: node tools/scripts/size-report.mjs
  */
 import { spawn } from 'node:child_process'
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-const root = fileURLToPath(new URL('..', import.meta.url))
-const benchCli = join(root, 'packages/bench/dist/cli.js')
+const root = fileURLToPath(new URL('../..', import.meta.url))
+const benchCli = join(root, 'tools/bench/dist/cli.js')
 
 const PACKAGES = [
   'reactivity',
@@ -81,7 +81,7 @@ function* walk(dir) {
 
 const measureAllFramework = async () => {
   const { measureBundle } = await import(
-    join(root, 'packages/bench/dist/index.js')
+    join(root, 'tools/bench/dist/index.js')
   )
   const entry = join(root, 'packages/framework/src/__size__/all.ts')
   return measureBundle({ absEntryPath: entry, format: 'esm', minify: true })
@@ -98,8 +98,8 @@ async function main() {
     process.exit(1)
   }
 
-  const outPackages = join(root, 'bench-results', 'size-packages')
-  const outFramework = join(root, 'bench-results', 'size-framework')
+  const outPackages = join(root, 'tools/bench-results', 'size-packages')
+  const outFramework = join(root, 'tools/bench-results', 'size-framework')
 
   await runBench([
     '--from',
@@ -187,7 +187,7 @@ async function main() {
   }
 
   console.log(
-    '\nReports: bench-results/size-packages/, bench-results/size-framework/\n'
+    '\nReports: tools/bench-results/size-packages/, tools/bench-results/size-framework/\n'
   )
 }
 
