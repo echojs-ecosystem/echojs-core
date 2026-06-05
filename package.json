@@ -10,9 +10,7 @@
   "scripts": {
     "build": "turbo run build",
     "build:packages": "turbo run build --filter='./packages/*'",
-    "build:http": "turbo run build --filter=@echojs-ecosystem/network-http",
     "dev": "turbo run dev",
-    "storybook": "turbo run storybook --filter=@echojs-ecosystem/ui",
     "storybook:build": "turbo run storybook:build --filter=@echojs-ecosystem/ui",
     "check-types": "turbo run check-types",
     "test": "turbo run test",
