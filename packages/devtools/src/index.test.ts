@@ -7,8 +7,8 @@ import {
   getTimelineEvents,
   registerDevtoolsNode,
   setDevtoolsEnabled,
-} from '../index'
-import { createDevtoolsId, resetDevtoolsIds } from '../utils/id'
+} from './index.js'
+import { createDevtoolsId, resetDevtoolsIds } from './utils/id.js'
 
 describe('devtools disable', () => {
   beforeEach(() => {

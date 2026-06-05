@@ -6,7 +6,8 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@echojs-ecosystem/hyperdom": ["../hyperdom/src/index.ts"]
+      "@echojs-ecosystem/hyperdom": ["../hyperdom/src/index.ts"],
+      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"]
     },
     "rootDir": ".."
   },

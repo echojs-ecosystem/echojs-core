@@ -10,16 +10,33 @@
       "@echojs-ecosystem/router": ["../router/src/index.ts"],
       "@echojs-ecosystem/router/hyperdom": ["../router/src/hyperdom/index.ts"],
       "@echojs-ecosystem/hyperdom": ["../hyperdom/src/index.ts"],
+      "@echojs-ecosystem/hyperdom/lifecycle/mount": ["../hyperdom/src/lifecycle/mount.ts"],
       "@echojs-ecosystem/form": ["../form/src/index.ts"],
       "@echojs-ecosystem/persist": ["../persist/src/index.ts"],
       "@echojs-ecosystem/store": ["../store/src/index.ts"],
       "@echojs-ecosystem/ui": ["../ui/src/index.ts"],
+      "@echojs-ecosystem/ui/button": ["../ui/src/components/button/index.ts"],
+      "@echojs-ecosystem/ui/icon-button": ["../ui/src/components/icon-button/index.ts"],
+      "@echojs-ecosystem/ui/input": ["../ui/src/components/input/index.ts"],
+      "@echojs-ecosystem/ui/input-mask": ["../ui/src/components/input-mask/index.ts"],
+      "@echojs-ecosystem/ui/input-otp": ["../ui/src/components/input-otp/index.ts"],
+      "@echojs-ecosystem/ui/input-tags": ["../ui/src/components/input-tags/index.ts"],
+      "@echojs-ecosystem/ui/textarea": ["../ui/src/components/textarea/index.ts"],
+      "@echojs-ecosystem/ui/label": ["../ui/src/components/label/index.ts"],
+      "@echojs-ecosystem/ui/field": ["../ui/src/components/field/index.ts"],
+      "@echojs-ecosystem/ui/checkbox": ["../ui/src/components/checkbox/index.ts"],
+      "@echojs-ecosystem/ui/provider": ["../ui/src/providers/index.ts"],
+      "@echojs-ecosystem/ui/theme": ["../ui/src/theme/index.ts"],
+      "@echojs-ecosystem/ui/core": ["../ui/src/core/index.ts"],
+      "@echojs-ecosystem/ui/utils": ["../ui/src/utils/index.ts"],
+      "@echojs-ecosystem/ui/primitives": ["../ui/src/primitives/index.ts"],
       "@echojs-ecosystem/i18n": ["../i18n/src/index.ts"],
-      "@echojs-ecosystem/query": ["../query/src/index.ts"]
+      "@echojs-ecosystem/query": ["../query/src/index.ts"],
+      "@echojs-ecosystem/devtools": ["../devtools/src/index.ts"],
+      "@echojs-ecosystem/url-state": ["../url-state/src/index.ts"]
     },
     "rootDir": ".."
   },
   "include": ["src/**/*"],
-  "exclude": ["dist", "node_modules"]
+  "exclude": ["dist", "node_modules", "src/__size__/**", "**/*.test.ts", "**/*.test-d.ts"]
 }
-
