@@ -1,4 +1,4 @@
-import { scope, cleanup, effect, signal, computed } from "@echojs/reactivity";
+import { scope, cleanup, effect, signal, computed } from "@echojs-ecosystem/reactivity";
 import { isFunction, isObject } from "./internals/utils";
 import type {
   JSXElement,

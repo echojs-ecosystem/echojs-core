@@ -1,4 +1,4 @@
-import { createQueryProvider } from "@echojs/query";
+import { createQueryProvider } from "@echojs-ecosystem/query";
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {

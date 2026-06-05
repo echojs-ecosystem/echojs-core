@@ -1,16 +1,16 @@
 ---
 title: Installation
-description: Install @echojs/i18n and register createI18nProvider.
-package: "@echojs/i18n"
+description: Install @echojs-ecosystem/i18n and register createI18nProvider.
+package: "@echojs-ecosystem/i18n"
 ---
 
 # Installation
 
 ## Package managers
 
-:::install @echojs/i18n
+:::install @echojs-ecosystem/i18n
 
-:::install @echojs/reactivity
+:::install @echojs-ecosystem/reactivity
 
 ## Locale files
 
@@ -27,7 +27,7 @@ Import eager locales in the provider module; lazy locales use dynamic `import()`
 ## Provider (`apps/docs`)
 
 ```ts
-import { createI18nProvider } from "@echojs/i18n";
+import { createI18nProvider } from "@echojs-ecosystem/i18n";
 import en from "../../../public/locales/en.json";
 import ru from "../../../public/locales/ru.json";
 
@@ -54,8 +54,8 @@ createEchoApp({ strictContextChecks: true })
 ```json
 {
   "dependencies": {
-    "@echojs/i18n": "workspace:*",
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/i18n": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*"
   }
 }
 ```

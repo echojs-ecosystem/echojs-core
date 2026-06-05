@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: createStore, subscriptions, extensions, actions, derived stores, and HyperDOM integration.
-package: "@echojs/store"
+package: "@echojs-ecosystem/store"
 ---
 
 # Usage
@@ -9,7 +9,7 @@ package: "@echojs/store"
 ## `createStore`
 
 ```ts
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 const counter = createStore(0, { name: "counter" });
 
@@ -81,7 +81,7 @@ Extensions receive the store instance and return an object merged onto it (typed
 Preferred pattern for named mutations:
 
 ```ts
-import { createStore, withActions } from "@echojs/store";
+import { createStore, withActions } from "@echojs-ecosystem/store";
 
 export const themeStore = createStore("dark" as "dark" | "light", { name: "theme" }).extend(
   withActions({
@@ -99,7 +99,7 @@ Action factories are `(store) => (...args) => void` — the outer function runs 
 ## `select` (derived readonly)
 
 ```ts
-import { createStore, select } from "@echojs/store";
+import { createStore, select } from "@echojs-ecosystem/store";
 
 const userStore = createStore({ id: "1", name: "Vova" });
 const userName = select(userStore, (user) => user.name, { name: "user-name" });
@@ -114,7 +114,7 @@ Recomputes when the source store changes. Supports `equals` in options like `cre
 ## `combine`
 
 ```ts
-import { combine, createStore } from "@echojs/store";
+import { combine, createStore } from "@echojs-ecosystem/store";
 
 const firstName = createStore("Vova");
 const lastName = createStore("Ivanov");
@@ -137,7 +137,7 @@ Sources can be `Store` or `ReadonlyStore`. Result is **readonly** — mutate sou
 Returns a separate **ReadonlyStore** that mirrors changes but has no `set` / `update` / `reset`.
 
 ```ts
-import { createStore, readonly } from "@echojs/store";
+import { createStore, readonly } from "@echojs-ecosystem/store";
 
 const counter = createStore(0);
 const view = readonly(counter);
@@ -159,10 +159,10 @@ Use `name` in `createStore` options for readable logs.
 
 ## `batch`
 
-Re-export from `@echojs/reactivity` — group multiple store updates into one notification wave:
+Re-export from `@echojs-ecosystem/reactivity` — group multiple store updates into one notification wave:
 
 ```ts
-import { batch } from "@echojs/store";
+import { batch } from "@echojs-ecosystem/store";
 
 batch(() => {
   counter.set(1);
@@ -182,7 +182,7 @@ export const authTokenStore = createStore<string | null>(null, { name: "auth-tok
 **View** reads via accessor or signal:
 
 ```ts
-import { effect } from "@echojs/reactivity";
+import { effect } from "@echojs-ecosystem/reactivity";
 
 effect(() => {
   document.title = `Count: ${counterStore.value()}`;
@@ -194,12 +194,12 @@ const count = () => counterStore.value();
 
 Example docs state page: `apps/example/src/pages/docs/state/state.model.ts` — `themeStore`, `counterStore`, `counterLabel = select(...)`.
 
-## Persistence (`@echojs/persist`)
+## Persistence (`@echojs-ecosystem/persist`)
 
 Store does not include storage. Extend with persist adapters:
 
 ```ts
-import { withLocalStorage, withCookie } from "@echojs/persist";
+import { withLocalStorage, withCookie } from "@echojs-ecosystem/persist";
 
 const token = createStore<string | null>(null).extend(
   withCookie({ key: "echojs-access-token", path: "/", sameSite: "lax" }),

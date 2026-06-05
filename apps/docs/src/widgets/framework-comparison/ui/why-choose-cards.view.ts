@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, p, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, p, span } from "@echojs-ecosystem/hyperdom";
 import { whyChooseEchoCards } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 

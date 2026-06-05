@@ -1,4 +1,4 @@
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 
 /** Allows rendering a component as a different intrinsic element. */
 export type PolymorphicProps<Tag extends string = "div"> = {

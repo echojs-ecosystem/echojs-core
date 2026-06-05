@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Public API for @echojs/hyperdom — render, h, DSL, controls, models, views.
-package: "@echojs/hyperdom"
+description: Public API for @echojs-ecosystem/hyperdom — render, h, DSL, controls, models, views.
+package: "@echojs-ecosystem/hyperdom"
 ---
 
 # API Reference
 
-## Package entry `@echojs/hyperdom`
+## Package entry `@echojs-ecosystem/hyperdom`
 
 ```ts
 import {
@@ -27,15 +27,15 @@ import {
   aria,
   data,
   // DSL tags: div, button, span, section, input, ...
-} from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
 
-import type { Child, Props, Component } from "@echojs/hyperdom";
+import type { Child, Props, Component } from "@echojs-ecosystem/hyperdom";
 ```
 
 Subpath:
 
 ```ts
-import { mount } from "@echojs/hyperdom/lifecycle/mount";
+import { mount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
 ```
 
 (`mount` from main entry = app `render()` helper in `mount.ts`; lifecycle `mount` = on-mount child hook.)
@@ -147,13 +147,13 @@ Includes:
 - `ref?: (el: E | null) => void`
 - Modifiers `.propName`, `^attrName`
 
-## `mount` (from `@echojs/hyperdom` index)
+## `mount` (from `@echojs-ecosystem/hyperdom` index)
 
 **App mount helper** — same as `render` pattern: `mount(view, { container?, className? })` → `{ node, dispose }`.
 
 See `mount.ts` for standalone demos.
 
-## `mount` (from `@echojs/hyperdom/lifecycle/mount`)
+## `mount` (from `@echojs-ecosystem/hyperdom/lifecycle/mount`)
 
 Lifecycle child: `mount(() => { …; return cleanup? })` inserted in the tree; runs after DOM insert.
 
@@ -169,7 +169,7 @@ Lifecycle child: `mount(() => { …; return cleanup? })` inserted in the tree; r
 
 - Virtual DOM / reconciliation
 - JSX compiler (planned separately)
-- Router (`@echojs/router/hyperdom`)
+- Router (`@echojs-ecosystem/router/hyperdom`)
 
 ## Related
 

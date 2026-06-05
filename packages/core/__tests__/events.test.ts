@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { scope, signal, computed } from "@echojs/reactivity";
+import { scope, signal, computed } from "@echojs-ecosystem/reactivity";
 import { setEvent } from "../src/events";
 import { insert } from "../src/insert";
 import { createModel, createView, createComponent } from "../src/component";

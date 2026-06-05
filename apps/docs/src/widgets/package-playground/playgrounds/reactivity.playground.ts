@@ -1,5 +1,5 @@
-import { batch, computed, effect, signal } from "@echojs/reactivity";
-import { button, div, input, p, span } from "@echojs/hyperdom";
+import { batch, computed, effect, signal } from "@echojs-ecosystem/reactivity";
+import { button, div, input, p, span } from "@echojs-ecosystem/hyperdom";
 import type { PackagePlaygroundDef, PlaygroundInstance } from "../types.js";
 import { pg } from "../playground-ui.js";
 

@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: Public exports from @echojs/store.
-package: "@echojs/store"
+description: Public exports from @echojs-ecosystem/store.
+package: "@echojs-ecosystem/store"
 ---
 
 # API Reference
@@ -46,7 +46,7 @@ Same `name` and `equals` shape as `createStore`.
 
 | Export | Description |
 | --- | --- |
-| `batch(fn)` | Re-export from `@echojs/reactivity` |
+| `batch(fn)` | Re-export from `@echojs-ecosystem/reactivity` |
 
 ## `Store<State>` instance
 
@@ -100,9 +100,9 @@ Each key becomes a method on the extended store with inferred parameter types fr
 
 | Concern | Package |
 | --- | --- |
-| localStorage / session / cookie / IndexedDB | `@echojs/persist` |
-| URL query sync | `@echojs/url-state` |
-| Server cache / fetch | `@echojs/query` |
+| localStorage / session / cookie / IndexedDB | `@echojs-ecosystem/persist` |
+| URL query sync | `@echojs-ecosystem/url-state` |
+| Server cache / fetch | `@echojs-ecosystem/query` |
 
 ## Related
 

@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { Sponsors } from "@entities/sponsors/index.js";
 import { applySeo } from "@core/seo/apply-seo.js";
 

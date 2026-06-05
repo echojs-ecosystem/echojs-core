@@ -1,5 +1,5 @@
-import { Show, createView, type Child } from "@echojs/hyperdom";
-import { button, code, div, h4, input, label, p, pre, section, span, strong } from "@echojs/hyperdom";
+import { Show, createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { button, code, div, h4, input, label, p, pre, section, span, strong } from "@echojs-ecosystem/hyperdom";
 
 import { i18n } from "@app/providers/i18n.js";
 import { cardHintKey, cardTitleKey, type QueryPlaygroundCardBase } from "@app/providers/i18n.js";

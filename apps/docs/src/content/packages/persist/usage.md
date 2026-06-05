@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: withLocalStorage, hydrate/save, cookie/IndexedDB, TTL, migrations, and auth patterns.
-package: "@echojs/persist"
+package: "@echojs-ecosystem/persist"
 ---
 
 # Usage
@@ -9,8 +9,8 @@ package: "@echojs/persist"
 ## Basic `.extend()`
 
 ```ts
-import { createStore } from "@echojs/store";
-import { withLocalStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 
 export const themeStore = createStore("dark", { name: "theme" }).extend(
   withLocalStorage({
@@ -52,7 +52,7 @@ await draft.persist.hydrate();
 ## Session & cookie
 
 ```ts
-import { withSessionStorage, withCookie } from "@echojs/persist";
+import { withSessionStorage, withCookie } from "@echojs-ecosystem/persist";
 
 const filters = createStore({ search: "", category: null }).extend(
   withSessionStorage({ key: "catalog-filters", version: 1 }),
@@ -73,7 +73,7 @@ const token = createStore<string | null>(null).extend(
 ## IndexedDB
 
 ```ts
-import { withIndexedDB } from "@echojs/persist";
+import { withIndexedDB } from "@echojs-ecosystem/persist";
 
 const cache = createStore<Record<string, Product>>({}).extend(
   withIndexedDB({
@@ -167,17 +167,17 @@ try {
 ## Without `.extend()` on store
 
 ```ts
-import { persist, withLocalStorage } from "@echojs/persist";
+import { persist, withLocalStorage } from "@echojs-ecosystem/persist";
 
 persist(fieldLike, withLocalStorage({ key: "profile:name" }));
 ```
 
-`persistField` / `persistFieldArray` are aliases for form-like targets (future `@echojs/form`).
+`persistField` / `persistFieldArray` are aliases for form-like targets (future `@echojs-ecosystem/form`).
 
 ## Custom adapter
 
 ```ts
-import { withStorage } from "@echojs/persist";
+import { withStorage } from "@echojs-ecosystem/persist";
 
 const adapter = {
   kind: "custom",

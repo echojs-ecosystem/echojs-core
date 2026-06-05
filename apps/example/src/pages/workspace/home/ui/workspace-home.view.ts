@@ -12,7 +12,7 @@ import { slowPage } from "@pages/workspace/slow/workspace-slow.page.js";
 import { userPage } from "@pages/workspace/users/user-detail.page.js";
 import { usersListPage } from "@pages/workspace/users/users-list.page.js";
 import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.page.js";
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import {
   button,
   div,

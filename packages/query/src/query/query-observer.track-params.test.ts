@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { signal } from '@echojs/reactivity'
+import { signal } from '@echojs-ecosystem/reactivity'
 
 import { createTestClient } from '../test-utils'
 import { createQuery } from './create-query'

@@ -1,4 +1,4 @@
-import { h, type Child } from "@echojs/hyperdom";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 
 import { createUIComponent } from "../../core/component";
 import { composeEventHandlers } from "../../utils/compose-event-handlers";

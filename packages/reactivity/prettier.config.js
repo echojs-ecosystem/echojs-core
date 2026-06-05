@@ -1,1 +1,1 @@
-export { default } from "@echojs/oxc-config/prettier";
+export { default } from "@echojs-ecosystem/oxc-config/prettier";

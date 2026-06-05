@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: Public exports from @echojs/url-state.
-package: "@echojs/url-state"
+description: Public exports from @echojs-ecosystem/url-state.
+package: "@echojs-ecosystem/url-state"
 ---
 
 # API Reference

@@ -15,7 +15,7 @@ export const getDefaultQueryClient = (): QueryClient => {
   if (!defaultClient) {
     if (!pendingFactory) {
       throw new Error(
-        '@echojs/query: no default QueryClient. Call createQueryClient() first or pass { client } to .with().',
+        '@echojs-ecosystem/query: no default QueryClient. Call createQueryClient() first or pass { client } to .with().',
       )
     }
     defaultClient = pendingFactory()

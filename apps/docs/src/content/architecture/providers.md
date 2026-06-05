@@ -11,7 +11,7 @@ Providers are EchoJS’s composition root: they run **once** at bootstrap and su
 ## Registration
 
 ```ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 
 export const bootstrap = () =>
   createEchoApp({ strictContextChecks: true })
@@ -27,7 +27,7 @@ Order matters when a provider’s `setup()` expects another to be registered fir
 
 ## Provider shape
 
-From `@echojs/framework`:
+From `@echojs-ecosystem/framework`:
 
 | Hook | Purpose |
 | --- | --- |
@@ -35,7 +35,7 @@ From `@echojs/framework`:
 | `resolveRoot()` | Innermost root view (router outlet) |
 | `wrapRoot(inner)` | Optional outer wrappers (theme portal, devtools) |
 
-Router uses `createRouterProvider(router)` from `@echojs/router/hyperdom`, which:
+Router uses `createRouterProvider(router)` from `@echojs-ecosystem/router/hyperdom`, which:
 
 1. `app.provide(ROUTER_KEY, router)`
 2. `router.start()` on resolve
@@ -47,15 +47,15 @@ The docs app uses a **custom** `routerProvider` to pin sidebar/header outside re
 
 | Provider | Package | Role |
 | --- | --- | --- |
-| `createRouterProvider` | `@echojs/router/hyperdom` | SPA navigation, `NavLink` |
-| `createQueryProvider` | `@echojs/query` | Query client defaults |
-| UI / theme | `@echojs/ui` | Design system context |
-| i18n | `@echojs/i18n` | Messages, locale switching |
+| `createRouterProvider` | `@echojs-ecosystem/router/hyperdom` | SPA navigation, `NavLink` |
+| `createQueryProvider` | `@echojs-ecosystem/query` | Query client defaults |
+| UI / theme | `@echojs-ecosystem/ui` | Design system context |
+| i18n | `@echojs-ecosystem/i18n` | Messages, locale switching |
 
 ### Query example (`apps/docs`)
 
 ```ts
-import { createQueryProvider } from "@echojs/query";
+import { createQueryProvider } from "@echojs-ecosystem/query";
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {

@@ -11,7 +11,7 @@ export const warnDev = (message: string): void => {
     return;
   }
   if (typeof console !== "undefined" && typeof console.warn === "function") {
-    console.warn(`[@echojs/persist] ${message}`);
+    console.warn(`[@echojs-ecosystem/persist] ${message}`);
   }
 };
 

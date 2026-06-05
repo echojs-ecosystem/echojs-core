@@ -1,7 +1,7 @@
 ---
 title: Installation
-description: Install @echojs/router and wire it through @echojs/framework or HyperDOM.
-package: "@echojs/router"
+description: Install @echojs-ecosystem/router and wire it through @echojs-ecosystem/framework or HyperDOM.
+package: "@echojs-ecosystem/router"
 ---
 
 # Installation
@@ -10,34 +10,34 @@ The router is split into a **core** package and **HyperDOM bindings**. EchoJS ap
 
 ## Package managers
 
-:::install @echojs/router
+:::install @echojs-ecosystem/router
 
 Typical peers (install if you build UI in HyperDOM):
 
-:::install @echojs/hyperdom
+:::install @echojs-ecosystem/hyperdom
 
-:::install @echojs/reactivity
+:::install @echojs-ecosystem/reactivity
 
-:::install @echojs/framework
+:::install @echojs-ecosystem/framework
 
 ## Imports
 
 | Use case | Import |
 | --- | --- |
-| Route definitions | `@echojs/router` — `createRouteView`, `createRoutes`, … |
-| App router instance | `@echojs/router/hyperdom` — `createRouter`, `NavLink`, `createRouterProvider` |
-| Optional URL state | `@echojs/url-state` (separate package) |
+| Route definitions | `@echojs-ecosystem/router` — `createRouteView`, `createRoutes`, … |
+| App router instance | `@echojs-ecosystem/router/hyperdom` — `createRouter`, `NavLink`, `createRouterProvider` |
+| Optional URL state | `@echojs-ecosystem/url-state` (separate package) |
 
 ```ts
-import { createRouteView, createRoutes } from "@echojs/router";
-import { createRouter, NavLink, createRouterProvider } from "@echojs/router/hyperdom";
+import { createRouteView, createRoutes } from "@echojs-ecosystem/router";
+import { createRouter, NavLink, createRouterProvider } from "@echojs-ecosystem/router/hyperdom";
 ```
 
 ## Framework wiring (`apps/docs` pattern)
 
 ```ts
 // entities/__routes__/router.ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 import { appRoutes } from "./app.routes.js";
 
 export const appRouter = createRouter({
@@ -49,7 +49,7 @@ export const appRouter = createRouter({
 });
 
 // core/providers/router.ts
-import { createRouterProvider } from "@echojs/router/hyperdom";
+import { createRouterProvider } from "@echojs-ecosystem/router/hyperdom";
 
 export const routerProvider = createRouterProvider(appRouter);
 ```
@@ -65,9 +65,9 @@ createEchoApp({ strictContextChecks: true })
 ```json
 {
   "dependencies": {
-    "@echojs/router": "workspace:*",
-    "@echojs/hyperdom": "workspace:*",
-    "@echojs/framework": "workspace:*"
+    "@echojs-ecosystem/router": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/framework": "workspace:*"
   }
 }
 ```

@@ -16,59 +16,59 @@ export default defineConfig({
       { find: "@core", replacement: resolve(src, "core") },
       { find: "@content", replacement: resolve(src, "content") },
       {
-        find: /^@echojs\/reactivity$/,
+        find: /^@echojs-ecosystem\/reactivity$/,
         replacement: resolve(packages, "reactivity/src/index.ts"),
       },
       {
-        find: /^@echojs\/hyperdom$/,
+        find: /^@echojs-ecosystem\/hyperdom$/,
         replacement: resolve(packages, "hyperdom/src/index.ts"),
       },
       {
-        find: /^@echojs\/hyperdom\/lifecycle\/mount$/,
+        find: /^@echojs-ecosystem\/hyperdom\/lifecycle\/mount$/,
         replacement: resolve(packages, "hyperdom/src/lifecycle/mount.ts"),
       },
       {
-        find: /^@echojs\/hyperdom\/lifecycle\/reactive$/,
+        find: /^@echojs-ecosystem\/hyperdom\/lifecycle\/reactive$/,
         replacement: resolve(packages, "hyperdom/src/lifecycle/reactive.ts"),
       },
       {
-        find: /^@echojs\/router\/hyperdom$/,
+        find: /^@echojs-ecosystem\/router\/hyperdom$/,
         replacement: resolve(packages, "router/src/hyperdom/index.ts"),
       },
       {
-        find: /^@echojs\/router$/,
+        find: /^@echojs-ecosystem\/router$/,
         replacement: resolve(packages, "router/src/index.ts"),
       },
       {
-        find: /^@echojs\/store$/,
+        find: /^@echojs-ecosystem\/store$/,
         replacement: resolve(packages, "store/src/index.ts"),
       },
       {
-        find: /^@echojs\/persist$/,
+        find: /^@echojs-ecosystem\/persist$/,
         replacement: resolve(packages, "persist/src/index.ts"),
       },
       {
-        find: /^@echojs\/url-state$/,
+        find: /^@echojs-ecosystem\/url-state$/,
         replacement: resolve(packages, "url-state/src/index.ts"),
       },
       {
-        find: /^@echojs\/query$/,
+        find: /^@echojs-ecosystem\/query$/,
         replacement: resolve(packages, "query/src/index.ts"),
       },
       {
-        find: /^@echojs\/i18n$/,
+        find: /^@echojs-ecosystem\/i18n$/,
         replacement: resolve(packages, "i18n/src/index.ts"),
       },
       {
-        find: /^@echojs\/framework\/app$/,
+        find: /^@echojs-ecosystem\/framework\/app$/,
         replacement: resolve(packages, "framework/src/app/index.ts"),
       },
       {
-        find: /^@echojs\/framework$/,
+        find: /^@echojs-ecosystem\/framework$/,
         replacement: resolve(packages, "framework/src/index.ts"),
       },
       {
-        find: /^@echojs\/ui$/,
+        find: /^@echojs-ecosystem\/ui$/,
         replacement: resolve(packages, "ui/src/index.ts"),
       },
     ],
@@ -79,15 +79,15 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
-      "@echojs/reactivity",
-      "@echojs/hyperdom",
-      "@echojs/router",
-      "@echojs/store",
-      "@echojs/url-state",
-      "@echojs/query",
-      "@echojs/i18n",
-      "@echojs/framework",
-      "@echojs/ui",
+      "@echojs-ecosystem/reactivity",
+      "@echojs-ecosystem/hyperdom",
+      "@echojs-ecosystem/router",
+      "@echojs-ecosystem/store",
+      "@echojs-ecosystem/url-state",
+      "@echojs-ecosystem/query",
+      "@echojs-ecosystem/i18n",
+      "@echojs-ecosystem/framework",
+      "@echojs-ecosystem/ui",
     ],
   },
 });

@@ -1,6 +1,6 @@
-import { effect, signal } from "@echojs/reactivity";
-import { createStore, select, withActions } from "@echojs/store";
-import { button, div, p } from "@echojs/hyperdom";
+import { effect, signal } from "@echojs-ecosystem/reactivity";
+import { createStore, select, withActions } from "@echojs-ecosystem/store";
+import { button, div, p } from "@echojs-ecosystem/hyperdom";
 import type { PackagePlaygroundDef, PlaygroundInstance } from "../types.js";
 import { pg } from "../playground-ui.js";
 

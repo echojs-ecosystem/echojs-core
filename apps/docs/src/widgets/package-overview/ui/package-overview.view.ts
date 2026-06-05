@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
-import { div, h2, h3, p, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { div, h2, h3, p, span } from "@echojs-ecosystem/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import {
   ecosystemPackages,
@@ -103,7 +103,7 @@ const OverviewBody = (data: PackageOverviewData): Child => {
       ? div(null, [
           h3({ class: ui.sectionTitle() }, "Often paired with"),
           div({ class: ui.pillRow() }, [
-            ...data.powers.map((pkg) => span({ class: ui.pill() }, `@echojs/${pkg}`)),
+            ...data.powers.map((pkg) => span({ class: ui.pill() }, `@echojs-ecosystem/${pkg}`)),
           ]),
         ])
       : null,

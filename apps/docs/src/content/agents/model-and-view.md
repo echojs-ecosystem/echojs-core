@@ -10,7 +10,7 @@ description: How createModel and createView work together in apps/docs.
 | | Model | View |
 |---|--------|------|
 | **Owns** | State, effects, queries, actions | DOM structure, styles, composition |
-| **Imports** | `@echojs/reactivity`, `@echojs/query`, providers | `@echojs/hyperdom`, `@echojs/router/hyperdom`, style modules |
+| **Imports** | `@echojs-ecosystem/reactivity`, `@echojs-ecosystem/query`, providers | `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/router/hyperdom`, style modules |
 | **Exports** | `createXModel`, `XVM` type | `XView = createView(...)` |
 
 ## Minimal widget
@@ -18,7 +18,7 @@ description: How createModel and createView work together in apps/docs.
 **`model/theme-toggle.model.ts`**
 
 ```typescript
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { $themeMode, toggleTheme } from "@core/providers/index.js";
 
 export type ThemeToggleVM = {

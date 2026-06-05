@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/form
+# @echojs-ecosystem/form
 
 **Signal-native forms — fields, validation, and Hyperdom bindings.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/form)](https://www.npmjs.com/package/@echojs/form)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/form)](https://www.npmjs.com/package/@echojs-ecosystem/form)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/guides/forms)
 
 </div>
@@ -18,21 +18,21 @@ Framework-agnostic form primitives for EchoJS. **Fields are reactive objects** w
 - **`createField`** — single value with validation & meta (touched, errors, dirty)
 - **`createFieldArray`** — dynamic lists of fields
 - **`createForm`** — grouped fields with submit & schema validation
-- **`bindField`** — Hyperdom binding for `@echojs/ui` inputs
-- **Persistence-ready** — extend fields with `@echojs/persist`
+- **`bindField`** — Hyperdom binding for `@echojs-ecosystem/ui` inputs
+- **Persistence-ready** — extend fields with `@echojs-ecosystem/persist`
 
 ## Install
 
 ```bash
-npm install @echojs/form @echojs/reactivity
+npm install @echojs-ecosystem/form @echojs-ecosystem/reactivity
 # optional UI bindings
-npm install @echojs/hyperdom @echojs/ui
+npm install @echojs-ecosystem/hyperdom @echojs-ecosystem/ui
 ```
 
 ## Quick start
 
 ```ts
-import { createField, createForm } from "@echojs/form";
+import { createField, createForm } from "@echojs-ecosystem/form";
 import { z } from "zod";
 
 const schema = z.object({
@@ -57,7 +57,7 @@ await loginForm.submit();
 ### Hyperdom + UI
 
 ```ts
-import { bindField } from "@echojs/form";
+import { bindField } from "@echojs-ecosystem/form";
 
 bindField(loginForm.fields.email, { variant: "email" });
 ```
@@ -77,9 +77,9 @@ bindField(loginForm.fields.email, { variant: "email" });
 
 | Package | Role |
 |---------|------|
-| [`@echojs/persist`](https://www.npmjs.com/package/@echojs/persist) | Save field/form state to storage |
-| [`@echojs/ui`](https://www.npmjs.com/package/@echojs/ui) | Accessible inputs via `bindField` |
-| [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom) | View layer |
+| [`@echojs-ecosystem/persist`](https://www.npmjs.com/package/@echojs-ecosystem/persist) | Save field/form state to storage |
+| [`@echojs-ecosystem/ui`](https://www.npmjs.com/package/@echojs-ecosystem/ui) | Accessible inputs via `bindField` |
+| [`@echojs-ecosystem/hyperdom`](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom) | View layer |
 
 ## Documentation
 

@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
-import { div, h1, p } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { div, h1, p } from "@echojs-ecosystem/hyperdom";
 import { homePage } from "@app/router/page-links.js";
 import { routerStateStyles } from "@entities/router-states/ui/router-states.view.styles.js";
 

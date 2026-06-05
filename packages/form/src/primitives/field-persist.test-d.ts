@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, it } from "vitest";
-import { withMemoryStorage } from "@echojs/persist";
+import { withMemoryStorage } from "@echojs-ecosystem/persist";
 
 import { createField } from "./field";
 import { createFieldArray } from "./fieldArray";

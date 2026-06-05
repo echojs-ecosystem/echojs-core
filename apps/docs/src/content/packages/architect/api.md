@@ -1,7 +1,7 @@
 ---
 title: API
-description: Programmatic API for @echojs/architect.
-package: "@echojs/architect"
+description: Programmatic API for @echojs-ecosystem/architect.
+package: "@echojs-ecosystem/architect"
 ---
 
 # API
@@ -9,7 +9,7 @@ package: "@echojs/architect"
 ## Config
 
 ```ts
-import { defineConfig, abstraction } from "@echojs/architect";
+import { defineConfig, abstraction } from "@echojs-ecosystem/architect";
 
 export default defineConfig({
   baseUrl: "src",
@@ -30,7 +30,7 @@ import {
   requiredChildren,
   off,
   warn,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 ```
 
 ### `dependenciesDirection(order, options?)`
@@ -53,7 +53,7 @@ Forbids imports between sibling instances under the same layer abstraction.
 ## Lint
 
 ```ts
-import { lint } from "@echojs/architect";
+import { lint } from "@echojs-ecosystem/architect";
 
 const result = await lint({
   configPath: "./architect.config.ts",
@@ -69,7 +69,7 @@ import {
   parseAbstractionInstance,
   parseDependenciesMap,
   getFlattenFiles,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 ```
 
 Use when building custom tooling on top of the same VFS + dependency graph.

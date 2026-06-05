@@ -1,5 +1,5 @@
-import { h } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { getRouteState } from "../core/route";
 import type { Route } from "../core/types";
 import type { QueryRecord } from "../core/query";

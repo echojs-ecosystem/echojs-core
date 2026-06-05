@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Public exports from @echojs/framework/app.
-package: "@echojs/framework"
+description: Public exports from @echojs-ecosystem/framework/app.
+package: "@echojs-ecosystem/framework"
 ---
 
 # API Reference
 
-## `@echojs/framework/app`
+## `@echojs-ecosystem/framework/app`
 
 | Export | Description |
 | --- | --- |
@@ -63,7 +63,7 @@ Returns `EchoProviderWithInstance<TInstance>` with `.instance`.
 
 `EchoApp`, `EchoAppOptions`, `EchoBodyAttributes`, `EchoProvider`, `EchoProvideKey`, `EchoRootSource`, `EchoRouterSource`, `EchoUseInput`, `EchoPlugin`, `CreateProviderOptions`, `EchoProviderWithInstance`, `CreatePluginOptions`, `EchoPluginWithInstance`
 
-## Root barrel `@echojs/framework`
+## Root barrel `@echojs-ecosystem/framework`
 
 Re-exports sub-packages for convenience (size-sensitive apps may import narrowly):
 
@@ -74,7 +74,7 @@ Re-exports sub-packages for convenience (size-sensitive apps may import narrowly
 | `router` / `router-hyperdom` | Router |
 | `query`, `store`, `persist`, `url-state`, `ui`, `form` | Ecosystem packages |
 
-Prefer **`@echojs/framework/app`** in bootstrap; import feature packages directly in features.
+Prefer **`@echojs-ecosystem/framework/app`** in bootstrap; import feature packages directly in features.
 
 ## Related
 

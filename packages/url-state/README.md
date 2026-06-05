@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/url-state
+# @echojs-ecosystem/url-state
 
 **Type-safe URL search params — nuqs-style, signal-native.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/url-state)](https://www.npmjs.com/package/@echojs/url-state)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/url-state)](https://www.npmjs.com/package/@echojs-ecosystem/url-state)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/url-state)
 
 </div>
@@ -18,14 +18,14 @@ Manage **query string state** with typed parsers, defaults, and router integrati
 - **`createQueryParam`** — single typed param
 - **`createQueryParams`** — object of params with batch updates
 - **Rich parsers** — string, int, float, bool, literal, array, JSON + Standard Schema
-- **Router adapter** — auto-sync with `@echojs/router/hyperdom`
+- **Router adapter** — auto-sync with `@echojs-ecosystem/router/hyperdom`
 - **History control** — `push` / `replace` per update
 - **`urlKeys`** — remap param names in the URL
 
 ## Install
 
 ```bash
-npm install @echojs/url-state @echojs/reactivity
+npm install @echojs-ecosystem/url-state @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
@@ -36,7 +36,7 @@ import {
   parseAsInteger,
   parseAsString,
   parseAsBoolean,
-} from "@echojs/url-state";
+} from "@echojs-ecosystem/url-state";
 
 const filters = createQueryParams({
   q: parseAsString.withDefault(""),
@@ -53,7 +53,7 @@ filters.reset();
 ### With router
 
 ```ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 
 export const appRouter = createRouter({ routes });
 
@@ -78,8 +78,8 @@ export const filters = appRouter.createQueryParams({
 
 | Package | Role |
 |---------|------|
-| [`@echojs/router`](https://www.npmjs.com/package/@echojs/router) | SPA URL sync |
-| [`@echojs/reactivity`](https://www.npmjs.com/package/@echojs/reactivity) | Signal-backed param state |
+| [`@echojs-ecosystem/router`](https://www.npmjs.com/package/@echojs-ecosystem/router) | SPA URL sync |
+| [`@echojs-ecosystem/reactivity`](https://www.npmjs.com/package/@echojs-ecosystem/reactivity) | Signal-backed param state |
 
 ## Documentation
 

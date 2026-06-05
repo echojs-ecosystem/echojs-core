@@ -1,4 +1,4 @@
-import { h, type Child } from "@echojs/hyperdom";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 
 import type { ButtonSize } from "./button.types";
 

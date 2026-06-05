@@ -1,6 +1,6 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import type { Child } from "@echojs/hyperdom";
-import { article, button, div, footer, h1, header, nav, p } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { article, button, div, footer, h1, header, nav, p } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { authSignupPage } from "@pages/auth/signup/auth-signup.page.js";

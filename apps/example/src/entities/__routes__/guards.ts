@@ -1,4 +1,4 @@
-import { guardRoute } from "@echojs/router";
+import { guardRoute } from "@echojs-ecosystem/router";
 import { $isLoggedIn } from "@entities/session/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { accountPage } from "@pages/docs/account/account.page.js";

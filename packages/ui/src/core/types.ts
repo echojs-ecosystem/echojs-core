@@ -1,4 +1,4 @@
-import type { Child, Props } from "@echojs/hyperdom";
+import type { Child, Props } from "@echojs-ecosystem/hyperdom";
 import type { ClassValue } from "../utils/cn";
 
 /** Base props supported by all UI components. */

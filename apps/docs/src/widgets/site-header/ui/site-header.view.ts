@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
-import { button, div, h, header, nav as navEl, p } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { button, div, h, header, nav as navEl, p } from "@echojs-ecosystem/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
 import { headerIconBtnStyles } from "@widgets/site-header/ui/site-header.view.styles.js";

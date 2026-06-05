@@ -1,4 +1,4 @@
-import { bindField } from "@echojs/form";
+import { bindField } from "@echojs-ecosystem/form";
 import {
   List,
   button,
@@ -16,8 +16,8 @@ import {
   select,
   span,
   textarea,
-} from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import type { Signal } from "@echojs-ecosystem/reactivity";
 import {
   ROLE_OPTIONS,

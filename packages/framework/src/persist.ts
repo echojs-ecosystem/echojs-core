@@ -1,2 +1,2 @@
-export * from "@echojs/persist";
+export * from "@echojs-ecosystem/persist";
 

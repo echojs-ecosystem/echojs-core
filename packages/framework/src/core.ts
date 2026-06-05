@@ -1,2 +1,2 @@
-export * from "@echojs/core";
+export * from "@echojs-ecosystem/core";
 

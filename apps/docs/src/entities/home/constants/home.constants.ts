@@ -1,6 +1,6 @@
 import type { CodeTab } from "@entities/home/types/home.types.js";
 
-export const bootstrapExample = `import { createEchoApp } from "@echojs/framework/app"
+export const bootstrapExample = `import { createEchoApp } from "@echojs-ecosystem/framework/app"
 import { queryProvider } from "./providers/query"
 import { uiProvider } from "./providers/ui"
 import { i18nProvider } from "./providers/i18n"
@@ -13,7 +13,7 @@ createEchoApp({ strictContextChecks: true })
   .use(routerProvider)
   .mount("#app")`;
 
-export const queryExample = `import { createQuery } from "@echojs/query"
+export const queryExample = `import { createQuery } from "@echojs-ecosystem/query"
 
 export const usersQuery = createQuery({
   name: "users",
@@ -24,8 +24,8 @@ export const usersQuery = createQuery({
 // In a page model — reactive cache, no hooks
 const users = usersQuery.with()`;
 
-export const modelViewExample = `import { signal } from "@echojs/reactivity"
-import { createModel, createView, button } from "@echojs/hyperdom"
+export const modelViewExample = `import { signal } from "@echojs-ecosystem/reactivity"
+import { createModel, createView, button } from "@echojs-ecosystem/hyperdom"
 
 export const createCounterModel = createModel((): CounterVM => {
   const $count = signal(0)
@@ -40,7 +40,7 @@ export const CounterView = createView((vm: CounterVM): Child =>
   "CounterView",
 )`;
 
-export const uiExample = `import { Button } from "@echojs/ui"
+export const uiExample = `import { Button } from "@echojs-ecosystem/ui"
 
 Button({
   variant: "primary",

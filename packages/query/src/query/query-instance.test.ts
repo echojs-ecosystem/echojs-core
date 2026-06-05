@@ -57,7 +57,7 @@ describe('QueryInstance', () => {
 
   it('refetches when reactive params change', async () => {
     const client = createTestClient()
-    const { signal } = await import('@echojs/reactivity')
+    const { signal } = await import('@echojs-ecosystem/reactivity')
     const $id = signal('1')
     const fetcher = vi.fn(async ({ params }: { params: { id: string } }) => params.id)
 
@@ -79,7 +79,7 @@ describe('QueryInstance', () => {
 
   it('keepPreviousData keeps old data while key changes', async () => {
     const client = createTestClient()
-    const { signal } = await import('@echojs/reactivity')
+    const { signal } = await import('@echojs-ecosystem/reactivity')
     const $id = signal('1')
 
     const getUserQuery = createQuery({
@@ -125,7 +125,7 @@ describe('QueryInstance', () => {
 
   it('abortPrevious aborts old request on params change', async () => {
     const client = createTestClient()
-    const { signal: $id } = await import('@echojs/reactivity')
+    const { signal: $id } = await import('@echojs-ecosystem/reactivity')
     const id = $id('1')
     let aborted = 0
 

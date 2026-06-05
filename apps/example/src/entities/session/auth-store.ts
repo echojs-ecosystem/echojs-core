@@ -1,6 +1,6 @@
 import { computed } from "@echojs-ecosystem/reactivity";
-import { createStore } from "@echojs/store";
-import { withCookie, withLocalStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withCookie, withLocalStorage } from "@echojs-ecosystem/persist";
 
 export type AuthUser = {
   id: string;

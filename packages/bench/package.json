@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/bench",
+  "name": "@echojs-ecosystem/bench",
   "version": "0.0.0",
   "private": true,
   "files": ["dist"],
@@ -35,10 +35,10 @@
     "esbuild": "^0.25.9"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
-    "@echojs/reactivity": "workspace:*",
-    "@echojs/store": "workspace:*",
-    "@echojs/router": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*",
+    "@echojs-ecosystem/router": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
   }

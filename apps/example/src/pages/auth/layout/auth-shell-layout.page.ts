@@ -1,4 +1,4 @@
-import { createLayoutView } from "@echojs/router";
+import { createLayoutView } from "@echojs-ecosystem/router";
 
 import { AuthShellLayoutView } from "./ui/auth-shell-layout.view.js";
 

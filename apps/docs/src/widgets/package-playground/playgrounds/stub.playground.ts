@@ -1,5 +1,5 @@
-import { signal } from "@echojs/reactivity";
-import { div, p } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { div, p } from "@echojs-ecosystem/hyperdom";
 import type { PackagePlaygroundDef, PlaygroundInstance } from "../types.js";
 import { pg } from "../playground-ui.js";
 

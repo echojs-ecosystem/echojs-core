@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/router
+# @echojs-ecosystem/router
 
 **Typed SPA routing — routes as signal-backed objects, not components.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/router)](https://www.npmjs.com/package/@echojs/router)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/router)](https://www.npmjs.com/package/@echojs-ecosystem/router)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/router)
 
 </div>
@@ -19,18 +19,18 @@ Programmatic router for EchoJS. Syncs **URL ↔ route state** with guards, lazy 
 - **Signal-backed state** — `$path`, `$params`, `$query`, `$activePage`, `$pending`, `$error`
 - **Guards & redirects** — `authorizationGuard`, `guardRoute`, `redirect`, `chainRoute`
 - **History adapters** — `browser`, `hash`, `memory`, or custom
-- **Hyperdom** — `@echojs/router/hyperdom` for `Link`, `NavLink`, `createRouter`
+- **Hyperdom** — `@echojs-ecosystem/router/hyperdom` for `Link`, `NavLink`, `createRouter`
 
 ## Install
 
 ```bash
-npm install @echojs/router @echojs/reactivity @echojs/hyperdom
+npm install @echojs-ecosystem/router @echojs-ecosystem/reactivity @echojs-ecosystem/hyperdom
 ```
 
 ## Quick start
 
 ```ts
-import { createRouteView, createRoutes, createRouter } from "@echojs/router";
+import { createRouteView, createRoutes, createRouter } from "@echojs-ecosystem/router";
 
 const homePage = createRouteView({
   name: "home",
@@ -49,7 +49,7 @@ router.go("/");
 ### Hyperdom
 
 ```ts
-import { createRouter, NavLink } from "@echojs/router/hyperdom";
+import { createRouter, NavLink } from "@echojs-ecosystem/router/hyperdom";
 
 const router = createRouter({ history: "browser", routes });
 router.start();
@@ -72,8 +72,8 @@ NavLink({ to: homePage, activeClass: "active", children: "Home" });
 
 | Package | Role |
 |---------|------|
-| [`@echojs/url-state`](https://www.npmjs.com/package/@echojs/url-state) | Typed search params |
-| [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework) | App bootstrap with router provider |
+| [`@echojs-ecosystem/url-state`](https://www.npmjs.com/package/@echojs-ecosystem/url-state) | Typed search params |
+| [`@echojs-ecosystem/framework`](https://www.npmjs.com/package/@echojs-ecosystem/framework) | App bootstrap with router provider |
 
 ## Documentation
 

@@ -1,4 +1,4 @@
-import { createRouterProvider, isRouterLike } from "@echojs/router/hyperdom";
+import { createRouterProvider, isRouterLike } from "@echojs-ecosystem/router/hyperdom";
 
 import type { EchoProvider, EchoRouterSource, EchoUseInput } from "./types";
 

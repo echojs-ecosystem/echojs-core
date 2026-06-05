@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 import { beforeEach, describe, expect, it } from "vitest";
-import { h, render } from "@echojs/hyperdom";
+import { h, render } from "@echojs-ecosystem/hyperdom";
 import { createRoute } from "../core/create-route";
 import { createRouter } from "../core/create-router";
 import { getRouterInternal } from "../core/router";

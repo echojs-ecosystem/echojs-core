@@ -1,6 +1,6 @@
 /**
  * Design tokens (HeroUI v3–inspired).
- * Import in app entry / Storybook: `@import "@echojs/ui/theme/tokens.css";`
+ * Import in app entry / Storybook: `@import "@echojs-ecosystem/ui/theme/tokens.css";`
  */
 @theme {
   --color-accent: var(--color-zinc-900);

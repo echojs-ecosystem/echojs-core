@@ -1,7 +1,7 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
-import type { AnyPage } from "@echojs/router";
-import { h, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/router";
+import { h, span } from "@echojs-ecosystem/hyperdom";
 import { cn } from "@core/styles/cn.js";
 import { navLinkStyles, shellStyles } from "@widgets/docs-shell/docs-shell.styles.js";
 import type { NavIconId } from "@core/content/nav-icon-id.js";

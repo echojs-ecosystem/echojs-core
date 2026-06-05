@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 
 import { FormsView } from "./ui/forms.view.js";
 

@@ -1,7 +1,7 @@
 ---
 title: Playground
 description: Try architect rules locally.
-package: "@echojs/architect"
+package: "@echojs-ecosystem/architect"
 ---
 
 # Playground

@@ -1,4 +1,4 @@
-# @echojs/bench
+# @echojs-ecosystem/bench
 
 Локальная утилита для сравнения **bundle size** и **перформанса** пакетов в этом monorepo (в духе `js-framework-benchmark`, но заточено под EchoJS-пакеты).
 
@@ -16,7 +16,7 @@ bun install
 
 ```bash
 # Все workspace-пакеты (кроме скрытых папок типа .configs)
-bun run --filter @echojs/bench build
+bun run --filter @echojs-ecosystem/bench build
 node packages/bench/dist/cli.js size
 
 # Только выбранные пакеты

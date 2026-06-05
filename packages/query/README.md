@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/query
+# @echojs-ecosystem/query
 
 **Signal-native async cache — queries, mutations, and infinite lists without hooks.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/query)](https://www.npmjs.com/package/@echojs/query)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/query)](https://www.npmjs.com/package/@echojs-ecosystem/query)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/query)
 
 </div>
@@ -24,13 +24,13 @@ Model-first data layer inspired by [TanStack Query](https://tanstack.com/query),
 ## Install
 
 ```bash
-npm install @echojs/query @echojs/reactivity
+npm install @echojs-ecosystem/query @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
 
 ```ts
-import { createQuery, createQueryClient } from "@echojs/query";
+import { createQuery, createQueryClient } from "@echojs-ecosystem/query";
 
 const client = createQueryClient();
 
@@ -72,8 +72,8 @@ user.cancel({ reason: "navigate-away" });
 
 | Package | Role |
 |---------|------|
-| [`@echojs/store`](https://www.npmjs.com/package/@echojs/store) | Optional `withStore()` integration |
-| [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework) | Query provider at app bootstrap |
+| [`@echojs-ecosystem/store`](https://www.npmjs.com/package/@echojs-ecosystem/store) | Optional `withStore()` integration |
+| [`@echojs-ecosystem/framework`](https://www.npmjs.com/package/@echojs-ecosystem/framework) | Query provider at app bootstrap |
 
 ## Documentation
 

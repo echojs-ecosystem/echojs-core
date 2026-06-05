@@ -6,4 +6,6 @@ export type DocVersionHistoryEntry = {
   disabled?: boolean;
 };
 
-export const DOC_VERSION_HISTORY: readonly DocVersionHistoryEntry[] = [];
+export const DOC_VERSION_HISTORY: readonly DocVersionHistoryEntry[] = [
+
+];

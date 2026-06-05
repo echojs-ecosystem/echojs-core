@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/devtools-core
+# @echojs-ecosystem/devtools-core
 
 **Runtime registry and event timeline for EchoJS DevTools — no UI, zero overhead when disabled.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/devtools-core)](https://www.npmjs.com/package/@echojs/devtools-core)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/devtools-core)](https://www.npmjs.com/package/@echojs-ecosystem/devtools-core)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/devtools)
 
 </div>
@@ -24,7 +24,7 @@ Infrastructure layer for future EchoJS DevTools. Provides a **global bridge**, *
 ## Install
 
 ```bash
-npm install @echojs/devtools-core
+npm install @echojs-ecosystem/devtools-core
 ```
 
 ## Quick start
@@ -35,7 +35,7 @@ import {
   emitDevtoolsEvent,
   subscribeTimeline,
   setDevtoolsEnabled,
-} from "@echojs/devtools-core";
+} from "@echojs-ecosystem/devtools-core";
 
 // Disable in production
 setDevtoolsEnabled(import.meta.env.DEV);

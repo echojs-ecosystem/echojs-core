@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 
 import { FormsNestedView } from "./ui/forms-nested.view.js";
 

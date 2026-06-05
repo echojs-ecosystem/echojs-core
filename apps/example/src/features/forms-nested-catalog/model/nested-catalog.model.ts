@@ -1,11 +1,11 @@
 import { effect } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import {
   arrayGenerator,
   createField,
   createFieldArray,
   createForm,
-} from "@echojs/form";
+} from "@echojs-ecosystem/form";
 import { z } from "zod";
 
 const RoleEnum = z.enum(["dev", "pm", "qa"]);

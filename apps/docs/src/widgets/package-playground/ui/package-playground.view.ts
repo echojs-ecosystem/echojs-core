@@ -1,6 +1,6 @@
-import { createView, div, p, pre } from "@echojs/hyperdom";
-import { mount as onMount } from "@echojs/hyperdom/lifecycle/mount";
-import type { Child } from "@echojs/hyperdom";
+import { createView, div, p, pre } from "@echojs-ecosystem/hyperdom";
+import { mount as onMount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { playgroundStyles } from "@widgets/package-playground/ui/package-playground.view.styles.js";
 import type { PackagePlaygroundVM } from "../model/package-playground.model.js";
 

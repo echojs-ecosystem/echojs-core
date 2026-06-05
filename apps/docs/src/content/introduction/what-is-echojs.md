@@ -16,44 +16,44 @@ EchoJS is a **signal-first** frontend platform for building fast, documented, an
 
 ### Signals drive the UI
 
-State lives in `@echojs/reactivity`. Views read `signal.value()` (or computed/effects) and update only what depends on that state.
+State lives in `@echojs-ecosystem/reactivity`. Views read `signal.value()` (or computed/effects) and update only what depends on that state.
 
 ```ts
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const count = signal(0);
 count.set(1);
 ```
 
-@echojs/reactivity
+@echojs-ecosystem/reactivity
 
 ### HyperDOM renders to the DOM
 
-`@echojs/hyperdom` exposes `div`, `button`, `createView`, `createModel`, and control helpers (`Show`, `List`). There is **no reconciliation step** over a virtual tree.
+`@echojs-ecosystem/hyperdom` exposes `div`, `button`, `createView`, `createModel`, and control helpers (`Show`, `List`). There is **no reconciliation step** over a virtual tree.
 
 ```ts
-import { button, div } from "@echojs/hyperdom";
+import { button, div } from "@echojs-ecosystem/hyperdom";
 
 div(null, [
   button({ onClick: () => count.update((n) => n + 1) }, () => String(count.value())),
 ]);
 ```
 
-@echojs/hyperdom
+@echojs-ecosystem/hyperdom
 
 ### Apps compose through providers
 
-`createEchoApp()` from `@echojs/framework` registers router, query, UI, and other services once, then mounts a single root view.
+`createEchoApp()` from `@echojs-ecosystem/framework` registers router, query, UI, and other services once, then mounts a single root view.
 
 ```ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 
 createEchoApp({ strictContextChecks: true })
   .use(routerProvider)
   .mount("#app");
 ```
 
-@echojs/framework
+@echojs-ecosystem/framework
 
 > [!NOTE]
 > EchoJS documentation and the `apps/example` lab are real apps built with the same patterns — not a separate demo framework.
@@ -62,13 +62,13 @@ createEchoApp({ strictContextChecks: true })
 
 | Area | Package |
 | --- | --- |
-| Routing & `NavLink` | `@echojs/router` |
-| Server/async data | `@echojs/query` |
-| Client store | `@echojs/store` |
-| URL-bound state | `@echojs/url-state` |
-| Local persistence | `@echojs/persist` |
-| Components & theme | `@echojs/ui` |
-| Translations | `@echojs/i18n` |
+| Routing & `NavLink` | `@echojs-ecosystem/router` |
+| Server/async data | `@echojs-ecosystem/query` |
+| Client store | `@echojs-ecosystem/store` |
+| URL-bound state | `@echojs-ecosystem/url-state` |
+| Local persistence | `@echojs-ecosystem/persist` |
+| Components & theme | `@echojs-ecosystem/ui` |
+| Translations | `@echojs-ecosystem/i18n` |
 
 Browse the **Packages** section in the sidebar for per-package installation and API pages.
 

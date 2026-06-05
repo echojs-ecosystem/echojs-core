@@ -14,7 +14,7 @@ Teams usually arrive at EchoJS with one of three goals: **less render overhead**
 
 Classic virtual-DOM frameworks reconcile component trees. Even with memoization, large layouts and dashboards pay for scope you did not intend to update.
 
-EchoJS uses **fine-grained signals** (`@echojs/reactivity`). When a value changes, only subscribers run — not every descendant in a component hierarchy.
+EchoJS uses **fine-grained signals** (`@echojs-ecosystem/reactivity`). When a value changes, only subscribers run — not every descendant in a component hierarchy.
 
 ### 2. Architecture drift
 
@@ -46,12 +46,12 @@ Routing, async data, URL state, persistence, and UI primitives are separate purc
 
 | Capability | Package |
 | --- | --- |
-| Signals, computed, effects | `@echojs/reactivity` |
-| DOM views (no VDOM) | `@echojs/hyperdom` |
-| App bootstrap & providers | `@echojs/framework` |
-| Typed routes & `NavLink` | `@echojs/router` |
-| Async data & cache | `@echojs/query` |
-| Client store | `@echojs/store` |
-| URL ↔ state | `@echojs/url-state` |
-| Persistence | `@echojs/persist` |
-| UI primitives | `@echojs/ui` |
+| Signals, computed, effects | `@echojs-ecosystem/reactivity` |
+| DOM views (no VDOM) | `@echojs-ecosystem/hyperdom` |
+| App bootstrap & providers | `@echojs-ecosystem/framework` |
+| Typed routes & `NavLink` | `@echojs-ecosystem/router` |
+| Async data & cache | `@echojs-ecosystem/query` |
+| Client store | `@echojs-ecosystem/store` |
+| URL ↔ state | `@echojs-ecosystem/url-state` |
+| Persistence | `@echojs-ecosystem/persist` |
+| UI primitives | `@echojs-ecosystem/ui` |

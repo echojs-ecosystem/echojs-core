@@ -1,7 +1,7 @@
 ---
 title: Example
-description: Runnable patterns for @echojs/reactivity from the EchoJS example app.
-package: "@echojs/reactivity"
+description: Runnable patterns for @echojs-ecosystem/reactivity from the EchoJS example app.
+package: "@echojs-ecosystem/reactivity"
 ---
 
 # Example — Reactivity
@@ -11,8 +11,8 @@ package: "@echojs/reactivity"
 ## Model — signals
 
 ```ts
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 export const createCounterModel = createModel(() => {
   const $count = signal(0);
@@ -35,8 +35,8 @@ export const createCounterModel = createModel(() => {
 ## View — read signals in HyperDOM
 
 ```ts
-import { Show, createView } from "@echojs/hyperdom";
-import { button, span, section } from "@echojs/hyperdom";
+import { Show, createView } from "@echojs-ecosystem/hyperdom";
+import { button, span, section } from "@echojs-ecosystem/hyperdom";
 
 export const CounterView = createView((vm) =>
   section(
@@ -57,7 +57,7 @@ export const CounterView = createView((vm) =>
 ## Batch update
 
 ```ts
-import { batch, signal } from "@echojs/reactivity";
+import { batch, signal } from "@echojs-ecosystem/reactivity";
 
 const a = signal(0);
 const b = signal(0);

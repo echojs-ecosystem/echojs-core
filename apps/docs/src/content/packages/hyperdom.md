@@ -1,19 +1,19 @@
 ---
 title: HyperDOM
 description: Direct DOM rendering with views, models, and reactive children.
-package: "@echojs/hyperdom"
+package: "@echojs-ecosystem/hyperdom"
 keywords: [hyperdom, createView, createModel, h, Show]
 ---
 
 :::package-overview hyperdom
 
-:::install @echojs/hyperdom
+:::install @echojs-ecosystem/hyperdom
 
 ## Quick start
 
 ```ts
-import { signal } from "@echojs/reactivity";
-import { createView, createModel, div, p } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createView, createModel, div, p } from "@echojs-ecosystem/hyperdom";
 
 const CounterModel = createModel(() => {
   const count = signal(0);
@@ -26,4 +26,4 @@ export const CounterView = createView((vm) =>
 ```
 
 > [!tip]
-> Keep `.view.ts` free of `fetch` — use models + `@echojs/query` for async data.
+> Keep `.view.ts` free of `fetch` — use models + `@echojs-ecosystem/query` for async data.

@@ -28,7 +28,7 @@ const step = (pkgId: string, slug: string, title: string, description: string): 
 export const packageOverviewById: Record<string, PackageOverviewData> = {
   reactivity: {
     id: "reactivity",
-    npmPackage: "@echojs/reactivity",
+    npmPackage: "@echojs-ecosystem/reactivity",
     icon: "⚡",
     tagline: "Fine-grained reactive primitives",
     summary:
@@ -40,7 +40,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
       { icon: "↻", title: "Effects", body: "Side effects that track signal reads." },
     ],
     whenToUse: ["Local state in createModel", "Any reactive subscription", "Derived UI with computed"],
-    whenNot: ["Remote server cache → @echojs/query", "Cross-route session → @echojs/store"],
+    whenNot: ["Remote server cache → @echojs-ecosystem/query", "Cross-route session → @echojs-ecosystem/store"],
     dependsOn: [],
     powers: ["hyperdom", "store", "query", "router"],
     learnPath: [
@@ -54,7 +54,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   hyperdom: {
     id: "hyperdom",
-    npmPackage: "@echojs/hyperdom",
+    npmPackage: "@echojs-ecosystem/hyperdom",
     icon: "◆",
     tagline: "Direct DOM rendering",
     summary:
@@ -67,7 +67,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["All EchoJS UI", "Reactive () => child", "Features and pages"],
     whenNot: ["fetch in .view.ts", "App bootstrap → framework"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: ["ui", "router"],
     learnPath: [
       step("hyperdom", "installation", "Installation", "With reactivity."),
@@ -80,7 +80,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   framework: {
     id: "framework",
-    npmPackage: "@echojs/framework",
+    npmPackage: "@echojs-ecosystem/framework",
     icon: "◎",
     tagline: "Application shell",
     summary:
@@ -93,7 +93,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["App entry", "DI via provide/inject", "Custom docs chrome"],
     whenNot: ["Leaf widgets", "Low-level signals"],
-    dependsOn: ["@echojs/hyperdom"],
+    dependsOn: ["@echojs-ecosystem/hyperdom"],
     powers: ["router", "query", "i18n", "ui"],
     learnPath: [
       step("framework", "installation", "Installation", "Framework stack."),
@@ -106,7 +106,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   router: {
     id: "router",
-    npmPackage: "@echojs/router",
+    npmPackage: "@echojs-ecosystem/router",
     icon: "⤳",
     tagline: "Typed SPA routing",
     summary:
@@ -119,7 +119,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Multi-page apps", "Guards", "Route data hooks"],
     whenNot: ["Query params only → url-state"],
-    dependsOn: ["@echojs/reactivity", "@echojs/hyperdom"],
+    dependsOn: ["@echojs-ecosystem/reactivity", "@echojs-ecosystem/hyperdom"],
     powers: ["url-state"],
     learnPath: [
       step("router", "installation", "Installation", "Router + hyperdom."),
@@ -132,7 +132,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   store: {
     id: "store",
-    npmPackage: "@echojs/store",
+    npmPackage: "@echojs-ecosystem/store",
     icon: "▣",
     tagline: "Structured client state",
     summary:
@@ -145,7 +145,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Auth, theme, shared prefs", "entity/* modules"],
     whenNot: ["Page VM → model signals", "API lists → query"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: ["persist"],
     learnPath: [
       step("store", "installation", "Installation", "Store package."),
@@ -158,7 +158,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   query: {
     id: "query",
-    npmPackage: "@echojs/query",
+    npmPackage: "@echojs-ecosystem/query",
     icon: "↻",
     tagline: "Async cache for models",
     summary:
@@ -171,7 +171,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["API in models", "Loading UI", "Mutations"],
     whenNot: ["UI toggles", "URL filters"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: ["framework"],
     learnPath: [
       step("query", "installation", "Installation", "Query provider."),
@@ -184,7 +184,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   "url-state": {
     id: "url-state",
-    npmPackage: "@echojs/url-state",
+    npmPackage: "@echojs-ecosystem/url-state",
     icon: "🔗",
     tagline: "Typed URL params",
     summary: "nuqs-style search params: parsers, createQueryParams, router adapter — signal-friendly.",
@@ -196,7 +196,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Filters in URL", "Shareable state", "Catalog pages"],
     whenNot: ["Path segments", "Server cache"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: ["router"],
     learnPath: [
       step("url-state", "installation", "Installation", "With router."),
@@ -209,7 +209,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   persist: {
     id: "persist",
-    npmPackage: "@echojs/persist",
+    npmPackage: "@echojs-ecosystem/persist",
     icon: "💾",
     tagline: "Storage extensions",
     summary: "Persist stores via .extend(localStorage | cookie | …). hydrate/save/clear on .persist controller.",
@@ -221,7 +221,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Theme, auth, drafts", "entity/session"],
     whenNot: ["Without store", "Huge cookies"],
-    dependsOn: ["@echojs/store"],
+    dependsOn: ["@echojs-ecosystem/store"],
     powers: [],
     learnPath: [
       step("persist", "installation", "Installation", "persist + store."),
@@ -234,7 +234,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   i18n: {
     id: "i18n",
-    npmPackage: "@echojs/i18n",
+    npmPackage: "@echojs-ecosystem/i18n",
     icon: "🌐",
     tagline: "i18n & Intl",
     summary: "Typed keys from JSON, lazy locales, plural/interpolation, Intl helpers. createI18nProvider for apps.",
@@ -246,7 +246,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["All UI strings", "Locale switcher"],
     whenNot: ["Build-time only text"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: ["framework"],
     learnPath: [
       step("i18n", "installation", "Installation", "Locales setup."),
@@ -259,7 +259,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   ui: {
     id: "ui",
-    npmPackage: "@echojs/ui",
+    npmPackage: "@echojs-ecosystem/ui",
     icon: "◈",
     tagline: "UI components",
     summary: "Accessible HyperDOM components — Button, Field, Input — theme via UIProvider. Docs expanding.",
@@ -271,7 +271,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Forms & actions", "Design system"],
     whenNot: ["Docs markdown layout"],
-    dependsOn: ["@echojs/hyperdom"],
+    dependsOn: ["@echojs-ecosystem/hyperdom"],
     powers: [],
     learnPath: [
       step("ui", "installation", "Installation", "UI package."),
@@ -284,7 +284,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   devtools: {
     id: "devtools",
-    npmPackage: "@echojs/devtools",
+    npmPackage: "@echojs-ecosystem/devtools",
     icon: "🔧",
     tagline: "DevTools (planned)",
     summary: "Future overlay for signals, query cache, and routes. Package not in monorepo yet.",
@@ -296,7 +296,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     ],
     whenToUse: ["Local debug"],
     whenNot: ["Production"],
-    dependsOn: ["@echojs/reactivity"],
+    dependsOn: ["@echojs-ecosystem/reactivity"],
     powers: [],
     learnPath: [
       step("devtools", "installation", "Installation", "Planned."),
@@ -308,7 +308,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   cli: {
     id: "cli",
-    npmPackage: "@echojs/cli",
+    npmPackage: "@echojs-ecosystem/cli",
     icon: "⌘",
     tagline: "CLI (planned)",
     summary: "Scaffold apps and feature slices aligned with feature-first layout.",
@@ -332,7 +332,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
   },
   architect: {
     id: "architect",
-    npmPackage: "@echojs/architect",
+    npmPackage: "@echojs-ecosystem/architect",
     icon: "🏛",
     tagline: "Architecture linter",
     summary:

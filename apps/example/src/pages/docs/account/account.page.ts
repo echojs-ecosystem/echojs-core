@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 
 import { AccountView } from "./ui/account.view.js";
 

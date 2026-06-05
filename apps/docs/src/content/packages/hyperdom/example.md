@@ -1,7 +1,7 @@
 ---
 title: Example
 description: render, createView, createModel, and Show/List from EchoJS apps.
-package: "@echojs/hyperdom"
+package: "@echojs-ecosystem/hyperdom"
 ---
 
 # Example — HyperDOM
@@ -9,8 +9,8 @@ package: "@echojs/hyperdom"
 ## Minimal mount
 
 ```ts
-import { render, div, button } from "@echojs/hyperdom";
-import { signal } from "@echojs/reactivity";
+import { render, div, button } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const n = signal(0);
 
@@ -26,7 +26,7 @@ const dispose = render(view, document.getElementById("app")!);
 ## Model + view (example app)
 
 ```ts
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import { createCounterModel, CounterView } from "@features/reactivity-counter/index.js";
 
 export const Counter = createComponent(createCounterModel, CounterView, { name: "Counter" });
@@ -34,7 +34,7 @@ export const Counter = createComponent(createCounterModel, CounterView, { name: 
 ```
 
 ```ts
-import { createView, Show, List } from "@echojs/hyperdom";
+import { createView, Show, List } from "@echojs-ecosystem/hyperdom";
 
 export const CounterView = createView((vm) =>
   article(null, [
@@ -48,7 +48,7 @@ export const CounterView = createView((vm) =>
 ## Docs site — doc article
 
 ```ts
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import { createDocArticleModel, DocArticleView } from "@pages/doc/index.js";
 
 export const DocArticle = (props: { contentId: string }) =>

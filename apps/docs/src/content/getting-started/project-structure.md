@@ -111,7 +111,7 @@ Use the same aliases in Vite (`resolve.alias`) so imports match TypeScript.
 | `widgets` | features, entities, core |
 | `features` | entities, core |
 | `entities` | core |
-| `core` | packages (`@echojs/*`) only |
+| `core` | packages (`@echojs-ecosystem/*`) only |
 
 > [!WARNING]
 > Do not import `pages/` from `features/` or `widgets/`. Lift shared logic to `features/` or `core/`.

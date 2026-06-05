@@ -1,5 +1,5 @@
-import { createView } from "@echojs/hyperdom";
-import { button, div, h2, li, p, span, ul } from "@echojs/hyperdom";
+import { createView } from "@echojs-ecosystem/hyperdom";
+import { button, div, h2, li, p, span, ul } from "@echojs-ecosystem/hyperdom";
 import { codeTabs } from "@entities/home/constants/home.constants.js";
 import { codeDots } from "@entities/home/helpers/code-dots.js";
 import type { HomeVM } from "@entities/home/types/home.types.js";

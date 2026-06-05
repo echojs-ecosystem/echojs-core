@@ -1,7 +1,7 @@
 ---
 title: Installation
-description: @echojs/cli — coming soon.
-package: "@echojs/cli"
+description: @echojs-ecosystem/cli — coming soon.
+package: "@echojs-ecosystem/cli"
 status: draft
 ---
 
@@ -12,9 +12,9 @@ status: draft
 
 ```bash
 # planned
-bunx @echojs/cli@latest
+bunx @echojs-ecosystem/cli@latest
 # or
-bun add -D @echojs/cli
+bun add -D @echojs-ecosystem/cli
 ```
 
 ## Planned content

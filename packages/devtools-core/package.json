@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/devtools-core",
+  "name": "@echojs-ecosystem/devtools-core",
   "version": "0.0.0",
   "description": "Runtime registry and timeline infrastructure for EchoJS DevTools",
   "files": [
@@ -27,7 +27,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
   },

@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Public API for @echojs/router and @echojs/router/hyperdom.
-package: "@echojs/router"
+description: Public API for @echojs-ecosystem/router and @echojs-ecosystem/router/hyperdom.
+package: "@echojs-ecosystem/router"
 ---
 
 # API Reference
 
-## `@echojs/router` (core)
+## `@echojs-ecosystem/router` (core)
 
 ### Factories
 
@@ -59,7 +59,7 @@ package: "@echojs/router"
 
 `Route`, `Page`, `LayoutPage`, `AnyPage`, `Router`, `RouterRoutes`, `RouteView`, `RouteViewContext`, `BeforeLoadContext`, `AuthorizationGuardOptions`, `CreateRouterOptions`, `GoOptions`, `RouteTreeBranch`, …
 
-## `@echojs/router/hyperdom`
+## `@echojs-ecosystem/router/hyperdom`
 
 | Export | Description |
 | --- | --- |

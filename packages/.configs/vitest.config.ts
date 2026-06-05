@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { defineConfig, mergeConfig } from "vitest/config";
 import type { ViteUserConfig, ViteUserConfigExport } from "vitest/config";
 
-import { echoPackageSrcAliases } from "@echojs/oxc-config/package-aliases";
+import { echoPackageSrcAliases } from "@echojs-ecosystem/oxc-config/package-aliases";
 
 export const sharedVitestConfig = defineConfig({
   test: {
@@ -17,33 +17,33 @@ export const sharedVitestConfig = defineConfig({
 
 export const echoWorkspaceAliases = (fromDir: string): NonNullable<ViteUserConfig["resolve"]>["alias"] => {
   return {
-    "@echojs/core": resolve(fromDir, "../core/src/index.ts"),
-    "@echojs/reactivity": resolve(fromDir, "../reactivity/src/index.ts"),
-    "@echojs/hyperdom": resolve(fromDir, "../hyperdom/src/index.ts"),
-    "@echojs/router": resolve(fromDir, "../router/src/index.ts"),
-    "@echojs/store": resolve(fromDir, "../store/src/index.ts"),
-    "@echojs/persist": resolve(fromDir, "../persist/src/index.ts"),
-    "@echojs/form": resolve(fromDir, "../form/src/index.ts"),
-    "@echojs/ui": resolve(fromDir, "../ui/src/index.ts"),
-    "@echojs/ui/button": resolve(fromDir, "../ui/src/components/button/index.ts"),
-    "@echojs/ui/icon-button": resolve(fromDir, "../ui/src/components/icon-button/index.ts"),
-    "@echojs/ui/input": resolve(fromDir, "../ui/src/components/input/index.ts"),
-    "@echojs/ui/input-mask": resolve(fromDir, "../ui/src/components/input-mask/index.ts"),
-    "@echojs/ui/input-otp": resolve(fromDir, "../ui/src/components/input-otp/index.ts"),
-    "@echojs/ui/input-tags": resolve(fromDir, "../ui/src/components/input-tags/index.ts"),
-    "@echojs/ui/textarea": resolve(fromDir, "../ui/src/components/textarea/index.ts"),
-    "@echojs/ui/label": resolve(fromDir, "../ui/src/components/label/index.ts"),
-    "@echojs/ui/field": resolve(fromDir, "../ui/src/components/field/index.ts"),
-    "@echojs/ui/checkbox": resolve(fromDir, "../ui/src/components/checkbox/index.ts"),
-    "@echojs/ui/provider": resolve(fromDir, "../ui/src/providers/index.ts"),
-    "@echojs/ui/theme": resolve(fromDir, "../ui/src/theme/index.ts"),
-    "@echojs/ui/core": resolve(fromDir, "../ui/src/core/index.ts"),
-    "@echojs/ui/utils": resolve(fromDir, "../ui/src/utils/index.ts"),
-    "@echojs/ui/primitives": resolve(fromDir, "../ui/src/primitives/index.ts"),
-    "@echojs/url-state": resolve(fromDir, "../url-state/src/index.ts"),
-    "@echojs/devtools-core": resolve(fromDir, "../devtools-core/src/index.ts"),
-    "@echojs/i18n": resolve(fromDir, "../i18n/src/index.ts"),
-    "@echojs/architect": resolve(fromDir, "../architect/src/index.ts"),
+    "@echojs-ecosystem/core": resolve(fromDir, "../core/src/index.ts"),
+    "@echojs-ecosystem/reactivity": resolve(fromDir, "../reactivity/src/index.ts"),
+    "@echojs-ecosystem/hyperdom": resolve(fromDir, "../hyperdom/src/index.ts"),
+    "@echojs-ecosystem/router": resolve(fromDir, "../router/src/index.ts"),
+    "@echojs-ecosystem/store": resolve(fromDir, "../store/src/index.ts"),
+    "@echojs-ecosystem/persist": resolve(fromDir, "../persist/src/index.ts"),
+    "@echojs-ecosystem/form": resolve(fromDir, "../form/src/index.ts"),
+    "@echojs-ecosystem/ui": resolve(fromDir, "../ui/src/index.ts"),
+    "@echojs-ecosystem/ui/button": resolve(fromDir, "../ui/src/components/button/index.ts"),
+    "@echojs-ecosystem/ui/icon-button": resolve(fromDir, "../ui/src/components/icon-button/index.ts"),
+    "@echojs-ecosystem/ui/input": resolve(fromDir, "../ui/src/components/input/index.ts"),
+    "@echojs-ecosystem/ui/input-mask": resolve(fromDir, "../ui/src/components/input-mask/index.ts"),
+    "@echojs-ecosystem/ui/input-otp": resolve(fromDir, "../ui/src/components/input-otp/index.ts"),
+    "@echojs-ecosystem/ui/input-tags": resolve(fromDir, "../ui/src/components/input-tags/index.ts"),
+    "@echojs-ecosystem/ui/textarea": resolve(fromDir, "../ui/src/components/textarea/index.ts"),
+    "@echojs-ecosystem/ui/label": resolve(fromDir, "../ui/src/components/label/index.ts"),
+    "@echojs-ecosystem/ui/field": resolve(fromDir, "../ui/src/components/field/index.ts"),
+    "@echojs-ecosystem/ui/checkbox": resolve(fromDir, "../ui/src/components/checkbox/index.ts"),
+    "@echojs-ecosystem/ui/provider": resolve(fromDir, "../ui/src/providers/index.ts"),
+    "@echojs-ecosystem/ui/theme": resolve(fromDir, "../ui/src/theme/index.ts"),
+    "@echojs-ecosystem/ui/core": resolve(fromDir, "../ui/src/core/index.ts"),
+    "@echojs-ecosystem/ui/utils": resolve(fromDir, "../ui/src/utils/index.ts"),
+    "@echojs-ecosystem/ui/primitives": resolve(fromDir, "../ui/src/primitives/index.ts"),
+    "@echojs-ecosystem/url-state": resolve(fromDir, "../url-state/src/index.ts"),
+    "@echojs-ecosystem/devtools-core": resolve(fromDir, "../devtools-core/src/index.ts"),
+    "@echojs-ecosystem/i18n": resolve(fromDir, "../i18n/src/index.ts"),
+    "@echojs-ecosystem/architect": resolve(fromDir, "../architect/src/index.ts"),
   };
 };
 

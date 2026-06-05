@@ -8,9 +8,9 @@ keywords: api, reference, exports
 
 | Package | Status |
 | --- | --- |
-| @echojs/reactivity | Documented in package page |
-| @echojs/router | Documented in package page |
-| @echojs/query | Documented in package page |
+| @echojs-ecosystem/reactivity | Documented in package page |
+| @echojs-ecosystem/router | Documented in package page |
+| @echojs-ecosystem/query | Documented in package page |
 
 :::callout type=tip
 Full symbol-level API search is planned for a future release.

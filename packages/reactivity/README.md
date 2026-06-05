@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/reactivity
+# @echojs-ecosystem/reactivity
 
 **Fine-grained reactive primitives — signals, computed, effects, and batching.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/reactivity)](https://www.npmjs.com/package/@echojs/reactivity)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/reactivity)](https://www.npmjs.com/package/@echojs-ecosystem/reactivity)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/reactivity)
 
 </div>
@@ -24,15 +24,15 @@ The reactive foundation of EchoJS. Built on a fast signal engine, wrapped in a *
 ## Install
 
 ```bash
-npm install @echojs/reactivity
-# bun add @echojs/reactivity
-# pnpm add @echojs/reactivity
+npm install @echojs-ecosystem/reactivity
+# bun add @echojs-ecosystem/reactivity
+# pnpm add @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
 
 ```ts
-import { signal, computed, effect, batch } from "@echojs/reactivity";
+import { signal, computed, effect, batch } from "@echojs-ecosystem/reactivity";
 
 const $count = signal(0);
 const $double = computed(() => $count.value() * 2);
@@ -69,9 +69,9 @@ batch(() => {
 
 | Package | Role |
 |---------|------|
-| [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom) | DOM views wired to signals |
-| [`@echojs/store`](https://www.npmjs.com/package/@echojs/store) | Structured app state on top of signals |
-| [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework) | Meta-package — entire ecosystem via subpath imports |
+| [`@echojs-ecosystem/hyperdom`](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom) | DOM views wired to signals |
+| [`@echojs-ecosystem/store`](https://www.npmjs.com/package/@echojs-ecosystem/store) | Structured app state on top of signals |
+| [`@echojs-ecosystem/framework`](https://www.npmjs.com/package/@echojs-ecosystem/framework) | Meta-package — entire ecosystem via subpath imports |
 
 ## Documentation
 

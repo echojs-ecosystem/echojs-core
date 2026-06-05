@@ -12,14 +12,14 @@ EchoJS does not use one global Redux-style store. Applications combine **several
 
 | Layer | Driven by | Package / API | Typical examples |
 | --- | --- | --- | --- |
-| [Router state](/docs/state/router-state) | URL + navigation | `@echojs/router` | `:userId`, `?tab=`, `beforeLoad` data |
-| [URL state](/docs/state/url-state) | Query string (typed) | `@echojs/url-state` | Search `q`, `page`, `view=grid` |
-| [Server state](/docs/state/server-state) | HTTP / async | `@echojs/query` | User list, product details |
-| [Form state](/docs/state/form-state) | User input | `@echojs/form` | Login fields, checkout lines |
-| [Client store](/docs/state/client-store) | App logic | `@echojs/store` + `@echojs/persist` | Theme, session, cart id |
-| [Local UI state](/docs/state/local-ui-state) | Interaction | `@echojs/reactivity` in models | Open modal, active tab index |
+| [Router state](/docs/state/router-state) | URL + navigation | `@echojs-ecosystem/router` | `:userId`, `?tab=`, `beforeLoad` data |
+| [URL state](/docs/state/url-state) | Query string (typed) | `@echojs-ecosystem/url-state` | Search `q`, `page`, `view=grid` |
+| [Server state](/docs/state/server-state) | HTTP / async | `@echojs-ecosystem/query` | User list, product details |
+| [Form state](/docs/state/form-state) | User input | `@echojs-ecosystem/form` | Login fields, checkout lines |
+| [Client store](/docs/state/client-store) | App logic | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` | Theme, session, cart id |
+| [Local UI state](/docs/state/local-ui-state) | Interaction | `@echojs-ecosystem/reactivity` in models | Open modal, active tab index |
 
-**Locale** (active language) is provider state from `@echojs/i18n` — global like a store, but read-only for most features except the language picker.
+**Locale** (active language) is provider state from `@echojs-ecosystem/i18n` — global like a store, but read-only for most features except the language picker.
 
 ## How they relate to the URL
 
@@ -33,10 +33,10 @@ flowchart TB
     RawQuery["parsed query on route"]
     Loader["beforeLoad → $data"]
   end
-  subgraph urlState["URL state (@echojs/url-state)"]
+  subgraph urlState["URL state (@echojs-ecosystem/url-state)"]
     TypedQ["typed filters page q"]
   end
-  subgraph server["Server state (@echojs/query)"]
+  subgraph server["Server state (@echojs-ecosystem/query)"]
     Cache["cached API responses"]
   end
   URL --> Params

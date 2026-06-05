@@ -1,7 +1,7 @@
 ---
 title: Example
 description: i18n provider and locale switcher from apps/docs.
-package: "@echojs/i18n"
+package: "@echojs-ecosystem/i18n"
 ---
 
 # Example — i18n
@@ -9,7 +9,7 @@ package: "@echojs/i18n"
 ## Provider (`apps/docs`)
 
 ```ts
-import { createI18nProvider } from "@echojs/i18n";
+import { createI18nProvider } from "@echojs-ecosystem/i18n";
 import en from "../../../public/locales/en.json";
 import ru from "../../../public/locales/ru.json";
 

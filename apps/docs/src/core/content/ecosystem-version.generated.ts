@@ -2,22 +2,22 @@
 export const ECOSYSTEM_VERSION = "0.0.0";
 
 export const packageVersions = {
-  "@echojs/architect": "0.0.0",
-  "@echojs/bench": "0.0.0",
-  "@echojs/core": "0.0.0",
-  "@echojs/devtools-core": "0.0.0",
-  "@echojs/form": "0.0.0",
-  "@echojs/framework": "0.0.0",
-  "@echojs/hyperdom": "0.0.0",
-  "@echojs/i18n": "0.0.0",
-  "@echojs/oxc-config": "0.1.0",
-  "@echojs/persist": "0.0.0",
-  "@echojs/query": "0.0.0",
-  "@echojs/reactivity": "0.0.0",
-  "@echojs/router": "0.0.0",
-  "@echojs/store": "0.0.0",
-  "@echojs/ui": "0.0.0",
-  "@echojs/url-state": "0.0.0",
+  "@echojs-ecosystem/architect": "0.0.0",
+  "@echojs-ecosystem/bench": "0.0.0",
+  "@echojs-ecosystem/core": "0.0.0",
+  "@echojs-ecosystem/devtools-core": "0.0.0",
+  "@echojs-ecosystem/form": "0.0.0",
+  "@echojs-ecosystem/framework": "0.0.0",
+  "@echojs-ecosystem/hyperdom": "0.0.0",
+  "@echojs-ecosystem/i18n": "0.0.0",
+  "@echojs-ecosystem/oxc-config": "0.1.0",
+  "@echojs-ecosystem/persist": "0.0.0",
+  "@echojs-ecosystem/query": "0.0.0",
+  "@echojs-ecosystem/reactivity": "0.0.0",
+  "@echojs-ecosystem/router": "0.0.0",
+  "@echojs-ecosystem/store": "0.0.0",
+  "@echojs-ecosystem/ui": "0.0.0",
+  "@echojs-ecosystem/url-state": "0.0.0",
 } as const;
 
 export type PackageName = keyof typeof packageVersions;

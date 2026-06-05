@@ -1,5 +1,5 @@
-import { effect, cleanup } from "@echojs/reactivity";
-import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import { effect, cleanup } from "@echojs-ecosystem/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
 import { isSignalish } from "../internals/utils";
 import type { Signalish } from "../types";
 

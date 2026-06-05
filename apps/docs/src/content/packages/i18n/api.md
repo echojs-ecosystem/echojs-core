@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: Public exports from @echojs/i18n.
-package: "@echojs/i18n"
+description: Public exports from @echojs-ecosystem/i18n.
+package: "@echojs-ecosystem/i18n"
 ---
 
 # API Reference

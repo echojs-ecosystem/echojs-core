@@ -1,5 +1,5 @@
-import { createModel } from "@echojs/hyperdom";
-import { createField, createFieldArray, createForm } from "@echojs/form";
+import { createModel } from "@echojs-ecosystem/hyperdom";
+import { createField, createFieldArray, createForm } from "@echojs-ecosystem/form";
 import { z } from "zod";
 
 type LoginValue = z.infer<typeof LoginSchema>;

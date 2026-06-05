@@ -1,6 +1,6 @@
-import { nav } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
-import type { AnyPage } from "@echojs/router";
+import { nav } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/router";
 import { code, li, NavLink, span, ul } from "@pages/workspace/ui/common.js";
 
 export type BreadcrumbItem = {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 import { h } from "../h";
 import { render } from "../render";
 import { Show } from "./show";

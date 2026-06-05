@@ -1,4 +1,4 @@
-import type { ReadValue, Signal } from "@echojs/reactivity";
+import type { ReadValue, Signal } from "@echojs-ecosystem/reactivity";
 import type { debounce } from "../utils/debounce";
 import type { throttle } from "../utils/throttle";
 import type { SearchParamValue } from "./url";

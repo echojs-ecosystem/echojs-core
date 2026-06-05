@@ -3,7 +3,7 @@ import type { QueryProviderConfig } from '../provider/query-provider-types'
 
 export const QUERY_PROVIDER_KEY = Symbol.for('echojs.query.provider')
 
-/** Minimal host shape — compatible with {@link EchoApp} from `@echojs/framework/app`. */
+/** Minimal host shape — compatible with {@link EchoApp} from `@echojs-ecosystem/framework/app`. */
 export type QueryProviderHost = {
   provide?<T>(key: symbol, value: T): unknown
 }

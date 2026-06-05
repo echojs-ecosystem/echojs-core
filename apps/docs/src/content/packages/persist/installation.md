@@ -1,7 +1,7 @@
 ---
 title: Installation
-description: Install @echojs/persist with @echojs/store.
-package: "@echojs/persist"
+description: Install @echojs-ecosystem/persist with @echojs-ecosystem/store.
+package: "@echojs-ecosystem/persist"
 ---
 
 # Installation
@@ -10,9 +10,9 @@ Persist extends stores at runtime — install **both** packages.
 
 ## Package managers
 
-:::install @echojs/persist
+:::install @echojs-ecosystem/persist
 
-:::install @echojs/store
+:::install @echojs-ecosystem/store
 
 ## Requirements
 
@@ -24,8 +24,8 @@ Persist extends stores at runtime — install **both** packages.
 ```json
 {
   "dependencies": {
-    "@echojs/persist": "workspace:*",
-    "@echojs/store": "workspace:*"
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*"
   }
 }
 ```
@@ -33,8 +33,8 @@ Persist extends stores at runtime — install **both** packages.
 ## Minimal check
 
 ```ts
-import { createStore } from "@echojs/store";
-import { withMemoryStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withMemoryStorage } from "@echojs-ecosystem/persist";
 
 const counter = createStore(0).extend(
   withMemoryStorage({ key: "counter-test" }),

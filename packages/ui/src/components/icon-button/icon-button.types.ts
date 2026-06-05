@@ -1,4 +1,4 @@
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import type { ButtonProps } from "../button/button.types";
 
 export type IconButtonSize = "xs" | "sm" | "md" | "lg";

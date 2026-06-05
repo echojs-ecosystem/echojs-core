@@ -1,5 +1,5 @@
-import { h } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import type { UIComponentBaseProps } from "../core/types";
 import { createUIComponent } from "../core/component";
 

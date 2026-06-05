@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it, beforeEach } from "vitest";
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 import { flushMicrotasks } from "../test-utils";
 import { withSessionStorage } from "./with-session-storage";

@@ -1,5 +1,5 @@
-import { createLayoutView } from "@echojs/router";
-import { div, main } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import { div, main } from "@echojs-ecosystem/hyperdom";
 import { docsLayoutStyles } from "@pages/doc/docs.layout.styles.js";
 import { DocsSidebar } from "@widgets/docs-shell/docs-sidebar.js";
 import { SiteHeader } from "@widgets/site-header/index.js";

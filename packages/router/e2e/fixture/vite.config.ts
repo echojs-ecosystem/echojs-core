@@ -31,16 +31,16 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: "@echojs/router/hyperdom",
+        find: "@echojs-ecosystem/router/hyperdom",
         replacement: resolve(packagesDir, "router/src/hyperdom/index.ts"),
       },
-      { find: "@echojs/router", replacement: resolve(packagesDir, "router/src/index.ts") },
-      { find: "@echojs/reactivity", replacement: resolve(packagesDir, "reactivity/src/index.ts") },
-      { find: "@echojs/hyperdom", replacement: resolve(packagesDir, "hyperdom/src/index.ts") },
-      { find: "@echojs/url-state", replacement: resolve(packagesDir, "url-state/src/index.ts") },
+      { find: "@echojs-ecosystem/router", replacement: resolve(packagesDir, "router/src/index.ts") },
+      { find: "@echojs-ecosystem/reactivity", replacement: resolve(packagesDir, "reactivity/src/index.ts") },
+      { find: "@echojs-ecosystem/hyperdom", replacement: resolve(packagesDir, "hyperdom/src/index.ts") },
+      { find: "@echojs-ecosystem/url-state", replacement: resolve(packagesDir, "url-state/src/index.ts") },
     ],
   },
   optimizeDeps: {
-    exclude: ["@echojs/reactivity", "@echojs/hyperdom", "@echojs/router", "@echojs/url-state"],
+    exclude: ["@echojs-ecosystem/reactivity", "@echojs-ecosystem/hyperdom", "@echojs-ecosystem/router", "@echojs-ecosystem/url-state"],
   },
 });

@@ -37,14 +37,14 @@ EchoJS and **Solid** are closest in *rendering philosophy* (no VDOM diff). EchoJ
 
 | Concern | EchoJS | React | Vue | Angular | Solid | Svelte |
 | --- | --- | --- | --- | --- | --- | --- |
-| Routing | `@echojs/router` | React Router, TanStack Router | Vue Router | `@angular/router` | `@solidjs/router` | SvelteKit |
-| Async data | `@echojs/query` | TanStack Query, SWR | Pinia + fetch / TanStack Query | HttpClient + RxJS | `createResource` / TanStack | load + stores |
-| Global client state | `@echojs/store` | Redux, Zustand, Jotai | Pinia | NgRx, signals | stores, context | runes / writable |
-| URL search params | `@echojs/url-state` | router + ad hoc | `useRoute` query | `ActivatedRoute` | router search | `$page.url` |
-| Persistence | `@echojs/persist` | redux-persist, custom | pinia-plugin-persistedstate | custom | localStorage | localStorage |
-| UI kit | `@echojs/ui` | MUI, shadcn, Chakra | Vuetify, PrimeVue | Material, CDK | solid-ui, Kobalte | Skeleton, Melt |
-| i18n | `@echojs/i18n` | react-i18next | vue-i18n | `@angular/localize` | solid-i18n | svelte-i18n |
-| App shell | `@echojs/framework` | Next, Remix, Vite SPA | Nuxt, Vite SPA | Angular CLI | SolidStart, Vite | SvelteKit |
+| Routing | `@echojs-ecosystem/router` | React Router, TanStack Router | Vue Router | `@angular/router` | `@solidjs/router` | SvelteKit |
+| Async data | `@echojs-ecosystem/query` | TanStack Query, SWR | Pinia + fetch / TanStack Query | HttpClient + RxJS | `createResource` / TanStack | load + stores |
+| Global client state | `@echojs-ecosystem/store` | Redux, Zustand, Jotai | Pinia | NgRx, signals | stores, context | runes / writable |
+| URL search params | `@echojs-ecosystem/url-state` | router + ad hoc | `useRoute` query | `ActivatedRoute` | router search | `$page.url` |
+| Persistence | `@echojs-ecosystem/persist` | redux-persist, custom | pinia-plugin-persistedstate | custom | localStorage | localStorage |
+| UI kit | `@echojs-ecosystem/ui` | MUI, shadcn, Chakra | Vuetify, PrimeVue | Material, CDK | solid-ui, Kobalte | Skeleton, Melt |
+| i18n | `@echojs-ecosystem/i18n` | react-i18next | vue-i18n | `@angular/localize` | solid-i18n | svelte-i18n |
+| App shell | `@echojs-ecosystem/framework` | Next, Remix, Vite SPA | Nuxt, Vite SPA | Angular CLI | SolidStart, Vite | SvelteKit |
 
 ## What every comparison covers
 

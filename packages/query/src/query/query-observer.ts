@@ -1,4 +1,4 @@
-import { effect } from '@echojs/reactivity'
+import { effect } from '@echojs-ecosystem/reactivity'
 
 import { Query } from '../core/query'
 import {

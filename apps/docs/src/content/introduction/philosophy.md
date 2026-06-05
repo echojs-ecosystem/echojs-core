@@ -69,7 +69,7 @@ Child views resolve dependencies through provider context — not through global
 
 ## 5. Routes are data, not components
 
-`@echojs/router` exposes route objects with signals (`$isOpened`, `$params`, `$query`). Navigation is `page.go()` / `NavLink`, not stringly-typed path concatenation in views.
+`@echojs-ecosystem/router` exposes route objects with signals (`$isOpened`, `$params`, `$query`). Navigation is `page.go()` / `NavLink`, not stringly-typed path concatenation in views.
 
 Layouts nest with `outlet()`; data loading uses `beforeLoad` on the route definition.
 

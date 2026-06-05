@@ -1,4 +1,4 @@
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 export const $mobileNavOpen = signal(false);
 

@@ -1,10 +1,10 @@
 ---
 title: Playground
-description: Interactive sandbox for @echojs/reactivity.
-package: "@echojs/reactivity"
+description: Interactive sandbox for @echojs-ecosystem/reactivity.
+package: "@echojs-ecosystem/reactivity"
 ---
 
-Interact with **@echojs/reactivity** in the panel below. Buttons and inputs update **live state** (JSON on the right).
+Interact with **@echojs-ecosystem/reactivity** in the panel below. Buttons and inputs update **live state** (JSON on the right).
 
 :::playground reactivity
 

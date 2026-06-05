@@ -31,31 +31,31 @@ const packageDocPages = (id: string, title: string, npmPackage: string): DocsNav
 ];
 
 export const packageNavGroups: PackageNavGroup[] = [
-  { id: "reactivity", title: "Reactivity", npmPackage: "@echojs/reactivity", children: packageDocPages("reactivity", "Reactivity", "@echojs/reactivity") },
-  { id: "hyperdom", title: "HyperDOM", npmPackage: "@echojs/hyperdom", children: packageDocPages("hyperdom", "HyperDOM", "@echojs/hyperdom") },
-  { id: "framework", title: "Framework", npmPackage: "@echojs/framework", children: packageDocPages("framework", "Framework", "@echojs/framework") },
-  { id: "router", title: "Router", npmPackage: "@echojs/router", children: packageDocPages("router", "Router", "@echojs/router") },
-  { id: "store", title: "Store", npmPackage: "@echojs/store", children: packageDocPages("store", "Store", "@echojs/store") },
-  { id: "query", title: "Query", npmPackage: "@echojs/query", children: packageDocPages("query", "Query", "@echojs/query") },
-  { id: "url-state", title: "URL State", npmPackage: "@echojs/url-state", children: packageDocPages("url-state", "URL State", "@echojs/url-state") },
-  { id: "persist", title: "Persist", npmPackage: "@echojs/persist", children: packageDocPages("persist", "Persist", "@echojs/persist") },
+  { id: "reactivity", title: "Reactivity", npmPackage: "@echojs-ecosystem/reactivity", children: packageDocPages("reactivity", "Reactivity", "@echojs-ecosystem/reactivity") },
+  { id: "hyperdom", title: "HyperDOM", npmPackage: "@echojs-ecosystem/hyperdom", children: packageDocPages("hyperdom", "HyperDOM", "@echojs-ecosystem/hyperdom") },
+  { id: "framework", title: "Framework", npmPackage: "@echojs-ecosystem/framework", children: packageDocPages("framework", "Framework", "@echojs-ecosystem/framework") },
+  { id: "router", title: "Router", npmPackage: "@echojs-ecosystem/router", children: packageDocPages("router", "Router", "@echojs-ecosystem/router") },
+  { id: "store", title: "Store", npmPackage: "@echojs-ecosystem/store", children: packageDocPages("store", "Store", "@echojs-ecosystem/store") },
+  { id: "query", title: "Query", npmPackage: "@echojs-ecosystem/query", children: packageDocPages("query", "Query", "@echojs-ecosystem/query") },
+  { id: "url-state", title: "URL State", npmPackage: "@echojs-ecosystem/url-state", children: packageDocPages("url-state", "URL State", "@echojs-ecosystem/url-state") },
+  { id: "persist", title: "Persist", npmPackage: "@echojs-ecosystem/persist", children: packageDocPages("persist", "Persist", "@echojs-ecosystem/persist") },
   {
     id: "ui",
     title: "UI",
-    npmPackage: "@echojs/ui",
+    npmPackage: "@echojs-ecosystem/ui",
     children: [
-      ...packageDocPages("ui", "UI", "@echojs/ui"),
-      pkgItem("ui", "forms", "Forms", "guides/forms", "@echojs/ui"),
+      ...packageDocPages("ui", "UI", "@echojs-ecosystem/ui"),
+      pkgItem("ui", "forms", "Forms", "guides/forms", "@echojs-ecosystem/ui"),
     ],
   },
-  { id: "i18n", title: "i18n", npmPackage: "@echojs/i18n", children: packageDocPages("i18n", "i18n", "@echojs/i18n") },
-  { id: "devtools", title: "DevTools", npmPackage: "@echojs/devtools", children: packageDocPages("devtools", "DevTools", "@echojs/devtools") },
-  { id: "cli", title: "CLI", npmPackage: "@echojs/cli", children: packageDocPages("cli", "CLI", "@echojs/cli") },
+  { id: "i18n", title: "i18n", npmPackage: "@echojs-ecosystem/i18n", children: packageDocPages("i18n", "i18n", "@echojs-ecosystem/i18n") },
+  { id: "devtools", title: "DevTools", npmPackage: "@echojs-ecosystem/devtools", children: packageDocPages("devtools", "DevTools", "@echojs-ecosystem/devtools") },
+  { id: "cli", title: "CLI", npmPackage: "@echojs-ecosystem/cli", children: packageDocPages("cli", "CLI", "@echojs-ecosystem/cli") },
   {
     id: "architect",
     title: "Architect",
-    npmPackage: "@echojs/architect",
-    children: packageDocPages("architect", "Architect", "@echojs/architect"),
+    npmPackage: "@echojs-ecosystem/architect",
+    children: packageDocPages("architect", "Architect", "@echojs-ecosystem/architect"),
   },
 ];
 

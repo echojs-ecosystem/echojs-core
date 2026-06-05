@@ -5,7 +5,7 @@ import {
   noUnabstractionFiles,
   publicAbstraction,
   restrictCrossImports,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 
 /** `app/` — shell: entrypoints, router tables, global styles. */
 const appLayer = abstraction({

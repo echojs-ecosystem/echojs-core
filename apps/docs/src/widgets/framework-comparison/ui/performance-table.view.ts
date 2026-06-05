@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div } from "@echojs-ecosystem/hyperdom";
 import {
   comparisonFrameworks,
   performanceComparisonRows,

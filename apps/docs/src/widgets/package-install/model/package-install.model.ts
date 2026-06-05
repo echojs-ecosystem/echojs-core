@@ -1,5 +1,5 @@
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import {
   addPackageManagers,
   projectScaffoldManagers,

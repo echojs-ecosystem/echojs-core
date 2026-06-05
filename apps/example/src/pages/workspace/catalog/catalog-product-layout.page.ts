@@ -1,5 +1,5 @@
-import { createLayoutView } from "@echojs/router";
-import { div, h4, li, p, ul, type Child } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import { div, h4, li, p, ul, type Child } from "@echojs-ecosystem/hyperdom";
 import { findProduct } from "@entities/catalog/demo-data.js";
 import { catalogVariantPage } from "@pages/workspace/catalog/catalog-variant.page.js";
 import { Breadcrumbs, ParamPill } from "@pages/workspace/ui/breadcrumbs.js";

@@ -1,5 +1,5 @@
-import type { ReadonlySignal } from "@echojs/reactivity";
-import type { Child } from "@echojs/hyperdom";
+import type { ReadonlySignal } from "@echojs-ecosystem/reactivity";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 
 export type PlaygroundSnapshot = Record<string, unknown>;
 

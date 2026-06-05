@@ -31,7 +31,7 @@ This page explains **why**, and how that choice relates to **declarative** vs **
 | Is HyperDOM “anti-JSX”? | No — it is **optional sugar** we skip in favor of **plain TS + direct DOM** |
 | Is EchoJS imperative? | **Views are declarative** (UI follows state). **Syntax** looks more explicit than JSX |
 | Do we need a compiler? | **No** SFC/JSX plugin in CI — only `tsc` |
-| Can I use JSX anyway? | Not in core HyperDOM apps; `@echojs/core` is a separate JSX-oriented experiment |
+| Can I use JSX anyway? | Not in core HyperDOM apps; `@echojs-ecosystem/core` is a separate JSX-oriented experiment |
 
 EchoJS targets **signal-first SPAs** with **feature-first folders**. HyperDOM matches that: explicit dependencies, typed views, one less build pipeline.
 

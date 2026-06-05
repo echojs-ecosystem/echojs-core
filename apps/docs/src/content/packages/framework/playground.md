@@ -1,10 +1,10 @@
 ---
 title: Playground
-description: Interactive sandbox for @echojs/framework.
-package: "@echojs/framework"
+description: Interactive sandbox for @echojs-ecosystem/framework.
+package: "@echojs-ecosystem/framework"
 ---
 
-Interact with **@echojs/framework** in the panel below. Buttons and inputs update **live state** (JSON on the right).
+Interact with **@echojs-ecosystem/framework** in the panel below. Buttons and inputs update **live state** (JSON on the right).
 
 :::playground framework
 

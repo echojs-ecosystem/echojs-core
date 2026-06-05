@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 import { createMemoryStorageAdapter } from "../adapters/memory";
 import { createPersistRecord } from "./record";
@@ -282,7 +282,7 @@ describe("$error and $pending", () => {
   });
 });
 
-describe("@echojs/store integration", () => {
+describe("@echojs-ecosystem/store integration", () => {
   it("works with createStore().extend(withMemoryStorage())", async () => {
     const adapter = createMemoryStorageAdapter();
 

@@ -6,7 +6,7 @@ keywords: [router, routes, NavLink, beforeLoad, layout, guard]
 
 # Routing
 
-EchoJS routing lives in `@echojs/router`: a typed route tree, signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). This guide focuses on **how to structure routes in a real app**; package details are in [Router usage](/docs/packages/router/usage).
+EchoJS routing lives in `@echojs-ecosystem/router`: a typed route tree, signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). This guide focuses on **how to structure routes in a real app**; package details are in [Router usage](/docs/packages/router/usage).
 
 ## Mental model
 
@@ -23,7 +23,7 @@ URLs drive which **route view** renders. Layouts wrap children and must call `ou
 
 ```ts
 // entities/__routes__/app.routes.ts
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { homePage } from "@pages/home/home.page.js";
 
 export const appRoutes = createRoutes([
@@ -33,7 +33,7 @@ export const appRoutes = createRoutes([
 
 ```ts
 // entities/__routes__/router.ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 import { appRoutes } from "./app.routes.js";
 
 export const appRouter = createRouter({
@@ -82,7 +82,7 @@ Path rules:
 Typical page export:
 
 ```ts
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { bindModelView } from "@core/ui/bind-model-view.js";
 import { createSettingsModel } from "./model/settings.model.js";
 import { SettingsView } from "./ui/settings.view.js";
@@ -100,7 +100,7 @@ The route `view` is a HyperDOM child factory — no JSX, no hooks.
 Prefer **`NavLink`** for in-app navigation (no full reload, active class from `$isOpened`):
 
 ```ts
-import { NavLink } from "@echojs/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
 
 NavLink({
   to: settingsPage,
@@ -142,7 +142,7 @@ See `apps/example` → `workspace/users/user-detail.page.ts` and `workspace/slow
 ### Per-route (`guardRoute`)
 
 ```ts
-import { guardRoute } from "@echojs/router";
+import { guardRoute } from "@echojs-ecosystem/router";
 import { $isLoggedIn } from "@entities/session/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { settingsPage } from "@pages/workspace/settings/workspace-settings.page.js";
@@ -177,7 +177,7 @@ Use **global** guard for “whole app behind login”; use **`guardRoute`** for 
 ## Lazy routes
 
 ```ts
-import { createLazyRouteView } from "@echojs/router";
+import { createLazyRouteView } from "@echojs-ecosystem/router";
 
 export const reportsPage = createLazyRouteView({
   name: "reports",
@@ -200,7 +200,7 @@ Shell chrome can sit **outside** `router.View` with a pass-through layout — se
 
 ## URL query state
 
-For filters, tabs, and shareable UI state prefer `@echojs/url-state` over ad-hoc `location.search` parsing — see [URL state](/docs/state/url-state) and [State overview](/docs/state/overview).
+For filters, tabs, and shareable UI state prefer `@echojs-ecosystem/url-state` over ad-hoc `location.search` parsing — see [URL state](/docs/state/url-state) and [State overview](/docs/state/overview).
 
 ## Related
 

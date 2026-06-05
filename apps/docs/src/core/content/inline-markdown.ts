@@ -1,6 +1,6 @@
-import type { Child } from "@echojs/hyperdom";
-import { code, h, strong } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { code, h, strong } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 
 export type InlinePart =

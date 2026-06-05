@@ -1,5 +1,5 @@
-import { createRouteView } from "@echojs/router";
-import { div, h4, p, strong } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { div, h4, p, strong } from "@echojs-ecosystem/hyperdom";
 
 export const filesPage = createRouteView({
   name: "files",

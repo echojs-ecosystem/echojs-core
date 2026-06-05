@@ -1,4 +1,4 @@
-import { bindField } from "@echojs/form";
+import { bindField } from "@echojs-ecosystem/form";
 import {
   $authUser,
   $isLoggedIn,
@@ -9,7 +9,7 @@ import {
 import { getDocsModule } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { profileForm, saveProfileSnapshot } from "@pages/docs/account/account.model.js";
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import {
   button,
   code,
@@ -22,7 +22,7 @@ import {
   section,
   Show,
   span,
-} from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
 import { ModuleHeader } from "@widgets/app-shell/module-header.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 

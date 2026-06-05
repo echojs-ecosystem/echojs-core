@@ -1,7 +1,7 @@
 ---
 title: Example
 description: UI components preview from packages/ui README and example app.
-package: "@echojs/ui"
+package: "@echojs-ecosystem/ui"
 status: draft
 ---
 
@@ -13,7 +13,7 @@ status: draft
 ## Provider (`apps/example`)
 
 ```ts
-import { createUiProvider } from "@echojs/ui/provider";
+import { createUiProvider } from "@echojs-ecosystem/ui/provider";
 
 export const uiProvider = createUiProvider({
   // theme overrides
@@ -29,7 +29,7 @@ createEchoApp({ strictContextChecks: true })
 ## Button
 
 ```ts
-import { Button } from "@echojs/ui/button";
+import { Button } from "@echojs-ecosystem/ui/button";
 
 Button({
   variant: "primary",
@@ -42,9 +42,9 @@ Button({
 ## Field + Input
 
 ```ts
-import { Field } from "@echojs/ui/field";
-import { Input } from "@echojs/ui/input";
-import { Label } from "@echojs/ui/label";
+import { Field } from "@echojs-ecosystem/ui/field";
+import { Input } from "@echojs-ecosystem/ui/input";
+import { Label } from "@echojs-ecosystem/ui/label";
 
 Field({
   children: [
@@ -57,9 +57,9 @@ Field({
 ## Subpath imports
 
 ```ts
-import { Button } from "@echojs/ui/button";
-import { Checkbox } from "@echojs/ui/checkbox";
-import { createTheme } from "@echojs/ui/theme";
+import { Button } from "@echojs-ecosystem/ui/button";
+import { Checkbox } from "@echojs-ecosystem/ui/checkbox";
+import { createTheme } from "@echojs-ecosystem/ui/theme";
 ```
 
 ## Live references

@@ -1,6 +1,6 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import type { Child } from "@echojs/hyperdom";
-import { aside, button, div, nav, p, Show } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { aside, button, div, nav, p, Show } from "@echojs-ecosystem/hyperdom";
 import { docsModules } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import type { TKey } from "@app/providers/i18n.js";
@@ -16,7 +16,7 @@ import { reactivityPage } from "@pages/docs/reactivity/reactivity.page.js";
 import { statePage } from "@pages/docs/state/state.page.js";
 import { hubPage } from "@pages/hub/hub.page.js";
 import { LocaleSwitcher } from "@widgets/locale-switcher/locale-switcher.js";
-import type { AnyPage } from "@echojs/router";
+import type { AnyPage } from "@echojs-ecosystem/router";
 
 const navLink = (page: AnyPage, labelKey: TKey): Child =>
   NavLink({

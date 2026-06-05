@@ -24,7 +24,7 @@ bun dev
 
 ## Как это работает
 
-Пример использует `@echojs/hyperdom` (без JSX) и пакеты из workspace.
+Пример использует `@echojs-ecosystem/hyperdom` (без JSX) и пакеты из workspace.
 
 ## Структура
 

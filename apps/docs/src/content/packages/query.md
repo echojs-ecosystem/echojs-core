@@ -1,18 +1,18 @@
 ---
 title: Query
 description: Signal-native async cache for models — queries, mutations, invalidation.
-package: "@echojs/query"
+package: "@echojs-ecosystem/query"
 keywords: [createQuery, createMutation, queryClient]
 ---
 
 :::package-overview query
 
-:::install @echojs/query
+:::install @echojs-ecosystem/query
 
 ## Quick start
 
 ```ts
-import { createQuery } from "@echojs/query";
+import { createQuery } from "@echojs-ecosystem/query";
 
 const userQuery = createQuery({
   queryKey: ["user", id] as const,

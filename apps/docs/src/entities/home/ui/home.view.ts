@@ -1,6 +1,6 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { NavLink } from "@echojs/router/hyperdom";
-import { div, h1, h2, main, p, section, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { div, h1, h2, main, p, section, span } from "@echojs-ecosystem/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import type { HomeVM } from "@entities/home/types/home.types.js";
 import { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.js";

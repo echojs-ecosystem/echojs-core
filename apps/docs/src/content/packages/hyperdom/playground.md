@@ -1,10 +1,10 @@
 ---
 title: Playground
-description: Interactive sandbox for @echojs/hyperdom.
-package: "@echojs/hyperdom"
+description: Interactive sandbox for @echojs-ecosystem/hyperdom.
+package: "@echojs-ecosystem/hyperdom"
 ---
 
-Interact with **@echojs/hyperdom** in the panel below. Buttons and inputs update **live state** (JSON on the right).
+Interact with **@echojs-ecosystem/hyperdom** in the panel below. Buttons and inputs update **live state** (JSON on the right).
 
 :::playground hyperdom
 

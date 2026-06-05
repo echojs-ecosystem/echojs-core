@@ -102,4 +102,4 @@ export { Checkbox } from "./components/checkbox/index";
 export type { CheckboxProps, CheckboxSize, CheckboxVariantProps } from "./components/checkbox/index";
 
 // Re-export hyperdom types used by consumers
-export type { Child, Props, Component } from "@echojs/hyperdom";
+export type { Child, Props, Component } from "@echojs-ecosystem/hyperdom";

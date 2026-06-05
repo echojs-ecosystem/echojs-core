@@ -1,23 +1,23 @@
 ---
 title: Installation
-description: Install @echojs/hyperdom with @echojs/reactivity.
-package: "@echojs/hyperdom"
+description: Install @echojs-ecosystem/hyperdom with @echojs-ecosystem/reactivity.
+package: "@echojs-ecosystem/hyperdom"
 ---
 
 # Installation
 
-HyperDOM is the **view layer** of EchoJS. It depends on `@echojs/reactivity` for dynamic regions and reactive props.
+HyperDOM is the **view layer** of EchoJS. It depends on `@echojs-ecosystem/reactivity` for dynamic regions and reactive props.
 
 ## Requirements
 
 - **ESM** bundler (Vite, Bun, etc.)
-- **`@echojs/reactivity`** — required peer-style dependency (workspace or npm)
+- **`@echojs-ecosystem/reactivity`** — required peer-style dependency (workspace or npm)
 
 ## Package managers
 
-:::install @echojs/hyperdom
+:::install @echojs-ecosystem/hyperdom
 
-:::install @echojs/reactivity
+:::install @echojs-ecosystem/reactivity
 
 > [!TIP]
 > In EchoJS apps you usually install **framework** + **router** at the root; HyperDOM is still imported directly in views and widgets.
@@ -27,8 +27,8 @@ HyperDOM is the **view layer** of EchoJS. It depends on `@echojs/reactivity` for
 ```json
 {
   "dependencies": {
-    "@echojs/hyperdom": "workspace:*",
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*"
   }
 }
 ```
@@ -40,8 +40,8 @@ bun install
 ## Smoke test
 
 ```ts
-import { render, div, button } from "@echojs/hyperdom";
-import { signal } from "@echojs/reactivity";
+import { render, div, button } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const $n = signal(0);
 
@@ -66,7 +66,7 @@ createEchoApp({ strictContextChecks: true });
 Or manually:
 
 ```ts
-import { setStrictContextChecks } from "@echojs/hyperdom";
+import { setStrictContextChecks } from "@echojs-ecosystem/hyperdom";
 
 setStrictContextChecks(true);
 ```
@@ -76,5 +76,5 @@ setStrictContextChecks(true);
 Lifecycle hook as a child (advanced):
 
 ```ts
-import { mount } from "@echojs/hyperdom/lifecycle/mount";
+import { mount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
 ```

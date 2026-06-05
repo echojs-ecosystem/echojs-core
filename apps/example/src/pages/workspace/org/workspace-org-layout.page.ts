@@ -1,5 +1,5 @@
-import { createLayoutView } from "@echojs/router";
-import { div, h4, li, p, ul, type Child } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import { div, h4, li, p, ul, type Child } from "@echojs-ecosystem/hyperdom";
 import { findOrg, WORKSPACE_ORGS } from "@entities/workspace/demo-data.js";
 import { workspaceSprintPage } from "@pages/workspace/sprint/workspace-sprint.page.js";
 import { Breadcrumbs, ParamPill } from "@pages/workspace/ui/breadcrumbs.js";

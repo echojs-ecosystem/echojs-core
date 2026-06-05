@@ -1,5 +1,5 @@
-import type { Child } from "@echojs/hyperdom";
-import { createComponent } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import { createHomeModel } from "@entities/home/model/home.model.js";
 import { HomeView } from "@entities/home/ui/home.view.js";
 

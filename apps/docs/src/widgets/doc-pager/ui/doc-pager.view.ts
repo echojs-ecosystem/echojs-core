@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, h, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, h, span } from "@echojs-ecosystem/hyperdom";
 import { getDocPage } from "@app/router/doc-pages.js";
 import { docPath, getAdjacentDocNavItems } from "@core/content/nav.js";
 import type { ContentId } from "@core/content/types.js";

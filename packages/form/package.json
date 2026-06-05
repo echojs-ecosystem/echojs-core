@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/form",
+  "name": "@echojs-ecosystem/form",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -29,12 +29,12 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/persist": "workspace:*",
-    "@echojs/reactivity": "workspace:*",
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
     "@standard-schema/spec": "^1.1.0"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4",
     "zod": "^3.25.28"

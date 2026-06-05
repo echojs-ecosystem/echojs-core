@@ -35,7 +35,7 @@ describe('createQuery', () => {
 
   it('withStore binds store params', async () => {
     const client = createTestClient()
-    const { createStore } = await import('@echojs/store')
+    const { createStore } = await import('@echojs-ecosystem/store')
 
     const filters = createStore({ page: 1, q: '' })
     const getUsersQuery = createQuery({

@@ -1,4 +1,4 @@
-import { createRoute } from "@echojs/router";
+import { createRoute } from "@echojs-ecosystem/router";
 
 export const legacyUserRoute = createRoute<"legacy-user", { id: string }>("legacy-user");
 export const legacyExample1Route = createRoute("legacy-example1");

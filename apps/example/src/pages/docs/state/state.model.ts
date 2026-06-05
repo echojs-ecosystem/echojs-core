@@ -1,4 +1,4 @@
-import { createStore, select, withActions } from "@echojs/store";
+import { createStore, select, withActions } from "@echojs-ecosystem/store";
 
 export const themeStore = createStore("dark" as "dark" | "light", { name: "theme" }).extend(
   withActions({

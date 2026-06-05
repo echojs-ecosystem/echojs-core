@@ -10,7 +10,7 @@ Short contract for tools that edit **`apps/docs`**. The canonical plain-text cop
 
 ## Stack
 
-- **EchoJS** — `@echojs/hyperdom`, `@echojs/reactivity`, `@echojs/router`, `@echojs/query`, `@echojs/i18n`, `@echojs/framework`
+- **EchoJS** — `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/reactivity`, `@echojs-ecosystem/router`, `@echojs-ecosystem/query`, `@echojs-ecosystem/i18n`, `@echojs-ecosystem/framework`
 - **Styling** — Tailwind v4 + `tailwind-variants` (`tv()`)
 - **Content** — Markdown in `src/content/`, lazy-loaded per route
 

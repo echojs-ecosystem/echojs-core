@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: createQuery, reactive .with(), QueryClient, mutations, infinite queries, and HyperDOM models.
-package: "@echojs/query"
+package: "@echojs-ecosystem/query"
 ---
 
 # Usage
@@ -19,7 +19,7 @@ Example feature: `apps/example/src/features/query-demo/api/jsonplaceholder.queri
 ## `createQuery`
 
 ```ts
-import { createQuery } from "@echojs/query";
+import { createQuery } from "@echojs-ecosystem/query";
 
 export const listUsersQuery = createQuery<User[]>({
   name: "jp-users",
@@ -71,7 +71,7 @@ const posts = getUserPostsQuery.with(
 ### `withStore`
 
 ```ts
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 const $filter = createStore({ userId: 1 });
 const posts = getUserPostsQuery.withStore($filter, (s) => ({ userId: s.userId }));
@@ -157,7 +157,7 @@ Same options work on `createMutation` / `createInfiniteQuery`.
 Access via provider: `getQueryProvider()?.client` or pass `{ client }` to `.with()`.
 
 ```ts
-import { createQueryClient } from "@echojs/query";
+import { createQueryClient } from "@echojs-ecosystem/query";
 
 const client = createQueryClient();
 
@@ -175,7 +175,7 @@ client.clear();
 ## Mutations
 
 ```ts
-import { createMutation } from "@echojs/query";
+import { createMutation } from "@echojs-ecosystem/query";
 
 export const createPostMutation = createMutation({
   name: "create-post",
@@ -203,7 +203,7 @@ Definitions use **`mutationFn`**, not `mutation` (README legacy name).
 ## Infinite queries
 
 ```ts
-import { createInfiniteQuery } from "@echojs/query";
+import { createInfiniteQuery } from "@echojs-ecosystem/query";
 
 type PostsPage = { posts: Post[]; nextOffset: number | null };
 

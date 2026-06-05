@@ -1,4 +1,4 @@
-/** Bench entry: all public @echojs/framework subpaths in one browser bundle. */
+/** Bench entry: all public @echojs-ecosystem/framework subpaths in one browser bundle. */
 export * from '../core.js'
 export * from '../reactivity.js'
 export * from '../router.js'

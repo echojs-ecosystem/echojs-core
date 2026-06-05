@@ -1,4 +1,4 @@
-import { effect } from "@echojs/reactivity";
+import { effect } from "@echojs-ecosystem/reactivity";
 import { appRouter } from "@app/router/router.js";
 
 const STORAGE_KEY = "echojs:docs-sidebar-scroll";

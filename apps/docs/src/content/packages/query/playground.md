@@ -1,10 +1,10 @@
 ---
 title: Playground
-description: Interactive sandbox for @echojs/query.
-package: "@echojs/query"
+description: Interactive sandbox for @echojs-ecosystem/query.
+package: "@echojs-ecosystem/query"
 ---
 
-Interact with **@echojs/query** in the panel below. Buttons and inputs update **live state** (JSON on the right).
+Interact with **@echojs-ecosystem/query** in the panel below. Buttons and inputs update **live state** (JSON on the right).
 
 :::playground query
 

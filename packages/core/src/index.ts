@@ -8,9 +8,9 @@ export {
   batch,
   isSignal as isSignalBase,
   isReadonlySignal as isReadonlySignalBase,
-} from "@echojs/reactivity";
+} from "@echojs-ecosystem/reactivity";
 
-export type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs/reactivity";
+export type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs-ecosystem/reactivity";
 
 // Component system - новый API с createModel и createView
 export {

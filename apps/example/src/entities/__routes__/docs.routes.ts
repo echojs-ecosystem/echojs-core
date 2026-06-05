@@ -1,4 +1,4 @@
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { docsShellLayoutPage } from "@pages/docs/layout/docs-shell-layout.page.js";
 import { docsHomePage } from "@pages/docs/home/docs-home.page.js";
 import { reactivityPage } from "@pages/docs/reactivity/reactivity.page.js";

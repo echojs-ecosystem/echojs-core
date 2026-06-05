@@ -6,8 +6,8 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@echojs/reactivity": ["../reactivity/src/index.ts"],
-      "@echojs/persist": ["../persist/src/index.ts"]
+      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"],
+      "@echojs-ecosystem/persist": ["../persist/src/index.ts"]
     },
     "rootDir": ".."
   },

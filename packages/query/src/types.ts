@@ -1,4 +1,4 @@
-import type { ReadonlySignal } from '@echojs/reactivity'
+import type { ReadonlySignal } from '@echojs-ecosystem/reactivity'
 
 import type { InfiniteQueryCache } from './core/infinite-query-cache'
 import type { QueryCache } from './core/query-cache'

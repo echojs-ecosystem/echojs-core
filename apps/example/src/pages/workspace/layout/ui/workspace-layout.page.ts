@@ -1,6 +1,6 @@
-import { createLayoutView } from "@echojs/router";
-import type { AnyPage } from "@echojs/router";
-import { h, type Child } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import type { AnyPage } from "@echojs-ecosystem/router";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 import { appRouter } from "@app/router/index.js";
 import { i18n } from "@app/providers/i18n.js";
 import type { TKey } from "@app/providers/i18n.js";

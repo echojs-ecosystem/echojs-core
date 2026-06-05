@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, it } from "vitest";
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 import { createMemoryStorageAdapter } from "../adapters/memory";
 import { withStorage } from "./with-storage";

@@ -1,5 +1,5 @@
 import type { Signal } from "@echojs-ecosystem/reactivity";
-import type { Persistable, PersistExtension, PersistExtensionResult } from "@echojs/persist";
+import type { Persistable, PersistExtension, PersistExtensionResult } from "@echojs-ecosystem/persist";
 import type { Field, FieldArray, FieldArrayCore, FieldCore } from "../types";
 
 type ValueField<T> = {

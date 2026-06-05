@@ -1,4 +1,4 @@
-import { h, type Child } from "@echojs/hyperdom";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";

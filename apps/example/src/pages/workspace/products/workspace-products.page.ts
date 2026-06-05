@@ -1,6 +1,6 @@
-import { createRouteView } from "@echojs/router";
-import type { Child } from "@echojs/hyperdom";
-import { input, label } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { input, label } from "@echojs-ecosystem/hyperdom";
 import {
   createQueryParams,
   debounce,
@@ -10,7 +10,7 @@ import {
   parseAsInteger,
   parseAsLiteral,
   parseAsString,
-} from "@echojs/url-state";
+} from "@echojs-ecosystem/url-state";
 import { CATALOG_CATEGORIES, type CatalogProduct } from "@entities/catalog/demo-data.js";
 import { Breadcrumbs } from "@pages/workspace/ui/breadcrumbs.js";
 import { button, code, div, h4, p, pre, section, span } from "@pages/workspace/ui/common.js";
@@ -138,7 +138,7 @@ export const workspaceProductsPage = createRouteView({
       h4(null, "Товары — фильтры в URL"),
       p({ class: "router-muted" }, [
         "Это демо показывает ",
-        code(null, "@echojs/url-state"),
+        code(null, "@echojs-ecosystem/url-state"),
         ": значения фильтров типизированы парсерами, живут в ",
         code(null, "search params"),
         ", и синхронизируются как state (без React/Vue/Solid).",

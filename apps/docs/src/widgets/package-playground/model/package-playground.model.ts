@@ -1,4 +1,4 @@
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { getPackagePlayground } from "../registry.js";
 import type { PlaygroundInstance, PackagePlaygroundDef } from "../types.js";
 

@@ -152,7 +152,7 @@ export const parseMarkdown = (raw: string): DocDocument => {
       continue;
     }
 
-    if (line.startsWith("@echojs/")) {
+    if (line.startsWith("@echojs-ecosystem/")) {
       blocks.push({ type: "package-badge", name: line.trim() });
       i++;
       continue;

@@ -1,4 +1,4 @@
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { assertPage, getPageState, isLayoutPage, isPage } from "./page";
 import { resolveBeforeLoad } from "./page";
 import type { RouteTreeEntry } from "./path-types";

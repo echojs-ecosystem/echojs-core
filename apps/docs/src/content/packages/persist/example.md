@@ -1,7 +1,7 @@
 ---
 title: Example
 description: Auth session persistence with cookie and localStorage.
-package: "@echojs/persist"
+package: "@echojs-ecosystem/persist"
 ---
 
 # Example — Persist
@@ -9,8 +9,8 @@ package: "@echojs/persist"
 ## Auth session (`apps/example`)
 
 ```ts
-import { createStore } from "@echojs/store";
-import { withCookie, withLocalStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withCookie, withLocalStorage } from "@echojs-ecosystem/persist";
 
 export type AuthUser = {
   id: string;
@@ -69,8 +69,8 @@ export const logout = (): void => {
 ## Theme in localStorage (minimal)
 
 ```ts
-import { createStore } from "@echojs/store";
-import { withLocalStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 
 export const themeStore = createStore("dark" as "dark" | "light").extend(
   withLocalStorage({ key: "app-theme", version: 1 }),

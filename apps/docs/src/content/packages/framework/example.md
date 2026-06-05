@@ -1,7 +1,7 @@
 ---
 title: Example
 description: createEchoApp bootstrap from apps/docs and apps/example.
-package: "@echojs/framework"
+package: "@echojs-ecosystem/framework"
 ---
 
 # Example — Framework
@@ -10,7 +10,7 @@ package: "@echojs/framework"
 
 ```ts
 // src/app/bootstrap.ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 import {
   i18nProvider,
   queryProvider,
@@ -41,7 +41,7 @@ void bootstrap();
 ## Example lab bootstrap (`apps/example`)
 
 ```ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 import { i18nProvider, queryProvider, routerProvider, uiProvider } from "./providers/index.js";
 
 export const bootstrap = () =>
@@ -59,7 +59,7 @@ export const bootstrap = () =>
 ## Custom provider (`createProvider`)
 
 ```ts
-import { createProvider } from "@echojs/framework/app";
+import { createProvider } from "@echojs-ecosystem/framework/app";
 
 const THEME_KEY = Symbol("theme");
 
@@ -76,7 +76,7 @@ export const themeProvider = createProvider({
 `apps/docs` не использует stock `createRouterProvider` — sidebar остаётся смонтированным:
 
 ```ts
-import { ROUTER_KEY } from "@echojs/framework/app";
+import { ROUTER_KEY } from "@echojs-ecosystem/framework/app";
 import { appRouter } from "@entities/__routes__/router.js";
 import { DocsChrome } from "@widgets/docs-shell/docs-chrome.js";
 

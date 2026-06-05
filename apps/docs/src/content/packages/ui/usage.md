@@ -1,7 +1,7 @@
 ---
 title: Usage
-description: @echojs/ui usage — documentation coming soon.
-package: "@echojs/ui"
+description: @echojs-ecosystem/ui usage — documentation coming soon.
+package: "@echojs-ecosystem/ui"
 status: draft
 ---
 
@@ -21,8 +21,8 @@ status: draft
 ## Preview (from README)
 
 ```ts
-import { Button } from "@echojs/ui/button";
-import { createUiProvider } from "@echojs/ui/provider";
+import { Button } from "@echojs-ecosystem/ui/button";
+import { createUiProvider } from "@echojs-ecosystem/ui/provider";
 
 Button({
   variant: "primary",

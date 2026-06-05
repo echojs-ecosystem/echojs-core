@@ -15,5 +15,5 @@ export {
   span,
   strong,
   ul,
-} from "@echojs/hyperdom";
-export { Link, NavLink } from "@echojs/router/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
+export { Link, NavLink } from "@echojs-ecosystem/router/hyperdom";

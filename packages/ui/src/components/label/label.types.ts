@@ -1,4 +1,4 @@
-import type { Child, Props } from "@echojs/hyperdom";
+import type { Child, Props } from "@echojs-ecosystem/hyperdom";
 import type { UIComponentBaseProps } from "../../core/types";
 
 export type LabelProps = UIComponentBaseProps &

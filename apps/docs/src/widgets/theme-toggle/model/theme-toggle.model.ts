@@ -1,4 +1,4 @@
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { $themeMode, toggleTheme } from "@core/providers/index.js";
 
 export type ThemeToggleVM = {

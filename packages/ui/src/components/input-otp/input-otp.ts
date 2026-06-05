@@ -1,4 +1,4 @@
-import { h } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
 
 import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";

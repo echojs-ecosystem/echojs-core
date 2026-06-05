@@ -4,25 +4,25 @@
   "commit": false,
   "fixed": [
     [
-      "@echojs/reactivity",
-      "@echojs/core",
-      "@echojs/hyperdom",
-      "@echojs/framework",
-      "@echojs/router",
-      "@echojs/form",
-      "@echojs/persist",
-      "@echojs/store",
-      "@echojs/query",
-      "@echojs/url-state",
-      "@echojs/i18n",
-      "@echojs/ui",
-      "@echojs/architect",
-      "@echojs/devtools-core"
+      "@echojs-ecosystem/reactivity",
+      "@echojs-ecosystem/core",
+      "@echojs-ecosystem/hyperdom",
+      "@echojs-ecosystem/framework",
+      "@echojs-ecosystem/router",
+      "@echojs-ecosystem/form",
+      "@echojs-ecosystem/persist",
+      "@echojs-ecosystem/store",
+      "@echojs-ecosystem/query",
+      "@echojs-ecosystem/url-state",
+      "@echojs-ecosystem/i18n",
+      "@echojs-ecosystem/ui",
+      "@echojs-ecosystem/architect",
+      "@echojs-ecosystem/devtools-core"
     ]
   ],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@echojs/bench", "@echojs/oxc-config"]
+  "ignore": ["@echojs-ecosystem/bench", "@echojs-ecosystem/oxc-config"]
 }

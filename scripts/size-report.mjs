@@ -93,7 +93,7 @@ const readReport = (dir) =>
 async function main() {
   if (!existsSync(benchCli)) {
     console.error(
-      'Build @echojs/bench first: bun run --filter @echojs/bench build'
+      'Build @echojs-ecosystem/bench first: bun run --filter @echojs-ecosystem/bench build'
     )
     process.exit(1)
   }
@@ -143,7 +143,7 @@ async function main() {
     )
   }
 
-  console.log('\nFramework subpaths (@echojs/framework/…):\n')
+  console.log('\nFramework subpaths (@echojs-ecosystem/framework/…):\n')
   console.log(
     `${'Subpath'.padEnd(22)} ${'Minified'.padStart(10)} ${'Gzip'.padStart(10)} ${'Brotli'.padStart(10)}`
   )
@@ -167,12 +167,12 @@ async function main() {
   )
 
   if (urlStateRow && urlStateFw) {
-    console.log('\n@echojs/url-state:\n')
+    console.log('\n@echojs-ecosystem/url-state:\n')
     console.log(
-      `  Пакет @echojs/url-state:          gzip ${fmt(urlStateRow.gzipBytes)} (min ${fmt(urlStateRow.bytes)})`
+      `  Пакет @echojs-ecosystem/url-state:          gzip ${fmt(urlStateRow.gzipBytes)} (min ${fmt(urlStateRow.bytes)})`
     )
     console.log(
-      `  Subpath @echojs/framework/url-state: gzip ${fmt(urlStateFw.gzipBytes)} (min ${fmt(urlStateFw.bytes)})`
+      `  Subpath @echojs-ecosystem/framework/url-state: gzip ${fmt(urlStateFw.gzipBytes)} (min ${fmt(urlStateFw.bytes)})`
     )
     console.log(
       '  В router/hyperdom url-state уже включён; отдельный subpath — для прямого import без router.'

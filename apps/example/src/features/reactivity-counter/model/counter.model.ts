@@ -1,6 +1,6 @@
 import { signal } from "@echojs-ecosystem/reactivity";
 import type { Signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 export interface CounterVM {
   $count: Signal<number>;

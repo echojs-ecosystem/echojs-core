@@ -4,7 +4,7 @@
 
 ## Stack
 
-- EchoJS: @echojs/framework, @echojs/hyperdom, @echojs/router, @echojs/reactivity, @echojs/query, @echojs/i18n
+- EchoJS: @echojs-ecosystem/framework, @echojs-ecosystem/hyperdom, @echojs-ecosystem/router, @echojs-ecosystem/reactivity, @echojs-ecosystem/query, @echojs-ecosystem/i18n
 - UI: hyperdom + tailwind-variants (`tv()`), no React
 - Content: markdown under `apps/docs/src/content/`
 
@@ -12,7 +12,7 @@
 
 NEVER mix state/effects and markup in one file.
 
-1. **Model** — `createModel` from `@echojs/hyperdom` in `model/*.model.ts`
+1. **Model** — `createModel` from `@echojs-ecosystem/hyperdom` in `model/*.model.ts`
    - Signals, effects, queries, actions, derived state
 2. **View** — `createView` in `ui/*.view.ts` — ONLY presentation (hyperdom tree)
 3. **Wire** — `bindModelView(createXModel, XView)` or `bindModelViewWith(props, (p) => createXModel(p), XView)` from `shared/ui/bind-model-view.ts`

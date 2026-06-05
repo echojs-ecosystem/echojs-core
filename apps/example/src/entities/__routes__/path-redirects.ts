@@ -1,4 +1,4 @@
-import { createRoute, redirect } from "@echojs/router";
+import { createRoute, redirect } from "@echojs-ecosystem/router";
 import { reactivityPage } from "@pages/docs/reactivity/reactivity.page.js";
 import { formsPage } from "@pages/docs/forms/forms.page.js";
 import { formsNestedPage } from "@pages/docs/forms/nested/forms-nested.page.js";

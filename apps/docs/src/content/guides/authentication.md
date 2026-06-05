@@ -6,16 +6,16 @@ keywords: [auth, session, guardRoute, authorizationGuard, persist, cookie]
 
 # Authentication
 
-EchoJS has no built-in auth server — you integrate your API and keep **session state** in stores, **persistence** in `@echojs/persist`, and **access control** in the router. `apps/example` demonstrates a mock login you can replace with real endpoints.
+EchoJS has no built-in auth server — you integrate your API and keep **session state** in stores, **persistence** in `@echojs-ecosystem/persist`, and **access control** in the router. `apps/example` demonstrates a mock login you can replace with real endpoints.
 
 ## Session shape
 
 Split **token** (credential) and **user** (profile) so you can clear or refresh them independently:
 
 ```ts
-import { computed } from "@echojs/reactivity";
-import { createStore } from "@echojs/store";
-import { withCookie, withLocalStorage } from "@echojs/persist";
+import { computed } from "@echojs-ecosystem/reactivity";
+import { createStore } from "@echojs-ecosystem/store";
+import { withCookie, withLocalStorage } from "@echojs-ecosystem/persist";
 
 export type AuthUser = { id: string; email: string; name: string };
 
@@ -96,7 +96,7 @@ Forms: [Forms guide](/docs/guides/forms). Example page: `apps/example/src/pages/
 ### `guardRoute` (recommended for a few pages)
 
 ```ts
-import { guardRoute } from "@echojs/router";
+import { guardRoute } from "@echojs-ecosystem/router";
 import { $isLoggedIn } from "@entities/session/index.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";
 import { settingsPage } from "@pages/workspace/settings/workspace-settings.page.js";

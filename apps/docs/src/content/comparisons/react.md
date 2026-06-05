@@ -47,12 +47,12 @@ This guide is the **primary migration reference** for teams who know React, Next
 | **Granularity** | Component (unless Compiler/memo) | Signal / binding |
 | **Virtual DOM** | Yes (core model) | No |
 | **Structure** | Team convention, lint rules optional | **Feature-first** dependency direction (documented) |
-| **Routing** | React Router, TanStack Router, Next file routes | `@echojs/router` (typed route table) |
-| **Server / cache** | TanStack Query, SWR, Apollo, RTK Query | `@echojs/query` |
-| **Client global** | Redux, Zustand, Jotai, Context | `@echojs/store` (+ `@echojs/persist`) |
-| **URL state** | `useSearchParams`, nuqs, manual | `@echojs/url-state` |
-| **UI** | MUI, Chakra, Radix + shadcn, Ant Design | `@echojs/hyperdom` + `@echojs/ui` |
-| **App shell** | Next.js, Remix, Vite SPA | `@echojs/framework` + Vite (reference apps) |
+| **Routing** | React Router, TanStack Router, Next file routes | `@echojs-ecosystem/router` (typed route table) |
+| **Server / cache** | TanStack Query, SWR, Apollo, RTK Query | `@echojs-ecosystem/query` |
+| **Client global** | Redux, Zustand, Jotai, Context | `@echojs-ecosystem/store` (+ `@echojs-ecosystem/persist`) |
+| **URL state** | `useSearchParams`, nuqs, manual | `@echojs-ecosystem/url-state` |
+| **UI** | MUI, Chakra, Radix + shadcn, Ant Design | `@echojs-ecosystem/hyperdom` + `@echojs-ecosystem/ui` |
+| **App shell** | Next.js, Remix, Vite SPA | `@echojs-ecosystem/framework` + Vite (reference apps) |
 | **Hooks rules** | Yes (eslint-plugin-react-hooks) | No — models are plain functions |
 | **Official SSR story** | Next / Remix mature | SPA-first today; plan SSR separately |
 
@@ -94,8 +94,8 @@ function Counter() {
 
 ```ts
 // EchoJS — model + view; text node subscribed to count
-import { signal } from "@echojs/reactivity";
-import { createModel, createView, button } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel, createView, button } from "@echojs-ecosystem/hyperdom";
 
 export const createCounterModel = createModel(() => {
   const count = signal(0);
@@ -118,14 +118,14 @@ export const CounterView = createView((vm) =>
 | `useEffect` | `effect` | Same dependency idea, no hook ordering |
 | `useLayoutEffect` | `effect` + sync DOM reads in view | Prefer binding over post-paint fixes |
 | `useRef` (DOM) | element refs via HyperDOM | See HyperDOM usage docs |
-| `useContext` | `provide` / `inject` | Via `@echojs/framework` |
+| `useContext` | `provide` / `inject` | Via `@echojs-ecosystem/framework` |
 | `useSyncExternalStore` | `subscribe` on signals / store | Rare at app level |
 | `useImperativeHandle` | expose API from model | No forwardRef ceremony |
 | Custom hooks | `createModel` factories | Testable without `renderHook` wrappers |
 
 ### External stores (Redux, Zotai) in React
 
-React 18+ integrates external stores via `useSyncExternalStore`. EchoJS prefers **first-class signals** or `@echojs/store` so the UI graph and the state graph share the same reactivity semantics.
+React 18+ integrates external stores via `useSyncExternalStore`. EchoJS prefers **first-class signals** or `@echojs-ecosystem/store` so the UI graph and the state graph share the same reactivity semantics.
 
 ---
 
@@ -220,20 +220,20 @@ EchoJS classifies state **by kind** so you do not dump everything into Redux or 
 | --- | --- | --- | --- |
 | **Local UI** | modals, hover, field focus | `useState` | `signal` in model |
 | **Screen model** | step wizard, derived UI | hooks + `useMemo` | `createModel` |
-| **Server / async** | API lists, detail | React Query, SWR, Apollo, RTK Query | `@echojs/query` |
-| **URL** | filters, tab, pagination | `useSearchParams`, nuqs | `@echojs/url-state` |
-| **App client** | session, theme, cart | Redux, Zustand, Jotai, Context | `@echojs/store` + `@echojs/persist` |
+| **Server / async** | API lists, detail | React Query, SWR, Apollo, RTK Query | `@echojs-ecosystem/query` |
+| **URL** | filters, tab, pagination | `useSearchParams`, nuqs | `@echojs-ecosystem/url-state` |
+| **App client** | session, theme, cart | Redux, Zustand, Jotai, Context | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
 ### Library-by-library (client state)
 
 | Library | React role | EchoJS replacement |
 | --- | --- | --- |
-| **Redux Toolkit** | Global normalized store | `@echojs/store` + feature-local models |
+| **Redux Toolkit** | Global normalized store | `@echojs-ecosystem/store` + feature-local models |
 | **Zustand** | Lightweight global | `createStore` or feature model |
 | **Jotai / Recoil** | Atomic global | `signal` / small stores |
 | **MobX** | Observable OOP | `signal` + `computed` (similar mental model) |
-| **Context** | DI + theme + session | `provide` / `inject`, `@echojs/ui` theme |
-| **Apollo Client (local)** | Cache + local state | `@echojs/query` for server; store for UI |
+| **Context** | DI + theme + session | `provide` / `inject`, `@echojs-ecosystem/ui` theme |
+| **Apollo Client (local)** | Cache + local state | `@echojs-ecosystem/query` for server; store for UI |
 | **react-use** misc | One-off hooks | model methods or `core/` utils |
 | **Immer** | Immutable patches | `store.update` / `set` with spread |
 | **xstate** | State machines | model + explicit transitions (or port machine in shared) |
@@ -271,7 +271,7 @@ const slice = createSlice({
 
 ```ts
 // EchoJS store
-import { createStore, withActions } from "@echojs/store";
+import { createStore, withActions } from "@echojs-ecosystem/store";
 
 export const sessionStore = createStore({ token: null as string | null }).extend(
   withActions((store) => ({
@@ -285,7 +285,7 @@ export const sessionStore = createStore({ token: null as string | null }).extend
 
 ## Async data: Query, SWR, Apollo, RTK Query
 
-### TanStack Query → `@echojs/query`
+### TanStack Query → `@echojs-ecosystem/query`
 
 | TanStack Query | EchoJS |
 | --- | --- |
@@ -355,7 +355,7 @@ export const UsersView = createView((vm) =>
 
 ### React Router 6/7
 
-| React Router | `@echojs/router` |
+| React Router | `@echojs-ecosystem/router` |
 | --- | --- |
 | `<Routes>` / `<Route>` | `createRoutes([...])` tree |
 | `useParams()` | `params` on route view |
@@ -381,7 +381,7 @@ export const userPage = createRouteView({
 | --- | --- |
 | File-based or code routes | Code-first route table in `entities/__routes__` |
 | Type-safe params | Typed route names + params |
-| Search param schemas | `@echojs/url-state` parsers |
+| Search param schemas | `@echojs-ecosystem/url-state` parsers |
 | Router context | `inject(router)` |
 
 ### Next.js App Router
@@ -395,7 +395,7 @@ export const userPage = createRouteView({
 | Server Components | **No direct equivalent** |
 | `generateMetadata` | SPA: meta via head management / SSR layer TBD |
 | Middleware | server / edge — outside Echo client router |
-| `useRouter()` from `next/navigation` | `@echojs/router` signals |
+| `useRouter()` from `next/navigation` | `@echojs-ecosystem/router` signals |
 
 Keep **URLs stable** when migrating so SEO bookmarks and API callbacks still work.
 
@@ -464,7 +464,7 @@ export const createLoginModel = createModel(() => {
 | **Tailwind** | Very common | Used in docs/example (`tailwind-variants`) |
 | **CSS Modules** | `*.module.css` | Global + component classes on `h()` props |
 | **styled-components / Emotion** | CSS-in-JS | Prefer TV / Tailwind (no runtime CSS-in-JS in core) |
-| **MUI / Chakra / Ant** | Large component libs | `@echojs/ui` primitives; wrap if porting gradually |
+| **MUI / Chakra / Ant** | Large component libs | `@echojs-ecosystem/ui` primitives; wrap if porting gradually |
 | **Radix + shadcn** | Copy-paste components | Rebuild as HyperDOM views or wrap DOM |
 | **Framer Motion** | Animation | CSS / WAAPI / targeted transitions in views |
 
@@ -475,7 +475,7 @@ export const createLoginModel = createModel(() => {
 | Pattern | React | EchoJS |
 | --- | --- | --- |
 | **Auth0 / Clerk / NextAuth** | React SDKs | Same OAuth flows; session in `sessionStore` |
-| **JWT in memory** | Context | `createStore` + optional `@echojs/persist` (careful with XSS) |
+| **JWT in memory** | Context | `createStore` + optional `@echojs-ecosystem/persist` (careful with XSS) |
 | **Cookie session** | HTTP-only cookie | `fetch` credentials; `beforeLoad` guards |
 | **Route guards** | `<ProtectedRoute>` | `beforeLoad` redirect |
 | **RBAC** | HOC / wrapper components | model `computed` + conditional `Show` |
@@ -504,7 +504,7 @@ See [Authentication guide](/docs/guides/authentication).
 | `useMemo` / `useCallback` | Stabilize identities | `computed` / stable model API |
 | Virtual lists | `react-window` | Render visible rows; bind signals per row |
 | Code splitting | `lazy` + Suspense | Lazy route modules |
-| Profiling | React DevTools Profiler | Planned `@echojs/devtools` |
+| Profiling | React DevTools Profiler | Planned `@echojs-ecosystem/devtools` |
 | Bundle size | react + react-dom | Echo packages modular (tree-shake per package) |
 
 **Lists:** In React, 10k rows often need virtualization + memo. In Echo, still virtualize for **DOM node count**, but you avoid **reconciliation** over 10k vnodes.
@@ -520,7 +520,7 @@ See [Authentication guide](/docs/guides/authentication).
 | **`renderHook`** | Test hooks | Test `createModel()` return value |
 | **MSW** | Mock HTTP | Mock `fetch` in `queryFn` |
 | **Storybook** | UI stories | HyperDOM stories (pattern from `ui` package roadmap) |
-| **React DevTools** | Components tree | `@echojs/devtools` planned (signals, query, routes) |
+| **React DevTools** | Components tree | `@echojs-ecosystem/devtools` planned (signals, query, routes) |
 
 ---
 
@@ -530,8 +530,8 @@ See [Authentication guide](/docs/guides/authentication).
 
 | Problem | React ecosystem | EchoJS |
 | --- | --- | --- |
-| UI runtime | `react` + `react-dom` | `@echojs/hyperdom` + `@echojs/reactivity` |
-| App bootstrap | manual root / Next | `@echojs/framework` |
+| UI runtime | `react` + `react-dom` | `@echojs-ecosystem/hyperdom` + `@echojs-ecosystem/reactivity` |
+| App bootstrap | manual root / Next | `@echojs-ecosystem/framework` |
 | Strict DI | Context + custom | `createProvider`, `inject`, strict checks |
 | Monorepo | Nx, Turborepo | Bun workspaces (this repo) |
 
@@ -539,39 +539,39 @@ See [Authentication guide](/docs/guides/authentication).
 
 | Problem | React | EchoJS |
 | --- | --- | --- |
-| SPA routing | React Router | `@echojs/router` |
+| SPA routing | React Router | `@echojs-ecosystem/router` |
 | Type-safe routes | TanStack Router | Route table + typed names |
-| URL search state | nuqs, manual | `@echojs/url-state` |
+| URL search state | nuqs, manual | `@echojs-ecosystem/url-state` |
 | Active link styling | `NavLink` className | `NavLink` from router/hyperdom |
 
 ### Data & network
 
 | Problem | React | EchoJS |
 | --- | --- | --- |
-| REST cache | TanStack Query, SWR | `@echojs/query` |
+| REST cache | TanStack Query, SWR | `@echojs-ecosystem/query` |
 | GraphQL | Apollo, urql | `queryFn` + optional client |
 | WebSockets | socket.io-client + hooks | `effect` + client in entity |
 | Upload progress | xhr + state | model signals |
-| Offline | RTK + persist | `@echojs/persist` |
+| Offline | RTK + persist | `@echojs-ecosystem/persist` |
 
 ### UI & UX
 
 | Problem | React | EchoJS |
 | --- | --- | --- |
-| Headless primitives | Radix | `@echojs/ui` (growing) |
+| Headless primitives | Radix | `@echojs-ecosystem/ui` (growing) |
 | Icons | lucide-react | Same SVG sets in views |
 | Modals / dialogs | Radix Dialog | views + signals |
 | Tables | TanStack Table | model + mapped rows |
-| Dates | date-fns + picker libs | `Intl` via `@echojs/i18n` |
+| Dates | date-fns + picker libs | `Intl` via `@echojs-ecosystem/i18n` |
 | Drag and drop | dnd-kit | DOM events in feature |
 
 ### i18n & a11y
 
 | Problem | React | EchoJS |
 | --- | --- | --- |
-| i18n | react-i18next | `@echojs/i18n` |
+| i18n | react-i18next | `@echojs-ecosystem/i18n` |
 | RTL | CSS + i18n | Same |
-| a11y lint | eslint-plugin-jsx-a11y | semantic `h()` elements, `@echojs/ui` |
+| a11y lint | eslint-plugin-jsx-a11y | semantic `h()` elements, `@echojs-ecosystem/ui` |
 
 ### Build & quality
 
@@ -663,8 +663,8 @@ React 19 improves ref and context typing; **folder architecture** is still your 
 ### Phase 4 — Global cleanup
 
 1. Shrink Redux/Zustand to true cross-cutting only.
-2. Move filters to `@echojs/url-state`.
-3. Add `@echojs/persist` only where needed.
+2. Move filters to `@echojs-ecosystem/url-state`.
+3. Add `@echojs-ecosystem/persist` only where needed.
 
 ### Hook → model cheat sheet
 
@@ -679,7 +679,7 @@ React 19 improves ref and context typing; **folder architecture** is still your 
 | `useMemo` | `computed` |
 | `useCallback` | model method |
 | `useParams` | route view `params` |
-| `useSearchParams` | `@echojs/url-state` |
+| `useSearchParams` | `@echojs-ecosystem/url-state` |
 
 :::callout type=note
 Running React and Echo as **two SPAs** linked by URLs is possible but expensive. Prefer **one SPA**, feature-by-feature cutover.
@@ -742,10 +742,10 @@ Compiler reduces React re-render cost. Echo removes the **component re-render lo
 | Dimension | React + ecosystem | EchoJS |
 | --- | --- | --- |
 | Core loop | Render → diff → patch | Signal → targeted write |
-| State libraries | Many overlapping | Layered + `@echojs/store` / `query` / `url-state` |
-| Data fetching | TanStack Query, SWR, Apollo | `@echojs/query` |
-| Routing | RR, TanStack, Next | `@echojs/router` |
-| Meta-framework | Next, Remix | `@echojs/framework` + Vite SPA |
+| State libraries | Many overlapping | Layered + `@echojs-ecosystem/store` / `query` / `url-state` |
+| Data fetching | TanStack Query, SWR, Apollo | `@echojs-ecosystem/query` |
+| Routing | RR, TanStack, Next | `@echojs-ecosystem/router` |
+| Meta-framework | Next, Remix | `@echojs-ecosystem/framework` + Vite SPA |
 | Architecture | Convention | Feature-first rules |
 | SSR / RSC | Mature | Plan separately; SPA-first |
 | DX guardrails | Hooks eslint | Provider + inject checks |
@@ -760,4 +760,4 @@ Compiler reduces React re-render cost. Echo removes the **component re-render lo
 - [Data fetching](/docs/guides/data-fetching)
 - [Routing guide](/docs/guides/routing)
 - [Providers](/docs/architecture/providers)
-- [@echojs/reactivity](/docs/packages/reactivity) · [@echojs/query](/docs/packages/query) · [@echojs/router](/docs/packages/router)
+- [@echojs-ecosystem/reactivity](/docs/packages/reactivity) · [@echojs-ecosystem/query](/docs/packages/query) · [@echojs-ecosystem/router](/docs/packages/router)

@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/architect",
+  "name": "@echojs-ecosystem/architect",
   "version": "0.0.0",
   "description": "Architecture linter for EchoJS projects — core engine and CLI",
   "files": [
@@ -51,7 +51,7 @@
     "typescript": ">=5"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "@types/is-glob": "^4.0.4",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"

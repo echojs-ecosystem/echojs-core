@@ -1,4 +1,4 @@
-import { signal, type Signal } from "@echojs/reactivity";
+import { signal, type Signal } from "@echojs-ecosystem/reactivity";
 import { defaultEquals } from "../utils/equality";
 import type { Parser, QueryStateOptions, QueryStateSetOptions, UrlStateAdapter } from "./types";
 import { resolveSetOptions } from "./options";

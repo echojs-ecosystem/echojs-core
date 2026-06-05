@@ -116,7 +116,7 @@ export const standardSchemaIssuesForUnknownSync = (
   const raw = schema["~standard"].validate(value) as unknown;
   if (raw instanceof Promise) {
     throw new Error(
-      "[@echojs/form] Schema validation returned a Promise. Use field.validateAsync() / form.validateAsync(), or wrap with async handling.",
+      "[@echojs-ecosystem/form] Schema validation returned a Promise. Use field.validateAsync() / form.validateAsync(), or wrap with async handling.",
     );
   }
 

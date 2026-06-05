@@ -1,7 +1,7 @@
 ---
 title: Installation
-description: Add @echojs/architect to an EchoJS monorepo app.
-package: "@echojs/architect"
+description: Add @echojs-ecosystem/architect to an EchoJS monorepo app.
+package: "@echojs-ecosystem/architect"
 ---
 
 # Installation
@@ -10,10 +10,10 @@ package: "@echojs/architect"
 
 ```bash
 cd apps/docs   # or apps/example
-bun add -D @echojs/architect
+bun add -D @echojs-ecosystem/architect
 ```
 
-`@echojs/architect` is a workspace package — no npm publish required for local development.
+`@echojs-ecosystem/architect` is a workspace package — no npm publish required for local development.
 
 ## Scripts
 
@@ -32,7 +32,7 @@ bun add -D @echojs/architect
 Create `architect.config.ts` next to `package.json`:
 
 ```ts
-import { abstraction, defineConfig, dependenciesDirection } from "@echojs/architect";
+import { abstraction, defineConfig, dependenciesDirection } from "@echojs-ecosystem/architect";
 
 export default defineConfig({
   baseUrl: "src",

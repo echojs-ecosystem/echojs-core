@@ -1,4 +1,4 @@
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 
 export type FieldContext = {
   id: string;

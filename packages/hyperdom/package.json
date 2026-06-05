@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/hyperdom",
+  "name": "@echojs-ecosystem/hyperdom",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -32,10 +32,10 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/reactivity": "workspace:*"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "jsdom": "^26.1.0",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"

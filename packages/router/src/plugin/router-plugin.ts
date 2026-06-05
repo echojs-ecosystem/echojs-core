@@ -1,5 +1,5 @@
-import { createView } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { createView } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 
 import type { Router } from "../core/types";
 

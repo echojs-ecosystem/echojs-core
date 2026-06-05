@@ -8,7 +8,7 @@ import {
   signal,
 } from "@echojs-ecosystem/reactivity";
 import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 import { timestamp, uid } from "@features/reactivity-lab/utils/reactivity-lab.utils.js";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/router",
+  "name": "@echojs-ecosystem/router",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -37,12 +37,12 @@
     "e2e:serve": "vite --config e2e/fixture/vite.config.ts"
   },
   "dependencies": {
-    "@echojs/hyperdom": "workspace:*",
-    "@echojs/reactivity": "workspace:*",
-    "@echojs/url-state": "workspace:*"
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs-ecosystem/url-state": "workspace:*"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "@playwright/test": "^1.52.0",
     "jsdom": "^26.1.0",
     "typescript": "5.9.2",

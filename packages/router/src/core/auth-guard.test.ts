@@ -3,7 +3,7 @@ import { createRoute } from "./create-route";
 import { createRouter } from "./create-router";
 import { getRouterInternal } from "./router";
 import { clearGuards } from "../operators/guard";
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 import { r } from "../test-utils";
 
 describe("authorizationGuard", () => {

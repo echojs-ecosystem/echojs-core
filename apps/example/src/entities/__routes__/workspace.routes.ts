@@ -1,4 +1,4 @@
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { workspaceLayoutPage } from "@pages/workspace/layout/ui/workspace-layout.page.js";
 import { workspaceHomePage } from "@pages/workspace/home/workspace-home.page.js";
 import { filesPage } from "@pages/workspace/files/workspace-files.page.js";

@@ -1,9 +1,9 @@
 import { defineConfig, type Options } from 'tsup'
 
-import { echoPackageSrcAliases } from '@echojs/oxc-config/package-aliases'
+import { echoPackageSrcAliases } from '@echojs-ecosystem/oxc-config/package-aliases'
 
-/** Workspace packages stay external (no bundling of @echojs/*). */
-export const echoPackageExternals = [/^@echojs\//]
+/** Workspace packages stay external (no bundling of @echojs-ecosystem/*). */
+export const echoPackageExternals = [/^@echojs-ecosystem\//]
 
 export const echoTsupConfig = (
   overrides: Options = {},

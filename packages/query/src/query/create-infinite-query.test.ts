@@ -182,7 +182,7 @@ describe('createInfiniteQuery', () => {
 
   it('ignores stale responses via requestId on param change', async () => {
     const client = createTestClient()
-    const { signal: $userId } = await import('@echojs/reactivity')
+    const { signal: $userId } = await import('@echojs-ecosystem/reactivity')
     const userId = $userId('1')
 
     let resolveSlow!: (value: FeedPage) => void

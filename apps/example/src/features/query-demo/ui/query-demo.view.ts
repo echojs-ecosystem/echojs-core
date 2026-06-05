@@ -1,4 +1,4 @@
-import { List, Show, createView, type Child } from "@echojs/hyperdom";
+import { List, Show, createView, type Child } from "@echojs-ecosystem/hyperdom";
 import {
   article,
   button,
@@ -13,7 +13,7 @@ import {
   span,
   strong,
   ul,
-} from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
 
 import { i18n } from "@app/providers/i18n.js";
 import type { QueryDemoVM } from "@features/query-demo/model/query-demo.model.js";

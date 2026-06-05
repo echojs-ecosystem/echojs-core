@@ -56,7 +56,7 @@ export const architectureAdvantages: ArchitectureAdvantage[] = [
     title: "Boundaries you can enforce",
     summary:
       "Layer rules are documented and lintable — wrong imports fail in CI instead of rotting quietly for months.",
-    highlight: "@echojs/architect catches cross-layer leaks early.",
+    highlight: "@echojs-ecosystem/architect catches cross-layer leaks early.",
     docId: "architecture/dependency-flow",
   },
 ];

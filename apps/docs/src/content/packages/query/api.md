@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: Public exports from @echojs/query.
-package: "@echojs/query"
+description: Public exports from @echojs-ecosystem/query.
+package: "@echojs-ecosystem/query"
 ---
 
 # API Reference

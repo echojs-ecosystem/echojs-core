@@ -1,2 +1,2 @@
-export * from "@echojs/reactivity";
+export * from "@echojs-ecosystem/reactivity";
 

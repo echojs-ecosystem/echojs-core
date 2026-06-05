@@ -1,12 +1,12 @@
 ---
 title: Server state
-description: Async data, cache, and mutations with @echojs/query — separate from router and stores.
+description: Async data, cache, and mutations with @echojs-ecosystem/query — separate from router and stores.
 keywords: [createQuery, createMutation, cache, staleTime]
 ---
 
 # Server state
 
-**Server state** is data that **originates on the server** (or any async source): REST, GraphQL, edge functions. The client keeps a **cache** with staleness, refetch, and invalidation via `@echojs/query`. It is not the same as [router loader](/docs/state/router-state) data or a manual [store](/docs/state/client-store) copy.
+**Server state** is data that **originates on the server** (or any async source): REST, GraphQL, edge functions. The client keeps a **cache** with staleness, refetch, and invalidation via `@echojs-ecosystem/query`. It is not the same as [router loader](/docs/state/router-state) data or a manual [store](/docs/state/client-store) copy.
 
 ## Mental model
 

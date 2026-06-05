@@ -1,4 +1,4 @@
-import { createModel } from "@echojs/hyperdom";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { i18n, setAppLocale, type AppLocale } from "@core/providers/index.js";
 import type { HeaderDropdownProps } from "@widgets/header-dropdown/model/header-dropdown.model.js";
 

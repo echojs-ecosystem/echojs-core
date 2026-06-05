@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/i18n
+# @echojs-ecosystem/i18n
 
 **Signal-native internationalization with typed message keys and Intl helpers.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/i18n)](https://www.npmjs.com/package/@echojs/i18n)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/i18n)](https://www.npmjs.com/package/@echojs-ecosystem/i18n)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/i18n)
 
 </div>
@@ -24,13 +24,13 @@ Lightweight i18n for EchoJS. **Locale is a signal** — `t()` inside `computed` 
 ## Install
 
 ```bash
-npm install @echojs/i18n @echojs/reactivity
+npm install @echojs-ecosystem/i18n @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
 
 ```ts
-import { createI18n } from "@echojs/i18n";
+import { createI18n } from "@echojs-ecosystem/i18n";
 import ru from "./locales/ru.json";
 
 const i18n = createI18n({
@@ -62,7 +62,7 @@ i18n.$locale.value(); // reactive
 
 ## Provider (apps)
 
-Use `createI18nProvider` with [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework) to inject `i18n` into views.
+Use `createI18nProvider` with [`@echojs-ecosystem/framework`](https://www.npmjs.com/package/@echojs-ecosystem/framework) to inject `i18n` into views.
 
 ## Documentation
 

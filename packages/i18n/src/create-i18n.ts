@@ -16,7 +16,7 @@ import {
   resolveLocaleModuleSync,
 } from "./core/locale-source";
 import { detectLocale } from "./plugin/detect-locale";
-import { effect } from "@echojs/reactivity";
+import { effect } from "@echojs-ecosystem/reactivity";
 import { createLocaleState } from "./core/locale";
 import { createTranslator } from "./core/translator";
 import type {

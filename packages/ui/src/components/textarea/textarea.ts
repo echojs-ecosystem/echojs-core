@@ -1,4 +1,4 @@
-import { h } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
 import { createUIComponent } from "../../core/component";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { textareaStyles } from "./textarea.styles";

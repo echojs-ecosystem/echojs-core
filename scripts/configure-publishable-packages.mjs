@@ -12,20 +12,20 @@ const REPO = "https://github.com/echojs-ecosystem/echojs-core.git";
 
 /** Must match `.changeset/config.json` fixed group. */
 const PUBLISHABLE = [
-  { name: "@echojs/reactivity", dir: "reactivity" },
-  { name: "@echojs/core", dir: "core" },
-  { name: "@echojs/hyperdom", dir: "hyperdom" },
-  { name: "@echojs/framework", dir: "framework" },
-  { name: "@echojs/router", dir: "router" },
-  { name: "@echojs/form", dir: "form" },
-  { name: "@echojs/persist", dir: "persist" },
-  { name: "@echojs/store", dir: "store" },
-  { name: "@echojs/query", dir: "query" },
-  { name: "@echojs/url-state", dir: "url-state" },
-  { name: "@echojs/i18n", dir: "i18n" },
-  { name: "@echojs/ui", dir: "ui" },
-  { name: "@echojs/architect", dir: "architect" },
-  { name: "@echojs/devtools-core", dir: "devtools-core" },
+  { name: "@echojs-ecosystem/reactivity", dir: "reactivity" },
+  { name: "@echojs-ecosystem/core", dir: "core" },
+  { name: "@echojs-ecosystem/hyperdom", dir: "hyperdom" },
+  { name: "@echojs-ecosystem/framework", dir: "framework" },
+  { name: "@echojs-ecosystem/router", dir: "router" },
+  { name: "@echojs-ecosystem/form", dir: "form" },
+  { name: "@echojs-ecosystem/persist", dir: "persist" },
+  { name: "@echojs-ecosystem/store", dir: "store" },
+  { name: "@echojs-ecosystem/query", dir: "query" },
+  { name: "@echojs-ecosystem/url-state", dir: "url-state" },
+  { name: "@echojs-ecosystem/i18n", dir: "i18n" },
+  { name: "@echojs-ecosystem/ui", dir: "ui" },
+  { name: "@echojs-ecosystem/architect", dir: "architect" },
+  { name: "@echojs-ecosystem/devtools-core", dir: "devtools-core" },
 ];
 
 for (const { name, dir } of PUBLISHABLE) {

@@ -1,4 +1,4 @@
-import { h, type Child } from "@echojs/hyperdom";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 import { createId } from "../../core/ids";
 import { getUIContextOrDefault } from "../../theme/theme-context";
 import { cn } from "../../utils/cn";

@@ -6,7 +6,7 @@ keywords: [createStore, persist, session, theme]
 
 # Client store
 
-**Client store** is **mutable state that lives only in the browser** and is shared across routes or features: theme, sidebar collapsed, session snapshot, wizard step not in the URL. It uses `@echojs/store` (signals under the hood) — not server cache ([server state](/docs/state/server-state)) and not field trees ([form state](/docs/state/form-state)).
+**Client store** is **mutable state that lives only in the browser** and is shared across routes or features: theme, sidebar collapsed, session snapshot, wizard step not in the URL. It uses `@echojs-ecosystem/store` (signals under the hood) — not server cache ([server state](/docs/state/server-state)) and not field trees ([form state](/docs/state/form-state)).
 
 ## When to use a store
 
@@ -23,7 +23,7 @@ keywords: [createStore, persist, session, theme]
 ## Basic store
 
 ```ts
-import { createStore, withActions } from "@echojs/store";
+import { createStore, withActions } from "@echojs-ecosystem/store";
 
 export const themeStore = createStore<"light" | "dark">("dark", { name: "theme" }).extend(
   withActions({
@@ -41,19 +41,19 @@ Subscribe for side effects: `themeStore.changed.watch(...)`.
 ## Derived reads
 
 ```ts
-import { computed } from "@echojs/reactivity";
+import { computed } from "@echojs-ecosystem/reactivity";
 
 export const $isLoggedIn = computed(() => authTokenStore.value() != null);
 ```
 
 Computed bridges store → router guards and views without duplicating token in another store.
 
-## Persist (`@echojs/persist`)
+## Persist (`@echojs-ecosystem/persist`)
 
 Survive reload — **still client state**, hydrated from storage:
 
 ```ts
-import { withLocalStorage, withCookie } from "@echojs/persist";
+import { withLocalStorage, withCookie } from "@echojs-ecosystem/persist";
 
 export const authTokenStore = createStore<string | null>(null).extend(
   withCookie({ key: "echojs-access-token", path: "/", sameSite: "lax" }),

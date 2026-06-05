@@ -5,15 +5,15 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@echojs/core": ["../core/src/index.ts"],
-      "@echojs/reactivity": ["../reactivity/src/index.ts"],
-      "@echojs/router": ["../router/src/index.ts"],
-      "@echojs/router/hyperdom": ["../router/src/hyperdom/index.ts"],
-      "@echojs/hyperdom": ["../hyperdom/src/index.ts"],
-      "@echojs/form": ["../form/src/index.ts"],
-      "@echojs/persist": ["../persist/src/index.ts"],
-      "@echojs/store": ["../store/src/index.ts"],
-      "@echojs/ui": ["../ui/src/index.ts"]
+      "@echojs-ecosystem/core": ["../core/src/index.ts"],
+      "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"],
+      "@echojs-ecosystem/router": ["../router/src/index.ts"],
+      "@echojs-ecosystem/router/hyperdom": ["../router/src/hyperdom/index.ts"],
+      "@echojs-ecosystem/hyperdom": ["../hyperdom/src/index.ts"],
+      "@echojs-ecosystem/form": ["../form/src/index.ts"],
+      "@echojs-ecosystem/persist": ["../persist/src/index.ts"],
+      "@echojs-ecosystem/store": ["../store/src/index.ts"],
+      "@echojs-ecosystem/ui": ["../ui/src/index.ts"]
     },
     "rootDir": ".."
   },

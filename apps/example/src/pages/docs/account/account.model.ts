@@ -1,6 +1,6 @@
-import { collectFormValueFromFields, createField, createFieldArray, createForm } from "@echojs/form";
-import { withLocalStorage } from "@echojs/persist";
-import { createStore } from "@echojs/store";
+import { collectFormValueFromFields, createField, createFieldArray, createForm } from "@echojs-ecosystem/form";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
+import { createStore } from "@echojs-ecosystem/store";
 import { z } from "zod";
 
 const profileSchema = z.object({

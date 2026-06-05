@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/html";
-import { h } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
 
 import { hyperdomRender } from "../../storybook/story-helpers";
 import { InputMask } from "./index";

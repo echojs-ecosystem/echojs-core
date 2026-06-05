@@ -1,4 +1,4 @@
-import { computed, signal } from '@echojs/reactivity'
+import { computed, signal } from '@echojs-ecosystem/reactivity'
 
 import {
   abortWithReason,

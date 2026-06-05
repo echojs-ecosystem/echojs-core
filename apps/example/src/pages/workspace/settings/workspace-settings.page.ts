@@ -1,5 +1,5 @@
-import { createRouteView } from "@echojs/router";
-import { code, div, h4, p, Show } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { code, div, h4, p, Show } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import { $authUser, $isLoggedIn, authTokenStore } from "@entities/session/index.js";
 

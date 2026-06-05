@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { div, h4, li, NavLink, ul } from "@pages/workspace/ui/common.js";
 import { USERS } from "@entities/user/index.js";
 import { userPage } from "@pages/workspace/users/user-detail.page.js";

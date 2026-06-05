@@ -1,6 +1,6 @@
-import { createLayoutView } from "@echojs/router";
-import type { Child } from "@echojs/hyperdom";
-import { div } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { div } from "@echojs-ecosystem/hyperdom";
 import { DocsSidebar } from "@widgets/docs-shell/docs-sidebar.js";
 
 export const docsShellLayoutPage = createLayoutView({

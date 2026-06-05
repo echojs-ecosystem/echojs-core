@@ -1,4 +1,4 @@
-import type { Signal } from "@echojs/reactivity";
+import type { Signal } from "@echojs-ecosystem/reactivity";
 
 import type { TranslationKey } from "./types/nested-keys";
 

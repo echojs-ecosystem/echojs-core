@@ -1,7 +1,7 @@
-import { signal } from "@echojs/reactivity";
-import type { Signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
-import type { AnyPage } from "@echojs/router";
+import { signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/router";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
 import { searchDocs, type SearchEntry } from "@widgets/search/helpers/search-index.js";

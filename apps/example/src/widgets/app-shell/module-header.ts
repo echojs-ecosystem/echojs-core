@@ -1,5 +1,5 @@
-import { code, div, h3, p, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { code, div, h3, p, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import type { DocsModuleMeta } from "@app/config/docs-modules.js";
 

@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: Locales map, translations, plural, Intl helpers, browser detect, and HyperDOM.
-package: "@echojs/i18n"
+package: "@echojs-ecosystem/i18n"
 ---
 
 # Usage
@@ -9,7 +9,7 @@ package: "@echojs/i18n"
 ## `createI18n` / `createI18nProvider`
 
 ```ts
-import { createI18n } from "@echojs/i18n";
+import { createI18n } from "@echojs-ecosystem/i18n";
 import ru from "./locales/ru.json";
 
 const appLocales = {
@@ -156,7 +156,7 @@ Docs locale dropdown: `widgets/locale-dropdown` → `setAppLocale(id)`.
 ## Standalone `detectLocale`
 
 ```ts
-import { detectLocale } from "@echojs/i18n";
+import { detectLocale } from "@echojs-ecosystem/i18n";
 
 const locale = detectLocale({
   supported: ["en", "ru"],

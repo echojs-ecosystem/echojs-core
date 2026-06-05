@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/architect
+# @echojs-ecosystem/architect
 
 **Architecture linter for EchoJS — enforce layers, public APIs, and import boundaries.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/architect)](https://www.npmjs.com/package/@echojs/architect)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/architect)](https://www.npmjs.com/package/@echojs-ecosystem/architect)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/architect)
 
 </div>
@@ -24,7 +24,7 @@ Lint **folder structure and dependency direction** from `architect.config.ts`. U
 ## Install
 
 ```bash
-npm install -D @echojs/architect
+npm install -D @echojs-ecosystem/architect
 ```
 
 ## CLI
@@ -56,7 +56,7 @@ import {
   defineConfig,
   dependenciesDirection,
   publicAbstraction,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 
 export default defineConfig({
   root: abstraction({
@@ -78,7 +78,7 @@ export default defineConfig({
 ## Programmatic API
 
 ```ts
-import { lint, defineConfig } from "@echojs/architect";
+import { lint, defineConfig } from "@echojs-ecosystem/architect";
 
 const result = await lint({ configPath: "./architect.config.ts" });
 console.log(result.errors);

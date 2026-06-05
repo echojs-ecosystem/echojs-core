@@ -5,7 +5,7 @@ description: Install EchoJS packages with Bun, npm, pnpm, or yarn.
 
 # Installation
 
-EchoJS ships as scoped npm packages under `@echojs/*`. Use the ones your app needs — a minimal SPA usually starts with **framework**, **hyperdom**, **reactivity**, and **router**.
+EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. Use the ones your app needs — a minimal SPA usually starts with **framework**, **hyperdom**, **reactivity**, and **router**.
 
 ## Requirements
 
@@ -17,29 +17,29 @@ EchoJS ships as scoped npm packages under `@echojs/*`. Use the ones your app nee
 
 Install core packages (same UI as on the home page — tabs + copy):
 
-:::install @echojs/framework
+:::install @echojs-ecosystem/framework
 
-:::install @echojs/reactivity
+:::install @echojs-ecosystem/reactivity
 
-:::install @echojs/hyperdom
+:::install @echojs-ecosystem/hyperdom
 
-:::install @echojs/router
+:::install @echojs-ecosystem/router
 
 ## Full stack (docs / lab parity)
 
 Matches the provider pipeline in the official docs and example apps. Add each package you need:
 
-:::install @echojs/query
+:::install @echojs-ecosystem/query
 
-:::install @echojs/ui
+:::install @echojs-ecosystem/ui
 
-:::install @echojs/i18n
+:::install @echojs-ecosystem/i18n
 
-:::install @echojs/store
+:::install @echojs-ecosystem/store
 
-:::install @echojs/url-state
+:::install @echojs-ecosystem/url-state
 
-:::install @echojs/persist
+:::install @echojs-ecosystem/persist
 
 ## Working inside the EchoJS monorepo
 
@@ -47,7 +47,7 @@ If you clone `echojs-core`, apps already depend on workspace packages:
 
 ```bash
 bun install
-bun run dev --filter @echojs/docs    # documentation site (~3001)
+bun run dev --filter @echojs-ecosystem/docs    # documentation site (~3001)
 bun run dev --filter example         # interactive lab
 ```
 

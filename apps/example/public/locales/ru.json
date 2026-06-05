@@ -22,7 +22,7 @@
     "openModule": "Открыть →",
     "docs": {
       "title": "Docs Example",
-      "description": "Демо @echojs/reactivity, form, store, persist, query с обзором пакетов."
+      "description": "Демо @echojs-ecosystem/reactivity, form, store, persist, query с обзором пакетов."
     },
     "workspace": {
       "title": "Workspace",
@@ -128,7 +128,7 @@
     "signupHint": "Маршрут /auth/signup — после submit mock login и переход на login.",
     "nameField": "Имя",
     "nameDraftHint": "Имя и email черновики — localStorage.",
-    "layoutLead": "Вход в EchoJS Lab. Сессия сохраняется через @echojs/persist (cookie + localStorage).",
+    "layoutLead": "Вход в EchoJS Lab. Сессия сохраняется через @echojs-ecosystem/persist (cookie + localStorage).",
     "confirmPassword": "Повтор пароля",
     "acceptTerms": "Принимаю условия",
     "signupSubmit": "Зарегистрироваться",
@@ -168,21 +168,21 @@
     "cookieItem": " — access token (see ",
     "localItem": " — user profile and form drafts",
     "fieldItem": " — email/remember on login, profile fields on ",
-    "hint": "Package @echojs/persist connects via .extend() — store and form primitives don't know browser APIs."
+    "hint": "Package @echojs-ecosystem/persist connects via .extend() — store and form primitives don't know browser APIs."
   },
   "counter": {
     "title": "Счётчик",
     "increment": "Increment",
     "positive": "Count больше нуля",
     "inputTitle": "Реактивный ввод",
-    "inputHint": "Пишем без JSX через @echojs/hyperdom.",
+    "inputHint": "Пишем без JSX через @echojs-ecosystem/hyperdom.",
     "hello": "Hello, ",
     "listTitle": "Список",
     "append": "Append",
     "reset": "Reset"
   },
   "reactivityLab": {
-    "intro": "Интерактивные примеры @echojs/reactivity + интеграция с @echojs/hyperdom (Show, List, createModel).",
+    "intro": "Интерактивные примеры @echojs-ecosystem/reactivity + интеграция с @echojs-ecosystem/hyperdom (Show, List, createModel).",
     "cards": {
       "signal": {
         "title": "signal — базовое состояние",
@@ -230,7 +230,7 @@
     "todoPlaceholder": "Новая задача",
     "logTitle": "subscribe / effect log",
     "modelNote1": "Эта страница собрана через createReactivityLabModel() и ReactivityLabView.",
-    "modelNote2": "Сравни с @echojs/store на странице State и @echojs/query — там signal уже внутри query instances."
+    "modelNote2": "Сравни с @echojs-ecosystem/store на странице State и @echojs-ecosystem/query — там signal уже внутри query instances."
   },
   "queryDemo": {
     "apiHint": "Публичное API: https://jsonplaceholder.typicode.com — фейковый REST backend (данные не сохраняются на сервере).",
@@ -392,7 +392,7 @@
     }
   },
   "miniForms": {
-    "intro": "Ещё несколько примеров @echojs/form: checkbox, select, textarea, field array.",
+    "intro": "Ещё несколько примеров @echojs-ecosystem/form: checkbox, select, textarea, field array.",
     "email": "Email",
     "remember": "Запомнить",
     "submit": "submit (смотри консоль)",

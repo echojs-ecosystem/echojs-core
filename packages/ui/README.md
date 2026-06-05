@@ -1,21 +1,21 @@
 <div align="center">
 
-# @echojs/ui
+# @echojs-ecosystem/ui
 
 **Accessible UI primitives for HyperDOM — theme, variants, and headless mode.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/ui)](https://www.npmjs.com/package/@echojs/ui)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/ui)](https://www.npmjs.com/package/@echojs-ecosystem/ui)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/ui)
 
 </div>
 
 ---
 
-Component library for [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom). No React, no VDOM — real DOM nodes with **ARIA-first** semantics, **Tailwind** styling, and **tailwind-variants**.
+Component library for [`@echojs-ecosystem/hyperdom`](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom). No React, no VDOM — real DOM nodes with **ARIA-first** semantics, **Tailwind** styling, and **tailwind-variants**.
 
 ## Features
 
-- **Subpath exports** — `@echojs/ui/button` for tree-shaking
+- **Subpath exports** — `@echojs-ecosystem/ui/button` for tree-shaking
 - **`UIProvider`** — global theme, default variants, overrides
 - **Headless mode** — behavior & a11y without visual classes
 - **Components** — Button, Input, Textarea, Field, Checkbox, Label, …
@@ -24,16 +24,16 @@ Component library for [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs
 ## Install
 
 ```bash
-npm install @echojs/ui @echojs/hyperdom
+npm install @echojs-ecosystem/ui @echojs-ecosystem/hyperdom
 ```
 
 ## Quick start
 
 ```ts
-import { UIProvider } from "@echojs/ui/provider";
-import { createTheme } from "@echojs/ui/theme";
-import { Button } from "@echojs/ui/button";
-import { h, render } from "@echojs/hyperdom";
+import { UIProvider } from "@echojs-ecosystem/ui/provider";
+import { createTheme } from "@echojs-ecosystem/ui/theme";
+import { Button } from "@echojs-ecosystem/ui/button";
+import { h, render } from "@echojs-ecosystem/hyperdom";
 
 const theme = createTheme({
   prefix: "echo",
@@ -55,20 +55,20 @@ render(
 
 | Subpath | Components |
 |---------|------------|
-| `@echojs/ui/button` | Button |
-| `@echojs/ui/input` | Input |
-| `@echojs/ui/textarea` | Textarea |
-| `@echojs/ui/field` | Field, `mergeFieldControlProps` |
-| `@echojs/ui/checkbox` | Checkbox |
-| `@echojs/ui/provider` | UIProvider |
-| `@echojs/ui/theme` | `createTheme`, variants |
-| `@echojs/ui/utils` | `cn`, `mergeProps`, … |
+| `@echojs-ecosystem/ui/button` | Button |
+| `@echojs-ecosystem/ui/input` | Input |
+| `@echojs-ecosystem/ui/textarea` | Textarea |
+| `@echojs-ecosystem/ui/field` | Field, `mergeFieldControlProps` |
+| `@echojs-ecosystem/ui/checkbox` | Checkbox |
+| `@echojs-ecosystem/ui/provider` | UIProvider |
+| `@echojs-ecosystem/ui/theme` | `createTheme`, variants |
+| `@echojs-ecosystem/ui/utils` | `cn`, `mergeProps`, … |
 
 ## Field + Input pattern
 
 ```ts
-import { Field, mergeFieldControlProps } from "@echojs/ui/field";
-import { Input } from "@echojs/ui/input";
+import { Field, mergeFieldControlProps } from "@echojs-ecosystem/ui/field";
+import { Input } from "@echojs-ecosystem/ui/input";
 
 Field({
   label: "Email",

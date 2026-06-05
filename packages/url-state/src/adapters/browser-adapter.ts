@@ -3,7 +3,7 @@ import { normalizeSearch } from "../core/url";
 
 export const createBrowserUrlStateAdapter = (): UrlStateAdapter => {
   if (typeof window === "undefined" || typeof window.history === "undefined" || typeof window.location === "undefined") {
-    throw new Error("@echojs/url-state: Browser adapter requires `window`");
+    throw new Error("@echojs-ecosystem/url-state: Browser adapter requires `window`");
   }
 
   const listeners = new Set<() => void>();

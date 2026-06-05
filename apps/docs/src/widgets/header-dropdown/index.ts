@@ -1,5 +1,5 @@
-import type { Child } from "@echojs/hyperdom";
-import { createComponent } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import {
   createHeaderDropdownModel,
   type HeaderDropdownProps,

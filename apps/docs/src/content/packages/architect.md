@@ -1,17 +1,17 @@
 ---
 title: Architect
 description: Architecture linter for EchoJS apps — layer rules, public APIs, and import boundaries.
-package: "@echojs/architect"
+package: "@echojs-ecosystem/architect"
 keywords: [architect, lint, fsd, layers, dependencies, public-api]
 ---
 
 :::package-overview architect
 
-:::install @echojs/architect
+:::install @echojs-ecosystem/architect
 
 ## What it does
 
-`@echojs/architect` analyzes your `src/` tree against `architect.config.ts` and reports:
+`@echojs-ecosystem/architect` analyzes your `src/` tree against `architect.config.ts` and reports:
 
 - **Layer direction** — pages may import entities, not the reverse
 - **Public API** — consumers import `index.ts`, not deep paths
@@ -23,7 +23,7 @@ The docs site uses it in CI via `bun run architect`. Config lives at [`apps/docs
 ## Quick start
 
 ```bash
-bun add -D @echojs/architect
+bun add -D @echojs-ecosystem/architect
 ```
 
 ```json

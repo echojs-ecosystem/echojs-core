@@ -1,4 +1,4 @@
-import type { ReadonlySignal, Signal } from "@echojs/reactivity";
+import type { ReadonlySignal, Signal } from "@echojs-ecosystem/reactivity";
 import type { ModelContextType, ModelFn } from "./component";
 
 export type Signalish<T> = T | Signal<T> | ReadonlySignal<T>;

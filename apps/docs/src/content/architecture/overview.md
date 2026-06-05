@@ -68,10 +68,10 @@ Layouts run `beforeLoad` before children; a failing layout blocks child loads.
 | State type | Where it lives |
 | --- | --- |
 | UI selection (tab index, panel open) | Page or widget **model** |
-| Server data | `@echojs/query` in model (`createQuery.with`) |
+| Server data | `@echojs-ecosystem/query` in model (`createQuery.with`) |
 | Global theme / locale | Provider-backed stores (`core/providers`) |
-| URL shareable state | `@echojs/url-state` + router query |
-| Cross-feature client store | `@echojs/store` (sparingly) |
+| URL shareable state | `@echojs-ecosystem/url-state` + router query |
+| Cross-feature client store | `@echojs-ecosystem/store` (sparingly) |
 
 > [!RECOMMENDATION]
 > Prefer feature-local models over a single global store. Promote to `core/` only when two features need the same source of truth.

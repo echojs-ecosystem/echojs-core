@@ -47,11 +47,11 @@ This guide is the **Svelte migration reference** — runes vs signals, SvelteKit
 | **VDOM** | No (compiled updates) | No (HyperDOM bindings) |
 | **Authoring** | `.svelte` SFC | `.view.ts` + `.model.ts` |
 | **Routing** | File routes (`+page.svelte`) | `createRoutes` in entities |
-| **Server data** | `load`, `+server`, form actions | `@echojs/query`, API routes external |
-| **Global client** | runes modules, stores (legacy) | `@echojs/store` |
-| **URL state** | `$page.url.searchParams` | `@echojs/url-state` |
+| **Server data** | `load`, `+server`, form actions | `@echojs-ecosystem/query`, API routes external |
+| **Global client** | runes modules, stores (legacy) | `@echojs-ecosystem/store` |
+| **URL state** | `$page.url.searchParams` | `@echojs-ecosystem/url-state` |
 | **SSR** | SvelteKit adapters (mature) | SPA-first today |
-| **Meta-framework** | SvelteKit | `@echojs/framework` + Vite |
+| **Meta-framework** | SvelteKit | `@echojs-ecosystem/framework` + Vite |
 | **Compile step** | `svelte-check`, Vite plugin | `tsc` on TS views only |
 
 > [!TIP] Closest cousins
@@ -233,21 +233,21 @@ src/
 | --- | --- | --- |
 | **Local UI** | `$state` in component | `signal` in model |
 | **Screen** | runes in `.svelte` / module | `createModel` |
-| **Server** | `load`, server actions | `@echojs/query` |
-| **URL** | `$page.url.searchParams` | `@echojs/url-state` |
-| **App client** | stores / rune modules | `@echojs/store` + `@echojs/persist` |
+| **Server** | `load`, server actions | `@echojs-ecosystem/query` |
+| **URL** | `$page.url.searchParams` | `@echojs-ecosystem/url-state` |
+| **App client** | stores / rune modules | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
 ### Library-by-library
 
 | Library | Svelte role | EchoJS |
 | --- | --- | --- |
-| **TanStack Query Svelte** | `createQuery` | `@echojs/query` |
+| **TanStack Query Svelte** | `createQuery` | `@echojs-ecosystem/query` |
 | **sveltekit-superforms** | forms + zod | model + mutation |
-| **formsnap** | accessible fields | `@echojs/ui` + model |
+| **formsnap** | accessible fields | `@echojs-ecosystem/ui` + model |
 | **nanostores** | tiny stores | signals / store |
-| **@tanstack/svelte-query** | cache | `@echojs/query` |
-| **paraglide** | i18n | `@echojs/i18n` |
-| **svelte-i18n** | dictionaries | `@echojs/i18n` |
+| **@tanstack/svelte-query** | cache | `@echojs-ecosystem/query` |
+| **paraglide** | i18n | `@echojs-ecosystem/i18n` |
+| **svelte-i18n** | dictionaries | `@echojs-ecosystem/i18n` |
 | **lucide-svelte** | icons | SVG in views |
 
 > [!WARNING] Module-level `$state`
@@ -320,7 +320,7 @@ Keep **HTTP endpoints** on your backend or SvelteKit server during hybrid migrat
 | `hooks.client.ts` | client boot | app bootstrap |
 | `params` | `[id]` folders | `:id` in route path |
 | `goto()` | imperative nav | `router.go()` |
-| `$app/navigation` | imports | `@echojs/router` |
+| `$app/navigation` | imports | `@echojs-ecosystem/router` |
 
 **URL stability:** map `src/routes/foo/[id]` → path `foo/:id` unchanged.
 
@@ -370,9 +370,9 @@ export const createSignupModel = createModel(() => {
 
 | Library | Svelte | EchoJS |
 | --- | --- | --- |
-| **Skeleton UI** | design system | `@echojs/ui` + Tailwind |
+| **Skeleton UI** | design system | `@echojs-ecosystem/ui` + Tailwind |
 | **shadcn-svelte** | copy components | rebuild in HyperDOM |
-| **Melt UI** | headless | `@echojs/ui` |
+| **Melt UI** | headless | `@echojs-ecosystem/ui` |
 | **Flowbite Svelte** | Tailwind kit | feature views |
 | **Tailwind** | first-class | docs/example |
 | **Sass in Svelte** | `<style lang="scss">` | global / CSS modules |
@@ -412,7 +412,7 @@ Svelte components **do not port** — budget UI rewrite per screen.
 | Technique | Svelte | EchoJS |
 | --- | --- | --- |
 | Compile-time dead code | yes | tree-shake |
-| No runtime framework | mostly | small `@echojs/*` modules |
+| No runtime framework | mostly | small `@echojs-ecosystem/*` modules |
 | `each` keyed lists | required for perf | keys on children |
 | Virtual list | `svelte-virtual-list` | windowed map |
 | HMR | Vite + svelte plugin | Vite |
@@ -447,7 +447,7 @@ expect(vm.results.value().length).toBeGreaterThan(0);
 | --- | --- | --- |
 | Compiler | `svelte` package | none |
 | Vite plugin | `@sveltejs/vite-plugin-svelte` | Vite TS only |
-| App framework | SvelteKit | `@echojs/framework` |
+| App framework | SvelteKit | `@echojs-ecosystem/framework` |
 
 ### Routing & data
 
@@ -456,8 +456,8 @@ expect(vm.results.value().length).toBeGreaterThan(0);
 | Routes | filesystem | `createRoutes` |
 | Prefetch | `data-sveltekit-preload-data` | router / query prefetch |
 | Mutations | form actions | `createMutation` |
-| REST cache | TanStack / load | `@echojs/query` |
-| URL params | `$page.url` | `@echojs/url-state` |
+| REST cache | TanStack / load | `@echojs-ecosystem/query` |
+| URL params | `$page.url` | `@echojs-ecosystem/url-state` |
 
 ### UI & content
 
@@ -465,7 +465,7 @@ expect(vm.results.value().length).toBeGreaterThan(0);
 | --- | --- | --- |
 | Markdown docs | mdsvex | Echo docs pattern |
 | Charts | layercake | wrap in view |
-| i18n | paraglide, svelte-i18n | `@echojs/i18n` |
+| i18n | paraglide, svelte-i18n | `@echojs-ecosystem/i18n` |
 
 ### Deploy
 
@@ -536,7 +536,7 @@ Echo: **one TS pipeline** — no split between script and template checkers.
 
 1. `load` fetchers → `createQuery`.
 2. Form actions → `createMutation`.
-3. `searchParams` → `@echojs/url-state`.
+3. `searchParams` → `@echojs-ecosystem/url-state`.
 
 ### Phase 3 — UI
 
@@ -576,7 +576,7 @@ Echo: **one TS pipeline** — no split between script and template checkers.
 | Copying `{#each}` without keys | stable keys |
 | Keeping `.svelte` in Echo app | `.view.ts` only |
 | Kit form actions without mutation | `createMutation` |
-| `$app/stores` page store for filters | `@echojs/url-state` |
+| `$app/stores` page store for filters | `@echojs-ecosystem/url-state` |
 
 ---
 
@@ -627,16 +627,16 @@ Replace with `beforeLoad` + session store; keep server hooks until API moved.
 | Reactivity | Runes (compiled) | Runtime signals |
 | UI | `.svelte` | HyperDOM `.view.ts` |
 | Routing | File-based Kit | Code route table |
-| Data | `load`, actions | `@echojs/query` |
+| Data | `load`, actions | `@echojs-ecosystem/query` |
 | SSR | Mature adapters | SPA-first |
 | Architecture | Kit + `lib/` | Feature-first rules |
-| Platform | Kit + community | `@echojs/*` integrated |
+| Platform | Kit + community | `@echojs-ecosystem/*` integrated |
 
 **Other guides:** [Comparisons index](/docs/comparisons) · [Solid](/docs/comparisons/solid) · [React](/docs/comparisons/react) · [Vue](/docs/comparisons/vue) · [Angular](/docs/comparisons/angular)
 
 ## Related docs
 
-- [@echojs/reactivity](/docs/packages/reactivity)
+- [@echojs-ecosystem/reactivity](/docs/packages/reactivity)
 - [Feature-first design](/docs/architecture/feature-first)
 - [Data fetching](/docs/guides/data-fetching)
 - [Routing guide](/docs/guides/routing)

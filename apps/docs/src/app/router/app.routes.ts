@@ -1,4 +1,4 @@
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { docsRoutes } from "@app/router/docs.routes.js";
 import { homePage } from "@pages/home/home.page.js";
 import { sponsorsPage } from "@pages/sponsors/sponsors.page.js";

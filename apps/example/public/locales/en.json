@@ -22,7 +22,7 @@
     "openModule": "Open →",
     "docs": {
       "title": "Docs Example",
-      "description": "Demos for @echojs/reactivity, form, store, persist, query with a package overview."
+      "description": "Demos for @echojs-ecosystem/reactivity, form, store, persist, query with a package overview."
     },
     "workspace": {
       "title": "Workspace",
@@ -128,7 +128,7 @@
     "signupHint": "Route /auth/signup — after submit mock login and redirect to login.",
     "nameField": "Name",
     "nameDraftHint": "Name and email drafts — localStorage.",
-    "layoutLead": "Sign in to EchoJS Lab. Session persists via @echojs/persist (cookie + localStorage).",
+    "layoutLead": "Sign in to EchoJS Lab. Session persists via @echojs-ecosystem/persist (cookie + localStorage).",
     "confirmPassword": "Confirm password",
     "acceptTerms": "I accept the terms",
     "signupSubmit": "Register",
@@ -168,21 +168,21 @@
     "cookieItem": " — access token (see ",
     "localItem": " — user profile and form drafts",
     "fieldItem": " — email/remember on login, profile fields on ",
-    "hint": "Package @echojs/persist connects via .extend() — store and form primitives don't know browser APIs."
+    "hint": "Package @echojs-ecosystem/persist connects via .extend() — store and form primitives don't know browser APIs."
   },
   "counter": {
     "title": "Counter",
     "increment": "Increment",
     "positive": "Count is greater than zero",
     "inputTitle": "Reactive input",
-    "inputHint": "No JSX — built with @echojs/hyperdom.",
+    "inputHint": "No JSX — built with @echojs-ecosystem/hyperdom.",
     "hello": "Hello, ",
     "listTitle": "List",
     "append": "Append",
     "reset": "Reset"
   },
   "reactivityLab": {
-    "intro": "Interactive examples of @echojs/reactivity + @echojs/hyperdom (Show, List, createModel).",
+    "intro": "Interactive examples of @echojs-ecosystem/reactivity + @echojs-ecosystem/hyperdom (Show, List, createModel).",
     "cards": {
       "signal": {
         "title": "signal — basic state",
@@ -230,7 +230,7 @@
     "todoPlaceholder": "New task",
     "logTitle": "subscribe / effect log",
     "modelNote1": "This page uses createReactivityLabModel() and ReactivityLabView.",
-    "modelNote2": "Compare with @echojs/store on State and @echojs/query — signals inside query instances."
+    "modelNote2": "Compare with @echojs-ecosystem/store on State and @echojs-ecosystem/query — signals inside query instances."
   },
   "queryDemo": {
     "apiHint": "Public API: https://jsonplaceholder.typicode.com — fake REST backend (data is not persisted).",
@@ -392,7 +392,7 @@
     }
   },
   "miniForms": {
-    "intro": "More @echojs/form examples: checkbox, select, textarea, field array.",
+    "intro": "More @echojs-ecosystem/form examples: checkbox, select, textarea, field array.",
     "email": "Email",
     "remember": "Remember me",
     "submit": "submit (see console)",

@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, h1, p } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, h1, p } from "@echojs-ecosystem/hyperdom";
 import { routerStateStyles } from "@entities/router-states/ui/router-states.view.styles.js";
 
 const state = routerStateStyles();

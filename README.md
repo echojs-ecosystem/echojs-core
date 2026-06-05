@@ -30,14 +30,14 @@ bun run format
 
 ## Пакеты
 
-- **`@echojs/reactivity`** — сигналы/эффекты/батчинг.
-- **`@echojs/core`** — минимальный UI runtime: `createComponent`, `mount`, директивы, вставка/пропсы/события.
-- **`@echojs/hyperdom`** — DSL/рендер без JSX (и control primitives).
-- **`@echojs/router`** — программируемый роутер (есть bindings: `@echojs/router/hyperdom`).
-- **`@echojs/form`** — поля/формы + валидация (Standard Schema) + bindings для Hyperdom.
-- **`@echojs/persist`** — универсальный слой persistence для store/form-like primitives.
-- **`@echojs/store`** — стор (используется в `persist`).
-- **`@echojs/bench`** — CLI/утилиты для performance/size бенчей.
+- **`@echojs-ecosystem/reactivity`** — сигналы/эффекты/батчинг.
+- **`@echojs-ecosystem/core`** — минимальный UI runtime: `createComponent`, `mount`, директивы, вставка/пропсы/события.
+- **`@echojs-ecosystem/hyperdom`** — DSL/рендер без JSX (и control primitives).
+- **`@echojs-ecosystem/router`** — программируемый роутер (есть bindings: `@echojs-ecosystem/router/hyperdom`).
+- **`@echojs-ecosystem/form`** — поля/формы + валидация (Standard Schema) + bindings для Hyperdom.
+- **`@echojs-ecosystem/persist`** — универсальный слой persistence для store/form-like primitives.
+- **`@echojs-ecosystem/store`** — стор (используется в `persist`).
+- **`@echojs-ecosystem/bench`** — CLI/утилиты для performance/size бенчей.
 
 ## Примеры
 
@@ -46,7 +46,7 @@ bun run format
 ### 1) Реактивность: `signal` + `effect`
 
 ```ts
-import { signal, effect } from "@echojs/reactivity";
+import { signal, effect } from "@echojs-ecosystem/reactivity";
 
 const $count = signal(0);
 
@@ -61,7 +61,7 @@ $count.update((v) => v + 1);
 ### 2) Минимальный UI: `createComponent` + `mount`
 
 ```ts
-import { createComponent, mount, signal } from "@echojs/core";
+import { createComponent, mount, signal } from "@echojs-ecosystem/core";
 
 const Counter = createComponent(
   ({ signal }) => {
@@ -79,14 +79,14 @@ const Counter = createComponent(
 mount(document.getElementById("app")!, Counter());
 ```
 
-Примечание: `@echojs/core` ре-экспортирует reactivity-примитивы (например `signal`, `effect`) для удобства.
+Примечание: `@echojs-ecosystem/core` ре-экспортирует reactivity-примитивы (например `signal`, `effect`) для удобства.
 
 ### 3) Router: дерево routes + `createRouter`
 
 Полная философия и примеры: `packages/router/README.md`.
 
 ```ts
-import { createRouter, createRoutes, createRouteView } from "@echojs/router";
+import { createRouter, createRoutes, createRouteView } from "@echojs-ecosystem/router";
 
 const homePage = createRouteView({
   name: "home",
@@ -102,15 +102,15 @@ router.start();
 router.go("/");
 ```
 
-Для Hyperdom приложений подключай bindings: `@echojs/router/hyperdom`.
+Для Hyperdom приложений подключай bindings: `@echojs-ecosystem/router/hyperdom`.
 
 ### 4) Form + Persist: поле с сохранением в localStorage
 
 Рабочий пример из `apps/example/src/pages/auth/login/model.ts`:
 
 ```ts
-import { createField, createForm, bindField } from "@echojs/form";
-import { withLocalStorage } from "@echojs/persist";
+import { createField, createForm, bindField } from "@echojs-ecosystem/form";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 import { z } from "zod";
 
 const schema = z.object({
@@ -153,14 +153,14 @@ packages/
 - `packages/router/README.md`
 - `packages/persist/README.md`
 
-## Единый пакет `@echojs/framework`
+## Единый пакет `@echojs-ecosystem/framework`
 
-Если хочешь “установил один пакет — доступна вся экосистема”, используй meta-package `@echojs/framework`.
+Если хочешь “установил один пакет — доступна вся экосистема”, используй meta-package `@echojs-ecosystem/framework`.
 
 ### Установка
 
 ```bash
-bun add @echojs/framework
+bun add @echojs-ecosystem/framework
 ```
 
 ### Импорты для минимального бандла (рекомендуется)
@@ -168,23 +168,23 @@ bun add @echojs/framework
 Импортируй **конкретный модуль**, чтобы бандлер забрал только нужный граф зависимостей:
 
 ```ts
-import { signal, effect } from "@echojs/framework/reactivity";
-import { createRouter } from "@echojs/framework/router";
-import { createForm } from "@echojs/framework/form";
+import { signal, effect } from "@echojs-ecosystem/framework/reactivity";
+import { createRouter } from "@echojs-ecosystem/framework/router";
+import { createForm } from "@echojs-ecosystem/framework/form";
 ```
 
 Доступные под-импорты:
 
-- `@echojs/framework/core`
-- `@echojs/framework/reactivity`
-- `@echojs/framework/hyperdom`
-- `@echojs/framework/router`
-- `@echojs/framework/router/hyperdom`
-- `@echojs/framework/form`
-- `@echojs/framework/persist`
-- `@echojs/framework/store`
-- `@echojs/framework/ui`
+- `@echojs-ecosystem/framework/core`
+- `@echojs-ecosystem/framework/reactivity`
+- `@echojs-ecosystem/framework/hyperdom`
+- `@echojs-ecosystem/framework/router`
+- `@echojs-ecosystem/framework/router/hyperdom`
+- `@echojs-ecosystem/framework/form`
+- `@echojs-ecosystem/framework/persist`
+- `@echojs-ecosystem/framework/store`
+- `@echojs-ecosystem/framework/ui`
 
 ### Про install size vs bundle size
 
-- **install size** (в `node_modules`) будет больше, потому что `@echojs/framework` зависит от всей экосистемы.\n+- **bundle size** будет минимальным, если ты импортируешь подмодули и у проекта включён tree-shaking.
+- **install size** (в `node_modules`) будет больше, потому что `@echojs-ecosystem/framework` зависит от всей экосистемы.\n+- **bundle size** будет минимальным, если ты импортируешь подмодули и у проекта включён tree-shaking.

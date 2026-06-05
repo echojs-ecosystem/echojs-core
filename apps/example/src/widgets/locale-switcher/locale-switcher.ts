@@ -1,5 +1,5 @@
-import { button, div, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { button, div, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { i18n, setAppLocale, type AppLocale } from "@app/providers/i18n.js";
 
 const localeLabel: Record<AppLocale, string> = {

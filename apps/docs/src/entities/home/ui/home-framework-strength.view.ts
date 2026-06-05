@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, span } from "@echojs-ecosystem/hyperdom";
 import { vdomCompare } from "@entities/home/constants/home-landing.data.js";
 import { HomeCompareCardView } from "@entities/home/ui/home-compare-card.view.js";
 import { frameworkStrengthStyles } from "@entities/home/ui/home-framework-strength.view.styles.js";

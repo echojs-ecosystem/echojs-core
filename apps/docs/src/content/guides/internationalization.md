@@ -1,17 +1,17 @@
 ---
 title: Internationalization
-description: Locales, lazy messages, browser detect, and translations in models and views with @echojs/i18n.
+description: Locales, lazy messages, browser detect, and translations in models and views with @echojs-ecosystem/i18n.
 keywords: [i18n, locale, createI18nProvider, translations]
 ---
 
 # Internationalization
 
-EchoJS i18n is **`@echojs/i18n`**: typed message maps, lazy locale chunks, browser detection, and HyperDOM-friendly `t()` that tracks the active locale. The docs site (`apps/docs`) and example app both use the same provider pattern.
+EchoJS i18n is **`@echojs-ecosystem/i18n`**: typed message maps, lazy locale chunks, browser detection, and HyperDOM-friendly `t()` that tracks the active locale. The docs site (`apps/docs`) and example app both use the same provider pattern.
 
 ## Provider at bootstrap
 
 ```ts
-import { createI18nProvider } from "@echojs/i18n";
+import { createI18nProvider } from "@echojs-ecosystem/i18n";
 import en from "../public/locales/en.json";
 import ru from "../public/locales/ru.json";
 
@@ -91,7 +91,7 @@ navigatorRules: [
 Call `i18n.t()` inside reactive contexts so UI updates on locale change:
 
 ```ts
-import { effect } from "@echojs/reactivity";
+import { effect } from "@echojs-ecosystem/reactivity";
 import { i18n } from "@core/providers/i18n.js";
 
 // In createView — function child re-runs when locale signal updates
@@ -121,7 +121,7 @@ Use built-in plural helpers and `Intl` formatters from the package (dates, numbe
 
 ## Router and URLs
 
-Locale in the **path** (`/en/docs/...`) is an app choice — combine with route params or `@echojs/url-state`. The i18n provider does not replace routing; sync `setLocale` when the URL locale segment changes.
+Locale in the **path** (`/en/docs/...`) is an app choice — combine with route params or `@echojs-ecosystem/url-state`. The i18n provider does not replace routing; sync `setLocale` when the URL locale segment changes.
 
 ## Testing
 

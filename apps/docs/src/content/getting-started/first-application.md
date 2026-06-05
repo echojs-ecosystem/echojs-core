@@ -40,7 +40,7 @@ void bootstrap();
 `src/app/bootstrap.ts`:
 
 ```ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 import {
   queryProvider,
   routerProvider,
@@ -72,7 +72,7 @@ export const bootstrap = (): Promise<() => void> =>
 `src/core/providers/router.ts` (simplified):
 
 ```ts
-import { createRouterProvider } from "@echojs/router/hyperdom";
+import { createRouterProvider } from "@echojs-ecosystem/router/hyperdom";
 import { appRouter } from "../entities/__routes__/router.js";
 
 export const routerProvider = createRouterProvider(appRouter);
@@ -85,7 +85,7 @@ export const routerProvider = createRouterProvider(appRouter);
 `src/entities/__routes__/app.routes.ts`:
 
 ```ts
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { homePage } from "@pages/home/home.page.js";
 
 export const appRoutes = createRoutes([
@@ -95,7 +95,7 @@ export const appRoutes = createRoutes([
 
 ```ts
 // src/entities/__routes__/router.ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 import { appRoutes } from "./app.routes.js";
 
 export const appRouter = createRouter({
@@ -109,7 +109,7 @@ export const appRouter = createRouter({
 `src/pages/home/home.page.ts`:
 
 ```ts
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { bindModelView } from "@core/ui/bind-model-view.js";
 import { createHomeModel } from "./model/home.model.js";
 import { HomeView } from "./ui/home.view.js";
@@ -125,7 +125,7 @@ export const homePage = createRouteView({
 ## 7. Navigate in the UI
 
 ```ts
-import { NavLink } from "@echojs/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
 import { aboutPage } from "@pages/about/about.page.js";
 
 NavLink({

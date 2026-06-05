@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, expect, it, beforeAll } from "vitest";
 import "fake-indexeddb/auto";
-import { createStore } from "@echojs/store";
+import { createStore } from "@echojs-ecosystem/store";
 
 import { flushMicrotasks } from "../test-utils";
 import { withIndexedDB } from "./with-indexed-db";

@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: createEchoApp lifecycle, providers, provide/inject, and router integration.
-package: "@echojs/framework"
+package: "@echojs-ecosystem/framework"
 ---
 
 # Usage
@@ -9,7 +9,7 @@ package: "@echojs/framework"
 ## `createEchoApp` options
 
 ```ts
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 import { MyRootView } from "./root.js";
 
 // Static root (no router provider)
@@ -56,10 +56,10 @@ export { themeProvider } from "./theme.js";
 
 | Provider | Package | Notes |
 | --- | --- | --- |
-| `createQueryProvider` | `@echojs/query` | Global query defaults |
-| `createRouterProvider` | `@echojs/router/hyperdom` | `router.start()`, root = `router.View` |
-| UI / theme | `@echojs/ui` | Design tokens |
-| i18n | `@echojs/i18n` | Locale + messages |
+| `createQueryProvider` | `@echojs-ecosystem/query` | Global query defaults |
+| `createRouterProvider` | `@echojs-ecosystem/router/hyperdom` | `router.start()`, root = `router.View` |
+| UI / theme | `@echojs-ecosystem/ui` | Design tokens |
+| i18n | `@echojs-ecosystem/i18n` | Locale + messages |
 
 **Order:** query and i18n before router if routes or models depend on them during first navigation.
 
@@ -70,7 +70,7 @@ See Architecture → Providers.
 Typed install + setup (Vue-style):
 
 ```ts
-import { createProvider } from "@echojs/framework/app";
+import { createProvider } from "@echojs-ecosystem/framework/app";
 
 export const themeProvider = createProvider({
   name: "theme",
@@ -108,7 +108,7 @@ export const apiProvider = {
 const client = app.inject(API_KEY);
 ```
 
-Router uses `ROUTER_KEY` from `@echojs/framework/app` — or `injectRouter(app)` helper.
+Router uses `ROUTER_KEY` from `@echojs-ecosystem/framework/app` — or `injectRouter(app)` helper.
 
 ## Custom router provider (docs app)
 

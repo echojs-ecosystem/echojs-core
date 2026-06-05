@@ -146,7 +146,7 @@ export type PageViewRenderer<
 > = (context: PageViewRenderContext<Params, Query>) => unknown;
 
 import type { RouterHistoryConfig } from "./history-config";
-import type { Child } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import type {
   CollectRoutePaths,
   RouteTreeEntry,

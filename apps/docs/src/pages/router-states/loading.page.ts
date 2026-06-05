@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { RouterLoadingView } from "@entities/router-states/ui/loading.view.js";
 
 export const routerLoadingPage = createRouteView({

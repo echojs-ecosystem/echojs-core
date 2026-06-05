@@ -1,6 +1,6 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import { code, div, h4, li, p, section, ul } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { code, div, h4, li, p, section, ul } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { getDocsModule } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { ModuleHeader } from "@widgets/app-shell/module-header.js";

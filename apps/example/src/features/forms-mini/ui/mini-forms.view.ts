@@ -1,6 +1,6 @@
-import { bindField } from "@echojs/form";
-import { List, button, code, div, h2, hr, input, label, p, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { bindField } from "@echojs-ecosystem/form";
+import { List, button, code, div, h2, hr, input, label, p, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import type { MiniFormsVM } from "@features/forms-mini/model/mini-forms.model.js";
 
 export const MiniFormsView = ({
@@ -13,7 +13,7 @@ export const MiniFormsView = ({
 }: MiniFormsVM) => {
   return div(
     { class: "forms-mini" },
-    h2(null, "Ещё несколько примеров: @echojs/form + Zod (Standard Schema)"),
+    h2(null, "Ещё несколько примеров: @echojs-ecosystem/form + Zod (Standard Schema)"),
     p(null, [
       "Шаблон: ",
       code(

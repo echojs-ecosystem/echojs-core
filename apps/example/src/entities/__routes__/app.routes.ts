@@ -1,4 +1,4 @@
-import { createRoutes } from "@echojs/router";
+import { createRoutes } from "@echojs-ecosystem/router";
 import { hubPage } from "@pages/hub/hub.page.js";
 import { authShellLayoutPage } from "@pages/auth/layout/auth-shell-layout.page.js";
 import { authLoginPage } from "@pages/auth/login/auth-login.page.js";

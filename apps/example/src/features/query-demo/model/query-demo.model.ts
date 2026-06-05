@@ -1,8 +1,8 @@
-import { signal } from "@echojs/reactivity";
-import type { Signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
-import { getQueryProvider } from "@echojs/query";
+import { getQueryProvider } from "@echojs-ecosystem/query";
 import {
   createPostMutation,
   getUserPostsInfiniteQuery,
@@ -140,7 +140,7 @@ export const createQueryDemoModel = createModel((): QueryDemoVM => {
       createPost.run({
         userId: $selectedUserId.value(),
         title: $draftTitle.value(),
-        body: "Created from @echojs/query example app.",
+        body: "Created from @echojs-ecosystem/query example app.",
       }),
 
     togglePostsEnabled: () => {

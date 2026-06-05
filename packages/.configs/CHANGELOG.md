@@ -1,4 +1,4 @@
-# @echojs/oxc-config
+# @echojs-ecosystem/oxc-config
 
 ## 0.1.0
 

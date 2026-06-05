@@ -1,10 +1,10 @@
 <div align="center">
 
-# @echojs/hyperdom
+# @echojs-ecosystem/hyperdom
 
 **Direct DOM rendering — no virtual DOM, no JSX required.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/hyperdom)](https://www.npmjs.com/package/@echojs/hyperdom)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/hyperdom)](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/hyperdom)
 
 </div>
@@ -24,14 +24,14 @@ The view layer of EchoJS. Maps **views to real DOM nodes** with a hyperscript AP
 ## Install
 
 ```bash
-npm install @echojs/hyperdom @echojs/reactivity
+npm install @echojs-ecosystem/hyperdom @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
 
 ```ts
-import { h, render, Show, button, div, span } from "@echojs/hyperdom";
-import { signal } from "@echojs/reactivity";
+import { h, render, Show, button, div, span } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const $count = signal(0);
 
@@ -73,9 +73,9 @@ h("input", { value: () => $text.value(), onInput: (e) => $text.set(e.currentTarg
 
 | Package | Role |
 |---------|------|
-| [`@echojs/reactivity`](https://www.npmjs.com/package/@echojs/reactivity) | Signals for dynamic regions |
-| [`@echojs/router`](https://www.npmjs.com/package/@echojs/router) | SPA routing bindings |
-| [`@echojs/ui`](https://www.npmjs.com/package/@echojs/ui) | Accessible UI components |
+| [`@echojs-ecosystem/reactivity`](https://www.npmjs.com/package/@echojs-ecosystem/reactivity) | Signals for dynamic regions |
+| [`@echojs-ecosystem/router`](https://www.npmjs.com/package/@echojs-ecosystem/router) | SPA routing bindings |
+| [`@echojs-ecosystem/ui`](https://www.npmjs.com/package/@echojs-ecosystem/ui) | Accessible UI components |
 
 ## Documentation
 

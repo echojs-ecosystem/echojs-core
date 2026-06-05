@@ -1,4 +1,4 @@
-import { cleanup } from "@echojs/reactivity";
+import { cleanup } from "@echojs-ecosystem/reactivity";
 import type { EventHandler, EventModifiers } from "./types";
 import { isFunction } from "./internals/utils";
 

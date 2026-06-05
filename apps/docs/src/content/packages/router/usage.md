@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: Route trees, pages, layouts, navigation, beforeLoad, lazy routes, and guards.
-package: "@echojs/router"
+package: "@echojs-ecosystem/router"
 ---
 
 # Usage
@@ -9,7 +9,7 @@ package: "@echojs/router"
 ## Route tree with `createRoutes`
 
 ```ts
-import { createRoutes, createRouteView, createLayoutView } from "@echojs/router";
+import { createRoutes, createRouteView, createLayoutView } from "@echojs-ecosystem/router";
 
 const shellLayout = createLayoutView({
   name: "app-shell",
@@ -55,7 +55,7 @@ Each `name` must be unique — used for `router.routes.home` style maps.
 ## `createRouter` lifecycle
 
 ```ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 
 const router = createRouter({
   history: "browser",
@@ -123,7 +123,7 @@ userPage.open({ id: "1" }); // alias for go
 ### HyperDOM `NavLink` (preferred in UI)
 
 ```ts
-import { NavLink } from "@echojs/router/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
 
 NavLink({
   to: userPage,
@@ -141,7 +141,7 @@ NavLink({
 ### Plain `Link`
 
 ```ts
-import { Link } from "@echojs/router/hyperdom";
+import { Link } from "@echojs-ecosystem/router/hyperdom";
 
 Link({ href: "/docs/guides/routing", children: "Routing guide" });
 Link({ to: homePage, children: "Home" });
@@ -169,7 +169,7 @@ Access pending/error via router signals: `router.$pending`, `router.$error`, or 
 ## Lazy routes
 
 ```ts
-import { createLazyRouteView } from "@echojs/router";
+import { createLazyRouteView } from "@echojs-ecosystem/router";
 
 const settingsPage = createLazyRouteView({
   name: "settings",
@@ -185,7 +185,7 @@ Default export of the chunk must be a **`RouteView` function**. Chunk is cached 
 For redirects and guards without a view:
 
 ```ts
-import { createRoute } from "@echojs/router";
+import { createRoute } from "@echojs-ecosystem/router";
 
 const legacy = createRoute("legacy-redirect");
 legacy.go({ id: "1" });

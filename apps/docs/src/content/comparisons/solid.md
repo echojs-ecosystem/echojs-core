@@ -49,10 +49,10 @@ This guide is the **Solid migration reference** — primitives, mental model tra
 | **View syntax** | JSX (runs once per component) | HyperDOM TS (`.view.ts`) |
 | **Component re-run** | **Never** (function runs once) | Views are factories; models are plain |
 | **Structure** | Team convention | **Feature-first** (documented) |
-| **Routing** | `@solidjs/router` | `@echojs/router` |
-| **Async** | `createResource`, TanStack Query | `@echojs/query` |
-| **Global state** | `createStore`, context, signals | `@echojs/store` |
-| **Meta-framework** | SolidStart (Vinxi/Nitro) | `@echojs/framework` + Vite SPA |
+| **Routing** | `@solidjs/router` | `@echojs-ecosystem/router` |
+| **Async** | `createResource`, TanStack Query | `@echojs-ecosystem/query` |
+| **Global state** | `createStore`, context, signals | `@echojs-ecosystem/store` |
+| **Meta-framework** | SolidStart (Vinxi/Nitro) | `@echojs-ecosystem/framework` + Vite SPA |
 | **SSR** | SolidStart mature path | CSR-first today |
 | **Looks like React?** | JSX similar — semantics differ | No JSX |
 
@@ -102,7 +102,7 @@ setCount((n) => n + 1);
 
 ```ts
 // EchoJS
-import { signal, computed, effect } from "@echojs/reactivity";
+import { signal, computed, effect } from "@echojs-ecosystem/reactivity";
 
 const count = signal(0);
 const double = computed(() => count.value() * 2);
@@ -248,7 +248,7 @@ SolidStart `routes/` files map to Echo **pages** + `entities/__routes__` — kee
 | --- | --- |
 | Component per feature | `features/x/ui` + `model` |
 | `createContext` | `provide` / `inject` |
-| Module stores | `@echojs/store` in entity |
+| Module stores | `@echojs-ecosystem/store` in entity |
 | `createResource` in component | `createQuery` in model |
 | Route `load` (Start) | `beforeLoad` |
 
@@ -260,18 +260,18 @@ SolidStart `routes/` files map to Echo **pages** + `entities/__routes__` — kee
 | --- | --- | --- |
 | **Local UI** | `createSignal` | `signal` in model |
 | **Screen** | component + memos | `createModel` |
-| **Server / cache** | `createResource`, TanStack Query | `@echojs/query` |
-| **URL** | router search, `useSearchParams` | `@echojs/url-state` |
-| **App client** | `createStore`, context | `@echojs/store` + `@echojs/persist` |
+| **Server / cache** | `createResource`, TanStack Query | `@echojs-ecosystem/query` |
+| **URL** | router search, `useSearchParams` | `@echojs-ecosystem/url-state` |
+| **App client** | `createStore`, context | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
 ### Library-by-library
 
 | Library | Solid role | EchoJS |
 | --- | --- | --- |
-| **solid-js/store** `createStore` | nested immutable store | `@echojs/store` |
+| **solid-js/store** `createStore` | nested immutable store | `@echojs-ecosystem/store` |
 | **solid-js/store** `produce` | Immer-like | `store.update` |
 | **context API** | DI + theme | framework `inject` |
-| **@tanstack/solid-query** | `createQuery` | `@echojs/query` (same concepts) |
+| **@tanstack/solid-query** | `createQuery` | `@echojs-ecosystem/query` (same concepts) |
 | **solid-primitives** | utilities | `shared/` + model |
 | **@solidjs/meta** | head tags | SPA head / future SSR |
 | **valtio** (rare) | proxy state | signals / store |
@@ -298,7 +298,7 @@ const user = userQuery.with(() => ({ id: params.id }));
 // user.isPending(), user.data() in view
 ```
 
-| createResource | `@echojs/query` |
+| createResource | `@echojs-ecosystem/query` |
 | --- | --- |
 | Source + fetcher | `queryKey` + `queryFn` |
 | `refetch` | invalidate / refetch |
@@ -335,7 +335,7 @@ export const saveUserMutation = createMutation({
 
 ### @solidjs/router
 
-| Solid Router | `@echojs/router` |
+| Solid Router | `@echojs-ecosystem/router` |
 | --- | --- |
 | `<Router>` + routes | `createRouter` + `createRoutes` |
 | `<Route path="/users/:id">` | `{ path: "users/:id", routeView }` |
@@ -407,7 +407,7 @@ export const createLoginModel = createModel(() => {
 
 | Library | Solid | EchoJS |
 | --- | --- | --- |
-| **Kobalte** | headless a11y | `@echojs/ui` |
+| **Kobalte** | headless a11y | `@echojs-ecosystem/ui` |
 | **hope-ui** | component kit | feature views |
 | **solid-ui** | shadcn port | Tailwind + ui package |
 | **Tailwind** | common | docs/example |
@@ -445,7 +445,7 @@ Solid UI libs **do not port** — rebuild screens in HyperDOM or wrap raw DOM (n
 
 | Topic | Solid | EchoJS |
 | --- | --- | --- |
-| Runtime size | very small core | modular `@echojs/*` |
+| Runtime size | very small core | modular `@echojs-ecosystem/*` |
 | Compile JSX | babel/solid plugin | no JSX compile step |
 | List performance | `<For>` keyed | map + signal per row |
 | Dev rebuild | fast HMR | Vite HMR |
@@ -462,7 +462,7 @@ Both avoid VDOM — differences show up in **ecosystem weight** and **view autho
 | **@solidjs/testing-library** | mount component | integration tests on views |
 | **Vitest** | unit | unit on **models** |
 | **@solidjs/testing-library** `userEvent` | UI tests | Playwright e2e |
-| **DevTools** | Solid Inspector | `@echojs/devtools` planned |
+| **DevTools** | Solid Inspector | `@echojs-ecosystem/devtools` planned |
 
 ```ts
 const vm = createCartModel({ userId: "1" });
@@ -478,7 +478,7 @@ expect(vm.total.value()).toBe(19.99);
 
 | Problem | Solid | EchoJS |
 | --- | --- | --- |
-| Runtime | `solid-js` | `@echojs/reactivity` + `@echojs/hyperdom` |
+| Runtime | `solid-js` | `@echojs-ecosystem/reactivity` + `@echojs-ecosystem/hyperdom` |
 | JSX compile | `babel-preset-solid` | none (TS views) |
 | Bootstrap | `render(() => …)` | `createEchoApp().mount()` |
 
@@ -486,18 +486,18 @@ expect(vm.total.value()).toBe(19.99);
 
 | Problem | Solid | EchoJS |
 | --- | --- | --- |
-| Router | `@solidjs/router` | `@echojs/router` |
-| Meta | SolidStart | `@echojs/framework` |
-| REST cache | TanStack Query / resource | `@echojs/query` |
-| URL state | manual / router | `@echojs/url-state` |
-| Persist | localStorage manual | `@echojs/persist` |
+| Router | `@solidjs/router` | `@echojs-ecosystem/router` |
+| Meta | SolidStart | `@echojs-ecosystem/framework` |
+| REST cache | TanStack Query / resource | `@echojs-ecosystem/query` |
+| URL state | manual / router | `@echojs-ecosystem/url-state` |
+| Persist | localStorage manual | `@echojs-ecosystem/persist` |
 
 ### UI & i18n
 
 | Problem | Solid | EchoJS |
 | --- | --- | --- |
-| Components | Kobalte, corvu | `@echojs/ui` |
-| i18n | `@solid-primitives/i18n` | `@echojs/i18n` |
+| Components | Kobalte, corvu | `@echojs-ecosystem/ui` |
+| i18n | `@solid-primitives/i18n` | `@echojs-ecosystem/i18n` |
 | Icons | solid-icons | SVG in views |
 
 ### Quality
@@ -579,7 +579,7 @@ Echo views are **plain TS** — no JSX compiler plugin in CI.
 
 1. Extract component logic → `createModel`.
 2. Rewrite JSX → HyperDOM per view.
-3. Replace Kobalte with `@echojs/ui` where possible.
+3. Replace Kobalte with `@echojs-ecosystem/ui` where possible.
 
 ### Phase 4 — Cleanup
 
@@ -623,7 +623,7 @@ Echo views are **plain TS** — no JSX compiler plugin in CI.
 | --- | --- |
 | SolidStart SSR is core | Echo monorepo SPA |
 | Team loves JSX + small core | Want enforced architecture |
-| Kobalte UI investment | `@echojs/ui` + HyperDOM OK |
+| Kobalte UI investment | `@echojs-ecosystem/ui` + HyperDOM OK |
 | Already shipped Solid app | Greenfield or gradual port |
 | Hire Solid specialists | Standardize on Echo packages |
 
@@ -660,16 +660,16 @@ Keep on Nitro or move to your API; Echo client uses `queryFn` + `fetch`.
 | Reactivity | Nearly identical primitives | `signal` / `computed` / `effect` |
 | Views | JSX (compile-time bindings) | HyperDOM TS |
 | Architecture | Optional discipline | Feature-first rules |
-| Data | Resource + TanStack | `@echojs/query` |
-| Routing | solid-router / Start | `@echojs/router` |
+| Data | Resource + TanStack | `@echojs-ecosystem/query` |
+| Routing | solid-router / Start | `@echojs-ecosystem/router` |
 | SSR | SolidStart | SPA-first |
-| Platform | Minimal + community | Integrated `@echojs/*` |
+| Platform | Minimal + community | Integrated `@echojs-ecosystem/*` |
 
 **Other guides:** [Comparisons index](/docs/comparisons) · [React](/docs/comparisons/react) · [Vue](/docs/comparisons/vue) · [Angular](/docs/comparisons/angular) · [Svelte](/docs/comparisons/svelte)
 
 ## Related docs
 
-- [@echojs/reactivity](/docs/packages/reactivity)
+- [@echojs-ecosystem/reactivity](/docs/packages/reactivity)
 - [Feature-first design](/docs/architecture/feature-first)
 - [Dependency flow](/docs/architecture/dependency-flow)
 - [State overview](/docs/state/overview)

@@ -1,20 +1,20 @@
 ---
 title: Installation
-description: Install @echojs/url-state and connect to @echojs/router.
-package: "@echojs/url-state"
+description: Install @echojs-ecosystem/url-state and connect to @echojs-ecosystem/router.
+package: "@echojs-ecosystem/url-state"
 ---
 
 # Installation
 
 ## Package managers
 
-:::install @echojs/url-state
+:::install @echojs-ecosystem/url-state
 
 For SPA URL sync via router:
 
-:::install @echojs/router
+:::install @echojs-ecosystem/router
 
-:::install @echojs/hyperdom
+:::install @echojs-ecosystem/hyperdom
 
 ## Standalone (tests / static pages)
 
@@ -25,20 +25,20 @@ Use `createBrowserUrlStateAdapter()` or `createMemoryUrlStateAdapter()` per para
 ```json
 {
   "dependencies": {
-    "@echojs/url-state": "workspace:*",
-    "@echojs/router": "workspace:*"
+    "@echojs-ecosystem/url-state": "workspace:*",
+    "@echojs-ecosystem/router": "workspace:*"
   }
 }
 ```
 
 ## Router registration
 
-`createRouter` from `@echojs/router/hyperdom` calls `attachRouterQueryParams` — registers the router for `createQueryParams()` without importing `appRouter` in route modules (avoids circular imports).
+`createRouter` from `@echojs-ecosystem/router/hyperdom` calls `attachRouterQueryParams` — registers the router for `createQueryParams()` without importing `appRouter` in route modules (avoids circular imports).
 
 ## Minimal check
 
 ```ts
-import { createMemoryUrlStateAdapter, createQueryParam, parseAsString } from "@echojs/url-state";
+import { createMemoryUrlStateAdapter, createQueryParam, parseAsString } from "@echojs-ecosystem/url-state";
 
 const adapter = createMemoryUrlStateAdapter("?q=hello");
 const q = createQueryParam("q", parseAsString.withDefault(""), { adapter });

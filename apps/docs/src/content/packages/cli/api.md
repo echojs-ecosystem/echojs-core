@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: @echojs/cli programmatic API — coming soon.
-package: "@echojs/cli"
+description: @echojs-ecosystem/cli programmatic API — coming soon.
+package: "@echojs-ecosystem/cli"
 status: draft
 ---
 

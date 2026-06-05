@@ -1,4 +1,4 @@
-import { createI18nProvider } from "@echojs/i18n";
+import { createI18nProvider } from "@echojs-ecosystem/i18n";
 
 import en from "../../../public/locales/en.json";
 import ru from "../../../public/locales/ru.json";

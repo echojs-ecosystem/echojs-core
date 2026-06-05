@@ -48,12 +48,12 @@ This guide is the **Angular migration reference**: change detection, templates, 
 | **Reactivity** | `signal`, `computed`, `effect` + RxJS | `signal`, `computed`, `effect` only in UI path |
 | **Templates** | HTML + directives + pipes | HyperDOM `.view.ts` |
 | **DI** | Hierarchical injectors | `provide` / `inject` on `createEchoApp` |
-| **Async default** | Observables (`HttpClient`) | `fetch` + `@echojs/query` |
-| **Global state** | NgRx, ComponentStore, services | `@echojs/store` |
-| **Routing** | `@angular/router` | `@echojs/router` |
+| **Async default** | Observables (`HttpClient`) | `fetch` + `@echojs-ecosystem/query` |
+| **Global state** | NgRx, ComponentStore, services | `@echojs-ecosystem/store` |
+| **Routing** | `@angular/router` | `@echojs-ecosystem/router` |
 | **Forms** | Reactive / template-driven | model signals + views |
-| **UI kit** | Material, CDK | `@echojs/ui` |
-| **CLI** | `ng` workspace | Vite + `@echojs/cli` (planned) |
+| **UI kit** | Material, CDK | `@echojs-ecosystem/ui` |
+| **CLI** | `ng` workspace | Vite + `@echojs-ecosystem/cli` (planned) |
 | **SSR** | `@angular/ssr` mature | SPA-first; SSR planned separately |
 | **Structure** | Modules → standalone; team-defined | **Feature-first** (documented) |
 
@@ -99,7 +99,7 @@ count.set(1);
 
 ```ts
 // EchoJS
-import { signal, computed, effect } from "@echojs/reactivity";
+import { signal, computed, effect } from "@echojs-ecosystem/reactivity";
 
 const count = signal(0);
 const double = computed(() => count.value() * 2);
@@ -147,7 +147,7 @@ count.set(1);
 | Binding | `{{ expr() }}`, `[prop]`, `(click)` | `h()` props, `() =>` reactive children |
 | Control flow | `@if`, `@for`, `@switch` (v17+) | `Show`, `.map`, conditional children |
 | Structural | `*ngIf`, `*ngFor` (legacy) | explicit in TS |
-| Pipes | `{{ price \| currency }}` | `Intl` via `@echojs/i18n` or utils |
+| Pipes | `{{ price \| currency }}` | `Intl` via `@echojs-ecosystem/i18n` or utils |
 | Class/style | `[ngClass]`, `[ngStyle]` | `class` / `style` props |
 | Two-way | `[(ngModel)]` | model signals |
 | i18n attrs | `i18n` | `t()` keys |
@@ -246,15 +246,15 @@ Angular **feature modules** ≈ Echo **features/** — but Echo **blocks** featu
 | --- | --- | --- |
 | **Local UI** | signal, component fields | `signal` in model |
 | **Screen** | component + service | `createModel` |
-| **Server / cache** | HttpClient, NgRx, TanStack | `@echojs/query` |
-| **URL** | `queryParams` observable | `@echojs/url-state` |
-| **App client** | NgRx, services, signals | `@echojs/store` + `@echojs/persist` |
+| **Server / cache** | HttpClient, NgRx, TanStack | `@echojs-ecosystem/query` |
+| **URL** | `queryParams` observable | `@echojs-ecosystem/url-state` |
+| **App client** | NgRx, services, signals | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
 ### Library-by-library
 
 | Library | Angular role | EchoJS |
 | --- | --- | --- |
-| **NgRx Store** | global normalized state | `@echojs/store` + query |
+| **NgRx Store** | global normalized state | `@echojs-ecosystem/store` + query |
 | **NgRx Effects** | side effects on actions | query mutations, model actions |
 | **NgRx Entity** | entity adapters | store slices + typed maps |
 | **ComponentStore** | local feature store | feature `createStore` |
@@ -341,7 +341,7 @@ export const createUsersFeatureStore = () =>
 
 ## Routing & guards
 
-| `@angular/router` | `@echojs/router` |
+| `@angular/router` | `@echojs-ecosystem/router` |
 | --- | --- |
 | `Routes` config | `createRoutes` tree |
 | `Router.navigate` | `router.go()` |
@@ -351,7 +351,7 @@ export const createUsersFeatureStore = () =>
 | `resolve` | `beforeLoad` return data |
 | Lazy `loadChildren` | lazy route modules |
 | `ActivatedRoute.params` | `params` on route view |
-| `queryParams` | `@echojs/url-state` or router |
+| `queryParams` | `@echojs-ecosystem/url-state` or router |
 | `RouterOutlet` | layout `outlet()` |
 
 ```ts
@@ -410,7 +410,7 @@ const errors = computed(() => validateEmail(email.value()));
 
 | Library | Angular | EchoJS |
 | --- | --- | --- |
-| **Angular Material** | full design system | `@echojs/ui` + Tailwind |
+| **Angular Material** | full design system | `@echojs-ecosystem/ui` + Tailwind |
 | **CDK** | a11y primitives | HyperDOM semantics + ui package |
 | **PrimeNG** | enterprise widgets | feature views |
 | **ng-bootstrap** | Bootstrap | Tailwind components |
@@ -469,7 +469,7 @@ Angular **incremental DOM** is not VDOM — still different from Echo’s **per-
 | **TestBed** | configure module | test model; mount view optional |
 | **Spectator** | sugar | plain factories |
 | **NgRx MockStore** | mock selectors | mock store factory |
-| **Angular DevTools** | profiler, DI tree | `@echojs/devtools` planned |
+| **Angular DevTools** | profiler, DI tree | `@echojs-ecosystem/devtools` planned |
 | **Playwright** | e2e | e2e on SPA |
 
 ```ts
@@ -487,28 +487,28 @@ expect(vm.total.value()).toBe(90);
 
 | Problem | Angular | EchoJS |
 | --- | --- | --- |
-| Framework | `@angular/core` | `@echojs/framework` |
+| Framework | `@angular/core` | `@echojs-ecosystem/framework` |
 | Build | `@angular-devkit/build-angular` | Vite |
 | Workspace | `angular.json` | monorepo packages |
-| Schematics | `ng generate` | `@echojs/cli` (planned) |
+| Schematics | `ng generate` | `@echojs-ecosystem/cli` (planned) |
 
 ### Data & state
 
 | Problem | Angular | EchoJS |
 | --- | --- | --- |
 | HTTP | `HttpClient` | `fetch` in query |
-| Cache | NgRx, TanStack | `@echojs/query` |
+| Cache | NgRx, TanStack | `@echojs-ecosystem/query` |
 | WebSocket | RxJS | effect + client |
-| Local storage | services, ngrx meta | `@echojs/persist` |
+| Local storage | services, ngrx meta | `@echojs-ecosystem/persist` |
 | GraphQL | Apollo Angular | queryFn |
 
 ### UI & i18n
 
 | Problem | Angular | EchoJS |
 | --- | --- | --- |
-| Components | Material, PrimeNG | `@echojs/ui` |
+| Components | Material, PrimeNG | `@echojs-ecosystem/ui` |
 | Icons | Material icons | inline SVG |
-| i18n | `$localize`, ngx-translate | `@echojs/i18n` |
+| i18n | `$localize`, ngx-translate | `@echojs-ecosystem/i18n` |
 | Animations | `@angular/animations` | CSS / WAAPI |
 
 ### Quality
@@ -534,7 +534,7 @@ expect(vm.total.value()).toBe(90);
 ### Echo providers
 
 ```ts
-import { createProvider, createEchoApp } from "@echojs/framework";
+import { createProvider, createEchoApp } from "@echojs-ecosystem/framework";
 
 const apiProvider = createProvider("api", () => ({
   getUsers: (signal?: AbortSignal) => fetch("/api/users", { signal }),
@@ -591,7 +591,7 @@ Echo has **one language surface** in UI — no split between `.ts` logic and tem
 
 1. NgRx effects that only fetch → `createQuery`.
 2. Remaining NgRx → `createStore` (session, UI prefs).
-3. `ActivatedRoute.queryParams` → `@echojs/url-state`.
+3. `ActivatedRoute.queryParams` → `@echojs-ecosystem/url-state`.
 
 ### Phase 3 — Features
 
@@ -633,7 +633,7 @@ Echo has **one language surface** in UI — no split between `.ts` logic and tem
 | Observable in templates via async pipe | signals in view |
 | God `CoreModule` | providers + entities |
 | Feature module importing another feature | respect Echo boundaries |
-| Material copy-paste in HyperDOM | rebuild with `@echojs/ui` |
+| Material copy-paste in HyperDOM | rebuild with `@echojs-ecosystem/ui` |
 | Zone mindset (“CD will catch it”) | explicit signals |
 | 500-line components | model + view split |
 
@@ -688,7 +688,7 @@ New signal APIs map closely — migration effort is **templates + NgRx + Materia
 | State | NgRx, ComponentStore | store + query + url-state |
 | UI | Templates + Material | HyperDOM + ui |
 | DI | Hierarchical injectors | app providers |
-| Routing | `@angular/router` | `@echojs/router` |
+| Routing | `@angular/router` | `@echojs-ecosystem/router` |
 | SSR | Mature | SPA-first |
 | Structure | Modules / standalone | Feature-first rules |
 
@@ -701,4 +701,4 @@ New signal APIs map closely — migration effort is **templates + NgRx + Materia
 - [State overview](/docs/state/overview)
 - [Data fetching](/docs/guides/data-fetching)
 - [Why EchoJS](/docs/introduction/why-echojs)
-- [@echojs/store](/docs/packages/store) · [@echojs/query](/docs/packages/query) · [@echojs/router](/docs/packages/router)
+- [@echojs-ecosystem/store](/docs/packages/store) · [@echojs-ecosystem/query](/docs/packages/query) · [@echojs-ecosystem/router](/docs/packages/router)

@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, li, p, span, ul } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, li, p, span, ul } from "@echojs-ecosystem/hyperdom";
 import type { CompareCardViewProps } from "@entities/home/types/home.types.js";
 import { compareCardStyles } from "@entities/home/ui/home-compare-card.view.styles.js";
 

@@ -1,4 +1,4 @@
-import { List, Show, createView, type Child } from "@echojs/hyperdom";
+import { List, Show, createView, type Child } from "@echojs-ecosystem/hyperdom";
 import {
   article,
   button,
@@ -15,7 +15,7 @@ import {
   span,
   strong,
   ul,
-} from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
 
 import { i18n } from "@app/providers/i18n.js";
 import { cardHintKey, cardTitleKey, type ReactivityCardBase } from "@app/providers/i18n.js";

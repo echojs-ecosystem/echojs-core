@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 import { createView } from "../create-view";
 import { h } from "../h";

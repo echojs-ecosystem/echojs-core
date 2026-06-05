@@ -11,11 +11,11 @@ Layers exist to keep refactors local. **Imports may only go down the stack** —
 ## Allowed directions
 
 ```
-pages  →  widgets, features, entities, core, @echojs/*
-widgets  →  features, entities, core, @echojs/*
-features  →  entities, core, @echojs/*
-entities  →  core, @echojs/*
-core  →  @echojs/*
+pages  →  widgets, features, entities, core, @echojs-ecosystem/*
+widgets  →  features, entities, core, @echojs-ecosystem/*
+features  →  entities, core, @echojs-ecosystem/*
+entities  →  core, @echojs-ecosystem/*
+core  →  @echojs-ecosystem/*
 ```
 
 ```mermaid
@@ -30,7 +30,7 @@ flowchart TB
   features --> entities
   features --> core
   entities --> core
-  core --> echojs["@echojs/*"]
+  core --> echojs["@echojs-ecosystem/*"]
 ```
 
 ## Forbidden (will rot quickly)
@@ -58,12 +58,12 @@ Typical `tsconfig` paths:
 
 Vite `resolve.alias` should mirror the same map so dev and typecheck agree.
 
-## `@echojs/*` packages
+## `@echojs-ecosystem/*` packages
 
 Application layers may import published workspace packages:
 
-- `@echojs/reactivity`, `@echojs/hyperdom`, `@echojs/framework`
-- `@echojs/router`, `@echojs/query`, `@echojs/store`, …
+- `@echojs-ecosystem/reactivity`, `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/framework`
+- `@echojs-ecosystem/router`, `@echojs-ecosystem/query`, `@echojs-ecosystem/store`, …
 
 Packages **must not** import application folders (`@pages`, etc.).
 

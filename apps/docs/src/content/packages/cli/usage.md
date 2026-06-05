@@ -1,7 +1,7 @@
 ---
 title: Usage
-description: @echojs/cli usage — coming soon.
-package: "@echojs/cli"
+description: @echojs-ecosystem/cli usage — coming soon.
+package: "@echojs-ecosystem/cli"
 status: draft
 ---
 

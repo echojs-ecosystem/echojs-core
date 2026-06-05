@@ -1,6 +1,6 @@
-import { createRouteView } from "@echojs/router";
-import { Link } from "@echojs/router/hyperdom";
-import { div, h4 } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { Link } from "@echojs-ecosystem/router/hyperdom";
+import { div, h4 } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import { hubPage } from "@pages/hub/hub.page.js";
 

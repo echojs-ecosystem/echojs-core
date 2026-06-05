@@ -21,8 +21,8 @@ keywords: [signal, computed, createModel, ephemeral]
 ## Typical pattern
 
 ```ts
-import { signal, computed } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal, computed } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 export const createPanelModel = createModel((): PanelVM => {
   const $tab = signal(0);

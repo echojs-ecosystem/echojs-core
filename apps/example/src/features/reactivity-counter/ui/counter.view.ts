@@ -1,4 +1,4 @@
-import { List, Show, createView, type Child } from "@echojs/hyperdom";
+import { List, Show, createView, type Child } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import type { CounterVM } from "@features/reactivity-counter/model/counter.model.js";
 import {
@@ -13,7 +13,7 @@ import {
   section,
   span,
   strong,
-} from "@echojs/hyperdom";
+} from "@echojs-ecosystem/hyperdom";
 
 export const CounterView = createView((vm: CounterVM): Child => {
   const { $count, $items, $name } = vm;

@@ -1,7 +1,7 @@
 ---
 title: Example
 description: Theme and counter stores from the EchoJS example docs module.
-package: "@echojs/store"
+package: "@echojs-ecosystem/store"
 ---
 
 # Example — Store
@@ -10,7 +10,7 @@ package: "@echojs/store"
 
 ```ts
 // pages/docs/state/state.model.ts
-import { createStore, select, withActions } from "@echojs/store";
+import { createStore, select, withActions } from "@echojs-ecosystem/store";
 
 export const themeStore = createStore("dark" as "dark" | "light", { name: "theme" }).extend(
   withActions({
@@ -37,7 +37,7 @@ export const counterLabel = select(counterStore, (n) => `×${n}`, {
 ## View reads store
 
 ```ts
-import { effect } from "@echojs/reactivity";
+import { effect } from "@echojs-ecosystem/reactivity";
 import { themeStore } from "./state.model.js";
 
 effect(() => {
@@ -54,7 +54,7 @@ button({ onClick: () => themeStore.toggle() }, () => `Theme: ${themeStore.value(
 ## combine
 
 ```ts
-import { combine, createStore } from "@echojs/store";
+import { combine, createStore } from "@echojs-ecosystem/store";
 
 const first = createStore("Echo");
 const last = createStore("JS");

@@ -1,7 +1,7 @@
 ---
 title: Example
 description: architect.config.ts for the EchoJS docs app.
-package: "@echojs/architect"
+package: "@echojs-ecosystem/architect"
 ---
 
 # Example — docs app
@@ -16,7 +16,7 @@ import {
   noUnabstractionFiles,
   publicAbstraction,
   restrictCrossImports,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 
 const pageSlice = abstraction({
   name: "page",

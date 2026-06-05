@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { button, div, span } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { button, div, span } from "@echojs-ecosystem/hyperdom";
 import { packageInstallStyles } from "@widgets/package-install/ui/package-install.view.styles.js";
 import { HighlightedCommand } from "@widgets/package-install/highlighted-command.js";
 import { PackageManagerIcon } from "@widgets/package-install/pm-icons.js";

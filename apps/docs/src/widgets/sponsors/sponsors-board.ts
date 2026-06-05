@@ -1,5 +1,5 @@
-import type { Child } from "@echojs/hyperdom";
-import { div } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { div } from "@echojs-ecosystem/hyperdom";
 import { goldTier, silverTier, sponsorTierGroups } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorsBoardStyles } from "@widgets/sponsors/sponsors-board.styles.js";
 import { SponsorsTierPanel } from "@widgets/sponsors/sponsors-tier-panel.js";

@@ -1,4 +1,4 @@
-import { redirect } from "@echojs/router";
+import { redirect } from "@echojs-ecosystem/router";
 import {
   legacyExample1Route,
   legacyExample3Route,

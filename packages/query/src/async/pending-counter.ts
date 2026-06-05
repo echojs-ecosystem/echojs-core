@@ -1,4 +1,4 @@
-import type { Signal } from '@echojs/reactivity'
+import type { Signal } from '@echojs-ecosystem/reactivity'
 
 export const incrementPending = ($pendingCount: Signal<number>): void => {
   $pendingCount.set($pendingCount.peek() + 1)

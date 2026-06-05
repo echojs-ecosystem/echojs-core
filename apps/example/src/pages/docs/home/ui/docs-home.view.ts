@@ -1,7 +1,7 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import type { AnyPage } from "@echojs/router";
-import type { Child } from "@echojs/hyperdom";
-import { button, code, div, h3, li, p, section, Show, ul } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import type { AnyPage } from "@echojs-ecosystem/router";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { button, code, div, h3, li, p, section, Show, ul } from "@echojs-ecosystem/hyperdom";
 import { docsModules } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { $authUser, $isLoggedIn } from "@app/router/auth.js";

@@ -1,6 +1,6 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import { div, p, section } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import { div, p, section } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { getDocsModule } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { $miniFormsModel, MiniFormsView } from "@features/forms-mini/index.js";

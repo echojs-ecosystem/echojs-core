@@ -6,7 +6,7 @@ keywords: [createQuery, createMutation, beforeLoad, QueryClient]
 
 # Data Fetching
 
-Async data in EchoJS flows through **`@echojs/query`** (cache, retries, staleness) or **`beforeLoad`** on routes (one-shot loader data). Views and route components stay declarative; models and API modules own the wiring.
+Async data in EchoJS flows through **`@echojs-ecosystem/query`** (cache, retries, staleness) or **`beforeLoad`** on routes (one-shot loader data). Views and route components stay declarative; models and API modules own the wiring.
 
 ## Where code lives
 
@@ -24,7 +24,7 @@ Example reference: `apps/example/src/features/query-demo/api/jsonplaceholder.que
 Register defaults once:
 
 ```ts
-import { createQueryProvider } from "@echojs/query";
+import { createQueryProvider } from "@echojs-ecosystem/query";
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {
@@ -38,7 +38,7 @@ Place **before** `routerProvider` if routes prefetch in `beforeLoad` using the s
 ## Define a query
 
 ```ts
-import { createQuery } from "@echojs/query";
+import { createQuery } from "@echojs-ecosystem/query";
 
 export type User = { id: number; name: string };
 
@@ -60,8 +60,8 @@ Use stable **`queryKey` tuples** (`as const`). Optional `transform` maps the raw
 Reactive params — re-fetch when signals change:
 
 ```ts
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { getUserQuery } from "@features/users/api/users.queries.js";
 
 export const createUserPanelModel = createModel((): UserPanelVM => {
@@ -128,7 +128,7 @@ Same cache entry when navigating between docs with the same id; new key when `co
 ## Mutations
 
 ```ts
-import { createMutation } from "@echojs/query";
+import { createMutation } from "@echojs-ecosystem/query";
 
 export const updateProfileMutation = createMutation({
   name: "update-profile",

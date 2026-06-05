@@ -1,4 +1,4 @@
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import { createDocsSearchModel } from "@widgets/search/model/docs-search.model.js";
 import { DocsSearchView } from "@widgets/search/ui/docs-search.view.js";
 

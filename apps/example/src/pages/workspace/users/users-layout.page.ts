@@ -1,6 +1,6 @@
-import { createLayoutView } from "@echojs/router";
-import type { Child } from "@echojs/hyperdom";
-import { div, h4, p } from "@echojs/hyperdom";
+import { createLayoutView } from "@echojs-ecosystem/router";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { div, h4, p } from "@echojs-ecosystem/hyperdom";
 import { usersListPage } from "@pages/workspace/users/users-list.page.js";
 import { Breadcrumbs } from "@pages/workspace/ui/breadcrumbs.js";
 import { code, NavLink } from "@pages/workspace/ui/common.js";

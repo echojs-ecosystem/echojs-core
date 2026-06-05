@@ -1,6 +1,6 @@
-import { effect, signal } from "@echojs/reactivity";
-import type { Signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { effect, signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { $themeMode } from "@core/providers/index.js";
 import { highlightCode } from "@widgets/code-block/helpers/shiki/highlighter.js";
 import { resolveShikiTheme } from "@widgets/code-block/helpers/shiki/resolve-theme.js";

@@ -1,12 +1,12 @@
 ---
 title: Forms
-description: Field trees, Zod validation, bindField, and UI inputs with @echojs/form.
+description: Field trees, Zod validation, bindField, and UI inputs with @echojs-ecosystem/form.
 keywords: [createForm, createField, bindField, zod, validation]
 ---
 
 # Forms
 
-Form state in EchoJS is handled by **`@echojs/form`**: reactive fields, optional Standard Schema validation (Zod), and HyperDOM bindings. **`@echojs/ui`** supplies styled `Input`, `Field`, and labels — the guide covers both layers.
+Form state in EchoJS is handled by **`@echojs-ecosystem/form`**: reactive fields, optional Standard Schema validation (Zod), and HyperDOM bindings. **`@echojs-ecosystem/ui`** supplies styled `Input`, `Field`, and labels — the guide covers both layers.
 
 > [!NOTE]
 > The Forms doc is linked from the UI package group in the sidebar and listed under **Guides** — same `contentId`, one canonical route.
@@ -20,15 +20,15 @@ Form state in EchoJS is handled by **`@echojs/form`**: reactive fields, optional
 | `createForm` | Submit, schema validation, `defaultValues` |
 | `bindField` | Spread onto native `input` / UI `Input` in HyperDOM |
 
-Install: `pnpm add @echojs/form zod` (Zod or any Standard Schema adapter).
+Install: `pnpm add @echojs-ecosystem/form zod` (Zod or any Standard Schema adapter).
 
 ## Simple login form
 
 Pattern from `apps/example` auth login:
 
 ```ts
-import { createField, createForm } from "@echojs/form";
-import { withLocalStorage } from "@echojs/persist";
+import { createField, createForm } from "@echojs-ecosystem/form";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -59,8 +59,8 @@ const { email, password, remember } = authLoginForm;
 ## Bind fields in HyperDOM
 
 ```ts
-import { bindField } from "@echojs/form";
-import { button, div, input, label, p } from "@echojs/hyperdom";
+import { bindField } from "@echojs-ecosystem/form";
+import { button, div, input, label, p } from "@echojs-ecosystem/hyperdom";
 
 div(null, [
   label(null, [
@@ -91,11 +91,11 @@ div(null, [
 > [!WARNING]
 > Inside **`List`** / dynamic rows, pass `controlledValue: true` on text-like fields so HyperDOM does not lose input text after re-renders (`apps/example` forms-mini demo).
 
-## With `@echojs/ui`
+## With `@echojs-ecosystem/ui`
 
 ```ts
-import { Input } from "@echojs/ui";
-import { bindField } from "@echojs/form";
+import { Input } from "@echojs-ecosystem/ui";
+import { bindField } from "@echojs-ecosystem/form";
 
 Input({
   ...bindField(email, { variant: "email" }),
@@ -109,7 +109,7 @@ Wrap with `Field` + `Label` for descriptions and error slots when building acces
 ## Field arrays
 
 ```ts
-import { createField, createFieldArray, createForm, arrayGenerator } from "@echojs/form";
+import { createField, createFieldArray, createForm, arrayGenerator } from "@echojs-ecosystem/form";
 
 type TagRow = { tag: ReturnType<typeof createField<string>> };
 

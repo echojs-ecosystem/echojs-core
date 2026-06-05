@@ -1,1 +1,1 @@
-export * from '@echojs/url-state'
+export * from '@echojs-ecosystem/url-state'

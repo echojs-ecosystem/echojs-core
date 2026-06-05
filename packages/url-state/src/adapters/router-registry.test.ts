@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeEach } from 'vitest'
 
-import { signal } from '@echojs/reactivity'
+import { signal } from '@echojs-ecosystem/reactivity'
 
 import { attachRouterQueryParams } from './bind-router-query-params'
 import { createQueryParams } from '../core/create-query-params'
@@ -46,7 +46,7 @@ describe('onUrlStateRouterReady()', () => {
   it('calls listener immediately when router is already registered', async () => {
     const { registerUrlStateRouter, onUrlStateRouterReady, getUrlStateRouter } =
       await import('./router-registry')
-    const { signal } = await import('@echojs/reactivity')
+    const { signal } = await import('@echojs-ecosystem/reactivity')
 
     const $fullPath = signal('/')
     const router = {
@@ -69,7 +69,7 @@ describe('onUrlStateRouterReady()', () => {
 
   it('queues listener until router registers and supports unsubscribe', async () => {
     const { registerUrlStateRouter, onUrlStateRouterReady } = await import('./router-registry')
-    const { signal } = await import('@echojs/reactivity')
+    const { signal } = await import('@echojs-ecosystem/reactivity')
 
     const listener = vi.fn()
     const unsubscribe = onUrlStateRouterReady(listener)

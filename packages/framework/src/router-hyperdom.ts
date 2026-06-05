@@ -1,2 +1,2 @@
-export * from "@echojs/router/hyperdom";
+export * from "@echojs-ecosystem/router/hyperdom";
 

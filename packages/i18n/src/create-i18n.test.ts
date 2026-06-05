@@ -1,4 +1,4 @@
-import { computed } from "@echojs/reactivity";
+import { computed } from "@echojs-ecosystem/reactivity";
 import { describe, expect, it, vi } from "vitest";
 
 import { createI18n } from "./create-i18n";

@@ -1,5 +1,5 @@
-import { button, code, div, h4, p, section, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { button, code, div, h4, p, section, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { getDocsModule } from "@app/config/docs-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { counterLabel, counterStore, themeStore } from "@pages/docs/state/state.model.js";

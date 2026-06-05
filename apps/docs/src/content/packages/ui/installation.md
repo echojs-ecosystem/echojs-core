@@ -1,7 +1,7 @@
 ---
 title: Installation
-description: Install @echojs/ui — documentation coming soon.
-package: "@echojs/ui"
+description: Install @echojs-ecosystem/ui — documentation coming soon.
+package: "@echojs-ecosystem/ui"
 status: draft
 ---
 
@@ -12,22 +12,22 @@ status: draft
 
 ## Planned content
 
-- `:::install @echojs/ui` и peer `@echojs/hyperdom`
-- Импорт CSS tokens (`@echojs/ui/theme` или глобальные tokens)
+- `:::install @echojs-ecosystem/ui` и peer `@echojs-ecosystem/hyperdom`
+- Импорт CSS tokens (`@echojs-ecosystem/ui/theme` или глобальные tokens)
 - `createUiProvider()` в `createEchoApp().use(uiProvider)`
 - Subpath exports vs barrel
 
 ## Temporary install (monorepo)
 
 ```bash
-bun add @echojs/ui @echojs/hyperdom
+bun add @echojs-ecosystem/ui @echojs-ecosystem/hyperdom
 ```
 
 ```json
 {
   "dependencies": {
-    "@echojs/ui": "workspace:*",
-    "@echojs/hyperdom": "workspace:*"
+    "@echojs-ecosystem/ui": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*"
   }
 }
 ```

@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: Rules, presets, and allowDownward paths in architect.config.ts.
-package: "@echojs/architect"
+package: "@echojs-ecosystem/architect"
 ---
 
 # Usage
@@ -30,7 +30,7 @@ import {
   publicAbstraction,
   restrictCrossImports,
   noUnabstractionFiles,
-} from "@echojs/architect";
+} from "@echojs-ecosystem/architect";
 ```
 
 | Preset | Purpose |

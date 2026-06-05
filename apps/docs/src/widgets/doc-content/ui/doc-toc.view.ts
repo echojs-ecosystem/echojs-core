@@ -1,5 +1,5 @@
-import { createView, type Child } from "@echojs/hyperdom";
-import { div, h, nav, p } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { div, h, nav, p } from "@echojs-ecosystem/hyperdom";
 import { docTocStyles } from "@widgets/doc-content/ui/doc-toc.view.styles.js";
 import type { DocTocVM } from "@widgets/doc-content/types/doc-toc.types.js";
 

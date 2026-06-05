@@ -47,11 +47,11 @@ widgets/code-block/
 
 ## createModel
 
-From `@echojs/hyperdom`:
+From `@echojs-ecosystem/hyperdom`:
 
 ```typescript
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 export type CounterVM = {
   $count: Signal<number>;
@@ -74,7 +74,7 @@ export const createCounterModel = createModel((): CounterVM => {
 ## createView
 
 ```typescript
-import { createView, type Child } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
 import type { CounterVM } from "../model/counter.model.js";
 
 export const CounterView = createView((vm: CounterVM): Child => {
@@ -88,10 +88,10 @@ export const CounterView = createView((vm: CounterVM): Child => {
 
 ## Binding model + view
 
-Use `createComponent` from `@echojs/hyperdom`:
+Use `createComponent` from `@echojs-ecosystem/hyperdom`:
 
 ```typescript
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 
 export const Counter = createComponent(createCounterModel, CounterView, { name: "Counter" });
 // route: view: () => Counter()
@@ -117,8 +117,8 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 ## Content & sidebar
 
 - Markdown: `src/content/<path>.md` with YAML frontmatter (`title`, `description`)
-- Install panel (same widget as home hero): standalone line `:::install @echojs/reactivity` — do not duplicate `:::tabs` bash blocks for package adds
-- Package badge line: `@echojs/reactivity` under frontmatter
+- Install panel (same widget as home hero): standalone line `:::install @echojs-ecosystem/reactivity` — do not duplicate `:::tabs` bash blocks for package adds
+- Package badge line: `@echojs-ecosystem/reactivity` under frontmatter
 - Nav: `core/content/nav.ts` — `docsNavSections` + `item(slug, title, contentId)`
 - Package docs: Overview · Installation · Usage · Example · **Playground** · API (`package-nav.ts`)
 - Interactive embed: standalone line `:::playground reactivity` → `widgets/package-playground` (live UI + JSON state)

@@ -1,7 +1,7 @@
 ---
 title: Usage
 description: createQueryParam, createQueryParams, parsers, router integration, and catalog filters.
-package: "@echojs/url-state"
+package: "@echojs-ecosystem/url-state"
 ---
 
 # Usage
@@ -9,7 +9,7 @@ package: "@echojs/url-state"
 ## Single param — `createQueryParam`
 
 ```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
+import { createQueryParam, parseAsInteger } from "@echojs-ecosystem/url-state";
 
 const page = createQueryParam("page", parseAsInteger.withDefault(1));
 
@@ -29,7 +29,7 @@ import {
   parseAsLiteral,
   parseAsString,
   parseAsArrayOf,
-} from "@echojs/url-state";
+} from "@echojs-ecosystem/url-state";
 
 const filters = createQueryParams({
   q: parseAsString.withDefault(""),
@@ -49,8 +49,8 @@ filters.clear();
 ## Router integration
 
 ```ts
-import { createRouter } from "@echojs/router/hyperdom";
-import { createQueryParams, parseAsInteger, parseAsString } from "@echojs/url-state";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
+import { createQueryParams, parseAsInteger, parseAsString } from "@echojs-ecosystem/url-state";
 
 export const appRouter = createRouter({ routes: appRoutes });
 
@@ -97,7 +97,7 @@ Example: `apps/example/src/pages/workspace/products/workspace-products.page.ts`.
 | `limitUrlUpdates` | `debounce(ms)` / `throttle(ms)` / `false` | Rate-limit writes |
 
 ```ts
-import { debounce } from "@echojs/url-state";
+import { debounce } from "@echojs-ecosystem/url-state";
 
 createQueryParams(schema, {
   history: "replace",
@@ -128,7 +128,7 @@ Chain: `parseAsInteger.withDefault(1).withOptions({ history: "replace" })`.
 ## Custom parsers
 
 ```ts
-import { createCustomParser, createCustomMultiParser } from "@echojs/url-state";
+import { createCustomParser, createCustomMultiParser } from "@echojs-ecosystem/url-state";
 
 const parseAsStars = createCustomParser({
   parse: (value) => { /* string | string[] | null */ },
@@ -145,7 +145,7 @@ const parseAsIds = createCustomMultiParser({
 ## Browser adapter (no router)
 
 ```ts
-import { createBrowserUrlStateAdapter, createQueryParam, parseAsString } from "@echojs/url-state";
+import { createBrowserUrlStateAdapter, createQueryParam, parseAsString } from "@echojs-ecosystem/url-state";
 
 const q = createQueryParam("q", parseAsString.withDefault(""), {
   adapter: createBrowserUrlStateAdapter(),
@@ -155,7 +155,7 @@ const q = createQueryParam("q", parseAsString.withDefault(""), {
 ## Memory adapter (tests)
 
 ```ts
-import { createMemoryUrlStateAdapter, createQueryParams, parseAsString } from "@echojs/url-state";
+import { createMemoryUrlStateAdapter, createQueryParams, parseAsString } from "@echojs-ecosystem/url-state";
 
 const adapter = createMemoryUrlStateAdapter("?q=hello");
 const state = createQueryParams(

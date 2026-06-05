@@ -1,6 +1,6 @@
 /** @vitest-environment jsdom */
 import { beforeEach, describe, expect, it } from "vitest";
-import { render } from "@echojs/hyperdom";
+import { render } from "@echojs-ecosystem/hyperdom";
 import { createRouteView } from "../core/create-route-view";
 import { createRouter } from "../core/create-router";
 import { clearGuards } from "../operators/guard";
@@ -22,7 +22,7 @@ describe("router.view()", () => {
     router.start();
 
     const container = document.createElement("div");
-    render(router.view() as () => import("@echojs/hyperdom").Child, container);
+    render(router.view() as () => import("@echojs-ecosystem/hyperdom").Child, container);
     await Promise.resolve();
 
     expect(container.textContent).toContain("home-content");

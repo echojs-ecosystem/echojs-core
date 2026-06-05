@@ -1,7 +1,7 @@
 ---
 title: Example
 description: Catalog filters with createQueryParams from apps/example workspace.
-package: "@echojs/url-state"
+package: "@echojs-ecosystem/url-state"
 ---
 
 # Example — URL State
@@ -18,7 +18,7 @@ import {
   parseAsInteger,
   parseAsLiteral,
   parseAsString,
-} from "@echojs/url-state";
+} from "@echojs-ecosystem/url-state";
 
 const productsQueryParams = createQueryParams(
   {
@@ -70,7 +70,7 @@ button(
 ## Single param
 
 ```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
+import { createQueryParam, parseAsInteger } from "@echojs-ecosystem/url-state";
 
 const page = createQueryParam("page", parseAsInteger.withDefault(1));
 
@@ -81,7 +81,7 @@ page.reset();
 ## Router-bound group
 
 ```ts
-import { createRouter } from "@echojs/router/hyperdom";
+import { createRouter } from "@echojs-ecosystem/router/hyperdom";
 
 export const appRouter = createRouter({ routes: appRoutes });
 

@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: Public exports from @echojs/persist.
-package: "@echojs/persist"
+description: Public exports from @echojs-ecosystem/persist.
+package: "@echojs-ecosystem/persist"
 ---
 
 # API Reference

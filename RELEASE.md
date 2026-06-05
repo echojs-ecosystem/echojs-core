@@ -1,11 +1,11 @@
 # Релизы (Changesets)
 
-Версии пакетов `@echojs/*` управляются через [Changesets](https://github.com/changesets/changesets).
+Версии пакетов `@echojs-ecosystem/*` управляются через [Changesets](https://github.com/changesets/changesets).
 
 ## Как это устроено
 
-- Все **публикуемые** пакеты экосистемы в одной **fixed**-группе — если меняется **хотя бы один** пакет, при релизе **одна версия поднимается у всех** (`@echojs/reactivity`, `@echojs/framework`, …).
-- Внутренние пакеты **не версионируются**: `@echojs/bench`, `@echojs/oxc-config`.
+- Все **публикуемые** пакеты экосистемы в одной **fixed**-группе — если меняется **хотя бы один** пакет, при релизе **одна версия поднимается у всех** (`@echojs-ecosystem/reactivity`, `@echojs-ecosystem/framework`, …).
+- Внутренние пакеты **не версионируются**: `@echojs-ecosystem/bench`, `@echojs-ecosystem/oxc-config`.
 - После `changeset version` скрипт `scripts/sync-package-versions.mjs` обновляет:
   - `apps/docs/src/core/content/ecosystem-version.generated.ts` — версии для документации;
   - `apps/docs/src/core/content/doc-version-history.generated.ts` — архив прошлых версий docs;
@@ -56,7 +56,7 @@ bun run release
 
 | Secret | Назначение |
 |---|---|
-| `NPM_TOKEN` | npm automation token с правом publish для `@echojs/*` |
+| `NPM_TOKEN` | npm automation token с правом publish для `@echojs-ecosystem/*` |
 | `GITHUB_TOKEN` | выдаётся автоматически |
 
 ## Где версии видны в документации
@@ -64,9 +64,9 @@ bun run release
 | Место | Источник |
 |---|---|
 | Переключатель версий в шапке | `ECOSYSTEM_VERSION` + история |
-| Бейдж `:::badge @echojs/...` | `имя@версия` |
-| Overview пакета | `@echojs/foo@x.y.z` в hero |
-| `echo-architect --version` | `@echojs/architect` |
+| Бейдж `:::badge @echojs-ecosystem/...` | `имя@версия` |
+| Overview пакета | `@echojs-ecosystem/foo@x.y.z` в hero |
+| `echo-architect --version` | `@echojs-ecosystem/architect` |
 
 Перегенерировать версии в docs без bump:
 
@@ -76,6 +76,6 @@ bun run sync-versions
 
 ## Первый релиз
 
-1. Убедиться, что npm-организация `@echojs` создана и `NPM_TOKEN` добавлен в GitHub Secrets.
+1. Убедиться, что npm-организация `@echojs-ecosystem` создана и `NPM_TOKEN` добавлен в GitHub Secrets.
 2. Создать changeset с `minor` (или нужным bump) для стартовой версии, например `0.1.0`.
 3. Смержить PR с changeset → дождаться PR «version packages» → смержить его → publish на npm.

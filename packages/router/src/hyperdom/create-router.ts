@@ -1,8 +1,8 @@
 import { createRouter as createRouterCore } from "../core/create-router";
 import type { CollectNamedRoutes, RouteTreeBranch } from "../core/path-types";
 import type { CreateRouterOptions, Router } from "../core/types";
-import type { Child } from "@echojs/hyperdom";
-import { attachRouterQueryParams, type RouterBoundQueryParams } from "@echojs/url-state";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { attachRouterQueryParams, type RouterBoundQueryParams } from "@echojs-ecosystem/url-state";
 
 export type HyperdomRouter<TRoutes extends Router["routes"] = Router["routes"]> = Omit<
   Router<TRoutes>,

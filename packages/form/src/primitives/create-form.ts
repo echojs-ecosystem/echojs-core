@@ -62,7 +62,7 @@ export type CreateFormOptions<
   fieldArrayFactories?: Record<string, () => unknown>;
 
   /**
-   * Фабрики строк (`createTicket`, …) и append/remove через `arrayGenerator` из `@echojs/form`.
+   * Фабрики строк (`createTicket`, …) и append/remove через `arrayGenerator` из `@echojs-ecosystem/form`.
    *
    * @example
    * ```ts

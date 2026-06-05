@@ -1,4 +1,4 @@
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 import { DOC_VERSION_HISTORY } from "@core/content/doc-version-history.generated.js";
 import { ECOSYSTEM_VERSION } from "@core/content/ecosystem-version.generated.js";
 

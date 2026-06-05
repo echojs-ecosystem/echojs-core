@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Complete @echojs/reactivity public API — signal, computed, effect, batch, scope, cleanup, readonly.
-package: "@echojs/reactivity"
+description: Complete @echojs-ecosystem/reactivity public API — signal, computed, effect, batch, scope, cleanup, readonly.
+package: "@echojs-ecosystem/reactivity"
 ---
 
 # API Reference
 
-Public exports from `@echojs/reactivity`:
+Public exports from `@echojs-ecosystem/reactivity`:
 
 ```ts
 import {
@@ -19,9 +19,9 @@ import {
   readonly,
   isSignal,
   isReadonlySignal,
-} from "@echojs/reactivity";
+} from "@echojs-ecosystem/reactivity";
 
-import type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs/reactivity";
+import type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs-ecosystem/reactivity";
 ```
 
 ## `signal(initial)`

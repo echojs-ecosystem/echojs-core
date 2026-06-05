@@ -1,5 +1,5 @@
-import type { Child } from "@echojs/hyperdom";
-import { span } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { span } from "@echojs-ecosystem/hyperdom";
 import type { MockSponsor } from "@widgets/sponsors/constants/sponsors.data.js";
 import { sponsorLogoStyles } from "@widgets/sponsors/sponsor-logo.styles.js";
 import { cn } from "@core/styles/cn.js";

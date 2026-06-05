@@ -1,16 +1,16 @@
 ---
 title: URL state
-description: Typed query parameters for filters and shareable UI — @echojs/url-state vs raw router query.
+description: Typed query parameters for filters and shareable UI — @echojs-ecosystem/url-state vs raw router query.
 keywords: [query params, parseAsInteger, createQueryParams]
 ---
 
 # URL state
 
-**URL state** is application data stored in the **query string** (`?page=2&q=echo`) that users can bookmark, share, or refresh without losing context. EchoJS implements it with `@echojs/url-state` — typed parsers, defaults, and batch updates — on top of the same `location.search` the [router](/docs/state/router-state) already sees.
+**URL state** is application data stored in the **query string** (`?page=2&q=echo`) that users can bookmark, share, or refresh without losing context. EchoJS implements it with `@echojs-ecosystem/url-state` — typed parsers, defaults, and batch updates — on top of the same `location.search` the [router](/docs/state/router-state) already sees.
 
 ## URL state vs router query
 
-| | Router `page.$query` | `@echojs/url-state` |
+| | Router `page.$query` | `@echojs-ecosystem/url-state` |
 | --- | --- | --- |
 | Type | Plain record from parser | Parsed `number`, `boolean`, enums, arrays |
 | Defaults | Manual `??` | `.withDefault(...)` |
@@ -22,7 +22,7 @@ Both reflect the **same URL**. Pick url-state when multiple features read/write 
 ## Single param
 
 ```ts
-import { createQueryParam, parseAsInteger } from "@echojs/url-state";
+import { createQueryParam, parseAsInteger } from "@echojs-ecosystem/url-state";
 
 const page = createQueryParam("page", parseAsInteger.withDefault(1));
 
@@ -39,7 +39,7 @@ import {
   parseAsString,
   parseAsInteger,
   parseAsLiteral,
-} from "@echojs/url-state";
+} from "@echojs-ecosystem/url-state";
 
 export const catalogFilters = createQueryParams({
   q: parseAsString.withDefault(""),

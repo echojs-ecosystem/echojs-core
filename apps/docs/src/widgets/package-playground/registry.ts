@@ -18,14 +18,14 @@ const stubs: PackagePlaygroundDef[] = [
   createStubPlayground(
     "ui",
     "UI",
-    "Component playground will ship with @echojs/ui Storybook integration.",
+    "Component playground will ship with @echojs-ecosystem/ui Storybook integration.",
   ),
   createStubPlayground(
     "devtools",
     "DevTools",
-    "@echojs/devtools is not in the monorepo yet.",
+    "@echojs-ecosystem/devtools is not in the monorepo yet.",
   ),
-  createStubPlayground("cli", "CLI", "@echojs/cli is not released yet."),
+  createStubPlayground("cli", "CLI", "@echojs-ecosystem/cli is not released yet."),
 ];
 
 const all: PackagePlaygroundDef[] = [

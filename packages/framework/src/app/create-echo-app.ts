@@ -1,5 +1,5 @@
-import { render, setStrictContextChecks } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { render, setStrictContextChecks } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 
 import { applyBodyAttributes } from "./apply-body-attributes";
 import { normalizeEchoProvider } from "./normalize-plugin";

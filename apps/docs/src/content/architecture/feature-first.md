@@ -78,7 +78,7 @@ Rule of thumb:
 
 | Smell | Fix |
 | --- | --- |
-| `shared/components/Button.tsx` grows without bound | Split by feature or move to `@echojs/ui` |
+| `shared/components/Button.tsx` grows without bound | Split by feature or move to `@echojs-ecosystem/ui` |
 | Page imports another page | Extract shared logic to feature/widget |
 | Feature imports `pages/` | Invert dependency — page should import feature |
 | God `app/store.ts` | Feature-local models + query |

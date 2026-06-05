@@ -15,7 +15,7 @@ export class DevtoolsRegistry implements DevtoolsRegistryAPI {
     const node = normalizeDevtoolsNode(input)
 
     if (this.#nodes.has(node.id)) {
-      throw new Error(`@echojs/devtools-core: node "${node.id}" is already registered`)
+      throw new Error(`@echojs-ecosystem/devtools-core: node "${node.id}" is already registered`)
     }
 
     this.#nodes.set(node.id, node)

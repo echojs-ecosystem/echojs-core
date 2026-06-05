@@ -1,5 +1,5 @@
-import { createField, createForm } from "@echojs/form";
-import { withLocalStorage } from "@echojs/persist";
+import { createField, createForm } from "@echojs-ecosystem/form";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 import { z } from "zod";
 
 const loginSchema = z.object({

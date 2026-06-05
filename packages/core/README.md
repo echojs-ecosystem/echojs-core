@@ -1,19 +1,19 @@
 <div align="center">
 
-# @echojs/core
+# @echojs-ecosystem/core
 
 **Minimal UI runtime — components, mount, directives, and DOM utilities.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/core)](https://www.npmjs.com/package/@echojs/core)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/core)](https://www.npmjs.com/package/@echojs-ecosystem/core)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/architecture/overview)
 
 </div>
 
 ---
 
-Low-level building blocks for EchoJS UI: **`createComponent`**, **`createModel`**, **`createView`**, **`mount`**, and reactive DOM helpers. Re-exports `@echojs/reactivity` for convenience.
+Low-level building blocks for EchoJS UI: **`createComponent`**, **`createModel`**, **`createView`**, **`mount`**, and reactive DOM helpers. Re-exports `@echojs-ecosystem/reactivity` for convenience.
 
-Most applications should prefer [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom) or [`@echojs/framework`](https://www.npmjs.com/package/@echojs/framework). Use `@echojs/core` when you need the component runtime directly.
+Most applications should prefer [`@echojs-ecosystem/hyperdom`](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom) or [`@echojs-ecosystem/framework`](https://www.npmjs.com/package/@echojs-ecosystem/framework). Use `@echojs-ecosystem/core` when you need the component runtime directly.
 
 ## Features
 
@@ -25,13 +25,13 @@ Most applications should prefer [`@echojs/hyperdom`](https://www.npmjs.com/packa
 ## Install
 
 ```bash
-npm install @echojs/core @echojs/reactivity
+npm install @echojs-ecosystem/core @echojs-ecosystem/reactivity
 ```
 
 ## Quick start
 
 ```ts
-import { createComponent, mount, signal } from "@echojs/core";
+import { createComponent, mount, signal } from "@echojs-ecosystem/core";
 
 const Counter = createComponent(
   () => {
@@ -57,14 +57,14 @@ mount(document.getElementById("app")!, Counter());
 | `mount` / `unmount` / `render` / `createRoot` | DOM mounting |
 | `createElement`, `setProp`, `setProps` | Element helpers |
 | `insert`, `createReactiveText` | Reactive DOM updates |
-| `signal`, `computed`, `effect`, `batch` | From `@echojs/reactivity` |
+| `signal`, `computed`, `effect`, `batch` | From `@echojs-ecosystem/reactivity` |
 
 ## Related packages
 
 | Package | Role |
 |---------|------|
-| [`@echojs/reactivity`](https://www.npmjs.com/package/@echojs/reactivity) | Required peer-style dependency |
-| [`@echojs/hyperdom`](https://www.npmjs.com/package/@echojs/hyperdom) | Higher-level `h()` DSL and views |
+| [`@echojs-ecosystem/reactivity`](https://www.npmjs.com/package/@echojs-ecosystem/reactivity) | Required peer-style dependency |
+| [`@echojs-ecosystem/hyperdom`](https://www.npmjs.com/package/@echojs-ecosystem/hyperdom) | Higher-level `h()` DSL and views |
 
 ## Documentation
 

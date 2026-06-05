@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@echojs/oxc-config/tsconfig",
+  "extends": "@echojs-ecosystem/oxc-config/tsconfig",
   "compilerOptions": {
     "noEmit": false,
     "declaration": true,

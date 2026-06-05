@@ -1,4 +1,4 @@
-import { createRouteView } from "@echojs/router";
+import { createRouteView } from "@echojs-ecosystem/router";
 import { DocArticle } from "@entities/doc-article/index.js";
 import type { ContentId } from "@core/content/types.js";
 

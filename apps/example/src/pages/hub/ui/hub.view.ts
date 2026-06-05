@@ -1,6 +1,6 @@
-import { NavLink } from "@echojs/router/hyperdom";
-import type { Child } from "@echojs/hyperdom";
-import { button, code, div, h1, p, section } from "@echojs/hyperdom";
+import { NavLink } from "@echojs-ecosystem/router/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { button, code, div, h1, p, section } from "@echojs-ecosystem/hyperdom";
 import { hubModules } from "@app/config/hub-modules.js";
 import { i18n } from "@app/providers/i18n.js";
 import { docsHomePage } from "@pages/docs/home/docs-home.page.js";

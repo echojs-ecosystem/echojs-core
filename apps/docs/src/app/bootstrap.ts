@@ -1,4 +1,4 @@
-import { createEchoApp } from "@echojs/framework/app";
+import { createEchoApp } from "@echojs-ecosystem/framework/app";
 import {
   i18nProvider,
   queryProvider,

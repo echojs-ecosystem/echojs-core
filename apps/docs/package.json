@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/docs",
+  "name": "@echojs-ecosystem/docs",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,22 +12,22 @@
     "architect:fix": "echo-architect lint --fix"
   },
   "dependencies": {
-    "@echojs/framework": "workspace:*",
-    "@echojs/hyperdom": "workspace:*",
-    "@echojs/i18n": "workspace:*",
-    "@echojs/query": "workspace:*",
-    "@echojs/reactivity": "workspace:*",
-    "@echojs/router": "workspace:*",
-    "@echojs/persist": "workspace:*",
-    "@echojs/store": "workspace:*",
-    "@echojs/ui": "workspace:*",
-    "@echojs/url-state": "workspace:*",
+    "@echojs-ecosystem/framework": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/i18n": "workspace:*",
+    "@echojs-ecosystem/query": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs-ecosystem/router": "workspace:*",
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*",
+    "@echojs-ecosystem/ui": "workspace:*",
+    "@echojs-ecosystem/url-state": "workspace:*",
     "shiki": "^3.4.0",
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^1.0.0"
   },
   "devDependencies": {
-    "@echojs/architect": "workspace:*",
+    "@echojs-ecosystem/architect": "workspace:*",
     "@tailwindcss/vite": "^4.1.8",
     "tailwindcss": "^4.1.8",
     "typescript": "5.9.2",

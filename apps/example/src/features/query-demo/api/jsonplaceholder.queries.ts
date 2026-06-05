@@ -3,7 +3,7 @@ import {
   createMutation,
   createQuery,
   getQueryProvider,
-} from "@echojs/query";
+} from "@echojs-ecosystem/query";
 import type { JpPost, JpUser } from '@shared/api/jsonplaceholder.js'
 import { jpFetch } from '@shared/api/jsonplaceholder.js'
 import { delay } from '@features/query-demo/utils/query-demo.utils.js'

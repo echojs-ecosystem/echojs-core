@@ -1,5 +1,5 @@
-import { createRouteView } from "@echojs/router";
-import { button, div, h4, p, pre, span, strong } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { button, div, h4, p, pre, span, strong } from "@echojs-ecosystem/hyperdom";
 import { findSprint } from "@entities/workspace/demo-data.js";
 import { Breadcrumbs, ParamPill } from "@pages/workspace/ui/breadcrumbs.js";
 import { code } from "@pages/workspace/ui/common.js";

@@ -1,4 +1,4 @@
-import { computed, signal } from '@echojs/reactivity'
+import { computed, signal } from '@echojs-ecosystem/reactivity'
 
 import { InfiniteQueryObserver } from './infinite-query-observer'
 import { isQueryPending } from './query-status'

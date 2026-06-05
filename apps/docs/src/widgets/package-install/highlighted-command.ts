@@ -1,5 +1,5 @@
-import type { Child } from "@echojs/hyperdom";
-import { code, span } from "@echojs/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
+import { code, span } from "@echojs-ecosystem/hyperdom";
 import type { CommandToken, CommandTokenKind } from "@widgets/package-install/constants/install-commands.js";
 import { packageInstallStyles } from "@widgets/package-install/ui/package-install.view.styles.js";
 

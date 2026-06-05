@@ -1,5 +1,5 @@
-import { signal } from "@echojs/reactivity";
-import type { Signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from "@echojs-ecosystem/reactivity";
 
 export type LocaleState<TLocale extends string = string> = {
   readonly $locale: Signal<TLocale>;

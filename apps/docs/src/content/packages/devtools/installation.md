@@ -1,14 +1,14 @@
 ---
 title: Installation
-description: @echojs/devtools — coming soon.
-package: "@echojs/devtools"
+description: @echojs-ecosystem/devtools — coming soon.
+package: "@echojs-ecosystem/devtools"
 status: draft
 ---
 
 # Installation
 
 > [!NOTE]
-> **Пакет `@echojs/devtools` ещё не добавлен в monorepo.** Страница будет обновлена при появлении первого релиза.
+> **Пакет `@echojs-ecosystem/devtools` ещё не добавлен в monorepo.** Страница будет обновлена при появлении первого релиза.
 
 ## Planned content
 

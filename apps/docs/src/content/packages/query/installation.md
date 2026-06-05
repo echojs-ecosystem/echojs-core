@@ -1,24 +1,24 @@
 ---
 title: Installation
-description: Install @echojs/query and register createQueryProvider in your EchoJS app.
-package: "@echojs/query"
+description: Install @echojs-ecosystem/query and register createQueryProvider in your EchoJS app.
+package: "@echojs-ecosystem/query"
 ---
 
 # Installation
 
-`@echojs/query` is framework-agnostic at the core; EchoJS apps register a **query provider** so definitions pick up default options and a shared `QueryClient`.
+`@echojs-ecosystem/query` is framework-agnostic at the core; EchoJS apps register a **query provider** so definitions pick up default options and a shared `QueryClient`.
 
 ## Package managers
 
-:::install @echojs/query
+:::install @echojs-ecosystem/query
 
 Peer (used by views and models):
 
-:::install @echojs/reactivity
+:::install @echojs-ecosystem/reactivity
 
 Optional when binding params from stores:
 
-:::install @echojs/store
+:::install @echojs-ecosystem/store
 
 ## Requirements
 
@@ -30,7 +30,7 @@ Optional when binding params from stores:
 
 ```ts
 // core/providers/query.ts
-import { createQueryProvider } from "@echojs/query";
+import { createQueryProvider } from "@echojs-ecosystem/query";
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {
@@ -40,7 +40,7 @@ export const queryProvider = createQueryProvider({
 ```
 
 ```ts
-import { createEchoApp } from "@echojs/framework";
+import { createEchoApp } from "@echojs-ecosystem/framework";
 import { queryProvider } from "./providers/query.js";
 
 createEchoApp({ strictContextChecks: true })
@@ -55,8 +55,8 @@ createEchoApp({ strictContextChecks: true })
 ```json
 {
   "dependencies": {
-    "@echojs/query": "workspace:*",
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/query": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*"
   }
 }
 ```
@@ -68,7 +68,7 @@ You can pass `{ provider }` as the second argument to `createQuery`, or rely on 
 ## Minimal check
 
 ```ts
-import { createQuery, createQueryClient } from "@echojs/query";
+import { createQuery, createQueryClient } from "@echojs-ecosystem/query";
 
 const client = createQueryClient();
 const ping = createQuery({

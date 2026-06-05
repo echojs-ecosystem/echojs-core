@@ -84,7 +84,7 @@ export type bindFieldOptions =
     };
 
 /**
- * Унифицированный биндинг поля `@echojs/form` к пропсам Hyperdom (`input`, `textarea`, `select`, …).
+ * Унифицированный биндинг поля `@echojs-ecosystem/form` к пропсам Hyperdom (`input`, `textarea`, `select`, …).
  *
  * Для списков внутри `List` рекомендуется `controlledValue: true` у текстовых вариантов, чтобы значения
  * не терялись при пересоздании DOM.

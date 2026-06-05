@@ -5,7 +5,7 @@ export async function createDefaultBenches(enabledPackages?: string[]): Promise<
   const cases: BenchCase[] = [];
 
   if (allow("reactivity")) {
-    const reactivity = (await import("@echojs/reactivity")) as typeof import("@echojs/reactivity");
+    const reactivity = (await import("@echojs-ecosystem/reactivity")) as typeof import("@echojs-ecosystem/reactivity");
 
     cases.push(
       {
@@ -38,7 +38,7 @@ export async function createDefaultBenches(enabledPackages?: string[]): Promise<
   }
 
   if (allow("store")) {
-    const storePkg = (await import("@echojs/store")) as typeof import("@echojs/store");
+    const storePkg = (await import("@echojs-ecosystem/store")) as typeof import("@echojs-ecosystem/store");
     cases.push({
       group: "store",
       name: "createStore + 10k set()",
@@ -52,7 +52,7 @@ export async function createDefaultBenches(enabledPackages?: string[]): Promise<
   }
 
   if (allow("router")) {
-    const router = (await import("@echojs/router")) as typeof import("@echojs/router");
+    const router = (await import("@echojs-ecosystem/router")) as typeof import("@echojs-ecosystem/router");
     cases.push({
       group: "router",
       name: "matchPath 100k",

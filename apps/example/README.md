@@ -8,7 +8,7 @@
 |-----|----------|
 | `/` | Выбор модуля (Hub) |
 | `/docs` | **Docs Example** — демо reactivity, form, store, persist, query |
-| `/workspace` | **Workspace** — продуктовый сценарий `@echojs/router` |
+| `/workspace` | **Workspace** — продуктовый сценарий `@echojs-ecosystem/router` |
 | `/auth/login`, `/auth/signup` | Mock-авторизация |
 
 Старые URL (`/example1`, `/reactivity`, …) перенаправляются на новые маршруты.

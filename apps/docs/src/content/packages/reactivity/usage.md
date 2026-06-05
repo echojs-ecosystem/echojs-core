@@ -1,12 +1,12 @@
 ---
 title: Usage
 description: Patterns for signals, computed, effects, batching, and scopes in EchoJS apps.
-package: "@echojs/reactivity"
+package: "@echojs-ecosystem/reactivity"
 ---
 
 # Usage
 
-`@echojs/reactivity` exposes a **small, strict** API: writable `signal`, readonly `computed`, eager `effect`, and helpers for batching and disposal.
+`@echojs-ecosystem/reactivity` exposes a **small, strict** API: writable `signal`, readonly `computed`, eager `effect`, and helpers for batching and disposal.
 
 ## Execution model
 
@@ -21,7 +21,7 @@ Use `batch()` to apply several writes before effects flush once.
 ## Writable signal
 
 ```ts
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const $count = signal(0);
 
@@ -54,7 +54,7 @@ const stop = $count.subscribe(log);
 ## Computed (derived)
 
 ```ts
-import { computed, signal } from "@echojs/reactivity";
+import { computed, signal } from "@echojs-ecosystem/reactivity";
 
 const $first = signal("Echo");
 const $greeting = computed(() => `Hello, ${$first.value()}!`);
@@ -67,7 +67,7 @@ $greeting.value(); // tracked read
 ## Effects (side work)
 
 ```ts
-import { effect, signal } from "@echojs/reactivity";
+import { effect, signal } from "@echojs-ecosystem/reactivity";
 
 const $theme = signal<"light" | "dark">("light");
 
@@ -84,7 +84,7 @@ Inside an effect, use `.peek()` when you need a value **without** subscribing (e
 ## Batching updates
 
 ```ts
-import { batch, signal } from "@echojs/reactivity";
+import { batch, signal } from "@echojs-ecosystem/reactivity";
 
 const $a = signal(0);
 const $b = signal(0);
@@ -103,7 +103,7 @@ Use in event handlers that touch multiple signals, or when syncing related field
 Group disposable work (effects, subscriptions, timers):
 
 ```ts
-import { scope, effect, signal, cleanup } from "@echojs/reactivity";
+import { scope, effect, signal, cleanup } from "@echojs-ecosystem/reactivity";
 
 const $id = signal("a");
 
@@ -135,7 +135,7 @@ export const user = $user.readonly();
 Or wrap any writable signal:
 
 ```ts
-import { readonly } from "@echojs/reactivity";
+import { readonly } from "@echojs-ecosystem/reactivity";
 
 const $internal = signal(0);
 const $public = readonly($internal);

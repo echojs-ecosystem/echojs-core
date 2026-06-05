@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/persist",
+  "name": "@echojs-ecosystem/persist",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -27,11 +27,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/reactivity": "workspace:*"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
-    "@echojs/store": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*",
     "fake-indexeddb": "^6.0.0",
     "jsdom": "^26.1.0",
     "typescript": "5.9.2",

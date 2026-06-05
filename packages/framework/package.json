@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/framework",
+  "name": "@echojs-ecosystem/framework",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -67,18 +67,18 @@
     "format:fix": "oxfmt ."
   },
   "dependencies": {
-    "@echojs/core": "workspace:*",
-    "@echojs/reactivity": "workspace:*",
-    "@echojs/router": "workspace:*",
-    "@echojs/hyperdom": "workspace:*",
-    "@echojs/form": "workspace:*",
-    "@echojs/persist": "workspace:*",
-    "@echojs/store": "workspace:*",
-    "@echojs/ui": "workspace:*",
-    "@echojs/url-state": "workspace:*"
+    "@echojs-ecosystem/core": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs-ecosystem/router": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/form": "workspace:*",
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*",
+    "@echojs-ecosystem/ui": "workspace:*",
+    "@echojs-ecosystem/url-state": "workspace:*"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
     "oxlint": "^1.60.0",
     "typescript": "5.9.2"
   },

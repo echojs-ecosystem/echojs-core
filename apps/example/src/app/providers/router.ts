@@ -1,4 +1,4 @@
-import { createRouterProvider } from "@echojs/router/hyperdom";
+import { createRouterProvider } from "@echojs-ecosystem/router/hyperdom";
 
 import { appRouter } from "../router/index.js";
 

@@ -1,4 +1,4 @@
-import { signal } from '@echojs/reactivity'
+import { signal } from '@echojs-ecosystem/reactivity'
 
 import { CancelledError, isCancelledError } from './cancelled-error'
 import { Removable } from './removable'

@@ -4,7 +4,7 @@ Official documentation for EchoJS — built with EchoJS, not Docusaurus/VitePres
 
 ## Stack
 
-- `@echojs/framework`, `@echojs/router`, `@echojs/ui`, `@echojs/query`, `@echojs/store`, `@echojs/url-state`
+- `@echojs-ecosystem/framework`, `@echojs-ecosystem/router`, `@echojs-ecosystem/ui`, `@echojs-ecosystem/query`, `@echojs-ecosystem/store`, `@echojs-ecosystem/url-state`
 - Tailwind CSS v4 + **tailwind-variants** (`tv()`)
 - Shiki (syntax highlighting)
 - Markdown content under `src/content/` (lazy-loaded via Vite glob)
@@ -13,7 +13,7 @@ Official documentation for EchoJS — built with EchoJS, not Docusaurus/VitePres
 
 ```bash
 bun install
-bun run dev --filter @echojs/docs
+bun run dev --filter @echojs-ecosystem/docs
 ```
 
 Opens at http://localhost:3001

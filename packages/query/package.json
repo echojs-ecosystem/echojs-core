@@ -1,5 +1,5 @@
 {
-  "name": "@echojs/query",
+  "name": "@echojs-ecosystem/query",
   "version": "0.0.0",
   "files": [
     "dist"
@@ -27,11 +27,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@echojs/reactivity": "workspace:*"
+    "@echojs-ecosystem/reactivity": "workspace:*"
   },
   "devDependencies": {
-    "@echojs/oxc-config": "workspace:*",
-    "@echojs/store": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs-ecosystem/store": "workspace:*",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
   },

@@ -1,2 +1,2 @@
-export * from "@echojs/form";
+export * from "@echojs-ecosystem/form";
 

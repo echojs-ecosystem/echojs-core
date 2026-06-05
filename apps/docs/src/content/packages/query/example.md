@@ -1,7 +1,7 @@
 ---
 title: Example
 description: JSONPlaceholder queries and query demo model from apps/example.
-package: "@echojs/query"
+package: "@echojs-ecosystem/query"
 ---
 
 # Example — Query
@@ -9,7 +9,7 @@ package: "@echojs/query"
 ## Query definitions (`features/query-demo/api`)
 
 ```ts
-import { createQuery } from "@echojs/query";
+import { createQuery } from "@echojs-ecosystem/query";
 import { jpFetch } from "@core/api/jsonplaceholder.js";
 
 export const listUsersQuery = createQuery({
@@ -30,8 +30,8 @@ export const getUserQuery = createQuery({
 ## Model — reactive `.with()`
 
 ```ts
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 import { getUserQuery, listUsersQuery } from "../api/jsonplaceholder.queries.js";
 
 export const createQueryDemoModel = createModel(() => {
@@ -71,7 +71,7 @@ Show(
 
 ```ts
 // apps/docs — pages/doc/model/doc-article.model.ts
-import { createQuery } from "@echojs/query";
+import { createQuery } from "@echojs-ecosystem/query";
 
 const docContentQuery = createQuery({
   name: "doc-content",
@@ -90,7 +90,7 @@ const query = docContentQuery.with(() => ({ contentId: props.contentId }));
 
 ```ts
 // apps/docs/src/core/providers/query.ts
-import { createQueryProvider } from "@echojs/query";
+import { createQueryProvider } from "@echojs-ecosystem/query";
 
 export const queryProvider = createQueryProvider({
   defaultOptions: { queries: { staleTime: 60_000 } },

@@ -13,7 +13,7 @@ const rewriteImports = (code) => {
   // - export * from "../y.js"      -> "../y"
   // - import type { T } from "./t.js" -> "./t"
   //
-  // We intentionally do NOT touch package imports like "@echojs/foo".
+  // We intentionally do NOT touch package imports like "@echojs-ecosystem/foo".
   return code
     .replace(
       /\b(from\s+["'])(\.{1,2}\/[^"'?#]+?)\.js(["'])/g,

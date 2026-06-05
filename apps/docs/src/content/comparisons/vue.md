@@ -48,11 +48,11 @@ This guide is the **Vue migration reference** — reactivity, templates, state, 
 | **Reactivity** | Proxy (`reactive`) + ref boxes | Explicit `signal` cells |
 | **Templates** | SFC `.vue` + compiler | HyperDOM `h()` / DSL in `.view.ts` |
 | **Structure** | Flexible; Nuxt adds opinions | **Feature-first** dependency rules |
-| **Routing** | Vue Router 4 | `@echojs/router` |
-| **Global store** | Pinia (Vuex legacy) | `@echojs/store` |
-| **Server / cache** | Pinia actions, TanStack Query, `useFetch` | `@echojs/query` |
-| **URL state** | `route.query`, manual sync | `@echojs/url-state` |
-| **Meta-framework** | Nuxt 3/4 | Vite + `@echojs/framework` (SPA-first) |
+| **Routing** | Vue Router 4 | `@echojs-ecosystem/router` |
+| **Global store** | Pinia (Vuex legacy) | `@echojs-ecosystem/store` |
+| **Server / cache** | Pinia actions, TanStack Query, `useFetch` | `@echojs-ecosystem/query` |
+| **URL state** | `route.query`, manual sync | `@echojs-ecosystem/url-state` |
+| **Meta-framework** | Nuxt 3/4 | Vite + `@echojs-ecosystem/framework` (SPA-first) |
 | **SSR** | Nuxt mature | Plan separately; docs/example are CSR |
 | **DX** | `script setup`, auto-imports | Models + providers; no `ref` unwrap in templates |
 
@@ -90,7 +90,7 @@ count.value++;
 
 ```ts
 // EchoJS
-import { signal, effect } from "@echojs/reactivity";
+import { signal, effect } from "@echojs-ecosystem/reactivity";
 
 const count = signal(0);
 effect(() => console.log(count.value()));
@@ -102,7 +102,7 @@ count.set(count.value() + 1);
 | Vue 2 | Vue 3 | EchoJS note |
 | --- | --- | --- |
 | `data()` | `ref` / `reactive` | Use signals, not Options API |
-| `this.$store` | Pinia | `@echojs/store` |
+| `this.$store` | Pinia | `@echojs-ecosystem/store` |
 | Filters | removed | `computed` |
 | Event bus | mitt / Pinia | store events or feature models |
 
@@ -252,9 +252,9 @@ Nuxt `pages/` maps mentally to Echo **pages** + **entities/__routes__** — not 
 | --- | --- | --- |
 | **Local UI** | `ref`, `shallowRef` | `signal` in model |
 | **Screen model** | composables + `computed` | `createModel` |
-| **Server / async** | Pinia + fetch, TanStack Query, `useAsyncData` | `@echojs/query` |
-| **URL** | `useRoute().query` | `@echojs/url-state` |
-| **App client** | Pinia, persisted state plugins | `@echojs/store` + `@echojs/persist` |
+| **Server / async** | Pinia + fetch, TanStack Query, `useAsyncData` | `@echojs-ecosystem/query` |
+| **URL** | `useRoute().query` | `@echojs-ecosystem/url-state` |
+| **App client** | Pinia, persisted state plugins | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
 ### Library-by-library (client & server)
 
@@ -266,7 +266,7 @@ Nuxt `pages/` maps mentally to Echo **pages** + **entities/__routes__** — not 
 | **VueUse** | 100+ composables | model/shared utilities (pick what you need) |
 | **mitt / tiny-emitter** | Event bus | store `.on` / feature events |
 | **Apollo Vue** | GraphQL | `queryFn` + optional client |
-| **pinia-plugin-persistedstate** | localStorage | `@echojs/persist` |
+| **pinia-plugin-persistedstate** | localStorage | `@echojs-ecosystem/persist` |
 | **@vueuse/core `useStorage`** | synced ref | persist on store slice |
 
 > [!WARNING] Pinia as “god object”
@@ -347,7 +347,7 @@ Use plain `fetch` or your HTTP wrapper inside `queryFn` — no Nuxt auto-import 
 
 ### Vue Router 4
 
-| Vue Router | `@echojs/router` |
+| Vue Router | `@echojs-ecosystem/router` |
 | --- | --- |
 | `createRouter({ routes })` | `createRoutes([...])` |
 | `router.push` | `router.go()` |
@@ -390,7 +390,7 @@ Keep **URL paths identical** when migrating Nuxt → Echo SPA to avoid breaking 
 | SSR / SSG | First-class | CSR SPA; SSR roadmap separate |
 | Server API | `server/api/*` | Backend of your choice |
 | Auto-imports | components, composables | explicit imports (clearer graph) |
-| Modules ecosystem | `@nuxtjs/i18n`, etc. | `@echojs/*` providers |
+| Modules ecosystem | `@nuxtjs/i18n`, etc. | `@echojs-ecosystem/*` providers |
 | Nitro deploy | Vercel, Node, edge | Static/Vite hosting for SPA |
 | Hybrid rendering | route rules | not 1:1 |
 
@@ -439,10 +439,10 @@ export const createSignupModel = createModel(() => {
 | --- | --- | --- |
 | **Tailwind** | common | `tailwind-variants` in docs/example |
 | **UnoCSS** | Vite plugin | same Vite pipeline |
-| **Vuetify** | Material Vue | `@echojs/ui` or gradual port |
+| **Vuetify** | Material Vue | `@echojs-ecosystem/ui` or gradual port |
 | **PrimeVue** | enterprise widgets | feature-specific views |
 | **Naive UI / Element Plus** | admin UIs | rebuild critical screens |
-| **Headless UI Vue** | accessible primitives | `@echojs/ui` |
+| **Headless UI Vue** | accessible primitives | `@echojs-ecosystem/ui` |
 | **Vue Transition** | `<Transition>` | CSS classes on DOM updates |
 | **@vueuse/motion** | animations | CSS / WAAPI in views |
 
@@ -494,7 +494,7 @@ Vue’s compiler **reduces** update cost; Echo **removes** reconciliation — pr
 | **@vue/test-utils** | mount SFC | mount views integration-style |
 | **`@pinia/testing`** | mock stores | mock store factories |
 | **MSW** | mock API | mock `fetch` in queries |
-| **Vue DevTools** | Pinia, router, components | `@echojs/devtools` planned |
+| **Vue DevTools** | Pinia, router, components | `@echojs-ecosystem/devtools` planned |
 | **Storybook Vue** | stories | HyperDOM stories (roadmap) |
 
 ```ts
@@ -512,7 +512,7 @@ expect(vm.errors.value().email).toBeUndefined();
 
 | Problem | Vue stack | EchoJS |
 | --- | --- | --- |
-| UI + reactivity | `vue` | `@echojs/reactivity` + `@echojs/hyperdom` |
+| UI + reactivity | `vue` | `@echojs-ecosystem/reactivity` + `@echojs-ecosystem/hyperdom` |
 | App entry | `createApp` | `createEchoApp` |
 | Build | Vite + `@vitejs/plugin-vue` | Vite (no SFC compiler) |
 | TS in SFC | `vue-tsc` | `tsc` on `.ts` views |
@@ -521,26 +521,26 @@ expect(vm.errors.value().email).toBeUndefined();
 
 | Problem | Vue | EchoJS |
 | --- | --- | --- |
-| SPA router | Vue Router | `@echojs/router` |
+| SPA router | Vue Router | `@echojs-ecosystem/router` |
 | Nuxt pages | file routes | code route table |
-| URL query sync | manual / vue-router | `@echojs/url-state` |
-| i18n routes | `@nuxtjs/i18n` | `@echojs/i18n` + router |
+| URL query sync | manual / vue-router | `@echojs-ecosystem/url-state` |
+| i18n routes | `@nuxtjs/i18n` | `@echojs-ecosystem/i18n` + router |
 
 ### Data & state
 
 | Problem | Vue | EchoJS |
 | --- | --- | --- |
-| REST cache | TanStack Query | `@echojs/query` |
+| REST cache | TanStack Query | `@echojs-ecosystem/query` |
 | GraphQL | Villus, Apollo | `queryFn` |
-| Global store | Pinia | `@echojs/store` |
-| Persistence | pinia-plugin-persistedstate | `@echojs/persist` |
+| Global store | Pinia | `@echojs-ecosystem/store` |
+| Persistence | pinia-plugin-persistedstate | `@echojs-ecosystem/persist` |
 | Realtime | socket.io + ref | `effect` + client |
 
 ### UI & content
 
 | Problem | Vue | EchoJS |
 | --- | --- | --- |
-| Component libraries | Vuetify, PrimeVue, … | `@echojs/ui` |
+| Component libraries | Vuetify, PrimeVue, … | `@echojs-ecosystem/ui` |
 | Icons | `@iconify/vue` | SVG / icon components in views |
 | Markdown docs | VitePress | Echo docs app pattern |
 | Charts | vue-echarts | wrap chart lib in view |
@@ -553,7 +553,7 @@ expect(vm.errors.value().email).toBeUndefined();
 | Lint | `eslint-plugin-vue` | ESLint TS |
 | Format | Prettier + Volar | Prettier |
 | E2E | Cypress, Playwright | Playwright on SPA |
-| i18n | vue-i18n | `@echojs/i18n` |
+| i18n | vue-i18n | `@echojs-ecosystem/i18n` |
 
 ---
 
@@ -620,7 +620,7 @@ Echo avoids **template-only type checking** split — what you see in `.view.ts`
 
 1. Pinia actions that fetch → `createQuery`.
 2. Keep Pinia only for true session/UI globals → `createStore`.
-3. Move `route.query` filters → `@echojs/url-state`.
+3. Move `route.query` filters → `@echojs-ecosystem/url-state`.
 
 ### Phase 3 — Features
 
@@ -696,7 +696,7 @@ Treat Nuxt as **server + routing host**; Echo migration targets the **client app
 
 ### VueUse `useDark`?
 
-Theme → `prefsStore` + `@echojs/persist` or UI provider.
+Theme → `prefsStore` + `@echojs-ecosystem/persist` or UI provider.
 
 ---
 
@@ -707,8 +707,8 @@ Theme → `prefsStore` + `@echojs/persist` or UI provider.
 | Reactivity | Proxy + ref | Explicit signals |
 | UI | SFC + optional compiler opts | HyperDOM direct |
 | Structure | Progressive / Nuxt opinions | Feature-first rules |
-| Data | Pinia + Query + useFetch | `@echojs/query` + store |
-| Routing | Vue Router / Nuxt pages | `@echojs/router` |
+| Data | Pinia + Query + useFetch | `@echojs-ecosystem/query` + store |
+| Routing | Vue Router / Nuxt pages | `@echojs-ecosystem/router` |
 | Full-stack | Nuxt mature | SPA-first; split marketing SSR |
 | DX | Volar, script setup | Models, providers, strict layers |
 
@@ -721,4 +721,4 @@ Theme → `prefsStore` + `@echojs/persist` or UI provider.
 - [State overview](/docs/state/overview)
 - [Data fetching](/docs/guides/data-fetching)
 - [Routing guide](/docs/guides/routing)
-- [@echojs/reactivity](/docs/packages/reactivity) · [@echojs/store](/docs/packages/store) · [@echojs/query](/docs/packages/query)
+- [@echojs-ecosystem/reactivity](/docs/packages/reactivity) · [@echojs-ecosystem/store](/docs/packages/store) · [@echojs-ecosystem/query](/docs/packages/query)

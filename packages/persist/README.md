@@ -1,17 +1,17 @@
 <div align="center">
 
-# @echojs/persist
+# @echojs-ecosystem/persist
 
 **Storage extensions for stores and form fields — localStorage, cookies, IndexedDB, and more.**
 
-[![npm](https://img.shields.io/npm/v/@echojs/persist)](https://www.npmjs.com/package/@echojs/persist)
+[![npm](https://img.shields.io/npm/v/@echojs-ecosystem/persist)](https://www.npmjs.com/package/@echojs-ecosystem/persist)
 [![docs](https://img.shields.io/badge/docs-echojs.dev-blue)](https://echojs.dev/docs/packages/persist)
 
 </div>
 
 ---
 
-Universal persistence via **`.extend()`**. Works with [`@echojs/store`](https://www.npmjs.com/package/@echojs/store) and any object matching the persistable contract (`value` / `set` / `subscribe`).
+Universal persistence via **`.extend()`**. Works with [`@echojs-ecosystem/store`](https://www.npmjs.com/package/@echojs-ecosystem/store) and any object matching the persistable contract (`value` / `set` / `subscribe`).
 
 ## Features
 
@@ -25,14 +25,14 @@ Universal persistence via **`.extend()`**. Works with [`@echojs/store`](https://
 ## Install
 
 ```bash
-npm install @echojs/persist @echojs/store
+npm install @echojs-ecosystem/persist @echojs-ecosystem/store
 ```
 
 ## Quick start
 
 ```ts
-import { createStore } from "@echojs/store";
-import { withLocalStorage } from "@echojs/persist";
+import { createStore } from "@echojs-ecosystem/store";
+import { withLocalStorage } from "@echojs-ecosystem/persist";
 
 export const themeStore = createStore("dark", { name: "theme" }).extend(
   withLocalStorage({ key: "app-theme", version: 1 }),
@@ -47,7 +47,7 @@ themeStore.persist.$hydrated.value();
 ## Adapters
 
 ```ts
-import { withSessionStorage, withCookie, withIndexedDB } from "@echojs/persist";
+import { withSessionStorage, withCookie, withIndexedDB } from "@echojs-ecosystem/persist";
 
 createStore(filters).extend(withSessionStorage({ key: "filters", version: 1 }));
 createStore(token).extend(withCookie({ key: "token", path: "/", sameSite: "lax" }));

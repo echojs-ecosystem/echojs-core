@@ -24,11 +24,11 @@ const config: StorybookConfig = {
       plugins: [tailwindcss()],
       resolve: {
         alias: {
-          "@echojs/hyperdom": resolve(packageRoot, "../hyperdom/src/index.ts"),
+          "@echojs-ecosystem/hyperdom": resolve(packageRoot, "../hyperdom/src/index.ts"),
         },
       },
       optimizeDeps: {
-        exclude: ["@echojs/hyperdom"],
+        exclude: ["@echojs-ecosystem/hyperdom"],
       },
     });
   },

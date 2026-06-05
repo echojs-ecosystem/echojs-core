@@ -6,7 +6,7 @@ keywords: [router, params, query, beforeLoad, navigation]
 
 # Router state
 
-**Router state** is everything derived from **navigation**: which route is active, path parameters, the parsed query string on that route, and optional **loader** payload from `beforeLoad`. It is owned by `@echojs/router` and updates when the user follows links, uses back/forward, or you call `page.go()`.
+**Router state** is everything derived from **navigation**: which route is active, path parameters, the parsed query string on that route, and optional **loader** payload from `beforeLoad`. It is owned by `@echojs-ecosystem/router` and updates when the user follows links, uses back/forward, or you call `page.go()`.
 
 ## What counts as router state
 
@@ -31,7 +31,7 @@ Router state is **synchronized with browser history** (`history: "browser"`). It
 | Modal open/closed | [Local UI state](/docs/state/local-ui-state) |
 
 > [!NOTE]
-> Raw `page.$query` and `@echojs/url-state` both read the same `location.search`. Prefer **url-state** when you need parsers, defaults, and `reset()` — not ad-hoc string parsing in every model.
+> Raw `page.$query` and `@echojs-ecosystem/url-state` both read the same `location.search`. Prefer **url-state** when you need parsers, defaults, and `reset()` — not ad-hoc string parsing in every model.
 
 ## Params — identity in the path
 

@@ -1,5 +1,5 @@
-import { div, h4, p } from "@echojs/hyperdom";
-import type { RouteView } from "@echojs/router";
+import { div, h4, p } from "@echojs-ecosystem/hyperdom";
+import type { RouteView } from "@echojs-ecosystem/router";
 import { i18n } from "@app/providers/i18n.js";
 
 const lazyChunkView: RouteView = () =>

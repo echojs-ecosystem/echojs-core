@@ -11,8 +11,8 @@ In EchoJS, a **model** is the place for state and behavior. Views read a **view 
 ## `createModel`
 
 ```ts
-import { signal } from "@echojs/reactivity";
-import { createModel } from "@echojs/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
+import { createModel } from "@echojs-ecosystem/hyperdom";
 
 export type CounterVM = {
   count: () => number;
@@ -33,8 +33,8 @@ Always pass a **display name** (second argument) — it appears in debug tooling
 ## Pairing with `createView`
 
 ```ts
-import { createView, type Child } from "@echojs/hyperdom";
-import { button } from "@echojs/hyperdom";
+import { createView, type Child } from "@echojs-ecosystem/hyperdom";
+import { button } from "@echojs-ecosystem/hyperdom";
 
 export const CounterView = createView((vm: CounterVM): Child =>
   button({ onClick: vm.increment }, () => String(vm.count())),
@@ -42,10 +42,10 @@ export const CounterView = createView((vm: CounterVM): Child =>
 );
 ```
 
-Glue with `createComponent` from `@echojs/hyperdom`:
+Glue with `createComponent` from `@echojs-ecosystem/hyperdom`:
 
 ```ts
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 
 // No props — callable component
 export const Counter = createComponent(createCounterModel, CounterView, { name: "Counter" });

@@ -9,7 +9,7 @@ import {
   runWithUIContext,
 } from "../theme/theme-context";
 import { UIProvider } from "./UIProvider";
-import { h } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
 
 afterEach(() => {
   resetUIContextStack();

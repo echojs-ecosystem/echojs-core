@@ -65,7 +65,7 @@ export const projectScaffoldManagers: PackageManager[] = [
   },
 ];
 
-/** Package docs — `npm install @echojs/<name>`. */
+/** Package docs — `npm install @echojs-ecosystem/<name>`. */
 export const addPackageManagers = (npmPackage: string): PackageManager[] => [
   {
     id: "bun",

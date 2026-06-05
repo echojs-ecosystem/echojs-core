@@ -12,7 +12,7 @@ const packagesDir = join(root, "packages");
 const docsDir = join(root, "apps/docs");
 
 /** Canonical version for the whole EchoJS ecosystem (meta-package). */
-const ECOSYSTEM_VERSION_PACKAGE = "@echojs/framework";
+const ECOSYSTEM_VERSION_PACKAGE = "@echojs-ecosystem/framework";
 
 const readPackageJson = (path) => JSON.parse(readFileSync(path, "utf8"));
 const writePackageJson = (path, data) => writeFileSync(path, `${JSON.stringify(data, null, 2)}\n`, "utf8");
@@ -146,7 +146,7 @@ const main = () => {
   const versions = collectVersions();
   const ecosystemVersion =
     versions[ECOSYSTEM_VERSION_PACKAGE] ??
-    versions["@echojs/reactivity"] ??
+    versions["@echojs-ecosystem/reactivity"] ??
     "0.0.0";
 
   const previousVersion = readEcosystemVersion();
@@ -166,8 +166,8 @@ const main = () => {
 
   syncDocsPackageVersion(ecosystemVersion);
 
-  if (versions["@echojs/architect"]) {
-    syncArchitectCliVersion(versions["@echojs/architect"]);
+  if (versions["@echojs-ecosystem/architect"]) {
+    syncArchitectCliVersion(versions["@echojs-ecosystem/architect"]);
   }
 
   console.log(

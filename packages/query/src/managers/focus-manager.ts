@@ -1,4 +1,4 @@
-import { signal } from '@echojs/reactivity'
+import { signal } from '@echojs-ecosystem/reactivity'
 
 import type { QueryClient } from '../types'
 import { getRegisteredClients } from './register-client'

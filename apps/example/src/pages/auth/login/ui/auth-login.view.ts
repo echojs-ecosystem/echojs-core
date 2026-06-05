@@ -1,6 +1,6 @@
-import { bindField } from "@echojs/form";
-import { button, div, h4, input, label, p, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { bindField } from "@echojs-ecosystem/form";
+import { button, div, h4, input, label, p, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 import { mockLogin } from "@entities/session/index.js";
 import { docsHomePage } from "@pages/docs/home/docs-home.page.js";

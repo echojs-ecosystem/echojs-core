@@ -1,5 +1,5 @@
-import { createRouteView } from "@echojs/router";
-import { div, h4, p } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { div, h4, p } from "@echojs-ecosystem/hyperdom";
 import { i18n } from "@app/providers/i18n.js";
 
 const delay = (ms: number): Promise<{ loadedAt: string }> =>

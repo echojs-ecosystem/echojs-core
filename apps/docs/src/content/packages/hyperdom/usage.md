@@ -1,19 +1,19 @@
 ---
 title: Usage
 description: Build UIs with h, DSL tags, reactive children, Show, List, createView, and createModel.
-package: "@echojs/hyperdom"
+package: "@echojs-ecosystem/hyperdom"
 ---
 
 # Usage
 
-HyperDOM turns a **view tree** into real DOM nodes. Dynamic parts are functions or reactive props backed by `@echojs/reactivity`.
+HyperDOM turns a **view tree** into real DOM nodes. Dynamic parts are functions or reactive props backed by `@echojs-ecosystem/reactivity`.
 
 ## Two styles: `h` and DSL
 
 Low-level hyperscript:
 
 ```ts
-import { h } from "@echojs/hyperdom";
+import { h } from "@echojs-ecosystem/hyperdom";
 
 h("button", { class: "btn", onClick: () => {} }, "Save");
 h("div", null, ["Hello", () => dynamicPiece()]);
@@ -22,7 +22,7 @@ h("div", null, ["Hello", () => dynamicPiece()]);
 Ergonomic tags (same runtime, better inference):
 
 ```ts
-import { div, button, span } from "@echojs/hyperdom";
+import { div, button, span } from "@echojs-ecosystem/hyperdom";
 
 div({ class: "card" }, [
   button({ type: "button", onClick: save }, "Save"),
@@ -57,7 +57,7 @@ div(null, [Card({ title: "Docs", children: p(null, "…") })]);
 A **function child** `() => Child` creates a dynamic region — HyperDOM re-runs it when signals read inside change:
 
 ```ts
-import { signal } from "@echojs/reactivity";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const $open = signal(false);
 
@@ -97,7 +97,7 @@ input({
 Helpers:
 
 ```ts
-import { on } from "@echojs/hyperdom";
+import { on } from "@echojs-ecosystem/hyperdom";
 
 button({ ...on.click(() => {}) }, "Click");
 ```
@@ -105,7 +105,7 @@ button({ ...on.click(() => {}) }, "Click");
 ## `Show` — conditional UI
 
 ```ts
-import { Show } from "@echojs/hyperdom";
+import { Show } from "@echojs-ecosystem/hyperdom";
 
 Show(
   () => $loggedIn.value(),
@@ -119,8 +119,8 @@ Returns a dynamic child — omit the third argument for no fallback.
 ## `List` — collections
 
 ```ts
-import { List } from "@echojs/hyperdom";
-import { signal } from "@echojs/reactivity";
+import { List } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
 
 const $items = signal(["Todo", "Done"]);
 
@@ -135,7 +135,7 @@ Source can be a **signal of array** or `() => readonly T[]`.
 ## `render` and teardown
 
 ```ts
-import { render } from "@echojs/hyperdom";
+import { render } from "@echojs-ecosystem/hyperdom";
 
 const dispose = render(appView, document.getElementById("app")!);
 // later: dispose() — removes listeners, effects, DOM
@@ -163,7 +163,7 @@ export const createCounterModel = createModel((): CounterVM => {
 Glue:
 
 ```ts
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 
 const Counter = createComponent(createCounterModel, CounterView);
 ```
@@ -186,7 +186,7 @@ nav({
 ## Classes and styles
 
 ```ts
-import { cx } from "@echojs/hyperdom";
+import { cx } from "@echojs-ecosystem/hyperdom";
 
 span({
   class: () => cx("badge", $active.value() && "badge--on"),
@@ -218,7 +218,7 @@ Prefer structured `Child` trees for app UI.
 Register after-insert hooks inside a view tree:
 
 ```ts
-import { mount } from "@echojs/hyperdom/lifecycle/mount";
+import { mount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
 
 div(null, [
   mount(() => {

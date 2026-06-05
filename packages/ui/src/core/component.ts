@@ -1,4 +1,4 @@
-import { h, type Child, type Props } from "@echojs/hyperdom";
+import { h, type Child, type Props } from "@echojs-ecosystem/hyperdom";
 import type { UIContextValue } from "../theme/theme-context";
 import { getUIContextOrDefault } from "../theme/theme-context";
 import { resolveVariantClasses } from "../theme/variants";

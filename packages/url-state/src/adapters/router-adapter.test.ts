@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { signal } from '@echojs/reactivity'
+import { signal } from '@echojs-ecosystem/reactivity'
 
 import { createRouterUrlStateAdapter } from './router-adapter'
 

@@ -1,5 +1,5 @@
-import { createRouteView } from "@echojs/router";
-import { button, div, h4, p, Show, span, strong } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { button, div, h4, p, Show, span, strong } from "@echojs-ecosystem/hyperdom";
 import { loadUserProfile, type UserProfile } from "@entities/user/index.js";
 
 const tabBtn = (active: boolean): Record<string, string> => ({

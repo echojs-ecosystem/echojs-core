@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it, vi } from "vitest";
-import { render } from "@echojs/hyperdom";
+import { render } from "@echojs-ecosystem/hyperdom";
 
 import { InputMask } from "./index";
 

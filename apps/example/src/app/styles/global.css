@@ -1405,7 +1405,7 @@ footer {
   flex: 1;
 }
 
-/* @echojs/query demo */
+/* @echojs-ecosystem/query demo */
 .demo-query__api {
   margin-bottom: 12px;
   color: var(--gray-600);
@@ -1674,7 +1674,7 @@ footer {
   font-family: ui-monospace, monospace;
 }
 
-/* @echojs/reactivity lab */
+/* @echojs-ecosystem/reactivity lab */
 .demo-reactivity__intro {
   margin-bottom: 16px;
   color: var(--gray-600);

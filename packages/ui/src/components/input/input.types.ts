@@ -1,4 +1,4 @@
-import type { Props } from "@echojs/hyperdom";
+import type { Props } from "@echojs-ecosystem/hyperdom";
 import type { InputFieldProps } from "../input-shared/field.types";
 
 export type { InputSize, InputVariant } from "../input-shared/field.types";

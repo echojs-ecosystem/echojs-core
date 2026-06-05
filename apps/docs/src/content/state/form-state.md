@@ -1,12 +1,12 @@
 ---
 title: Form state
-description: Field trees, validation, and submit — ephemeral input state with @echojs/form.
+description: Field trees, validation, and submit — ephemeral input state with @echojs-ecosystem/form.
 keywords: [createForm, createField, bindField, validation]
 ---
 
 # Form state
 
-**Form state** is **user input before and during submit**: field values, touched/dirty flags, field-level errors, and optional schema errors. It lives in `@echojs/form` (`createField`, `createFieldArray`, `createForm`) — not in global stores and usually not in the URL.
+**Form state** is **user input before and during submit**: field values, touched/dirty flags, field-level errors, and optional schema errors. It lives in `@echojs-ecosystem/form` (`createField`, `createFieldArray`, `createForm`) — not in global stores and usually not in the URL.
 
 ## How it differs from other layers
 
@@ -23,7 +23,7 @@ Forms are **write-heavy and short-lived**. After a successful submit, persist vi
 ## Structure
 
 ```ts
-import { createField, createForm } from "@echojs/form";
+import { createField, createForm } from "@echojs-ecosystem/form";
 import { z } from "zod";
 
 const schema = z.object({

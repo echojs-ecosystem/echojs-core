@@ -1,7 +1,7 @@
 ---
 title: Usage
-description: @echojs/devtools usage — coming soon.
-package: "@echojs/devtools"
+description: @echojs-ecosystem/devtools usage — coming soon.
+package: "@echojs-ecosystem/devtools"
 status: draft
 ---
 

@@ -1,4 +1,4 @@
-import { createView, render, type Child } from "@echojs/hyperdom";
+import { createView, render, type Child } from "@echojs-ecosystem/hyperdom";
 
 import { UIProvider, type UIProviderProps } from "./providers";
 

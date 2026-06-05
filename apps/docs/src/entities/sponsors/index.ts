@@ -1,4 +1,4 @@
-import { createComponent } from "@echojs/hyperdom";
+import { createComponent } from "@echojs-ecosystem/hyperdom";
 import { createSponsorsModel } from "@entities/sponsors/model/sponsors.model.js";
 import { SponsorsView } from "@entities/sponsors/ui/sponsors.view.js";
 

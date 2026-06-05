@@ -1,4 +1,4 @@
-import type { Props } from "@echojs/hyperdom";
+import type { Props } from "@echojs-ecosystem/hyperdom";
 import type { UIComponentBaseProps } from "../../core/types";
 
 export type TextareaVariant = "outline" | "filled" | "ghost";

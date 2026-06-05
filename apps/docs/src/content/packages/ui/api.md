@@ -1,7 +1,7 @@
 ---
 title: API Reference
-description: @echojs/ui API — documentation coming soon.
-package: "@echojs/ui"
+description: @echojs-ecosystem/ui API — documentation coming soon.
+package: "@echojs-ecosystem/ui"
 status: draft
 ---
 

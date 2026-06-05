@@ -1,8 +1,8 @@
-import { createRouteView } from "@echojs/router";
-import { bindField } from "@echojs/form";
-import { createField, createForm } from "@echojs/form";
-import { button, div, h4, input, label, p, pre, span } from "@echojs/hyperdom";
-import type { Child } from "@echojs/hyperdom";
+import { createRouteView } from "@echojs-ecosystem/router";
+import { bindField } from "@echojs-ecosystem/form";
+import { createField, createForm } from "@echojs-ecosystem/form";
+import { button, div, h4, input, label, p, pre, span } from "@echojs-ecosystem/hyperdom";
+import type { Child } from "@echojs-ecosystem/hyperdom";
 import { z } from "zod";
 import { findVariant } from "@entities/catalog/demo-data.js";
 import { Breadcrumbs, ParamPill } from "@pages/workspace/ui/breadcrumbs.js";
