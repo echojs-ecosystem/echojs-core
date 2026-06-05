@@ -1,7 +1,7 @@
 import type { Child } from "@echojs/hyperdom";
 import { div, h, p, span } from "@echojs/hyperdom";
 import { becomeSponsorUrl, type SponsorTier, type SponsorTierGroup } from "@shared/sponsors/data.js";
-import { sponsorsTierStyles } from "@shared/styles/sponsors.js";
+import { sponsorsTierStyles } from "@widgets/sponsors/sponsors-tier-panel.styles.js";
 import { cn } from "@shared/styles/cn.js";
 import { SponsorLogo } from "@widgets/sponsors/sponsor-logo.js";
 

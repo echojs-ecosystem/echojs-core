@@ -1,6 +1,6 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
-import { frameworkComparisonStyles } from "@shared/styles/framework-comparison.js";
+import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import type { RatingCellViewProps } from "@widgets/framework-comparison/types/framework-comparison.types.js";
 
 const cmp = frameworkComparisonStyles();

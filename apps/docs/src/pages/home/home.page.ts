@@ -1,9 +1,6 @@
-import { createComponent } from "@echojs/hyperdom";
 import { createRouteView } from "@echojs/router";
-import { createHomeModel, HomeView } from "@pages/home/index.js";
+import { Home } from "@entities/home/index.js";
 import { applySeo } from "@shared/seo/apply-seo.js";
-
-export const Home = createComponent(createHomeModel, HomeView, { name: "Home" });
 
 export const homePage = createRouteView({
   name: "home",

@@ -11,9 +11,9 @@ import {
   sidebarResourceLinks,
   type SidebarLink,
 } from "@shared/content/sidebar-extras.js";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
-import { homePage } from "@pages/home/home.page.js";
-import { shellStyles, sidebarPanelStyles } from "@shared/styles/index.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
+import { homePage } from "@app/router/page-links.js";
+import { shellStyles, sidebarPanelStyles } from "@widgets/docs-shell/docs-shell.styles.js";
 import type { NavIconId } from "@widgets/icons/nav-icon-id.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 import { AgentNavLinkView } from "@widgets/docs-shell/agent-nav-link.view.js";

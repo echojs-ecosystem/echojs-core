@@ -1,7 +1,7 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { div, button } from "@echojs/hyperdom";
 import type { CodeBlockVM } from "@widgets/code-block/model/code-block.model.js";
-import { codeBlockStyles } from "@shared/styles/index.js";
+import { codeBlockStyles } from "@widgets/code-block/ui/code-block.view.styles.js";
 
 const code = codeBlockStyles();
 

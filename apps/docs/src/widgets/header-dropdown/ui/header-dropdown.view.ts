@@ -1,7 +1,7 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { button, div, span } from "@echojs/hyperdom";
 import type { HeaderDropdownVM } from "@widgets/header-dropdown/model/header-dropdown.model.js";
-import { headerDropdownStyles } from "@shared/styles/header-dropdown.js";
+import { headerDropdownStyles } from "@widgets/header-dropdown/ui/header-dropdown.view.styles.js";
 import { cn } from "@shared/styles/cn.js";
 
 const dd = headerDropdownStyles();

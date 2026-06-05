@@ -1,8 +1,8 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, p, span } from "@echojs/hyperdom";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
-import { ecosystemPackageStyles } from "@shared/styles/package-install.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
+import { ecosystemPackageStyles } from "@widgets/ecosystem/ui/ecosystem-package-card.view.styles.js";
 import type { EcosystemPackageCardViewProps } from "@widgets/ecosystem/types/ecosystem-package-card.types.js";
 
 const card = ecosystemPackageStyles();

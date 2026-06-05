@@ -1,6 +1,6 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { button } from "@echojs/hyperdom";
-import { themeToggleStyles } from "@shared/styles/index.js";
+import { themeToggleStyles } from "@widgets/theme-toggle/ui/theme-toggle.view.styles.js";
 import { MoonIcon, SunIcon } from "@widgets/icons/theme-icons.js";
 import type { ThemeToggleVM } from "@widgets/theme-toggle/model/theme-toggle.model.js";
 

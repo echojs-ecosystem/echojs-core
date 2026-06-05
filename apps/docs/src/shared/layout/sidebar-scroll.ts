@@ -1,5 +1,5 @@
 import { effect } from "@echojs/reactivity";
-import { appRouter } from "@entities/__routes__/router.js";
+import { appRouter } from "@app/router/router.js";
 
 const STORAGE_KEY = "echojs:docs-sidebar-scroll";
 const ACTIVE_LINK_SELECTOR = "a[aria-current='page']";

@@ -1,13 +1,13 @@
 import { effect, signal } from "@echojs/reactivity";
 import { NavLink } from "@echojs/router/hyperdom";
-import { appRouter } from "@entities/__routes__/router.js";
+import { appRouter } from "@app/router/router.js";
 import type { AnyPage } from "@echojs/router";
 import type { Child } from "@echojs/hyperdom";
 import { button, div, span } from "@echojs/hyperdom";
 import { packageIdFromPathname, type PackageNavGroup } from "@shared/content/package-nav.js";
 import { resolveNavIcon, resolvePackageGroupIcon } from "@shared/content/resolve-nav-icon.js";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
-import { navLinkStyles, shellStyles } from "@shared/styles/index.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
+import { navLinkStyles, shellStyles } from "@widgets/docs-shell/docs-shell.styles.js";
 import { cn } from "@shared/styles/cn.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 

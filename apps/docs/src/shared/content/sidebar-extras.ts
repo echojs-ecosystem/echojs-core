@@ -1,6 +1,6 @@
 import type { AnyPage } from "@echojs/router";
 import type { NavIconId } from "@widgets/icons/nav-icon-id.js";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@pages/home/home.page.js";
 import { sponsorsPage } from "@pages/sponsors/sponsors.page.js";
 

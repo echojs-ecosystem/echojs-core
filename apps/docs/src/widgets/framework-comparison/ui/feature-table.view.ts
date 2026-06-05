@@ -4,7 +4,7 @@ import {
   comparisonFrameworks,
   featureComparisonRows,
 } from "@shared/home/framework-comparison.js";
-import { frameworkComparisonStyles } from "@shared/styles/framework-comparison.js";
+import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import {
   comparisonFeatureBodyCell,
   comparisonFeatureHeadCell,

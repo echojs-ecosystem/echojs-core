@@ -1,7 +1,7 @@
 import type { Child } from "@echojs/hyperdom";
 import { code, h, strong } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
 
 export type InlinePart =
   | { type: "text"; value: string }

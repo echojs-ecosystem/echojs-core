@@ -6,7 +6,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "architect": "echo-architect lint",
+    "architect:watch": "echo-architect lint --watch",
+    "architect:fix": "echo-architect lint --fix"
   },
   "dependencies": {
     "@echojs/framework": "workspace:*",
@@ -24,6 +27,7 @@
     "tailwind-variants": "^1.0.0"
   },
   "devDependencies": {
+    "@echojs/architect": "workspace:*",
     "@tailwindcss/vite": "^4.1.8",
     "tailwindcss": "^4.1.8",
     "typescript": "5.9.2",

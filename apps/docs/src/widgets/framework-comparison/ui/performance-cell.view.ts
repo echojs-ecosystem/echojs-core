@@ -1,6 +1,6 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
-import { frameworkComparisonStyles } from "@shared/styles/framework-comparison.js";
+import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import { cn } from "@shared/styles/cn.js";
 import { bestPerformanceIds } from "@widgets/framework-comparison/model/framework-comparison.model.js";
 import type { PerformanceCellViewProps } from "@widgets/framework-comparison/types/framework-comparison.types.js";

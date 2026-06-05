@@ -1,10 +1,10 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, footer, h, p } from "@echojs/hyperdom";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homeFooterLinks } from "@shared/home/ecosystem-packages.js";
-import { sponsorsPage } from "@pages/sponsors/sponsors.page.js";
-import { homeFooterStyles } from "@shared/styles/home.js";
+import { sponsorsPage } from "@app/router/page-links.js";
+import { homeFooterStyles } from "@widgets/home-shell/ui/home-footer.view.styles.js";
 
 const ft = homeFooterStyles();
 

@@ -2,8 +2,8 @@ import { signal } from "@echojs/reactivity";
 import type { Signal } from "@echojs/reactivity";
 import { createModel } from "@echojs/hyperdom";
 import type { AnyPage } from "@echojs/router";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
-import { homePage } from "@pages/home/home.page.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
+import { homePage } from "@app/router/page-links.js";
 import { searchDocs, type SearchEntry } from "@shared/search/search-index.js";
 
 export type DocsSearchVM = {

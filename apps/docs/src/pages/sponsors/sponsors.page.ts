@@ -1,9 +1,6 @@
-import { createComponent } from "@echojs/hyperdom";
 import { createRouteView } from "@echojs/router";
-import { createSponsorsModel, SponsorsView } from "@pages/sponsors/index.js";
+import { Sponsors } from "@entities/sponsors/index.js";
 import { applySeo } from "@shared/seo/apply-seo.js";
-
-export const Sponsors = createComponent(createSponsorsModel, SponsorsView, { name: "Sponsors" });
 
 export const sponsorsPage = createRouteView({
   name: "sponsors",

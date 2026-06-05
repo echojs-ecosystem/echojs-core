@@ -1,7 +1,7 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { div, p, span } from "@echojs/hyperdom";
 import { whyChooseEchoCards } from "@shared/home/framework-comparison.js";
-import { frameworkComparisonStyles } from "@shared/styles/framework-comparison.js";
+import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 
 const cmp = frameworkComparisonStyles();
 

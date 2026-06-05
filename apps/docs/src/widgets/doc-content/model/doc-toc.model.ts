@@ -1,5 +1,5 @@
 import { createModel } from "@echojs/hyperdom";
-import { docTocStyles } from "@shared/styles/doc.js";
+import { docTocStyles } from "@widgets/doc-content/ui/doc-toc.view.styles.js";
 import { cn } from "@shared/styles/cn.js";
 import type { DocTocProps, DocTocVM } from "@widgets/doc-content/types/doc-toc.types.js";
 

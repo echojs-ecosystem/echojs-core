@@ -1,5 +1,5 @@
 import { createRouterProvider } from "@echojs/router/hyperdom";
-import { appRouter } from "@entities/__routes__/router.js";
+import { appRouter } from "@app/router/router.js";
 
 export const appRouterExport = appRouter;
 

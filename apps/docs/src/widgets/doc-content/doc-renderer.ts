@@ -32,7 +32,7 @@ import {
   docHeadingStyles,
   docStyles,
   tabButtonStyles,
-} from "@shared/styles/index.js";
+} from "@widgets/doc-content/doc-renderer.styles.js";
 import { CodeBlock } from "@widgets/code-block/index.js";
 import { PackageInstallAdd } from "@widgets/package-install/index.js";
 import { PackageOverview } from "@widgets/package-overview/index.js";

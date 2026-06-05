@@ -1,9 +1,9 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { NavLink } from "@echojs/router/hyperdom";
 import { div, p, span } from "@echojs/hyperdom";
-import { docPageByContentId } from "@entities/__routes__/doc-pages.js";
+import { docPageByContentId } from "@app/router/doc-pages.js";
 import { frameworkComparisonArticles } from "@shared/home/framework-comparison.js";
-import { frameworkComparisonStyles } from "@shared/styles/framework-comparison.js";
+import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 import type { FrameworkNavIconId } from "@widgets/icons/framework-nav-icons.js";
 

@@ -1,10 +1,10 @@
 import { createView, type Child } from "@echojs/hyperdom";
 import { div, h, span } from "@echojs/hyperdom";
-import { getDocPage } from "@entities/__routes__/doc-pages.js";
+import { getDocPage } from "@app/router/doc-pages.js";
 import { docPath, getAdjacentDocNavItems } from "@shared/content/nav.js";
 import type { ContentId } from "@shared/content/types.js";
 import type { DocsNavItemEnriched } from "@shared/content/types.js";
-import { docPagerStyles } from "@shared/styles/index.js";
+import { docPagerStyles } from "@widgets/doc-pager/ui/doc-pager.view.styles.js";
 import { NavIcon } from "@widgets/icons/nav-icons.js";
 
 const pager = docPagerStyles();

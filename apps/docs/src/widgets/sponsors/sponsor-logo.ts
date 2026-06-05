@@ -1,7 +1,7 @@
 import type { Child } from "@echojs/hyperdom";
 import { span } from "@echojs/hyperdom";
 import type { MockSponsor } from "@shared/sponsors/data.js";
-import { sponsorLogoStyles } from "@shared/styles/sponsors.js";
+import { sponsorLogoStyles } from "@widgets/sponsors/sponsor-logo.styles.js";
 import { cn } from "@shared/styles/cn.js";
 
 type SponsorLogoProps = {
