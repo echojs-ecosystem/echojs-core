@@ -1,96 +1,110 @@
 import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
 import { NavLink } from "@echojs-ecosystem/framework/router";
-import { div, p, span } from "@echojs-ecosystem/framework/hyperdom";
+import { button, div, p, span } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import {
   testingAdvantages,
   testingCodePanels,
+  testingHighlights,
 } from "@entities/home/constants/testing-advantages.js";
+import { codeDots } from "@entities/home/helpers/code-dots.js";
+import type { HomeVM } from "@entities/home/types/home.types.js";
 import {
   homeTestingStyles,
-  testingDotColors,
 } from "@entities/home/ui/home-testing.view.styles.js";
 import { cn } from "@core/styles/cn.js";
 import { CodeBlock } from "@widgets/code-block/index.js";
 
 const home = homeTestingStyles();
 
-const advantageNumbers = ["01", "02", "03", "04"] as const;
-
-const TestingSplitDiagram = (): Child =>
-  div({ class: home.splitDiagram() }, [
-    div({ class: home.splitBox() }, [
-      p({ class: home.splitLabel() }, "createModel"),
-      p({ class: home.splitHint() }, "unit tests · no mount"),
+const TestingPipeline = (): Child =>
+  div({ class: home.pipeline() }, [
+    div({ class: cn(home.pipelineNode(), home.pipelineNodePrimary()) }, [
+      p({ class: home.pipelineLabel() }, "createModel"),
+      p({ class: home.pipelineHint() }, "unit · no mount"),
     ]),
-    span({ class: home.splitArrow(), "aria-hidden": "true" }, "→"),
-    div({ class: home.splitBox() }, [
-      p({ class: home.splitLabel() }, "createView"),
-      p({ class: home.splitHint() }, "stub VM · optional render"),
+    span({ class: home.pipelineArrow(), "aria-hidden": "true" }, "→"),
+    div({ class: home.pipelineNode() }, [
+      p({ class: home.pipelineLabel() }, "createView"),
+      p({ class: home.pipelineHint() }, "stub VM · optional"),
     ]),
   ]);
 
-const TestingCodePanels = (): Child =>
-  div({ class: home.codeStack() }, [
-    div({ class: home.codeStackGlow() }),
-    TestingSplitDiagram(),
-    ...testingCodePanels.map((panel) =>
-      div({ class: home.codePanel() }, [
-        div({ class: home.codeChrome() }, [
-          div({ class: home.codeDots() }, [
-            ...testingDotColors.map((color) => span({ class: cn(home.codeDot(), color) })),
-          ]),
-          span({ class: home.codeTitle() }, panel.file),
-          span({ class: home.codeBadge() }, panel.badge),
+const TestingCodeEditor = (vm: HomeVM): Child =>
+  div({ class: home.editor() }, [
+    div({ class: home.editorTabs() }, [
+      ...testingCodePanels.map((panel, index) =>
+        button(
+          {
+            type: "button",
+            class: () =>
+              cn(home.editorTab(), vm.isTestingPanelActive(index) && home.editorTabActive()),
+            onClick: () => vm.setTestingPanel(index),
+          },
+          panel.label,
+        ),
+      ),
+    ]),
+    () => {
+      const panel = vm.activeTestingPanel();
+      return [
+        div({ class: home.editorChrome() }, [
+          div({ class: home.editorDots() }, codeDots()),
+          span({ class: home.editorTitle() }, panel.file),
+          span({ class: home.editorBadge() }, panel.badge),
         ]),
-        div({ class: home.codeBody() }, [
+        div({ class: home.editorBody() }, [
           CodeBlock({ language: panel.lang, code: panel.code, bare: true }),
         ]),
-        p({ class: home.codeFoot() }, panel.caption),
-      ]),
-    ),
+        p({ class: home.editorFoot() }, panel.caption),
+      ];
+    },
   ]);
 
-export const HomeTestingBridgeView = createView(
-  (_vm: void): Child =>
-    div({ class: home.bridge() }, [
-      p({ class: home.bridgeText() }, [
-        "EchoJS splits ",
-        span({ class: cn("font-medium text-fg") }, "state and behavior"),
-        " from ",
-        span({ class: cn("font-medium text-fg") }, "markup"),
-        " at every layer. That is not ceremony — it is what makes testing straightforward: exercise the model as a plain object, mount the view only when the DOM matters.",
-      ]),
-      NavLink({
-        to: docPageByContentId["architecture/models"]!,
-        class: home.bridgeLink(),
-        children: ["Models & views", span(null, "→")],
-      }),
-    ]),
-  "HomeTestingBridgeView",
-);
-
 export const HomeTestingView = createView(
-  (_vm: void): Child =>
-    div(null, [
-      HomeTestingBridgeView(),
-      div({ class: home.grid() }, [
-        div({ class: home.advantages() }, [
-          ...testingAdvantages.map((item, index) =>
-            NavLink({
-              to: docPageByContentId[item.docId]!,
-              class: home.advantageCard(),
-              children: [
-                span({ class: home.advantageIcon() }, advantageNumbers[index] ?? "•"),
-                p({ class: home.advantageTitle() }, item.title),
-                p({ class: home.advantageSummary() }, item.summary),
-                p({ class: home.advantageHighlight() }, item.highlight),
-                span({ class: home.advantageLink() }, ["Read more", span(null, "→")]),
-              ],
-            }),
-          ),
+  (vm: HomeVM): Child =>
+    div({ class: home.shell() }, [
+      div({ class: home.shellGlow() }),
+      div({ class: home.shellGlowRight() }),
+      div({ class: home.bridge() }, [
+        p({ class: home.bridgeText() }, [
+          "EchoJS splits ",
+          span({ class: cn("font-medium text-fg") }, "state and behavior"),
+          " from ",
+          span({ class: cn("font-medium text-fg") }, "markup"),
+          " at every layer — exercise the model as a plain object, mount the view only when the DOM matters.",
         ]),
-        TestingCodePanels(),
+        NavLink({
+          to: docPageByContentId["architecture/models"]!,
+          class: home.bridgeLink(),
+          children: ["Models & views", span(null, "→")],
+        }),
+      ]),
+      div({ class: home.grid() }, [
+        div({ class: home.leftCol() }, [
+          div({ class: home.pills() }, [
+            ...testingHighlights.map((label) => span({ class: home.pill() }, label)),
+          ]),
+          div({ class: home.advantages() }, [
+            ...testingAdvantages.map((item) =>
+              NavLink({
+                to: docPageByContentId[item.docId]!,
+                class: home.advantageCard(),
+                children: [
+                  div({ class: home.advantageTopLine() }),
+                  div({ class: home.advantageHead() }, [
+                    span({ class: home.advantageIcon() }, item.icon),
+                    p({ class: home.advantageTitle() }, item.title),
+                  ]),
+                  p({ class: home.advantageSummary() }, item.summary),
+                  p({ class: home.advantageHighlight() }, item.highlight),
+                  span({ class: home.advantageLink() }, ["Read more", span(null, "→")]),
+                ],
+              }),
+            ),
+          ]),
+        ]),
+        div({ class: home.rightCol() }, [TestingPipeline(), TestingCodeEditor(vm)]),
       ]),
     ]),
   "HomeTestingView",

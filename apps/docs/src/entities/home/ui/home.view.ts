@@ -13,11 +13,9 @@ import {
   HomePhilosophyPrinciplesView,
 } from "@entities/home/ui/home-philosophy-principles.view.js";
 import { heroPills, homeStats } from "@entities/home/constants/home-landing.data.js";
-import { ecosystemPackages } from "@widgets/ecosystem/constants/ecosystem-packages.js";
 import { homeButtonStyles } from "@entities/home/ui/home-button.styles.js";
-import { HomeFrameworkStrengthView } from "@entities/home/ui/home-framework-strength.view.js";
 import { homeStyles } from "@entities/home/ui/home.view.styles.js";
-import { EcosystemPackageCard } from "@widgets/ecosystem/index.js";
+import { EcosystemSection } from "@widgets/ecosystem/index.js";
 import { FrameworkComparisonSection } from "@widgets/framework-comparison/index.js";
 import { HomeFooter } from "@widgets/home-shell/index.js";
 import { HomeHeader } from "@widgets/home-shell/home-header.js";
@@ -119,7 +117,7 @@ export const HomeView = createView((vm: HomeVM): Child => {
                 "Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.",
               ]),
             ]),
-            HomeTestingView(),
+            HomeTestingView(vm),
           ]),
         ]),
 
@@ -132,9 +130,7 @@ export const HomeView = createView((vm: HomeVM): Child => {
                 "Adopt incrementally — each package solves one problem and plugs in through providers.",
               ]),
             ]),
-            div({ class: home.ecosystemGrid() }, [
-              ...ecosystemPackages.map((pkg) => EcosystemPackageCard(pkg)),
-            ]),
+            EcosystemSection(),
           ]),
         ]),
 
@@ -157,29 +153,6 @@ export const HomeView = createView((vm: HomeVM): Child => {
               ]),
             ]),
             FrameworkComparisonSection(),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.archGrid() }, [
-              div({ class: home.archContent() }, [
-                p({ class: home.sectionEyebrow() }, "Runtime"),
-                h2({ class: home.archTitle() }, "Surgical updates, not tree diffs"),
-                p({ class: home.archBody() }, [
-                  "Signals track exactly what your UI depends on. HyperDOM updates only the nodes that changed — no virtual tree, no reconciliation pass, predictable cost as apps grow.",
-                ]),
-                NavLink({
-                  to: docPageByContentId["packages/reactivity"]!,
-                  class: home.archLink(),
-                  children: [
-                    "Explore signals & HyperDOM",
-                    span({ class: home.archLinkArrow() }, "→"),
-                  ],
-                }),
-              ]),
-              HomeFrameworkStrengthView(),
-            ]),
           ]),
         ]),
 

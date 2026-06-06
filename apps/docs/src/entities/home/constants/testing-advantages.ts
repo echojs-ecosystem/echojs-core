@@ -2,6 +2,7 @@ import type { ContentId } from "@core/content/types.js";
 
 export type TestingAdvantage = {
   id: string;
+  icon: string;
   title: string;
   summary: string;
   highlight: string;
@@ -44,10 +45,13 @@ describe("CounterView", () => {
   })
 })`;
 
+export const testingHighlights = ["Vitest", "TypeScript", "No provider maze"] as const;
+
 /** Landing-page digest — why model/view split makes testing straightforward. */
 export const testingAdvantages: TestingAdvantage[] = [
   {
     id: "model-first",
+    icon: "⚡",
     title: "Test models without mounting",
     summary:
       "Models are plain factories — call createXModel(), invoke actions, assert on accessors. No jsdom tree, no wrapper providers, no render cycle.",
@@ -56,6 +60,7 @@ export const testingAdvantages: TestingAdvantage[] = [
   },
   {
     id: "thin-views",
+    icon: "◫",
     title: "Views map VM → markup",
     summary:
       "createView receives a narrow VM and returns HyperDOM. Behavior stays in the model; views stay declarative and easy to snapshot.",
@@ -64,6 +69,7 @@ export const testingAdvantages: TestingAdvantage[] = [
   },
   {
     id: "one-playbook",
+    icon: "▦",
     title: "Same split at every layer",
     summary:
       "Pages, widgets, and features all use createModel + createView. One testing playbook from a counter to a full checkout flow.",
@@ -72,6 +78,7 @@ export const testingAdvantages: TestingAdvantage[] = [
   },
   {
     id: "mock-vm",
+    icon: "⎘",
     title: "Mock the VM, not the framework",
     summary:
       "Pass a stub VM into views for integration tests. Stub queries and stores at the model boundary — not inside HyperDOM.",

@@ -5,6 +5,7 @@ import { docPageByContentId } from "@app/router/doc-pages.js";
 import { homePage } from "@app/router/page-links.js";
 import { headerIconBtnStyles } from "@widgets/site-header/ui/site-header.view.styles.js";
 import { GitHubIcon } from "@widgets/icons/github-icon.js";
+import { EchoBrandLogo } from "@widgets/icons/echo-brand-logo.js";
 import { MenuIcon } from "@widgets/icons/menu-icon.js";
 import { DocsSearch } from "@widgets/search/index.js";
 import { LocaleDropdown } from "@widgets/locale-dropdown/index.js";
@@ -33,7 +34,7 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
         to: homePage,
         class: hdr().brand(),
         children: [
-          div({ class: hdr().logo() }, "◉"),
+          div({ class: hdr().logo() }, [EchoBrandLogo({ className: hdr().logoMark() })]),
           div(null, [
             p({ class: hdr().brandName() }, "EchoJS"),
             p({ class: hdr().brandTag() }, "Documentation"),

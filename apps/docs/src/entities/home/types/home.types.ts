@@ -1,3 +1,5 @@
+import type { TestingCodePanel } from "@entities/home/constants/testing-advantages.js";
+
 export type CompareTone = "muted" | "accent";
 
 export type CompareCardData = {
@@ -21,6 +23,9 @@ export type HomeVM = {
   activeCodeTab: () => CodeTab;
   setCodeTab: (index: number) => void;
   isCodeTabActive: (index: number) => boolean;
+  activeTestingPanel: () => TestingCodePanel;
+  setTestingPanel: (index: number) => void;
+  isTestingPanelActive: (index: number) => boolean;
 };
 
 export type CompareCardViewProps = {

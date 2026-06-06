@@ -5,8 +5,12 @@ export const homeHeaderStyles = tv({
     root: "sticky top-0 z-50 border-b border-transparent bg-transparent shadow-none",
     inner: "flex w-full min-w-0 items-center gap-2 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4",
     brand: "flex min-w-0 items-center gap-2 sm:gap-2.5",
-    logo:
-      "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-echo-500 text-sm font-bold text-stone-950 shadow-md shadow-echo-600/20 ring-1 ring-echo-600/30",
+    logo: [
+      "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
+      "bg-gradient-to-br from-echo-500/25 to-echo-600/10 ring-1 ring-echo-500/25",
+      "dark:from-echo-500/20 dark:to-echo-900/40 dark:ring-echo-500/30",
+    ].join(" "),
+    logoMark: "h-6 w-6",
     brandName: "truncate text-base font-bold tracking-tight text-fg",
     brandTag: "hidden text-xs text-fg-subtle sm:block",
     menuBtn: "shrink-0 lg:hidden",

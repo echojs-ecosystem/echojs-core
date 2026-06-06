@@ -6,6 +6,7 @@ export type EcosystemPackage = {
   description: string;
   contentId: ContentId;
   icon: string;
+  featured?: boolean;
 };
 
 export const ecosystemPackages: EcosystemPackage[] = [
@@ -29,6 +30,7 @@ export const ecosystemPackages: EcosystemPackage[] = [
     description: "App bootstrap, providers, and composition root.",
     contentId: "packages/framework",
     icon: "◎",
+    featured: true,
   },
   {
     name: "@echojs-ecosystem/router",
@@ -101,3 +103,7 @@ export const ecosystemPackages: EcosystemPackage[] = [
     icon: "🏛",
   },
 ];
+
+export const ecosystemFrameworkPackage = ecosystemPackages.find((pkg) => pkg.featured)!;
+
+export const ecosystemModulePackages = ecosystemPackages.filter((pkg) => !pkg.featured);
