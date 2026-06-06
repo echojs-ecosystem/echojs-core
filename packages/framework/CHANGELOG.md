@@ -1,5 +1,26 @@
 # @echojs-ecosystem/framework
 
+## 0.4.0
+
+### Minor Changes
+
+- Release 0.4.0 — bun publish pipeline, npm install fixes, and ecosystem updates.
+
+### Patch Changes
+
+- @echojs-ecosystem/reactivity@0.4.0
+- @echojs-ecosystem/core@0.4.0
+- @echojs-ecosystem/hyperdom@0.4.0
+- @echojs-ecosystem/router@0.4.0
+- @echojs-ecosystem/form@0.4.0
+- @echojs-ecosystem/persist@0.4.0
+- @echojs-ecosystem/store@0.4.0
+- @echojs-ecosystem/query@0.4.0
+- @echojs-ecosystem/url-state@0.4.0
+- @echojs-ecosystem/i18n@0.4.0
+- @echojs-ecosystem/ui@0.4.0
+- @echojs-ecosystem/devtools@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

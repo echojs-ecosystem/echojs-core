@@ -7,6 +7,7 @@ import { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.
 import { HomeCtaView } from "@entities/home/ui/home-cta.view.js";
 import { HomeHeroCodeWindowView } from "@entities/home/ui/home-hero-code-window.view.js";
 import { HomeArchitectureView } from "@entities/home/ui/home-architecture.view.js";
+import { HomeTestingView } from "@entities/home/ui/home-testing.view.js";
 import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
@@ -106,6 +107,19 @@ export const HomeView = createView((vm: HomeVM): Child => {
               ]),
             ]),
             HomeArchitectureView(),
+          ]),
+        ]),
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, "Testing"),
+              h2({ class: home.sectionTitle() }, "Easy to test — models and views stay separate"),
+              p({ class: home.sectionLead() }, [
+                "Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.",
+              ]),
+            ]),
+            HomeTestingView(),
           ]),
         ]),
 

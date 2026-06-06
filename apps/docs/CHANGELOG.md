@@ -1,5 +1,12 @@
 # @echojs-ecosystem/docs
 
+## 0.3.1
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/framework@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

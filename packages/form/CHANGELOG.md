@@ -1,5 +1,12 @@
 # @echojs-ecosystem/form
 
+## 0.4.0
+
+### Patch Changes
+
+- @echojs-ecosystem/reactivity@0.4.0
+- @echojs-ecosystem/persist@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

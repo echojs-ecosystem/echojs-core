@@ -1,5 +1,11 @@
 # @echojs-ecosystem/ui
 
+## 0.4.0
+
+### Patch Changes
+
+- @echojs-ecosystem/hyperdom@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes

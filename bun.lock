@@ -20,7 +20,7 @@
     },
     "apps/docs": {
       "name": "@echojs-ecosystem/docs",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/framework": "workspace:*",
         "shiki": "^3.4.0",
@@ -69,7 +69,7 @@
     },
     "packages/architect": {
       "name": "@echojs-ecosystem/architect",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "bin": {
         "echo-architect": "./dist/cli/index.js",
       },
@@ -103,7 +103,7 @@
     },
     "packages/core": {
       "name": "@echojs-ecosystem/core",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -117,7 +117,7 @@
     },
     "packages/devtools": {
       "name": "@echojs-ecosystem/devtools",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
         "typescript": "5.9.2",
@@ -126,7 +126,7 @@
     },
     "packages/form": {
       "name": "@echojs-ecosystem/form",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/persist": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
@@ -141,7 +141,7 @@
     },
     "packages/framework": {
       "name": "@echojs-ecosystem/framework",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/core": "workspace:*",
         "@echojs-ecosystem/devtools": "workspace:*",
@@ -164,7 +164,7 @@
     },
     "packages/hyperdom": {
       "name": "@echojs-ecosystem/hyperdom",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -177,7 +177,7 @@
     },
     "packages/i18n": {
       "name": "@echojs-ecosystem/i18n",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -189,7 +189,7 @@
     },
     "packages/persist": {
       "name": "@echojs-ecosystem/persist",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -204,7 +204,7 @@
     },
     "packages/query": {
       "name": "@echojs-ecosystem/query",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -217,7 +217,7 @@
     },
     "packages/reactivity": {
       "name": "@echojs-ecosystem/reactivity",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "alien-signals": "^3.1.2",
       },
@@ -230,7 +230,7 @@
     },
     "packages/router": {
       "name": "@echojs-ecosystem/router",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/hyperdom": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
@@ -247,7 +247,7 @@
     },
     "packages/store": {
       "name": "@echojs-ecosystem/store",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -259,7 +259,7 @@
     },
     "packages/ui": {
       "name": "@echojs-ecosystem/ui",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/hyperdom": "workspace:*",
       },
@@ -281,7 +281,7 @@
     },
     "packages/url-state": {
       "name": "@echojs-ecosystem/url-state",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
