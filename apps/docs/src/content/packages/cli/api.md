@@ -1,21 +1,31 @@
 ---
 title: API Reference
-description: @echojs-ecosystem/cli programmatic API — coming soon.
+description: @echojs-ecosystem/cli commands and programmatic API (planned).
 package: "@echojs-ecosystem/cli"
-status: draft
 ---
 
 # API Reference
 
-> [!NOTE]
-> **Программный API CLI не определён.** Возможен экспорт для CI (`echojs doctor --json`).
+> [!warning]
+> **CLI commands and programmatic API are not implemented.** This page documents the target surface for the first release.
 
-## Planned content
+## Planned commands
 
-- CLI flags reference
-- Config file (`echojs.config.ts`)
-- Exit codes for CI
+| Command | Status | Description |
+| --- | --- | --- |
+| [create](/docs/packages/cli/api/create) | **planned** | Scaffold a new EchoJS app |
+| [generate](/docs/packages/cli/api/generate) | **planned** | Generate feature slices |
+| `doctor` | **planned** | Validate feature-first layout |
 
-## See also
+## Planned programmatic API
 
-- [CLI overview](/docs/packages/cli)
+| Export | Status | Description |
+| --- | --- | --- |
+| CLI flags reference | **planned** | `--json`, `--cwd`, … |
+| `echojs.config.ts` | **planned** | Project-level CLI config |
+| CI exit codes | **planned** | `doctor --json` for pipelines |
+
+## Guides
+
+- [Overview](/docs/packages/cli/guides/overview)
+- [Planned Commands](/docs/packages/cli/guides/planned-commands)

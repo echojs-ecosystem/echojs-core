@@ -1,29 +1,27 @@
 ---
-title: Example
-description: DevTools examples — coming soon.
+title: Examples
+description: Local debug with the DevTools registry and timeline.
 package: "@echojs-ecosystem/devtools"
-status: draft
 ---
 
-# Example — DevTools
+# Examples
 
-> [!NOTE]
-> Пакет `@echojs-ecosystem/devtools` ещё не в monorepo. Примеры появятся вместе с первым релизом.
+Patterns for inspecting runtime state during development. Browser overlay UI is **planned** — examples use the registry and timeline APIs available today.
+
+## Pick an example
+
+| Example | Teaches |
+| --- | --- |
+| [Local Debug](/docs/packages/devtools/examples/local-debug) | Enable devtools, register a node, subscribe to timeline |
 
 ## Planned examples
 
-```ts
-// draft — not implemented
-import { createDevtoolsProvider } from "@echojs-ecosystem/devtools";
+When the overlay ships, examples will cover:
 
-createEchoApp({ strictContextChecks: true })
-  .use(devtoolsProvider)
-  .mount("#app");
-```
+- `createDevtoolsProvider` in `createEchoApp().use(devtoolsProvider)`
+- Inspecting active queries, route chain, and signal dependencies
 
-Планируется: overlay, просмотр signals / query cache / active routes.
+## Related
 
-## See also
-
-- [DevTools overview](/docs/packages/devtools)
-- Reactivity Example — `/docs/packages/reactivity/example`
+- [Registry & Timeline](/docs/packages/devtools/guides/registry)
+- [Playground](/docs/packages/devtools/playground)

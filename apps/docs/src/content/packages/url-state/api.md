@@ -1,46 +1,43 @@
 ---
 title: API Reference
-description: Public exports from @echojs-ecosystem/url-state.
+description: Complete @echojs-ecosystem/url-state public API index.
 package: "@echojs-ecosystem/url-state"
 ---
 
 # API Reference
 
+Public exports from `@echojs-ecosystem/url-state`:
+
+```ts
+import {
+  createQueryParam,
+  createQueryParams,
+  parseAsString,
+  parseAsInteger,
+  createBrowserUrlStateAdapter,
+  createMemoryUrlStateAdapter,
+  debounce,
+} from "@echojs-ecosystem/url-state";
+```
+
 ## Factories
 
 | Export | Description |
 | --- | --- |
-| `createQueryParam(name, parser, options?)` | Single search param state |
-| `createQueryParams(schema, options?)` | Object of params |
+| [createQueryParams](/docs/packages/url-state/api/create-query-params) | Object of typed search params |
+| `createQueryParam(name, parser, options?)` | Single search param |
 
 ## Parsers
 
 | Export | Description |
 | --- | --- |
-| `parseAsString` | string |
-| `parseAsInteger` / `parseAsFloat` | numbers |
-| `parseAsBoolean` | boolean |
-| `parseAsLiteral` | const tuple union |
-| `parseAsStringLiteral` / `parseAsNumberLiteral` | literal unions |
-| `parseAsArrayOf(parser)` | array (multi-key or separator) |
-| `parseAsNativeArrayOf(parser)` | `?k=a&k=b` |
-| `parseAsJson(schema?)` | JSON + Standard Schema |
-| `parseAsIsoDate` / `parseAsTimestamp` | date types |
-| `createCustomParser(config)` | Custom single parser |
-| `createCustomMultiParser(config)` | Repeated keys |
-| `isMultiParser(parser)` | Type guard |
-
-Parser methods: `.withDefault(value)`, `.withOptions(partial)`.
+| [parseAs*](/docs/packages/url-state/api/parsers) | Built-in and custom parsers |
 
 ## Adapters
 
 | Export | Description |
 | --- | --- |
-| `createBrowserUrlStateAdapter()` | `window` history |
-| `createMemoryUrlStateAdapter(initialSearch?)` | Tests |
-| `createRouterUrlStateAdapter(router)` | Router-backed |
-| `attachRouterQueryParams(router)` | Adds `router.createQueryParams` |
-| `getUrlStateRouter()` | Registered router |
+| [Adapters](/docs/packages/url-state/api/adapters) | Browser, memory, router adapters |
 
 ## Utilities
 
@@ -49,41 +46,16 @@ Parser methods: `.withDefault(value)`, `.withOptions(partial)`.
 | `debounce(ms)` | Limit URL update rate |
 | `throttle(ms)` | Throttle URL updates |
 
-## `QueryParamState` / group (typical)
-
-| Member | Description |
-| --- | --- |
-| `value()` | Parsed value(s) |
-| `set(value, options?)` | Write URL |
-| `update(fn, options?)` | Functional update |
-| `reset(options?)` | Defaults |
-| `clear(options?)` | Remove from URL (group) |
-
-## `QueryStateSetOptions`
-
-| Field | Type |
-| --- | --- |
-| `adapter` | `UrlStateAdapter` |
-| `history` | `"push"` \| `"replace"` |
-| `shallow` | `boolean` |
-| `scroll` | `boolean` |
-| `defaultVisibility` | `"hide"` \| `"show"` |
-| `limitUrlUpdates` | debounce/throttle/false |
-| `equals` | custom equality |
-
-## `CreateQueryParamsOptions`
-
-Extends set options with:
-
-| Field | Description |
-| --- | --- |
-| `urlKeys` | Map schema key → URL key name |
-
 ## Types
 
-`Parser`, `ParserWithDefault`, `MultiParser`, `QueryParamParser`, `QueryParamState`, `QueryParamsState`, `UrlStateAdapter`, `QueryStateOptions`, `DefaultVisibility`, `RouterBoundQueryParams`, `RouterWithQueryParams`, `CustomParserConfig`, `CustomMultiParserConfig`, `JsonSchema`, `StandardSchemaLike`, …
+| Export | Description |
+| --- | --- |
+| [Types](/docs/packages/url-state/api/types) | Parser, adapter, and state types |
 
-## Related
+## Guides
 
-- Usage — `/docs/packages/url-state/usage`
-- Overview — `/docs/packages/url-state`
+Conceptual docs live under [Guides & Concepts](/docs/packages/url-state/guides/important-defaults):
+
+- [Important Defaults](/docs/packages/url-state/guides/important-defaults)
+- [Parsers](/docs/packages/url-state/guides/parsers)
+- [createQueryParams](/docs/packages/url-state/guides/query-params)

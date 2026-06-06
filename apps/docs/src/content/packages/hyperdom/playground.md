@@ -8,4 +8,4 @@ Interact with **@echojs-ecosystem/hyperdom** in the panel below. Buttons and inp
 
 :::playground hyperdom
 
-**Example** page has copy-paste source — [Example](/docs/packages/hyperdom/example).
+**Examples** have copy-paste source — [Examples](/docs/packages/hyperdom/example).

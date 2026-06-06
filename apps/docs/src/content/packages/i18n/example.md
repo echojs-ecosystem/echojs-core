@@ -1,95 +1,23 @@
 ---
-title: Example
-description: i18n provider and locale switcher from apps/docs.
+title: Examples
+description: i18n provider, locale switcher, and plural messages from apps/docs.
 package: "@echojs-ecosystem/i18n"
 ---
 
-# Example — i18n
+# Examples
 
-## Provider (`apps/docs`)
+Patterns from the EchoJS docs app and example lab.
 
-```ts
-import { createI18nProvider } from "@echojs-ecosystem/i18n";
-import en from "../../../public/locales/en.json";
-import ru from "../../../public/locales/ru.json";
+## Pick an example
 
-export const i18nProvider = createI18nProvider({
-  fallbackLocale: "en",
-  locales: { en, ru },
-  storageKey: "echojs-docs-locale",
-  navigatorRules: [{ prefix: "ru", locale: "ru" }],
-  documentTitleKey: "shell.documentTitle",
-});
-
-export const i18n = i18nProvider.i18n;
-
-export type AppLocale = (typeof i18n.supportedLocales)[number];
-export const setAppLocale = (locale: AppLocale) => i18n.setLocale(locale);
-```
-
-```json
-// public/locales/en.json
-{
-  "shell": {
-    "documentTitle": "EchoJS Documentation",
-    "locale": "Language"
-  },
-  "locale": {
-    "en": "English",
-    "ru": "Русский"
-  }
-}
-```
-
-## HyperDOM view
-
-```ts
-import { i18n, setAppLocale } from "@core/providers/i18n.js";
-
-button({ onClick: () => void setAppLocale("ru") }, () => i18n.t("locale.ru"));
-span(null, () => i18n.t("shell.documentTitle"));
-```
-
-## Locale dropdown widget
-
-```ts
-// widgets/locale-dropdown/model/locale-dropdown.model.ts
-import { i18n, setAppLocale, type AppLocale } from "@core/providers/i18n.js";
-
-export const createLocaleDropdownModel = createModel(() => ({
-  locale: () => i18n.locale(),
-  options: () =>
-    i18n.supportedLocales.map((id) => ({
-      id,
-      label: i18n.t(`locale.${id}` as const),
-    })),
-  onSelect: (id: string) => void setAppLocale(id as AppLocale),
-}), "LocaleDropdownModel");
-```
-
-## Lazy locale
-
-```ts
-const i18n = createI18n({
-  defaultLocale: "en",
-  fallbackLocale: "en",
-  locales: {
-    en: () => import("./locales/en.json"),
-    ru: () => import("./locales/ru.json"),
-  },
-});
-```
-
-## Live app
-
-| Resource | Path |
+| Example | Teaches |
 | --- | --- |
-| Provider | `apps/docs/src/core/providers/i18n.ts` |
-| Locales | `apps/docs/public/locales/*.json` |
-| Switcher | `apps/docs/src/widgets/locale-dropdown/` |
-| Example lab | `apps/example` — counter uses `i18n.t("counter.title")` |
+| [Locale Switcher](/docs/packages/i18n/examples/locale-switcher) | HyperDOM dropdown + `setLocale` |
+| [Docs Locales](/docs/packages/i18n/examples/docs-locales) | Provider setup and JSON message trees |
+| [Plural Messages](/docs/packages/i18n/examples/plural-messages) | `Intl.PluralRules` buckets |
 
-## See also
+## Related
 
-- Usage — `/docs/packages/i18n/usage`
-- Framework Example — `/docs/packages/framework/example`
+- [Guides & Concepts](/docs/packages/i18n/guides/important-defaults)
+- [API Reference](/docs/packages/i18n/api)
+- [Framework With i18n](/docs/packages/framework/examples/with-i18n)

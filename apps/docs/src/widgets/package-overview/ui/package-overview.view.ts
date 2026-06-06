@@ -2,6 +2,7 @@ import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
 import { NavLink } from "@echojs-ecosystem/framework/router";
 import { div, h2, h3, p, span } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
+import { CodeBlock } from "@widgets/code-block/index.js";
 import {
   ecosystemPackages,
   type EcosystemPackage,
@@ -62,15 +63,41 @@ const OverviewBody = (data: PackageOverviewData): Child => {
       div({ class: ui.heroInner() }, [
         div({ class: ui.heroIconWrap() }, [span({ class: ui.heroIcon() }, data.icon)]),
         div({ class: ui.heroContent() }, [
+          data.id === "framework"
+            ? p({ class: ui.heroFeaturedBanner() }, "Recommended starting point")
+            : null,
           p({ class: ui.heroEyebrow() }, packageLabel),
+          data.heroTitle ? p({ class: ui.heroTitle() }, data.heroTitle) : null,
           p({ class: ui.heroHeadline() }, data.tagline),
           p({ class: ui.heroSummary() }, data.summary),
           div({ class: ui.pillRow() }, [
             ...data.pills.map((pill) => span({ class: ui.pill() }, pill)),
           ]),
+          NavLink({
+            to: docPageByContentId[`packages/${data.id}/installation`]!,
+            class: ui.importPathsLink(),
+            children: "Import paths → Installation",
+          }),
         ]),
       ]),
     ]),
+
+    data.whyCards && data.whyCards.length > 0
+      ? sectionBlock(data.whyTitle ?? "Why this package", () =>
+          div(null, [
+            data.whySubtitle ? p({ class: "mt-1 max-w-2xl text-sm text-fg-muted" }, data.whySubtitle) : null,
+            div({ class: ui.whyGrid() }, [
+              ...data.whyCards!.map((card) =>
+                div({ class: ui.whyCard() }, [
+                  span({ class: ui.whyCardIcon() }, card.icon),
+                  h3({ class: ui.whyCardTitle() }, card.title),
+                  p({ class: ui.whyCardBody() }, card.body),
+                ]),
+              ),
+            ]),
+          ]),
+        )
+      : null,
 
     sectionBlock("Core concepts", () =>
       div({ class: ui.pillarGrid() }, [
@@ -84,6 +111,34 @@ const OverviewBody = (data: PackageOverviewData): Child => {
         ),
       ]),
     ),
+
+    data.lifecycleSteps && data.lifecycleSteps.length > 0
+      ? sectionBlock(data.lifecycleTitle ?? "Lifecycle", () =>
+          div(null, [
+            data.lifecycleSubtitle
+              ? p({ class: "mt-1 max-w-2xl text-sm text-fg-muted" }, data.lifecycleSubtitle)
+              : null,
+            div({ class: ui.lifecycleGrid() }, [
+              ...data.lifecycleSteps!.map((step) =>
+                div({ class: ui.lifecycleCard() }, [
+                  span({ class: ui.lifecycleStep() }, step.step),
+                  p({ class: ui.lifecycleTitle() }, step.title),
+                  p({ class: ui.lifecycleBody() }, step.body),
+                ]),
+              ),
+            ]),
+          ]),
+        )
+      : null,
+
+    data.codeExample
+      ? sectionBlock(data.codeExample.title, () =>
+          div({ class: ui.codeSection() }, [
+            div({ class: ui.codeSectionTitle() }, data.codeExample!.language),
+            CodeBlock({ language: data.codeExample!.language, code: data.codeExample!.code }),
+          ]),
+        )
+      : null,
 
     div({ class: ui.twoCol() }, [
       ListSection({ title: "Use when", items: data.whenToUse }),

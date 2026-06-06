@@ -1,7 +1,10 @@
 import type { Child } from "@echojs-ecosystem/framework/hyperdom";
 import { span } from "@echojs-ecosystem/framework/hyperdom";
 import type { NavIconId } from "@core/content/nav-icon-id.js";
+import type { FrameworkNavIconId } from "@widgets/icons/framework-nav-icons.js";
 import { FRAMEWORK_NAV_ICON_SVGS } from "@widgets/icons/framework-nav-icons.js";
+import type { FrameworkId } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
+import { FrameworkLogo } from "@widgets/framework-comparison/ui/framework-logo.js";
 import { cn } from "@core/styles/cn.js";
 
 const stroke =
@@ -62,8 +65,27 @@ const NAV_ICON_SVGS: Record<NavIconId, string> = {
   ...FRAMEWORK_NAV_ICON_SVGS,
 };
 
-export const NavIcon = (id: NavIconId, className?: string): Child =>
-  span({
+const frameworkNavIconId: Record<FrameworkNavIconId, FrameworkId> = {
+  "fw-react": "react",
+  "fw-vue": "vue",
+  "fw-angular": "angular",
+  "fw-solid": "solid",
+  "fw-svelte": "svelte",
+};
+
+const isFrameworkNavIcon = (id: NavIconId): id is FrameworkNavIconId =>
+  id in frameworkNavIconId;
+
+export const NavIcon = (id: NavIconId, className?: string): Child => {
+  if (isFrameworkNavIcon(id)) {
+    return FrameworkLogo({
+      id: frameworkNavIconId[id],
+      className: cn("h-4 w-4", className),
+    });
+  }
+
+  return span({
     class: cn("inline-flex h-4 w-4 shrink-0 [&_svg]:h-full [&_svg]:w-full", className),
     ".innerHTML": NAV_ICON_SVGS[id],
   });
+};

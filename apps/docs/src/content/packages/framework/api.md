@@ -1,82 +1,52 @@
 ---
 title: API Reference
-description: Public exports from @echojs-ecosystem/framework/app.
+description: Complete @echojs-ecosystem/framework public API index.
 package: "@echojs-ecosystem/framework"
 ---
 
 # API Reference
 
-## `@echojs-ecosystem/framework/app`
+Public exports from `@echojs-ecosystem/framework/app`:
+
+```ts
+import {
+  createEchoApp,
+  defineAppRoot,
+  createProvider,
+  defineProvider,
+  definePlugin,
+  createPlugin,
+  ROUTER_KEY,
+  injectRouter,
+  isEchoRouter,
+} from "@echojs-ecosystem/framework/app";
+```
+
+## Functions
 
 | Export | Description |
 | --- | --- |
-| `createEchoApp(input?)` | Build app; overloads: none, `EchoRootSource`, `EchoAppOptions` |
-| `defineAppRoot(view)` | Normalize root view factory |
-| `createProvider(options)` | Provider factory with `install` / `setup` / `wrapRoot` |
-| `defineProvider` / `definePlugin` | Lower-level provider object |
-| `createPlugin` | Plugin-shaped provider |
-| `ROUTER_KEY` | Symbol for router DI |
-| `injectRouter(app)` | Get router from app context |
-| `isEchoRouter(value)` | Type guard for router instances |
+| [createEchoApp](/docs/packages/framework/api/create-echo-app) | Build app; overloads: none, `EchoRootSource`, `EchoAppOptions` |
+| [createProvider](/docs/packages/framework/api/create-provider) | Provider factory with `install` / `setup` / `wrapRoot` |
+| [provide / inject](/docs/packages/framework/api/provide-inject) | `ROUTER_KEY`, `injectRouter`, `isEchoRouter` |
 
-## `EchoApp`
+## App surface
 
-| Method | Description |
+| Export | Description |
 | --- | --- |
-| `use(provider)` | Register provider; chainable |
-| `provide(key, value)` | Store value on app |
-| `inject(key)` | Read provided value |
-| `has(key)` | Whether key was provided |
-| `mount(target)` | `string` selector or `Element`; returns `Promise<() => void>` |
+| [createEchoApp](/docs/packages/framework/api/create-echo-app) | `EchoApp` methods: `use`, `provide`, `inject`, `mount` |
+| [createProvider](/docs/packages/framework/api/create-provider) | `EchoProvider`, `CreateProviderOptions` |
 
-## `EchoAppOptions`
+## Barrel
 
-| Field | Type |
+| Export | Description |
 | --- | --- |
-| `view` | `() => Child` |
-| `strictContextChecks` | `boolean` |
-| `body` | `{ class?: string; id?: string }` |
-| `awaitProviders` | `boolean` (default `true`) |
+| [App Exports](/docs/packages/framework/api/app-exports) | Root `@echojs-ecosystem/framework` re-exports |
 
-## `EchoProvider`
+## Guides
 
-| Field | Description |
-| --- | --- |
-| `name` | Provider id (logging) |
-| `setup(app)` | Sync or async registration |
-| `resolveRoot?` | Return root `Child` (router) |
-| `wrapRoot?(inner)` | `(previous: () => Child) => () => Child` |
+Conceptual docs live under [Guides & Concepts](/docs/packages/framework/guides/important-defaults):
 
-## `CreateProviderOptions`
-
-| Field | Description |
-| --- | --- |
-| `name` | Required |
-| `install?` | `() => TInstance` at factory time |
-| `setup?` | `(app, instance) => void \| Promise<void>` |
-| `provideKey?` | Auto-provide instance |
-| `wrapRoot?` | Root wrapper |
-
-Returns `EchoProviderWithInstance<TInstance>` with `.instance`.
-
-## Types
-
-`EchoApp`, `EchoAppOptions`, `EchoBodyAttributes`, `EchoProvider`, `EchoProvideKey`, `EchoRootSource`, `EchoRouterSource`, `EchoUseInput`, `EchoPlugin`, `CreateProviderOptions`, `EchoProviderWithInstance`, `CreatePluginOptions`, `EchoPluginWithInstance`
-
-## Root barrel `@echojs-ecosystem/framework`
-
-Re-exports sub-packages for convenience (size-sensitive apps may import narrowly):
-
-| Module | Re-exports |
-| --- | --- |
-| `hyperdom` | HyperDOM surface |
-| `reactivity` | Signals |
-| `router` / `router-hyperdom` | Router |
-| `query`, `store`, `persist`, `url-state`, `ui`, `form` | Ecosystem packages |
-
-Prefer **`@echojs-ecosystem/framework/app`** in bootstrap; import feature packages directly in features.
-
-## Related
-
-- Usage — `/docs/packages/framework/usage`
-- Overview — `/docs/packages/framework`
+- [Important Defaults](/docs/packages/framework/guides/important-defaults)
+- [createEchoApp](/docs/packages/framework/guides/create-echo-app)
+- [Providers](/docs/packages/framework/guides/providers)

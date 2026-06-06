@@ -4,32 +4,9 @@ import { div, p, span } from "@echojs-ecosystem/framework/hyperdom";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { frameworkComparisonArticles } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
 import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
-import { NavIcon } from "@widgets/icons/nav-icons.js";
-import type { FrameworkNavIconId } from "@widgets/icons/framework-nav-icons.js";
+import { FrameworkLogo } from "@widgets/framework-comparison/ui/framework-logo.js";
 
 const cmp = frameworkComparisonStyles();
-
-const frameworkIconId: Record<
-  (typeof frameworkComparisonArticles)[number]["frameworkId"],
-  FrameworkNavIconId
-> = {
-  react: "fw-react",
-  vue: "fw-vue",
-  angular: "fw-angular",
-  solid: "fw-solid",
-  svelte: "fw-svelte",
-};
-
-const frameworkIconTone: Record<
-  (typeof frameworkComparisonArticles)[number]["frameworkId"],
-  string
-> = {
-  react: "text-[#61dafb]",
-  vue: "text-[#42b883]",
-  angular: "text-[#dd0031] dark:text-[#f5476a]",
-  solid: "text-[#4a7ab8] dark:text-[#6b9bd1]",
-  svelte: "text-[#ff6b3d]",
-};
 
 const frameworkShortName: Record<
   (typeof frameworkComparisonArticles)[number]["frameworkId"],
@@ -53,16 +30,13 @@ export const ComparisonGuideCardsView = createView(
           ]);
         }
 
-        const iconId = frameworkIconId[article.frameworkId];
-        const iconClass = frameworkIconTone[article.frameworkId];
-
         return NavLink({
           to: docPageByContentId[article.contentId]!,
           class: cmp.deepDiveCard(),
           children: [
             div({ class: cmp.deepDiveCardGlow() }),
             div({ class: cmp.deepDiveCardIconWrap() }, [
-              NavIcon(iconId, `${cmp.deepDiveCardIcon()} ${iconClass}`),
+              FrameworkLogo({ id: article.frameworkId, className: cmp.deepDiveCardIcon() }),
             ]),
             div({ class: cmp.deepDiveCardCopy() }, [
               p({ class: cmp.deepDiveCardEyebrow() }, [

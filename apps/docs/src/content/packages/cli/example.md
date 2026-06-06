@@ -1,35 +1,26 @@
 ---
-title: Example
-description: CLI usage examples — coming soon.
+title: Examples
+description: Planned CLI workflows for scaffolding EchoJS apps.
 package: "@echojs-ecosystem/cli"
-status: draft
 ---
 
-# Example — CLI
+# Examples
 
-> [!NOTE]
-> `@echojs-ecosystem/cli` в разработке. Ниже — целевые команды (не запускайте в production).
+> [!warning]
+> **`@echojs-ecosystem/cli` is in development.** Examples describe target workflows — do not run in production yet.
 
-## Planned workflow
+## Pick an example
 
-```bash
-# Create a new EchoJS app
-bunx @echojs-ecosystem/cli create my-shop
+| Example | Status | Teaches |
+| --- | --- | --- |
+| [Scaffold App](/docs/packages/cli/examples/scaffold-app) | **planned** | `create`, `generate`, `doctor` workflow |
 
-cd my-shop
-bun install
-bun run dev
-```
+## Interim reference
 
-```bash
-# Generate a feature slice
-bunx @echojs-ecosystem/cli generate feature product-catalog
+Use `apps/example` as the canonical EchoJS app layout until the CLI ships.
 
-# Validate feature-first layout
-bunx @echojs-ecosystem/cli doctor
-```
+## Related
 
-## See also
-
-- [CLI overview](/docs/packages/cli)
-- Project structure — `/docs/getting-started/project-structure`
+- [Planned Commands](/docs/packages/cli/guides/planned-commands)
+- [Project Structure](/docs/getting-started/project-structure)
+- [Architect](/docs/packages/architect) — lint feature-first layout today

@@ -6,7 +6,7 @@ keywords: [router, routes, NavLink, beforeLoad, layout, guard]
 
 # Routing
 
-EchoJS routing lives in `@echojs-ecosystem/router`: a typed route tree, signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). This guide focuses on **how to structure routes in a real app**; package details are in [Router usage](/docs/packages/router/usage).
+EchoJS routing lives in `@echojs-ecosystem/router`: a typed route tree, signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). This guide focuses on **how to structure routes in a real app**; package details are in [Router guides](/docs/packages/router/guides/route-trees).
 
 ## Mental model
 

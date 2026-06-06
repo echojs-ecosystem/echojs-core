@@ -1,37 +1,64 @@
 ---
 title: Installation
-description: Install @echojs-ecosystem/ui — documentation coming soon.
+description: Add @echojs-ecosystem/ui with HyperDOM peer dependency.
 package: "@echojs-ecosystem/ui"
-status: draft
 ---
 
 # Installation
 
-> [!NOTE]
-> **Документация в работе.** См. `packages/ui/README.md` для текущих шагов установки.
+UI components render through HyperDOM — install **both** packages.
 
-## Planned content
+## Import paths
 
-- `:::install @echojs-ecosystem/ui` и peer `@echojs-ecosystem/hyperdom`
-- Импорт CSS tokens (`@echojs-ecosystem/ui/theme` или глобальные tokens)
-- `createUiProvider()` в `createEchoApp().use(uiProvider)`
-- Subpath exports vs barrel
+| Path | When to use |
+| --- | --- |
+| `@echojs-ecosystem/ui` | Barrel import (tree-shaking via subpaths recommended) |
+| `@echojs-ecosystem/ui/button`, `/field`, `/provider`, … | Per-component subpath |
+| `@echojs-ecosystem/framework/ui` | You already use the framework meta-package |
 
-## Temporary install (monorepo)
-
-```bash
-bun add @echojs-ecosystem/ui @echojs-ecosystem/hyperdom
+```ts
+import { Button } from "@echojs-ecosystem/ui/button";
+import { createUiProvider } from "@echojs-ecosystem/ui/provider";
+// or: from "@echojs-ecosystem/framework/ui/..."
 ```
 
-```json
-{
-  "dependencies": {
-    "@echojs-ecosystem/ui": "workspace:*",
-    "@echojs-ecosystem/hyperdom": "workspace:*"
-  }
-}
+> [!note]
+> Full component docs are **expanding** — the [Playground](/docs/packages/ui/playground) shows a live Button demo today. See `packages/ui/README.md` and Storybook for the latest catalog.
+
+## Quick install
+
+:::install @echojs-ecosystem/ui
+
+:::install @echojs-ecosystem/hyperdom
+
+Or install the full framework once:
+
+:::install @echojs-ecosystem/framework
+
+## Register the provider
+
+```ts
+import { createUiProvider } from "@echojs-ecosystem/ui/provider";
+
+export const uiProvider = createUiProvider({
+  // theme overrides
+});
+
+createEchoApp({ strictContextChecks: true })
+  .use(uiProvider)
+  .mount("#app");
 ```
 
-## See also
+## Requirements
 
-- [UI overview](/docs/packages/ui)
+| Requirement | Notes |
+| --- | --- |
+| **HyperDOM** | Peer dependency — components return DOM nodes via `h()` |
+| **CSS tokens** | Import theme tokens from `@echojs-ecosystem/ui/theme` or global tokens |
+| **TypeScript** 5.x | Subpath exports ship `.d.ts` per component |
+
+## Next steps
+
+- [Important Defaults](/docs/packages/ui/guides/important-defaults) — subpaths, headless mode, a11y
+- [UIProvider & Theme](/docs/packages/ui/guides/ui-provider) — `createUiProvider` setup
+- [Examples](/docs/packages/ui/example) — Button and form row patterns

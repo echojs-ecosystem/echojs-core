@@ -1,12 +1,12 @@
 ---
 title: API Reference
-description: Public API for @echojs-ecosystem/hyperdom — render, h, DSL, controls, models, views.
+description: Complete @echojs-ecosystem/hyperdom public API index.
 package: "@echojs-ecosystem/hyperdom"
 ---
 
 # API Reference
 
-## Package entry `@echojs-ecosystem/hyperdom`
+Public exports from `@echojs-ecosystem/hyperdom`:
 
 ```ts
 import {
@@ -32,138 +32,64 @@ import {
 import type { Child, Props, Component } from "@echojs-ecosystem/hyperdom";
 ```
 
-Subpath:
+Lifecycle subpath:
 
 ```ts
 import { mount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
 ```
 
-(`mount` from main entry = app `render()` helper in `mount.ts`; lifecycle `mount` = on-mount child hook.)
+> [!NOTE]
+> `mount` on the main entry is the **app mount helper**. Lifecycle `mount` is the **on-insert child hook** — different APIs, same name.
 
-## `Child`
+## Core
 
-```ts
-type Child =
-  | string
-  | number
-  | boolean
-  | null
-  | undefined
-  | Node
-  | Child[]
-  | (() => Child);
-```
-
-## `h(tag, props?, children?, ...rest)`
-
-| `tag` | Behavior |
+| Export | Description |
 | --- | --- |
-| string | Intrinsic element (`"div"`, `"button"`, SVG tags, …) |
-| `Component` | Call function `(props) => Child` |
+| [h](/docs/packages/hyperdom/api/h) | Hyperscript — intrinsic elements and components |
+| [render](/docs/packages/hyperdom/api/render) | Mount a view into a container; returns `dispose` |
+| [mount](/docs/packages/hyperdom/api/mount) | App mount helper — `{ node, dispose }` |
 
-Convenience: `h("div", "text")` when second arg is not a props object.
+## Lifecycle
 
-Throws if `setStrictContextChecks(true)` and called outside view/render scope.
-
-## `render(view, container)`
-
-Returns `dispose(): void`.
-
-- Clears `container` (`textContent = ""`)
-- Mounts `view` under a cleanup scope
-- Activates reactive bindings in the tree
-
-## DSL tags
-
-Each export (`div`, `button`, `nav`, …) mirrors `h` with typed element props.
-
-Also exported: `h1`–`h6`, `p`, `form`, `input`, `table`, semantic sections, media tags, etc.
-
-## `Show(condition, then, else?)`
-
-| Param | Type |
+| Export | Description |
 | --- | --- |
-| `condition` | `() => boolean` |
-| `then` | `() => Child` |
-| `else` | optional `() => Child` |
+| [lifecycle/mount](/docs/packages/hyperdom/api/lifecycle-mount) | After-insert child hook with optional cleanup |
 
-Returns `() => Child` (dynamic region).
+## Model & view
 
-## `List(source, renderItem)`
-
-| Param | Type |
+| Export | Description |
 | --- | --- |
-| `source` | `{ value(): readonly T[] }` or `() => readonly T[]` |
-| `renderItem` | `(item: T, index: () => number) => Child` |
+| [createView](/docs/packages/hyperdom/api/create-view) | View factory with view context |
+| [createModel](/docs/packages/hyperdom/api/create-model) | Model factory with model context |
+| [createComponent](/docs/packages/hyperdom/api/create-component) | Bind model + view into `() => Child` |
 
-Returns `() => Child`.
+## Control flow
 
-## `createView(viewFn, name)`
-
-Returns `(vm) => Child` with `displayName`. Runs `viewFn` inside view context.
-
-## `createModel(factory, name)`
-
-Returns `() => VM` with `displayName`. Sets model context during factory execution.
-
-## `createComponent(modelFactory, viewFn, options?)`
-
-Returns `() => Child` — calls `modelFactory()` then `viewFn(vm)` once per invocation. Optional `options.name` sets `displayName`.
-
-With props, pass the bound factory: `createComponent(createFooModel(props), view)()` (where `createFooModel(props)` returns `() => VM`).
-
-## `createModel` / view guards
-
-| Export | Returns |
+| Export | Description |
 | --- | --- |
-| `isInModelContext()` | `true` while model factory runs |
-| `isInViewContext()` | `true` while view fn runs |
+| [Show](/docs/packages/hyperdom/api/show) | Conditional dynamic region |
+| [List](/docs/packages/hyperdom/api/list) | Collection dynamic region |
 
-## `setStrictContextChecks(enabled)` / `getStrictContextChecks()`
+## Context & helpers
 
-Toggle strict `h()` / lifecycle guardrails (default **true** in HyperDOM config module).
+| Export | Description |
+| --- | --- |
+| [Strict Context](/docs/packages/hyperdom/api/strict-context) | `setStrictContextChecks`, guards |
+| [DSL Tags](/docs/packages/hyperdom/api/dsl) | `div`, `button`, semantic tags, … |
+| [cx](/docs/packages/hyperdom/api/cx) | `cx`, `on`, `aria`, `data` helpers |
 
-## `cx(...classValues)`
+## Types
 
-Join class strings / conditional maps (tailwind-friendly).
+| Export | Description |
+| --- | --- |
+| [Types](/docs/packages/hyperdom/api/types) | `Child`, `Props`, `Component` |
 
-## `on` / `aria` / `data`
-
-Small prop bag helpers:
-
-- `on.click(fn)` → `{ onClick: fn }`
-- `aria.label("…")`, `aria.expanded(bool)`, …
-- `data.testid("…")`
-
-## `Props<E>` (intrinsic elements)
-
-Includes:
-
-- Standard attributes (reactive allowed via `() => value`)
-- `class` / `className` — `ClassValue`
-- `style` — string or object
-- `on*` — typed `currentTarget` per event
-- `data-*`, `aria-*`
-- `ref?: (el: E | null) => void`
-- Modifiers `.propName`, `^attrName`
-
-## `mount` (from `@echojs-ecosystem/hyperdom` index)
-
-**App mount helper** — same as `render` pattern: `mount(view, { container?, className? })` → `{ node, dispose }`.
-
-See `mount.ts` for standalone demos.
-
-## `mount` (from `@echojs-ecosystem/hyperdom/lifecycle/mount`)
-
-Lifecycle child: `mount(() => { …; return cleanup? })` inserted in the tree; runs after DOM insert.
-
-## Errors (common)
+## Common errors
 
 | Message | Cause |
 | --- | --- |
 | `h() called outside of view/render context` | Strict mode + UI built at module scope |
 | `mount() called outside of view/render context` | Lifecycle mount not inside a view |
-| `cleanup(fn) must be called inside scope()` | Reactivity cleanup misuse (see reactivity package) |
 
 ## Not in this package
 
@@ -171,7 +97,10 @@ Lifecycle child: `mount(() => { …; return cleanup? })` inserted in the tree; r
 - JSX compiler (planned separately)
 - Router (`@echojs-ecosystem/router/hyperdom`)
 
-## Related
+## Guides
 
-- Usage guide — `/docs/packages/hyperdom/usage`
-- Overview — `/docs/packages/hyperdom`
+Conceptual docs live under [Guides & Concepts](/docs/packages/hyperdom/guides/important-defaults):
+
+- [Important Defaults](/docs/packages/hyperdom/guides/important-defaults)
+- [Views & DSL](/docs/packages/hyperdom/guides/views-and-dsl)
+- [Models & Components](/docs/packages/hyperdom/guides/models-and-components)

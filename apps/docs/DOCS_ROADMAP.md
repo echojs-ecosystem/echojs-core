@@ -2,6 +2,10 @@
 
 Пошаговый план наполнения `apps/docs/src/content/`. Статусы: `[ ]` — заглушка, `[~]` — черновик, `[x]` — готово к ревью.
 
+Все пакеты используют **modern layout** (как reactivity): Overview → Installation → Guides & Concepts → API Reference → Examples → Playground.
+
+Конфиг страниц: `apps/docs/src/core/content/package-doc-config.ts`
+
 ## Этап 1 — Introduction & Getting Started
 
 | Страница | Статус |
@@ -24,97 +28,41 @@
 | `architecture/models` | [x] |
 | `architecture/dependency-flow` | [x] |
 
-## Этап 3 — Core packages
+## Этап 3 — Packages (modern layout)
 
-| Страница | Статус |
-|----------|--------|
-| `packages/reactivity` (overview) | [x] |
-| `packages/reactivity/installation` | [x] |
-| `packages/reactivity/usage` | [x] |
-| `packages/reactivity/api` | [x] |
-| `packages/hyperdom` (overview) | [x] |
-| `packages/hyperdom/installation` | [x] |
-| `packages/hyperdom/usage` | [x] |
-| `packages/hyperdom/api` | [x] |
-| `packages/framework` (overview) | [x] |
-| `packages/framework/installation` | [x] |
-| `packages/framework/usage` | [x] |
-| `packages/framework/api` | [x] |
-| `packages/router` (overview) | [x] |
-| `packages/router/installation` | [x] |
-| `packages/router/usage` | [x] |
-| `packages/router/api` | [x] |
-| `packages/store` (overview) | [x] |
-| `packages/store/installation` | [x] |
-| `packages/store/usage` | [x] |
-| `packages/store/api` | [x] |
-| `packages/query` (overview) | [x] |
-| `packages/query/installation` | [x] |
-| `packages/query/usage` | [x] |
-| `packages/query/api` | [x] |
-| `packages/url-state` (overview) | [x] |
-| `packages/url-state/installation` | [x] |
-| `packages/url-state/usage` | [x] |
-| `packages/url-state/api` | [x] |
-| `packages/persist` (overview) | [x] |
-| `packages/persist/installation` | [x] |
-| `packages/persist/usage` | [x] |
-| `packages/persist/api` | [x] |
+| Пакет | Статус |
+|-------|--------|
+| `reactivity` | [x] |
+| `hyperdom` | [x] |
+| `framework` | [x] |
+| `router` | [x] |
+| `store` | [x] |
+| `query` | [x] |
+| `url-state` | [x] |
+| `persist` | [x] |
+| `i18n` | [x] |
+| `ui` | [~] expanding |
+| `devtools` | [~] overlay planned |
+| `cli` | [~] planned |
+| `architect` | [x] |
 
-## Этап 4 — App packages
+Legacy `usage.md` удалены — контент в `guides/*`.
 
-Этап 4 закрыт: URL State + Persist (router/query/store — в этапе 3).
-
-## Этап 5 — UI & tooling
-
-| Страница | Статус |
-|----------|--------|
-| `packages/i18n` (overview) | [x] |
-| `packages/i18n/installation` | [x] |
-| `packages/i18n/usage` | [x] |
-| `packages/i18n/api` | [x] |
-| `packages/*/example` (все пакеты в sidebar) | [x] полные для core; [~] ui/devtools/cli |
-| `packages/*/playground` (интерактив + `:::playground`) | [x] core; [~] ui/devtools/cli stubs |
-| `packages/ui` (+ installation, usage, api) | [~] заглушки |
-| `packages/devtools` (+ installation, usage, api) | [~] заглушки |
-| `packages/cli` (+ installation, usage, api) | [~] заглушки |
-
-## Этап 6 — Guides
+## Этап 4 — Guides (site-level)
 
 | Страница | Статус |
 |----------|--------|
 | `guides/routing` | [x] |
-| `state/overview` | [x] |
-| `state/router-state` | [x] |
-| `state/form-state` | [x] |
-| `state/server-state` | [x] |
-| `state/url-state` | [x] |
-| `state/client-store` | [x] |
-| `state/local-ui-state` | [x] |
 | `guides/data-fetching` | [x] |
 | `guides/forms` | [x] |
 | `guides/authentication` | [x] |
 | `guides/internationalization` | [x] |
 | `guides/callouts` | [x] |
 
-Секция **Guides** — после Architecture, выше Packages. Секция **State Management** (`state/*`) — после Guides, выше Packages (`nav.ts`).
+## Этап 5 — State, comparisons, examples
 
-## Этап 7 — Examples
-
-Todo, dashboard, admin, e-commerce — по одному сценарию + ссылка на `apps/example`.
-
-## Этап 8 — Comparisons & API
-
-`comparisons/*` [x deep] (react, vue, angular, solid, svelte), `comparisons/index`, `api/index`.
-
-## For agents
-
-`agents/*` — поддерживать в актуальном состоянии при смене конвенций (см. `agents/agents.md`).
-
-## Live references
-
-| Ресурс | Путь |
-|--------|------|
-| Docs site (this app) | `apps/docs` |
-| Interactive lab | `apps/example` |
-| Package READMEs | `packages/*/README.md` |
+| Раздел | Статус |
+|--------|--------|
+| `state/*` | [x] |
+| `comparisons/*` | [x] |
+| `examples/*` | [~] |

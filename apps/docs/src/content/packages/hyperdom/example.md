@@ -1,70 +1,55 @@
 ---
-title: Example
-description: render, createView, createModel, and Show/List from EchoJS apps.
+title: Examples
+description: Practical @echojs-ecosystem/hyperdom patterns — counter, model+view, Show, List, docs article.
 package: "@echojs-ecosystem/hyperdom"
 ---
 
-# Example — HyperDOM
+# Examples
 
-## Minimal mount
+Focused, copy-paste patterns for real UI problems. Each example shows **view code** and, where relevant, **model glue** using EchoJS conventions.
 
-```ts
-import { render, div, button } from "@echojs-ecosystem/hyperdom";
-import { signal } from "@echojs-ecosystem/reactivity";
+> [!tip]
+> Try the interactive lab in the [Playground](/docs/packages/hyperdom/playground).
 
-const n = signal(0);
+## Pick an example
 
-const view = () =>
-  div(null, [
-    button({ onClick: () => n.update((x) => x + 1) }, () => `Count: ${n.value()}`),
-  ]);
+| Example | Teaches |
+| --- | --- |
+| [Counter](/docs/packages/hyperdom/examples/counter) | Minimal `render()` + reactive child |
+| [Model + View Counter](/docs/packages/hyperdom/examples/model-view-counter) | `createModel`, `createView`, `createComponent` |
+| [Conditional UI](/docs/packages/hyperdom/examples/conditional-ui) | `Show` for login/dashboard toggle |
+| [Todo List](/docs/packages/hyperdom/examples/todo-list) | `List` over a signal array |
+| [Doc Article](/docs/packages/hyperdom/examples/doc-article) | Props-bound component in the docs site |
+| [Lifecycle Mount](/docs/packages/hyperdom/examples/lifecycle-resize) | `ResizeObserver` with cleanup |
 
-const dispose = render(view, document.getElementById("app")!);
-// dispose() on teardown
-```
+## Shared component pattern
 
-## Model + view (example app)
-
-```ts
-import { createComponent } from "@echojs-ecosystem/hyperdom";
-import { createCounterModel, CounterView } from "@features/reactivity-counter/index.js";
-
-export const Counter = createComponent(createCounterModel, CounterView, { name: "Counter" });
-// page: view: () => Counter()
-```
+EchoJS features typically export a bound component:
 
 ```ts
-import { createView, Show, List } from "@echojs-ecosystem/hyperdom";
+export const Feature = createComponent(createFeatureModel, FeatureView, {
+  name: "Feature",
+});
 
-export const CounterView = createView((vm) =>
-  article(null, [
-    List(vm.$items, (item) => span(null, item)),
-    Show(() => vm.$count.value() > 0, () => p(null, "Positive")),
-  ]),
-  "CounterView",
-);
+// page route: view: () => Feature()
 ```
 
-## Docs site — doc article
+With props:
 
 ```ts
-import { createComponent } from "@echojs-ecosystem/hyperdom";
-import { createDocArticleModel, DocArticleView } from "@pages/doc/index.js";
-
-export const DocArticle = (props: { contentId: string }) =>
-  createComponent(createDocArticleModel(props), DocArticleView, { name: "DocArticle" })();
+export const Feature = (props: Props) =>
+  createComponent(createFeatureModel(props), FeatureView)();
 ```
 
-`createView` / `createModel` names enable **strict context checks** in dev.
-
-## Live app
+## Live source in the repo
 
 | Resource | Path |
 | --- | --- |
 | Counter + List + Show | `apps/example/src/features/reactivity-counter/` |
 | Docs pages | `apps/docs/src/pages/doc/` |
 
-## See also
+## Related
 
-- Usage — `/docs/packages/hyperdom/usage`
-- Framework Example — `/docs/packages/framework/example`
+- [Guides & Concepts](/docs/packages/hyperdom/guides/important-defaults)
+- [API Reference](/docs/packages/hyperdom/api)
+- [Reactivity Examples](/docs/packages/reactivity/example)

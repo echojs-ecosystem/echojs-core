@@ -93,6 +93,6 @@ If marketing wants `?utm=...` tracked, URL state or router query — not a hidde
 ## Related
 
 - [State overview](/docs/state/overview)
-- [Store package](/docs/packages/store/usage)
-- [Persist package](/docs/packages/persist/usage)
+- [Store package](/docs/packages/store/guides/creating-stores)
+- [Persist package](/docs/packages/persist/guides/storage-adapters)
 - Example session — `apps/example/src/entities/session/auth-store.ts`

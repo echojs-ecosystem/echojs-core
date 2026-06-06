@@ -1,91 +1,42 @@
 ---
 title: API Reference
-description: Public exports from @echojs-ecosystem/persist.
+description: Complete @echojs-ecosystem/persist public API index.
 package: "@echojs-ecosystem/persist"
 ---
 
 # API Reference
 
+Public exports from `@echojs-ecosystem/persist`:
+
+```ts
+import {
+  withLocalStorage,
+  withSessionStorage,
+  withCookie,
+  withIndexedDB,
+  withMemoryStorage,
+  withStorage,
+  persist,
+  persistField,
+  persistFieldArray,
+} from "@echojs-ecosystem/persist";
+```
+
 ## Extensions
 
 | Export | Description |
 | --- | --- |
-| `withLocalStorage(options)` | `localStorage` adapter |
-| `withSessionStorage(options)` | `sessionStorage` |
-| `withCookie(options)` | Cookie adapter + cookie fields |
-| `withIndexedDB(options)` | IndexedDB KV |
-| `withMemoryStorage(options)` | In-memory |
-| `withStorage(adapter, options)` | Generic `StorageAdapter` |
-
-## Helpers
-
-| Export | Description |
-| --- | --- |
-| `persist(target, extension)` | Attach without store `.extend()` |
-| `persistField` / `persistFieldArray` | Form-field aliases |
-
-## Adapters (low-level)
-
-| Export | Description |
-| --- | --- |
-| `createLocalStorageAdapter()` | Browser localStorage |
-| `createSessionStorageAdapter()` | sessionStorage |
-| `createCookieStorageAdapter()` | Cookies |
-| `createIndexedDBStorageAdapter()` | IndexedDB |
-| `createMemoryStorageAdapter()` | Memory |
-
-## Serialization
-
-| Export | Description |
-| --- | --- |
-| `jsonSerializer` | Default JSON serializer |
-| `createJsonSerializer()` | Factory |
-| `createPersistRecord(snapshot, options)` | Build record envelope |
-| `isRecordExpired(record)` | TTL check |
-
-## `PersistOptions` (common)
-
-| Field | Description |
-| --- | --- |
-| `key` | Storage key (required) |
-| `version` | Schema version for migration |
-| `ttl` | Ms until expiry |
-| `hydrate` | Auto-hydrate on attach (default true) |
-| `saveInitial` | Persist initial value immediately |
-| `debounce` | Debounce ms for auto-save |
-| `syncTabs` | localStorage cross-tab sync |
-| `serializer` | Custom `PersistRecord` serializer |
-| `select` / `merge` | Partial snapshot read/write |
-| `migrate` | `(ctx) => Snapshot` |
-| `validate` | Type guard for hydrated data |
-| `onHydrate` / `onSave` / `onError` | Hooks |
-
-## `CookiePersistOptions` extras
-
-`path`, `domain`, `sameSite`, `secure`, `maxAge`
-
-## `IndexedDBPersistOptions` extras
-
-`dbName`, `storeName`, …
-
-## `PersistController`
-
-| Member | Description |
-| --- | --- |
-| `key` | Storage key |
-| `hydrate()` | Load into target |
-| `save()` | Write current value |
-| `clear()` | Remove storage entry |
-| `pause()` / `resume()` | Toggle auto persistence |
-| `$hydrated` | Hydration completed |
-| `$pending` | Async op in flight |
-| `$error` | Last error |
+| [withStorage](/docs/packages/persist/api/with-storage) | Store extensions and `persist()` helper |
+| [Adapters](/docs/packages/persist/api/adapters) | Low-level `create*Adapter` factories |
+| [Serializers](/docs/packages/persist/api/serializers) | JSON serializer and persist record envelope |
+| [Persist Controller](/docs/packages/persist/api/persist-controller) | `hydrate`, `save`, `clear`, status signals |
 
 ## Types
 
-`Persistable`, `PersistOptions`, `PersistRecord`, `PersistExtension`, `PersistExtensionResult`, `PersistController`, `StorageAdapter`, `Serializer`, `MigrateContext`, `CookiePersistOptions`, `IndexedDBPersistOptions`, …
+`Persistable`, `PersistOptions`, `PersistRecord`, `PersistExtension`, `PersistExtensionResult`, `PersistController`, `StorageAdapter`, `Serializer`, `MigrateContext`, `CookiePersistOptions`, `IndexedDBPersistOptions`, `FieldLike`, `FieldArrayLike`, `PersistableForm`
 
-## Related
+## Guides
 
-- Usage — `/docs/packages/persist/usage`
-- Overview — `/docs/packages/persist`
+- [Important Defaults](/docs/packages/persist/guides/important-defaults)
+- [Hydrate & Save](/docs/packages/persist/guides/hydrate-and-save)
+- [Migration & TTL](/docs/packages/persist/guides/migration-and-ttl)

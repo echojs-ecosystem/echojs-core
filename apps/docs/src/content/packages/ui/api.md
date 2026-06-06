@@ -1,26 +1,40 @@
 ---
 title: API Reference
-description: @echojs-ecosystem/ui API — documentation coming soon.
+description: @echojs-ecosystem/ui public API index — coverage expanding.
 package: "@echojs-ecosystem/ui"
-status: draft
 ---
 
 # API Reference
 
-> [!NOTE]
-> **Документация в работе.** Актуальный список экспортов — `packages/ui/src/index.ts` и subpath `package.json` exports.
+> [!note]
+> Component API pages are **expanding**. The full export list lives in `packages/ui/src/index.ts` and `package.json` exports. Storybook catalogs variants.
 
-## Planned sections
+```ts
+import { Button } from "@echojs-ecosystem/ui/button";
+import { Field, mergeFieldControlProps } from "@echojs-ecosystem/ui/field";
+import { UIProvider, createUiProvider } from "@echojs-ecosystem/ui/provider";
+import { createTheme } from "@echojs-ecosystem/ui/theme";
+```
 
-| Area | Exports (preview) |
+## Components (documented)
+
+| Export | Description |
 | --- | --- |
-| Components | `Button`, `IconButton`, `Input`, `Textarea`, `Checkbox`, `Field`, `Label`, … |
-| Provider | `UIProvider`, `createUiProvider` |
-| Theme | `createTheme`, tokens, variants |
+| [Button](/docs/packages/ui/api/button) | Primary action control with variants |
+| [Field](/docs/packages/ui/api/field) | Label, error, and control wiring |
+| [UIProvider](/docs/packages/ui/api/provider) | Theme and global defaults |
+
+## More exports (preview)
+
+| Area | Exports |
+| --- | --- |
+| Inputs | `Input`, `Textarea`, `Checkbox`, `Label` |
+| Theme | `createTheme`, variant tokens |
 | Primitives | `Portal`, `VisuallyHidden` |
 | Utils | `cn`, `mergeProps`, input-mask helpers |
 
-## See also
+## Guides
 
-- [UI overview](/docs/packages/ui)
-- `packages/ui/README.md`
+- [UIProvider & Theme](/docs/packages/ui/guides/ui-provider)
+- [Form Controls](/docs/packages/ui/guides/forms)
+- Global [Forms guide](/docs/guides/forms)

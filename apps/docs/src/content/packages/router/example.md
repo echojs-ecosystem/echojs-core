@@ -1,110 +1,24 @@
 ---
-title: Example
+title: Examples
 description: Routes, layouts, and NavLink from apps/docs and apps/example.
 package: "@echojs-ecosystem/router"
 ---
 
-# Example — Router
+# Examples
 
-## Docs — dynamic routes from nav (`apps/docs`)
+Practical routing patterns from production EchoJS apps.
 
-```ts
-import { createRoutes } from "@echojs-ecosystem/router";
-import { canonicalDocsRouteItems } from "@core/content/nav.js";
-import { getDocPage } from "@entities/__routes__/doc-pages.js";
-import { docsShellLayoutPage } from "@pages/docs/layout/docs-shell-layout.page.js";
+## Pick an example
 
-const docChildren = canonicalDocsRouteItems().map((item) => ({
-  path: item.contentId,
-  name: item.routeName,
-  routeView: getDocPage(item.contentId),
-}));
+| Example | Teaches |
+| --- | --- |
+| [Docs Dynamic Routes](/docs/packages/router/examples/docs-routes) | Nav-driven markdown routes |
+| [Nested Routes](/docs/packages/router/examples/nested-routes) | Example lab docs module |
+| [Page + Layout](/docs/packages/router/examples/page-and-layout) | `createRouteView` + `createLayoutView` |
+| [NavLink Sidebar](/docs/packages/router/examples/nav-link) | Declarative navigation |
+| [Imperative Navigation](/docs/packages/router/examples/imperative-nav) | `page.go()` and `router.go()` |
 
-export const docsRoutes = createRoutes([
-  {
-    path: "/docs",
-    name: "docs",
-    layoutView: docsShellLayoutPage,
-    children: docChildren,
-  },
-]);
-```
-
-```ts
-// entities/__routes__/router.ts
-import { createRouter } from "@echojs-ecosystem/router/hyperdom";
-
-export const appRouter = createRouter({
-  history: "browser",
-  routes: appRoutes,
-  loadingView: routerLoadingPage,
-  errorView: routerErrorPage,
-  notFoundView: routerNotFoundPage,
-});
-```
-
-## Example lab — nested docs module
-
-```ts
-export const docsRoutes = createRoutes([
-  {
-    path: "/docs",
-    name: "docs",
-    layoutView: docsShellLayoutPage,
-    children: [
-      { path: "/", name: "docs-home", routeView: docsHomePage },
-      { path: "reactivity", name: "reactivity", routeView: reactivityPage },
-      { path: "query", name: "query", routeView: queryPage },
-    ],
-  },
-]);
-```
-
-## Page + layout
-
-```ts
-import { createRouteView, createLayoutView } from "@echojs-ecosystem/router";
-
-const shell = createLayoutView({
-  name: "docs-shell",
-  view: ({ outlet }) => DocsShell(outlet()),
-});
-
-const docPage = createRouteView({
-  name: "doc-article",
-  view: ({ params }) => DocArticle({ contentId: params.contentId }),
-  beforeLoad: async ({ params }) => loadDoc(params.contentId),
-});
-```
-
-## NavLink in sidebar
-
-```ts
-import { NavLink } from "@echojs-ecosystem/router/hyperdom";
-
-NavLink({
-  to: homePage,
-  activeClass: "is-active",
-  class: "nav-link",
-  children: "Home",
-});
-
-NavLink({
-  to: userPage,
-  params: { id: "42" },
-  query: { tab: "profile" },
-  children: "User",
-});
-```
-
-## Imperative navigation
-
-```ts
-userPage.go({ id: "1" });
-appRouter.go("/docs/packages/router/example");
-```
-
-## Live app
+## Live app paths
 
 | Resource | Path |
 | --- | --- |
@@ -112,7 +26,8 @@ appRouter.go("/docs/packages/router/example");
 | Example routes | `apps/example/src/entities/__routes__/` |
 | Lazy / slow demos | `apps/example/src/pages/workspace/` |
 
-## See also
+## Related
 
-- Usage — `/docs/packages/router/usage`
-- URL State Example — `/docs/packages/url-state/example`
+- [Guides & Concepts](/docs/packages/router/guides/route-trees)
+- [API Reference](/docs/packages/router/api)
+- [URL State Example](/docs/packages/url-state/example)

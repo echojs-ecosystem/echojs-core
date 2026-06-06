@@ -94,5 +94,5 @@ The URL is shareable; the query cache avoids refetching identical keys within `s
 
 - [State overview](/docs/state/overview)
 - [Data fetching guide](/docs/guides/data-fetching)
-- [Query package](/docs/packages/query/usage)
+- [Query package](/docs/packages/query/guides/query-definitions)
 - Example — `apps/example/src/features/query-demo/`

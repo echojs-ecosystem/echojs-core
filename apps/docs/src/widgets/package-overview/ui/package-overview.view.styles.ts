@@ -38,7 +38,31 @@ export const packageOverviewStyles = tv({
     learnLink:
       "mt-3 inline-flex items-center gap-1 text-xs font-semibold text-echo-700 transition group-hover:gap-2 dark:text-echo-300",
     relatedGrid: "mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3",
-    stackLabel: "mb-2 text-xs font-semibold uppercase tracking-wider text-fg-subtle",
+    lifecycleGrid: "mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4",
+    lifecycleCard:
+      "rounded-xl border border-border/80 bg-surface-elevated/80 p-4 dark:border-white/10",
+    lifecycleStep:
+      "mb-2 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-echo-100 text-xs font-bold text-echo-800 dark:bg-echo-950 dark:text-echo-200",
+    lifecycleTitle: "mt-1 text-sm font-semibold text-fg",
+    lifecycleBody: "mt-1.5 text-xs leading-relaxed text-fg-muted",
+    whyGrid: "mt-4 grid gap-4 sm:grid-cols-2",
+    whyCard:
+      "rounded-xl border border-border/80 bg-surface-elevated/80 p-5 dark:border-white/10",
+    whyCardIcon: "text-lg font-semibold text-echo-700 dark:text-echo-300",
+    whyCardTitle: "mt-3 text-base font-semibold text-fg",
+    whyCardBody: "mt-2 text-sm leading-relaxed text-fg-muted",
+    codeSection: "mt-4 overflow-hidden rounded-xl border border-border/80 dark:border-white/10",
+    codeSectionTitle:
+      "border-b border-border/80 bg-surface-muted/50 px-4 py-2.5 text-xs font-semibold uppercase tracking-wider text-fg-subtle dark:border-white/10",
+    heroTitle:
+      "mt-2 text-2xl font-bold leading-tight tracking-tight text-fg sm:text-3xl lg:text-[2rem]",
+    importPathsLink:
+      "mt-3 inline-flex text-xs font-medium text-echo-700 underline-offset-2 transition hover:text-echo-800 hover:underline dark:text-echo-300 dark:hover:text-echo-200",
+    heroFeaturedBanner: [
+      "mb-3 inline-flex items-center gap-1.5 rounded-full border border-echo-500/30",
+      "bg-echo-100/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-echo-800",
+      "dark:border-echo-500/35 dark:bg-echo-950/60 dark:text-echo-200",
+    ].join(" "),
   },
 });
 

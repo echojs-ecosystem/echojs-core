@@ -97,4 +97,4 @@ effect(() => {
 
 - [State overview](/docs/state/overview)
 - [Architecture → Models](/docs/architecture/models)
-- [Reactivity package](/docs/packages/reactivity/usage)
+- [Reactivity package](/docs/packages/reactivity/guides/signals)

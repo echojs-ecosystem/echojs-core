@@ -1,110 +1,35 @@
 ---
-title: Example
-description: createEchoApp bootstrap from apps/docs and apps/example.
+title: Examples
+description: createEchoApp bootstrap patterns from apps/docs and apps/example.
 package: "@echojs-ecosystem/framework"
 ---
 
-# Example — Framework
+# Examples
 
-## Docs site bootstrap (`apps/docs`)
+Focused wiring patterns for real EchoJS apps. Each example shows provider registration and bootstrap entry points.
 
-```ts
-// src/app/bootstrap.ts
-import { createEchoApp } from "@echojs-ecosystem/framework/app";
-import {
-  i18nProvider,
-  queryProvider,
-  routerProvider,
-  themeProvider,
-  uiProvider,
-} from "@core/providers/index.js";
+> [!tip]
+> Live reference implementations: `apps/docs/src/app/bootstrap.ts`, `apps/example/src/app/bootstrap.ts`.
 
-export const bootstrap = (): Promise<() => void> =>
-  createEchoApp({
-    strictContextChecks: true,
-  })
-    .use(queryProvider)
-    .use(uiProvider)
-    .use(i18nProvider)
-    .use(themeProvider)
-    .use(routerProvider)
-    .mount("#app");
-```
+## Pick an example
 
-```ts
-// src/app/main.ts
-import { bootstrap } from "./bootstrap.js";
-
-void bootstrap();
-```
-
-## Example lab bootstrap (`apps/example`)
-
-```ts
-import { createEchoApp } from "@echojs-ecosystem/framework/app";
-import { i18nProvider, queryProvider, routerProvider, uiProvider } from "./providers/index.js";
-
-export const bootstrap = () =>
-  createEchoApp({
-    strictContextChecks: true,
-    body: { class: "echojs-lab" },
-  })
-    .use(queryProvider)
-    .use(uiProvider)
-    .use(i18nProvider)
-    .use(routerProvider)
-    .mount("#app");
-```
-
-## Custom provider (`createProvider`)
-
-```ts
-import { createProvider } from "@echojs-ecosystem/framework/app";
-
-const THEME_KEY = Symbol("theme");
-
-export const themeProvider = createProvider({
-  name: "theme",
-  install: () => ({ mode: "light" as const }),
-  provideKey: THEME_KEY,
-  wrapRoot: (inner) => () => div({ class: "theme-root" }, inner()),
-});
-```
-
-## Docs router provider (chrome + SPA)
-
-`apps/docs` не использует stock `createRouterProvider` — sidebar остаётся смонтированным:
-
-```ts
-import { ROUTER_KEY } from "@echojs-ecosystem/framework/app";
-import { appRouter } from "@entities/__routes__/router.js";
-import { DocsChrome } from "@widgets/docs-shell/docs-chrome.js";
-
-export const routerProvider = {
-  name: "router",
-  setup(app) {
-    app.provide(ROUTER_KEY, appRouter);
-    appRouter.start();
-  },
-  resolveRoot: () => () => DocsChrome(() => appRouter.View()),
-};
-```
+| Example | Teaches |
+| --- | --- |
+| [Minimal App](/docs/packages/framework/examples/minimal-app) | Query + router providers, `body` attributes |
+| [With Router](/docs/packages/framework/examples/with-router) | Custom `resolveRoot` — docs chrome outside `router.View` |
+| [With Query](/docs/packages/framework/examples/with-query) | Full docs site provider stack |
+| [With i18n](/docs/packages/framework/examples/with-i18n) | `createProvider` theme wrapper |
 
 ## Teardown
+
+All examples return a disposer from `mount()`:
 
 ```ts
 const dispose = await bootstrap();
 dispose();
 ```
 
-## Live app
+## Related
 
-| App | `bootstrap.ts` |
-| --- | --- |
-| Documentation | `apps/docs/src/app/bootstrap.ts` |
-| Interactive lab | `apps/example/src/app/bootstrap.ts` |
-
-## See also
-
-- Architecture → Providers
-- Router Example — `/docs/packages/router/example`
+- [Guides & Concepts](/docs/packages/framework/guides/important-defaults)
+- [API Reference](/docs/packages/framework/api)

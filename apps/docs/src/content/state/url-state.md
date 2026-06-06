@@ -97,4 +97,4 @@ Path **params** (`:id`) identify **resources**; query keys usually hold **view o
 - [State overview](/docs/state/overview)
 - [Router state](/docs/state/router-state)
 - [Server state](/docs/state/server-state)
-- [URL State package](/docs/packages/url-state/usage)
+- [URL State package](/docs/packages/url-state/guides/important-defaults)

@@ -1,24 +1,13 @@
 ---
 title: Reactivity
-description: Fine-grained signals, computed values, and effects for EchoJS.
+description: Fine-grained signals, computed values, and effects — the reactive foundation of EchoJS.
 package: "@echojs-ecosystem/reactivity"
-keywords: [signals, computed, effect, batch, scope]
+keywords: [signals, computed, effect, batch, scope, reactivity]
 ---
 
 :::package-overview reactivity
 
 :::install @echojs-ecosystem/reactivity
 
-## Quick start
-
-```ts
-import { signal, computed, effect } from "@echojs-ecosystem/reactivity";
-
-const count = signal(0);
-const double = computed(() => count.value() * 2);
-effect(() => console.log(double.value()));
-count.set(1);
-```
-
 > [!tip]
-> Use **Playground** for a live demo and **Example** for patterns from `apps/example`.
+> Open **Guides & Concepts** for patterns, **API Reference** for every export, and **Playground** for a live demo.

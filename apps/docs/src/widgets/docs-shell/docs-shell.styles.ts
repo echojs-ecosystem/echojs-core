@@ -34,17 +34,40 @@ export const shellStyles = tv({
     ].join(" "),
     sidebarResources: "mt-2 flex flex-col gap-0.5 border-t border-border/70 pt-4 dark:border-white/10",
     packageGroup: "mb-0.5",
+    packageGroupFeatured:
+      "mb-2 rounded-xl border border-echo-500/30 bg-gradient-to-br from-echo-50/70 via-surface-elevated/40 to-transparent p-1 dark:border-echo-500/25 dark:from-echo-950/45 dark:via-echo-950/20",
     packageGroupBtn: [
       "group flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left transition",
       "hover:bg-surface-muted/80",
     ].join(" "),
     packageGroupIcon: "text-fg-subtle group-hover:text-fg",
     packageGroupBtnActive: "bg-echo-50/60 dark:bg-echo-950/35",
-    packageChevron: "mt-0.5 shrink-0 text-[10px] text-fg-subtle transition-transform duration-200",
-    packageChevronOpen: "rotate-90 text-echo-600 dark:text-echo-400",
+    packageGroupBtnFeatured: "ring-1 ring-echo-500/20 dark:ring-echo-500/25",
+    packageGroupBtnFeaturedActive:
+      "bg-echo-100/70 ring-echo-500/35 dark:bg-echo-950/55 dark:ring-echo-500/40",
+    packageGroupIconFeatured: "text-echo-600 dark:text-echo-400",
+    packageGroupNameFeatured: "inline-flex min-w-0 flex-1 items-center gap-2",
+    packageGroupBadge:
+      "shrink-0 rounded-md bg-echo-600 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.08em] text-white dark:bg-echo-500",
+    packageChevronWrap: [
+      "inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-md",
+      "text-fg-subtle/75 transition-[transform,color,background-color] duration-200 ease-out",
+      "group-hover:bg-surface-muted/70 group-hover:text-fg-muted",
+    ].join(" "),
+    packageChevronOpen:
+      "rotate-90 bg-echo-50/90 text-echo-600 dark:bg-echo-950/55 dark:text-echo-400",
+    packageChevronIcon: "h-3.5 w-3.5",
+    packageSubsectionChevronWrap: [
+      "inline-flex h-4 w-4 shrink-0 items-center justify-center rounded",
+      "text-fg-subtle/70 transition-[transform,color] duration-200 ease-out",
+      "group-hover:text-fg-muted",
+    ].join(" "),
+    packageSubsectionChevronOpen: "rotate-90 text-echo-600 dark:text-echo-400",
+    packageSubsectionChevronIcon: "h-3 w-3",
     packageGroupLabel: "flex min-w-0 flex-1 flex-col gap-0.5",
     packageGroupName: "text-sm font-semibold text-fg",
-    packageGroupPkg: "truncate font-mono text-[10px] text-fg-subtle",
+    packageModulesDivider:
+      "mx-2 mb-1.5 mt-2 border-t border-border/60 pt-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-fg-subtle/80 dark:border-white/10",
     packageChildren: "mb-2 ml-3 flex flex-col gap-0.5 border-l border-border/70 pl-2 dark:border-white/10",
     packageChildWrap: "min-w-0",
     packageChildLink: [
@@ -52,9 +75,20 @@ export const shellStyles = tv({
       "hover:bg-surface-muted/60 hover:text-fg",
     ].join(" "),
     packageChildIcon: "text-fg-subtle/90 group-hover:text-fg",
-    packageChildNested: "text-xs",
+    packageChildNested: "text-[13px]",
+    packageSubsection: "min-w-0",
+    packageSubsectionBtn: [
+      "group flex w-full items-center gap-1.5 rounded-md py-1.5 pl-1 pr-1 text-left text-sm font-medium text-fg-muted transition",
+      "hover:bg-surface-muted/60 hover:text-fg",
+    ].join(" "),
+    packageSubsectionBtnOpen: "text-fg",
+    packageSubsectionIcon: "text-fg-subtle/80 group-hover:text-fg-muted",
+    packageSubsectionLabel: "min-w-0 truncate",
+    packageSubsectionChildren:
+      "ml-2 flex flex-col gap-0.5 border-l border-border/50 pl-2 dark:border-white/10",
     sectionTitle:
-      "mb-1.5 mt-5 px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-echo-700 first:mt-2 dark:text-echo-400",
+      "mb-1.5 mt-5 flex items-center gap-1.5 px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-fg-subtle first:mt-2",
+    sectionTitleIcon: "inline-flex h-3.5 w-3.5 shrink-0 text-echo-600/80 dark:text-echo-400/80",
     agentsDivider: "mx-2 my-4 border-t border-border/80 dark:border-white/10",
     agentsSectionTitle:
       "mb-2 mt-2 px-2 text-[11px] font-semibold tracking-tight text-fg",

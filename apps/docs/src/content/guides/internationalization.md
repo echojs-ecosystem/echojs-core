@@ -117,7 +117,7 @@ Build a locale picker with `i18n.supportedLocales` and labels from `i18n.t("loca
 
 ## Plural and Intl
 
-Use built-in plural helpers and `Intl` formatters from the package (dates, numbers, relative time) — see [i18n usage](/docs/packages/i18n/usage).
+Use built-in plural helpers and `Intl` formatters from the package (dates, numbers, relative time) — see [i18n guides](/docs/packages/i18n/guides/messages-and-keys).
 
 ## Router and URLs
 

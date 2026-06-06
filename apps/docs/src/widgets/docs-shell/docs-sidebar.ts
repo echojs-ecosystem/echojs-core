@@ -1,5 +1,5 @@
 import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { aside, div, nav, p, Show } from "@echojs-ecosystem/framework/hyperdom";
+import { aside, div, nav, p, Show, span } from "@echojs-ecosystem/framework/hyperdom";
 import { $mobileNavOpen } from "@widgets/docs-shell/model/mobile-nav.js";
 import { sidebarScrollRef } from "@widgets/docs-shell/helpers/sidebar-scroll.js";
 import { agentsNavItems, agentsNavSection, docsNavSections } from "@core/content/nav.js";
@@ -21,7 +21,7 @@ const sectionIcons: Record<string, NavIconId> = {
   "getting-started": "rocket",
   architecture: "layers",
   packages: "package",
-  comparisons: "scale",
+  comparisons: "git-branch",
   guides: "compass",
   state: "database",
   examples: "layout-grid",
@@ -39,8 +39,8 @@ const sectionNav = (sectionId: string, title: string, children: Child[]): Child[
   const icon = sectionIcons[sectionId];
   return [
     p({ class: shell.sectionTitle() }, [
-      icon ? NavIcon(icon, "mr-1.5 inline-flex h-3 w-3 opacity-80") : null,
-      title,
+      icon ? NavIcon(icon, shell.sectionTitleIcon()) : null,
+      span(null, title),
     ]),
     ...children,
   ];
@@ -77,11 +77,15 @@ const SidebarPanel = (): Child =>
         [
         ...docsNavSections.flatMap((section) => {
           if (section.id === "packages") {
-            return sectionNav(
-              section.id,
-              section.title,
-              packageNavGroups.map((group) => PackageNavGroupView(group)),
-            );
+            const featured = packageNavGroups.filter((g) => g.featured);
+            const modules = packageNavGroups.filter((g) => !g.featured);
+            return sectionNav(section.id, section.title, [
+              ...featured.map((group) => PackageNavGroupView(group)),
+              modules.length > 0
+                ? p({ class: shell.packageModulesDivider() }, "Ecosystem modules")
+                : null,
+              ...modules.map((group) => PackageNavGroupView(group)),
+            ]);
           }
           return sectionNav(
             section.id,

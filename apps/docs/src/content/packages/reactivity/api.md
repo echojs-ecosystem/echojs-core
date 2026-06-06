@@ -1,6 +1,6 @@
 ---
 title: API Reference
-description: Complete @echojs-ecosystem/reactivity public API — signal, computed, effect, batch, scope, cleanup, readonly.
+description: Complete @echojs-ecosystem/reactivity public API index.
 package: "@echojs-ecosystem/reactivity"
 ---
 
@@ -24,115 +24,40 @@ import {
 import type { Signal, ReadonlySignal, ReadValue, DeepReadonly } from "@echojs-ecosystem/reactivity";
 ```
 
-## `signal(initial)`
+## Functions
 
-Creates a **writable** signal. **`initial` is required** — calling `signal()` with no argument throws `TypeError`.
-
-| Method | Description |
+| Export | Description |
 | --- | --- |
-| `.value()` | Read with dependency tracking |
-| `.peek()` | Read without tracking |
-| `.set(next)` | Replace value |
-| `.update(fn)` | `fn(previous)` → next value |
-| `.subscribe(fn)` | Notify on change; returns `unsubscribe` |
-| `.readonly()` | Readonly facade (no set/update) |
+| [signal](/docs/packages/reactivity/api/signal) | Writable reactive cell |
+| [computed](/docs/packages/reactivity/api/computed) | Readonly derived signal |
+| [effect](/docs/packages/reactivity/api/effect) | Side effect with auto tracking |
+| [batch](/docs/packages/reactivity/api/batch) | Coalesce notifications |
+| [scope](/docs/packages/reactivity/api/scope) | Effect scope with disposal |
+| [cleanup](/docs/packages/reactivity/api/cleanup) | Register scope teardown |
+| [readonly](/docs/packages/reactivity/api/readonly) | Readonly facade |
 
-**Subscribe:** listener runs only when `Object.is(prev, next)` is false; **not** invoked immediately on subscribe.
+## Type guards
 
-## `computed(getter)`
-
-Creates a **readonly** derived signal. `getter` must be a function or `TypeError` is thrown.
-
-| Method | Description |
+| Export | Description |
 | --- | --- |
-| `.value()` | Read (tracks deps, may recompute) |
-| `.peek()` | Read without tracking |
-| `.subscribe(fn)` | Same change-only contract as `signal` |
-
-No `.set()` / `.update()`.
-
-## `effect(fn)`
-
-Runs `fn` **synchronously**, then re-runs when dependencies read via `.value()` inside `fn` change. Returns **disposer** `() => void`.
-
-`fn` must be a function or `TypeError` is thrown.
-
-## `batch(fn)`
-
-Runs `fn`, batches reactive notifications until `fn` completes, returns `fn()`’s return value. `fn` must be a function.
-
-## `scope(fn)`
-
-Starts an effect scope. Returns disposer that tears down effects created inside and runs registered `cleanup()` callbacks.
-
-`fn` must be a function.
-
-## `cleanup(fn)`
-
-Registers `fn` to run when the current `scope()` disposes. **Must** be called inside an active scope or throws:
-
-```
-cleanup(fn) must be called inside scope()
-```
-
-`fn` must be a function.
-
-## `readonly(sig)`
-
-Returns a readonly view of a writable or readonly signal. Strips `.set()` / `.update()` from the type surface.
-
-## `isSignal(value)`
-
-Type guard: branded writable or readonly signal instances from this package.
-
-## `isReadonlySignal(value)`
-
-Type guard: readonly/branded computed-style signals.
+| [isSignal](/docs/packages/reactivity/api/type-guards) | Writable or readonly signal |
+| [isReadonlySignal](/docs/packages/reactivity/api/type-guards) | Readonly / computed signal |
 
 ## Types
 
-### `Signal<T>`
-
-Writable signal interface extending read methods with `set`, `update`, `readonly`.
-
-### `ReadonlySignal<T>`
-
-Read + `subscribe` only.
-
-### `ReadValue<T>`
-
-Result of `.value()` / `.peek()`:
-
-- Primitives: `T`
-- Objects/arrays: `DeepReadonly<T>` (recursive readonly fields)
-
-### `DeepReadonly<T>`
-
-Utility type for immutable reads — prevents `user.tags.push(...)` on values from `.value()`.
-
-## Errors (summary)
-
-| Call | Error |
+| Export | Description |
 | --- | --- |
-| `signal()` | `TypeError: signal(initial) expects 1 argument` |
-| `computed(x)` non-function | `TypeError: computed(getter) expects a function` |
-| `effect(x)` non-function | `TypeError: effect(fn) expects a function` |
-| `batch(x)` non-function | `TypeError: batch(fn) expects a function` |
-| `scope(x)` non-function | `TypeError: scope(fn) expects a function` |
-| `cleanup(x)` non-function | `TypeError: cleanup(fn) expects a function` |
-| `cleanup()` outside scope | `Error: cleanup(fn) must be called inside scope()` |
-| `subscribe(x)` non-function | `TypeError: subscribe(fn) expects a function` |
-
-## Dev-only behavior
-
-When `NODE_ENV !== "production"`, object/array values assigned via `.set()` / `.update()` are **deep-frozen** after write. In-place mutation throws at runtime (typically `TypeError` in strict mode).
+| [Types](/docs/packages/reactivity/api/types) | `Signal`, `ReadonlySignal`, `ReadValue`, `DeepReadonly` |
 
 ## Not exported (by design)
 
 - `trigger()` — manual invalidation without `.set()`
 - Engine internals (`alien-signals` direct access)
 
-## Related
+## Guides
 
-- Usage guide — `/docs/packages/reactivity/usage`
-- Package overview — `/docs/packages/reactivity`
+Conceptual docs live under [Guides & Concepts](/docs/packages/reactivity/guides/important-defaults):
+
+- [Important Defaults](/docs/packages/reactivity/guides/important-defaults)
+- [Signals](/docs/packages/reactivity/guides/signals)
+- [Effects](/docs/packages/reactivity/guides/effects)

@@ -1,58 +1,19 @@
 ---
-title: Example
-description: UI components preview from packages/ui README and example app.
+title: Examples
+description: UIProvider, Button, and form row patterns from packages/ui and apps/example.
 package: "@echojs-ecosystem/ui"
-status: draft
 ---
 
-# Example — UI
+# Examples
 
-> [!NOTE]
-> Полная документация UI в работе. Ниже — рабочие фрагменты из `packages/ui` и `apps/example`.
+Working fragments from `packages/ui` and `apps/example`. Full component coverage is **expanding** — see Storybook for the latest catalog.
 
-## Provider (`apps/example`)
+## Pick an example
 
-```ts
-import { createUiProvider } from "@echojs-ecosystem/ui/provider";
-
-export const uiProvider = createUiProvider({
-  // theme overrides
-});
-```
-
-```ts
-createEchoApp({ strictContextChecks: true })
-  .use(uiProvider)
-  .mount("#app");
-```
-
-## Button
-
-```ts
-import { Button } from "@echojs-ecosystem/ui/button";
-
-Button({
-  variant: "primary",
-  size: "md",
-  leftIcon: "✓",
-  children: "Save changes",
-});
-```
-
-## Field + Input
-
-```ts
-import { Field } from "@echojs-ecosystem/ui/field";
-import { Input } from "@echojs-ecosystem/ui/input";
-import { Label } from "@echojs-ecosystem/ui/label";
-
-Field({
-  children: [
-    Label({ children: "Email" }),
-    Input({ type: "email", name: "email", placeholder: "you@example.com" }),
-  ],
-});
-```
+| Example | Teaches |
+| --- | --- |
+| [Button Demo](/docs/packages/ui/examples/button-demo) | Variants, sizes, icons |
+| [Form Row](/docs/packages/ui/examples/form-row) | `Field` + `Input` + `Label` composition |
 
 ## Subpath imports
 
@@ -62,15 +23,8 @@ import { Checkbox } from "@echojs-ecosystem/ui/checkbox";
 import { createTheme } from "@echojs-ecosystem/ui/theme";
 ```
 
-## Live references
+## Related
 
-| Resource | Path |
-| --- | --- |
-| README + stories | `packages/ui/README.md`, `packages/ui/.storybook` |
-| Home snippet | `apps/docs` → home constants |
-| Lab provider | `apps/example/src/core/providers/ui.ts` |
-
-## See also
-
-- [UI overview](/docs/packages/ui)
-- HyperDOM Example — `/docs/packages/hyperdom/example`
+- [Playground](/docs/packages/ui/playground) — live Button demo
+- [HyperDOM Examples](/docs/packages/hyperdom/example)
+- `packages/ui/README.md`, `packages/ui/.storybook`

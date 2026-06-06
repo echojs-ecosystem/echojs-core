@@ -1,75 +1,42 @@
 ---
-title: API
+title: API Reference
 description: Programmatic API for @echojs-ecosystem/architect.
 package: "@echojs-ecosystem/architect"
 ---
 
-# API
-
-## Config
-
-```ts
-import { defineConfig, abstraction } from "@echojs-ecosystem/architect";
-
-export default defineConfig({
-  baseUrl: "src",
-  ignores: ["**/*.md"],
-  root: abstraction({ name: "src", children: { /* … */ } }),
-});
-```
-
-## Presets
+# API Reference
 
 ```ts
 import {
+  defineConfig,
+  abstraction,
   dependenciesDirection,
-  type DependenciesDirectionOptions,
   publicAbstraction,
   restrictCrossImports,
   noUnabstractionFiles,
-  requiredChildren,
-  off,
-  warn,
+  lint,
 } from "@echojs-ecosystem/architect";
 ```
 
-### `dependenciesDirection(order, options?)`
+## Config
 
-```ts
-type DependenciesDirectionOptions = {
-  /** Glob patterns; matching dependency paths bypass layer-order checks. */
-  allowDownward?: readonly string[];
-};
-```
-
-### `publicAbstraction(name)`
-
-Marks abstraction `name` (e.g. `"public-api"`, `"page"`) as the only entry external importers may use.
-
-### `restrictCrossImports()`
-
-Forbids imports between sibling instances under the same layer abstraction.
+| Export | Description |
+| --- | --- |
+| [defineConfig](/docs/packages/architect/api/define-config) | Config factory |
+| [Presets](/docs/packages/architect/api/presets) | Rule presets |
 
 ## Lint
 
-```ts
-import { lint } from "@echojs-ecosystem/architect";
-
-const result = await lint({
-  configPath: "./architect.config.ts",
-  cwd: process.cwd(),
-});
-```
+| Export | Description |
+| --- | --- |
+| [lint](/docs/packages/architect/api/lint) | Programmatic lint runner |
 
 ## Low-level
 
-```ts
-import {
-  rule,
-  parseAbstractionInstance,
-  parseDependenciesMap,
-  getFlattenFiles,
-} from "@echojs-ecosystem/architect";
-```
+`rule`, `parseAbstractionInstance`, `parseDependenciesMap`, `getFlattenFiles` — for custom tooling on the VFS + dependency graph.
 
-Use when building custom tooling on top of the same VFS + dependency graph.
+## Guides
+
+- [Layer Rules](/docs/packages/architect/guides/layers)
+- [Public API](/docs/packages/architect/guides/public-api)
+- [CI Integration](/docs/packages/architect/guides/ci-integration)

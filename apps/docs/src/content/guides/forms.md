@@ -152,7 +152,7 @@ Use **`validate`** / **`validateAsync`** on the form for custom rules without Zo
 
 ## Persisted fields
 
-`withLocalStorage` / `withCookie` on `createField` or stores — see [Persist usage](/docs/packages/persist/usage). Pause persist during logout when clearing auth (see [Authentication](/docs/guides/authentication)).
+`withLocalStorage` / `withCookie` on `createField` or stores — see [Persist guides](/docs/packages/persist/guides/storage-adapters). Pause persist during logout when clearing auth (see [Authentication](/docs/guides/authentication)).
 
 ## Model integration
 

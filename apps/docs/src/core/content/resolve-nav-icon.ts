@@ -14,7 +14,7 @@ const byContentId: Record<ContentId, NavIconId> = {
   "architecture/providers": "plug",
   "architecture/models": "box",
   "architecture/dependency-flow": "git-branch",
-  "comparisons/index": "scale",
+  "comparisons/index": "git-branch",
   "comparisons/react": "fw-react",
   "comparisons/vue": "fw-vue",
   "comparisons/angular": "fw-angular",
@@ -66,6 +66,31 @@ const packagePageIcon: Record<string, NavIconId> = {
   usage: "terminal",
   api: "api",
   forms: "form",
+  "important-defaults": "zap",
+  signals: "zap",
+  computed: "terminal",
+  effects: "refresh",
+  batching: "layers",
+  "scopes-and-cleanup": "folder-tree",
+  "readonly-signals": "shield",
+  "immutable-updates": "save",
+  "hyperdom-integration": "code",
+  "examples-overview": "book",
+  counter: "zap",
+  "derived-greeting": "terminal",
+  "batch-updates": "layers",
+  "todo-list": "list",
+  "scope-timer": "refresh",
+  "shopping-cart": "store",
+  signal: "zap",
+  effect: "refresh",
+  batch: "layers",
+  scope: "folder-tree",
+  cleanup: "folder-tree",
+  readonly: "shield",
+  "type-guards": "api",
+  types: "api",
+  "api-overview": "api",
 };
 
 export const resolveNavIcon = (contentId: ContentId, slug?: string): NavIconId => {
@@ -74,8 +99,12 @@ export const resolveNavIcon = (contentId: ContentId, slug?: string): NavIconId =
 
   if (contentId.startsWith("packages/")) {
     const rest = contentId.slice("packages/".length);
-    const [pkg, page] = rest.split("/");
+    const segments = rest.split("/");
+    const last = segments[segments.length - 1];
+    if (last && packagePageIcon[last]) return packagePageIcon[last]!;
+    const page = segments[1];
     if (page && packagePageIcon[page]) return packagePageIcon[page]!;
+    const pkg = segments[0];
     if (pkg && packageGroupIcon[pkg]) return packageGroupIcon[pkg]!;
     return "package";
   }

@@ -235,7 +235,7 @@ Choose Echo + HyperDOM when:
 ## Related docs
 
 - [Philosophy](/docs/introduction/philosophy) — model/view split
-- [HyperDOM Usage](/docs/packages/hyperdom/usage) — `h`, `Show`, `List`
+- [HyperDOM Guides](/docs/packages/hyperdom/guides/views-and-dsl) — `h`, `Show`, `List`
 - [Models](/docs/architecture/models) — `createModel` + `createComponent`
 - [EchoJS vs React](/docs/comparisons/react) — JSX ecosystem comparison
 - [EchoJS vs Solid](/docs/comparisons/solid) — closest signal + JSX cousin

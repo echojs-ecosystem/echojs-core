@@ -28,15 +28,37 @@ bun changeset
 bun run version
 ```
 
-Это выполнит `changeset version` + синхронизацию версий в docs.
+Это выполнит `changeset version` + синхронизацию версий в docs + **`bun update`** (обновляет lockfile, чтобы `bun publish` заменил `workspace:*` на semver).
 
-### 3. Опубликовать на npm
+Закоммитьте изменения версий и `bun.lock`.
+
+### 3. Проверить tarball (рекомендуется)
+
+```bash
+bun run build:packages
+bun run release:verify
+```
+
+Скрипт делает `bun pm pack` для каждого публикуемого пакета и падает, если в tarball остались `workspace:*` / `catalog:` / `file:`.
+
+### 4. Опубликовать на npm
+
+Локально (нужен `.npmrc` с токеном или `NPM_TOKEN` в окружении):
 
 ```bash
 bun run release
 ```
 
-Сначала собирает все пакеты (`build:packages`), затем `changeset publish`.
+Сборка → verify → `changeset publish` (через `bun publish`).
+
+После publish проверьте:
+
+```bash
+npm view @echojs-ecosystem/framework dependencies
+npm view @echojs-ecosystem/hyperdom dependencies
+```
+
+В dependencies должны быть `"0.x.y"`, **не** `workspace:*`.
 
 ## CI / GitHub Actions
 

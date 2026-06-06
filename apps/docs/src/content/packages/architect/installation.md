@@ -1,19 +1,16 @@
 ---
 title: Installation
-description: Add @echojs-ecosystem/architect to an EchoJS monorepo app.
+description: Add @echojs-ecosystem/architect as a dev dependency.
 package: "@echojs-ecosystem/architect"
 ---
 
 # Installation
 
-## Workspace app (this monorepo)
+Architect is a **standalone dev tool** — package-only install, no framework subpath.
 
-```bash
-cd apps/docs   # or apps/example
-bun add -D @echojs-ecosystem/architect
-```
+## Quick install
 
-`@echojs-ecosystem/architect` is a workspace package — no npm publish required for local development.
+:::install @echojs-ecosystem/architect
 
 ## Scripts
 
@@ -51,7 +48,14 @@ export default defineConfig({
 
 Architect resolves imports using your app `tsconfig.json` paths (`@pages/*`, `@core/*`, …). Keep aliases aligned with Vite `resolve.alias`.
 
-## See also
+## Verify
 
-- [Usage](/docs/packages/architect/usage)
-- [Example config](/docs/packages/architect/example)
+```bash
+bun run architect
+```
+
+## Next steps
+
+- [Important Defaults](/docs/packages/architect/guides/important-defaults)
+- [Layer Rules](/docs/packages/architect/guides/layers)
+- [Examples](/docs/packages/architect/example)

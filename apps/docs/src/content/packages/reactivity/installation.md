@@ -1,63 +1,75 @@
 ---
 title: Installation
-description: Add @echojs-ecosystem/reactivity to your app or monorepo workspace.
+description: Add @echojs-ecosystem/reactivity to your EchoJS or vanilla TypeScript app.
 package: "@echojs-ecosystem/reactivity"
 ---
 
 # Installation
 
-`@echojs-ecosystem/reactivity` is a standalone package. HyperDOM and other EchoJS libraries depend on it — you often install it transitively, but models and features import it directly.
+Reactivity ships as a **standalone package** and is also re-exported through **`@echojs-ecosystem/framework`**. Both import paths expose the same API.
 
-## Requirements
+## Import paths
 
-- **TypeScript** 5.x recommended (ships `.d.ts` with `DeepReadonly` read types)
-- **ESM** bundler (Vite, Bun, etc.)
-- Runtime: modern browsers or Node 20+
+| Path | When to use |
+| --- | --- |
+| `@echojs-ecosystem/reactivity` | À la carte install — explicit dependency in `package.json` |
+| `@echojs-ecosystem/framework/reactivity` | You already use the framework meta-package — one install, subpath imports |
 
-## Package managers
+```ts
+// Standalone package
+import { signal, computed, effect } from "@echojs-ecosystem/reactivity";
 
-Use the same install panel as on the home page (tabs + copy):
+// Same API via framework subpath
+import { signal, computed, effect } from "@echojs-ecosystem/framework/reactivity";
+```
+
+> [!tip]
+> Pick **one style per app** and stay consistent. Mixing both paths works at runtime but clutters dependency graphs.
+
+## Quick install
+
+Standalone:
 
 :::install @echojs-ecosystem/reactivity
 
-## Monorepo (echojs-core)
+Or install the full framework once (includes reactivity):
 
-Workspace apps already reference the local package:
+:::install @echojs-ecosystem/framework
 
-```json
-{
-  "dependencies": {
-    "@echojs-ecosystem/reactivity": "workspace:*"
-  }
-}
-```
+## Requirements
 
-From repo root:
+| Requirement | Notes |
+| --- | --- |
+| **TypeScript** 5.x | Ships `.d.ts` with `DeepReadonly` read types |
+| **ESM bundler** | Vite, Bun, webpack with ESM output |
+| **Runtime** | Modern browsers or Node 20+ |
 
-```bash
-bun install
-```
-
-No publish step is required for local development.
-
-## Minimal import check
+## Verify the import
 
 ```ts
-import { signal, computed, effect } from "@echojs-ecosystem/reactivity";
+import { signal, effect } from "@echojs-ecosystem/reactivity";
+// or: from "@echojs-ecosystem/framework/reactivity"
 
 const $n = signal(0);
 effect(() => console.log($n.value()));
 $n.set(1);
 ```
 
-## Peer usage in EchoJS apps
+## Typical EchoJS stack
 
-Typical stack:
+For UI you will also need HyperDOM (which peers on reactivity):
 
 :::install @echojs-ecosystem/hyperdom
 
-Install reactivity explicitly when writing **models** or shared stores even if HyperDOM is already present.
+Install reactivity **explicitly** when writing models or shared stores even if HyperDOM is already present.
 
 ## Engine note
 
-The implementation uses **`alien-signals`** internally. Your code should only import `@echojs-ecosystem/reactivity` — the engine can change without breaking the public object API.
+The implementation uses **`alien-signals`** internally. Import only the public package paths above — the engine can change without breaking the object API.
+
+## Next steps
+
+- [Important Defaults](/docs/packages/reactivity/guides/important-defaults) — execution model
+- [Signals](/docs/packages/reactivity/guides/signals) — first patterns
+- [Examples](/docs/packages/reactivity/example) — copy-paste patterns
+- [Playground](/docs/packages/reactivity/playground) — live demo

@@ -18,6 +18,9 @@ export const frameworkComparisonStyles = tv({
     gridFeatureHead:
       "sticky left-0 z-10 justify-start bg-surface-muted/95 px-4 text-xs font-semibold uppercase tracking-wider text-fg-subtle backdrop-blur-sm dark:bg-surface-muted/90",
     gridFrameworkHead: "text-center text-[11px] font-semibold uppercase tracking-wider text-fg-subtle",
+    gridFrameworkHeadInner: "flex flex-col items-center justify-center gap-1.5",
+    gridFrameworkHeadLogo: "h-5 w-5 sm:h-6 sm:w-6",
+    gridEchoHeadLabel: "font-bold text-echo-900 dark:text-echo-200",
     gridFeatureCell:
       "sticky left-0 z-10 flex flex-col justify-center bg-surface-elevated/95 px-4 py-3.5 text-left text-sm font-medium text-fg backdrop-blur-sm dark:bg-surface-elevated/90",
     gridFrameworkCell: "flex items-center justify-center px-2 py-3.5",

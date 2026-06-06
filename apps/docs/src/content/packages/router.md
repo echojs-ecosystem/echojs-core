@@ -9,14 +9,5 @@ keywords: [createRouter, NavLink, createRouteView, guards]
 
 :::install @echojs-ecosystem/router
 
-## Quick start
-
-```ts
-import { createRoutes, createRouter, NavLink } from "@echojs-ecosystem/router";
-
-const routes = createRoutes({ home: { path: "/", page: HomePage } });
-const router = createRouter({ routes, history: browserHistory() });
-```
-
 > [!tip]
-> Search params and filters → `@echojs-ecosystem/url-state`.
+> Open **Guides & Concepts** for route trees and navigation, **API Reference** for every export, and **Examples** for patterns from `apps/docs` and `apps/example`. Search params and filters → `@echojs-ecosystem/url-state`.

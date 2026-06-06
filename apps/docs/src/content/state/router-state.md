@@ -103,4 +103,4 @@ guardRoute({
 - [State overview](/docs/state/overview)
 - [URL state](/docs/state/url-state)
 - [Routing guide](/docs/guides/routing)
-- [Router package](/docs/packages/router/usage)
+- [Router package](/docs/packages/router/guides/route-trees)

@@ -1,111 +1,40 @@
 ---
-title: Example
-description: JSONPlaceholder queries and query demo model from apps/example.
+title: Examples
+description: Practical @echojs-ecosystem/query patterns — JSONPlaceholder, models, status UI, docs loader.
 package: "@echojs-ecosystem/query"
 ---
 
-# Example — Query
+# Examples
 
-## Query definitions (`features/query-demo/api`)
+Focused, copy-paste patterns for data fetching in EchoJS apps. Definitions live in feature API modules; models bind with `.with()`; views read status helpers.
 
-```ts
-import { createQuery } from "@echojs-ecosystem/query";
-import { jpFetch } from "@core/api/jsonplaceholder.js";
+> [!tip]
+> Run the interactive lab in the EchoJS example app at `/docs/query`, or try the [Playground](/docs/packages/query/playground).
 
-export const listUsersQuery = createQuery({
-  name: "jp-users",
-  queryKey: () => ["jsonplaceholder", "users"] as const,
-  queryFn: ({ signal }) => jpFetch("/users", { signal }),
-});
+## Pick an example
 
-export const getUserQuery = createQuery({
-  name: "jp-user",
-  queryKey: ({ id }: { id: number }) => ["jsonplaceholder", "user", id] as const,
-  keepPreviousData: true,
-  abortPrevious: true,
-  queryFn: ({ params, signal }) => jpFetch(`/users/${params.id}`, { signal }),
-});
-```
-
-## Model — reactive `.with()`
-
-```ts
-import { signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
-import { getUserQuery, listUsersQuery } from "../api/jsonplaceholder.queries.js";
-
-export const createQueryDemoModel = createModel(() => {
-  const $selectedUserId = signal(1);
-
-  const users = listUsersQuery.with();
-  const user = getUserQuery.with(() => ({ id: $selectedUserId.value() }));
-
-  return {
-    users,
-    user,
-    $selectedUserId,
-    selectUser: (id: number) => $selectedUserId.set(id),
-    refetchAll: () => Promise.all([users.refetch(), user.refetch()]),
-  };
-}, "QueryDemoModel");
-```
-
-## View — status helpers
-
-```ts
-Show(
-  () => user.isPending(),
-  () => p(null, "Loading user…"),
-);
-Show(
-  () => user.isError(),
-  () => p(null, () => String(user.error())),
-);
-Show(
-  () => user.hasData(),
-  () => p(null, () => user.data()!.name),
-);
-```
-
-## Docs site — markdown loader
-
-```ts
-// apps/docs — pages/doc/model/doc-article.model.ts
-import { createQuery } from "@echojs-ecosystem/query";
-
-const docContentQuery = createQuery({
-  name: "doc-content",
-  queryKey: ({ contentId }) => ["doc-content", contentId] as const,
-  queryFn: async ({ params }) => {
-    const raw = await loadContentRaw(params.contentId);
-    return parseMarkdown(raw);
-  },
-  staleTime: 3_600_000,
-});
-
-const query = docContentQuery.with(() => ({ contentId: props.contentId }));
-```
-
-## Provider defaults
-
-```ts
-// apps/docs/src/core/providers/query.ts
-import { createQueryProvider } from "@echojs-ecosystem/query";
-
-export const queryProvider = createQueryProvider({
-  defaultOptions: { queries: { staleTime: 60_000 } },
-});
-```
-
-## Live app
-
-| Resource | Path |
+| Example | Teaches |
 | --- | --- |
-| Query demo | `apps/example/src/features/query-demo/` |
-| Docs articles | `apps/docs/src/pages/doc/model/doc-article.model.ts` |
-| Route | `/docs/query` in example lab |
+| [JSONPlaceholder](/docs/packages/query/examples/jsonplaceholder) | Query definitions and cache keys |
+| [Query Demo Model](/docs/packages/query/examples/query-demo-model) | Reactive `.with()` binding |
+| [View Status Helpers](/docs/packages/query/examples/status-helpers) | `Show` + `isPending` / `hasData` |
+| [Docs Markdown Loader](/docs/packages/query/examples/doc-content) | Long `staleTime`, SEO effect |
+| [Provider Defaults](/docs/packages/query/examples/provider-defaults) | App-wide default options |
 
-## See also
+## Shared pattern
 
-- Usage — `/docs/packages/query/usage`
-- Framework Example — `/docs/packages/framework/example`
+```ts
+// features/*/api/*.queries.ts — definitions
+export const getUserQuery = createQuery({ queryKey, queryFn, ... });
+
+// model — instances
+const user = getUserQuery.with(() => ({ id: $selectedUserId.value() }));
+
+// view — read only
+Show(() => user.hasData(), () => p(null, () => user.data()!.name));
+```
+
+## Related
+
+- [Guides & Concepts](/docs/packages/query/guides/query-definitions)
+- [API Reference](/docs/packages/query/api)

@@ -15,6 +15,15 @@ export default defineConfig({
       { find: "@widgets", replacement: resolve(src, "widgets") },
       { find: "@core", replacement: resolve(src, "core") },
       { find: "@content", replacement: resolve(src, "content") },
+      { find: "@echojs-ecosystem/framework/app", replacement: resolve(frameworkRoot, "app/index.ts") },
+      { find: "@echojs-ecosystem/framework/router/hyperdom", replacement: resolve(frameworkRoot, "router.ts") },
+      {
+        find: "@echojs-ecosystem/framework/hyperdom/lifecycle/mount",
+        replacement: resolve(frameworkRoot, "hyperdom-lifecycle-mount.ts"),
+      },
+      { find: "@echojs-ecosystem/framework/ui", replacement: resolve(frameworkRoot, "ui.ts") },
+      { find: /^@echojs-ecosystem\/framework\/(.+)$/, replacement: `${frameworkRoot}/$1.ts` },
+      { find: /^@echojs-ecosystem\/framework$/, replacement: resolve(frameworkRoot, "index.ts") },
     ],
   },
   server: {

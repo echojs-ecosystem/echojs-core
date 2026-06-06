@@ -13,6 +13,7 @@ import {
   comparisonGridHeader,
   comparisonGridRow,
 } from "@widgets/framework-comparison/ui/comparison-grid.js";
+import { FrameworkHeadLabelView } from "@widgets/framework-comparison/ui/framework-head-label.view.js";
 import { PerformanceCellView } from "@widgets/framework-comparison/ui/performance-cell.view.js";
 
 const cmp = frameworkComparisonStyles();
@@ -24,7 +25,7 @@ export const PerformanceTableView = createView(
         div({ class: comparisonGridHeader() }, [
           div({ class: comparisonFeatureHeadCell() }, "Benchmark"),
           ...comparisonFrameworks.map((fw) =>
-            div({ class: comparisonFrameworkHeadCell(fw) }, fw.label),
+            div({ class: comparisonFrameworkHeadCell(fw) }, FrameworkHeadLabelView(fw)),
           ),
         ]),
         ...performanceComparisonRows.map((row) =>

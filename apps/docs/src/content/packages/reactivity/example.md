@@ -1,81 +1,43 @@
 ---
-title: Example
-description: Runnable patterns for @echojs-ecosystem/reactivity from the EchoJS example app.
+title: Examples
+description: Practical @echojs-ecosystem/reactivity patterns — counter, computed, batch, todos, scope, cart.
 package: "@echojs-ecosystem/reactivity"
 ---
 
-# Example — Reactivity
+# Examples
 
-Минимальный счётчик и список из **`apps/example`** (`features/reactivity-counter`).
+Focused, copy-paste patterns for real UI problems. Each example shows **model code first**, then how HyperDOM reads reactive state.
 
-## Model — signals
+> [!tip]
+> Run the interactive lab in the EchoJS example app at `/docs/reactivity`, or try the [Playground](/docs/packages/reactivity/playground).
 
-```ts
-import { signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
+## Pick an example
 
-export const createCounterModel = createModel(() => {
-  const $count = signal(0);
-  const $name = signal("Echo");
-  const $items = signal(["A", "B", "C"]);
-
-  return {
-    $count,
-    $name,
-    $items,
-    increment: () => $count.update((n) => n + 1),
-    appendItem: () =>
-      $items.set([...$items.value(), String($items.value().length + 1)]),
-    resetItems: () => $items.set(["X"]),
-    setName: (next: string) => $name.set(next),
-  };
-}, "CounterModel");
-```
-
-## View — read signals in HyperDOM
-
-```ts
-import { Show, createView } from "@echojs-ecosystem/hyperdom";
-import { button, span, section } from "@echojs-ecosystem/hyperdom";
-
-export const CounterView = createView((vm) =>
-  section(
-    { class: () => ({ "is-positive": vm.$count.value() > 0 }) },
-    button({ onClick: vm.increment }, () => "+1"),
-    span(null, () => String(vm.$count.value())),
-    Show(
-      () => vm.$count.value() > 0,
-      () => span(null, "Count is positive"),
-    ),
-  ),
-  "CounterView",
-);
-```
-
-`() => vm.$count.value()` в children и `class:` регистрирует зависимости — DOM обновляется без полного re-render дерева.
-
-## Batch update
-
-```ts
-import { batch, signal } from "@echojs-ecosystem/reactivity";
-
-const a = signal(0);
-const b = signal(0);
-
-batch(() => {
-  a.set(1);
-  b.set(2);
-});
-```
-
-## Live app
-
-| Resource | Path |
+| Example | Teaches |
 | --- | --- |
-| Example lab | `apps/example` → docs module **Reactivity** |
-| Source | `apps/example/src/features/reactivity-counter/` |
+| [Counter](/docs/packages/reactivity/examples/counter) | Writable `signal`, actions, reactive view children |
+| [Derived Greeting](/docs/packages/reactivity/examples/derived-greeting) | Chained `computed`, derived strings |
+| [Batch Updates](/docs/packages/reactivity/examples/batch-updates) | One notification for multiple writes |
+| [Todo List](/docs/packages/reactivity/examples/todo-list) | Immutable list updates in a signal |
+| [Scope & Timer](/docs/packages/reactivity/examples/scope-timer) | `scope`, `effect`, `cleanup` for intervals |
+| [Shopping Cart](/docs/packages/reactivity/examples/shopping-cart) | `computed` totals over object collections |
 
-## See also
+## Shared model pattern
 
-- Usage — `/docs/packages/reactivity/usage`
-- HyperDOM Example — `/docs/packages/hyperdom/example`
+All examples use `createModel` from HyperDOM — signals live inside the factory, actions mutate them, views read via `.value()` in reactive children:
+
+```ts
+export const createFeatureModel = createModel((): FeatureVM => {
+  const $state = signal(initial);
+  return {
+    /* readonly accessors + actions */
+  };
+}, "FeatureModel");
+```
+
+See [HyperDOM Integration](/docs/packages/reactivity/guides/hyperdom-integration) for why views rarely call `effect()` directly.
+
+## Related
+
+- [Guides & Concepts](/docs/packages/reactivity/guides/important-defaults)
+- [API Reference](/docs/packages/reactivity/api)

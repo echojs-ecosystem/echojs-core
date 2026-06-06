@@ -1,78 +1,40 @@
 ---
-title: Example
-description: Theme and counter stores from the EchoJS example docs module.
+title: Examples
+description: Practical @echojs-ecosystem/store patterns — theme, counter, views, combine, session.
 package: "@echojs-ecosystem/store"
 ---
 
-# Example — Store
+# Examples
 
-## State demo (`apps/example`)
+Focused, copy-paste patterns for shared application state. Each example shows **store definitions first**, then how models and views consume them.
+
+> [!tip]
+> Run the interactive lab in the EchoJS example app at `/docs/state`, or try the [Playground](/docs/packages/store/playground).
+
+## Pick an example
+
+| Example | Teaches |
+| --- | --- |
+| [Theme & Counter](/docs/packages/store/examples/theme-and-counter) | `createStore`, `withActions`, `select` |
+| [View Reads Store](/docs/packages/store/examples/view-integration) | HyperDOM views and `effect()` |
+| [combine Full Name](/docs/packages/store/examples/combine-names) | Multi-source derived state |
+| [Session Stores](/docs/packages/store/examples/session-stores) | Persist extensions for auth |
+
+## Shared pattern
+
+Stores live at module scope. Views and models import them and call actions — never raw `set` from UI code:
 
 ```ts
-// pages/docs/state/state.model.ts
-import { createStore, select, withActions } from "@echojs-ecosystem/store";
-
-export const themeStore = createStore("dark" as "dark" | "light", { name: "theme" }).extend(
-  withActions({
-    toggle: (store) => () =>
-      store.update((t) => (t === "dark" ? "light" : "dark")),
-    setDark: (store) => () => store.set("dark"),
-    setLight: (store) => () => store.set("light"),
-  }),
-);
-
 export const counterStore = createStore(0, { name: "counter" }).extend(
   withActions({
     increment: (store) => () => store.update((v) => v + 1),
-    decrement: (store) => () => store.update((v) => v - 1),
-    add: (store) => (amount: number) => store.update((v) => v + amount),
   }),
 );
-
-export const counterLabel = select(counterStore, (n) => `×${n}`, {
-  name: "counter-label",
-});
 ```
 
-## View reads store
+See [HyperDOM Integration](/docs/packages/store/guides/hyperdom-integration) for model vs store boundaries.
 
-```ts
-import { effect } from "@echojs-ecosystem/reactivity";
-import { themeStore } from "./state.model.js";
+## Related
 
-effect(() => {
-  document.documentElement.dataset.theme = themeStore.value();
-});
-
-button({ onClick: () => themeStore.toggle() }, () => `Theme: ${themeStore.value()}`);
-```
-
-## Session stores (with persist)
-
-См. также [Persist Example](/docs/packages/persist/example) — `authTokenStore` / `authUserStore` в `entities/session/auth-store.ts`.
-
-## combine
-
-```ts
-import { combine, createStore } from "@echojs-ecosystem/store";
-
-const first = createStore("Echo");
-const last = createStore("JS");
-
-const fullName = combine(
-  { first, last },
-  ({ first, last }) => `${first} ${last}`,
-);
-```
-
-## Live app
-
-| Resource | Path |
-| --- | --- |
-| State page model | `apps/example/src/pages/docs/state/state.model.ts` |
-| Auth stores | `apps/example/src/entities/session/auth-store.ts` |
-
-## See also
-
-- Persist Example — `/docs/packages/persist/example`
-- Usage — `/docs/packages/store/usage`
+- [Guides & Concepts](/docs/packages/store/guides/creating-stores)
+- [API Reference](/docs/packages/store/api)

@@ -8,39 +8,54 @@ package: "@echojs-ecosystem/hyperdom"
 
 HyperDOM is the **view layer** of EchoJS. It depends on `@echojs-ecosystem/reactivity` for dynamic regions and reactive props.
 
-## Requirements
+## Import paths
 
-- **ESM** bundler (Vite, Bun, etc.)
-- **`@echojs-ecosystem/reactivity`** — required peer-style dependency (workspace or npm)
+| Path | When to use |
+| --- | --- |
+| `@echojs-ecosystem/hyperdom` | À la carte install — explicit dependency in `package.json` |
+| `@echojs-ecosystem/framework/hyperdom` | You already use the framework meta-package — one install, subpath imports |
 
-## Package managers
+```ts
+// Standalone package
+import { render, div, createView } from "@echojs-ecosystem/hyperdom";
+
+// Same API via framework subpath
+import { render, div, createView } from "@echojs-ecosystem/framework/hyperdom";
+```
+
+> [!tip]
+> Pick **one style per app** and stay consistent. Mixing both paths works at runtime but clutters dependency graphs.
+
+## Quick install
+
+Standalone:
 
 :::install @echojs-ecosystem/hyperdom
 
+Reactivity is required for reactive children and props:
+
 :::install @echojs-ecosystem/reactivity
 
-> [!TIP]
+Or install the full framework once (includes HyperDOM and reactivity):
+
+:::install @echojs-ecosystem/framework
+
+> [!tip]
 > In EchoJS apps you usually install **framework** + **router** at the root; HyperDOM is still imported directly in views and widgets.
 
-## Monorepo (echojs-core)
+## Requirements
 
-```json
-{
-  "dependencies": {
-    "@echojs-ecosystem/hyperdom": "workspace:*",
-    "@echojs-ecosystem/reactivity": "workspace:*"
-  }
-}
-```
+| Requirement | Notes |
+| --- | --- |
+| **`@echojs-ecosystem/reactivity`** | Required peer-style dependency — install explicitly |
+| **ESM bundler** | Vite, Bun, webpack with ESM output |
+| **TypeScript** 5.x | Typed DSL tags and element props |
 
-```bash
-bun install
-```
-
-## Smoke test
+## Verify the import
 
 ```ts
 import { render, div, button } from "@echojs-ecosystem/hyperdom";
+// or: from "@echojs-ecosystem/framework/hyperdom"
 import { signal } from "@echojs-ecosystem/reactivity";
 
 const $n = signal(0);
@@ -71,10 +86,21 @@ import { setStrictContextChecks } from "@echojs-ecosystem/hyperdom";
 setStrictContextChecks(true);
 ```
 
-## Subpath export
+See [Important Defaults](/docs/packages/hyperdom/guides/important-defaults).
 
-Lifecycle hook as a child (advanced):
+## Lifecycle mount subpath
+
+The **lifecycle hook** `mount` is a separate subpath export (not the app `mount()` helper):
 
 ```ts
 import { mount } from "@echojs-ecosystem/hyperdom/lifecycle/mount";
 ```
+
+Use it as a **child** inside a view tree for after-insert hooks. See [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount) and [API: lifecycle/mount](/docs/packages/hyperdom/api/lifecycle-mount).
+
+## Next steps
+
+- [Important Defaults](/docs/packages/hyperdom/guides/important-defaults) — execution model and guardrails
+- [Views & DSL](/docs/packages/hyperdom/guides/views-and-dsl) — first UI patterns
+- [Examples](/docs/packages/hyperdom/example) — copy-paste patterns
+- [Playground](/docs/packages/hyperdom/playground) — live demo

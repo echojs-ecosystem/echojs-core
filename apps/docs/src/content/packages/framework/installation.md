@@ -6,9 +6,28 @@ package: "@echojs-ecosystem/framework"
 
 # Installation
 
-`@echojs-ecosystem/framework` is the app shell — it does not replace HyperDOM or the router; it composes them.
+`@echojs-ecosystem/framework` is the **recommended entry point** for EchoJS apps — one dependency, tree-shakeable subpaths for every ecosystem module, and `createEchoApp` as the composition root.
 
-## Package managers
+It does not replace HyperDOM or the router; it wires them together.
+
+## Import paths
+
+| Path | When to use |
+| --- | --- |
+| `@echojs-ecosystem/framework/app` | Bootstrap code — `createEchoApp`, `createProvider`, `provide` / `inject` |
+| `@echojs-ecosystem/framework/<module>` | Feature imports — same API as `@echojs-ecosystem/<module>` (reactivity, router, query, …) |
+| `@echojs-ecosystem/framework` | Convenience root barrel — prefer `/app` in bootstrap, subpaths in features |
+
+```ts
+import { createEchoApp, createProvider } from "@echojs-ecosystem/framework/app";
+```
+
+> [!tip]
+> Prefer **`/app`** in bootstrap files. Import feature packages directly in features when bundle size matters.
+
+There is **no** `@echojs-ecosystem/framework/framework` subpath — the meta package root is the barrel.
+
+## Quick install
 
 :::install @echojs-ecosystem/framework
 
@@ -21,16 +40,6 @@ Typical stack for a full SPA:
 :::install @echojs-ecosystem/router
 
 :::install @echojs-ecosystem/query
-
-## Import path
-
-Apps import from the **`/app`** subpath:
-
-```ts
-import { createEchoApp, createProvider } from "@echojs-ecosystem/framework/app";
-```
-
-The root `@echojs-ecosystem/framework` barrel re-exports convenience modules (`hyperdom`, `router`, …) for bundler aliases — prefer `/app` in bootstrap code.
 
 ## Minimal bootstrap
 
@@ -56,20 +65,10 @@ export const bootstrap = (): Promise<() => void> =>
 
 `mount()` returns `Promise<() => void>` — the disposer tears down HyperDOM render and provider side effects.
 
-## Monorepo
-
-```json
-{
-  "dependencies": {
-    "@echojs-ecosystem/framework": "workspace:*",
-    "@echojs-ecosystem/hyperdom": "workspace:*",
-    "@echojs-ecosystem/reactivity": "workspace:*"
-  }
-}
-```
-
 Reference implementations: `apps/docs`, `apps/example`.
 
-## Vite
+## Next steps
 
-Ensure workspace aliases match other EchoJS apps (`vite.config.ts` → `@echojs-ecosystem/framework`, peers).
+- [Important Defaults](/docs/packages/framework/guides/important-defaults) — mount pipeline and defaults
+- [createEchoApp](/docs/packages/framework/guides/create-echo-app) — options and teardown
+- [Examples](/docs/packages/framework/example) — full provider wiring

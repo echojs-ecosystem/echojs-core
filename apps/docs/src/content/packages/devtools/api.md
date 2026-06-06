@@ -1,22 +1,51 @@
 ---
 title: API Reference
-description: @echojs-ecosystem/devtools API — coming soon.
+description: @echojs-ecosystem/devtools public API — registry and bridge.
 package: "@echojs-ecosystem/devtools"
-status: draft
 ---
 
 # API Reference
 
-> [!NOTE]
-> **API не зафиксирован.** Таблица экспортов появится вместе с пакетом.
+Infrastructure layer for EchoJS DevTools. Integrating packages (store, query, router, …) register automatically — end users rarely call these APIs directly.
 
-## Planned exports (draft)
+```ts
+import {
+  setDevtoolsEnabled,
+  isDevtoolsEnabled,
+  registerDevtoolsNode,
+  unregisterDevtoolsNode,
+  emitDevtoolsEvent,
+  getNodeSnapshot,
+  getAllSnapshots,
+  getTimelineEvents,
+  subscribeTimeline,
+  getDevtoolsBridge,
+} from "@echojs-ecosystem/devtools";
+```
 
-| Export | Role |
+## Available today
+
+| Export | Description |
 | --- | --- |
-| `createDevtoolsProvider` | Echo provider |
-| Debug panels / hooks | TBD |
+| [registerDevtoolsNode](/docs/packages/devtools/api/register-node) | Register inspectable node |
+| [Bridge](/docs/packages/devtools/api/bridge) | `setDevtoolsEnabled`, global hook, bridge access |
+| `emitDevtoolsEvent` | Append timeline event |
+| `getNodeSnapshot` / `getAllSnapshots` | Read current state |
+| `subscribeTimeline` | Listen to events |
+| `createDevtoolsId`, `safeSerialize` | Utilities |
 
-## See also
+## Planned (not shipped)
 
-- [DevTools overview](/docs/packages/devtools)
+| Export | Status |
+| --- | --- |
+| `createDevtoolsProvider` | Echo provider — **planned** |
+| Browser overlay UI | Debug panels — **planned** |
+
+## Node types
+
+`store` · `query` · `mutation` · `router` · `persist` · `url-state` · `ui-provider` · `signal` · `custom`
+
+## Guides
+
+- [Overview](/docs/packages/devtools/guides/overview)
+- [Package Integration](/docs/packages/devtools/guides/integration)
