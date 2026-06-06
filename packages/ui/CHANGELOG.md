@@ -1,5 +1,16 @@
 # @echojs-ecosystem/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- update release flow
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/hyperdom@0.2.0
+
 ## 0.1.0
 
 ### Patch Changes

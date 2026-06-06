@@ -20,7 +20,7 @@
     },
     "apps/docs": {
       "name": "@echojs-ecosystem/docs",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/framework": "workspace:*",
         "shiki": "^3.4.0",
@@ -69,7 +69,7 @@
     },
     "packages/architect": {
       "name": "@echojs-ecosystem/architect",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "bin": {
         "echo-architect": "./dist/cli/index.js",
       },
@@ -103,7 +103,7 @@
     },
     "packages/core": {
       "name": "@echojs-ecosystem/core",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -117,7 +117,7 @@
     },
     "packages/devtools": {
       "name": "@echojs-ecosystem/devtools",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
         "typescript": "5.9.2",
@@ -126,7 +126,7 @@
     },
     "packages/form": {
       "name": "@echojs-ecosystem/form",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/persist": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
@@ -141,7 +141,7 @@
     },
     "packages/framework": {
       "name": "@echojs-ecosystem/framework",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/core": "workspace:*",
         "@echojs-ecosystem/devtools": "workspace:*",
@@ -164,7 +164,7 @@
     },
     "packages/hyperdom": {
       "name": "@echojs-ecosystem/hyperdom",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -177,7 +177,7 @@
     },
     "packages/i18n": {
       "name": "@echojs-ecosystem/i18n",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -189,7 +189,7 @@
     },
     "packages/persist": {
       "name": "@echojs-ecosystem/persist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -204,7 +204,7 @@
     },
     "packages/query": {
       "name": "@echojs-ecosystem/query",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -217,7 +217,7 @@
     },
     "packages/reactivity": {
       "name": "@echojs-ecosystem/reactivity",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "alien-signals": "^3.1.2",
       },
@@ -230,7 +230,7 @@
     },
     "packages/router": {
       "name": "@echojs-ecosystem/router",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/hyperdom": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
@@ -247,7 +247,7 @@
     },
     "packages/store": {
       "name": "@echojs-ecosystem/store",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -259,7 +259,7 @@
     },
     "packages/ui": {
       "name": "@echojs-ecosystem/ui",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/hyperdom": "workspace:*",
       },
@@ -281,7 +281,7 @@
     },
     "packages/url-state": {
       "name": "@echojs-ecosystem/url-state",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "dependencies": {
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
@@ -752,7 +752,7 @@
 
     "@types/mdx": ["@types/mdx@2.0.13", "", {}, "sha512-+OWZQfAYyio6YkJb3HLxDrvnx6SWWDbC0zVPfBRzUk0/nqoDyf6dNxQi3eArPe8rJ473nobTMQ/8Zk+LxJ+Yuw=="],
 
-    "@types/node": ["@types/node@24.13.0", "", { "dependencies": { "undici-types": "~7.18.0" } }, "sha512-5vtOqGQr4NJKeEzV441FcOi2MeG9UTWq9LqVLGneDdu4vlX17H8kQ2PA2UmNwCUGPVDj4oBjNhS7ReVEIWJJrg=="],
+    "@types/node": ["@types/node@24.13.1", "", { "dependencies": { "undici-types": "~7.18.0" } }, "sha512-RSpUJGmvsJ1ZeBehQZFhIdpsz+bIpES0nIQXko4Ybq+N+kX6XvOq3Jo+iJ82FWLdblFq85AsMikd3m35jgezYg=="],
 
     "@types/react": ["@types/react@19.2.17", "", { "dependencies": { "csstype": "^3.2.2" } }, "sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw=="],
 
@@ -1623,6 +1623,8 @@
     "@vue/compiler-sfc/estree-walker": ["estree-walker@2.0.2", "", {}, "sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w=="],
 
     "anymatch/picomatch": ["picomatch@2.3.2", "", {}, "sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA=="],
+
+    "bun-types/@types/node": ["@types/node@24.13.0", "", { "dependencies": { "undici-types": "~7.18.0" } }, "sha512-5vtOqGQr4NJKeEzV441FcOi2MeG9UTWq9LqVLGneDdu4vlX17H8kQ2PA2UmNwCUGPVDj4oBjNhS7ReVEIWJJrg=="],
 
     "c12/pathe": ["pathe@1.1.2", "", {}, "sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ=="],
 
