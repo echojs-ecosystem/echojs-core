@@ -43,13 +43,16 @@ bun run release:verify
 
 ### 4. Опубликовать на npm
 
+**Важно:** используйте `bun run release`, **не** `changeset publish`.
+`changeset publish` вызывает `npm publish` и оставляет `workspace:*` в tarball.
+
 Локально (нужен `.npmrc` с токеном или `NPM_TOKEN` в окружении):
 
 ```bash
 bun run release
 ```
 
-Сборка → verify → `changeset publish` (через `bun publish`).
+Цепочка: `build:packages` → `release:verify` (`bun pm pack`) → `publish-all.mjs` (`bun publish` для каждого пакета) → `changeset tag`.
 
 После publish проверьте:
 

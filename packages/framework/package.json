@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/framework",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "EchoJS meta-package — app bootstrap, providers, and tree-shakeable subpath re-exports for the full ecosystem",
   "files": [
     "dist"
