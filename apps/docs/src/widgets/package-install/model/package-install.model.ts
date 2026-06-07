@@ -36,6 +36,7 @@ export const createPackageInstallModel = (props: PackageInstallProps = {}) =>
     };
 
     return {
+      embedded: props.embedded ?? false,
       $manager,
       $copied,
       managers,

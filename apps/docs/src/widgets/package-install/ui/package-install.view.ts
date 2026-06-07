@@ -8,8 +8,8 @@ import type { PackageInstallVM } from "@widgets/package-install/types/package-in
 const styles = packageInstallStyles();
 
 export const PackageInstallView = createView((vm: PackageInstallVM): Child => {
-  return div({ class: styles.root() }, [
-    div({ class: styles.panel() }, [
+  return div({ class: vm.embedded ? styles.rootEmbedded() : styles.root() }, [
+    div({ class: vm.embedded ? styles.panelEmbedded() : styles.panel() }, [
       div({ class: styles.tabs() }, [
         ...vm.managers.map((pm) =>
           button(

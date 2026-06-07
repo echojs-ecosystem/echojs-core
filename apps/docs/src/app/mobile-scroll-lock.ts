@@ -1,6 +1,7 @@
 import { effect } from "@echojs-ecosystem/framework/reactivity";
-import { $mobileNavOpen } from "@widgets/docs-shell/model/mobile-nav.js";
-import { $homeNavOpen } from "@widgets/site-header/model/home-mobile-nav.js";
+import { appRouter } from "@app/router/router.js";
+import { $mobileNavOpen, closeMobileNav } from "@widgets/docs-shell/model/mobile-nav.js";
+import { $homeNavOpen, closeHomeNav } from "@widgets/site-header/model/home-mobile-nav.js";
 import { $mobileSearchOpen } from "@widgets/search/model/docs-search.model.js";
 
 let lockCount = 0;
@@ -30,5 +31,14 @@ export const bindMobileScrollLock = (): void => {
     const locked =
       $mobileNavOpen.value() || $homeNavOpen.value() || $mobileSearchOpen.value();
     setLocked(locked);
+  });
+};
+
+/** Close drawer menus after SPA navigation (NavLink uses programmatic routing). */
+export const bindMobileNavCloseOnNavigate = (): void => {
+  effect(() => {
+    appRouter.$path.value();
+    closeMobileNav();
+    closeHomeNav();
   });
 };

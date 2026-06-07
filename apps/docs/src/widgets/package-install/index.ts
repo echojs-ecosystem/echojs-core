@@ -10,6 +10,9 @@ export const PackageInstall = (props?: PackageInstallProps): Child =>
     name: "PackageInstall",
   })();
 
+/** Embedded inside hero showcase — no outer panel chrome. */
+export const PackageInstallEmbedded = (): Child => PackageInstall({ embedded: true });
+
 /** Package docs — `npm install @echojs-ecosystem/<pkg>`. */
 export const PackageInstallAdd = (packageName: string): Child =>
   PackageInstall({ mode: { kind: "add", packageName } });

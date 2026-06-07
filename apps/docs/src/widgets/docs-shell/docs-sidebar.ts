@@ -1,5 +1,5 @@
 import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { aside, div, nav, p, Show, span } from "@echojs-ecosystem/framework/hyperdom";
+import { aside, div, nav, p, Show } from "@echojs-ecosystem/framework/hyperdom";
 import { $mobileNavOpen } from "@widgets/docs-shell/model/mobile-nav.js";
 import { sidebarScrollRef } from "@widgets/docs-shell/helpers/sidebar-scroll.js";
 import { agentsNavItems, agentsNavSection, docsNavSections } from "@core/content/nav.js";
@@ -8,43 +8,23 @@ import { resolveNavIcon, resolveNavIconClass } from "@core/content/resolve-nav-i
 import { sidebarResourceLinks, type SidebarLink } from "@widgets/docs-shell/sidebar-extras.js";
 import { docPageByContentId } from "@app/router/doc-pages.js";
 import { shellStyles, sidebarPanelStyles } from "@widgets/docs-shell/docs-shell.styles.js";
-import type { NavIconId } from "@core/content/nav-icon-id.js";
-import { NavIcon } from "@widgets/icons/nav-icons.js";
 import { AgentNavLinkView } from "@widgets/docs-shell/agent-nav-link.view.js";
 import { PackageNavGroupView } from "@widgets/docs-shell/package-nav-group.js";
 import { SidebarNavLinkView } from "@widgets/docs-shell/sidebar-nav-link.view.js";
 
 const shell = shellStyles();
 
-const sectionIcons: Record<string, NavIconId> = {
-  introduction: "book",
-  "getting-started": "rocket",
-  architecture: "layers",
-  packages: "package",
-  comparisons: "git-branch",
-  guides: "compass",
-  state: "database",
-  examples: "layout-grid",
-  api: "api",
-  agents: "bot",
-  resources: "sparkles",
-};
+const sectionsWithoutItemIcons = new Set(["api"]);
 
 const closeMobileNavOnLinkClick = (event: MouseEvent): void => {
   const target = event.target as HTMLElement | null;
   if (target?.closest("a")) $mobileNavOpen.set(false);
 };
 
-const sectionNav = (sectionId: string, title: string, children: Child[]): Child[] => {
-  const icon = sectionIcons[sectionId];
-  return [
-    p({ class: shell.sectionTitle() }, [
-      icon ? NavIcon(icon, shell.sectionTitleIcon()) : null,
-      span(null, title),
-    ]),
-    ...children,
-  ];
-};
+const sectionNav = (_sectionId: string, title: string, children: Child[]): Child[] => [
+  p({ class: shell.sectionTitle() }, title),
+  ...children,
+];
 
 const resourceLink = (link: SidebarLink): Child => {
   if (link.kind === "external") {
@@ -94,11 +74,15 @@ const SidebarPanel = (): Child =>
               SidebarNavLinkView({
                 page: docPageByContentId[item.contentId]!,
                 label: item.title,
-                icon: resolveNavIcon(item.contentId, item.slug),
-                iconClassName:
-                  section.id === "comparisons"
-                    ? resolveNavIconClass(item.contentId)
-                    : undefined,
+                ...(sectionsWithoutItemIcons.has(section.id)
+                  ? {}
+                  : {
+                      icon: resolveNavIcon(item.contentId, item.slug),
+                      iconClassName:
+                        section.id === "comparisons"
+                          ? resolveNavIconClass(item.contentId)
+                          : undefined,
+                    }),
               }),
             ),
           );

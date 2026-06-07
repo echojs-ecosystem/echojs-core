@@ -62,6 +62,9 @@ export const docsNavSections: DocsNavSection[] = [
       item("routing", "Routing", "guides/routing"),
       item("data-fetching", "Data Fetching", "guides/data-fetching"),
       item("forms", "Forms", "guides/forms"),
+      item("conventions", "Conventions", "guides/conventions", {
+        keywords: ["naming", "signals", "stores", "createModel", "createView"],
+      }),
       item("authentication", "Authentication", "guides/authentication"),
       item("internationalization", "Internationalization", "guides/internationalization"),
       item("callouts", "Callouts", "guides/callouts", {

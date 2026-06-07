@@ -6,9 +6,10 @@ import {
   uiProvider,
 } from "@core/providers/index.js";
 import { routerProvider } from "@app/router-provider.js";
-import { bindMobileScrollLock } from "@app/mobile-scroll-lock.js";
+import { bindMobileNavCloseOnNavigate, bindMobileScrollLock } from "@app/mobile-scroll-lock.js";
 
 bindMobileScrollLock();
+bindMobileNavCloseOnNavigate();
 
 export const bootstrap = (): Promise<() => void> =>
   createEchoApp({

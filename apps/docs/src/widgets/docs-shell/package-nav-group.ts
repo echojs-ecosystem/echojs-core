@@ -45,6 +45,15 @@ const NavChevron = (isOpen: () => boolean, nested = false): Child =>
     ],
   );
 
+const navIconSlot = (icon: Child | null): Child =>
+  span({ class: shell.packageNavIconSlot() }, icon);
+
+const navLabel = (label: string, className?: string): Child =>
+  span({ class: cn(shell.packageNavLabel(), className) }, label);
+
+const navChevronSlot = (chevron: Child | null): Child =>
+  span({ class: shell.packageNavChevronSlot() }, chevron);
+
 /** One align effect per package group — view factory runs on every sidebar render. */
 const packageGroupPathEffects = new Set<string>();
 
@@ -77,6 +86,8 @@ const persistSubsectionExpanded = (groupId: string, subsectionId: string, open: 
   window.localStorage.setItem(`docs:pkg:${groupId}:${subsectionId}`, open ? "open" : "closed");
 };
 
+const subsectionsWithoutItemIcons = new Set(["guides", "api", "examples"]);
+
 const childLink = (
   page: AnyPage,
   label: string,
@@ -84,6 +95,7 @@ const childLink = (
   slug: string,
   nested = false,
   onNavigate?: () => void,
+  showIcon = true,
 ): Child =>
   div(
     {
@@ -93,15 +105,16 @@ const childLink = (
     [
       NavLink({
         to: page,
-        activeClass: navLinkStyles({ active: true, withIcon: true }),
+        activeClass: navLinkStyles({ active: true, withIcon: showIcon }),
         class: [
-          navLinkStyles({ withIcon: true }),
-          shell.packageChildLink(),
+          navLinkStyles({ withIcon: showIcon }),
+          shell.packageNavRow(),
           nested ? shell.packageChildNested() : "",
         ].join(" "),
         children: [
-          NavIcon(resolveNavIcon(contentId, slug), shell.packageChildIcon()),
-          span({ class: "min-w-0 truncate" }, label),
+          navIconSlot(showIcon ? NavIcon(resolveNavIcon(contentId, slug), shell.packageChildIcon()) : null),
+          navLabel(label),
+          navChevronSlot(null),
         ],
       }),
     ],
@@ -136,6 +149,8 @@ const PackageNavSubsectionView = (
     syncOpenForActivePage();
   });
 
+  const showItemIcon = !subsectionsWithoutItemIcons.has(subsection.id);
+
   const renderLeaf = (child: DocsNavItem): Child =>
     childLink(
       docPageByContentId[child.contentId]!,
@@ -144,6 +159,7 @@ const PackageNavSubsectionView = (
       child.slug,
       true,
       ensureGroupOpen,
+      showItemIcon,
     );
 
   return div({ class: shell.packageSubsection() }, [
@@ -151,17 +167,15 @@ const PackageNavSubsectionView = (
       {
         type: "button",
         class: () =>
-          cn(
-            shell.packageSubsectionBtn(),
-            "group",
-            $open.value() && shell.packageSubsectionBtnOpen(),
-          ),
+          cn(shell.packageSubsectionBtn(), "group"),
         onClick: toggle,
       },
       [
-        NavChevron(() => $open.value(), true),
-        NavIcon(subsectionIcons[subsection.id] ?? "file-text", shell.packageSubsectionIcon()),
-        span({ class: shell.packageSubsectionLabel() }, subsection.title),
+        navIconSlot(
+          NavIcon(subsectionIcons[subsection.id] ?? "file-text", shell.packageSubsectionIcon()),
+        ),
+        navLabel(subsection.title),
+        navChevronSlot(NavChevron(() => $open.value(), true)),
       ],
     ),
     () =>
@@ -225,32 +239,30 @@ export const PackageNavGroupView = (
     button(
       {
         type: "button",
-        class: () => {
-          const activePkg = typeof window !== "undefined" ? packageIdFromPathname(window.location.pathname) : null;
-          return cn(
+        class: () =>
+          cn(
             shell.packageGroupBtn(),
             "group",
             featured && shell.packageGroupBtnFeatured(),
-            ($open.value() || activePkg === group.id) &&
-              (featured ? shell.packageGroupBtnFeaturedActive() : shell.packageGroupBtnActive()),
-          );
-        },
+          ),
         onClick: toggle,
       },
       [
-        NavIcon(
-          groupIcon,
-          cn(shell.packageGroupIcon(), featured && shell.packageGroupIconFeatured()),
+        navIconSlot(
+          NavIcon(
+            groupIcon,
+            cn(shell.packageGroupIcon(), featured && shell.packageGroupIconFeatured()),
+          ),
         ),
-        NavChevron(() => $open.value()),
         span({ class: shell.packageGroupLabel() }, [
           span({ class: cn(shell.packageGroupName(), featured && shell.packageGroupNameFeatured()) }, [
             group.title,
             featured
-              ? span({ class: shell.packageGroupBadge() }, "Start here")
+              ? span({ class: shell.packageGroupBadge() }, "Start")
               : null,
           ]),
         ]),
+        navChevronSlot(NavChevron(() => $open.value())),
       ],
     ),
     () =>

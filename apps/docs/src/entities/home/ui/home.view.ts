@@ -65,7 +65,7 @@ export const HomeView = createView((vm: HomeVM): Child => {
               ]),
               div({ class: home.heroStats() }, [
                 ...homeStats.map((stat) =>
-                  div(null, [
+                  div({ class: home.heroStat() }, [
                     p({ class: home.heroStatValue() }, stat.value),
                     p({ class: home.heroStatLabel() }, stat.label),
                   ]),

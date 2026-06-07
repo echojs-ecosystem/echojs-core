@@ -7,9 +7,11 @@ export type PackageInstallMode =
 
 export type PackageInstallProps = {
   mode?: PackageInstallMode;
+  embedded?: boolean;
 };
 
 export type PackageInstallVM = {
+  embedded: boolean;
   $manager: Signal<PackageManagerId>;
   $copied: Signal<boolean>;
   managers: PackageManager[];

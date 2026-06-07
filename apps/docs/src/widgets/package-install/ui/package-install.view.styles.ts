@@ -2,9 +2,11 @@ import { tv } from "tailwind-variants";
 
 export const packageInstallStyles = tv({
   slots: {
-    root: "mt-5 w-full",
+    root: "mt-5 w-full min-w-0 max-w-full",
+    rootEmbedded: "w-full min-w-0 max-w-full",
     panel:
-      "overflow-hidden rounded-xl border border-white/10 bg-code-bg shadow-2xl shadow-black/30 ring-1 ring-white/[0.06]",
+      "max-w-full overflow-hidden rounded-xl border border-white/10 bg-code-bg shadow-2xl shadow-black/30 ring-1 ring-white/[0.06]",
+    panelEmbedded: "",
     tabs: "flex items-stretch gap-0.5 overflow-x-auto border-b border-white/10 px-1.5 pt-1.5",
     tab: [
       "inline-flex shrink-0 items-center gap-2 rounded-t-lg px-3.5 py-2.5 text-sm font-medium text-stone-400",

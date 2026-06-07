@@ -1,6 +1,15 @@
 import type { ContentId } from "./types.js";
 import type { NavIconId } from "./nav-icon-id.js";
 
+const overviewNavIcon: NavIconId = "app-window";
+
+const isOverviewNavItem = (contentId: ContentId, slug?: string): boolean => {
+  if (slug === "overview" || slug === "api-overview" || slug === "examples-overview") return true;
+  if (contentId.endsWith("/overview")) return true;
+  if (contentId === "comparisons/index") return true;
+  return /^packages\/[^/]+$/.test(contentId);
+};
+
 const byContentId: Record<ContentId, NavIconId> = {
   "introduction/what-is-echojs": "book",
   "introduction/why-echojs": "lightbulb",
@@ -30,6 +39,7 @@ const byContentId: Record<ContentId, NavIconId> = {
   "state/client-store": "save",
   "state/local-ui-state": "zap",
   "guides/forms": "form",
+  "guides/conventions": "scale",
   "guides/authentication": "shield",
   "guides/internationalization": "globe",
   "guides/callouts": "megaphone",
@@ -61,7 +71,7 @@ const packageGroupIcon: Record<string, NavIconId> = {
 };
 
 const packagePageIcon: Record<string, NavIconId> = {
-  overview: "book",
+  overview: overviewNavIcon,
   installation: "download",
   usage: "terminal",
   api: "api",
@@ -75,7 +85,7 @@ const packagePageIcon: Record<string, NavIconId> = {
   "readonly-signals": "shield",
   "immutable-updates": "save",
   "hyperdom-integration": "code",
-  "examples-overview": "book",
+  "examples-overview": overviewNavIcon,
   counter: "zap",
   "derived-greeting": "terminal",
   "batch-updates": "layers",
@@ -90,10 +100,12 @@ const packagePageIcon: Record<string, NavIconId> = {
   readonly: "shield",
   "type-guards": "api",
   types: "api",
-  "api-overview": "api",
+  "api-overview": overviewNavIcon,
 };
 
 export const resolveNavIcon = (contentId: ContentId, slug?: string): NavIconId => {
+  if (isOverviewNavItem(contentId, slug)) return overviewNavIcon;
+
   const explicit = byContentId[contentId];
   if (explicit) return explicit;
 

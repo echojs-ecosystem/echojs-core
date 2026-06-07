@@ -11,7 +11,7 @@ const shell = shellStyles();
 
 export type SidebarNavLinkProps = {
   label: string;
-  icon: NavIconId;
+  icon?: NavIconId;
   /** Optional override (e.g. framework brand colors on comparison links). */
   iconClassName?: string;
   badge?: string;
@@ -22,13 +22,15 @@ export type SidebarNavLinkProps = {
 );
 
 const linkInner = (props: SidebarNavLinkProps): Child[] => [
-  NavIcon(props.icon, cn(shell.sidebarNavIcon(), props.iconClassName)),
+  props.icon ? NavIcon(props.icon, cn(shell.sidebarNavIcon(), props.iconClassName)) : null,
   span({ class: shell.sidebarNavLabel() }, props.label),
   props.badge ? span({ class: shell.sidebarNavBadge() }, props.badge) : null,
   props.external ? NavIcon("external", shell.sidebarNavExternal()) : null,
 ];
 
 export const SidebarNavLinkView = createView((props: SidebarNavLinkProps): Child => {
+  const withIcon = Boolean(props.icon);
+
   if ("href" in props) {
     return h(
       "a",
@@ -44,8 +46,8 @@ export const SidebarNavLinkView = createView((props: SidebarNavLinkProps): Child
 
   return NavLink({
     to: props.page,
-    activeClass: navLinkStyles({ active: true, withIcon: true }),
-    class: navLinkStyles({ withIcon: true }),
+    activeClass: navLinkStyles({ active: true, withIcon }),
+    class: navLinkStyles({ withIcon }),
     children: linkInner(props),
   });
 }, "SidebarNavLinkView");
