@@ -1,19 +1,24 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { button } from "@echojs-ecosystem/framework/hyperdom";
-import { themeToggleStyles } from "@widgets/theme-toggle/ui/theme-toggle.view.styles.js";
-import { MoonIcon, SunIcon } from "@widgets/icons/theme-icons.js";
-import type { ThemeToggleVM } from "@widgets/theme-toggle/model/theme-toggle.model.js";
+import {
+  button,
+  type Child,
+  createView,
+} from '@echojs-ecosystem/framework/hyperdom'
+
+import { MoonIcon, SunIcon } from '@widgets/icons'
+
+import type { ThemeToggleVM } from '../model/theme-toggle.model.js'
+import { themeToggleStyles } from './theme-toggle.view.styles.js'
 
 export const ThemeToggleView = createView(
   (vm: ThemeToggleVM): Child =>
     button(
       {
-        type: "button",
+        type: 'button',
         class: themeToggleStyles(),
         onClick: vm.toggle,
-        "aria-label": "Toggle color theme",
+        'aria-label': 'Toggle color theme',
       },
-      () => (vm.isDarkMode() ? SunIcon() : MoonIcon()),
+      () => (vm.isDarkMode() ? SunIcon() : MoonIcon())
     ),
-  "ThemeToggleView",
-);
+  'ThemeToggleView'
+)

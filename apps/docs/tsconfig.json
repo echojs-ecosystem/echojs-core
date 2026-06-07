@@ -15,16 +15,22 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@pages/*": ["src/pages/*"],
-      "@entities/*": ["src/entities/*"],
-      "@widgets/*": ["src/widgets/*"],
-      "@core/*": ["src/core/*"],
+      "@app/*": ["src/app/*/index.ts", "src/app/*"],
+      "@pages/*": ["src/pages/*/index.ts", "src/pages/*"],
+      "@entities/*": ["src/entities/*/index.ts", "src/entities/*"],
+      "@widgets/*": ["src/widgets/*/index.ts", "src/widgets/*"],
+      "@core/*": ["src/core/*/index.ts", "src/core/*"],
       "@content/*": ["src/content/*"],
       "@echojs-ecosystem/framework": ["../../packages/framework/src/index.ts"],
-      "@echojs-ecosystem/framework/app": ["../../packages/framework/src/app/index.ts"],
-      "@echojs-ecosystem/framework/router/hyperdom": ["../../packages/framework/src/router.ts"],
-      "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": ["../../packages/framework/src/hyperdom-lifecycle-mount.ts"],
+      "@echojs-ecosystem/framework/app": [
+        "../../packages/framework/src/app/index.ts"
+      ],
+      "@echojs-ecosystem/framework/router/hyperdom": [
+        "../../packages/framework/src/router.ts"
+      ],
+      "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": [
+        "../../packages/framework/src/hyperdom-lifecycle-mount.ts"
+      ],
       "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
       "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"]
     }

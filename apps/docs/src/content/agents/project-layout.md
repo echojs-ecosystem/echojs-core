@@ -25,13 +25,14 @@ apps/docs/
 
 ## `pages/` — one route per folder
 
-| Page | Entry |
-|------|--------|
-| Home | `pages/home/home.page.ts` |
+| Page        | Entry                                     |
+| ----------- | ----------------------------------------- |
+| Home        | `pages/home/home.page.ts`                 |
 | Doc article | `pages/doc/` + `createDocPage(contentId)` |
-| Sponsors | `pages/sponsors/sponsors.page.ts` |
+| Sponsors    | `pages/sponsors/sponsors.page.ts`         |
 
-Each folder should contain **`constants/`**, **`types/`**, **`model/`**, **`ui/`** when the page has logic.
+Each folder should contain **`constants/`**, **`types/`**, **`model/`**,
+**`ui/`** when the page has logic.
 
 ## `widgets/` — reusable blocks
 

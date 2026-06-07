@@ -1,18 +1,20 @@
 ---
 title: Examples
-description: Theme persistence and auth session patterns with @echojs-ecosystem/persist.
-package: "@echojs-ecosystem/persist"
+description:
+  Theme persistence and auth session patterns with @echojs-ecosystem/persist.
+package: '@echojs-ecosystem/persist'
 ---
 
 # Examples
 
-Focused patterns for persisting Echo stores. Each example shows **store setup**, then **lifecycle** (login, logout, manual hydrate).
+Focused patterns for persisting Echo stores. Each example shows **store setup**,
+then **lifecycle** (login, logout, manual hydrate).
 
 ## Pick an example
 
-| Example | Teaches |
-| --- | --- |
-| [Theme Store](/docs/packages/persist/examples/theme-store) | Minimal `withLocalStorage` on a theme store |
+| Example                                                      | Teaches                                                          |
+| ------------------------------------------------------------ | ---------------------------------------------------------------- |
+| [Theme Store](/docs/packages/persist/examples/theme-store)   | Minimal `withLocalStorage` on a theme store                      |
 | [Auth Session](/docs/packages/persist/examples/auth-session) | Cookie token + localStorage profile, logout with `pause`/`clear` |
 
 ## Shared pattern
@@ -20,12 +22,13 @@ Focused patterns for persisting Echo stores. Each example shows **store setup**,
 Attach persistence via `.extend()` on a `createStore` instance:
 
 ```ts
-export const themeStore = createStore("dark").extend(
-  withLocalStorage({ key: "app-theme", version: 1 }),
-);
+export const themeStore = createStore('dark').extend(
+  withLocalStorage({ key: 'app-theme', version: 1 })
+)
 ```
 
-See [Important Defaults](/docs/packages/persist/guides/important-defaults) for the persist controller and record envelope.
+See [Important Defaults](/docs/packages/persist/guides/important-defaults) for
+the persist controller and record envelope.
 
 ## Related
 

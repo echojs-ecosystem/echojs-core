@@ -1,35 +1,37 @@
 ---
 title: Router Lifecycle
-description: createRouter, start/stop, global loading priority, and reactive router state.
-package: "@echojs-ecosystem/router"
+description:
+  createRouter, start/stop, global loading priority, and reactive router state.
+package: '@echojs-ecosystem/router'
 ---
 
 # Router Lifecycle
 
-Create the router with `createRouter`, start history listeners, and navigate imperatively or via page objects.
+Create the router with `createRouter`, start history listeners, and navigate
+imperatively or via page objects.
 
 ## createRouter
 
 ```ts
-import { createRouter } from "@echojs-ecosystem/router/hyperdom";
+import { createRouter } from '@echojs-ecosystem/router/hyperdom'
 
 const router = createRouter({
-  history: "browser",
+  history: 'browser',
   routes: appRoutes,
   loadingView: globalLoading,
   errorView: globalError,
   notFoundView: notFound,
   authorizationGuard: {
     isAuthorized: () => $session.value() != null,
-    allowedUnauthorizedPaths: ["/", "/login"],
-    redirectTo: "/login",
-    redirectWhenAuthorized: "/",
+    allowedUnauthorizedPaths: ['/', '/login'],
+    redirectTo: '/login',
+    redirectWhenAuthorized: '/',
   },
-});
+})
 
-router.start(); // listen to history / apply initial URL
-router.go("/users/42?tab=posts");
-router.stop(); // teardown
+router.start() // listen to history / apply initial URL
+router.go('/users/42?tab=posts')
+router.stop() // teardown
 ```
 
 ## Global UI priority
@@ -42,20 +44,21 @@ When a page is loading or errors:
 
 ## Router instance signals
 
-| Member | Description |
-| --- | --- |
-| `start()` / `stop()` | History listeners |
-| `go(path, { replace? })` | Navigate by path string |
-| `replace(path)` | `go` with replace |
-| `back()` / `forward()` | History |
-| `reload()` | Re-sync current URL |
-| `resolve(route, params?, { query? })` | Build URL string |
-| `isActive(route)` | Whether route is in active chain |
-| `View` / `view()` | HyperDOM root render fn |
-| `routes` | Named route map from tree |
-| `$path`, `$query`, `$fullPath`, `$activePage`, `$activeRoutes`, `$matched`, `$params`, `$pending`, `$error` | Reactive state |
+| Member                                                                                                      | Description                      |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `start()` / `stop()`                                                                                        | History listeners                |
+| `go(path, { replace? })`                                                                                    | Navigate by path string          |
+| `replace(path)`                                                                                             | `go` with replace                |
+| `back()` / `forward()`                                                                                      | History                          |
+| `reload()`                                                                                                  | Re-sync current URL              |
+| `resolve(route, params?, { query? })`                                                                       | Build URL string                 |
+| `isActive(route)`                                                                                           | Whether route is in active chain |
+| `View` / `view()`                                                                                           | HyperDOM root render fn          |
+| `routes`                                                                                                    | Named route map from tree        |
+| `$path`, `$query`, `$fullPath`, `$activePage`, `$activeRoutes`, `$matched`, `$params`, `$pending`, `$error` | Reactive state                   |
 
-Access pending/error via `router.$pending`, `router.$error`, or page state in views.
+Access pending/error via `router.$pending`, `router.$error`, or page state in
+views.
 
 ## Related
 

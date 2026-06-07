@@ -1,7 +1,7 @@
 ---
 title: cleanup
 description: cleanup(fn) — register teardown inside an active scope.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # cleanup
@@ -10,7 +10,8 @@ package: "@echojs-ecosystem/reactivity"
 function cleanup(fn: () => void): void
 ```
 
-Registers `fn` to run when the current `scope()` disposes. **Must** be called inside an active scope or throws:
+Registers `fn` to run when the current `scope()` disposes. **Must** be called
+inside an active scope or throws:
 
 ```
 cleanup(fn) must be called inside scope()
@@ -21,12 +22,12 @@ cleanup(fn) must be called inside scope()
 ## Example
 
 ```ts
-import { scope, cleanup } from "@echojs-ecosystem/reactivity";
+import { scope, cleanup } from '@echojs-ecosystem/reactivity'
 
 scope(() => {
-  const id = setInterval(tick, 1000);
-  cleanup(() => clearInterval(id));
-});
+  const id = setInterval(tick, 1000)
+  cleanup(() => clearInterval(id))
+})
 ```
 
 ## See also

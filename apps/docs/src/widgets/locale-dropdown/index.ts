@@ -1,7 +1,12 @@
-import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
-import { createLocaleDropdownModel } from "@widgets/locale-dropdown/model/locale-dropdown.model.js";
-import { LocaleDropdownView } from "@widgets/locale-dropdown/ui/locale-dropdown.view.js";
+import { createComponent } from '@echojs-ecosystem/framework/hyperdom'
 
-export const LocaleDropdown = createComponent(createLocaleDropdownModel, LocaleDropdownView, {
-  name: "LocaleDropdown",
-});
+import { createLocaleDropdownModel } from '@widgets/locale-dropdown/model/locale-dropdown.model.js'
+import { LocaleDropdownView } from '@widgets/locale-dropdown/ui/locale-dropdown.view.js'
+
+export const LocaleDropdown = createComponent(
+  createLocaleDropdownModel,
+  LocaleDropdownView,
+  {
+    name: 'LocaleDropdown',
+  }
+)

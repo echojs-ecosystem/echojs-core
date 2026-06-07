@@ -1,17 +1,21 @@
-import { createEchoApp } from "@echojs-ecosystem/framework/app";
+import { createEchoApp } from '@echojs-ecosystem/framework/app'
+
+import { bindDocsHeaderScroll } from '@app/docs-header-scroll'
+import {
+  bindMobileNavCloseOnNavigate,
+  bindMobileScrollLock,
+} from '@app/mobile-scroll-lock'
+import { routerProvider } from '@app/router-provider'
 import {
   i18nProvider,
   queryProvider,
   themeProvider,
   uiProvider,
-} from "@core/providers/index.js";
-import { routerProvider } from "@app/router-provider.js";
-import { bindDocsHeaderScroll } from "@app/docs-header-scroll.js";
-import { bindMobileNavCloseOnNavigate, bindMobileScrollLock } from "@app/mobile-scroll-lock.js";
+} from '@core/providers'
 
-bindMobileScrollLock();
-bindMobileNavCloseOnNavigate();
-bindDocsHeaderScroll();
+bindMobileScrollLock()
+bindMobileNavCloseOnNavigate()
+bindDocsHeaderScroll()
 
 export const bootstrap = (): Promise<() => void> =>
   createEchoApp({
@@ -22,4 +26,4 @@ export const bootstrap = (): Promise<() => void> =>
     .use(i18nProvider)
     .use(themeProvider)
     .use(routerProvider)
-    .mount("#app");
+    .mount('#app')

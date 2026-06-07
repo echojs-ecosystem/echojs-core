@@ -1,13 +1,13 @@
 ---
 title: Planned Commands
 description: Target CLI command UX (draft).
-package: "@echojs-ecosystem/cli"
+package: '@echojs-ecosystem/cli'
 ---
 
 # Planned Commands
 
-> [!warning]
-> **Commands below are not implemented.** Draft target UX for the first release.
+> [!warning] **Commands below are not implemented.** Draft target UX for the
+> first release.
 
 ## `create`
 
@@ -16,7 +16,8 @@ package: "@echojs-ecosystem/cli"
 echojs create my-app
 ```
 
-Scaffold a new EchoJS app with Vite, HyperDOM, router, and example feature slices.
+Scaffold a new EchoJS app with Vite, HyperDOM, router, and example feature
+slices.
 
 ## `generate`
 
@@ -25,7 +26,8 @@ Scaffold a new EchoJS app with Vite, HyperDOM, router, and example feature slice
 echojs generate feature docs-search
 ```
 
-Generate a feature folder with `index.ts`, `model/`, `ui/` segments per architect conventions.
+Generate a feature folder with `index.ts`, `model/`, `ui/` segments per
+architect conventions.
 
 ## `doctor`
 
@@ -35,16 +37,17 @@ echojs doctor
 echojs doctor --json   # CI output
 ```
 
-Validate feature-first layout — may delegate to [Architect](/docs/packages/architect) under the hood.
+Validate feature-first layout — may delegate to
+[Architect](/docs/packages/architect) under the hood.
 
 ## Config file (planned)
 
 ```ts
 // echojs.config.ts — planned
 export default {
-  srcDir: "src",
-  featuresDir: "features",
-};
+  srcDir: 'src',
+  featuresDir: 'features',
+}
 ```
 
 ## See also

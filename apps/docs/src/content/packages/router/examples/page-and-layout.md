@@ -1,7 +1,7 @@
 ---
 title: Page + Layout
 description: createRouteView and createLayoutView with beforeLoad.
-package: "@echojs-ecosystem/router"
+package: '@echojs-ecosystem/router'
 ---
 
 # Page + Layout
@@ -9,18 +9,18 @@ package: "@echojs-ecosystem/router"
 Shell layout renders `outlet()`; leaf page loads data with `beforeLoad`.
 
 ```ts
-import { createRouteView, createLayoutView } from "@echojs-ecosystem/router";
+import { createRouteView, createLayoutView } from '@echojs-ecosystem/router'
 
 const shell = createLayoutView({
-  name: "docs-shell",
+  name: 'docs-shell',
   view: ({ outlet }) => DocsShell(outlet()),
-});
+})
 
 const docPage = createRouteView({
-  name: "doc-article",
+  name: 'doc-article',
   view: ({ params }) => DocArticle({ contentId: params.contentId }),
   beforeLoad: async ({ params }) => loadDoc(params.contentId),
-});
+})
 ```
 
 In the tree:

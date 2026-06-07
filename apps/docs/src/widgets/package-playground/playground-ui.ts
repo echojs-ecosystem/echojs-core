@@ -1,3 +1,3 @@
-import { playgroundStyles } from "@widgets/package-playground/ui/package-playground.view.styles.js";
+import { playgroundStyles } from '@widgets/package-playground/ui/package-playground.view.styles.js'
 
-export const pg = playgroundStyles();
+export const pg = playgroundStyles()

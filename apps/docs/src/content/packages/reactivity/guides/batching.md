@@ -1,25 +1,26 @@
 ---
 title: Batching
 description: Coalesce multiple signal writes so dependents notify once.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # Batching
 
-`batch(fn)` runs a function and **defers reactive notifications** until the function completes. Dependents see all writes together and flush **once**.
+`batch(fn)` runs a function and **defers reactive notifications** until the
+function completes. Dependents see all writes together and flush **once**.
 
 ## Basic usage
 
 ```ts
-import { batch, signal } from "@echojs-ecosystem/reactivity";
+import { batch, signal } from '@echojs-ecosystem/reactivity'
 
-const $a = signal(0);
-const $b = signal(0);
+const $a = signal(0)
+const $b = signal(0)
 
 batch(() => {
-  $a.set(1);
-  $b.set(2);
-});
+  $a.set(1)
+  $b.set(2)
+})
 // Effects that depend on $a and/or $b run once after the batch
 ```
 
@@ -32,11 +33,11 @@ batch(() => {
 ```ts
 const applyFilters = (next: Filters) => {
   batch(() => {
-    $page.set(1);
-    $query.set(next.query);
-    $sort.set(next.sort);
-  });
-};
+    $page.set(1)
+    $query.set(next.query)
+    $sort.set(next.sort)
+  })
+}
 ```
 
 ## Return value
@@ -45,9 +46,9 @@ const applyFilters = (next: Filters) => {
 
 ```ts
 const result = batch(() => {
-  $a.set(1);
-  return $a.peek();
-});
+  $a.set(1)
+  return $a.peek()
+})
 ```
 
 ## Related

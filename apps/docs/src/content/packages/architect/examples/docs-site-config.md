@@ -1,7 +1,7 @@
 ---
 title: Docs Site Config
 description: architect.config.ts excerpt from apps/docs.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # Docs Site Config
@@ -16,59 +16,66 @@ import {
   noUnabstractionFiles,
   publicAbstraction,
   restrictCrossImports,
-} from "@echojs-ecosystem/architect";
+} from '@echojs-ecosystem/architect'
 
 const pageSlice = abstraction({
-  name: "page",
+  name: 'page',
   children: {
-    "*.page.ts": abstraction("page"),
-    "index.ts": abstraction("public-api"),
+    '*.page.ts': abstraction('page'),
+    'index.ts': abstraction('public-api'),
   },
   rules: [
-    publicAbstraction("page"),
-    publicAbstraction("public-api"),
+    publicAbstraction('page'),
+    publicAbstraction('public-api'),
     noUnabstractionFiles(),
   ],
-});
+})
 
 export default defineConfig({
-  baseUrl: "src",
-  ignores: ["**/*.md", "**/*.css", "**/*.json"],
+  baseUrl: 'src',
+  ignores: ['**/*.md', '**/*.css', '**/*.json'],
   root: abstraction({
-    name: "src",
+    name: 'src',
     children: {
       app: abstraction({
-        name: "app",
+        name: 'app',
         children: {
-          router: abstraction({ name: "router", children: { "*.ts": abstraction("routes-module") } }),
+          router: abstraction({
+            name: 'router',
+            children: { '*.ts': abstraction('routes-module') },
+          }),
           providers: abstraction({
-            name: "providers",
+            name: 'providers',
             children: {
-              "*.ts": abstraction("provider"),
-              "index.ts": abstraction("public-api"),
+              '*.ts': abstraction('provider'),
+              'index.ts': abstraction('public-api'),
             },
-            rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+            rules: [publicAbstraction('public-api'), noUnabstractionFiles()],
           }),
         },
       }),
       pages: abstraction({
-        name: "pages",
-        children: { "*": pageSlice },
+        name: 'pages',
+        children: { '*': pageSlice },
         rules: [restrictCrossImports()],
       }),
-      shared: abstraction({ name: "shared", children: { "**/*": abstraction("shared-module") } }),
+      shared: abstraction({
+        name: 'shared',
+        children: { '**/*': abstraction('shared-module') },
+      }),
     },
     rules: [
       dependenciesDirection(
-        ["app", "pages", "entities", "widgets", "features", "shared"],
-        { allowDownward: ["**/app/router/**", "**/core/providers/**"] },
+        ['app', 'pages', 'entities', 'widgets', 'features', 'shared'],
+        { allowDownward: ['**/app/router/**', '**/core/providers/**'] }
       ),
     ],
   }),
-});
+})
 ```
 
-Full file: [`apps/docs/architect.config.ts`](https://github.com/echojs/echojs/blob/main/apps/docs/architect.config.ts).
+Full file:
+[`apps/docs/architect.config.ts`](https://github.com/echojs/echojs/blob/main/apps/docs/architect.config.ts).
 
 ## See also
 

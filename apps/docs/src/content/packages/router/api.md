@@ -1,12 +1,13 @@
 ---
 title: API Reference
 description: Complete @echojs-ecosystem/router public API index.
-package: "@echojs-ecosystem/router"
+package: '@echojs-ecosystem/router'
 ---
 
 # API Reference
 
-Public exports from `@echojs-ecosystem/router` and `@echojs-ecosystem/router/hyperdom`:
+Public exports from `@echojs-ecosystem/router` and
+`@echojs-ecosystem/router/hyperdom`:
 
 ```ts
 import {
@@ -18,7 +19,7 @@ import {
   redirect,
   guardRoute,
   chainRoute,
-} from "@echojs-ecosystem/router";
+} from '@echojs-ecosystem/router'
 
 import {
   createRouter,
@@ -26,27 +27,28 @@ import {
   Link,
   NavLink,
   ROUTER_KEY,
-} from "@echojs-ecosystem/router/hyperdom";
+} from '@echojs-ecosystem/router/hyperdom'
 ```
 
 ## Core
 
-| Export | Description |
-| --- | --- |
-| [Route Views](/docs/packages/router/api/route-views) | `createRouteView`, `createLayoutView`, `createLazyRouteView`, page API |
-| [createRoutes & createRouter](/docs/packages/router/api/create-router) | Router factory, options, instance |
-| [Operators](/docs/packages/router/api/operators) | `redirect`, `guardRoute`, `chainRoute` |
-| [Path, Query & History](/docs/packages/router/api/path-query-history) | Path utilities, query parsing, history adapters |
+| Export                                                                 | Description                                                            |
+| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Route Views](/docs/packages/router/api/route-views)                   | `createRouteView`, `createLayoutView`, `createLazyRouteView`, page API |
+| [createRoutes & createRouter](/docs/packages/router/api/create-router) | Router factory, options, instance                                      |
+| [Operators](/docs/packages/router/api/operators)                       | `redirect`, `guardRoute`, `chainRoute`                                 |
+| [Path, Query & History](/docs/packages/router/api/path-query-history)  | Path utilities, query parsing, history adapters                        |
 
 ## HyperDOM
 
-| Export | Description |
-| --- | --- |
+| Export                                                     | Description                               |
+| ---------------------------------------------------------- | ----------------------------------------- |
 | [HyperDOM Integration](/docs/packages/router/api/hyperdom) | `createRouterProvider`, `Link`, `NavLink` |
 
 ## Guides
 
-Conceptual docs live under [Guides & Concepts](/docs/packages/router/guides/route-trees):
+Conceptual docs live under
+[Guides & Concepts](/docs/packages/router/guides/route-trees):
 
 - [Route Trees & Layouts](/docs/packages/router/guides/route-trees)
 - [Navigation & NavLink](/docs/packages/router/guides/navigation)

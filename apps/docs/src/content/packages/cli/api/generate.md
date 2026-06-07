@@ -1,13 +1,12 @@
 ---
 title: generate (planned)
 description: echojs generate — scaffold feature slices (planned).
-package: "@echojs-ecosystem/cli"
+package: '@echojs-ecosystem/cli'
 ---
 
 # generate (planned)
 
-> [!warning]
-> **Not implemented.** Target command for feature slice scaffolding.
+> [!warning] **Not implemented.** Target command for feature slice scaffolding.
 
 ```bash
 # planned
@@ -27,11 +26,11 @@ Aligned with [Architect](/docs/packages/architect) layer and public-api rules.
 
 ## Planned flags
 
-| Flag | Description |
-| --- | --- |
-| `--dry-run` | Print files without writing |
-| `--with-model` | Include `createModel` stub |
-| `--with-page` | Add `*.page.ts` route entry |
+| Flag           | Description                 |
+| -------------- | --------------------------- |
+| `--dry-run`    | Print files without writing |
+| `--with-model` | Include `createModel` stub  |
+| `--with-page`  | Add `*.page.ts` route entry |
 
 ## See also
 

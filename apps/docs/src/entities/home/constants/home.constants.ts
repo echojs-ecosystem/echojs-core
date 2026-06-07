@@ -1,4 +1,4 @@
-import type { CodeTab } from "@entities/home/types/home.types.js";
+import type { CodeTab } from '@entities/home/types/home.types.js'
 
 export const bootstrapExample = `import { createEchoApp } from "@echojs-ecosystem/framework/app"
 import { queryProvider } from "./providers/query"
@@ -11,7 +11,7 @@ createEchoApp({ strictContextChecks: true })
   .use(uiProvider)
   .use(i18nProvider)
   .use(routerProvider)
-  .mount("#app")`;
+  .mount("#app")`
 
 export const queryExample = `import { createQuery } from "@echojs-ecosystem/framework/query"
 
@@ -22,7 +22,7 @@ export const usersQuery = createQuery({
 })
 
 // In a page model — reactive cache, no hooks
-const users = usersQuery.with()`;
+const users = usersQuery.with()`
 
 export const modelViewExample = `import { signal } from "@echojs-ecosystem/framework/reactivity"
 import { createModel, createView, button } from "@echojs-ecosystem/framework/hyperdom"
@@ -38,7 +38,7 @@ export const createCounterModel = createModel((): CounterVM => {
 export const CounterView = createView((vm: CounterVM): Child =>
   button({ onClick: vm.increment }, () => String(vm.count())),
   "CounterView",
-)`;
+)`
 
 export const uiExample = `import { Button } from "@echojs-ecosystem/framework/ui"
 
@@ -48,51 +48,67 @@ Button({
   leftIcon: "✓",
   onClick: () => form.submit(),
   children: "Save changes",
-})`;
+})`
 
 export const codeTabs: readonly CodeTab[] = [
   {
-    id: "bootstrap",
-    label: "bootstrap.ts",
-    layer: "App shell",
-    icon: "◎",
+    id: 'bootstrap',
+    label: 'bootstrap.ts',
+    layer: 'App shell',
+    icon: '◎',
     code: bootstrapExample,
-    lang: "typescript",
-    title: "Compose once at the root",
-    body: "Providers register router, query, UI, and i18n. One mount target, strict context checks, predictable startup order.",
-    points: ["Fluent `.use()` pipeline", "Async provider setup", "Single `#app` mount"],
+    lang: 'typescript',
+    title: 'Compose once at the root',
+    body: 'Providers register router, query, UI, and i18n. One mount target, strict context checks, predictable startup order.',
+    points: [
+      'Fluent `.use()` pipeline',
+      'Async provider setup',
+      'Single `#app` mount',
+    ],
   },
   {
-    id: "query",
-    label: "users.query.ts",
-    layer: "Server state",
-    icon: "↻",
+    id: 'query',
+    label: 'users.query.ts',
+    layer: 'Server state',
+    icon: '↻',
     code: queryExample,
-    lang: "typescript",
-    title: "Data as definitions",
-    body: "Queries live in feature API modules. Models call `.with()` — views read `data()` and `isPending()`, never raw `fetch`.",
-    points: ["Stable `queryKey` tuples", "Abort-aware `queryFn`", "Invalidate after mutations"],
+    lang: 'typescript',
+    title: 'Data as definitions',
+    body: 'Queries live in feature API modules. Models call `.with()` — views read `data()` and `isPending()`, never raw `fetch`.',
+    points: [
+      'Stable `queryKey` tuples',
+      'Abort-aware `queryFn`',
+      'Invalidate after mutations',
+    ],
   },
   {
-    id: "model",
-    label: "counter.model.ts",
-    layer: "Model + View",
-    icon: "⚡",
+    id: 'model',
+    label: 'counter.model.ts',
+    layer: 'Model + View',
+    icon: '⚡',
     code: modelViewExample,
-    lang: "typescript",
-    title: "Behavior in the model",
-    body: "Signals and actions stay in `createModel`. Views stay declarative HyperDOM — the split scales better than mixing hooks in markup.",
-    points: ["Named models for DevTools", "Narrow VM surface", "Testable actions"],
+    lang: 'typescript',
+    title: 'Behavior in the model',
+    body: 'Signals and actions stay in `createModel`. Views stay declarative HyperDOM — the split scales better than mixing hooks in markup.',
+    points: [
+      'Named models for DevTools',
+      'Narrow VM surface',
+      'Testable actions',
+    ],
   },
   {
-    id: "ui",
-    label: "save-button.ts",
-    layer: "UI kit",
-    icon: "◈",
+    id: 'ui',
+    label: 'save-button.ts',
+    layer: 'UI kit',
+    icon: '◈',
     code: uiExample,
-    lang: "typescript",
-    title: "Primitives with variants",
-    body: "Accessible components on HyperDOM — `tailwind-variants` for design tokens, no shadow DOM wrapper tax.",
-    points: ["Variant + size API", "Icons & loading slots", "Headless mode when needed"],
+    lang: 'typescript',
+    title: 'Primitives with variants',
+    body: 'Accessible components on HyperDOM — `tailwind-variants` for design tokens, no shadow DOM wrapper tax.',
+    points: [
+      'Variant + size API',
+      'Icons & loading slots',
+      'Headless mode when needed',
+    ],
   },
-] as const;
+] as const

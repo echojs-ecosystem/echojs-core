@@ -1,7 +1,7 @@
 ---
 title: createQueryParams
 description: createQueryParam and createQueryParams — typed reactive URL state.
-package: "@echojs-ecosystem/url-state"
+package: '@echojs-ecosystem/url-state'
 ---
 
 # createQueryParams
@@ -9,10 +9,9 @@ package: "@echojs-ecosystem/url-state"
 ## createQueryParams
 
 ```ts
-function createQueryParams<Schema extends Record<string, ParserWithDefault<unknown>>>(
-  schema: Schema,
-  options?: CreateQueryParamsOptions,
-): QueryParamsState<Schema>
+function createQueryParams<
+  Schema extends Record<string, ParserWithDefault<unknown>>,
+>(schema: Schema, options?: CreateQueryParamsOptions): QueryParamsState<Schema>
 ```
 
 ## createQueryParam
@@ -21,36 +20,37 @@ function createQueryParams<Schema extends Record<string, ParserWithDefault<unkno
 function createQueryParam<T>(
   name: string,
   parser: ParserWithDefault<T>,
-  options?: QueryStateOptions,
+  options?: QueryStateOptions
 ): QueryParamState<T>
 ```
 
 ## CreateQueryParamsOptions
 
-| Field | Description |
-| --- | --- |
-| `urlKeys` | Map schema key → URL key name |
-| `adapter` | `UrlStateAdapter` |
-| `history` | `"push"` \| `"replace"` |
-| `shallow` | `boolean` |
-| `scroll` | `boolean` |
-| `defaultVisibility` | `"hide"` \| `"show"` |
-| `limitUrlUpdates` | debounce/throttle/false |
-| `equals` | custom equality |
+| Field               | Description                   |
+| ------------------- | ----------------------------- |
+| `urlKeys`           | Map schema key → URL key name |
+| `adapter`           | `UrlStateAdapter`             |
+| `history`           | `"push"` \| `"replace"`       |
+| `shallow`           | `boolean`                     |
+| `scroll`            | `boolean`                     |
+| `defaultVisibility` | `"hide"` \| `"show"`          |
+| `limitUrlUpdates`   | debounce/throttle/false       |
+| `equals`            | custom equality               |
 
 ## QueryParamState / QueryParamsState
 
-| Member | Description |
-| --- | --- |
-| `value()` | Parsed value(s) |
-| `set(value, options?)` | Write URL |
-| `update(fn, options?)` | Functional update |
-| `reset(options?)` | Defaults |
-| `clear(options?)` | Remove from URL (group) |
+| Member                 | Description             |
+| ---------------------- | ----------------------- |
+| `value()`              | Parsed value(s)         |
+| `set(value, options?)` | Write URL               |
+| `update(fn, options?)` | Functional update       |
+| `reset(options?)`      | Defaults                |
+| `clear(options?)`      | Remove from URL (group) |
 
 ## QueryStateSetOptions
 
-Per-call overrides for `set` / `update` / `reset`: `adapter`, `history`, `shallow`, `scroll`, `defaultVisibility`, `limitUrlUpdates`, `equals`.
+Per-call overrides for `set` / `update` / `reset`: `adapter`, `history`,
+`shallow`, `scroll`, `defaultVisibility`, `limitUrlUpdates`, `equals`.
 
 ## See also
 

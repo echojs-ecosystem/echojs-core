@@ -1,53 +1,69 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { button, div, span } from "@echojs-ecosystem/framework/hyperdom";
-import { packageInstallStyles } from "@widgets/package-install/ui/package-install.view.styles.js";
-import { HighlightedCommand } from "@widgets/package-install/highlighted-command.js";
-import { PackageManagerIcon } from "@widgets/package-install/pm-icons.js";
-import type { PackageInstallVM } from "@widgets/package-install/types/package-install.types.js";
+import {
+  button,
+  type Child,
+  createView,
+  div,
+  span,
+} from '@echojs-ecosystem/framework/hyperdom'
 
-const styles = packageInstallStyles();
+import { HighlightedCommand } from '@widgets/package-install/highlighted-command.js'
+import { PackageManagerIcon } from '@widgets/package-install/pm-icons.js'
+import type { PackageInstallVM } from '@widgets/package-install/types/package-install.types.js'
+import { packageInstallStyles } from '@widgets/package-install/ui/package-install.view.styles.js'
+
+const styles = packageInstallStyles()
 
 export const PackageInstallView = createView((vm: PackageInstallVM): Child => {
   return div({ class: vm.embedded ? styles.rootEmbedded() : styles.root() }, [
     div({ class: vm.embedded ? styles.panelEmbedded() : styles.panel() }, [
-      div({ class: styles.tabs() }, [
-        ...vm.managers.map((pm) =>
+      div(
+        { class: styles.tabs() },
+        vm.managers.map((pm) =>
           button(
             {
-              type: "button",
+              type: 'button',
               class: () =>
-                [styles.tab(), vm.isManagerActive(pm.id) ? styles.tabActive() : ""]
+                [
+                  styles.tab(),
+                  vm.isManagerActive(pm.id) ? styles.tabActive() : '',
+                ]
                   .filter(Boolean)
-                  .join(" "),
+                  .join(' '),
               onClick: () => vm.setManager(pm.id),
-              "aria-label": `Show install command for ${pm.label}`,
+              'aria-label': `Show install command for ${pm.label}`,
             },
-            [span({ class: styles.tabIcon() }, [PackageManagerIcon(pm.id)]), pm.label],
-          ),
-        ),
-      ]),
+            [
+              span({ class: styles.tabIcon() }, [PackageManagerIcon(pm.id)]),
+              pm.label,
+            ]
+          )
+        )
+      ),
       div(
         {
           class: styles.body(),
-          role: "button",
+          role: 'button',
           tabIndex: 0,
           onClick: () => void vm.copy(),
           onKeydown: vm.onBodyKeydown,
-          "aria-label": "Copy install command",
+          'aria-label': 'Copy install command',
         },
         [
           span(
             {
               class: () =>
-                [styles.copyHint(), vm.$copied.value() ? styles.copyHintVisible() : ""]
+                [
+                  styles.copyHint(),
+                  vm.$copied.value() ? styles.copyHintVisible() : '',
+                ]
                   .filter(Boolean)
-                  .join(" "),
+                  .join(' '),
             },
-            vm.copyHint,
+            vm.copyHint
           ),
           () => HighlightedCommand([...vm.activeTokens()]),
-        ],
+        ]
       ),
     ]),
-  ]);
-}, "PackageInstallView");
+  ])
+}, 'PackageInstallView')

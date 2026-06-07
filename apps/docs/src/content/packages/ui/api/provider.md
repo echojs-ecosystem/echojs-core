@@ -1,17 +1,18 @@
 ---
 title: UIProvider
 description: UIProvider and createUiProvider for global theme.
-package: "@echojs-ecosystem/ui"
+package: '@echojs-ecosystem/ui'
 ---
 
 # UIProvider
 
 ```ts
-import { UIProvider, createUiProvider } from "@echojs-ecosystem/ui/provider";
-import { createTheme } from "@echojs-ecosystem/ui/theme";
+import { UIProvider, createUiProvider } from '@echojs-ecosystem/ui/provider'
+import { createTheme } from '@echojs-ecosystem/ui/theme'
 ```
 
-Supplies global theme, default component variants, and optional overrides to all descendant views.
+Supplies global theme, default component variants, and optional overrides to all
+descendant views.
 
 ## createUiProvider
 
@@ -19,8 +20,13 @@ Echo app provider factory:
 
 ```ts
 export const uiProvider = createUiProvider({
-  theme: createTheme({ prefix: "echo", components: { /* … */ } }),
-});
+  theme: createTheme({
+    prefix: 'echo',
+    components: {
+      /* … */
+    },
+  }),
+})
 ```
 
 Register with `createEchoApp().use(uiProvider)`.

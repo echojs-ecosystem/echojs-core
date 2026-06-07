@@ -1,7 +1,8 @@
 ---
 title: createView
-description: createView(viewFn, name) — view factory with view context and displayName.
-package: "@echojs-ecosystem/hyperdom"
+description:
+  createView(viewFn, name) — view factory with view context and displayName.
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # createView
@@ -9,21 +10,23 @@ package: "@echojs-ecosystem/hyperdom"
 ```ts
 function createView<VM = void>(
   viewFn: (vm: VM) => Child,
-  name: string,
+  name: string
 ): (vm: VM) => Child & { displayName: string }
 ```
 
-Returns a view function that runs `viewFn` inside **view context**. Sets `displayName` for debugging and strict checks.
+Returns a view function that runs `viewFn` inside **view context**. Sets
+`displayName` for debugging and strict checks.
 
 ## Example
 
 ```ts
-import { createView, button } from "@echojs-ecosystem/hyperdom";
+import { createView, button } from '@echojs-ecosystem/hyperdom'
 
-export const CounterView = createView((vm: CounterVM) =>
-  button({ onClick: vm.increment }, () => String(vm.$count.value())),
-  "CounterView",
-);
+export const CounterView = createView(
+  (vm: CounterVM) =>
+    button({ onClick: vm.increment }, () => String(vm.$count.value())),
+  'CounterView'
+)
 ```
 
 `CounterView.displayName === "CounterView"`.

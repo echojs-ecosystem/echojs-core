@@ -1,23 +1,25 @@
 ---
 title: beforeLoad & Route Data
-description: Async route data loading, page.$data, and layout beforeLoad ordering.
-package: "@echojs-ecosystem/router"
+description:
+  Async route data loading, page.$data, and layout beforeLoad ordering.
+package: '@echojs-ecosystem/router'
 ---
 
 # beforeLoad & Route Data
 
-Load async data before a page renders. Results are stored on `page.$data` and passed to the view context.
+Load async data before a page renders. Results are stored on `page.$data` and
+passed to the view context.
 
 ## Page beforeLoad
 
 ```ts
 const docPage = createRouteView({
-  name: "doc",
+  name: 'doc',
   view: ({ data }) => DocView(data),
   beforeLoad: async ({ params }) => {
-    return loadMarkdown(params.contentId);
+    return loadMarkdown(params.contentId)
   },
-});
+})
 ```
 
 - Runs when route opens (and when params/query change per navigation)
@@ -30,21 +32,23 @@ Layout `beforeLoad` runs **before** child pages; failing layout skips children.
 
 ```ts
 const userPage = createRouteView({
-  name: "user",
+  name: 'user',
   view: ({ params, data }) => UserView(params, data),
   beforeLoad: async ({ params, query, navigationId }) => {
-    return fetchUser(params.id);
+    return fetchUser(params.id)
   },
   loadingView: () => RouterLoading(),
   errorView: ({ error }) => RouterError(error),
-});
+})
 ```
 
 ## Pending and error state
 
-Access via router signals: `router.$pending`, `router.$error`, or page `$pending` / `$error` in views.
+Access via router signals: `router.$pending`, `router.$error`, or page
+`$pending` / `$error` in views.
 
-Global loading/error UI falls back from page → layout → router — see [Router Lifecycle](/docs/packages/router/guides/router-lifecycle).
+Global loading/error UI falls back from page → layout → router — see
+[Router Lifecycle](/docs/packages/router/guides/router-lifecycle).
 
 ## Related
 

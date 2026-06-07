@@ -1,16 +1,17 @@
-import { signal } from "@echojs-ecosystem/framework/reactivity";
+import { signal } from '@echojs-ecosystem/framework/reactivity'
 
-const SCROLL_THRESHOLD = 8;
+const SCROLL_THRESHOLD = 8
 
-export const $docsHeaderScrolled = signal(false);
+export const $docsHeaderScrolled = signal(false)
 
-let bound = false;
+let bound = false
 
 export const bindDocsHeaderScroll = (): void => {
-  if (bound || typeof window === "undefined") return;
-  bound = true;
+  if (bound || typeof window === 'undefined') return
+  bound = true
 
-  const sync = (): void => $docsHeaderScrolled.set(window.scrollY > SCROLL_THRESHOLD);
-  sync();
-  window.addEventListener("scroll", sync, { passive: true });
-};
+  const sync = (): void =>
+    $docsHeaderScrolled.set(window.scrollY > SCROLL_THRESHOLD)
+  sync()
+  window.addEventListener('scroll', sync, { passive: true })
+}

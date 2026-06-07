@@ -1,7 +1,9 @@
 ---
 title: createMutation
-description: createMutation(options, meta?) — define a write operation with lifecycle hooks.
-package: "@echojs-ecosystem/query"
+description:
+  createMutation(options, meta?) — define a write operation with lifecycle
+  hooks.
+package: '@echojs-ecosystem/query'
 ---
 
 # createMutation
@@ -9,29 +11,29 @@ package: "@echojs-ecosystem/query"
 ```ts
 function createMutation<TData, TVariables, TError, TContext>(
   options: MutationOptions<TData, TVariables, TError, TContext>,
-  meta?: { provider?: QueryProvider | null },
+  meta?: { provider?: QueryProvider | null }
 ): MutationDefinition<TData, TVariables, TError, TContext>
 ```
 
 ## MutationOptions
 
-| Field | Description |
-| --- | --- |
-| `mutationFn` | `(ctx) => Promise<TData>` — `variables`, `signal`, … |
-| `onMutate` / `onSuccess` / `onError` / `onSettled` | Lifecycle |
-| `retry` / `retryDelay` | Same as queries |
-| `abortController` / `signal` | Abort wiring |
+| Field                                              | Description                                          |
+| -------------------------------------------------- | ---------------------------------------------------- |
+| `mutationFn`                                       | `(ctx) => Promise<TData>` — `variables`, `signal`, … |
+| `onMutate` / `onSuccess` / `onError` / `onSettled` | Lifecycle                                            |
+| `retry` / `retryDelay`                             | Same as queries                                      |
+| `abortController` / `signal`                       | Abort wiring                                         |
 
 ## MutationDefinition / MutationInstance
 
-| Member | Description |
-| --- | --- |
-| `.create({ client? })` | `MutationInstance` |
-| `run(variables, options?)` | Execute mutation |
-| `data()`, `error()`, `variables()`, `status()` | State |
-| `isPending()`, `isSuccess()`, … | Helpers |
-| `reset()` / `cancel()` | Control |
-| `$data`, `$error`, `$variables`, `$status`, `$abortSignal` | Signals |
+| Member                                                     | Description        |
+| ---------------------------------------------------------- | ------------------ |
+| `.create({ client? })`                                     | `MutationInstance` |
+| `run(variables, options?)`                                 | Execute mutation   |
+| `data()`, `error()`, `variables()`, `status()`             | State              |
+| `isPending()`, `isSuccess()`, …                            | Helpers            |
+| `reset()` / `cancel()`                                     | Control            |
+| `$data`, `$error`, `$variables`, `$status`, `$abortSignal` | Signals            |
 
 ## See also
 

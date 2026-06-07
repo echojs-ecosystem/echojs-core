@@ -1,7 +1,7 @@
 ---
 title: Show
 description: Show(condition, then, else?) — conditional dynamic region.
-package: "@echojs-ecosystem/hyperdom"
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # Show
@@ -10,40 +10,44 @@ package: "@echojs-ecosystem/hyperdom"
 function Show(
   condition: () => boolean,
   then: () => Child,
-  fallback?: () => Child,
+  fallback?: () => Child
 ): () => Child
 ```
 
-Returns a **dynamic child** that re-evaluates `condition()` and renders `then()` or `fallback()` on each update.
+Returns a **dynamic child** that re-evaluates `condition()` and renders `then()`
+or `fallback()` on each update.
 
 ## Parameters
 
-| Param | Type |
-| --- | --- |
-| `condition` | `() => boolean` |
-| `then` | `() => Child` |
-| `fallback` | optional `() => Child` |
+| Param       | Type                   |
+| ----------- | ---------------------- |
+| `condition` | `() => boolean`        |
+| `then`      | `() => Child`          |
+| `fallback`  | optional `() => Child` |
 
 Omit `fallback` for no else branch (`null`).
 
 ## Example
 
 ```ts
-import { Show } from "@echojs-ecosystem/hyperdom";
+import { Show } from '@echojs-ecosystem/hyperdom'
 
 Show(
   () => $loggedIn.value(),
   () => dashboard(),
-  () => loginForm(),
-);
+  () => loginForm()
+)
 ```
 
 Use as a child in a parent tree:
 
 ```ts
 article(null, [
-  Show(() => vm.$count.value() > 0, () => p(null, "Positive")),
-]);
+  Show(
+    () => vm.$count.value() > 0,
+    () => p(null, 'Positive')
+  ),
+])
 ```
 
 ## See also

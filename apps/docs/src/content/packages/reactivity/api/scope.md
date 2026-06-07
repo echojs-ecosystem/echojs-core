@@ -1,7 +1,7 @@
 ---
 title: scope
 description: scope(fn) — create a disposable effect scope.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # scope
@@ -10,21 +10,26 @@ package: "@echojs-ecosystem/reactivity"
 function scope(fn: () => void): () => void
 ```
 
-Starts an effect scope. Returns disposer that tears down effects created inside and runs registered `cleanup()` callbacks.
+Starts an effect scope. Returns disposer that tears down effects created inside
+and runs registered `cleanup()` callbacks.
 
 `fn` must be a function or `TypeError` is thrown.
 
 ## Example
 
 ```ts
-import { scope, effect, cleanup } from "@echojs-ecosystem/reactivity";
+import { scope, effect, cleanup } from '@echojs-ecosystem/reactivity'
 
 const stop = scope(() => {
-  effect(() => { /* ... */ });
-  cleanup(() => { /* teardown */ });
-});
+  effect(() => {
+    /* ... */
+  })
+  cleanup(() => {
+    /* teardown */
+  })
+})
 
-stop();
+stop()
 ```
 
 ## See also

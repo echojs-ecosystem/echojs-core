@@ -1,15 +1,18 @@
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
+import {
+  type Child,
+  createComponent,
+} from '@echojs-ecosystem/framework/hyperdom'
+
 import {
   createPackagePlaygroundModel,
   type PackagePlaygroundModelProps,
-} from "./model/package-playground.model.js";
-import { PackagePlaygroundView } from "./ui/package-playground.view.js";
+} from './model/package-playground.model.js'
+import { PackagePlaygroundView } from './ui/package-playground.view.js'
 
 /**
  * Dynamic child — tree builds inside hyperdom mount (not while DocRenderer assembles blocks).
  */
 export const PackagePlayground = (props: PackagePlaygroundModelProps): Child =>
   createComponent(createPackagePlaygroundModel(props), PackagePlaygroundView, {
-    name: "PackagePlayground",
-  });
+    name: 'PackagePlayground',
+  })

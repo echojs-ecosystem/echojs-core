@@ -1,30 +1,31 @@
 ---
 title: Public API
 description: publicAbstraction rule and barrel imports.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # Public API
 
-When `publicAbstraction("public-api")` is on a slice, external code must import `index.ts` (or another declared public segment like `*.page.ts` on pages).
+When `publicAbstraction("public-api")` is on a slice, external code must import
+`index.ts` (or another declared public segment like `*.page.ts` on pages).
 
 ## Rule
 
 ```ts
-publicAbstraction("public-api")
+publicAbstraction('public-api')
 ```
 
 Consumers import the barrel:
 
 ```ts
-import { themeStore } from "@core/providers/index.js";
+import { themeStore } from '@core/providers/index.js'
 ```
 
 Not deep paths:
 
 ```ts
 // forbidden
-import { themeStore } from "@core/providers/theme-store.ts";
+import { themeStore } from '@core/providers/theme-store.ts'
 ```
 
 ## Error message
@@ -35,7 +36,8 @@ import { themeStore } from "@core/providers/theme-store.ts";
 
 ## Page public API
 
-Pages use `publicAbstraction("page")` for `*.page.ts` route entries alongside `index.ts` barrels.
+Pages use `publicAbstraction("page")` for `*.page.ts` route entries alongside
+`index.ts` barrels.
 
 ## See also
 

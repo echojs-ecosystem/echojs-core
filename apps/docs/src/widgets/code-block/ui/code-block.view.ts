@@ -1,32 +1,37 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { div, button } from "@echojs-ecosystem/framework/hyperdom";
-import type { CodeBlockVM } from "@widgets/code-block/model/code-block.model.js";
-import { codeBlockStyles } from "@widgets/code-block/ui/code-block.view.styles.js";
+import {
+  button,
+  type Child,
+  createView,
+  div,
+} from '@echojs-ecosystem/framework/hyperdom'
 
-const code = codeBlockStyles();
+import type { CodeBlockVM } from '@widgets/code-block/model/code-block.model.js'
+import { codeBlockStyles } from '@widgets/code-block/ui/code-block.view.styles.js'
+
+const code = codeBlockStyles()
 
 export const CodeBlockView = createView((vm: CodeBlockVM): Child => {
-  const { props } = vm;
+  const { props } = vm
 
   const highlighted = div({
     class: props.bare ? code.bareBody() : code.body(),
-    ".innerHTML": () => vm.$html.value(),
-  });
+    '.innerHTML': () => vm.$html.value(),
+  })
 
-  if (props.bare) return highlighted;
+  if (props.bare) return highlighted
 
   return div({ class: code.root() }, [
     div({ class: code.header() }, [
-      div({ class: code.lang() }, props.language || "text"),
+      div({ class: code.lang() }, props.language || 'text'),
       button(
         {
-          type: "button",
+          type: 'button',
           class: code.copyBtn(),
           onClick: () => void vm.copy(),
         },
-        vm.copyLabel,
+        vm.copyLabel
       ),
     ]),
     highlighted,
-  ]);
-}, "CodeBlockView");
+  ])
+}, 'CodeBlockView')

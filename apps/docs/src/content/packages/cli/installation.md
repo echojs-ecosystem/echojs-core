@@ -1,13 +1,13 @@
 ---
 title: Installation
 description: Install @echojs-ecosystem/cli (planned).
-package: "@echojs-ecosystem/cli"
+package: '@echojs-ecosystem/cli'
 ---
 
 # Installation
 
-> [!warning]
-> **`@echojs-ecosystem/cli` is not released yet.** Use `apps/example` as the reference layout until `echojs create` ships.
+> [!warning] **`@echojs-ecosystem/cli` is not released yet.** Use `apps/example`
+> as the reference layout until `echojs create` ships.
 
 ## Planned install
 
@@ -30,14 +30,15 @@ When published:
 
 ## Planned requirements
 
-| Requirement | Notes |
-| --- | --- |
-| **Bun** or **Node** 20+ | Engine TBD at first release |
-| **Global vs local** | `bunx` for one-off scaffolds; `-D` for CI `doctor` |
+| Requirement             | Notes                                              |
+| ----------------------- | -------------------------------------------------- |
+| **Bun** or **Node** 20+ | Engine TBD at first release                        |
+| **Global vs local**     | `bunx` for one-off scaffolds; `-D` for CI `doctor` |
 
 ## Interim workflow
 
-Clone or copy from `apps/example` and adapt `package.json`, `src/`, and `architect.config.ts` manually.
+Clone or copy from `apps/example` and adapt `package.json`, `src/`, and
+`architect.config.ts` manually.
 
 ## Next steps
 

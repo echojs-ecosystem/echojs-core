@@ -1,12 +1,15 @@
 ---
 title: createQueryParams
-description: Typed param groups, urlKeys, set/update/reset/clear, and single createQueryParam.
-package: "@echojs-ecosystem/url-state"
+description:
+  Typed param groups, urlKeys, set/update/reset/clear, and single
+  createQueryParam.
+package: '@echojs-ecosystem/url-state'
 ---
 
 # createQueryParams
 
-`createQueryParams` creates a reactive object backed by multiple URL search params — the primary API for filters, pagination, and view toggles.
+`createQueryParams` creates a reactive object backed by multiple URL search
+params — the primary API for filters, pagination, and view toggles.
 
 ## Param group
 
@@ -18,21 +21,21 @@ import {
   parseAsLiteral,
   parseAsString,
   parseAsArrayOf,
-} from "@echojs-ecosystem/url-state";
+} from '@echojs-ecosystem/url-state'
 
 const filters = createQueryParams({
-  q: parseAsString.withDefault(""),
+  q: parseAsString.withDefault(''),
   page: parseAsInteger.withDefault(1),
   inStock: parseAsBoolean.withDefault(false),
-  view: parseAsLiteral(["grid", "list"] as const).withDefault("grid"),
+  view: parseAsLiteral(['grid', 'list'] as const).withDefault('grid'),
   tag: parseAsArrayOf(parseAsString).withDefault([]),
-});
+})
 
-filters.value();
-filters.set({ q: "bike", page: 2 });
-filters.update((v) => ({ ...v, page: v.page + 1 }));
-filters.reset();
-filters.clear();
+filters.value()
+filters.set({ q: 'bike', page: 2 })
+filters.update((v) => ({ ...v, page: v.page + 1 }))
+filters.reset()
+filters.clear()
 ```
 
 ## Single param — `createQueryParam`
@@ -40,14 +43,14 @@ filters.clear();
 For one isolated param:
 
 ```ts
-import { createQueryParam, parseAsInteger } from "@echojs-ecosystem/url-state";
+import { createQueryParam, parseAsInteger } from '@echojs-ecosystem/url-state'
 
-const page = createQueryParam("page", parseAsInteger.withDefault(1));
+const page = createQueryParam('page', parseAsInteger.withDefault(1))
 
-page.value();
-page.set(2, { history: "push" });
-page.update((p) => p + 1);
-page.reset();
+page.value()
+page.set(2, { history: 'push' })
+page.update((p) => p + 1)
+page.reset()
 ```
 
 ## `urlKeys` — rename query keys
@@ -61,9 +64,9 @@ const filters = createQueryParams(
     page: parseAsInteger.withDefault(1),
   },
   {
-    urlKeys: { inStock: "stock" },
-  },
-);
+    urlKeys: { inStock: 'stock' },
+  }
+)
 // URL uses ?stock=true, not ?inStock=true
 ```
 
@@ -73,25 +76,25 @@ Example: workspace products page in the example app.
 
 ```ts
 createQueryParams(schema, {
-  history: "replace",
+  history: 'replace',
   shallow: true,
-  defaultVisibility: "show",
-  urlKeys: { inStock: "stock" },
+  defaultVisibility: 'show',
+  urlKeys: { inStock: 'stock' },
   // limitUrlUpdates: debounce(500),
-});
+})
 ```
 
 Per-call overrides: `page.set(2, { history: "push" })`.
 
 ## Instance API
 
-| Member | Description |
-| --- | --- |
-| `value()` | Parsed object of all params |
-| `set(partial, options?)` | Merge and write URL |
-| `update(fn, options?)` | Functional update |
-| `reset(options?)` | Restore all defaults |
-| `clear(options?)` | Remove params from URL |
+| Member                   | Description                 |
+| ------------------------ | --------------------------- |
+| `value()`                | Parsed object of all params |
+| `set(partial, options?)` | Merge and write URL         |
+| `update(fn, options?)`   | Functional update           |
+| `reset(options?)`        | Restore all defaults        |
+| `clear(options?)`        | Remove params from URL      |
 
 ## Related
 

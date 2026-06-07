@@ -1,11 +1,19 @@
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
-import type { DocTocEntry } from "@core/content/extract-toc.js";
-import { createDocTocModel } from "@widgets/doc-content/model/doc-toc.model.js";
-import type { DocTocSpyProps } from "@widgets/doc-content/types/doc-toc.types.js";
-import { DocTocView } from "@widgets/doc-content/ui/doc-toc.view.js";
+import {
+  type Child,
+  createComponent,
+} from '@echojs-ecosystem/framework/hyperdom'
 
-export const DocToc = (entries: DocTocEntry[], spy: DocTocSpyProps): Child | null => {
-  if (entries.length === 0) return null;
-  return createComponent(createDocTocModel({ entries, ...spy }), DocTocView, { name: "DocToc" })();
-};
+import { createDocTocModel } from '@widgets/doc-content/model/doc-toc.model.js'
+import type { DocTocSpyProps } from '@widgets/doc-content/types/doc-toc.types.js'
+import { DocTocView } from '@widgets/doc-content/ui/doc-toc.view.js'
+import type { DocTocEntry } from '@core/content/extract-toc.js'
+
+export const DocToc = (
+  entries: DocTocEntry[],
+  spy: DocTocSpyProps
+): Child | null => {
+  if (entries.length === 0) return null
+  return createComponent(createDocTocModel({ entries, ...spy }), DocTocView, {
+    name: 'DocToc',
+  })()
+}

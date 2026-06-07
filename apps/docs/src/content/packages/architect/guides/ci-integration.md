@@ -1,12 +1,13 @@
 ---
 title: CI Integration
 description: Run architect lint in CI and programmatic lint API.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # CI Integration
 
-Run `echo-architect lint` in CI to catch layer and public API violations before merge.
+Run `echo-architect lint` in CI to catch layer and public API violations before
+merge.
 
 ## package.json script
 
@@ -28,12 +29,12 @@ Run `echo-architect lint` in CI to catch layer and public API violations before 
 ## Programmatic lint
 
 ```ts
-import { lint } from "@echojs-ecosystem/architect";
+import { lint } from '@echojs-ecosystem/architect'
 
 const result = await lint({
-  configPath: "./architect.config.ts",
+  configPath: './architect.config.ts',
   cwd: process.cwd(),
-});
+})
 ```
 
 Use in custom CI scripts or pre-commit hooks.
@@ -46,7 +47,9 @@ echo-architect lint --watch
 
 ## Pair with docs
 
-Align layer names in config with [Project Structure](/docs/getting-started/project-structure) and [Dependency Flow](/docs/architecture/dependency-flow).
+Align layer names in config with
+[Project Structure](/docs/getting-started/project-structure) and
+[Dependency Flow](/docs/architecture/dependency-flow).
 
 ## See also
 

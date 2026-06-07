@@ -1,27 +1,29 @@
 ---
 title: Rendering & Teardown
-description: Mount views with render() or mount(), and dispose cleanly on teardown.
-package: "@echojs-ecosystem/hyperdom"
+description:
+  Mount views with render() or mount(), and dispose cleanly on teardown.
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # Rendering & Teardown
 
-HyperDOM provides two entry points for putting a view tree into the DOM: **`render()`** (low-level) and **`mount()`** (convenience wrapper).
+HyperDOM provides two entry points for putting a view tree into the DOM:
+**`render()`** (low-level) and **`mount()`** (convenience wrapper).
 
 ## `render(view, container)`
 
 ```ts
-import { render } from "@echojs-ecosystem/hyperdom";
+import { render } from '@echojs-ecosystem/hyperdom'
 
-const dispose = render(appView, document.getElementById("app")!);
+const dispose = render(appView, document.getElementById('app')!)
 // later: dispose() — removes listeners, effects, DOM
 ```
 
-| Behavior | Detail |
-| --- | --- |
-| Clears container | Sets `container.textContent = ""` before mount |
-| Returns `dispose` | Call to tear down effects, listeners, and nodes |
-| Activates reactivity | Reactive children and props start tracking |
+| Behavior             | Detail                                          |
+| -------------------- | ----------------------------------------------- |
+| Clears container     | Sets `container.textContent = ""` before mount  |
+| Returns `dispose`    | Call to tear down effects, listeners, and nodes |
+| Activates reactivity | Reactive children and props start tracking      |
 
 See [API: render](/docs/packages/hyperdom/api/render).
 
@@ -30,20 +32,23 @@ See [API: render](/docs/packages/hyperdom/api/render).
 App-level helper that wraps `render` and optionally creates a container element:
 
 ```ts
-import { mount } from "@echojs-ecosystem/hyperdom";
+import { mount } from '@echojs-ecosystem/hyperdom'
 
 const { node, dispose } = mount(counterView, {
-  container: document.getElementById("app")!,
-  className: "app-root",
-});
+  container: document.getElementById('app')!,
+  className: 'app-root',
+})
 ```
 
-Returns `{ node: HTMLElement, dispose: () => void }`. The `node` may expose `__echoDispose` for framework interop.
+Returns `{ node: HTMLElement, dispose: () => void }`. The `node` may expose
+`__echoDispose` for framework interop.
 
 See [API: mount](/docs/packages/hyperdom/api/mount).
 
-> [!NOTE]
-> Do not confuse this with **`mount` from `@echojs-ecosystem/hyperdom/lifecycle/mount`** — that is a lifecycle **child hook**, not an app mount helper. See [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount).
+> [!NOTE] Do not confuse this with **`mount` from
+> `@echojs-ecosystem/hyperdom/lifecycle/mount`** — that is a lifecycle **child
+> hook**, not an app mount helper. See
+> [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount).
 
 ## What `dispose()` cleans up
 
@@ -54,11 +59,13 @@ Calling `dispose()`:
 - Runs lifecycle cleanup callbacks from `mount()` hooks
 - Clears mounted DOM under the container
 
-Always call `dispose()` when removing a view — leaked effects cause stale updates.
+Always call `dispose()` when removing a view — leaked effects cause stale
+updates.
 
 ## Router and framework integration
 
-In EchoJS apps, route views are mounted by the framework. Standalone demos and tests use `render()` / `mount()` directly.
+In EchoJS apps, route views are mounted by the framework. Standalone demos and
+tests use `render()` / `mount()` directly.
 
 ## Related
 

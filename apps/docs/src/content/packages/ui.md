@@ -1,7 +1,7 @@
 ---
 title: UI
 description: Accessible HyperDOM components and theming primitives.
-package: "@echojs-ecosystem/ui"
+package: '@echojs-ecosystem/ui'
 keywords: [Button, Field, UIProvider]
 ---
 
@@ -12,10 +12,10 @@ keywords: [Button, Field, UIProvider]
 ## Quick start
 
 ```ts
-import { Button, UIProvider } from "@echojs-ecosystem/ui";
+import { Button, UIProvider } from '@echojs-ecosystem/ui'
 
 // Register UIProvider in createEchoApp, then use Button in views.
 ```
 
-> [!note]
-> Full component docs are expanding — **Playground** shows a live Button demo today.
+> [!note] Full component docs are expanding — **Playground** shows a live Button
+> demo today.

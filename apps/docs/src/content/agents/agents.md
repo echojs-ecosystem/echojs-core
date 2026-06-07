@@ -1,29 +1,33 @@
 ---
 title: AGENTS.md
-description: Complete contributor and AI agent guide for the EchoJS documentation app.
+description:
+  Complete contributor and AI agent guide for the EchoJS documentation app.
 keywords: [agents, conventions, createModel, createView]
 ---
 
 # AGENTS.md
 
-Reference for **human contributors and coding agents** editing `apps/docs`. Follow this document before adding pages, widgets, or routes.
+Reference for **human contributors and coding agents** editing `apps/docs`.
+Follow this document before adding pages, widgets, or routes.
 
 ## Philosophy
 
-EchoJS separates **what changes** (model: signals, effects, actions) from **what is shown** (view: hyperdom). The docs site is the reference implementation of that idea — do not write “shortcut” components that mix both.
+EchoJS separates **what changes** (model: signals, effects, actions) from **what
+is shown** (view: hyperdom). The docs site is the reference implementation of
+that idea — do not write “shortcut” components that mix both.
 
 ## Project map
 
-| Path | Role |
-|------|------|
-| `src/app/` | Bootstrap, router, global CSS |
-| `src/core/providers/` | Query, UI, i18n, theme providers |
-| `src/pages/` | Route-level features (home, sponsors, doc article) |
-| `src/widgets/` | Reusable UI (header, sidebar, code-block, …) |
-| `src/core/` | Styles (`tv()`), content engine, SEO, search |
-| `src/content/` | Markdown sources |
-| `src/entities/__routes__/` | Router tables, doc page cache |
-| `public/llms.txt` | Compact rules for LLM tools |
+| Path                       | Role                                               |
+| -------------------------- | -------------------------------------------------- |
+| `src/app/`                 | Bootstrap, router, global CSS                      |
+| `src/core/providers/`      | Query, UI, i18n, theme providers                   |
+| `src/pages/`               | Route-level features (home, sponsors, doc article) |
+| `src/widgets/`             | Reusable UI (header, sidebar, code-block, …)       |
+| `src/core/`                | Styles (`tv()`), content engine, SEO, search       |
+| `src/content/`             | Markdown sources                                   |
+| `src/entities/__routes__/` | Router tables, doc page cache                      |
+| `public/llms.txt`          | Compact rules for LLM tools                        |
 
 ## Standard feature layout
 
@@ -50,36 +54,37 @@ widgets/code-block/
 From `@echojs-ecosystem/hyperdom`:
 
 ```typescript
-import { signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { signal } from '@echojs-ecosystem/reactivity'
+import { createModel } from '@echojs-ecosystem/hyperdom'
 
 export type CounterVM = {
-  $count: Signal<number>;
-  increment: () => void;
-};
+  $count: Signal<number>
+  increment: () => void
+}
 
 export const createCounterModel = createModel((): CounterVM => {
-  const $count = signal(0);
+  const $count = signal(0)
   return {
     $count,
     increment: () => $count.update((n) => n + 1),
-  };
-}, "CounterModel");
+  }
+}, 'CounterModel')
 ```
 
 - Always pass a **display name** string (`"CounterModel"`) for debugging
 - Return a **plain object** (the VM)
-- Props: `createCounterModel = (props: Props) => createModel((): CounterVM => ({ props, … }), "CounterModel")`
+- Props:
+  `createCounterModel = (props: Props) => createModel((): CounterVM => ({ props, … }), "CounterModel")`
 
 ## createView
 
 ```typescript
-import { createView, type Child } from "@echojs-ecosystem/hyperdom";
-import type { CounterVM } from "../model/counter.model.js";
+import { createView, type Child } from '@echojs-ecosystem/hyperdom'
+import type { CounterVM } from '../model/counter.model.js'
 
 export const CounterView = createView((vm: CounterVM): Child => {
-  return button({ onClick: vm.increment }, () => String(vm.$count.value()));
-}, "CounterView");
+  return button({ onClick: vm.increment }, () => String(vm.$count.value()))
+}, 'CounterView')
 ```
 
 - **Only** hyperdom / `NavLink` / child views — no new signals
@@ -91,37 +96,50 @@ export const CounterView = createView((vm: CounterVM): Child => {
 Use `createComponent` from `@echojs-ecosystem/hyperdom`:
 
 ```typescript
-import { createComponent } from "@echojs-ecosystem/hyperdom";
+import { createComponent } from '@echojs-ecosystem/hyperdom'
 
-export const Counter = createComponent(createCounterModel, CounterView, { name: "Counter" });
+export const Counter = createComponent(createCounterModel, CounterView, {
+  name: 'Counter',
+})
 // route: view: () => Counter()
 ```
 
-Reactive classes (e.g. header scroll): return a **function child** from `createView` that reads VM and rebuilds the tree:
+Reactive classes (e.g. header scroll): return a **function child** from
+`createView` that reads VM and rebuilds the tree:
 
 ```typescript
 export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
   return () => {
-    const hdr = vm.headerStyles();
-    return header({ class: hdr.root() }, [/* … */]);
-  };
-}, "SiteHeaderView");
+    const hdr = vm.headerStyles()
+    return header({ class: hdr.root() }, [
+      /* … */
+    ])
+  }
+}, 'SiteHeaderView')
 ```
 
 ## Styling
 
 - Design tokens in `src/app/styles/global.css` (`@theme`)
-- Component styles: `core/styles/*.ts` with `tv({ slots: { … }, variants: { … } })`
-- Do not hardcode one-off colors in views when a token exists (`echo-*`, `surface`, `fg-muted`)
+- Component styles: `core/styles/*.ts` with
+  `tv({ slots: { … }, variants: { … } })`
+- Do not hardcode one-off colors in views when a token exists (`echo-*`,
+  `surface`, `fg-muted`)
 
 ## Content & sidebar
 
-- Markdown: `src/content/<path>.md` with YAML frontmatter (`title`, `description`)
-- Install panel (same widget as home hero): standalone line `:::install @echojs-ecosystem/reactivity` — do not duplicate `:::tabs` bash blocks for package adds
+- Markdown: `src/content/<path>.md` with YAML frontmatter (`title`,
+  `description`)
+- Install panel (same widget as home hero): standalone line
+  `:::install @echojs-ecosystem/reactivity` — do not duplicate `:::tabs` bash
+  blocks for package adds
 - Package badge line: `@echojs-ecosystem/reactivity` under frontmatter
-- Nav: `core/content/nav.ts` — `docsNavSections` + `item(slug, title, contentId)`
-- Package docs: Overview · Installation · Usage · Example · **Playground** · API (`package-nav.ts`)
-- Interactive embed: standalone line `:::playground reactivity` → `widgets/package-playground` (live UI + JSON state)
+- Nav: `core/content/nav.ts` — `docsNavSections` +
+  `item(slug, title, contentId)`
+- Package docs: Overview · Installation · Usage · Example · **Playground** · API
+  (`package-nav.ts`)
+- Interactive embed: standalone line `:::playground reactivity` →
+  `widgets/package-playground` (live UI + JSON state)
 - Static code: `packages/<id>/example.md` from `apps/docs` / `apps/example`
 - Agent docs: `core/content/agents-nav.ts` — sidebar block **For agents**
 - Routes: auto via `docPageByContentId` from `allDocsNavItems`
@@ -129,7 +147,8 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 ## Queries & SEO
 
 - `createQuery` in **model** (see `pages/doc/model/doc-article.model.ts`)
-- `applySeo()` in page `view` callback or model `effect` — not in presentational view files
+- `applySeo()` in page `view` callback or model `effect` — not in presentational
+  view files
 
 ## Checklist before opening a PR
 
@@ -141,4 +160,6 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 
 ## Related
 
-- [LLMs.txt](/docs/agents/llms-txt) · [Model & View](/docs/agents/model-and-view) · [Project layout](/docs/agents/project-layout)
+- [LLMs.txt](/docs/agents/llms-txt) ·
+  [Model & View](/docs/agents/model-and-view) ·
+  [Project layout](/docs/agents/project-layout)

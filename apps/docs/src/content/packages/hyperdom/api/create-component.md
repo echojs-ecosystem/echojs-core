@@ -1,34 +1,37 @@
 ---
 title: createComponent
-description: createComponent(model, view, options?) — bind model factory and view into a component.
-package: "@echojs-ecosystem/hyperdom"
+description:
+  createComponent(model, view, options?) — bind model factory and view into a
+  component.
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # createComponent
 
 ```ts
-type ModelFactory<VM> = () => VM;
-type ViewFn<VM> = (vm: VM) => Child;
+type ModelFactory<VM> = () => VM
+type ViewFn<VM> = (vm: VM) => Child
 
 type CreateComponentOptions = {
-  name?: string;
-};
+  name?: string
+}
 
 function createComponent<VM>(
   model: ModelFactory<VM>,
   view: ViewFn<VM>,
-  options?: CreateComponentOptions,
+  options?: CreateComponentOptions
 ): () => Child
 ```
 
-Binds a model factory and view into a callable `() => Child`. Each invocation runs `model()` then `view(vm)`.
+Binds a model factory and view into a callable `() => Child`. Each invocation
+runs `model()` then `view(vm)`.
 
 ## No props
 
 ```ts
 export const Counter = createComponent(createCounterModel, CounterView, {
-  name: "Counter",
-});
+  name: 'Counter',
+})
 
 // route: view: () => Counter()
 ```
@@ -42,8 +45,8 @@ Pass a **bound** model factory when props are required:
 ```ts
 export const DocArticle = (props: { contentId: string }) =>
   createComponent(createDocArticleModel(props), DocArticleView, {
-    name: "DocArticle",
-  })();
+    name: 'DocArticle',
+  })()
 ```
 
 Here `createDocArticleModel(props)` returns `() => VM`.

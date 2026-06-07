@@ -1,1 +1,1 @@
-export { HomeHeader } from "@widgets/site-header/index.js";
+export { HomeHeader } from '@widgets/site-header'

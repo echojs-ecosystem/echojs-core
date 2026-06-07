@@ -1,15 +1,23 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { div, h, h1, main, p } from "@echojs-ecosystem/framework/hyperdom";
-import type { SponsorsVM } from "@entities/sponsors/types/sponsors.types.js";
-import { becomeSponsorUrl } from "@widgets/sponsors/constants/sponsors.data.js";
-import { homeButtonStyles } from "@entities/home/ui/home-button.styles.js";
-import { sponsorsPageStyles } from "@entities/sponsors/ui/sponsors.view.styles.js";
-import { HomeFooter } from "@widgets/home-shell/index.js";
-import { HomeHeader } from "@widgets/home-shell/home-header.js";
-import { SponsorsBoard } from "@widgets/sponsors/sponsors-board.js";
+import {
+  type Child,
+  createView,
+  div,
+  h,
+  h1,
+  main,
+  p,
+} from '@echojs-ecosystem/framework/hyperdom'
 
-const page = sponsorsPageStyles();
-const btn = homeButtonStyles();
+import { HomeFooter } from '@widgets/home-shell'
+import { HomeHeader } from '@widgets/home-shell/home-header.js'
+import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data.js'
+import { SponsorsBoard } from '@widgets/sponsors/sponsors-board.js'
+import { homeButtonStyles } from '@entities/home/ui/home-button.styles.js'
+import type { SponsorsVM } from '@entities/sponsors/types/sponsors.types.js'
+import { sponsorsPageStyles } from '@entities/sponsors/ui/sponsors.view.styles.js'
+
+const page = sponsorsPageStyles()
+const btn = homeButtonStyles()
 
 export const SponsorsView = createView(
   (_vm: SponsorsVM): Child =>
@@ -19,35 +27,35 @@ export const SponsorsView = createView(
       main({ class: page.main() }, [
         div({ class: page.container() }, [
           div({ class: page.header() }, [
-            h1({ class: page.title() }, "Sponsors"),
+            h1({ class: page.title() }, 'Sponsors'),
             p({ class: page.lead() }, [
-              "EchoJS is free and open source thanks to sponsors who fund documentation, CI, and core package maintenance. Join them and get your brand in front of thousands of developers.",
+              'EchoJS is free and open source thanks to sponsors who fund documentation, CI, and core package maintenance. Join them and get your brand in front of thousands of developers.',
             ]),
           ]),
-          div({ class: page.tiers() }, [SponsorsBoard({ variant: "full" })]),
+          div({ class: page.tiers() }, [SponsorsBoard({ variant: 'full' })]),
           div({ class: page.ctaBlock() }, [
-            p({ class: page.ctaTitle() }, "Support the ecosystem"),
+            p({ class: page.ctaTitle() }, 'Support the ecosystem'),
             p({ class: page.ctaBody() }, [
-              "Gold, Silver, and Bronze tiers include logo placement on the docs site, README mentions, and community recognition.",
+              'Gold, Silver, and Bronze tiers include logo placement on the docs site, README mentions, and community recognition.',
             ]),
             div({ class: page.ctaActions() }, [
               h(
-                "a",
+                'a',
                 {
                   href: becomeSponsorUrl,
-                  target: "_blank",
-                  rel: "noopener noreferrer",
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
                   class: btn.primary(),
                 },
-                "Become a sponsor",
+                'Become a sponsor'
               ),
               h(
-                "a",
+                'a',
                 {
-                  href: "mailto:sponsors@echojs.dev",
+                  href: 'mailto:sponsors@echojs.dev',
                   class: btn.secondary(),
                 },
-                "Contact us",
+                'Contact us'
               ),
             ]),
           ]),
@@ -55,5 +63,5 @@ export const SponsorsView = createView(
         ]),
       ]),
     ]),
-  "SponsorsView",
-);
+  'SponsorsView'
+)

@@ -6,11 +6,14 @@ keywords: [llms, agents, cursor, copilot]
 
 # LLMs.txt
 
-Short contract for tools that edit **`apps/docs`**. The canonical plain-text copy also lives at [/llms.txt](/llms.txt).
+Short contract for tools that edit **`apps/docs`**. The canonical plain-text
+copy also lives at [/llms.txt](/llms.txt).
 
 ## Stack
 
-- **EchoJS** — `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/reactivity`, `@echojs-ecosystem/router`, `@echojs-ecosystem/query`, `@echojs-ecosystem/i18n`, `@echojs-ecosystem/framework`
+- **EchoJS** — `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/reactivity`,
+  `@echojs-ecosystem/router`, `@echojs-ecosystem/query`,
+  `@echojs-ecosystem/i18n`, `@echojs-ecosystem/framework`
 - **Styling** — Tailwind v4 + `tailwind-variants` (`tv()`)
 - **Content** — Markdown in `src/content/`, lazy-loaded per route
 
@@ -18,51 +21,54 @@ Short contract for tools that edit **`apps/docs`**. The canonical plain-text cop
 
 **Logic and UI are always separate.**
 
-| Layer | File | API |
-|--------|------|-----|
-| State & behavior | `model/*.model.ts` | `createModel` |
-| Markup only | `ui/*.view.ts` | `createView` |
-| Types | `types/*.types.ts` | `FooVM`, `FooProps` |
-| Static data | `constants/*.constants.ts` | strings, tables |
-| Entry | `index.ts` | `bindModelView` / `bindModelViewWith` |
+| Layer            | File                       | API                                   |
+| ---------------- | -------------------------- | ------------------------------------- |
+| State & behavior | `model/*.model.ts`         | `createModel`                         |
+| Markup only      | `ui/*.view.ts`             | `createView`                          |
+| Types            | `types/*.types.ts`         | `FooVM`, `FooProps`                   |
+| Static data      | `constants/*.constants.ts` | strings, tables                       |
+| Entry            | `index.ts`                 | `bindModelView` / `bindModelViewWith` |
 
 ## Wiring
 
 ```typescript
-import { bindModelView, bindModelViewWith } from "@core/ui/bind-model-view.js";
-import { createHomeModel } from "./model/home.model.js";
-import { HomeView } from "./ui/home.view.js";
+import { bindModelView, bindModelViewWith } from '@core/ui/bind-model-view.js'
+import { createHomeModel } from './model/home.model.js'
+import { HomeView } from './ui/home.view.js'
 
 // No props
-export const Home = (): Child => bindModelView(createHomeModel, HomeView);
+export const Home = (): Child => bindModelView(createHomeModel, HomeView)
 
 // With props
 export const CodeBlock = (props: CodeBlockProps): Child =>
-  bindModelViewWith(props, createCodeBlockModel, CodeBlockView);
+  bindModelViewWith(props, createCodeBlockModel, CodeBlockView)
 ```
 
 ## View file rules
 
-- Use **only** `createView((vm) => …)` or `createView((props) => …)` for presentational trees
+- Use **only** `createView((vm) => …)` or `createView((props) => …)` for
+  presentational trees
 - No `signal()`, `effect()`, `createQuery`, or fetch in `.view.ts`
 - Sub-views: separate `createView` files (e.g. `home-code-showcase.view.ts`)
 
 ## Model file rules
 
-- Factory: `export const createXModel = createModel((): XVM => ({ … }), "XModel")`
-- With props: `export const createXModel = (props: XProps) => createModel((): XVM => ({ props, … }), "XModel")`
+- Factory:
+  `export const createXModel = createModel((): XVM => ({ … }), "XModel")`
+- With props:
+  `export const createXModel = (props: XProps) => createModel((): XVM => ({ props, … }), "XModel")`
 - Side effects (SEO, highlight on theme change) live here
 
 ## Routes
 
 ```typescript
 export const homePage = createRouteView({
-  name: "home",
+  name: 'home',
   view: () => {
-    applySeo({ title: "…", path: "/" });
-    return bindModelView(createHomeModel, HomeView);
+    applySeo({ title: '…', path: '/' })
+    return bindModelView(createHomeModel, HomeView)
   },
-});
+})
 ```
 
 ## New documentation page

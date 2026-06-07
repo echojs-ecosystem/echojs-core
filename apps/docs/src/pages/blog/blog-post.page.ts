@@ -1,1 +1,1 @@
-export { blogPostPage } from "@pages/blog/blog.pages.js";
+export { blogPostPage } from '@pages/blog/blog.pages.js'

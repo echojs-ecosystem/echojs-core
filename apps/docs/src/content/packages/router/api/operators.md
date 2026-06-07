@@ -1,17 +1,17 @@
 ---
 title: Operators
 description: redirect, guardRoute, and chainRoute route operators.
-package: "@echojs-ecosystem/router"
+package: '@echojs-ecosystem/router'
 ---
 
 # Operators
 
 Route operators attach to `route` entries in `createRoutes` (not `routeView`).
 
-| Export | Description |
-| --- | --- |
-| `redirect(options)` | Redirect route helper |
-| `guardRoute(options)` | Guard wrapper |
+| Export                | Description             |
+| --------------------- | ----------------------- |
+| `redirect(options)`   | Redirect route helper   |
+| `guardRoute(options)` | Guard wrapper           |
 | `chainRoute(options)` | `beforeOpen` hook chain |
 
 ## redirect

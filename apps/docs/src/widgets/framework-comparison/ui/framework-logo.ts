@@ -1,16 +1,16 @@
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { img } from "@echojs-ecosystem/framework/hyperdom";
-import type { FrameworkId } from "@widgets/framework-comparison/constants/framework-comparison.data.js";
+import { type Child, img } from '@echojs-ecosystem/framework/hyperdom'
+
+import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
 import {
   frameworkLogoAlt,
   frameworkLogoSrc,
-} from "@widgets/framework-comparison/constants/framework-logos.js";
-import { cn } from "@core/styles/cn.js";
+} from '@widgets/framework-comparison/constants/framework-logos.js'
+import { cn } from '@core/styles/cn.js'
 
 export type FrameworkLogoProps = {
-  id: FrameworkId;
-  className?: string;
-};
+  id: FrameworkId
+  className?: string
+}
 
 export const FrameworkLogo = ({ id, className }: FrameworkLogoProps): Child =>
   img({
@@ -18,7 +18,7 @@ export const FrameworkLogo = ({ id, className }: FrameworkLogoProps): Child =>
     alt: frameworkLogoAlt[id],
     width: 24,
     height: 24,
-    loading: "lazy",
-    decoding: "async",
-    class: cn("h-6 w-6 shrink-0 object-contain", className),
-  });
+    loading: 'lazy',
+    decoding: 'async',
+    class: cn('h-6 w-6 shrink-0 object-contain', className),
+  })

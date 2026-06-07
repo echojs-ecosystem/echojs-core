@@ -2,13 +2,13 @@ import type {
   CellRating,
   FrameworkId,
   PerformanceRow,
-} from "@widgets/framework-comparison/constants/framework-comparison.data.js";
+} from '@widgets/framework-comparison/constants/framework-comparison.data.js'
 
 export type RatingCellViewProps = {
-  rating: CellRating;
-};
+  rating: CellRating
+}
 
 export type PerformanceCellViewProps = {
-  row: PerformanceRow;
-  frameworkId: FrameworkId;
-};
+  row: PerformanceRow
+  frameworkId: FrameworkId
+}

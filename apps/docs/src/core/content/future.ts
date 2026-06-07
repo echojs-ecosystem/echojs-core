@@ -7,15 +7,15 @@
  * - i18n: locale-prefixed content paths (/en/docs, /ru/docs)
  */
 export type DocsFutureFeature =
-  | "playground"
-  | "liveExamples"
-  | "apiSearch"
-  | "versioning"
-  | "i18n";
+  | 'playground'
+  | 'liveExamples'
+  | 'apiSearch'
+  | 'versioning'
+  | 'i18n'
 
 export const DOCS_FUTURE_FEATURES: DocsFutureFeature[] = [
-  "liveExamples",
-  "apiSearch",
-  "versioning",
-  "i18n",
-];
+  'liveExamples',
+  'apiSearch',
+  'versioning',
+  'i18n',
+]

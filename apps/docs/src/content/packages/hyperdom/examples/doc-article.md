@@ -1,37 +1,41 @@
 ---
 title: Doc Article
 description: Props-bound createComponent pattern used by the docs site.
-package: "@echojs-ecosystem/hyperdom"
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # Doc Article
 
-How the EchoJS docs site mounts a markdown article page with a props-bound model factory.
+How the EchoJS docs site mounts a markdown article page with a props-bound model
+factory.
 
 ## Problem
 
-Route passes `contentId` as props; the component needs a fresh model per article without a global singleton.
+Route passes `contentId` as props; the component needs a fresh model per article
+without a global singleton.
 
 ## Code
 
 ```ts
-import { createComponent } from "@echojs-ecosystem/hyperdom";
-import { createDocArticleModel, DocArticleView } from "@pages/doc/index.js";
+import { createComponent } from '@echojs-ecosystem/hyperdom'
+import { createDocArticleModel, DocArticleView } from '@pages/doc/index.js'
 
 export const DocArticle = (props: { contentId: string }) =>
   createComponent(createDocArticleModel(props), DocArticleView, {
-    name: "DocArticle",
-  })();
+    name: 'DocArticle',
+  })()
 ```
 
-`createDocArticleModel(props)` returns `() => VM` — the bound factory `createComponent` expects.
+`createDocArticleModel(props)` returns `() => VM` — the bound factory
+`createComponent` expects.
 
 ## Trusted HTML in views
 
-Doc content may use `.innerHTML` for syntax-highlighted blocks — only for sanitized output:
+Doc content may use `.innerHTML` for syntax-highlighted blocks — only for
+sanitized output:
 
 ```ts
-div({ ".innerHTML": vm.highlightedHtml });
+div({ '.innerHTML': vm.highlightedHtml })
 ```
 
 See [Guides: Trusted HTML](/docs/packages/hyperdom/guides/trusted-html).

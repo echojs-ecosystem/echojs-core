@@ -1,7 +1,7 @@
 ---
 title: Local Debug
 description: Enable devtools and inspect nodes via the timeline.
-package: "@echojs-ecosystem/devtools"
+package: '@echojs-ecosystem/devtools'
 ---
 
 # Local Debug
@@ -14,31 +14,31 @@ import {
   emitDevtoolsEvent,
   subscribeTimeline,
   setDevtoolsEnabled,
-} from "@echojs-ecosystem/devtools";
+} from '@echojs-ecosystem/devtools'
 
-setDevtoolsEnabled(import.meta.env.DEV);
+setDevtoolsEnabled(import.meta.env.DEV)
 
 const node = registerDevtoolsNode({
-  type: "store",
-  id: "auth",
-  name: "authStore",
+  type: 'store',
+  id: 'auth',
+  name: 'authStore',
   getSnapshot: () => ({ token: authStore.value() }),
-});
+})
 
 const unsub = subscribeTimeline((event) => {
-  console.log("[devtools]", event.type, event.source, event.nodeId);
-});
+  console.log('[devtools]', event.type, event.source, event.nodeId)
+})
 
 emitDevtoolsEvent({
-  source: "store",
-  type: "changed",
-  nodeId: "auth",
-  payload: { value: "token-123", prevValue: null },
-});
+  source: 'store',
+  type: 'changed',
+  nodeId: 'auth',
+  payload: { value: 'token-123', prevValue: null },
+})
 
 // cleanup
-unsub();
-node.unregister();
+unsub()
+node.unregister()
 ```
 
 ## Planned workflow
@@ -47,11 +47,9 @@ When the overlay and `createDevtoolsProvider` ship:
 
 ```ts
 // planned — not implemented
-import { createDevtoolsProvider } from "@echojs-ecosystem/devtools";
+import { createDevtoolsProvider } from '@echojs-ecosystem/devtools'
 
-createEchoApp({ strictContextChecks: true })
-  .use(devtoolsProvider)
-  .mount("#app");
+createEchoApp({ strictContextChecks: true }).use(devtoolsProvider).mount('#app')
 ```
 
 ## See also

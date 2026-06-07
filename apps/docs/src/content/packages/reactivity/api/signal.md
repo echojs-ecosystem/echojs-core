@@ -1,7 +1,7 @@
 ---
 title: signal
 description: signal(initial) — create a writable reactive cell.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # signal
@@ -10,39 +10,41 @@ package: "@echojs-ecosystem/reactivity"
 function signal<T>(initial: T): Signal<T>
 ```
 
-Creates a **writable** signal. **`initial` is required** — calling `signal()` with no argument throws `TypeError`.
+Creates a **writable** signal. **`initial` is required** — calling `signal()`
+with no argument throws `TypeError`.
 
 ## Methods
 
-| Method | Description |
-| --- | --- |
-| `.value()` | Read with dependency tracking |
-| `.peek()` | Read without tracking |
-| `.set(next)` | Replace value |
-| `.update(fn)` | `fn(previous)` → next value |
+| Method           | Description                             |
+| ---------------- | --------------------------------------- |
+| `.value()`       | Read with dependency tracking           |
+| `.peek()`        | Read without tracking                   |
+| `.set(next)`     | Replace value                           |
+| `.update(fn)`    | `fn(previous)` → next value             |
 | `.subscribe(fn)` | Notify on change; returns `unsubscribe` |
-| `.readonly()` | Readonly facade (no set/update) |
+| `.readonly()`    | Readonly facade (no set/update)         |
 
 ## Example
 
 ```ts
-import { signal } from "@echojs-ecosystem/reactivity";
+import { signal } from '@echojs-ecosystem/reactivity'
 
-const $count = signal(0);
-$count.set(1);
-$count.update((n) => n + 1);
+const $count = signal(0)
+$count.set(1)
+$count.update((n) => n + 1)
 ```
 
 ## Subscribe contract
 
-Listener runs only when `Object.is(prev, next)` is false; **not** invoked immediately on subscribe.
+Listener runs only when `Object.is(prev, next)` is false; **not** invoked
+immediately on subscribe.
 
 ## Errors
 
-| Call | Error |
-| --- | --- |
-| `signal()` | `TypeError: signal(initial) expects 1 argument` |
-| `.subscribe(x)` non-function | `TypeError: subscribe(fn) expects a function` |
+| Call                         | Error                                           |
+| ---------------------------- | ----------------------------------------------- |
+| `signal()`                   | `TypeError: signal(initial) expects 1 argument` |
+| `.subscribe(x)` non-function | `TypeError: subscribe(fn) expects a function`   |
 
 ## See also
 

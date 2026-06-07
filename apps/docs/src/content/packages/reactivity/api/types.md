@@ -1,17 +1,18 @@
 ---
 title: Types
 description: Signal, ReadonlySignal, ReadValue, and DeepReadonly type reference.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # Types
 
 ## Signal&lt;T&gt;
 
-Writable signal interface extending read methods with `set`, `update`, `readonly`.
+Writable signal interface extending read methods with `set`, `update`,
+`readonly`.
 
 ```ts
-import type { Signal } from "@echojs-ecosystem/reactivity";
+import type { Signal } from '@echojs-ecosystem/reactivity'
 ```
 
 ## ReadonlySignal&lt;T&gt;
@@ -19,33 +20,34 @@ import type { Signal } from "@echojs-ecosystem/reactivity";
 Read + `subscribe` only — returned by `computed()` and `readonly()`.
 
 ```ts
-import type { ReadonlySignal } from "@echojs-ecosystem/reactivity";
+import type { ReadonlySignal } from '@echojs-ecosystem/reactivity'
 ```
 
 ## ReadValue&lt;T&gt;
 
 Result of `.value()` / `.peek()`:
 
-| Stored `T` | Read result |
-| --- | --- |
-| Primitives | `T` |
+| Stored `T`       | Read result       |
+| ---------------- | ----------------- |
+| Primitives       | `T`               |
 | Objects / arrays | `DeepReadonly<T>` |
 
 ```ts
-import type { ReadValue } from "@echojs-ecosystem/reactivity";
+import type { ReadValue } from '@echojs-ecosystem/reactivity'
 ```
 
 ## DeepReadonly&lt;T&gt;
 
-Utility type for immutable reads — prevents `user.tags.push(...)` on values from `.value()`.
+Utility type for immutable reads — prevents `user.tags.push(...)` on values from
+`.value()`.
 
 Recursive readonly mapping for objects and arrays; primitives unchanged.
 
 ```ts
-import type { DeepReadonly } from "@echojs-ecosystem/reactivity";
+import type { DeepReadonly } from '@echojs-ecosystem/reactivity'
 
-type User = { name: string; tags: string[] };
-type Frozen = DeepReadonly<User>;
+type User = { name: string; tags: string[] }
+type Frozen = DeepReadonly<User>
 // { readonly name: string; readonly tags: readonly string[] }
 ```
 

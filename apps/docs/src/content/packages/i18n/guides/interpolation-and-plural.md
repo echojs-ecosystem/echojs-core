@@ -1,7 +1,7 @@
 ---
 title: Interpolation & Plural
 description: Message params and Intl.PluralRules buckets.
-package: "@echojs-ecosystem/i18n"
+package: '@echojs-ecosystem/i18n'
 ---
 
 # Interpolation & Plural
@@ -9,8 +9,8 @@ package: "@echojs-ecosystem/i18n"
 ## Interpolation
 
 ```ts
-i18n.t("common.save");
-i18n.t("greeting", { name: "Vova" }); // "Hello, {name}"
+i18n.t('common.save')
+i18n.t('greeting', { name: 'Vova' }) // "Hello, {name}"
 ```
 
 Use params for dynamic segments — avoid string concatenation in views.
@@ -31,7 +31,7 @@ Message value can be a plural bucket:
 ```
 
 ```ts
-i18n.t("items", { count: 5 });
+i18n.t('items', { count: 5 })
 ```
 
 Uses `Intl.PluralRules` for the active locale.

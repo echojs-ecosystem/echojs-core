@@ -1,7 +1,7 @@
 ---
 title: Migration & TTL
 description: Schema versioning, migrate callbacks, and time-to-live expiry.
-package: "@echojs-ecosystem/persist"
+package: '@echojs-ecosystem/persist'
 ---
 
 # Migration & TTL
@@ -10,17 +10,18 @@ Handle schema changes and automatic expiry of stale records.
 
 ## Version and migration
 
-Bump `version` when the stored shape changes. Provide a `migrate` callback to transform old data:
+Bump `version` when the stored shape changes. Provide a `migrate` callback to
+transform old data:
 
 ```ts
 withLocalStorage({
-  key: "settings",
+  key: 'settings',
   version: 2,
   migrate: ({ data, version }) => {
-    if (version === 1) return migrateV1ToV2(data);
-    return data as Settings;
+    if (version === 1) return migrateV1ToV2(data)
+    return data as Settings
   },
-});
+})
 ```
 
 The `version` field is stored in the `PersistRecord` envelope alongside `data`.
@@ -31,16 +32,17 @@ Expire records after a duration — removed on hydrate:
 
 ```ts
 withLocalStorage({
-  key: "draft",
+  key: 'draft',
   ttl: 60 * 60 * 1000, // 1 hour
-});
+})
 ```
 
 Use `isRecordExpired(record)` when building custom serializers or adapters.
 
 ## Validation
 
-Optional `validate` type guard rejects corrupted hydrated data before merging into the store.
+Optional `validate` type guard rejects corrupted hydrated data before merging
+into the store.
 
 ## See also
 

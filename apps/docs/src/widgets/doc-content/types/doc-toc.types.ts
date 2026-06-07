@@ -1,16 +1,16 @@
-import type { DocTocEntry } from "@core/content/extract-toc.js";
+import type { DocTocEntry } from '@core/content/extract-toc.js'
 
 export type DocTocSpyProps = {
-  isActive: (id: string) => boolean;
-  setActiveId: (id: string) => void;
-};
+  isActive: (id: string) => boolean
+  setActiveId: (id: string) => void
+}
 
 export type DocTocProps = DocTocSpyProps & {
-  entries: DocTocEntry[];
-};
+  entries: DocTocEntry[]
+}
 
 export type DocTocVM = {
-  props: DocTocProps;
-  navigateToEntry: (id: string) => void;
-  linkClass: (level: DocTocEntry["level"], id: string) => string;
-};
+  props: DocTocProps
+  navigateToEntry: (id: string) => void
+  linkClass: (level: DocTocEntry['level'], id: string) => string
+}

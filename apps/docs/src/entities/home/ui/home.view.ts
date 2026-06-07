@@ -1,29 +1,42 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { NavLink } from "@echojs-ecosystem/framework/router";
-import { div, h1, h2, main, p, section, span } from "@echojs-ecosystem/framework/hyperdom";
-import { docPageByContentId } from "@app/router/doc-pages.js";
-import type { HomeVM } from "@entities/home/types/home.types.js";
-import { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.js";
-import { HomeCtaView } from "@entities/home/ui/home-cta.view.js";
-import { HomeHeroCodeWindowView } from "@entities/home/ui/home-hero-code-window.view.js";
-import { HomeArchitectureView } from "@entities/home/ui/home-architecture.view.js";
-import { HomeTestingView } from "@entities/home/ui/home-testing.view.js";
+import {
+  type Child,
+  createView,
+  div,
+  h1,
+  h2,
+  main,
+  p,
+  section,
+  span,
+} from '@echojs-ecosystem/framework/hyperdom'
+import { NavLink } from '@echojs-ecosystem/framework/router'
+
+import { docPageByContentId } from '@app/router'
+import { EcosystemSection } from '@widgets/ecosystem'
+import { FrameworkComparisonSection } from '@widgets/framework-comparison'
+import { HomeFooter } from '@widgets/home-shell'
+import { HomeHeader } from '@widgets/home-shell/home-header.js'
+import { PackageInstall } from '@widgets/package-install'
+import { SponsorsSection } from '@widgets/sponsors'
+import {
+  heroPills,
+  homeStats,
+} from '@entities/home/constants/home-landing.data.js'
+import type { HomeVM } from '@entities/home/types/home.types.js'
+import { HomeArchitectureView } from '@entities/home/ui/home-architecture.view.js'
+import { homeButtonStyles } from '@entities/home/ui/home-button.styles.js'
+import { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view.js'
+import { HomeCtaView } from '@entities/home/ui/home-cta.view.js'
+import { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view.js'
 import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
-} from "@entities/home/ui/home-philosophy-principles.view.js";
-import { heroPills, homeStats } from "@entities/home/constants/home-landing.data.js";
-import { homeButtonStyles } from "@entities/home/ui/home-button.styles.js";
-import { homeStyles } from "@entities/home/ui/home.view.styles.js";
-import { EcosystemSection } from "@widgets/ecosystem/index.js";
-import { FrameworkComparisonSection } from "@widgets/framework-comparison/index.js";
-import { HomeFooter } from "@widgets/home-shell/index.js";
-import { HomeHeader } from "@widgets/home-shell/home-header.js";
-import { PackageInstall } from "@widgets/package-install/index.js";
-import { SponsorsSection } from "@widgets/sponsors/index.js";
+} from '@entities/home/ui/home-philosophy-principles.view.js'
+import { HomeTestingView } from '@entities/home/ui/home-testing.view.js'
+import { homeStyles } from '@entities/home/ui/home.view.styles.js'
 
-const home = homeStyles();
-const btn = homeButtonStyles();
+const home = homeStyles()
+const btn = homeButtonStyles()
 
 export const HomeView = createView((vm: HomeVM): Child => {
   return div({ class: home.root() }, [
@@ -39,38 +52,40 @@ export const HomeView = createView((vm: HomeVM): Child => {
             div({ class: home.heroContent() }, [
               p({ class: home.heroBadge() }, [
                 span({ class: home.heroBadgeDot() }),
-                "Signal-first · Official docs",
+                'Signal-first · Official docs',
               ]),
               h1({ class: home.heroTitle() }, [
-                "Build faster with ",
-                span({ class: home.heroTitleAccent() }, "EchoJS"),
+                'Build faster with ',
+                span({ class: home.heroTitleAccent() }, 'EchoJS'),
               ]),
               p({ class: home.heroSubtitle() }, [
-                "A modern framework for scalable web apps — fine-grained signals, zero virtual DOM, and a composable ecosystem.",
+                'A modern framework for scalable web apps — fine-grained signals, zero virtual DOM, and a composable ecosystem.',
               ]),
-              div({ class: home.heroPills() }, [
-                ...heroPills.map((pill) => span({ class: home.heroPill() }, pill)),
-              ]),
+              div(
+                { class: home.heroPills() },
+                heroPills.map((pill) => span({ class: home.heroPill() }, pill))
+              ),
               div({ class: home.heroActions() }, [
                 NavLink({
-                  to: docPageByContentId["getting-started/installation"]!,
+                  to: docPageByContentId['getting-started/installation']!,
                   class: btn.primary(),
-                  children: "Get Started",
+                  children: 'Get Started',
                 }),
                 NavLink({
-                  to: docPageByContentId["introduction/what-is-echojs"]!,
+                  to: docPageByContentId['introduction/what-is-echojs']!,
                   class: btn.secondary(),
-                  children: "What is EchoJS?",
+                  children: 'What is EchoJS?',
                 }),
               ]),
-              div({ class: home.heroStats() }, [
-                ...homeStats.map((stat) =>
+              div(
+                { class: home.heroStats() },
+                homeStats.map((stat) =>
                   div({ class: home.heroStat() }, [
                     p({ class: home.heroStatValue() }, stat.value),
                     p({ class: home.heroStatLabel() }, stat.label),
-                  ]),
-                ),
-              ]),
+                  ])
+                )
+              ),
             ]),
             div({ class: home.heroVisual() }, [
               div({ class: home.heroVisualStack() }, [
@@ -84,10 +99,84 @@ export const HomeView = createView((vm: HomeVM): Child => {
         section({ class: home.section() }, [
           div({ class: home.sectionInner() }, [
             div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Philosophy"),
-              h2({ class: home.sectionTitle() }, "Reactive by design, not by accident"),
+              p({ class: home.sectionEyebrow() }, 'Ecosystem'),
+              h2(
+                { class: home.sectionTitle() },
+                'One framework, many packages'
+              ),
               p({ class: home.sectionLead() }, [
-                "EchoJS updates the DOM surgically — then encodes that mindset in folder structure, providers, and typed routes so teams do not reinvent conventions per repo.",
+                'Adopt incrementally — each package solves one problem and plugs in through providers.',
+              ]),
+            ]),
+            EcosystemSection(),
+          ]),
+        ]),
+
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, 'Architecture'),
+              h2(
+                { class: home.sectionTitle() },
+                'Structure that scales with your team'
+              ),
+              p({ class: home.sectionLead() }, [
+                'EchoJS is not only fast at runtime — it replaces ad-hoc folders with six predictable layers, feature-first slices, and enforceable import rules.',
+              ]),
+            ]),
+            HomeArchitectureView(),
+          ]),
+        ]),
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, 'Testing'),
+              h2(
+                { class: home.sectionTitle() },
+                'Easy to test — models and views stay separate'
+              ),
+              p({ class: home.sectionLead() }, [
+                'Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.',
+              ]),
+            ]),
+            HomeTestingView(vm),
+          ]),
+        ]),
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, 'Compare'),
+              h2({ class: home.sectionTitle() }, 'EchoJS vs the mainstream'),
+              p({ class: home.sectionLead() }, [
+                'React, Vue, Angular, Solid, and Svelte each made different bets. See the matrix below — then read ',
+                NavLink({
+                  to: docPageByContentId['comparisons/react']!,
+                  class: home.archLink(),
+                  children: [
+                    'EchoJS vs React + ecosystem',
+                    span({ class: home.archLinkArrow() }, '→'),
+                  ],
+                }),
+                ' for architecture and state depth.',
+              ]),
+            ]),
+            FrameworkComparisonSection(),
+          ]),
+        ]),
+
+        section({ class: home.section() }, [
+          div({ class: home.sectionInner() }, [
+            div({ class: home.sectionHeader() }, [
+              p({ class: home.sectionEyebrow() }, 'Philosophy'),
+              h2(
+                { class: home.sectionTitle() },
+                'Reactive by design, not by accident'
+              ),
+              p({ class: home.sectionLead() }, [
+                'EchoJS updates the DOM surgically — then encodes that mindset in folder structure, providers, and typed routes so teams do not reinvent conventions per repo.',
               ]),
             ]),
             HomePhilosophyBridgeView(),
@@ -98,78 +187,17 @@ export const HomeView = createView((vm: HomeVM): Child => {
         section({ class: home.section() }, [
           div({ class: home.sectionInner() }, [
             div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Architecture"),
-              h2({ class: home.sectionTitle() }, "Structure that scales with your team"),
+              p({ class: home.sectionEyebrow() }, 'Developer experience'),
+              h2({ class: home.sectionTitle() }, 'Code-first DX'),
               p({ class: home.sectionLead() }, [
-                "EchoJS is not only fast at runtime — it replaces ad-hoc folders with six predictable layers, feature-first slices, and enforceable import rules.",
-              ]),
-            ]),
-            HomeArchitectureView(),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Testing"),
-              h2({ class: home.sectionTitle() }, "Easy to test — models and views stay separate"),
-              p({ class: home.sectionLead() }, [
-                "Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.",
-              ]),
-            ]),
-            HomeTestingView(vm),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Ecosystem"),
-              h2({ class: home.sectionTitle() }, "One framework, many packages"),
-              p({ class: home.sectionLead() }, [
-                "Adopt incrementally — each package solves one problem and plugs in through providers.",
-              ]),
-            ]),
-            EcosystemSection(),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Compare"),
-              h2({ class: home.sectionTitle() }, "EchoJS vs the mainstream"),
-              p({ class: home.sectionLead() }, [
-                "React, Vue, Angular, Solid, and Svelte each made different bets. See the matrix below — then read ",
-                NavLink({
-                  to: docPageByContentId["comparisons/react"]!,
-                  class: home.archLink(),
-                  children: [
-                    "EchoJS vs React + ecosystem",
-                    span({ class: home.archLinkArrow() }, "→"),
-                  ],
-                }),
-                " for architecture and state depth.",
-              ]),
-            ]),
-            FrameworkComparisonSection(),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, "Developer experience"),
-              h2({ class: home.sectionTitle() }, "Code-first DX"),
-              p({ class: home.sectionLead() }, [
-                "Real snippets from how EchoJS apps are wired — pick a layer on the left, read the idea, inspect TypeScript on the right.",
+                'Real snippets from how EchoJS apps are wired — pick a layer on the left, read the idea, inspect TypeScript on the right.',
               ]),
             ]),
             HomeCodeShowcaseView(vm),
           ]),
         ]),
 
-        section({ class: "relative pt-4" }, [
+        section({ class: 'relative pt-4' }, [
           div({ class: home.sectionInner() }, [HomeCtaView()]),
         ]),
 
@@ -177,5 +205,5 @@ export const HomeView = createView((vm: HomeVM): Child => {
         HomeFooter(),
       ]),
     ]),
-  ]);
-}, "HomeView");
+  ])
+}, 'HomeView')

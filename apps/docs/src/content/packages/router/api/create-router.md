@@ -1,7 +1,8 @@
 ---
 title: createRoutes & createRouter
-description: createRoutes, createRouter options, authorizationGuard, and router instance.
-package: "@echojs-ecosystem/router"
+description:
+  createRoutes, createRouter options, authorizationGuard, and router instance.
+package: '@echojs-ecosystem/router'
 ---
 
 # createRoutes & createRouter
@@ -24,39 +25,39 @@ Use `@echojs-ecosystem/router/hyperdom` in apps for HyperDOM `View` integration.
 
 ### Options
 
-| Field | Type | Notes |
-| --- | --- | --- |
-| `routes` | `createRoutes(...)` result | Required |
-| `history` | `"browser"` \| `"hash"` \| `"memory"` \| config \| `RouterHistory` | |
-| `loadingView` | `RouteLoadingView` or page | Global loading |
-| `errorView` | `RouteErrorView` or page | Global error |
-| `notFoundView` | `RouteView` or page | Unmatched URL |
-| `authorizationGuard` | See below | Auth redirects |
+| Field                | Type                                                               | Notes          |
+| -------------------- | ------------------------------------------------------------------ | -------------- |
+| `routes`             | `createRoutes(...)` result                                         | Required       |
+| `history`            | `"browser"` \| `"hash"` \| `"memory"` \| config \| `RouterHistory` |                |
+| `loadingView`        | `RouteLoadingView` or page                                         | Global loading |
+| `errorView`          | `RouteErrorView` or page                                           | Global error   |
+| `notFoundView`       | `RouteView` or page                                                | Unmatched URL  |
+| `authorizationGuard` | See below                                                          | Auth redirects |
 
 ### authorizationGuard
 
-| Field | Role |
-| --- | --- |
-| `isAuthorized()` | Boolean or reactive check |
-| `allowedUnauthorizedPaths` | Guest-only URLs |
-| `allowedAuthorizedPaths` | Optional allow-list when logged in |
-| `redirectTo` | Path or `(ctx) => path` when unauthorized |
-| `redirectWhenAuthorized` | After login redirect |
+| Field                      | Role                                      |
+| -------------------------- | ----------------------------------------- |
+| `isAuthorized()`           | Boolean or reactive check                 |
+| `allowedUnauthorizedPaths` | Guest-only URLs                           |
+| `allowedAuthorizedPaths`   | Optional allow-list when logged in        |
+| `redirectTo`               | Path or `(ctx) => path` when unauthorized |
+| `redirectWhenAuthorized`   | After login redirect                      |
 
 ## Router instance
 
-| Member | Description |
-| --- | --- |
-| `start()` / `stop()` | History listeners |
-| `go(path, { replace? })` | Navigate by path string |
-| `replace(path)` | `go` with replace |
-| `back()` / `forward()` | History |
-| `reload()` | Re-sync current URL |
-| `resolve(route, params?, { query? })` | Build URL string |
-| `isActive(route)` | Whether route is in active chain |
-| `View` / `view()` | HyperDOM root render fn |
-| `routes` | Named route map from tree |
-| `$path`, `$query`, `$fullPath`, `$activePage`, `$activeRoutes`, `$matched`, `$params`, `$pending`, `$error` | Reactive state |
+| Member                                                                                                      | Description                      |
+| ----------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| `start()` / `stop()`                                                                                        | History listeners                |
+| `go(path, { replace? })`                                                                                    | Navigate by path string          |
+| `replace(path)`                                                                                             | `go` with replace                |
+| `back()` / `forward()`                                                                                      | History                          |
+| `reload()`                                                                                                  | Re-sync current URL              |
+| `resolve(route, params?, { query? })`                                                                       | Build URL string                 |
+| `isActive(route)`                                                                                           | Whether route is in active chain |
+| `View` / `view()`                                                                                           | HyperDOM root render fn          |
+| `routes`                                                                                                    | Named route map from tree        |
+| `$path`, `$query`, `$fullPath`, `$activePage`, `$activeRoutes`, `$matched`, `$params`, `$pending`, `$error` | Reactive state                   |
 
 ## Related
 

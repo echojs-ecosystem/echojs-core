@@ -1,7 +1,7 @@
 ---
 title: createI18nProvider
 description: Echo provider factory with i18n.start() setup.
-package: "@echojs-ecosystem/i18n"
+package: '@echojs-ecosystem/i18n'
 ---
 
 # createI18nProvider
@@ -25,17 +25,18 @@ provider.setup;  // () => i18n.start()
 
 ```ts
 export const i18nProvider = createI18nProvider({
-  fallbackLocale: "en",
+  fallbackLocale: 'en',
   locales: { en, ru },
-  storageKey: "echojs-docs-locale",
-  navigatorRules: [{ prefix: "ru", locale: "ru" }],
-  documentTitleKey: "shell.documentTitle",
-});
+  storageKey: 'echojs-docs-locale',
+  navigatorRules: [{ prefix: 'ru', locale: 'ru' }],
+  documentTitleKey: 'shell.documentTitle',
+})
 
-createEchoApp().use(i18nProvider).mount("#app");
+createEchoApp().use(i18nProvider).mount('#app')
 ```
 
-`setup` calls `i18n.start()` — browser detect, document sync, locale persistence.
+`setup` calls `i18n.start()` — browser detect, document sync, locale
+persistence.
 
 ## See also
 

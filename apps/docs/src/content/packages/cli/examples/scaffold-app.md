@@ -1,13 +1,13 @@
 ---
 title: Scaffold App (planned)
 description: Target end-to-end CLI workflow for new EchoJS apps.
-package: "@echojs-ecosystem/cli"
+package: '@echojs-ecosystem/cli'
 ---
 
 # Scaffold App (planned)
 
-> [!warning]
-> **`@echojs-ecosystem/cli` is in development.** Do not run these commands until the package ships.
+> [!warning] **`@echojs-ecosystem/cli` is in development.** Do not run these
+> commands until the package ships.
 
 ## Planned workflow
 

@@ -1,43 +1,50 @@
 ---
 title: Session Stores
-description: Auth token and user stores with persist extensions from the example app.
-package: "@echojs-ecosystem/store"
+description:
+  Auth token and user stores with persist extensions from the example app.
+package: '@echojs-ecosystem/store'
 ---
 
 # Session Stores
 
-Authentication state typically lives in module-level stores extended with **`@echojs-ecosystem/persist`** adapters — cookies for tokens, localStorage for preferences.
+Authentication state typically lives in module-level stores extended with
+**`@echojs-ecosystem/persist`** adapters — cookies for tokens, localStorage for
+preferences.
 
 ## Problem
 
-Persist auth tokens across page reloads and clear them on logout without manual storage calls in every action.
+Persist auth tokens across page reloads and clear them on logout without manual
+storage calls in every action.
 
 ## Pattern
 
 ```ts
-import { createStore } from "@echojs-ecosystem/store";
-import { withCookie } from "@echojs-ecosystem/persist";
+import { createStore } from '@echojs-ecosystem/store'
+import { withCookie } from '@echojs-ecosystem/persist'
 
-export const authTokenStore = createStore<string | null>(null, { name: "auth-token" }).extend(
-  withCookie({ key: "echojs-access-token", path: "/", sameSite: "lax" }),
-);
+export const authTokenStore = createStore<string | null>(null, {
+  name: 'auth-token',
+}).extend(
+  withCookie({ key: 'echojs-access-token', path: '/', sameSite: 'lax' })
+)
 ```
 
-Persist hooks into `set` / `update` / `reset` — writes happen automatically when state changes.
+Persist hooks into `set` / `update` / `reset` — writes happen automatically when
+state changes.
 
 ## Logout and persist control
 
 ```ts
-authTokenStore.reset();
-authTokenStore.persist.clear(); // remove from storage
-authTokenStore.persist.pause(); // stop syncing temporarily
-authTokenStore.persist.resume();
+authTokenStore.reset()
+authTokenStore.persist.clear() // remove from storage
+authTokenStore.persist.pause() // stop syncing temporarily
+authTokenStore.persist.resume()
 ```
 
 ## Live reference
 
-| Resource | Path |
-| --- | --- |
+| Resource    | Path                                              |
+| ----------- | ------------------------------------------------- |
 | Auth stores | `apps/example/src/entities/session/auth-store.ts` |
 
 ## See also

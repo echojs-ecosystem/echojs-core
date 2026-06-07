@@ -1,13 +1,12 @@
 ---
 title: create (planned)
 description: echojs create — scaffold a new EchoJS app (planned).
-package: "@echojs-ecosystem/cli"
+package: '@echojs-ecosystem/cli'
 ---
 
 # create (planned)
 
-> [!warning]
-> **Not implemented.** Target command for the first CLI release.
+> [!warning] **Not implemented.** Target command for the first CLI release.
 
 ```bash
 # planned
@@ -20,11 +19,11 @@ bun run dev
 
 ## Planned flags
 
-| Flag | Description |
-| --- | --- |
-| `--template` | App template variant |
+| Flag                | Description              |
+| ------------------- | ------------------------ |
+| `--template`        | App template variant     |
 | `--package-manager` | `bun` \| `npm` \| `pnpm` |
-| `--no-git` | Skip git init |
+| `--no-git`          | Skip git init            |
 
 ## Planned output
 

@@ -1,18 +1,21 @@
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { span } from "@echojs-ecosystem/framework/hyperdom";
-import type { MockSponsor } from "@widgets/sponsors/constants/sponsors.data.js";
-import { sponsorLogoStyles } from "@widgets/sponsors/sponsor-logo.styles.js";
-import { cn } from "@core/styles/cn.js";
+import { type Child, span } from '@echojs-ecosystem/framework/hyperdom'
+
+import type { MockSponsor } from '@widgets/sponsors/constants/sponsors.data.js'
+import { sponsorLogoStyles } from '@widgets/sponsors/sponsor-logo.styles.js'
+import { cn } from '@core/styles/cn.js'
 
 type SponsorLogoProps = {
-  sponsor: Pick<MockSponsor, "initials" | "name" | "logoGradient">;
-  size?: "gold" | "silver" | "bronze";
-};
+  sponsor: Pick<MockSponsor, 'initials' | 'name' | 'logoGradient'>
+  size?: 'gold' | 'silver' | 'bronze'
+}
 
-export const SponsorLogo = ({ sponsor, size = "silver" }: SponsorLogoProps): Child => {
-  const logo = sponsorLogoStyles({ size });
-  return span({ class: cn(logo.root(), `bg-gradient-to-br ${sponsor.logoGradient}`) }, [
-    span({ class: logo.label() }, sponsor.name),
-    sponsor.initials,
-  ]);
-};
+export const SponsorLogo = ({
+  sponsor,
+  size = 'silver',
+}: SponsorLogoProps): Child => {
+  const logo = sponsorLogoStyles({ size })
+  return span(
+    { class: cn(logo.root(), `bg-gradient-to-br ${sponsor.logoGradient}`) },
+    [span({ class: logo.label() }, sponsor.name), sponsor.initials]
+  )
+}

@@ -1,7 +1,7 @@
 ---
 title: Messages & Keys
 description: Nested JSON trees, TranslationKey, and runtime patches.
-package: "@echojs-ecosystem/i18n"
+package: '@echojs-ecosystem/i18n'
 ---
 
 # Messages & Keys
@@ -23,21 +23,22 @@ Messages are nested JSON objects. Keys use dot notation.
 ```
 
 ```ts
-i18n.t("shell.documentTitle");
-i18n.t("locale.ru");
-i18n.exists("common.save");
+i18n.t('shell.documentTitle')
+i18n.t('locale.ru')
+i18n.exists('common.save')
 ```
 
 ## Type-safe keys
 
-With `resolveJsonModule`, eager locale imports infer `TranslationKey<TMessages>` — autocomplete for nested paths.
+With `resolveJsonModule`, eager locale imports infer `TranslationKey<TMessages>`
+— autocomplete for nested paths.
 
 ## Runtime patches
 
 ```ts
-i18n.addMessages("en", { feature: { title: "New" } });
-await i18n.loadLocale("de");
-i18n.removeLocale("de");
+i18n.addMessages('en', { feature: { title: 'New' } })
+await i18n.loadLocale('de')
+i18n.removeLocale('de')
 ```
 
 ## See also

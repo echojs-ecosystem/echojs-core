@@ -1,43 +1,46 @@
 ---
 title: Batch Updates
 description: Coalesce multiple signal writes so dependents notify once.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # Batch Updates
 
-When one user action touches **two or more signals**, wrap writes in `batch()` so shared effects run **once** instead of once per write.
+When one user action touches **two or more signals**, wrap writes in `batch()`
+so shared effects run **once** instead of once per write.
 
 ## Problem
 
-A form reset or filter apply updates `$page`, `$query`, and `$sort` together. Without batching, a derived effect may run twice with inconsistent intermediate state.
+A form reset or filter apply updates `$page`, `$query`, and `$sort` together.
+Without batching, a derived effect may run twice with inconsistent intermediate
+state.
 
 ## Model
 
 ```ts
-import { batch, effect, signal } from "@echojs-ecosystem/reactivity";
-import type { Signal } from "@echojs-ecosystem/reactivity";
-import { createModel } from "@echojs-ecosystem/hyperdom";
+import { batch, effect, signal } from '@echojs-ecosystem/reactivity'
+import type { Signal } from '@echojs-ecosystem/reactivity'
+import { createModel } from '@echojs-ecosystem/hyperdom'
 
 export interface BatchDemoVM {
-  $a: Signal<number>;
-  $b: Signal<number>;
-  $effectRuns: Signal<number>;
-  runBatchUpdate: () => void;
-  runSequentialUpdate: () => void;
-  reset: () => void;
+  $a: Signal<number>
+  $b: Signal<number>
+  $effectRuns: Signal<number>
+  runBatchUpdate: () => void
+  runSequentialUpdate: () => void
+  reset: () => void
 }
 
 export const createBatchDemoModel = createModel((): BatchDemoVM => {
-  const $a = signal(0);
-  const $b = signal(0);
-  const $effectRuns = signal(0);
+  const $a = signal(0)
+  const $b = signal(0)
+  const $effectRuns = signal(0)
 
   effect(() => {
-    void $a.value();
-    void $b.value();
-    $effectRuns.update((n) => n + 1);
-  });
+    void $a.value()
+    void $b.value()
+    $effectRuns.update((n) => n + 1)
+  })
 
   return {
     $a,
@@ -45,31 +48,31 @@ export const createBatchDemoModel = createModel((): BatchDemoVM => {
     $effectRuns,
     runBatchUpdate: () => {
       batch(() => {
-        $a.update((n) => n + 1);
-        $b.update((n) => n + 1);
-      });
+        $a.update((n) => n + 1)
+        $b.update((n) => n + 1)
+      })
     },
     runSequentialUpdate: () => {
-      $a.update((n) => n + 1);
-      $b.update((n) => n + 1);
+      $a.update((n) => n + 1)
+      $b.update((n) => n + 1)
     },
     reset: () => {
       batch(() => {
-        $a.set(0);
-        $b.set(0);
-        $effectRuns.set(0);
-      });
+        $a.set(0)
+        $b.set(0)
+        $effectRuns.set(0)
+      })
     },
-  };
-}, "BatchDemoModel");
+  }
+}, 'BatchDemoModel')
 ```
 
 ## Compare behavior
 
-| Action | `$effectRuns` increment |
-| --- | --- |
-| `runBatchUpdate()` | **+1** (both writes, one flush) |
-| `runSequentialUpdate()` | **+2** (one flush per write) |
+| Action                  | `$effectRuns` increment         |
+| ----------------------- | ------------------------------- |
+| `runBatchUpdate()`      | **+1** (both writes, one flush) |
+| `runSequentialUpdate()` | **+2** (one flush per write)    |
 
 ## Takeaways
 

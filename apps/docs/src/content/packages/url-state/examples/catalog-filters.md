@@ -1,16 +1,20 @@
 ---
 title: Catalog Filters
-description: Workspace products filters with urlKeys, defaultVisibility, and HyperDOM bindings.
-package: "@echojs-ecosystem/url-state"
+description:
+  Workspace products filters with urlKeys, defaultVisibility, and HyperDOM
+  bindings.
+package: '@echojs-ecosystem/url-state'
 ---
 
 # Catalog Filters
 
-The workspace products page syncs search, pagination, stock filter, sort, view mode, and tags with the URL — a complete real-world param group.
+The workspace products page syncs search, pagination, stock filter, sort, view
+mode, and tags with the URL — a complete real-world param group.
 
 ## Problem
 
-Let users share filtered catalog views via URL while keeping typed, validated state in the app.
+Let users share filtered catalog views via URL while keeping typed, validated
+state in the app.
 
 ## Param group
 
@@ -22,32 +26,35 @@ import {
   parseAsInteger,
   parseAsLiteral,
   parseAsString,
-} from "@echojs-ecosystem/url-state";
+} from '@echojs-ecosystem/url-state'
 
 const productsQueryParams = createQueryParams(
   {
-    q: parseAsString.withDefault(""),
+    q: parseAsString.withDefault(''),
     page: parseAsInteger.withDefault(1),
     inStock: parseAsBoolean.withDefault(false),
-    sort: parseAsLiteral(["relevance", "price_asc", "price_desc", "name"] as const).withDefault(
-      "relevance",
-    ),
-    view: parseAsLiteral(["grid", "list"] as const).withDefault("grid"),
+    sort: parseAsLiteral([
+      'relevance',
+      'price_asc',
+      'price_desc',
+      'name',
+    ] as const).withDefault('relevance'),
+    view: parseAsLiteral(['grid', 'list'] as const).withDefault('grid'),
     tag: parseAsArrayOf(parseAsString).withDefault([]),
   },
   {
-    defaultVisibility: "show",
+    defaultVisibility: 'show',
     shallow: true,
-    history: "replace",
-    urlKeys: { inStock: "stock" },
-  },
-);
+    history: 'replace',
+    urlKeys: { inStock: 'stock' },
+  }
+)
 ```
 
 ## Read / write in view
 
 ```ts
-const { q, page, inStock, view } = productsQueryParams.value();
+const { q, page, inStock, view } = productsQueryParams.value()
 
 input({
   value: () => productsQueryParams.value().q,
@@ -57,7 +64,7 @@ input({
       q: (e.target as HTMLInputElement).value,
       page: 1,
     }),
-});
+})
 
 button(
   {
@@ -67,8 +74,8 @@ button(
         page: v.page + 1,
       })),
   },
-  () => "Next page",
-);
+  () => 'Next page'
+)
 ```
 
 ## Key points
@@ -79,8 +86,8 @@ button(
 
 ## Live reference
 
-| Resource | Path |
-| --- | --- |
+| Resource  | Path                                                                   |
+| --------- | ---------------------------------------------------------------------- |
 | Full page | `apps/example/src/pages/workspace/products/workspace-products.page.ts` |
 
 ## See also

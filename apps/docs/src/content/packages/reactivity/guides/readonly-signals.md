@@ -1,20 +1,22 @@
 ---
 title: Readonly Signals
 description: Expose read-only facades for signals and computed values.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # Readonly Signals
 
-Readonly signals expose `.value()`, `.peek()`, and `.subscribe()` — but not `.set()` / `.update()`. Use them at module boundaries so callers cannot mutate internal state.
+Readonly signals expose `.value()`, `.peek()`, and `.subscribe()` — but not
+`.set()` / `.update()`. Use them at module boundaries so callers cannot mutate
+internal state.
 
 ## signal.readonly()
 
 Every writable signal has a `.readonly()` method:
 
 ```ts
-const $user = signal({ name: "Ada" });
-export const user = $user.readonly();
+const $user = signal({ name: 'Ada' })
+export const user = $user.readonly()
 
 // user.set(...) — not on type / not on readonly facade
 ```
@@ -24,10 +26,10 @@ export const user = $user.readonly();
 Wrap any writable or readonly signal:
 
 ```ts
-import { readonly, signal } from "@echojs-ecosystem/reactivity";
+import { readonly, signal } from '@echojs-ecosystem/reactivity'
 
-const $internal = signal(0);
-const $public = readonly($internal);
+const $internal = signal(0)
+const $public = readonly($internal)
 ```
 
 ## computed is always readonly
@@ -40,13 +42,13 @@ Keep writable signals private inside `createModel` and expose accessors:
 
 ```ts
 export const createHomeModel = createModel((): HomeVM => {
-  const $tab = signal(0);
+  const $tab = signal(0)
   return {
     activeTab: $tab.readonly(),
     isTabActive: (i: number) => $tab.value() === i,
     setTab: (i: number) => $tab.set(i),
-  };
-}, "HomeModel");
+  }
+}, 'HomeModel')
 ```
 
 ## Related

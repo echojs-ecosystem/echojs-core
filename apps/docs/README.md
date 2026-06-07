@@ -1,10 +1,13 @@
 # EchoJS Documentation Site
 
-Official documentation for EchoJS — built with EchoJS, not Docusaurus/VitePress/Nextra.
+Official documentation for EchoJS — built with EchoJS, not
+Docusaurus/VitePress/Nextra.
 
 ## Stack
 
-- `@echojs-ecosystem/framework`, `@echojs-ecosystem/router`, `@echojs-ecosystem/ui`, `@echojs-ecosystem/query`, `@echojs-ecosystem/store`, `@echojs-ecosystem/url-state`
+- `@echojs-ecosystem/framework`, `@echojs-ecosystem/router`,
+  `@echojs-ecosystem/ui`, `@echojs-ecosystem/query`, `@echojs-ecosystem/store`,
+  `@echojs-ecosystem/url-state`
 - Tailwind CSS v4 + **tailwind-variants** (`tv()`)
 - Shiki (syntax highlighting)
 - Markdown content under `src/content/` (lazy-loaded via Vite glob)
@@ -37,18 +40,23 @@ src/
 
 ## Styling
 
-- **Tokens** — `src/app/styles/global.css` (`@theme` colors/fonts, `@layer base` for `body`)
+- **Tokens** — `src/app/styles/global.css` (`@theme` colors/fonts, `@layer base`
+  for `body`)
 - **Components** — co-located `*.styles.ts` via `tv()` from `tailwind-variants`
-- **Merge** — `cn()` in `src/core/styles/cn.ts` (`tailwind-merge`) when combining classes manually
+- **Merge** — `cn()` in `src/core/styles/cn.ts` (`tailwind-merge`) when
+  combining classes manually
 
 Example:
 
 ```ts
-import { cn } from "@core/styles/cn.js";
+import { cn } from '@core/styles/cn.js'
 
-NavLink({ class: cn(navLinkStyles(), isActive && navLinkStyles({ active: true })) });
+NavLink({
+  class: cn(navLinkStyles(), isActive && navLinkStyles({ active: true })),
+})
 ```
 
 ## Roadmap
 
-See `src/core/content/future.ts` for planned features (playground, versioning, i18n docs).
+See `src/core/content/future.ts` for planned features (playground, versioning,
+i18n docs).

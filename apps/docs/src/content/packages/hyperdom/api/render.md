@@ -1,7 +1,7 @@
 ---
 title: render
 description: render(view, container) — mount a view tree and return dispose.
-package: "@echojs-ecosystem/hyperdom"
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # render
@@ -14,21 +14,21 @@ Mounts a view tree into `container` and returns a **dispose** function.
 
 ## Behavior
 
-| Step | Detail |
-| --- | --- |
-| Clear | Sets `container.textContent = ""` before mount |
-| Mount | Creates DOM from `view` under a cleanup scope |
-| Activate | Reactive children and props start tracking |
+| Step     | Detail                                         |
+| -------- | ---------------------------------------------- |
+| Clear    | Sets `container.textContent = ""` before mount |
+| Mount    | Creates DOM from `view` under a cleanup scope  |
+| Activate | Reactive children and props start tracking     |
 
 ## Example
 
 ```ts
-import { render } from "@echojs-ecosystem/hyperdom";
+import { render } from '@echojs-ecosystem/hyperdom'
 
-const dispose = render(appView, document.getElementById("app")!);
+const dispose = render(appView, document.getElementById('app')!)
 
 // on teardown:
-dispose();
+dispose()
 ```
 
 `dispose()` removes listeners, disposes effects, and tears down mounted DOM.

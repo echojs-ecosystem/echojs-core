@@ -1,13 +1,13 @@
 ---
 title: Types
 description: Child, Props, Component, and supporting type aliases.
-package: "@echojs-ecosystem/hyperdom"
+package: '@echojs-ecosystem/hyperdom'
 ---
 
 # Types
 
 ```ts
-import type { Child, Props, Component } from "@echojs-ecosystem/hyperdom";
+import type { Child, Props, Component } from '@echojs-ecosystem/hyperdom'
 ```
 
 ## `Child`
@@ -21,17 +21,18 @@ type Child =
   | undefined
   | Node
   | Child[]
-  | (() => Child);
+  | (() => Child)
 ```
 
-Anything that can appear in a view tree. Function form `() => Child` creates a **dynamic region**.
+Anything that can appear in a view tree. Function form `() => Child` creates a
+**dynamic region**.
 
 `true`, `false`, `null`, `undefined` render nothing.
 
 ## `Component`
 
 ```ts
-type Component<P = any> = (props: P & { children?: Child }) => Child;
+type Component<P = any> = (props: P & { children?: Child }) => Child
 ```
 
 Function components receive props plus optional `children`.
@@ -40,15 +41,15 @@ Function components receive props plus optional `children`.
 
 Intrinsic element props for element type `E`:
 
-| Category | Members |
-| --- | --- |
-| Attributes | Standard DOM attributes — reactive via `() => value` |
-| `class` / `className` | `ClassValue` — string, array, map, getter |
-| `style` | String or `StyleObject` |
-| `on*` | Typed `currentTarget` per event |
-| `data-*`, `aria-*` | Reactive primitives allowed |
-| `ref` | `(el: E \| null) => void` |
-| Modifiers | `.propName` (property), `^attrName` (forced attribute) |
+| Category              | Members                                                |
+| --------------------- | ------------------------------------------------------ |
+| Attributes            | Standard DOM attributes — reactive via `() => value`   |
+| `class` / `className` | `ClassValue` — string, array, map, getter              |
+| `style`               | String or `StyleObject`                                |
+| `on*`                 | Typed `currentTarget` per event                        |
+| `data-*`, `aria-*`    | Reactive primitives allowed                            |
+| `ref`                 | `(el: E \| null) => void`                              |
+| Modifiers             | `.propName` (property), `^attrName` (forced attribute) |
 
 ## Supporting aliases
 

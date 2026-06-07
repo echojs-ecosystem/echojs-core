@@ -1,1 +1,1 @@
-export type SponsorsVM = Record<string, never>;
+export type SponsorsVM = Record<string, never>

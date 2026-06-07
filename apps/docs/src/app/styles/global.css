@@ -1,11 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* Accent scale — warm amber (brand), mapped as echo-* for existing utilities */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --color-echo-50: #fffbeb;
   --color-echo-100: #fef3c7;
   --color-echo-200: #fde68a;
@@ -52,7 +52,11 @@
   .echo-scrollbar,
   .sidebar-scrollbar {
     scrollbar-width: thin;
-    scrollbar-color: color-mix(in srgb, var(--color-echo-500) 55%, var(--color-surface-muted))
+    scrollbar-color: color-mix(
+        in srgb,
+        var(--color-echo-500) 55%,
+        var(--color-surface-muted)
+      )
       transparent;
   }
 
@@ -72,30 +76,49 @@
     border-radius: 999px;
     border: 2px solid transparent;
     background-clip: padding-box;
-    background-color: color-mix(in srgb, var(--color-echo-500) 45%, var(--color-border));
+    background-color: color-mix(
+      in srgb,
+      var(--color-echo-500) 45%,
+      var(--color-border)
+    );
   }
 
   .echo-scrollbar::-webkit-scrollbar-thumb:hover,
   .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in srgb, var(--color-echo-500) 70%, var(--color-echo-600));
+    background-color: color-mix(
+      in srgb,
+      var(--color-echo-500) 70%,
+      var(--color-echo-600)
+    );
   }
 
   .dark .echo-scrollbar,
   .dark .sidebar-scrollbar {
-    scrollbar-color: color-mix(in srgb, var(--color-echo-500) 40%, var(--color-surface-muted))
+    scrollbar-color: color-mix(
+        in srgb,
+        var(--color-echo-500) 40%,
+        var(--color-surface-muted)
+      )
       transparent;
   }
 
   .dark .echo-scrollbar::-webkit-scrollbar-thumb,
   .dark .sidebar-scrollbar::-webkit-scrollbar-thumb {
-    background-color: color-mix(in srgb, var(--color-echo-600) 55%, var(--color-border));
+    background-color: color-mix(
+      in srgb,
+      var(--color-echo-600) 55%,
+      var(--color-border)
+    );
   }
 
   .dark .echo-scrollbar::-webkit-scrollbar-thumb:hover,
   .dark .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: color-mix(in srgb, var(--color-echo-500) 65%, var(--color-echo-400));
+    background-color: color-mix(
+      in srgb,
+      var(--color-echo-500) 65%,
+      var(--color-echo-400)
+    );
   }
-
 }
 
 .dark {
@@ -210,8 +233,16 @@
 
   .dark .bg-grid-pattern {
     background-image:
-      linear-gradient(to right, color-mix(in srgb, var(--color-border) 45%, transparent) 1px, transparent 1px),
-      linear-gradient(to bottom, color-mix(in srgb, var(--color-border) 45%, transparent) 1px, transparent 1px);
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--color-border) 45%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--color-border) 45%, transparent) 1px,
+        transparent 1px
+      );
   }
 
   .text-gradient {

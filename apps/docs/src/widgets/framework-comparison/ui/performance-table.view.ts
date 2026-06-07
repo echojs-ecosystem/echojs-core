@@ -1,10 +1,13 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { div } from "@echojs-ecosystem/framework/hyperdom";
+import {
+  type Child,
+  createView,
+  div,
+} from '@echojs-ecosystem/framework/hyperdom'
+
 import {
   comparisonFrameworks,
   performanceComparisonRows,
-} from "@widgets/framework-comparison/constants/framework-comparison.data.js";
-import { frameworkComparisonStyles } from "@widgets/framework-comparison/ui/framework-comparison.view.styles.js";
+} from '@widgets/framework-comparison/constants/framework-comparison.data.js'
 import {
   comparisonFeatureBodyCell,
   comparisonFeatureHeadCell,
@@ -12,20 +15,24 @@ import {
   comparisonFrameworkHeadCell,
   comparisonGridHeader,
   comparisonGridRow,
-} from "@widgets/framework-comparison/ui/comparison-grid.js";
-import { FrameworkHeadLabelView } from "@widgets/framework-comparison/ui/framework-head-label.view.js";
-import { PerformanceCellView } from "@widgets/framework-comparison/ui/performance-cell.view.js";
+} from '@widgets/framework-comparison/ui/comparison-grid.js'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
+import { FrameworkHeadLabelView } from '@widgets/framework-comparison/ui/framework-head-label.view.js'
+import { PerformanceCellView } from '@widgets/framework-comparison/ui/performance-cell.view.js'
 
-const cmp = frameworkComparisonStyles();
+const cmp = frameworkComparisonStyles()
 
 export const PerformanceTableView = createView(
   (_vm: void): Child =>
     div({ class: cmp.tableWrap() }, [
       div({ class: cmp.tableInner() }, [
         div({ class: comparisonGridHeader() }, [
-          div({ class: comparisonFeatureHeadCell() }, "Benchmark"),
+          div({ class: comparisonFeatureHeadCell() }, 'Benchmark'),
           ...comparisonFrameworks.map((fw) =>
-            div({ class: comparisonFrameworkHeadCell(fw) }, FrameworkHeadLabelView(fw)),
+            div(
+              { class: comparisonFrameworkHeadCell(fw) },
+              FrameworkHeadLabelView(fw)
+            )
           ),
         ]),
         ...performanceComparisonRows.map((row) =>
@@ -34,11 +41,11 @@ export const PerformanceTableView = createView(
             ...comparisonFrameworks.map((fw) =>
               div({ class: comparisonFrameworkBodyCell(fw) }, [
                 PerformanceCellView({ row, frameworkId: fw.id }),
-              ]),
+              ])
             ),
-          ]),
+          ])
         ),
       ]),
     ]),
-  "PerformanceTableView",
-);
+  'PerformanceTableView'
+)

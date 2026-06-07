@@ -1,19 +1,19 @@
-import type { ReadonlySignal } from "@echojs-ecosystem/framework/reactivity";
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
+import type { Child } from '@echojs-ecosystem/framework/hyperdom'
+import type { ReadonlySignal } from '@echojs-ecosystem/framework/reactivity'
 
-export type PlaygroundSnapshot = Record<string, unknown>;
+export type PlaygroundSnapshot = Record<string, unknown>
 
 export type PlaygroundInstance = {
-  view: () => Child;
-  readonly $snapshot: ReadonlySignal<PlaygroundSnapshot>;
-  dispose?: () => void;
-};
+  view: () => Child
+  readonly $snapshot: ReadonlySignal<PlaygroundSnapshot>
+  dispose?: () => void
+}
 
 export type PackagePlaygroundDef = {
-  id: string;
-  title: string;
-  hint: string;
-  available: boolean;
-  unavailableReason?: string;
-  create: () => PlaygroundInstance;
-};
+  id: string
+  title: string
+  hint: string
+  available: boolean
+  unavailableReason?: string
+  create: () => PlaygroundInstance
+}

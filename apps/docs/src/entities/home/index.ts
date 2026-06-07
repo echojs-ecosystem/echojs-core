@@ -1,28 +1,28 @@
-import type { Child } from "@echojs-ecosystem/framework/hyperdom";
-import { createComponent } from "@echojs-ecosystem/framework/hyperdom";
-import { createHomeModel } from "@entities/home/model/home.model.js";
-import { HomeView } from "@entities/home/ui/home.view.js";
+import { createComponent } from '@echojs-ecosystem/framework/hyperdom'
 
-export { createHomeModel } from "@entities/home/model/home.model.js";
+import { createHomeModel } from '@entities/home/model/home.model.js'
+import { HomeView } from '@entities/home/ui/home.view.js'
+
+export { createHomeModel } from '@entities/home/model/home.model.js'
 export type {
   CodeTab,
   CompareCardData,
   CompareCardViewProps,
   CompareTone,
   HomeVM,
-} from "@entities/home/types/home.types.js";
-export { HomeView } from "@entities/home/ui/home.view.js";
-export { HomeCompareCardView } from "@entities/home/ui/home-compare-card.view.js";
-export { HomeCodeShowcaseView } from "@entities/home/ui/home-code-showcase.view.js";
-export { HomeCtaView } from "@entities/home/ui/home-cta.view.js";
-export { HomeHeroCodeWindowView } from "@entities/home/ui/home-hero-code-window.view.js";
+} from '@entities/home/types/home.types.js'
+export { HomeView } from '@entities/home/ui/home.view.js'
+export { HomeCompareCardView } from '@entities/home/ui/home-compare-card.view.js'
+export { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view.js'
+export { HomeCtaView } from '@entities/home/ui/home-cta.view.js'
+export { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view.js'
 export {
   HomeArchitectureBridgeView,
   HomeArchitectureView,
-} from "@entities/home/ui/home-architecture.view.js";
+} from '@entities/home/ui/home-architecture.view.js'
 export {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
-} from "@entities/home/ui/home-philosophy-principles.view.js";
+} from '@entities/home/ui/home-philosophy-principles.view.js'
 
-export const Home = createComponent(createHomeModel, HomeView, { name: "Home" });
+export const Home = createComponent(createHomeModel, HomeView, { name: 'Home' })

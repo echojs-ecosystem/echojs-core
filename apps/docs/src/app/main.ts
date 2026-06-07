@@ -1,5 +1,4 @@
-import "./styles/global.css";
+import './styles/global.css'
+import { bootstrap } from './bootstrap.js'
 
-import { bootstrap } from "./bootstrap.js";
-
-void bootstrap();
+void bootstrap()

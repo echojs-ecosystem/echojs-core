@@ -1,46 +1,50 @@
 ---
 title: defineConfig
 description: defineConfig and abstraction tree structure.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # defineConfig
 
 ```ts
-import { defineConfig, abstraction } from "@echojs-ecosystem/architect";
+import { defineConfig, abstraction } from '@echojs-ecosystem/architect'
 
 export default defineConfig({
-  baseUrl: "src",
-  ignores: ["**/*.md", "**/*.css", "**/*.json"],
+  baseUrl: 'src',
+  ignores: ['**/*.md', '**/*.css', '**/*.json'],
   root: abstraction({
-    name: "src",
-    children: { /* layer abstractions */ },
-    rules: [/* presets */],
+    name: 'src',
+    children: {
+      /* layer abstractions */
+    },
+    rules: [
+      /* presets */
+    ],
   }),
-});
+})
 ```
 
 ## Config fields
 
-| Field | Description |
-| --- | --- |
+| Field     | Description                                           |
+| --------- | ----------------------------------------------------- |
 | `baseUrl` | Source root relative to config file (usually `"src"`) |
-| `ignores` | Glob patterns excluded from analysis |
-| `root` | Root `abstraction()` tree |
+| `ignores` | Glob patterns excluded from analysis                  |
+| `root`    | Root `abstraction()` tree                             |
 
 ## abstraction()
 
 ```ts
-abstraction("pages"); // simple named segment
+abstraction('pages') // simple named segment
 
 abstraction({
-  name: "page",
+  name: 'page',
   children: {
-    "*.page.ts": abstraction("page"),
-    "index.ts": abstraction("public-api"),
+    '*.page.ts': abstraction('page'),
+    'index.ts': abstraction('public-api'),
   },
-  rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
-});
+  rules: [publicAbstraction('public-api'), noUnabstractionFiles()],
+})
 ```
 
 ## See also

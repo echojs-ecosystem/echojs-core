@@ -1,36 +1,40 @@
 ---
 title: JSONPlaceholder
-description: listUsersQuery and getUserQuery definitions from the query demo feature.
-package: "@echojs-ecosystem/query"
+description:
+  listUsersQuery and getUserQuery definitions from the query demo feature.
+package: '@echojs-ecosystem/query'
 ---
 
 # JSONPlaceholder
 
-The query demo feature in the EchoJS example app fetches users from JSONPlaceholder — a minimal pattern for list + detail queries.
+The query demo feature in the EchoJS example app fetches users from
+JSONPlaceholder — a minimal pattern for list + detail queries.
 
 ## Problem
 
-Load a user list and fetch individual users by ID with proper cache keys and abort support.
+Load a user list and fetch individual users by ID with proper cache keys and
+abort support.
 
 ## Definitions
 
 ```ts
-import { createQuery } from "@echojs-ecosystem/query";
-import { jpFetch } from "@core/api/jsonplaceholder.js";
+import { createQuery } from '@echojs-ecosystem/query'
+import { jpFetch } from '@core/api/jsonplaceholder.js'
 
 export const listUsersQuery = createQuery({
-  name: "jp-users",
-  queryKey: () => ["jsonplaceholder", "users"] as const,
-  queryFn: ({ signal }) => jpFetch("/users", { signal }),
-});
+  name: 'jp-users',
+  queryKey: () => ['jsonplaceholder', 'users'] as const,
+  queryFn: ({ signal }) => jpFetch('/users', { signal }),
+})
 
 export const getUserQuery = createQuery({
-  name: "jp-user",
-  queryKey: ({ id }: { id: number }) => ["jsonplaceholder", "user", id] as const,
+  name: 'jp-user',
+  queryKey: ({ id }: { id: number }) =>
+    ['jsonplaceholder', 'user', id] as const,
   keepPreviousData: true,
   abortPrevious: true,
   queryFn: ({ params, signal }) => jpFetch(`/users/${params.id}`, { signal }),
-});
+})
 ```
 
 ## Key points
@@ -42,8 +46,8 @@ export const getUserQuery = createQuery({
 
 ## Live reference
 
-| Resource | Path |
-| --- | --- |
+| Resource          | Path                                                                  |
+| ----------------- | --------------------------------------------------------------------- |
 | Query definitions | `apps/example/src/features/query-demo/api/jsonplaceholder.queries.ts` |
 
 ## See also

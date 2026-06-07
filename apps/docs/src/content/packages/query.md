@@ -1,7 +1,8 @@
 ---
 title: Query
-description: Signal-native async cache for models — queries, mutations, invalidation.
-package: "@echojs-ecosystem/query"
+description:
+  Signal-native async cache for models — queries, mutations, invalidation.
+package: '@echojs-ecosystem/query'
 keywords: [createQuery, createMutation, queryClient]
 ---
 
@@ -12,13 +13,12 @@ keywords: [createQuery, createMutation, queryClient]
 ## Quick start
 
 ```ts
-import { createQuery } from "@echojs-ecosystem/query";
+import { createQuery } from '@echojs-ecosystem/query'
 
 const userQuery = createQuery({
-  queryKey: ["user", id] as const,
+  queryKey: ['user', id] as const,
   queryFn: ({ signal }) => fetchUser(id, { signal }),
-});
+})
 ```
 
-> [!tip]
-> Bind `.with(() => params)` inside `createModel`, not in views.
+> [!tip] Bind `.with(() => params)` inside `createModel`, not in views.

@@ -1,12 +1,13 @@
 ---
 title: Installation
 description: Add @echojs-ecosystem/architect as a dev dependency.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # Installation
 
-Architect is a **standalone dev tool** — package-only install, no framework subpath.
+Architect is a **standalone dev tool** — package-only install, no framework
+subpath.
 
 ## Quick install
 
@@ -29,24 +30,29 @@ Architect is a **standalone dev tool** — package-only install, no framework su
 Create `architect.config.ts` next to `package.json`:
 
 ```ts
-import { abstraction, defineConfig, dependenciesDirection } from "@echojs-ecosystem/architect";
+import {
+  abstraction,
+  defineConfig,
+  dependenciesDirection,
+} from '@echojs-ecosystem/architect'
 
 export default defineConfig({
-  baseUrl: "src",
+  baseUrl: 'src',
   root: abstraction({
-    name: "src",
+    name: 'src',
     children: {
-      pages: abstraction("pages"),
-      shared: abstraction("shared"),
+      pages: abstraction('pages'),
+      shared: abstraction('shared'),
     },
-    rules: [dependenciesDirection(["pages", "shared"])],
+    rules: [dependenciesDirection(['pages', 'shared'])],
   }),
-});
+})
 ```
 
 ## TypeScript
 
-Architect resolves imports using your app `tsconfig.json` paths (`@pages/*`, `@core/*`, …). Keep aliases aligned with Vite `resolve.alias`.
+Architect resolves imports using your app `tsconfig.json` paths (`@pages/*`,
+`@core/*`, …). Keep aliases aligned with Vite `resolve.alias`.
 
 ## Verify
 

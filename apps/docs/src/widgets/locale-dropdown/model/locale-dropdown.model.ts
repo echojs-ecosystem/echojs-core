@@ -1,20 +1,21 @@
-import { createModel } from "@echojs-ecosystem/framework/hyperdom";
-import { i18n, setAppLocale, type AppLocale } from "@core/providers/index.js";
-import type { HeaderDropdownProps } from "@widgets/header-dropdown/model/header-dropdown.model.js";
+import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
-const localeKeys: Record<AppLocale, "locale.en" | "locale.ru"> = {
-  en: "locale.en",
-  ru: "locale.ru",
-};
+import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model.js'
+import { i18n, setAppLocale, type AppLocale } from '@core/providers'
+
+const localeKeys: Record<AppLocale, 'locale.en' | 'locale.ru'> = {
+  en: 'locale.en',
+  ru: 'locale.ru',
+}
 
 export type LocaleDropdownVM = {
-  dropdownProps: HeaderDropdownProps;
-};
+  dropdownProps: HeaderDropdownProps
+}
 
 export const createLocaleDropdownModel = createModel((): LocaleDropdownVM => {
   return {
     dropdownProps: {
-      ariaLabel: () => i18n.t("shell.localeMenu"),
+      ariaLabel: () => i18n.t('shell.localeMenu'),
       selectedId: () => i18n.locale(),
       triggerLabel: () => i18n.t(localeKeys[i18n.locale()]),
       options: () =>
@@ -24,5 +25,5 @@ export const createLocaleDropdownModel = createModel((): LocaleDropdownVM => {
         })),
       onSelect: (id) => void setAppLocale(id as AppLocale),
     },
-  };
-}, "LocaleDropdownModel");
+  }
+}, 'LocaleDropdownModel')

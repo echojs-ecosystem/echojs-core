@@ -5,13 +5,17 @@ description: Install EchoJS packages with Bun, npm, pnpm, or yarn.
 
 # Installation
 
-EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. For new apps, install **`@echojs-ecosystem/framework`** once — it re-exports the full runtime (`reactivity`, `hyperdom`, `router`, `query`, `i18n`, `store`, `ui`, …) via subpath imports.
+EchoJS ships as scoped npm packages under `@echojs-ecosystem/*`. For new apps,
+install **`@echojs-ecosystem/framework`** once — it re-exports the full runtime
+(`reactivity`, `hyperdom`, `router`, `query`, `i18n`, `store`, `ui`, …) via
+subpath imports.
 
 ## Requirements
 
 - **Bun** 1.x or **Node** 20+ (examples in this repo use Bun)
 - **TypeScript** 5.x recommended
-- A bundler with ESM support (**Vite** is used in `apps/docs` and `apps/example`)
+- A bundler with ESM support (**Vite** is used in `apps/docs` and
+  `apps/example`)
 
 ## Recommended — one package
 
@@ -61,11 +65,14 @@ bun run dev --filter @echojs-ecosystem/docs    # documentation site (~3001)
 bun run dev --filter example         # interactive lab
 ```
 
-No publish step is required for local development — Vite resolves `workspace:*` dependencies.
+No publish step is required for local development — Vite resolves `workspace:*`
+dependencies.
 
 ## TypeScript paths (optional)
 
-Apps in this monorepo map `@app/*`, `@pages/*`, `@widgets/*`, etc. via `tsconfig` paths. Copy the pattern from `apps/docs/tsconfig.json` when you split folders by layer.
+Apps in this monorepo map `@app/*`, `@pages/*`, `@widgets/*`, etc. via
+`tsconfig` paths. Copy the pattern from `apps/docs/tsconfig.json` when you split
+folders by layer.
 
-> [!TIP]
-> Enable `strictContextChecks: true` in `createEchoApp()` during development to catch views created outside router/model context.
+> [!TIP] Enable `strictContextChecks: true` in `createEchoApp()` during
+> development to catch views created outside router/model context.

@@ -1,11 +1,14 @@
 ---
 title: Project Structure
-description: Feature-first folder layout for EchoJS apps — app, pages, widgets, features, entities, core.
+description:
+  Feature-first folder layout for EchoJS apps — app, pages, widgets, features,
+  entities, core.
 ---
 
 # Project Structure
 
-EchoJS apps in this monorepo follow **feature-first** layering. The goal is simple imports: upper layers depend on lower layers, never the reverse.
+EchoJS apps in this monorepo follow **feature-first** layering. The goal is
+simple imports: upper layers depend on lower layers, never the reverse.
 
 ## Layer diagram
 
@@ -21,12 +24,12 @@ content/       → markdown sources (docs site only)
 
 ## `app/` — shell
 
-| File | Role |
-| --- | --- |
-| `main.ts` | Entry: CSS + `bootstrap()` |
-| `bootstrap.ts` | `createEchoApp().use(...).mount()` |
+| File                 | Role                                          |
+| -------------------- | --------------------------------------------- |
+| `main.ts`            | Entry: CSS + `bootstrap()`                    |
+| `bootstrap.ts`       | `createEchoApp().use(...).mount()`            |
 | `router-provider.ts` | Wires `appRouter` into `createRouterProvider` |
-| `styles/global.css` | Tailwind / tokens |
+| `styles/global.css`  | Tailwind / tokens                             |
 
 App-wide providers live in `core/providers/` — not inside individual pages.
 
@@ -49,7 +52,8 @@ Layouts use `createLayoutView` and render `outlet()` for child routes.
 
 ## `widgets/` — shared composition
 
-Cross-page UI: site header, docs sidebar, code blocks, footer sections. Widgets may have their own model/view pair (`widgets/code-block/`).
+Cross-page UI: site header, docs sidebar, code blocks, footer sections. Widgets
+may have their own model/view pair (`widgets/code-block/`).
 
 ## `features/` — focused capability
 
@@ -86,39 +90,40 @@ Keep path tables and `createRouter` wiring out of views.
 
 ## `content/` (documentation app)
 
-Markdown files map 1:1 to URLs via `contentId` (`guides/routing` → `/docs/guides/routing`). Nav lives in `core/content/nav.ts`.
+Markdown files map 1:1 to URLs via `contentId` (`guides/routing` →
+`/docs/guides/routing`). Nav lives in `core/content/nav.ts`.
 
 ## Path aliases
 
 `apps/docs/tsconfig.json` defines:
 
-| Alias | Points to |
-| --- | --- |
-| `@app/*` | `src/app/*` |
-| `@pages/*` | `src/pages/*` |
-| `@widgets/*` | `src/widgets/*` |
+| Alias         | Points to        |
+| ------------- | ---------------- |
+| `@app/*`      | `src/app/*`      |
+| `@pages/*`    | `src/pages/*`    |
+| `@widgets/*`  | `src/widgets/*`  |
 | `@features/*` | `src/features/*` |
 | `@entities/*` | `src/entities/*` |
-| `@core/*` | `src/core/*` |
+| `@core/*`     | `src/core/*`     |
 
 Use the same aliases in Vite (`resolve.alias`) so imports match TypeScript.
 
 ## Dependency rules
 
-| From | May import |
-| --- | --- |
-| `pages` | widgets, features, entities, core |
-| `widgets` | features, entities, core |
-| `features` | entities, core |
-| `entities` | core |
-| `core` | packages (`@echojs-ecosystem/*`) only |
+| From       | May import                            |
+| ---------- | ------------------------------------- |
+| `pages`    | widgets, features, entities, core     |
+| `widgets`  | features, entities, core              |
+| `features` | entities, core                        |
+| `entities` | core                                  |
+| `core`     | packages (`@echojs-ecosystem/*`) only |
 
-> [!WARNING]
-> Do not import `pages/` from `features/` or `widgets/`. Lift shared logic to `features/` or `core/`.
+> [!WARNING] Do not import `pages/` from `features/` or `widgets/`. Lift shared
+> logic to `features/` or `core/`.
 
 ## Reference repos
 
-| App | Purpose |
-| --- | --- |
-| `apps/docs` | Production docs + MV reference |
+| App            | Purpose                           |
+| -------------- | --------------------------------- |
+| `apps/docs`    | Production docs + MV reference    |
 | `apps/example` | Hub, docs module, workspace, auth |

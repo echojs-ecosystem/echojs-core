@@ -1,30 +1,37 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { button, div, p, Show } from "@echojs-ecosystem/framework/hyperdom";
-import { extractDocToc } from "@core/content/extract-toc.js";
+import {
+  button,
+  type Child,
+  createView,
+  div,
+  p,
+  Show,
+} from '@echojs-ecosystem/framework/hyperdom'
+
+import { DocRenderer } from '@widgets/doc-content/doc-renderer.js'
+import { DocTocMobile } from '@widgets/doc-content/doc-toc-mobile.js'
+import { DocToc } from '@widgets/doc-content/doc-toc.js'
+import { DocPager } from '@widgets/doc-pager'
+import type { DocArticleVM } from '@entities/doc-article/model/doc-article.model.js'
 import {
   docArticlePageStyles,
   docLayoutStyles,
   skeletonStyles,
-} from "@entities/doc-article/ui/doc-article.view.styles.js";
-import { routerStateStyles } from "@entities/router-states/ui/router-states.view.styles.js";
-import { DocRenderer } from "@widgets/doc-content/doc-renderer.js";
-import { DocToc } from "@widgets/doc-content/doc-toc.js";
-import { DocTocMobile } from "@widgets/doc-content/doc-toc-mobile.js";
-import { DocPager } from "@widgets/doc-pager/index.js";
-import type { DocArticleVM } from "@entities/doc-article/model/doc-article.model.js";
+} from '@entities/doc-article/ui/doc-article.view.styles.js'
+import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles.js'
+import { extractDocToc } from '@core/content/extract-toc.js'
 
-const layout = docArticlePageStyles();
-const articleLayout = docLayoutStyles();
-const skeleton = skeletonStyles();
-const state = routerStateStyles();
+const layout = docArticlePageStyles()
+const articleLayout = docLayoutStyles()
+const skeleton = skeletonStyles()
+const state = routerStateStyles()
 
 const tocSpy = (vm: DocArticleVM) => ({
   isActive: vm.isTocActive,
   setActiveId: vm.setTocActiveId,
-});
+})
 
 export const DocArticleView = createView((vm: DocArticleVM): Child => {
-  const { query } = vm;
+  const { query } = vm
 
   return div({ class: layout.docPage() }, [
     Show(
@@ -38,24 +45,27 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
       () =>
         Show(
           () => query.isError(),
-          () => p({ class: state.error() }, () => String(query.error() ?? "Failed to load content")),
+          () =>
+            p({ class: state.error() }, () =>
+              String(query.error() ?? 'Failed to load content')
+            ),
           () => {
-            const content = query.data();
-            if (!content) return null;
-            const doc = content.document;
-            const toc = extractDocToc(doc);
+            const content = query.data()
+            if (!content) return null
+            const doc = content.document
+            const toc = extractDocToc(doc)
             return div({ class: articleLayout.article() }, [
               div({ class: articleLayout.main() }, [
                 div({ class: articleLayout.mainInner() }, [
                   div({ class: articleLayout.toolbar() }, [
                     button(
                       {
-                        type: "button",
+                        type: 'button',
                         class: articleLayout.copyPageBtn(),
                         onClick: () => void vm.copyPage(),
-                        "aria-label": "Copy page as markdown",
+                        'aria-label': 'Copy page as markdown',
                       },
-                      vm.copyPageLabel,
+                      vm.copyPageLabel
                     ),
                   ]),
                   DocTocMobile(toc, tocSpy(vm)),
@@ -64,11 +74,13 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
                 ]),
               ]),
               div({ class: articleLayout.tocAside() }, [
-                div({ class: articleLayout.tocSticky() }, [DocToc(toc, tocSpy(vm))]),
+                div({ class: articleLayout.tocSticky() }, [
+                  DocToc(toc, tocSpy(vm)),
+                ]),
               ]),
-            ]);
-          },
-        ),
+            ])
+          }
+        )
     ),
-  ]);
-}, "DocArticleView");
+  ])
+}, 'DocArticleView')

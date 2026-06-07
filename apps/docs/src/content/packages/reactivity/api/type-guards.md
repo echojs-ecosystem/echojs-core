@@ -1,7 +1,7 @@
 ---
 title: Type Guards
 description: isSignal and isReadonlySignal runtime type guards.
-package: "@echojs-ecosystem/reactivity"
+package: '@echojs-ecosystem/reactivity'
 ---
 
 # Type Guards
@@ -9,16 +9,18 @@ package: "@echojs-ecosystem/reactivity"
 ## isSignal
 
 ```ts
-function isSignal(value: unknown): value is Signal<unknown> | ReadonlySignal<unknown>
+function isSignal(
+  value: unknown
+): value is Signal<unknown> | ReadonlySignal<unknown>
 ```
 
 Type guard for branded writable or readonly signal instances from this package.
 
 ```ts
-import { isSignal, signal } from "@echojs-ecosystem/reactivity";
+import { isSignal, signal } from '@echojs-ecosystem/reactivity'
 
 if (isSignal(maybe)) {
-  maybe.value();
+  maybe.value()
 }
 ```
 
@@ -28,13 +30,14 @@ if (isSignal(maybe)) {
 function isReadonlySignal(value: unknown): value is ReadonlySignal<unknown>
 ```
 
-Type guard for readonly/branded computed-style signals (no `.set()` / `.update()`).
+Type guard for readonly/branded computed-style signals (no `.set()` /
+`.update()`).
 
 ```ts
-import { computed, isReadonlySignal } from "@echojs-ecosystem/reactivity";
+import { computed, isReadonlySignal } from '@echojs-ecosystem/reactivity'
 
-const $x = computed(() => 1);
-isReadonlySignal($x); // true
+const $x = computed(() => 1)
+isReadonlySignal($x) // true
 ```
 
 ## See also

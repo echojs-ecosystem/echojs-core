@@ -1,79 +1,88 @@
 ---
 title: Auth Session
 description: Cookie token and localStorage profile with logout cleanup.
-package: "@echojs-ecosystem/persist"
+package: '@echojs-ecosystem/persist'
 ---
 
 # Auth Session
 
-Split token (cookie) and user profile (localStorage) — pattern from `apps/example`.
+Split token (cookie) and user profile (localStorage) — pattern from
+`apps/example`.
 
 ## Stores
 
 ```ts
-import { createStore } from "@echojs-ecosystem/store";
-import { withCookie, withLocalStorage } from "@echojs-ecosystem/persist";
+import { createStore } from '@echojs-ecosystem/store'
+import { withCookie, withLocalStorage } from '@echojs-ecosystem/persist'
 
 export type AuthUser = {
-  id: string;
-  email: string;
-  name: string;
-};
+  id: string
+  email: string
+  name: string
+}
 
-export const authTokenStore = createStore<string | null>(null, { name: "auth-token" }).extend(
+export const authTokenStore = createStore<string | null>(null, {
+  name: 'auth-token',
+}).extend(
   withCookie({
-    key: "echojs-access-token",
-    path: "/",
-    sameSite: "lax",
+    key: 'echojs-access-token',
+    path: '/',
+    sameSite: 'lax',
     secure: false,
-  }),
-);
+  })
+)
 
-export const authUserStore = createStore<AuthUser | null>(null, { name: "auth-user" }).extend(
+export const authUserStore = createStore<AuthUser | null>(null, {
+  name: 'auth-user',
+}).extend(
   withLocalStorage({
-    key: "echojs-auth-user",
-  }),
-);
+    key: 'echojs-auth-user',
+  })
+)
 ```
 
 ## Login / logout
 
 ```ts
-export const mockLogin = (input: { email: string; password: string; name?: string }): void => {
-  const email = input.email.trim();
-  authTokenStore.set(`mock.${btoa(email)}.${Date.now()}`);
+export const mockLogin = (input: {
+  email: string
+  password: string
+  name?: string
+}): void => {
+  const email = input.email.trim()
+  authTokenStore.set(`mock.${btoa(email)}.${Date.now()}`)
   authUserStore.set({
     id: `user-${email}`,
     email,
-    name: input.name?.trim() || email.split("@")[0] || "User",
-  });
-};
+    name: input.name?.trim() || email.split('@')[0] || 'User',
+  })
+}
 
 export const logout = (): void => {
   void (async () => {
-    authTokenStore.persist.pause();
-    authUserStore.persist.pause();
+    authTokenStore.persist.pause()
+    authUserStore.persist.pause()
     try {
-      authTokenStore.set(null);
-      authUserStore.set(null);
+      authTokenStore.set(null)
+      authUserStore.set(null)
       await Promise.all([
         authTokenStore.persist.clear(),
         authUserStore.persist.clear(),
-      ]);
+      ])
     } finally {
-      authTokenStore.persist.resume();
-      authUserStore.persist.resume();
+      authTokenStore.persist.resume()
+      authUserStore.persist.resume()
     }
-  })();
-};
+  })()
+}
 ```
 
 ## Live references
 
-| Resource | Path |
-| --- | --- |
-| Auth stores | `apps/example/src/entities/session/auth-store.ts` |
-| Account demo | `apps/example` → account / persistence pages |
+| Resource     | Path                                              |
+| ------------ | ------------------------------------------------- |
+| Auth stores  | `apps/example/src/entities/session/auth-store.ts` |
+| Account demo | `apps/example` → account / persistence pages      |
 
 ## See also
 

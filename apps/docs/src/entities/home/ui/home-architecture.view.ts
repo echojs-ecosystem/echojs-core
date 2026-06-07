@@ -1,27 +1,34 @@
-import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { NavLink } from "@echojs-ecosystem/framework/router";
-import { div, p, span } from "@echojs-ecosystem/framework/hyperdom";
-import { docPageByContentId } from "@app/router/doc-pages.js";
+import {
+  type Child,
+  createView,
+  div,
+  p,
+  span,
+} from '@echojs-ecosystem/framework/hyperdom'
+import { NavLink } from '@echojs-ecosystem/framework/router'
+
+import { docPageByContentId } from '@app/router'
 import {
   architectureAdvantages,
   architectureLayers,
-} from "@entities/home/constants/architecture-advantages.js";
+} from '@entities/home/constants/architecture-advantages.js'
 import {
   archLayerStyles,
   homeArchitectureStyles,
-} from "@entities/home/ui/home-architecture.view.styles.js";
-import { cn } from "@core/styles/cn.js";
+} from '@entities/home/ui/home-architecture.view.styles.js'
+import { cn } from '@core/styles/cn.js'
 
-const home = homeArchitectureStyles();
-const layer = archLayerStyles();
+const home = homeArchitectureStyles()
+const layer = archLayerStyles()
 
-const advantageNumbers = ["01", "02", "03", "04"] as const;
+const advantageNumbers = ['01', '02', '03', '04'] as const
 
 const ArchitectureLayerDiagram = (): Child =>
   div({ class: home.diagram() }, [
     div({ class: home.diagramGlow() }),
-    div({ class: home.diagramInner() }, [
-      ...architectureLayers.flatMap((item, index) => [
+    div(
+      { class: home.diagramInner() },
+      architectureLayers.flatMap((item, index) => [
         index > 0 ? div({ class: home.connector() }) : null,
         div({ class: layer.wrap() }, [
           div({ class: layer.layer({ emphasis: item.emphasis }) }, [
@@ -29,31 +36,31 @@ const ArchitectureLayerDiagram = (): Child =>
             p({ class: layer.hint() }, item.hint),
           ]),
         ]),
-      ]),
-    ]),
-    p({ class: home.diagramCaption() }, "imports only upward ↑"),
-  ]);
+      ])
+    ),
+    p({ class: home.diagramCaption() }, 'imports only upward ↑'),
+  ])
 
 export const HomeArchitectureBridgeView = createView(
   (_vm: void): Child =>
     div({ class: home.bridge() }, [
       p({ class: home.bridgeText() }, [
-        "Most frameworks stop at runtime. EchoJS ships an ",
-        span({ class: cn("font-medium text-fg") }, "opinionated layer stack"),
-        " — the same structure powers ",
-        span({ class: cn("font-medium text-fg") }, "apps/docs"),
-        ", ",
-        span({ class: cn("font-medium text-fg") }, "apps/example"),
-        ", and production apps. Boundaries scale with teams instead of collapsing into a flat components folder.",
+        'Most frameworks stop at runtime. EchoJS ships an ',
+        span({ class: cn('font-medium text-fg') }, 'opinionated layer stack'),
+        ' — the same structure powers ',
+        span({ class: cn('font-medium text-fg') }, 'apps/docs'),
+        ', ',
+        span({ class: cn('font-medium text-fg') }, 'apps/example'),
+        ', and production apps. Boundaries scale with teams instead of collapsing into a flat components folder.',
       ]),
       NavLink({
-        to: docPageByContentId["architecture/overview"]!,
+        to: docPageByContentId['architecture/overview']!,
         class: home.bridgeLink(),
-        children: ["Architecture overview", span(null, "→")],
+        children: ['Architecture overview', span(null, '→')],
       }),
     ]),
-  "HomeArchitectureBridgeView",
-);
+  'HomeArchitectureBridgeView'
+)
 
 export const HomeArchitectureView = createView(
   (_vm: void): Child =>
@@ -61,22 +68,29 @@ export const HomeArchitectureView = createView(
       HomeArchitectureBridgeView(),
       div({ class: home.grid() }, [
         ArchitectureLayerDiagram(),
-        div({ class: home.advantages() }, [
-          ...architectureAdvantages.map((item, index) =>
+        div(
+          { class: home.advantages() },
+          architectureAdvantages.map((item, index) =>
             NavLink({
               to: docPageByContentId[item.docId]!,
               class: home.advantageCard(),
               children: [
-                span({ class: home.advantageIcon() }, advantageNumbers[index] ?? "•"),
+                span(
+                  { class: home.advantageIcon() },
+                  advantageNumbers[index] ?? '•'
+                ),
                 p({ class: home.advantageTitle() }, item.title),
                 p({ class: home.advantageSummary() }, item.summary),
                 p({ class: home.advantageHighlight() }, item.highlight),
-                span({ class: home.advantageLink() }, ["Read more", span(null, "→")]),
+                span({ class: home.advantageLink() }, [
+                  'Read more',
+                  span(null, '→'),
+                ]),
               ],
-            }),
-          ),
-        ]),
+            })
+          )
+        ),
       ]),
     ]),
-  "HomeArchitectureView",
-);
+  'HomeArchitectureView'
+)

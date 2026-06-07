@@ -1,23 +1,26 @@
 ---
 title: Examples
-description: Practical @echojs-ecosystem/url-state patterns — catalog filters, pagination, memory adapter.
-package: "@echojs-ecosystem/url-state"
+description:
+  Practical @echojs-ecosystem/url-state patterns — catalog filters, pagination,
+  memory adapter.
+package: '@echojs-ecosystem/url-state'
 ---
 
 # Examples
 
-Focused, copy-paste patterns for shareable URL state. Param groups sync filters and pagination with the address bar — users can bookmark and share links.
+Focused, copy-paste patterns for shareable URL state. Param groups sync filters
+and pagination with the address bar — users can bookmark and share links.
 
-> [!tip]
-> Open **Workspace → Products** in the EchoJS example app to see catalog filters live.
+> [!tip] Open **Workspace → Products** in the EchoJS example app to see catalog
+> filters live.
 
 ## Pick an example
 
-| Example | Teaches |
-| --- | --- |
+| Example                                                              | Teaches                           |
+| -------------------------------------------------------------------- | --------------------------------- |
 | [Catalog Filters](/docs/packages/url-state/examples/catalog-filters) | Full filter schema with `urlKeys` |
-| [Pagination](/docs/packages/url-state/examples/pagination) | Single param, `history: "push"` |
-| [Memory URL](/docs/packages/url-state/examples/memory-url) | Test adapter without browser |
+| [Pagination](/docs/packages/url-state/examples/pagination)           | Single param, `history: "push"`   |
+| [Memory URL](/docs/packages/url-state/examples/memory-url)           | Test adapter without browser      |
 
 ## Shared pattern
 

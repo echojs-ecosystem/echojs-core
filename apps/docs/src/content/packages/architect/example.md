@@ -1,7 +1,7 @@
 ---
 title: Examples
 description: architect.config.ts patterns from the EchoJS docs app.
-package: "@echojs-ecosystem/architect"
+package: '@echojs-ecosystem/architect'
 ---
 
 # Examples
@@ -10,10 +10,10 @@ Real configs and violation fixes from the EchoJS monorepo.
 
 ## Pick an example
 
-| Example | Teaches |
-| --- | --- |
+| Example                                                                | Teaches                                      |
+| ---------------------------------------------------------------------- | -------------------------------------------- |
 | [Docs Site Config](/docs/packages/architect/examples/docs-site-config) | Full `apps/docs/architect.config.ts` excerpt |
-| [Feature Slice Check](/docs/packages/architect/examples/feature-slice) | Typical violations and fixes |
+| [Feature Slice Check](/docs/packages/architect/examples/feature-slice) | Typical violations and fixes                 |
 
 ## Quick lint
 
