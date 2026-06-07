@@ -1,4 +1,5 @@
 import type { Child } from "@echojs-ecosystem/hyperdom";
+import { effect, signal, untrack } from "@echojs-ecosystem/reactivity";
 import { assertPage, getPageState, isLayoutPage, isPage } from "./page";
 import { resolveBeforeLoad } from "./page";
 import type { RouteTreeEntry } from "./path-types";
@@ -80,6 +81,13 @@ type PageNode = {
   children?: PageNode[];
 };
 
+type ShellBuildContext = {
+  router: Router;
+  pageRoots: PageNode[];
+  globalLoading?: RouteLoadingView;
+  globalError?: RouteErrorView;
+};
+
 const collectChildPageNodes = (definitions: readonly RouteTreeEntry[]): PageNode[] => {
   const nodes: PageNode[] = [];
   for (const def of definitions) {
@@ -138,6 +146,29 @@ const layoutBeforeLoadFailed = (branch: PageNode[], leafIndex: number): boolean 
   return false;
 };
 
+const pageShellSnapshot = (page: AnyPage): string => {
+  const state = getPageState(page);
+  return [
+    page.name,
+    JSON.stringify(page.$params.value() ?? {}),
+    JSON.stringify(page.$query.value() ?? {}),
+    state.$pending.value(),
+    state.$error.value() ? "err" : "",
+    state.$viewPending.value(),
+    state.$viewError.value() ? "verr" : "",
+  ].join(":");
+};
+
+/** Layout identity — excludes the active leaf (like effector layout + outlet split). */
+const computeLayoutShellKey = (branch: PageNode[]): string => {
+  const leafIndex = branch.length - 1;
+  if (leafIndex <= 0) return `solo:${pageShellSnapshot(branch[0]!.page)}`;
+  return branch
+    .slice(0, leafIndex)
+    .map((node) => pageShellSnapshot(node.page))
+    .join("|");
+};
+
 const renderPageView = (
   page: AnyPage,
   outlet: () => Child,
@@ -174,34 +205,80 @@ const renderPageView = (
   return state.view({ params, query, outlet, data });
 };
 
-const renderBranch = (
+/** Reactive outlet — renders only the active leaf (effector `Outlet` equivalent). */
+const createReactiveLeafOutlet = (ctx: ShellBuildContext): (() => Child) => {
+  return (): Child => {
+    const activePage = ctx.router.$activePage.value();
+    if (!activePage || !isPage(activePage)) return null;
+
+    const branch = findBranch(ctx.pageRoots, activePage);
+    if (!branch?.length) return null;
+
+    const leafIndex = branch.length - 1;
+    if (leafIndex <= 0) return null;
+    if (layoutBeforeLoadFailed(branch, leafIndex)) return null;
+
+    return renderPageView(
+      branch[leafIndex]!.page,
+      () => null,
+      branch,
+      leafIndex,
+      ctx.globalLoading,
+      ctx.globalError,
+    ) as Child;
+  };
+};
+
+/** Reactive nested outlet — renders deeper layout levels for multi-layout trees. */
+const createReactiveNestedOutlet = (
+  ctx: ShellBuildContext,
+  fromIndex: number,
+): (() => Child) => {
+  return (): Child => {
+    const activePage = ctx.router.$activePage.value();
+    if (!activePage || !isPage(activePage)) return null;
+
+    const branch = findBranch(ctx.pageRoots, activePage);
+    if (!branch?.length || branch.length <= fromIndex) return null;
+
+    return buildLayoutShell(branch, fromIndex, ctx);
+  };
+};
+
+const buildLayoutShell = (
   branch: PageNode[],
   index: number,
-  globalLoading?: RouteLoadingView,
-  globalError?: RouteErrorView,
-): unknown => {
-  const node = branch[index];
-  if (!node) return null;
-
+  ctx: ShellBuildContext,
+): Child => {
   const leafIndex = branch.length - 1;
-  if (index > 0 && layoutBeforeLoadFailed(branch, index)) {
-    return null;
-  }
-
-  const outlet = (): Child =>
-    (index + 1 < branch.length
-      ? renderBranch(branch, index + 1, globalLoading, globalError)
-      : null) as Child;
+  const node = branch[index]!;
+  const outlet =
+    index === leafIndex - 1
+      ? createReactiveLeafOutlet(ctx)
+      : createReactiveNestedOutlet(ctx, index + 1);
 
   return renderPageView(
     node.page,
     outlet,
     branch,
     leafIndex,
-    globalLoading,
-    globalError,
-  );
+    ctx.globalLoading,
+    ctx.globalError,
+  ) as Child;
 };
+
+const renderSoloPage = (
+  branch: PageNode[],
+  ctx: ShellBuildContext,
+): Child =>
+  renderPageView(
+    branch[0]!.page,
+    () => null,
+    branch,
+    0,
+    ctx.globalLoading,
+    ctx.globalError,
+  ) as Child;
 
 export const createRouterViewComponent = (
   router: Router,
@@ -211,20 +288,76 @@ export const createRouterViewComponent = (
   const globalLoading = options.loadingView;
   const globalError = options.errorView;
   const notFoundView = options.notFoundView;
+  const layoutShellFactories = new Map<string, () => Child>();
 
-  return () => {
+  const ctx: ShellBuildContext = {
+    router,
+    pageRoots,
+    globalLoading,
+    globalError,
+  };
+
+  const renderNotFound = (): Child =>
+    (notFoundView?.({ params: {}, query: {}, outlet: () => null, data: null }) ?? null) as Child;
+
+  const $layoutShellKey = signal<string | null>(null);
+
+  effect(() => {
     const activeRoutes = router.$activeRoutes.value();
-    const activePage = activeRoutes.at(-1);
+    const activePage = router.$activePage.value();
 
+    let nextKey: string | null;
     if (!activePage || !isPage(activePage)) {
-      return notFoundView?.({ params: {}, query: {}, outlet: () => null, data: null }) ?? null;
+      nextKey = activeRoutes.length ? "__not_found__" : null;
+    } else {
+      const branch = findBranch(pageRoots, activePage);
+      if (!branch?.length) {
+        nextKey = "__not_found__";
+      } else {
+        nextKey = computeLayoutShellKey(branch);
+      }
     }
+
+    if ($layoutShellKey.peek() !== nextKey) {
+      $layoutShellKey.set(nextKey);
+    }
+  });
+
+  const getLayoutShellFactory = (key: string): (() => Child) => {
+    const cached = layoutShellFactories.get(key);
+    if (cached) return cached;
+
+    const factory = (): Child => {
+      const activePage = router.$activePage.peek();
+      if (!activePage || !isPage(activePage)) return renderNotFound();
+
+      const branch = findBranch(pageRoots, activePage);
+      if (!branch?.length || branch.length <= 1) return renderNotFound();
+
+      return buildLayoutShell(branch, 0, ctx);
+    };
+
+    layoutShellFactories.set(key, factory);
+    return factory;
+  };
+
+  const resolveSoloTree = (key: string): Child => {
+    const activePage = router.$activePage.peek();
+    if (!activePage || !isPage(activePage)) return renderNotFound();
 
     const branch = findBranch(pageRoots, activePage);
-    if (!branch?.length) {
-      return notFoundView?.({ params: {}, query: {}, outlet: () => null, data: null }) ?? null;
-    }
+    if (!branch?.length) return renderNotFound();
+    if (computeLayoutShellKey(branch) !== key) return renderNotFound();
 
-    return renderBranch(branch, 0, globalLoading, globalError);
+    return renderSoloPage(branch, ctx);
+  };
+
+  // Top-level view tracks only layout shell identity. Leaf updates flow through outlet().
+  return () => {
+    const key = $layoutShellKey.value();
+    if (key === null) return null;
+    if (key === "__not_found__") return renderNotFound();
+    if (key.startsWith("solo:")) return untrack(() => resolveSoloTree(key));
+    return untrack(() => getLayoutShellFactory(key)());
   };
 };

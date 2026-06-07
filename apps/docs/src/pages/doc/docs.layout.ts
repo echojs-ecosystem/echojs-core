@@ -13,7 +13,7 @@ export const docsShellLayoutPage = createLayoutView({
       DocsSidebar(),
       div({ class: layout.shellMain() }, [
         SiteHeader({ mode: "docs" }),
-        main({ class: layout.shellContent() }, outlet),
+        main({ class: layout.shellContent() }, () => outlet()),
       ]),
     ]),
 });
