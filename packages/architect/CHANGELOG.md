@@ -1,5 +1,12 @@
 # @echojs-ecosystem/architect
 
+## 0.5.0
+
+### Minor Changes
+
+- v-0.5.0
+- v-0.5.0
+
 ## 0.4.0
 
 ## 0.3.0
