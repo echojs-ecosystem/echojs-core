@@ -6,7 +6,7 @@ import type { DocTocVM } from "@widgets/doc-content/types/doc-toc.types.js";
 const toc = docTocStyles();
 
 export const DocTocView = createView((vm: DocTocVM): Child => {
-  const { entries } = vm.props;
+  const { entries, isActive } = vm.props;
   if (entries.length === 0) return null;
 
   return nav({ class: toc.root(), "aria-label": "On this page" }, [
@@ -17,7 +17,8 @@ export const DocTocView = createView((vm: DocTocVM): Child => {
           "a",
           {
             href: `#${entry.id}`,
-            class: vm.linkClass(entry.level),
+            class: () => vm.linkClass(entry.level, entry.id),
+            "aria-current": () => (isActive(entry.id) ? "location" : undefined),
             onClick: (e: MouseEvent) => {
               e.preventDefault();
               vm.navigateToEntry(entry.id);

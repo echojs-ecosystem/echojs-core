@@ -14,13 +14,12 @@ export const shellStyles = tv({
     sidebarWrap: "lg:w-[18.5rem] lg:shrink-0 lg:px-4 lg:py-4",
     sidebarBrand: "border-b border-border/70 px-4 py-4 dark:border-white/10",
     sidebarBrandLink: "flex items-center gap-3 transition opacity-90 hover:opacity-100",
-    sidebarBrandMark:
-      "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-echo-500/25 to-echo-600/10 text-echo-700 ring-1 ring-echo-500/25 dark:from-echo-500/20 dark:to-echo-900/40 dark:text-echo-300 dark:ring-echo-500/30",
+    sidebarBrandMark: "h-10 w-10 shrink-0",
     sidebarBrandText: "min-w-0",
     sidebarBrandName: "text-base font-bold tracking-tight text-fg",
     sidebarBrandTag: "text-xs text-fg-subtle",
     sidebarNav:
-      "echo-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 lg:mr-2.5 lg:px-2",
+      "echo-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 lg:mr-2.5 lg:my-2.5 lg:px-2",
     sidebarQuick: "mb-1 flex flex-col gap-0.5 border-b border-border/60 pb-3 dark:border-white/10",
     sidebarNavIcon:
       "text-fg-subtle transition group-hover:text-fg group-[.font-medium]:text-amber-600 dark:group-[.font-medium]:text-amber-400",

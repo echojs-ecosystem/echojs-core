@@ -6,7 +6,7 @@ import type { DocTocMobileVM } from "@widgets/doc-content/model/doc-toc-mobile.m
 const toc = docTocMobileStyles();
 
 export const DocTocMobileView = createView((vm: DocTocMobileVM): Child => {
-  const { entries } = vm.props;
+  const { entries, isActive } = vm.props;
   if (entries.length === 0) return null;
 
   return div({ class: toc.root() }, [
@@ -32,7 +32,8 @@ export const DocTocMobileView = createView((vm: DocTocMobileVM): Child => {
                 "a",
                 {
                   href: `#${entry.id}`,
-                  class: vm.linkClass(entry.level),
+                  class: () => vm.linkClass(entry.level, entry.id),
+                  "aria-current": () => (isActive(entry.id) ? "location" : undefined),
                   onClick: (e: MouseEvent) => {
                     e.preventDefault();
                     vm.navigateToEntry(entry.id);

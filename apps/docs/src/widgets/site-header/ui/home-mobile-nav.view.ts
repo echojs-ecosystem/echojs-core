@@ -2,8 +2,7 @@ import type { Child } from "@echojs-ecosystem/framework/hyperdom";
 import { aside, button, div, nav as navEl, p, Show } from "@echojs-ecosystem/framework/hyperdom";
 import { NavLink } from "@echojs-ecosystem/framework/router";
 import { docPageByContentId } from "@app/router/doc-pages.js";
-import { homePage } from "@app/router/page-links.js";
-import { siteHeaderNavItems } from "@widgets/site-header/model/site-header.model.js";
+import { buildSiteHeaderNavItems } from "@app/router/header-nav.js";
 import { $homeNavOpen, closeHomeNav } from "@widgets/site-header/model/home-mobile-nav.js";
 import { homeMobileNavStyles } from "@widgets/site-header/ui/home-mobile-nav.view.styles.js";
 const styles = homeMobileNavStyles();
@@ -35,14 +34,9 @@ export const HomeMobileNav = (): Child =>
           ),
         ]),
         navEl({ class: styles.links(), onClick: closeOnLinkClick }, [
-          NavLink({
-            to: homePage,
-            class: styles.link(),
-            children: "Home",
-          }),
-          ...siteHeaderNavItems.map((item) =>
+          ...buildSiteHeaderNavItems().map((item) =>
             NavLink({
-              to: docPageByContentId[item.contentId]!,
+              to: item.kind === "doc" ? docPageByContentId[item.contentId]! : item.page,
               class: styles.link(),
               children: item.label,
             }),

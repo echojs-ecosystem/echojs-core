@@ -2,15 +2,14 @@ import { tv } from "tailwind-variants";
 
 export const homeHeaderStyles = tv({
   slots: {
-    root: "sticky top-0 z-50 border-b border-transparent bg-transparent shadow-none",
+    root: [
+      "sticky top-0 z-50 border-b",
+      "transition-[background-color,box-shadow,border-color,backdrop-filter] duration-200",
+    ].join(" "),
     inner: "flex w-full min-w-0 items-center gap-2 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4",
     brand: "flex min-w-0 items-center gap-2 sm:gap-2.5",
-    logo: [
-      "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl",
-      "bg-gradient-to-br from-echo-500/25 to-echo-600/10 ring-1 ring-echo-500/25",
-      "dark:from-echo-500/20 dark:to-echo-900/40 dark:ring-echo-500/30",
-    ].join(" "),
-    logoMark: "h-6 w-6",
+    logo: "flex shrink-0 items-center justify-center",
+    logoMark: "h-10 w-10",
     brandName: "truncate text-base font-bold tracking-tight text-fg",
     brandTag: "hidden text-xs text-fg-subtle sm:block",
     menuBtn: "shrink-0 lg:hidden",
@@ -43,18 +42,9 @@ export const homeHeaderStyles = tv({
     },
     {
       layout: "home",
+      scrolled: false,
       class: {
         root: "border-transparent bg-transparent shadow-none",
-      },
-    },
-    {
-      layout: "docs",
-      scrolled: true,
-      class: {
-        root: [
-          "border-transparent bg-surface/95 shadow-sm shadow-black/5 backdrop-blur-md",
-          "dark:bg-surface/95",
-        ].join(" "),
       },
     },
     {
@@ -62,6 +52,17 @@ export const homeHeaderStyles = tv({
       scrolled: false,
       class: {
         root: "border-transparent bg-transparent shadow-none",
+      },
+    },
+    {
+      layout: ["home", "docs"],
+      scrolled: true,
+      class: {
+        root: [
+          "border-border/60 bg-surface/90 shadow-sm shadow-black/10",
+          "backdrop-blur-xl backdrop-saturate-150",
+          "dark:border-white/10 dark:bg-surface/90",
+        ].join(" "),
       },
     },
   ],

@@ -45,7 +45,7 @@ export const docHeadingStyles = tv({
 
 export const calloutStyles = tv({
   slots: {
-    root: "my-6 overflow-hidden rounded-xl border shadow-sm",
+    root: "my-6 overflow-hidden rounded-lg border shadow-sm",
     header: "flex items-start gap-3 px-4 py-3",
     icon: "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-bold",
     headerText: "min-w-0 flex-1 pt-0.5",
@@ -63,29 +63,88 @@ export const calloutStyles = tv({
         icon: "bg-sky-500/15 text-sky-700 dark:bg-sky-500/20 dark:text-sky-300",
       },
       tip: {
-        root: "border-emerald-500/30 bg-emerald-50/60 dark:border-emerald-500/30 dark:bg-emerald-950/25",
-        icon: "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300",
+        root: [
+          "border-emerald-400/55 bg-emerald-100 shadow-none",
+          "dark:border-emerald-500/45 dark:bg-emerald-800/40",
+        ].join(" "),
+        icon: "bg-emerald-500/20 text-emerald-600 dark:bg-emerald-500/25 dark:text-emerald-300",
+        title: "text-emerald-950 dark:text-emerald-100",
+        body: "border-emerald-400/40 text-emerald-950/85 dark:border-emerald-500/35 dark:text-emerald-50/90",
       },
       recommendation: {
-        root: "border-echo-500/35 bg-echo-50/70 dark:border-echo-500/35 dark:bg-echo-950/30",
-        icon: "bg-echo-500/20 text-echo-800 dark:bg-echo-500/25 dark:text-echo-200",
+        root: [
+          "border-echo-400/55 bg-echo-100 shadow-none",
+          "dark:border-echo-500/45 dark:bg-echo-800/40",
+        ].join(" "),
+        icon: "bg-echo-500/20 text-echo-600 dark:bg-echo-500/25 dark:text-echo-300",
+        title: "text-echo-950 dark:text-echo-100",
+        body: "border-echo-400/40 text-echo-950/85 dark:border-echo-500/35 dark:text-echo-50/90",
       },
       warning: {
-        root: "border-amber-500/35 bg-amber-50/70 dark:border-amber-500/35 dark:bg-amber-950/25",
-        icon: "bg-amber-500/20 text-amber-800 dark:bg-amber-500/25 dark:text-amber-300",
+        root: [
+          "border-amber-400/60 bg-amber-100 shadow-none",
+          "dark:border-amber-400/50 dark:bg-amber-700/45",
+        ].join(" "),
+        icon: "bg-amber-500/25 text-amber-700 dark:bg-amber-500/30 dark:text-amber-200",
+        title: "text-amber-950 dark:text-amber-50",
+        body: "border-amber-400/45 text-amber-950/90 dark:border-amber-400/40 dark:text-amber-50/95",
       },
       danger: {
-        root: "border-red-500/35 bg-red-50/70 dark:border-red-500/35 dark:bg-red-950/25",
-        icon: "bg-red-500/15 text-red-700 dark:bg-red-500/20 dark:text-red-300",
+        root: [
+          "border-red-400/55 bg-red-100 shadow-none",
+          "dark:border-red-500/45 dark:bg-red-800/40",
+        ].join(" "),
+        icon: "bg-red-500/20 text-red-600 dark:bg-red-500/25 dark:text-red-300",
+        title: "text-red-950 dark:text-red-100",
+        body: "border-red-400/40 text-red-950/85 dark:border-red-500/35 dark:text-red-50/90",
       },
       important: {
         root: "border-violet-500/30 bg-violet-50/60 dark:border-violet-500/30 dark:bg-violet-950/25",
         icon: "bg-violet-500/15 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300",
       },
     },
+    compact: {
+      true: {},
+      false: {},
+    },
   },
+  compoundVariants: [
+    {
+      variant: "tip",
+      compact: true,
+      class: {
+        root: "px-4 py-3.5",
+        body: "border-0 px-0 py-0 text-[0.9375rem] leading-relaxed",
+      },
+    },
+    {
+      variant: "warning",
+      compact: true,
+      class: {
+        root: "px-4 py-3.5",
+        body: "border-0 px-0 py-0 text-[0.9375rem] leading-relaxed",
+      },
+    },
+    {
+      variant: "danger",
+      compact: true,
+      class: {
+        root: "px-4 py-3.5",
+        body: "border-0 px-0 py-0 text-[0.9375rem] leading-relaxed",
+      },
+    },
+    {
+      variant: "recommendation",
+      compact: true,
+      class: {
+        root: "px-4 py-3.5",
+        body: "border-0 px-0 py-0 text-[0.9375rem] leading-relaxed",
+      },
+    },
+  ],
   defaultVariants: {
     variant: "note",
+    compact: false,
   },
 });
 

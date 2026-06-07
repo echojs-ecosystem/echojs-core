@@ -1,5 +1,5 @@
 import { createView, type Child } from "@echojs-ecosystem/framework/hyperdom";
-import { div, p, Show } from "@echojs-ecosystem/framework/hyperdom";
+import { button, div, p, Show } from "@echojs-ecosystem/framework/hyperdom";
 import { extractDocToc } from "@core/content/extract-toc.js";
 import {
   docArticlePageStyles,
@@ -18,6 +18,11 @@ const articleLayout = docLayoutStyles();
 const skeleton = skeletonStyles();
 const state = routerStateStyles();
 
+const tocSpy = (vm: DocArticleVM) => ({
+  isActive: vm.isTocActive,
+  setActiveId: vm.setTocActiveId,
+});
+
 export const DocArticleView = createView((vm: DocArticleVM): Child => {
   const { query } = vm;
 
@@ -35,19 +40,31 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
           () => query.isError(),
           () => p({ class: state.error() }, () => String(query.error() ?? "Failed to load content")),
           () => {
-            const doc = query.data();
-            if (!doc) return null;
+            const content = query.data();
+            if (!content) return null;
+            const doc = content.document;
             const toc = extractDocToc(doc);
             return div({ class: articleLayout.article() }, [
               div({ class: articleLayout.main() }, [
                 div({ class: articleLayout.mainInner() }, [
-                  DocTocMobile(toc),
+                  div({ class: articleLayout.toolbar() }, [
+                    button(
+                      {
+                        type: "button",
+                        class: articleLayout.copyPageBtn(),
+                        onClick: () => void vm.copyPage(),
+                        "aria-label": "Copy page as markdown",
+                      },
+                      vm.copyPageLabel,
+                    ),
+                  ]),
+                  DocTocMobile(toc, tocSpy(vm)),
                   DocRenderer(doc),
                   DocPager(vm.props.contentId),
                 ]),
               ]),
               div({ class: articleLayout.tocAside() }, [
-                div({ class: articleLayout.tocSticky() }, [DocToc(toc)]),
+                div({ class: articleLayout.tocSticky() }, [DocToc(toc, tocSpy(vm))]),
               ]),
             ]);
           },

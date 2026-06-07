@@ -15,9 +15,15 @@ import { HomeMobileNav } from "@widgets/site-header/ui/home-mobile-nav.view.js";
 import type { SiteHeaderVM } from "@widgets/site-header/model/site-header.model.js";
 
 export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
-  const hdr = () => vm.headerStyles();
+  const hdr = () =>
+    vm.headerStyles();
 
-  return header({ class: () => hdr().root() }, [
+  const headerRootClass = (): string => {
+    vm.$scrolled.value();
+    return hdr().root();
+  };
+
+  return header({ class: headerRootClass }, [
     div({ class: () => hdr().inner() }, [
       vm.showMenu
         ? button(
@@ -34,22 +40,16 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
         to: homePage,
         class: hdr().brand(),
         children: [
-          div({ class: hdr().logo() }, [EchoBrandLogo({ className: hdr().logoMark() })]),
-          div(null, [
+          div({ class: hdr().logo() }, [EchoBrandLogo({ className: hdr().logoMark(), size: 40 })]),
+          div([
             p({ class: hdr().brandName() }, "EchoJS"),
-            p({ class: hdr().brandTag() }, "Documentation"),
           ]),
         ],
       }),
       navEl({ class: hdr().nav() }, [
-        NavLink({
-          to: homePage,
-          class: hdr().navLink(),
-          children: "Home",
-        }),
         ...vm.navItems.map((item) =>
           NavLink({
-            to: docPageByContentId[item.contentId]!,
+            to: item.kind === "doc" ? docPageByContentId[item.contentId]! : item.page,
             class: hdr().navLink(),
             children: item.label,
           }),

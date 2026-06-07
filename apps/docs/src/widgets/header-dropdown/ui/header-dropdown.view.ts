@@ -9,7 +9,7 @@ const dd = headerDropdownStyles();
 export const HeaderDropdownView = createView((vm: HeaderDropdownVM): Child => {
   const { props } = vm;
 
-  return div({ class: dd.root(), onBlur: vm.handleBlur }, [
+  return div({ class: dd.root(), ref: vm.setRootRef, onBlur: vm.handleBlur }, [
     () =>
       button(
         {
@@ -17,6 +17,7 @@ export const HeaderDropdownView = createView((vm: HeaderDropdownVM): Child => {
           class: dd.trigger(),
           "aria-label": vm.resolveAriaLabel(),
           "aria-haspopup": "listbox",
+          "aria-expanded": () => String(vm.$open.value()),
           onClick: vm.toggle,
         },
         [

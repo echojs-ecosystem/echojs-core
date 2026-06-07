@@ -12,7 +12,7 @@ export const docTocStyles = tv({
       "dark:border-white/10",
     ].join(" "),
     link: "block break-words rounded-md py-1.5 pl-2.5 text-[13px] leading-snug text-fg-muted transition hover:bg-echo-50/80 hover:text-echo-800 dark:hover:bg-echo-950/40 dark:hover:text-echo-200",
-    linkActive: "bg-echo-50/90 font-medium text-echo-800 dark:bg-echo-950/50 dark:text-echo-200",
+    linkActive: "font-medium text-amber-600 dark:text-amber-400",
     linkDepth2: "text-[13px]",
     linkDepth3: "pl-4 text-[12px]",
     empty: "text-xs text-fg-subtle",

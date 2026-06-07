@@ -1,19 +1,26 @@
 import { createQuery } from "@echojs-ecosystem/framework/query";
-import { effect } from "@echojs-ecosystem/framework/reactivity";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
 import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 import { loadContentRaw } from "@core/content/load-content.js";
 import { parseMarkdown } from "@core/content/parse-markdown.js";
+import { extractDocToc } from "@core/content/extract-toc.js";
 import { findNavItemByContentId } from "@core/content/nav.js";
 import type { ContentId, DocDocument } from "@core/content/types.js";
 import { applySeo } from "@core/seo/apply-seo.js";
+import { attachDocTocScrollSpy } from "@widgets/doc-content/helpers/doc-toc-scroll-spy.js";
 import type { DocArticleProps } from "@entities/doc-article/types/doc-article.types.js";
 
-const docContentQuery = createQuery<DocDocument, { contentId: ContentId }>({
+export type DocContentPayload = {
+  document: DocDocument;
+  raw: string;
+};
+
+const docContentQuery = createQuery<DocContentPayload, { contentId: ContentId }>({
   name: "doc-content",
   queryKey: ({ contentId }) => ["doc-content", contentId] as const,
   queryFn: async ({ params }) => {
     const raw = await loadContentRaw(params.contentId);
-    return parseMarkdown(raw);
+    return { document: parseMarkdown(raw), raw };
   },
   staleTime: 3_600_000,
 });
@@ -21,25 +28,49 @@ const docContentQuery = createQuery<DocDocument, { contentId: ContentId }>({
 export type DocArticleVM = {
   props: DocArticleProps;
   query: ReturnType<typeof docContentQuery.with>;
+  copyPage: () => Promise<void>;
+  copyPageLabel: () => string;
+  isTocActive: (id: string) => boolean;
+  setTocActiveId: (id: string) => void;
 };
 
 export const createDocArticleModel = (props: DocArticleProps) =>
   createModel((): DocArticleVM => {
     const navItem = findNavItemByContentId(props.contentId);
     const query = docContentQuery.with(() => ({ contentId: props.contentId }));
+    const $pageCopied = signal(false);
+    const $tocActiveId = signal("");
 
     effect(() => {
-      const doc = query.data();
-      if (!doc) return;
+      const content = query.data();
+      if (!content) return;
       applySeo({
-        title: doc.frontmatter.title,
-        description: doc.frontmatter.description,
+        title: content.document.frontmatter.title,
+        description: content.document.frontmatter.description,
         path: navItem ? `/docs/${navItem.sectionSlug}/${navItem.slug}` : undefined,
       });
+    });
+
+    effect(() => {
+      const content = query.data();
+      if (!content) return;
+
+      const entries = extractDocToc(content.document);
+      attachDocTocScrollSpy(props.contentId, entries, (id) => $tocActiveId.set(id));
     });
 
     return {
       props,
       query,
+      copyPage: async () => {
+        const raw = query.data()?.raw;
+        if (!raw) return;
+        await navigator.clipboard.writeText(raw);
+        $pageCopied.set(true);
+        setTimeout(() => $pageCopied.set(false), 2000);
+      },
+      copyPageLabel: () => ($pageCopied.value() ? "Copied" : "Copy Page"),
+      isTocActive: (id) => $tocActiveId.value() === id,
+      setTocActiveId: (id) => $tocActiveId.set(id),
     };
   }, "DocArticleModel");

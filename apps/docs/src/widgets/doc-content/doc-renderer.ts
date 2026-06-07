@@ -48,21 +48,35 @@ const inlineOpts = () => ({
 
 const inline = (text: string): Child[] => renderInlineMarkdown(text, inlineOpts());
 
+const COMPACT_CALLOUT_VARIANTS = new Set<CalloutVariant>([
+  "tip",
+  "warning",
+  "danger",
+  "recommendation",
+]);
+
 const Callout = (block: Extract<DocBlock, { type: "callout" }>): Child => {
   const variant = block.variant as CalloutVariant;
-  const callout = calloutStyles({ variant });
+  const isCompact = !block.title && COMPACT_CALLOUT_VARIANTS.has(variant);
+  const callout = calloutStyles({ variant, compact: isCompact });
   const title = block.title ?? calloutDefaultTitle[variant];
+  const bodyChunks = block.body
+    .split(/\n\n+/)
+    .map((chunk) => chunk.trim())
+    .filter(Boolean);
+
+  if (isCompact) {
+    return div({ class: callout.root() }, [
+      ...bodyChunks.map((chunk) => p({ class: callout.body() }, inline(chunk))),
+    ]);
+  }
 
   return div({ class: callout.root() }, [
     div({ class: callout.header() }, [
       span({ class: callout.icon() }, calloutIcon[variant]),
       div({ class: callout.headerText() }, [p({ class: callout.title() }, inline(title))]),
     ]),
-    ...block.body
-      .split(/\n\n+/)
-      .map((chunk) => chunk.trim())
-      .filter(Boolean)
-      .map((chunk) => p({ class: callout.body() }, inline(chunk))),
+    ...bodyChunks.map((chunk) => p({ class: callout.body() }, inline(chunk))),
   ]);
 };
 

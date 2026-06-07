@@ -1,4 +1,4 @@
-import { signal } from "@echojs-ecosystem/framework/reactivity";
+import { effect, signal } from "@echojs-ecosystem/framework/reactivity";
 import type { Signal } from "@echojs-ecosystem/framework/reactivity";
 import { createModel } from "@echojs-ecosystem/framework/hyperdom";
 
@@ -23,6 +23,7 @@ export type HeaderDropdownVM = {
   toggle: () => void;
   close: () => void;
   select: (id: string, disabled?: boolean) => void;
+  setRootRef: (el: HTMLElement | null) => void;
   resolveAriaLabel: () => string;
   resolveOptions: () => HeaderDropdownOption[];
   handleBlur: (e: FocusEvent) => void;
@@ -38,8 +39,40 @@ const resolveOptions = (
 export const createHeaderDropdownModel = (props: HeaderDropdownProps) =>
   createModel((): HeaderDropdownVM => {
     const $open = signal(false);
+    let rootEl: HTMLElement | null = null;
+    let removeOutsideListener: (() => void) | undefined;
 
-    const close = (): void => $open.set(false);
+    const detachOutsideClose = (): void => {
+      removeOutsideListener?.();
+      removeOutsideListener = undefined;
+    };
+
+    const close = (): void => {
+      $open.set(false);
+      detachOutsideClose();
+    };
+
+    const attachOutsideClose = (): void => {
+      detachOutsideClose();
+      const onPointerDown = (e: PointerEvent): void => {
+        const target = e.target as Node | null;
+        if (rootEl?.contains(target ?? null)) return;
+        close();
+      };
+      document.addEventListener("pointerdown", onPointerDown, true);
+      removeOutsideListener = () =>
+        document.removeEventListener("pointerdown", onPointerDown, true);
+    };
+
+    effect(() => {
+      if (!$open.value()) {
+        detachOutsideClose();
+        return;
+      }
+      requestAnimationFrame(() => {
+        if ($open.value()) attachOutsideClose();
+      });
+    });
 
     return {
       props,
@@ -50,6 +83,9 @@ export const createHeaderDropdownModel = (props: HeaderDropdownProps) =>
         if (disabled) return;
         props.onSelect(id);
         close();
+      },
+      setRootRef: (el) => {
+        rootEl = el;
       },
       resolveAriaLabel: () => resolveAriaLabel(props.ariaLabel),
       resolveOptions: () => resolveOptions(props.options),

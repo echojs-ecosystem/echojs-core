@@ -1,7 +1,7 @@
 import type { AnyPage } from "@echojs-ecosystem/framework/router";
 import type { NavIconId } from "@core/content/nav-icon-id.js";
 import { docPageByContentId } from "@app/router/doc-pages.js";
-import { sponsorsPage } from "@app/router/page-links.js";
+import { blogPage, roadmapPage, sponsorsPage } from "@app/router/page-links.js";
 
 export type SidebarDocLink = {
   kind: "doc";
@@ -39,18 +39,18 @@ export const sidebarResourceLinks: SidebarLink[] = [
     page: docPageByContentId["examples/todo-app"]!,
   },
   {
-    kind: "external",
+    kind: "page",
     id: "roadmap",
     label: "Roadmap",
     icon: "roadmap",
-    href: "https://github.com/echojs/echojs/issues?q=sort%3Aupdated-desc+label%3Aroadmap",
+    page: roadmapPage,
   },
   {
-    kind: "external",
+    kind: "page",
     id: "blog",
     label: "Blog",
     icon: "newspaper",
-    href: "https://github.com/echojs/echojs/discussions/categories/announcements",
+    page: blogPage,
   },
   {
     kind: "external",

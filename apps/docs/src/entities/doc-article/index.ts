@@ -7,6 +7,7 @@ import { DocArticleView } from "@entities/doc-article/ui/doc-article.view.js";
 export {
   createDocArticleModel,
   type DocArticleVM,
+  type DocContentPayload,
 } from "@entities/doc-article/model/doc-article.model.js";
 export type { DocArticleProps } from "@entities/doc-article/types/doc-article.types.js";
 export { DocArticleView } from "@entities/doc-article/ui/doc-article.view.js";

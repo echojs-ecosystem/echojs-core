@@ -15,6 +15,7 @@ export const docTocMobileStyles = tv({
     panel: "mt-3 rounded-2xl border border-border/80 bg-surface-elevated/60 p-4 dark:border-white/10 dark:bg-surface-elevated/40",
     list: "flex flex-col gap-1 border-l border-border/80 pl-4 dark:border-white/10",
     link: "block break-words rounded-md py-1.5 pl-2.5 text-[13px] leading-snug text-fg-muted transition hover:bg-echo-50/80 hover:text-echo-800 dark:hover:bg-echo-950/40 dark:hover:text-echo-200",
+    linkActive: "font-medium text-amber-600 dark:text-amber-400",
     linkDepth3: "pl-4 text-[12px]",
   },
 });
