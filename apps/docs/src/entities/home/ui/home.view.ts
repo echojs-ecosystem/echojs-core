@@ -3,7 +3,6 @@ import {
   createView,
   div,
   h1,
-  h2,
   main,
   p,
   section,
@@ -32,6 +31,7 @@ import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
 } from '@entities/home/ui/home-philosophy-principles.view.js'
+import { HomeSection } from '@entities/home/ui/home-section.view.js'
 import { HomeTestingView } from '@entities/home/ui/home-testing.view.js'
 import { homeStyles } from '@entities/home/ui/home.view.styles.js'
 
@@ -96,110 +96,63 @@ export const HomeView = createView((vm: HomeVM): Child => {
           ]),
         ]),
 
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Ecosystem'),
-              h2(
-                { class: home.sectionTitle() },
-                'One framework, many packages'
-              ),
-              p({ class: home.sectionLead() }, [
-                'Adopt incrementally — each package solves one problem and plugs in through providers.',
-              ]),
-            ]),
-            EcosystemSection(),
-          ]),
-        ]),
+        HomeSection({
+          eyebrow: 'Ecosystem',
+          title: 'One framework, many packages',
+          lead: 'Adopt incrementally — each package solves one problem and plugs in through providers.',
+          children: EcosystemSection(),
+        }),
 
+        HomeSection({
+          eyebrow: 'Architecture',
+          title: 'Structure that scales with your team',
+          lead: 'Six predictable layers, feature-first slices, and Architect lint — wrong imports fail in CI, not in code review.',
+          children: HomeArchitectureView(vm),
+        }),
 
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Architecture'),
-              h2(
-                { class: home.sectionTitle() },
-                'Structure that scales with your team'
-              ),
-              p({ class: home.sectionLead() }, [
-                'EchoJS is not only fast at runtime — it replaces ad-hoc folders with six predictable layers, feature-first slices, and enforceable import rules.',
-              ]),
-            ]),
-            HomeArchitectureView(),
-          ]),
-        ]),
+        HomeSection({
+          eyebrow: 'Testing',
+          title: 'Easy to test — models and views stay separate',
+          lead: 'Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.',
+          children: HomeTestingView(vm),
+        }),
 
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Testing'),
-              h2(
-                { class: home.sectionTitle() },
-                'Easy to test — models and views stay separate'
-              ),
-              p({ class: home.sectionLead() }, [
-                'Logic lives in createModel, markup in createView. Unit-test behavior without a DOM tree; mount views only when UI wiring needs verification.',
-              ]),
-            ]),
-            HomeTestingView(vm),
-          ]),
-        ]),
+        HomeSection({
+          eyebrow: 'Compare',
+          title: 'EchoJS vs the mainstream',
+          lead: [
+            'React, Vue, Angular, Solid, and Svelte each made different bets. See the matrix below — then read ',
+            NavLink({
+              to: docPageByContentId['comparisons/react']!,
+              class: home.archLink(),
+              children: [
+                'EchoJS vs React + ecosystem',
+                span({ class: home.archLinkArrow() }, '→'),
+              ],
+            }),
+            ' for architecture and state depth.',
+          ],
+          children: FrameworkComparisonSection(),
+        }),
 
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Compare'),
-              h2({ class: home.sectionTitle() }, 'EchoJS vs the mainstream'),
-              p({ class: home.sectionLead() }, [
-                'React, Vue, Angular, Solid, and Svelte each made different bets. See the matrix below — then read ',
-                NavLink({
-                  to: docPageByContentId['comparisons/react']!,
-                  class: home.archLink(),
-                  children: [
-                    'EchoJS vs React + ecosystem',
-                    span({ class: home.archLinkArrow() }, '→'),
-                  ],
-                }),
-                ' for architecture and state depth.',
-              ]),
-            ]),
-            FrameworkComparisonSection(),
-          ]),
-        ]),
-
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Philosophy'),
-              h2(
-                { class: home.sectionTitle() },
-                'Reactive by design, not by accident'
-              ),
-              p({ class: home.sectionLead() }, [
-                'EchoJS updates the DOM surgically — then encodes that mindset in folder structure, providers, and typed routes so teams do not reinvent conventions per repo.',
-              ]),
-            ]),
+        HomeSection({
+          eyebrow: 'Philosophy',
+          title: 'Reactive by design, not by accident',
+          lead: 'EchoJS updates the DOM surgically — then encodes that mindset in folder structure, providers, and typed routes so teams do not reinvent conventions per repo.',
+          children: [
             HomePhilosophyBridgeView(),
             HomePhilosophyPrinciplesView(),
-          ]),
-        ]),
+          ],
+        }),
 
-        section({ class: home.section() }, [
-          div({ class: home.sectionInner() }, [
-            div({ class: home.sectionHeader() }, [
-              p({ class: home.sectionEyebrow() }, 'Developer experience'),
-              h2({ class: home.sectionTitle() }, 'Code-first DX'),
-              p({ class: home.sectionLead() }, [
-                'Real snippets from how EchoJS apps are wired — pick a layer on the left, read the idea, inspect TypeScript on the right.',
-              ]),
-            ]),
-            HomeCodeShowcaseView(vm),
-          ]),
-        ]),
+        HomeSection({
+          eyebrow: 'Developer experience',
+          title: 'Code-first DX',
+          lead: 'Real snippets from how EchoJS apps are wired — pick a layer on the left, read the idea, inspect TypeScript on the right.',
+          children: HomeCodeShowcaseView(vm),
+        }),
 
-        section({ class: 'relative pt-4' }, [
-          div({ class: home.sectionInner() }, [HomeCtaView()]),
-        ]),
+        section({ class: 'relative pt-4' }, [HomeCtaView()]),
 
         SponsorsSection(),
         HomeFooter(),

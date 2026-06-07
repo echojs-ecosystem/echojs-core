@@ -1,4 +1,5 @@
 import {
+  button,
   type Child,
   createView,
   div,
@@ -8,89 +9,108 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
+import { CodeBlock } from '@widgets/code-block'
 import {
+  architectCodePanels,
   architectureAdvantages,
   architectureLayers,
 } from '@entities/home/constants/architecture-advantages.js'
-import {
-  archLayerStyles,
-  homeArchitectureStyles,
-} from '@entities/home/ui/home-architecture.view.styles.js'
+import { codeDots } from '@entities/home/helpers/code-dots.js'
+import type { HomeVM } from '@entities/home/types/home.types.js'
+import { homeArchitectureStyles } from '@entities/home/ui/home-architecture.view.styles.js'
 import { cn } from '@core/styles/cn.js'
 
 const home = homeArchitectureStyles()
-const layer = archLayerStyles()
 
 const advantageNumbers = ['01', '02', '03', '04'] as const
 
-const ArchitectureLayerDiagram = (): Child =>
-  div({ class: home.diagram() }, [
-    div({ class: home.diagramGlow() }),
+const ArchitectureLayerStrip = (): Child =>
+  div({ class: home.layerStrip() }, [
+    div({ class: home.layerStripGlow() }),
     div(
-      { class: home.diagramInner() },
+      { class: home.layerRow() },
       architectureLayers.flatMap((item, index) => [
-        index > 0 ? div({ class: home.connector() }) : null,
-        div({ class: layer.wrap() }, [
-          div({ class: layer.layer({ emphasis: item.emphasis }) }, [
-            p({ class: layer.name() }, item.name),
-            p({ class: layer.hint() }, item.hint),
-          ]),
+        index > 0
+          ? span({ class: home.layerArrow(), 'aria-hidden': 'true' }, '→')
+          : null,
+        div({ class: home.layerCell({ emphasis: item.emphasis }) }, [
+          p({ class: home.layerName() }, item.name),
+          p({ class: home.layerHint() }, item.hint),
         ]),
       ])
     ),
-    p({ class: home.diagramCaption() }, 'imports only upward ↑'),
-  ])
-
-export const HomeArchitectureBridgeView = createView(
-  (_vm: void): Child =>
-    div({ class: home.bridge() }, [
-      p({ class: home.bridgeText() }, [
-        'Most frameworks stop at runtime. EchoJS ships an ',
-        span({ class: cn('font-medium text-fg') }, 'opinionated layer stack'),
-        ' — the same structure powers ',
-        span({ class: cn('font-medium text-fg') }, 'apps/docs'),
-        ', ',
-        span({ class: cn('font-medium text-fg') }, 'apps/example'),
-        ', and production apps. Boundaries scale with teams instead of collapsing into a flat components folder.',
-      ]),
+    div({ class: home.layerFooter() }, [
+      p(
+        { class: home.layerCaption() },
+        'Imports flow right → higher layers depend on lower ones'
+      ),
       NavLink({
-        to: docPageByContentId['architecture/overview']!,
-        class: home.bridgeLink(),
-        children: ['Architecture overview', span(null, '→')],
+        to: docPageByContentId['packages/architect/guides/layers']!,
+        class: home.topLink(),
+        children: ['Layer rules', span(null, '→')],
       }),
     ]),
-  'HomeArchitectureBridgeView'
-)
+  ])
+
+const ArchitectLintEditor = (vm: HomeVM): Child =>
+  div({ class: home.editor() }, [
+    div(
+      { class: home.editorTabs() },
+      architectCodePanels.map((panel, index) =>
+        button(
+          {
+            type: 'button',
+            class: () =>
+              cn(
+                home.editorTab(),
+                vm.isArchitectPanelActive(index) && home.editorTabActive()
+              ),
+            onClick: () => vm.setArchitectPanel(index),
+          },
+          panel.label
+        )
+      )
+    ),
+    () => {
+      const panel = vm.activeArchitectPanel()
+      return [
+        div({ class: home.editorChrome() }, [
+          div({ class: home.editorDots() }, codeDots()),
+          span({ class: home.editorTitle() }, panel.file),
+          span({ class: home.editorBadge() }, panel.badge),
+        ]),
+        div({ class: home.editorBody() }, [
+          CodeBlock({ language: panel.lang, code: panel.code, bare: true }),
+        ]),
+        p({ class: home.editorFoot() }, panel.caption),
+      ]
+    },
+  ])
 
 export const HomeArchitectureView = createView(
-  (_vm: void): Child =>
-    div(null, [
-      HomeArchitectureBridgeView(),
-      div({ class: home.grid() }, [
-        ArchitectureLayerDiagram(),
-        div(
-          { class: home.advantages() },
-          architectureAdvantages.map((item, index) =>
-            NavLink({
-              to: docPageByContentId[item.docId]!,
-              class: home.advantageCard(),
-              children: [
-                span(
-                  { class: home.advantageIcon() },
-                  advantageNumbers[index] ?? '•'
-                ),
-                p({ class: home.advantageTitle() }, item.title),
-                p({ class: home.advantageSummary() }, item.summary),
-                p({ class: home.advantageHighlight() }, item.highlight),
-                span({ class: home.advantageLink() }, [
-                  'Read more',
-                  span(null, '→'),
-                ]),
-              ],
-            })
-          )
-        ),
-      ]),
+  (vm: HomeVM): Child =>
+    div({ class: home.shell() }, [
+      div({ class: home.shellGlow() }),
+      div({ class: home.shellGlowRight() }),
+      ArchitectureLayerStrip(),
+      ArchitectLintEditor(vm),
+      div(
+        { class: home.advantages() },
+        architectureAdvantages.map((item, index) =>
+          NavLink({
+            to: docPageByContentId[item.docId]!,
+            class: home.advantageCard(),
+            children: [
+              span(
+                { class: home.advantageIcon() },
+                advantageNumbers[index] ?? '•'
+              ),
+              p({ class: home.advantageTitle() }, item.title),
+              p({ class: home.advantageSummary() }, item.summary),
+            ],
+          })
+        )
+      ),
     ]),
   'HomeArchitectureView'
 )

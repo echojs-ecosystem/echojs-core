@@ -1,3 +1,4 @@
+import type { ArchitectCodePanel } from '@entities/home/constants/architecture-advantages.js'
 import type { TestingCodePanel } from '@entities/home/constants/testing-advantages.js'
 
 export type CompareTone = 'muted' | 'accent'
@@ -26,6 +27,9 @@ export type HomeVM = {
   activeTestingPanel: () => TestingCodePanel
   setTestingPanel: (index: number) => void
   isTestingPanelActive: (index: number) => boolean
+  activeArchitectPanel: () => ArchitectCodePanel
+  setArchitectPanel: (index: number) => void
+  isArchitectPanelActive: (index: number) => boolean
 }
 
 export type CompareCardViewProps = {

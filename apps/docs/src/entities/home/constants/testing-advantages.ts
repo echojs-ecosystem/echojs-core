@@ -41,7 +41,18 @@ describe("CounterView", () => {
 
     render(CounterView(vm), root)
 
-    expect(root.textContent).toBe("3")
+    expect(root.textContent).toContain("3")
+  })
+
+  it("calls increment on button click", () => {
+    let calls = 0
+    const vm = { count: () => 0, increment: () => { calls++ } }
+    const root = document.createElement("div")
+
+    render(CounterView(vm), root)
+    root.querySelector("button")?.click()
+
+    expect(calls).toBe(1)
   })
 })`
 

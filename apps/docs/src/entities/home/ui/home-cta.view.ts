@@ -26,7 +26,9 @@ export const HomeCtaView = createView(
   (_vm: void): Child =>
     div({ class: home.cta() }, [
       div({ class: home.ctaMesh() }),
-      div({ class: home.ctaGrid() }, [
+      div({ class: home.ctaGlow() }),
+
+      div({ class: home.ctaTop() }, [
         div({ class: home.ctaCopy() }, [
           p({ class: home.ctaEyebrow() }, 'Next step'),
           h2({ class: home.ctaTitle() }, 'Ready to build with EchoJS?'),
@@ -37,35 +39,18 @@ export const HomeCtaView = createView(
             span({ class: home.ctaBodyEm() }, 'apps/example'),
             '.',
           ]),
-          div(
-            { class: home.ctaSteps() },
-            ctaSteps.map((step) =>
-              div({ class: home.ctaStep() }, [
-                span({ class: home.ctaStepNum() }, step.n),
-                span(null, step.label),
-              ])
-            )
-          ),
-          div({ class: home.ctaActions() }, [
-            NavLink({
-              to: docPageByContentId['getting-started/first-application']!,
-              class: btn.primary(),
-              children: 'Start building',
-            }),
-            NavLink({
-              to: docPageByContentId['introduction/what-is-echojs']!,
-              class: btn.secondary(),
-              children: 'What is EchoJS?',
-            }),
-          ]),
         ]),
-        div({ class: home.ctaAside() }, [
-          p({ class: home.ctaAsideLabel() }, 'Quick start'),
-          p(
-            { class: home.ctaAsideHint() },
-            'Pick your package manager — command copies on click.'
-          ),
-          div({ class: home.ctaInstall() }, [PackageInstall()]),
+        div({ class: home.ctaActions() }, [
+          NavLink({
+            to: docPageByContentId['getting-started/first-application']!,
+            class: btn.primary(),
+            children: 'Start building',
+          }),
+          NavLink({
+            to: docPageByContentId['introduction/what-is-echojs']!,
+            class: btn.secondary(),
+            children: 'What is EchoJS?',
+          }),
         ]),
       ]),
     ]),

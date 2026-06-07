@@ -15,43 +15,96 @@ export type ArchitectureAdvantage = {
   docId: ContentId
 }
 
-/** Visual layer stack from /docs/architecture/overview. */
+/** Visual layer stack — matches apps/docs architect.config.ts order. */
 export const architectureLayers: ArchitectureLayer[] = [
+  { id: 'app', name: 'app', hint: 'bootstrap & routes', emphasis: 'default' },
+  { id: 'pages', name: 'pages', hint: 'route views', emphasis: 'default' },
+  { id: 'entities', name: 'entities', hint: 'model · view', emphasis: 'default' },
+  { id: 'widgets', name: 'widgets', hint: 'composite UI', emphasis: 'foundation' },
+  { id: 'features', name: 'features', hint: 'user flows', emphasis: 'default' },
+  { id: 'core', name: 'core', hint: 'content & providers', emphasis: 'default' },
+]
+
+export type ArchitectCodePanel = {
+  id: string
+  label: string
+  file: string
+  badge: string
+  lang: string
+  code: string
+  caption: string
+}
+
+export const architectConfigExample = `import { defineConfig, dependenciesDirection } from "@echojs-ecosystem/architect"
+
+export default defineConfig({
+  root: abstraction({
+    name: "src",
+    children: {
+      app: appLayer,
+      pages: abstraction({ name: "pages", children: { "*": pageSlice } }),
+      entities: abstraction({ name: "entities", children: { "*": entitySlice } }),
+      widgets: abstraction({ name: "widgets", children: { "*": widgetSlice } }),
+      features: abstraction({ name: "features", children: { "*": featureSlice } }),
+      core: coreLayer,
+    },
+    rules: [
+      dependenciesDirection(
+        ["app", "pages", "entities", "widgets", "features", "core"],
+        { allowDownward: ["**/app/router/**"] },
+      ),
+    ],
+  }),
+})`
+
+export const architectViolationExample = `// widgets/site-header/model/site-header.model.ts
+import { createModel } from "@echojs-ecosystem/framework/hyperdom"
+import { blogPage } from "@pages/blog" // ✗ widgets → pages
+
+export const createSiteHeaderModel = createModel(() => ({
+  blogHref: () => blogPage.path,
+}), "SiteHeaderModel")`
+
+export const architectCiOutput = `$ bun run architect
+
+src/widgets/site-header/model/site-header.model.ts
+  ✘ Forbidden dependency "widgets" <= "pages".
+    allowed: app <= pages <= entities <= widgets <= features <= core
+    import { blogPage } from "@pages/blog"
+           ─────────────────────────────────
+
+Found 1 error in 1 file · exit 1`
+
+export const architectCodePanels: ArchitectCodePanel[] = [
   {
-    id: 'app',
-    name: 'app',
-    hint: 'bootstrap & providers',
-    emphasis: 'default',
+    id: 'config',
+    label: 'Rule',
+    file: 'architect.config.ts',
+    badge: 'define',
+    lang: 'typescript',
+    code: architectConfigExample,
+    caption:
+      'One ordered stack for the whole repo — imports may only flow downward.',
   },
   {
-    id: 'pages',
-    name: 'pages',
-    hint: 'routes & model-view',
-    emphasis: 'default',
+    id: 'violation',
+    label: 'Leak',
+    file: 'site-header.model.ts',
+    badge: 'blocked',
+    lang: 'typescript',
+    code: architectViolationExample,
+    caption:
+      'Convenient shortcuts become cross-layer imports. Architect names the offender.',
   },
   {
-    id: 'widgets',
-    name: 'widgets',
-    hint: 'composite UI blocks',
-    emphasis: 'default',
-  },
-  {
-    id: 'features',
-    name: 'features',
-    hint: 'user capabilities',
-    emphasis: 'foundation',
-  },
-  {
-    id: 'entities',
-    name: 'entities',
-    hint: 'domain & route tables',
-    emphasis: 'default',
-  },
-  {
-    id: 'shared',
-    name: 'shared',
-    hint: 'tokens, utils, content',
-    emphasis: 'default',
+    id: 'ci',
+    label: 'CI',
+    file: 'terminal',
+    badge: 'exit 1',
+    lang: 'bash',
+    code: architectCiOutput,
+    caption:
+      'Run echo-architect lint locally and in CI — same check as this docs site.',
   },
 ]
 
@@ -61,7 +114,7 @@ export const architectureAdvantages: ArchitectureAdvantage[] = [
     id: 'layers',
     title: 'Six layers, one direction',
     summary:
-      'Each folder has a single job. Imports flow upward only — shared never imports pages, features stay isolated.',
+      'Each folder has a single job. Imports flow downward only — core never imports pages, features stay isolated.',
     highlight: 'Refactors stay local as the codebase grows.',
     docId: 'architecture/overview',
   },
@@ -82,11 +135,11 @@ export const architectureAdvantages: ArchitectureAdvantage[] = [
     docId: 'architecture/models',
   },
   {
-    id: 'dependency-flow',
-    title: 'Boundaries you can enforce',
+    id: 'architect',
+    title: 'Architect lints imports',
     summary:
-      'Layer rules are documented and lintable — wrong imports fail in CI instead of rotting quietly for months.',
-    highlight: '@echojs-ecosystem/architect catches cross-layer leaks early.',
-    docId: 'architecture/dependency-flow',
+      'declare dependenciesDirection once — echo-architect reports forbidden upward imports with file paths.',
+    highlight: 'Ship the same lint in CI as apps/docs and apps/example.',
+    docId: 'packages/architect/guides/layers',
   },
 ]

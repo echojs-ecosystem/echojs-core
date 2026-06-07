@@ -22,16 +22,36 @@ import { cn } from '@core/styles/cn.js'
 
 const home = homeTestingStyles()
 
-const TestingPipeline = (): Child =>
-  div({ class: home.pipeline() }, [
-    div({ class: cn(home.pipelineNode(), home.pipelineNodePrimary()) }, [
-      p({ class: home.pipelineLabel() }, 'createModel'),
-      p({ class: home.pipelineHint() }, 'unit · no mount'),
+const TestingPipelineStrip = (): Child =>
+  div({ class: home.pipelineStrip() }, [
+    div({ class: home.pipelineGlow() }),
+    div({ class: home.pipelineRow() }, [
+      div({ class: home.pipelineCell({ emphasis: 'primary' }) }, [
+        p({ class: home.pipelineLabel() }, 'createModel'),
+        p({ class: home.pipelineHint() }, 'unit · no mount'),
+      ]),
+      span({ class: home.pipelineArrow(), 'aria-hidden': 'true' }, '→'),
+      div({ class: home.pipelineCell() }, [
+        p({ class: home.pipelineLabel() }, 'createView'),
+        p({ class: home.pipelineHint() }, 'stub VM · optional'),
+      ]),
     ]),
-    span({ class: home.pipelineArrow(), 'aria-hidden': 'true' }, '→'),
-    div({ class: home.pipelineNode() }, [
-      p({ class: home.pipelineLabel() }, 'createView'),
-      p({ class: home.pipelineHint() }, 'stub VM · optional'),
+    div({ class: home.pipelineFooter() }, [
+      div(null, [
+        p(
+          { class: home.pipelineCaption() },
+          'State and behavior separate from markup at every layer'
+        ),
+        div(
+          { class: home.pipelinePills() },
+          testingHighlights.map((label) => span({ class: home.pill() }, label))
+        ),
+      ]),
+      NavLink({
+        to: docPageByContentId['architecture/models']!,
+        class: home.topLink(),
+        children: ['Models & views', span(null, '→')],
+      }),
     ]),
   ])
 
@@ -75,56 +95,24 @@ export const HomeTestingView = createView(
     div({ class: home.shell() }, [
       div({ class: home.shellGlow() }),
       div({ class: home.shellGlowRight() }),
-      div({ class: home.bridge() }, [
-        p({ class: home.bridgeText() }, [
-          'EchoJS splits ',
-          span({ class: cn('font-medium text-fg') }, 'state and behavior'),
-          ' from ',
-          span({ class: cn('font-medium text-fg') }, 'markup'),
-          ' at every layer — exercise the model as a plain object, mount the view only when the DOM matters.',
-        ]),
-        NavLink({
-          to: docPageByContentId['architecture/models']!,
-          class: home.bridgeLink(),
-          children: ['Models & views', span(null, '→')],
-        }),
-      ]),
-      div({ class: home.grid() }, [
-        div({ class: home.leftCol() }, [
-          div(
-            { class: home.pills() },
-            testingHighlights.map((label) =>
-              span({ class: home.pill() }, label)
-            )
-          ),
-          div(
-            { class: home.advantages() },
-            testingAdvantages.map((item) =>
-              NavLink({
-                to: docPageByContentId[item.docId]!,
-                class: home.advantageCard(),
-                children: [
-                  div({ class: home.advantageTopLine() }),
-                  div({ class: home.advantageHead() }, [
-                    span({ class: home.advantageIcon() }, item.icon),
-                    p({ class: home.advantageTitle() }, item.title),
-                  ]),
-                  p({ class: home.advantageSummary() }, item.summary),
-                  p({ class: home.advantageHighlight() }, item.highlight),
-                  span({ class: home.advantageLink() }, [
-                    'Read more',
-                    span(null, '→'),
-                  ]),
-                ],
-              })
-            )
-          ),
-        ]),
-        div({ class: home.rightCol() }, [
-          TestingPipeline(),
-          TestingCodeEditor(vm),
-        ]),
-      ]),
+      TestingPipelineStrip(),
+      TestingCodeEditor(vm),
+      div(
+        { class: home.advantages() },
+        testingAdvantages.map((item) =>
+          NavLink({
+            to: docPageByContentId[item.docId]!,
+            class: home.advantageCard(),
+            children: [
+              div({ class: home.advantageHead() }, [
+                span({ class: home.advantageIcon() }, item.icon),
+                p({ class: home.advantageTitle() }, item.title),
+              ]),
+              p({ class: home.advantageSummary() }, item.summary),
+            ],
+          })
+        )
+      ),
     ]),
   'HomeTestingView'
 )
