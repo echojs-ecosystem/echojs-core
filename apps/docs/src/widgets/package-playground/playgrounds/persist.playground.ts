@@ -3,8 +3,8 @@ import { withMemoryStorage } from '@echojs-ecosystem/framework/persist'
 import { effect, signal } from '@echojs-ecosystem/framework/reactivity'
 import { createStore } from '@echojs-ecosystem/framework/store'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const create = (): PlaygroundInstance => {
   const counter = createStore(0).extend(

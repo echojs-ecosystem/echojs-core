@@ -29,6 +29,7 @@ const PUBLISHABLE = [
   "form",
   "router",
   "ui",
+  "network",
   "framework",
   "architect",
 ];

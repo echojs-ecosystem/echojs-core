@@ -6,8 +6,8 @@ import {
 
 import { MoonIcon, SunIcon } from '@widgets/icons'
 
-import type { ThemeToggleVM } from '../model/theme-toggle.model.js'
-import { themeToggleStyles } from './theme-toggle.view.styles.js'
+import type { ThemeToggleVM } from '../model/theme-toggle.model'
+import { themeToggleStyles } from './theme-toggle.view.styles'
 
 export const ThemeToggleView = createView(
   (vm: ThemeToggleVM): Child =>

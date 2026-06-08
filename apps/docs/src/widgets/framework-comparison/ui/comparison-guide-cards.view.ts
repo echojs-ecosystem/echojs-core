@@ -8,9 +8,9 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import { frameworkComparisonArticles } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
-import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo.js'
+import { frameworkComparisonArticles } from '@widgets/framework-comparison/constants/framework-comparison.data'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
+import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo'
 
 const cmp = frameworkComparisonStyles()
 

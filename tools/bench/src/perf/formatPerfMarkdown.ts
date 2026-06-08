@@ -1,4 +1,4 @@
-import type { PerfReport } from "./types.js";
+import type { PerfReport } from "./types";
 
 function formatNumber(n: number): string {
   return n.toLocaleString("en-US", { maximumFractionDigits: 2 });

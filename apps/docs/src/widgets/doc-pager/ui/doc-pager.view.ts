@@ -7,11 +7,11 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 
 import { getDocPage } from '@app/router'
-import { docPagerStyles } from '@widgets/doc-pager/ui/doc-pager.view.styles.js'
+import { docPagerStyles } from '@widgets/doc-pager/ui/doc-pager.view.styles'
 import { NavIcon } from '@widgets/icons'
-import { docPath, getAdjacentDocNavItems } from '@core/content/nav.js'
-import type { ContentId } from '@core/content/types.js'
-import type { DocsNavItemEnriched } from '@core/content/types.js'
+import { docPath, getAdjacentDocNavItems } from '@core/content/nav'
+import type { ContentId } from '@core/content/types'
+import type { DocsNavItemEnriched } from '@core/content/types'
 
 const pager = docPagerStyles()
 

@@ -3,12 +3,12 @@ import type {
   DocsNavItem,
   DocsNavItemEnriched,
   DocsNavSection,
-} from './types.js'
-import { agentsNavItems, agentsNavSection } from './agents-nav.js'
-import { allPackageNavItems } from './package-nav.js'
+} from './types'
+import { agentsNavItems, agentsNavSection } from './agents-nav'
+import { allPackageNavItems } from './package-nav'
 
-export type { DocsNavItem, DocsNavSection } from './types.js'
-export { agentsNavSection, agentsNavItems } from './agents-nav.js'
+export type { DocsNavItem, DocsNavSection } from './types'
+export { agentsNavSection, agentsNavItems } from './agents-nav'
 
 const item = (
   slug: string,
@@ -203,7 +203,7 @@ export const docsNavSections: DocsNavSection[] = [
   },
 ]
 
-export { packageNavGroups } from './package-nav.js'
+export { packageNavGroups } from './package-nav'
 
 const mapSectionItems = (
   section: DocsNavSection,

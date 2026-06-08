@@ -8,7 +8,7 @@ import { homePage } from '@app/router'
 import {
   searchDocs,
   type SearchEntry,
-} from '@widgets/search/helpers/search-index.js'
+} from '@widgets/search/helpers/search-index'
 
 /** Shared with mobile scroll lock — one search instance per header. */
 export const $mobileSearchOpen = signal(false)

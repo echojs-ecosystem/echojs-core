@@ -55,6 +55,10 @@ createEchoApp({ strictContextChecks: true })
 | `@echojs-ecosystem/framework/ui` | UI barrel |
 | `@echojs-ecosystem/framework/ui/button` | Button (and other UI subpaths) |
 | `@echojs-ecosystem/framework/devtools` | DevTools registry (optional) |
+| `@echojs-ecosystem/framework/network/http` | HTTP client |
+| `@echojs-ecosystem/framework/network/ws` | WebSocket client (stub) |
+| `@echojs-ecosystem/framework/network/mock` | Network mocking utilities (stub) |
+| `@echojs-ecosystem/framework/network/graphql` | GraphQL client (stub) |
 | `@echojs-ecosystem/framework/core` | Low-level component runtime |
 
 ### UI granular imports

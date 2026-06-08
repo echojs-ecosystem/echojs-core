@@ -7,7 +7,7 @@ import {
   BlogArticle,
   BlogIndex,
 } from '@entities/blog'
-import { applySeo } from '@core/seo/apply-seo.js'
+import { applySeo } from '@core/seo/apply-seo'
 
 export const blogSection = createRoute('docs-blog-section')
 

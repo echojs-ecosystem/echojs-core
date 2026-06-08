@@ -10,11 +10,11 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 
 import { CodeBlock } from '@widgets/code-block'
-import { codeTabs } from '@entities/home/constants/home.constants.js'
-import { codeDots } from '@entities/home/helpers/code-dots.js'
-import type { HomeVM } from '@entities/home/types/home.types.js'
-import { homeCodeShowcaseStyles } from '@entities/home/ui/home-code-showcase.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+import { codeTabs } from '@entities/home/constants/home.constants'
+import { codeDots } from '@entities/home/helpers/code-dots'
+import type { HomeVM } from '@entities/home/types/home.types'
+import { homeCodeShowcaseStyles } from '@entities/home/ui/home-code-showcase.view.styles'
+import { cn } from '@core/styles/cn'
 
 const home = homeCodeShowcaseStyles()
 

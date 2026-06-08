@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-import { docsShellPadding } from '@core/styles/docs-shell.js'
+import { docsShellPadding } from '@core/styles/docs-shell'
 
 export const docArticlePageStyles = tv({
   slots: {
@@ -13,7 +13,7 @@ export const docLayoutStyles = tv({
   slots: {
     article: 'flex w-full',
     main: ['flex min-w-0 flex-1 justify-start', docsShellPadding].join(' '),
-    mainInner: 'w-full min-w-0 max-w-3xl',
+    mainInner: 'w-full min-w-0 lg:mx-auto lg:max-w-3xl',
     toolbar: 'mb-4 flex justify-end',
     copyPageBtn: [
       'inline-flex items-center rounded-lg border border-border/80 bg-surface-elevated/80 px-3 py-1.5',

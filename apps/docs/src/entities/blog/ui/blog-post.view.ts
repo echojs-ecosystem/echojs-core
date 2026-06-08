@@ -9,9 +9,9 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
-import { blogCategoryLabels } from '@entities/blog/constants/blog.data.js'
-import type { BlogPostVM } from '@entities/blog/types/blog.types.js'
-import { blogPageStyles } from '@entities/blog/ui/blog.view.styles.js'
+import { blogCategoryLabels } from '@entities/blog/constants/blog.data'
+import type { BlogPostVM } from '@entities/blog/types/blog.types'
+import { blogPageStyles } from '@entities/blog/ui/blog.view.styles'
 
 const page = blogPageStyles()
 

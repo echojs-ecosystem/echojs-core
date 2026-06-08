@@ -1,12 +1,12 @@
-export { docPageByContentId, getDocPage } from './doc-pages.js'
+export { docPageByContentId, getDocPage } from './doc-pages'
 export {
   blogPage,
   blogPostPage,
   homePage,
   roadmapPage,
   sponsorsPage,
-} from './page-links.js'
+} from './page-links'
 export {
   buildSiteHeaderNavItems,
   type SiteHeaderNavItem,
-} from './header-nav.js'
+} from './header-nav'

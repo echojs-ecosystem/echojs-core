@@ -1,4 +1,4 @@
-import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
+import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data'
 
 export const frameworkLogoSrc: Record<FrameworkId, string> = {
   react: '/framework-logos/react.svg',
@@ -11,7 +11,7 @@ export const frameworkLogoSrc: Record<FrameworkId, string> = {
 
 export const frameworkLogoAlt: Record<FrameworkId, string> = {
   react: 'React',
-  vue: 'Vue.js',
+  vue: 'Vue',
   angular: 'Angular',
   solid: 'SolidJS',
   svelte: 'Svelte',

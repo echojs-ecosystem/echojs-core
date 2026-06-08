@@ -10,10 +10,10 @@ import {
   becomeSponsorUrl,
   type SponsorTier,
   type SponsorTierGroup,
-} from '@widgets/sponsors/constants/sponsors.data.js'
-import { SponsorLogo } from '@widgets/sponsors/sponsor-logo.js'
-import { sponsorsTierStyles } from '@widgets/sponsors/sponsors-tier-panel.styles.js'
-import { cn } from '@core/styles/cn.js'
+} from '@widgets/sponsors/constants/sponsors.data'
+import { SponsorLogo } from '@widgets/sponsors/sponsor-logo'
+import { sponsorsTierStyles } from '@widgets/sponsors/sponsors-tier-panel.styles'
+import { cn } from '@core/styles/cn'
 
 const tier = sponsorsTierStyles()
 

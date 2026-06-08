@@ -5,8 +5,8 @@ import {
   div,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { CodeBlockVM } from '@widgets/code-block/model/code-block.model.js'
-import { codeBlockStyles } from '@widgets/code-block/ui/code-block.view.styles.js'
+import type { CodeBlockVM } from '@widgets/code-block/model/code-block.model'
+import { codeBlockStyles } from '@widgets/code-block/ui/code-block.view.styles'
 
 const code = codeBlockStyles()
 

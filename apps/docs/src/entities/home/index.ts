@@ -1,26 +1,26 @@
 import { createComponent } from '@echojs-ecosystem/framework/hyperdom'
 
-import { createHomeModel } from '@entities/home/model/home.model.js'
-import { HomeView } from '@entities/home/ui/home.view.js'
+import { createHomeModel } from '@entities/home/model/home.model'
+import { HomeView } from '@entities/home/ui/home.view'
 
-export { createHomeModel } from '@entities/home/model/home.model.js'
+export { createHomeModel } from '@entities/home/model/home.model'
 export type {
   CodeTab,
   CompareCardData,
   CompareCardViewProps,
   CompareTone,
   HomeVM,
-} from '@entities/home/types/home.types.js'
-export { HomeView } from '@entities/home/ui/home.view.js'
-export { HomeCompareCardView } from '@entities/home/ui/home-compare-card.view.js'
-export { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view.js'
-export { HomeCtaView } from '@entities/home/ui/home-cta.view.js'
-export { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view.js'
-export { HomeArchitectureView } from '@entities/home/ui/home-architecture.view.js'
-export { HomeSection } from '@entities/home/ui/home-section.view.js'
+} from '@entities/home/types/home.types'
+export { HomeView } from '@entities/home/ui/home.view'
+export { HomeCompareCardView } from '@entities/home/ui/home-compare-card.view'
+export { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view'
+export { HomeCtaView } from '@entities/home/ui/home-cta.view'
+export { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view'
+export { HomeArchitectureView } from '@entities/home/ui/home-architecture.view'
+export { HomeSection } from '@entities/home/ui/home-section.view'
 export {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
-} from '@entities/home/ui/home-philosophy-principles.view.js'
+} from '@entities/home/ui/home-philosophy-principles.view'
 
 export const Home = createComponent(createHomeModel, HomeView, { name: 'Home' })

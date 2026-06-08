@@ -1,7 +1,7 @@
 import { createRouteView } from '@echojs-ecosystem/framework/router'
 
 import { Sponsors } from '@entities/sponsors'
-import { applySeo } from '@core/seo/apply-seo.js'
+import { applySeo } from '@core/seo/apply-seo'
 
 export const sponsorsPage = createRouteView({
   name: 'sponsors',

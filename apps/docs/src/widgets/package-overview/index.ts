@@ -1,1 +1,1 @@
-export { PackageOverview } from './package-overview.js'
+export { PackageOverview } from './package-overview'

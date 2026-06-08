@@ -1,4 +1,4 @@
-import type { DocDocument } from './types.js'
+import type { DocDocument } from './types'
 
 export type DocTocEntry = {
   id: string

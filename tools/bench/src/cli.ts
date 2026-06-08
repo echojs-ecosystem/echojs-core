@@ -2,11 +2,11 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
-import { measureWorkspaceBundleSizes } from "./size/measureWorkspaceBundleSizes.js";
-import { measureEntriesBundleSizes } from "./size/measureEntriesBundleSizes.js";
-import { formatBundleSizeMarkdown } from "./size/formatBundleSizeMarkdown.js";
-import { runPerfSuite } from "./perf/runPerfSuite.js";
-import { formatPerfMarkdown } from "./perf/formatPerfMarkdown.js";
+import { measureWorkspaceBundleSizes } from "./size/measureWorkspaceBundleSizes";
+import { measureEntriesBundleSizes } from "./size/measureEntriesBundleSizes";
+import { formatBundleSizeMarkdown } from "./size/formatBundleSizeMarkdown";
+import { runPerfSuite } from "./perf/runPerfSuite";
+import { formatPerfMarkdown } from "./perf/formatPerfMarkdown";
 
 type Command = "size" | "perf";
 

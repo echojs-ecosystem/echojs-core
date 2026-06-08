@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "../.configs/tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "types": ["bun-types", "node"],
+    "baseUrl": ".",
+    "rootDir": ".."
+  },
+  "include": ["src/**/*", "bench/**/*"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.integration.test.ts",
+    "**/*.test-d.ts",
+    "**/*.spec.ts"
+  ]
+}

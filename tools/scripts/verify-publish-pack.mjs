@@ -26,6 +26,7 @@ const PUBLISHABLE = [
   "ui",
   "architect",
   "devtools",
+  "network",
 ];
 
 const DEP_FIELDS = ["dependencies", "peerDependencies", "optionalDependencies"];

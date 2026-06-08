@@ -17,7 +17,8 @@
       "@echojs-ecosystem/i18n",
       "@echojs-ecosystem/ui",
       "@echojs-ecosystem/architect",
-      "@echojs-ecosystem/devtools"
+      "@echojs-ecosystem/devtools",
+      "@echojs-ecosystem/network"
     ]
   ],
   "linked": [],

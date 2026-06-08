@@ -2,7 +2,7 @@ import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
 import { blogPage, roadmapPage, sponsorsPage } from '@app/router'
-import type { NavIconId } from '@core/content/nav-icon-id.js'
+import type { NavIconId } from '@core/content/nav-icon-id'
 
 export type SidebarDocLink = {
   kind: 'doc'

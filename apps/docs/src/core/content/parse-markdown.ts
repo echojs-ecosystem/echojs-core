@@ -1,5 +1,5 @@
-import type { DocBlock, DocDocument, DocFrontmatter } from './types.js'
-import { normalizeCalloutVariant } from './callout-variants.js'
+import type { DocBlock, DocDocument, DocFrontmatter } from './types'
+import { normalizeCalloutVariant } from './callout-variants'
 
 const slugify = (text: string): string =>
   text

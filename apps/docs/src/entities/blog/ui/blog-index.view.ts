@@ -6,9 +6,9 @@ import {
   p,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { BlogIndexVM } from '@entities/blog/types/blog.types.js'
-import { BlogPostCard } from '@entities/blog/ui/blog-post-card.js'
-import { blogPageStyles } from '@entities/blog/ui/blog.view.styles.js'
+import type { BlogIndexVM } from '@entities/blog/types/blog.types'
+import { BlogPostCard } from '@entities/blog/ui/blog-post-card'
+import { blogPageStyles } from '@entities/blog/ui/blog.view.styles'
 
 const page = blogPageStyles()
 

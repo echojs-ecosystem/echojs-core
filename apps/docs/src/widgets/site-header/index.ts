@@ -6,13 +6,13 @@ import {
 import {
   createSiteHeaderModel,
   type SiteHeaderOptions,
-} from './model/site-header.model.js'
-import { SiteHeaderView } from './ui/site-header.view.js'
+} from './model/site-header.model'
+import { SiteHeaderView } from './ui/site-header.view'
 
 export type {
   SiteHeaderMode,
   SiteHeaderOptions,
-} from './model/site-header.model.js'
+} from './model/site-header.model'
 
 export const SiteHeader = (options: SiteHeaderOptions = {}): Child =>
   createComponent(createSiteHeaderModel(options), SiteHeaderView, {

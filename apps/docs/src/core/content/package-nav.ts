@@ -1,8 +1,8 @@
-import type { ContentId, DocsNavItem } from './types.js'
+import type { ContentId, DocsNavItem } from './types'
 import {
   modernPackageDocConfigs,
   type ModernPackageDocConfig,
-} from './package-doc-config.js'
+} from './package-doc-config'
 
 export type PackageNavSubsection = {
   kind: 'subsection'
@@ -164,4 +164,4 @@ export const packageIdFromPathname = (pathname: string): string | null => {
   return m?.[1] ?? null
 }
 
-export { modernPackageDocConfigs } from './package-doc-config.js'
+export { modernPackageDocConfigs } from './package-doc-config'

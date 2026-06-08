@@ -14,9 +14,9 @@ import {
   textarea,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { ideaCategoryOptions } from '@entities/roadmap/constants/roadmap.data.js'
-import type { RoadmapVM } from '@entities/roadmap/types/roadmap.types.js'
-import { roadmapIdeaFormStyles } from '@entities/roadmap/ui/roadmap-idea-form.styles.js'
+import { ideaCategoryOptions } from '@entities/roadmap/constants/roadmap.data'
+import type { RoadmapVM } from '@entities/roadmap/types/roadmap.types'
+import { roadmapIdeaFormStyles } from '@entities/roadmap/ui/roadmap-idea-form.styles'
 
 const form = roadmapIdeaFormStyles()
 

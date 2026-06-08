@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "noEmit": true
+  },
+  "include": ["src/**/*.test-d.ts", "src/**/*.test-d.tsx"],
+  "exclude": ["dist", "node_modules"]
+}

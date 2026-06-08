@@ -27,7 +27,7 @@ import {
   docHeadingStyles,
   docStyles,
   tabButtonStyles,
-} from '@widgets/doc-content/doc-renderer.styles.js'
+} from '@widgets/doc-content/doc-renderer.styles'
 import { PackageInstallAdd } from '@widgets/package-install'
 import { PackageOverview } from '@widgets/package-overview'
 import { PackagePlayground } from '@widgets/package-playground'
@@ -35,10 +35,10 @@ import {
   calloutDefaultTitle,
   calloutIcon,
   type CalloutVariant,
-} from '@core/content/callout-variants.js'
-import { getPackageVersion } from '@core/content/ecosystem-version.generated.js'
-import { renderInlineMarkdown } from '@core/content/inline-markdown.js'
-import type { DocBlock, DocDocument } from '@core/content/types.js'
+} from '@core/content/callout-variants'
+import { getPackageVersion } from '@core/content/ecosystem-version.generated'
+import { renderInlineMarkdown } from '@core/content/inline-markdown'
+import type { DocBlock, DocDocument } from '@core/content/types'
 
 const docUi = docStyles()
 

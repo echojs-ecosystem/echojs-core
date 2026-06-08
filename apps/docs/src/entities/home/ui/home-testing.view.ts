@@ -14,11 +14,11 @@ import {
   testingAdvantages,
   testingCodePanels,
   testingHighlights,
-} from '@entities/home/constants/testing-advantages.js'
-import { codeDots } from '@entities/home/helpers/code-dots.js'
-import type { HomeVM } from '@entities/home/types/home.types.js'
-import { homeTestingStyles } from '@entities/home/ui/home-testing.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+} from '@entities/home/constants/testing-advantages'
+import { codeDots } from '@entities/home/helpers/code-dots'
+import type { HomeVM } from '@entities/home/types/home.types'
+import { homeTestingStyles } from '@entities/home/ui/home-testing.view.styles'
+import { cn } from '@core/styles/cn'
 
 const home = homeTestingStyles()
 

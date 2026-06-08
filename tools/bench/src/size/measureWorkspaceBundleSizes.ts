@@ -1,9 +1,9 @@
 import { resolve } from "node:path";
 
-import { listWorkspacePackages } from "./workspacePackages.js";
-import { resolveEntry } from "./resolveEntry.js";
-import { measureBundle } from "./measureBundle.js";
-import type { BundleSizeReport, BundleSizeRow } from "./types.js";
+import { listWorkspacePackages } from "./workspacePackages";
+import { resolveEntry } from "./resolveEntry";
+import { measureBundle } from "./measureBundle";
+import type { BundleSizeReport, BundleSizeRow } from "./types";
 
 export async function measureWorkspaceBundleSizes(opts: {
   root: string;

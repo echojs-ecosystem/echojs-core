@@ -1,4 +1,4 @@
-import type { DocTocEntry } from '@core/content/extract-toc.js'
+import type { DocTocEntry } from '@core/content/extract-toc'
 
 export type DocTocSpyProps = {
   isActive: (id: string) => boolean

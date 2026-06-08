@@ -1,5 +1,5 @@
 import { performance } from "node:perf_hooks";
-import type { BenchCase, BenchResultRow } from "./types.js";
+import type { BenchCase, BenchResultRow } from "./types";
 
 async function runIterations(fn: () => void | Promise<void>, iterations: number): Promise<number> {
   const start = performance.now();

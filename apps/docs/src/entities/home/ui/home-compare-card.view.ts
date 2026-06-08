@@ -8,8 +8,8 @@ import {
   ul,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { CompareCardViewProps } from '@entities/home/types/home.types.js'
-import { compareCardStyles } from '@entities/home/ui/home-compare-card.view.styles.js'
+import type { CompareCardViewProps } from '@entities/home/types/home.types'
+import { compareCardStyles } from '@entities/home/ui/home-compare-card.view.styles'
 
 export const HomeCompareCardView = createView(
   (props: CompareCardViewProps): Child => {

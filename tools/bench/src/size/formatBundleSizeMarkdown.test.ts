@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { formatBundleSizeMarkdown } from "./formatBundleSizeMarkdown.js";
+import { formatBundleSizeMarkdown } from "./formatBundleSizeMarkdown";
 
 describe("formatBundleSizeMarkdown", () => {
   test("renders a markdown table", () => {

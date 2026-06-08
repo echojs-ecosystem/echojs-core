@@ -1,8 +1,8 @@
 import { type Child, span } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { MockSponsor } from '@widgets/sponsors/constants/sponsors.data.js'
-import { sponsorLogoStyles } from '@widgets/sponsors/sponsor-logo.styles.js'
-import { cn } from '@core/styles/cn.js'
+import type { MockSponsor } from '@widgets/sponsors/constants/sponsors.data'
+import { sponsorLogoStyles } from '@widgets/sponsors/sponsor-logo.styles'
+import { cn } from '@core/styles/cn'
 
 type SponsorLogoProps = {
   sponsor: Pick<MockSponsor, 'initials' | 'name' | 'logoGradient'>

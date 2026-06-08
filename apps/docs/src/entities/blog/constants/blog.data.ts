@@ -1,4 +1,4 @@
-import type { BlogCategory, BlogPost } from '@entities/blog/types/blog.types.js'
+import type { BlogCategory, BlogPost } from '@entities/blog/types/blog.types'
 
 export const blogCategoryLabels: Record<BlogCategory, string> = {
   announcement: 'Announcement',

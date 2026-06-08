@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "apps/*",
+    "apps/workspace/*",
     "packages/*",
     "packages/.configs",
     "tools/bench"

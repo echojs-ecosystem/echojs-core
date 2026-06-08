@@ -1,4 +1,4 @@
-import type { DocTocEntry } from '@core/content/extract-toc.js'
+import type { DocTocEntry } from '@core/content/extract-toc'
 
 /** Matches `scroll-mt-28` on doc headings plus sticky header clearance. */
 const SCROLL_OFFSET = 120

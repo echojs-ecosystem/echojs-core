@@ -8,7 +8,7 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { homePage } from '@app/router'
-import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles.js'
+import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles'
 
 const state = routerStateStyles()
 

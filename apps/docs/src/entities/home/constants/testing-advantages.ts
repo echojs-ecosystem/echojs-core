@@ -1,4 +1,4 @@
-import type { ContentId } from '@core/content/types.js'
+import type { ContentId } from '@core/content/types'
 
 export type TestingAdvantage = {
   id: string

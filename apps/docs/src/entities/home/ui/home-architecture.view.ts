@@ -14,11 +14,11 @@ import {
   architectCodePanels,
   architectureAdvantages,
   architectureLayers,
-} from '@entities/home/constants/architecture-advantages.js'
-import { codeDots } from '@entities/home/helpers/code-dots.js'
-import type { HomeVM } from '@entities/home/types/home.types.js'
-import { homeArchitectureStyles } from '@entities/home/ui/home-architecture.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+} from '@entities/home/constants/architecture-advantages'
+import { codeDots } from '@entities/home/helpers/code-dots'
+import type { HomeVM } from '@entities/home/types/home.types'
+import { homeArchitectureStyles } from '@entities/home/ui/home-architecture.view.styles'
+import { cn } from '@core/styles/cn'
 
 const home = homeArchitectureStyles()
 

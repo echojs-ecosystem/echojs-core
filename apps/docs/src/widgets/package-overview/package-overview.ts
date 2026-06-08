@@ -1,6 +1,6 @@
 import type { Child } from '@echojs-ecosystem/framework/hyperdom'
 
-import { PackageOverviewView } from './ui/package-overview.view.js'
+import { PackageOverviewView } from './ui/package-overview.view'
 
 export type PackageOverviewProps = { packageId: string }
 

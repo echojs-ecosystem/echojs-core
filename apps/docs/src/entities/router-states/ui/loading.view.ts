@@ -5,7 +5,7 @@ import {
   p,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles.js'
+import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles'
 
 const state = routerStateStyles()
 

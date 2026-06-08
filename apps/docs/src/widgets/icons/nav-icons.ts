@@ -1,12 +1,12 @@
 import { type Child, span } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
-import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo.js'
-import type { NavIconId } from '@core/content/nav-icon-id.js'
-import { cn } from '@core/styles/cn.js'
+import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data'
+import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo'
+import type { NavIconId } from '@core/content/nav-icon-id'
+import { cn } from '@core/styles/cn'
 
-import type { FrameworkNavIconId } from './framework-nav-icons.js'
-import { FRAMEWORK_NAV_ICON_SVGS } from './framework-nav-icons.js'
+import type { FrameworkNavIconId } from './framework-nav-icons'
+import { FRAMEWORK_NAV_ICON_SVGS } from './framework-nav-icons'
 
 const stroke =
   'fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"'

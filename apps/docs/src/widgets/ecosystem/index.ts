@@ -1,8 +1,8 @@
 import type { Child } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { EcosystemPackage } from '@widgets/ecosystem/constants/ecosystem-packages.js'
-import { EcosystemPackageCardView } from '@widgets/ecosystem/ui/ecosystem-package-card.view.js'
-import { EcosystemSectionView } from '@widgets/ecosystem/ui/ecosystem-section.view.js'
+import type { EcosystemPackage } from '@widgets/ecosystem/constants/ecosystem-packages'
+import { EcosystemPackageCardView } from '@widgets/ecosystem/ui/ecosystem-package-card.view'
+import { EcosystemSectionView } from '@widgets/ecosystem/ui/ecosystem-section.view'
 
 export const EcosystemPackageCard = (pkg: EcosystemPackage): Child =>
   EcosystemPackageCardView({ pkg })

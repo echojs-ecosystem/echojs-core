@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { formatPerfMarkdown } from "./formatPerfMarkdown.js";
+import { formatPerfMarkdown } from "./formatPerfMarkdown";
 
 describe("formatPerfMarkdown", () => {
   test("renders a markdown table", () => {

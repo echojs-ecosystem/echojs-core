@@ -5,7 +5,7 @@ export { effect } from "./effect";
 export { readonly } from "./readonly";
 export { scope } from "./scope";
 export { signal } from "./signal";
-export { untrack } from "./internals/alien.js";
+export { untrack } from "./internals/alien";
 
 export type { DeepReadonly, ReadonlySignal, ReadValue, Signal } from "./types";
 

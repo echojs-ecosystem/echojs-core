@@ -11,9 +11,9 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { sponsorsPage } from '@app/router'
-import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data.js'
-import { SponsorsBoard } from '@widgets/sponsors/sponsors-board.js'
-import { sponsorsSectionStyles } from '@widgets/sponsors/ui/sponsors-section.view.styles.js'
+import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data'
+import { SponsorsBoard } from '@widgets/sponsors/sponsors-board'
+import { sponsorsSectionStyles } from '@widgets/sponsors/ui/sponsors-section.view.styles'
 
 const s = sponsorsSectionStyles()
 

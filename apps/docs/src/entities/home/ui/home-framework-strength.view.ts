@@ -5,9 +5,9 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { vdomCompare } from '@entities/home/constants/home-landing.data.js'
-import { HomeCompareCardView } from '@entities/home/ui/home-compare-card.view.js'
-import { frameworkStrengthStyles } from '@entities/home/ui/home-framework-strength.view.styles.js'
+import { vdomCompare } from '@entities/home/constants/home-landing.data'
+import { HomeCompareCardView } from '@entities/home/ui/home-compare-card.view'
+import { frameworkStrengthStyles } from '@entities/home/ui/home-framework-strength.view.styles'
 
 const strength = frameworkStrengthStyles()
 

@@ -10,8 +10,8 @@ import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
 import { sponsorsPage } from '@app/router'
-import { homeFooterLinks } from '@widgets/home-shell/constants/home-footer.links.js'
-import { homeFooterStyles } from '@widgets/home-shell/ui/home-footer.view.styles.js'
+import { homeFooterLinks } from '@widgets/home-shell/constants/home-footer.links'
+import { homeFooterStyles } from '@widgets/home-shell/ui/home-footer.view.styles'
 
 const ft = homeFooterStyles()
 

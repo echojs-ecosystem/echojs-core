@@ -1,4 +1,4 @@
-import type { ContentId } from '@core/content/types.js'
+import type { ContentId } from '@core/content/types'
 
 export type PackagePillar = { title: string; body: string; icon: string }
 export type PackageLearnStep = {
@@ -1184,6 +1184,120 @@ cd my-app && bun dev`,
       ),
     ],
     relatedIds: ['framework', 'architect'],
+  },
+  'network-http': {
+    id: 'network-http',
+    npmPackage: '@echojs-ecosystem/network',
+    frameworkImport: '@echojs-ecosystem/framework/network/http',
+    icon: '🌐',
+    tagline: 'HTTP client for Echo apps',
+    heroTitle: 'Fetch, without the boilerplate.',
+    summary:
+      'Tree-shakeable HTTP subpath with immutable clients, hooks, retries, typed responses, and first-class AbortSignal support — built for queryFn and API modules.',
+    pills: ['createHttpClient', 'extend()', 'hooks', 'unwrapJson()'],
+    pillars: [
+      {
+        icon: '◎',
+        title: 'Immutable clients',
+        body: 'extend(), withAuth(), withBaseUrl() — layered defaults.',
+      },
+      {
+        icon: '↻',
+        title: 'Retries & redirects',
+        body: 'Configurable budgets, hooks, and error types.',
+      },
+      {
+        icon: 'ƒ',
+        title: 'Typed responses',
+        body: '.json(), .unwrapJson(), HttpResponse helpers.',
+      },
+    ],
+    whyTitle: 'Why network/http',
+    whySubtitle: 'A small transport layer that fits Echo feature slices.',
+    whyCards: [
+      {
+        icon: '📦',
+        title: 'Subpath import',
+        body: 'Import only /http — ws, mock, graphql stay separate.',
+      },
+      {
+        icon: '🔗',
+        title: 'Query-ready',
+        body: 'Forward signal from createQuery queryFn out of the box.',
+      },
+      {
+        icon: '🪝',
+        title: 'Hook buckets',
+        body: 'Auth, logging, metrics — concat on extend().',
+      },
+      {
+        icon: '⚠',
+        title: 'Typed errors',
+        body: 'HTTPStatusError, RetryError, guards for catch blocks.',
+      },
+    ],
+    lifecycleTitle: 'Request lifecycle',
+    lifecycleSubtitle: 'Defaults → normalize → hooks → adapter → parse.',
+    lifecycleSteps: [
+      {
+        step: '1',
+        title: 'Compose',
+        body: 'createHttpClient() at module scope.',
+      },
+      {
+        step: '2',
+        title: 'Request',
+        body: 'get/post + json or unwrapJson.',
+      },
+      {
+        step: '3',
+        title: 'Hooks',
+        body: 'beforeRequest / afterResponse middleware.',
+      },
+      {
+        step: '4',
+        title: 'Errors',
+        body: 'isStatusError + raw() when needed.',
+      },
+    ],
+    codeExample: {
+      title: 'Just a quick look…',
+      language: 'ts',
+      code: `import { createHttpClient } from '@echojs-ecosystem/network/http'
+
+const api = createHttpClient({ baseUrl: '/api' })
+const users = await api.get('/users').json<User[]>()`,
+    },
+    whenToUse: [
+      'REST API modules',
+      'queryFn implementations',
+      'Shared auth / tenant headers',
+    ],
+    whenNot: ['WebSocket streaming', 'GraphQL (use /graphql when shipped)'],
+    dependsOn: [],
+    powers: ['Typed HTTP', 'Retries', 'Hook middleware', 'Tracing ids'],
+    learnPath: [
+      step(
+        'network-http',
+        'installation',
+        'Installation',
+        'Subpath imports.'
+      ),
+      step(
+        'network-http',
+        'guides/important-defaults',
+        'Important Defaults',
+        'Retries and errors.'
+      ),
+      step(
+        'network-http',
+        'guides/query-integration',
+        'Query Integration',
+        'Use with createQuery.'
+      ),
+      step('network-http', 'api', 'API Reference', 'Full export index.'),
+    ],
+    relatedIds: ['query', 'framework'],
   },
   architect: {
     id: 'architect',

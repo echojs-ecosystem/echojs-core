@@ -8,8 +8,8 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { DocTocMobileVM } from '@widgets/doc-content/model/doc-toc-mobile.model.js'
-import { docTocMobileStyles } from '@widgets/doc-content/ui/doc-toc-mobile.view.styles.js'
+import type { DocTocMobileVM } from '@widgets/doc-content/model/doc-toc-mobile.model'
+import { docTocMobileStyles } from '@widgets/doc-content/ui/doc-toc-mobile.view.styles'
 
 const toc = docTocMobileStyles()
 

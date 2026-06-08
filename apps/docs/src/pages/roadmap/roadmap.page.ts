@@ -1,7 +1,7 @@
 import { createRouteView } from '@echojs-ecosystem/framework/router'
 
 import { Roadmap } from '@entities/roadmap'
-import { applySeo } from '@core/seo/apply-seo.js'
+import { applySeo } from '@core/seo/apply-seo'
 
 export const roadmapPage = createRouteView({
   name: 'docs-roadmap',

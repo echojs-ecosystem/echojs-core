@@ -7,18 +7,18 @@ import {
   Show,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { DocRenderer } from '@widgets/doc-content/doc-renderer.js'
-import { DocTocMobile } from '@widgets/doc-content/doc-toc-mobile.js'
-import { DocToc } from '@widgets/doc-content/doc-toc.js'
+import { DocRenderer } from '@widgets/doc-content/doc-renderer'
+import { DocTocMobile } from '@widgets/doc-content/doc-toc-mobile'
+import { DocToc } from '@widgets/doc-content/doc-toc'
 import { DocPager } from '@widgets/doc-pager'
-import type { DocArticleVM } from '@entities/doc-article/model/doc-article.model.js'
+import type { DocArticleVM } from '@entities/doc-article/model/doc-article.model'
 import {
   docArticlePageStyles,
   docLayoutStyles,
   skeletonStyles,
-} from '@entities/doc-article/ui/doc-article.view.styles.js'
-import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles.js'
-import { extractDocToc } from '@core/content/extract-toc.js'
+} from '@entities/doc-article/ui/doc-article.view.styles'
+import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles'
+import { extractDocToc } from '@core/content/extract-toc'
 
 const layout = docArticlePageStyles()
 const articleLayout = docLayoutStyles()

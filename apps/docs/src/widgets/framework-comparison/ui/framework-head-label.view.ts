@@ -5,9 +5,9 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { FrameworkColumn } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
-import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo.js'
+import type { FrameworkColumn } from '@widgets/framework-comparison/constants/framework-comparison.data'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
+import { FrameworkLogo } from '@widgets/framework-comparison/ui/framework-logo'
 
 const cmp = frameworkComparisonStyles()
 

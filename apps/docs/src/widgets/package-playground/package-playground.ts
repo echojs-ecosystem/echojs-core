@@ -6,8 +6,8 @@ import {
 import {
   createPackagePlaygroundModel,
   type PackagePlaygroundModelProps,
-} from './model/package-playground.model.js'
-import { PackagePlaygroundView } from './ui/package-playground.view.js'
+} from './model/package-playground.model'
+import { PackagePlaygroundView } from './ui/package-playground.view'
 
 /**
  * Dynamic child — tree builds inside hyperdom mount (not while DocRenderer assembles blocks).

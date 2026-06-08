@@ -1,11 +1,11 @@
 import { type Child, img } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
+import type { FrameworkId } from '@widgets/framework-comparison/constants/framework-comparison.data'
 import {
   frameworkLogoAlt,
   frameworkLogoSrc,
-} from '@widgets/framework-comparison/constants/framework-logos.js'
-import { cn } from '@core/styles/cn.js'
+} from '@widgets/framework-comparison/constants/framework-logos'
+import { cn } from '@core/styles/cn'
 
 export type FrameworkLogoProps = {
   id: FrameworkId

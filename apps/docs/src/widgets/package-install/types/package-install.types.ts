@@ -4,7 +4,7 @@ import type {
   CommandToken,
   PackageManager,
   PackageManagerId,
-} from '@widgets/package-install/constants/install-commands.js'
+} from '@widgets/package-install/constants/install-commands'
 
 export type PackageInstallMode =
   | { kind: 'scaffold' }

@@ -1,6 +1,6 @@
 import { span } from '@echojs-ecosystem/framework/hyperdom'
 
-import { homeHeroCodeWindowStyles } from '@entities/home/ui/home-hero-code-window.view.styles.js'
+import { homeHeroCodeWindowStyles } from '@entities/home/ui/home-hero-code-window.view.styles'
 
 export const codeDots = () => {
   const home = homeHeroCodeWindowStyles()

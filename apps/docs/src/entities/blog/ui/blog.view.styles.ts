@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-import { docsShellPadding } from '@core/styles/docs-shell.js'
+import { docsShellPadding } from '@core/styles/docs-shell'
 
 export const blogPageStyles = tv({
   slots: {

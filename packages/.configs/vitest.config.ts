@@ -44,6 +44,11 @@ export const echoWorkspaceAliases = (fromDir: string): NonNullable<ViteUserConfi
     "@echojs-ecosystem/devtools": resolve(fromDir, "../devtools/src/index.ts"),
     "@echojs-ecosystem/i18n": resolve(fromDir, "../i18n/src/index.ts"),
     "@echojs-ecosystem/architect": resolve(fromDir, "../architect/src/index.ts"),
+    "@echojs-ecosystem/permission": resolve(fromDir, "../permission/src/index.ts"),
+    "@echojs-ecosystem/network/http": resolve(fromDir, "../network/src/http/index.ts"),
+    "@echojs-ecosystem/network/ws": resolve(fromDir, "../network/src/ws/index.ts"),
+    "@echojs-ecosystem/network/mock": resolve(fromDir, "../network/src/mock/index.ts"),
+    "@echojs-ecosystem/network/graphql": resolve(fromDir, "../network/src/graphql/index.ts"),
   };
 };
 

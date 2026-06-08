@@ -6,8 +6,8 @@ import {
   withActions,
 } from '@echojs-ecosystem/framework/store'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const create = (): PlaygroundInstance => {
   const counter = createStore(0, { name: 'pg-counter' }).extend(

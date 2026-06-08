@@ -185,6 +185,36 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
     ],
   },
   {
+    id: 'network-http',
+    title: 'Network / HTTP',
+    npmPackage: '@echojs-ecosystem/network',
+    frameworkSubpath: 'network/http',
+    guides: [
+      { slug: 'important-defaults', title: 'Important Defaults' },
+      { slug: 'client-composition', title: 'Client Composition' },
+      {
+        slug: 'retries-timeouts-redirects',
+        title: 'Retries, Timeouts & Redirects',
+      },
+      { slug: 'hooks-and-middleware', title: 'Hooks & Middleware' },
+      { slug: 'query-integration', title: 'Query Integration' },
+    ],
+    api: [
+      { slug: 'overview', title: 'Overview' },
+      { slug: 'create-http-client', title: 'createHttpClient' },
+      { slug: 'request-options', title: 'RequestOptions' },
+      { slug: 'hooks', title: 'Hooks' },
+      { slug: 'errors', title: 'Errors' },
+      { slug: 'types', title: 'Types' },
+    ],
+    examples: [
+      { slug: 'overview', title: 'Overview' },
+      { slug: 'rest-api', title: 'REST API Client' },
+      { slug: 'auth-and-headers', title: 'Auth & Headers' },
+      { slug: 'error-handling', title: 'Error Handling' },
+    ],
+  },
+  {
     id: 'query',
     title: 'Query',
     npmPackage: '@echojs-ecosystem/query',

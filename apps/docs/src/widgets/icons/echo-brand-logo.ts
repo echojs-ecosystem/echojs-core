@@ -1,6 +1,6 @@
 import { type Child, img } from '@echojs-ecosystem/framework/hyperdom'
 
-import { cn } from '@core/styles/cn.js'
+import { cn } from '@core/styles/cn'
 
 export const echoBrandLogoSrc = '/framework-logos/echojs.svg'
 

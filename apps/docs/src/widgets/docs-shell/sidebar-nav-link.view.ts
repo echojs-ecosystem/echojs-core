@@ -10,10 +10,10 @@ import type { AnyPage } from '@echojs-ecosystem/framework/router'
 import {
   navLinkStyles,
   shellStyles,
-} from '@widgets/docs-shell/docs-shell.styles.js'
+} from '@widgets/docs-shell/docs-shell.styles'
 import { NavIcon } from '@widgets/icons'
-import type { NavIconId } from '@core/content/nav-icon-id.js'
-import { cn } from '@core/styles/cn.js'
+import type { NavIconId } from '@core/content/nav-icon-id'
+import { cn } from '@core/styles/cn'
 
 const shell = shellStyles()
 

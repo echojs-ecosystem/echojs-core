@@ -3,9 +3,9 @@ import {
   createComponent,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { createPackageInstallModel } from '@widgets/package-install/model/package-install.model.js'
-import type { PackageInstallProps } from '@widgets/package-install/types/package-install.types.js'
-import { PackageInstallView } from '@widgets/package-install/ui/package-install.view.js'
+import { createPackageInstallModel } from '@widgets/package-install/model/package-install.model'
+import type { PackageInstallProps } from '@widgets/package-install/types/package-install.types'
+import { PackageInstallView } from '@widgets/package-install/ui/package-install.view'
 
 /** Home hero — `npm create echojs@latest`. */
 export const PackageInstall = (props?: PackageInstallProps): Child =>

@@ -8,12 +8,12 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import { performanceDisclaimer } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
-import { ComparisonGuideCardsView } from '@widgets/framework-comparison/ui/comparison-guide-cards.view.js'
-import { FeatureTableView } from '@widgets/framework-comparison/ui/feature-table.view.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
-import { PerformanceTableView } from '@widgets/framework-comparison/ui/performance-table.view.js'
-import { WhyChooseCardsView } from '@widgets/framework-comparison/ui/why-choose-cards.view.js'
+import { performanceDisclaimer } from '@widgets/framework-comparison/constants/framework-comparison.data'
+import { ComparisonGuideCardsView } from '@widgets/framework-comparison/ui/comparison-guide-cards.view'
+import { FeatureTableView } from '@widgets/framework-comparison/ui/feature-table.view'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
+import { PerformanceTableView } from '@widgets/framework-comparison/ui/performance-table.view'
+import { WhyChooseCardsView } from '@widgets/framework-comparison/ui/why-choose-cards.view'
 
 const cmp = frameworkComparisonStyles()
 

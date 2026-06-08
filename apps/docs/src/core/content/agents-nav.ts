@@ -1,4 +1,4 @@
-import type { ContentId, DocsNavItem, DocsNavSection } from './types.js'
+import type { ContentId, DocsNavItem, DocsNavSection } from './types'
 
 const agentItem = (
   slug: string,

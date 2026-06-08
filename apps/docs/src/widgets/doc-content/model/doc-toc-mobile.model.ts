@@ -1,9 +1,9 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 import { signal } from '@echojs-ecosystem/framework/reactivity'
 
-import type { DocTocProps } from '@widgets/doc-content/types/doc-toc.types.js'
-import { docTocMobileStyles } from '@widgets/doc-content/ui/doc-toc-mobile.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+import type { DocTocProps } from '@widgets/doc-content/types/doc-toc.types'
+import { docTocMobileStyles } from '@widgets/doc-content/ui/doc-toc-mobile.view.styles'
+import { cn } from '@core/styles/cn'
 
 const toc = docTocMobileStyles()
 

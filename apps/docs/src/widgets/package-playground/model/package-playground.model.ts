@@ -1,7 +1,7 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { PlaygroundInstance, PackagePlaygroundDef } from '../types.js'
-import { getPackagePlayground } from '../registry.js'
+import type { PlaygroundInstance, PackagePlaygroundDef } from '../types'
+import { getPackagePlayground } from '../registry'
 
 export type PackagePlaygroundModelProps = {
   packageId: string

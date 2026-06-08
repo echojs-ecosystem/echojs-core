@@ -12,8 +12,8 @@ import {
   signal,
 } from '@echojs-ecosystem/framework/reactivity'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const create = (): PlaygroundInstance => {
   const $count = signal(0)

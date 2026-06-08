@@ -1,0 +1,5 @@
+export { usersListPage } from './users-list.page'
+export { userDetailPage } from './users-show.page'
+export { userCreatePage } from './users-create.page'
+export { userEditPage } from './users-edit.page'
+export { usersLayoutPage } from './users.layout'

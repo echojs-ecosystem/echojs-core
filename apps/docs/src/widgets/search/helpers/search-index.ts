@@ -1,5 +1,5 @@
-import { allDocsNavItems } from '@core/content/nav.js'
-import type { ContentId } from '@core/content/types.js'
+import { allDocsNavItems } from '@core/content/nav'
+import type { ContentId } from '@core/content/types'
 
 export type SearchEntry = {
   id: string

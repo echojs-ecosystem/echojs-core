@@ -14,26 +14,26 @@ import { docPageByContentId } from '@app/router'
 import { EcosystemSection } from '@widgets/ecosystem'
 import { FrameworkComparisonSection } from '@widgets/framework-comparison'
 import { HomeFooter } from '@widgets/home-shell'
-import { HomeHeader } from '@widgets/home-shell/home-header.js'
+import { HomeHeader } from '@widgets/home-shell/home-header'
 import { PackageInstall } from '@widgets/package-install'
 import { SponsorsSection } from '@widgets/sponsors'
 import {
   heroPills,
   homeStats,
-} from '@entities/home/constants/home-landing.data.js'
-import type { HomeVM } from '@entities/home/types/home.types.js'
-import { HomeArchitectureView } from '@entities/home/ui/home-architecture.view.js'
-import { homeButtonStyles } from '@entities/home/ui/home-button.styles.js'
-import { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view.js'
-import { HomeCtaView } from '@entities/home/ui/home-cta.view.js'
-import { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view.js'
+} from '@entities/home/constants/home-landing.data'
+import type { HomeVM } from '@entities/home/types/home.types'
+import { HomeArchitectureView } from '@entities/home/ui/home-architecture.view'
+import { homeButtonStyles } from '@entities/home/ui/home-button.styles'
+import { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view'
+import { HomeCtaView } from '@entities/home/ui/home-cta.view'
+import { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view'
 import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
-} from '@entities/home/ui/home-philosophy-principles.view.js'
-import { HomeSection } from '@entities/home/ui/home-section.view.js'
-import { HomeTestingView } from '@entities/home/ui/home-testing.view.js'
-import { homeStyles } from '@entities/home/ui/home.view.styles.js'
+} from '@entities/home/ui/home-philosophy-principles.view'
+import { HomeSection } from '@entities/home/ui/home-section.view'
+import { HomeTestingView } from '@entities/home/ui/home-testing.view'
+import { homeStyles } from '@entities/home/ui/home.view.styles'
 
 const home = homeStyles()
 const btn = homeButtonStyles()

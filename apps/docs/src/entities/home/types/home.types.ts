@@ -1,5 +1,5 @@
-import type { ArchitectCodePanel } from '@entities/home/constants/architecture-advantages.js'
-import type { TestingCodePanel } from '@entities/home/constants/testing-advantages.js'
+import type { ArchitectCodePanel } from '@entities/home/constants/architecture-advantages'
+import type { TestingCodePanel } from '@entities/home/constants/testing-advantages'
 
 export type CompareTone = 'muted' | 'accent'
 

@@ -1,4 +1,4 @@
-import type { ContentId } from './types.js'
+import type { ContentId } from './types'
 
 const contentModules = import.meta.glob('../../content/**/*.md', {
   query: '?raw',

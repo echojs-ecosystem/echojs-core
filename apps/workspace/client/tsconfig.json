@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "strict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["src/app/*/index.ts", "src/app/*"],
+      "@pages/*": ["src/pages/*/index.ts", "src/pages/*"],
+      "@entities/*": ["src/entities/*/index.ts", "src/entities/*"],
+      "@widgets/*": ["src/widgets/*/index.ts", "src/widgets/*"],
+      "@features/*": ["src/features/*/index.ts", "src/features/*"],
+      "@core/*": ["src/core/*/index.ts", "src/core/*"],
+      "@echojs-ecosystem/workspace-shared": ["../shared/src/index.ts"],
+      "@echojs-ecosystem/framework": ["../../../packages/framework/src/index.ts"],
+      "@echojs-ecosystem/framework/app": ["../../../packages/framework/src/app/index.ts"],
+      "@echojs-ecosystem/framework/router/hyperdom": ["../../../packages/framework/src/router.ts"],
+      "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": [
+        "../../../packages/framework/src/hyperdom-lifecycle-mount.ts"
+      ],
+      "@echojs-ecosystem/framework/ui/*": ["../../../packages/framework/src/ui/*"],
+      "@echojs-ecosystem/framework/*": ["../../../packages/framework/src/*"],
+      "@echojs-ecosystem/permission": ["../../../packages/permission/src/index.ts"],
+      "@echojs-ecosystem/query": ["../../../packages/query/src/index.ts"],
+      "@echojs-ecosystem/reactivity": ["../../../packages/reactivity/src/index.ts"],
+      "@echojs-ecosystem/router": ["../../../packages/router/src/index.ts"],
+      "@echojs-ecosystem/store": ["../../../packages/store/src/index.ts"],
+      "@echojs-ecosystem/persist": ["../../../packages/persist/src/index.ts"],
+      "@echojs-ecosystem/url-state": ["../../../packages/url-state/src/index.ts"],
+      "@echojs-ecosystem/form": ["../../../packages/form/src/index.ts"],
+      "@echojs-ecosystem/form/*": ["../../../packages/form/src/*"],
+      "@echojs-ecosystem/network/http": ["../../../packages/network/src/http/index.ts"],
+      "@echojs-ecosystem/network/ws": ["../../../packages/network/src/ws/index.ts"],
+      "@echojs-ecosystem/network/mock": ["../../../packages/network/src/mock/index.ts"],
+      "@echojs-ecosystem/network/graphql": ["../../../packages/network/src/graphql/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

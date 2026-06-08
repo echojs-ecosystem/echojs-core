@@ -32,7 +32,7 @@ export async function resolveEntry(opts: {
     (typeof exp === "string" ? exp : typeof exp === "object" && exp ? (exp as { default?: string }).default : undefined) ??
     pkgJson.module ??
     pkgJson.main ??
-    "./dist/index.js";
+    "./dist/index";
 
   const absEntryPath = join(pkgAbs, guess);
   return { entry: `packages/${packageDirName}/${guess.replace(/^\.\//, "")}`, absEntryPath };

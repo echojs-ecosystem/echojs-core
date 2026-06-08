@@ -10,8 +10,8 @@ import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
 import { PackageInstall } from '@widgets/package-install'
-import { homeButtonStyles } from '@entities/home/ui/home-button.styles.js'
-import { homeCtaStyles } from '@entities/home/ui/home-cta.view.styles.js'
+import { homeButtonStyles } from '@entities/home/ui/home-button.styles'
+import { homeCtaStyles } from '@entities/home/ui/home-cta.view.styles'
 
 const home = homeCtaStyles()
 const btn = homeButtonStyles()

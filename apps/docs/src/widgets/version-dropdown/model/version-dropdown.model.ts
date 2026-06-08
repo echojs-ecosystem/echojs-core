@@ -1,12 +1,12 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model.js'
+import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model'
 import { VersionIcon } from '@widgets/icons'
 import {
   $docVersionId,
   DOC_VERSIONS,
   setDocVersionId,
-} from '@widgets/version-dropdown/constants/doc-versions.js'
+} from '@widgets/version-dropdown/constants/doc-versions'
 import { i18n } from '@core/providers'
 
 export type VersionDropdownVM = {

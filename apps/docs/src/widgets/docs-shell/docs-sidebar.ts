@@ -8,28 +8,28 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 
 import { docPageByContentId } from '@app/router'
-import { AgentNavLinkView } from '@widgets/docs-shell/agent-nav-link.view.js'
+import { AgentNavLinkView } from '@widgets/docs-shell/agent-nav-link.view'
 import {
   shellStyles,
   sidebarPanelStyles,
-} from '@widgets/docs-shell/docs-shell.styles.js'
-import { $mobileNavOpen } from '@widgets/docs-shell/model/mobile-nav.js'
-import { PackageNavGroupView } from '@widgets/docs-shell/package-nav-group.js'
+} from '@widgets/docs-shell/docs-shell.styles'
+import { $mobileNavOpen } from '@widgets/docs-shell/model/mobile-nav'
+import { PackageNavGroupView } from '@widgets/docs-shell/package-nav-group'
 import {
   sidebarResourceLinks,
   type SidebarLink,
-} from '@widgets/docs-shell/sidebar-extras.js'
-import { SidebarNavLinkView } from '@widgets/docs-shell/sidebar-nav-link.view.js'
+} from '@widgets/docs-shell/sidebar-extras'
+import { SidebarNavLinkView } from '@widgets/docs-shell/sidebar-nav-link.view'
 import {
   agentsNavItems,
   agentsNavSection,
   docsNavSections,
-} from '@core/content/nav.js'
-import { packageNavGroups } from '@core/content/package-nav.js'
+} from '@core/content/nav'
+import { packageNavGroups } from '@core/content/package-nav'
 import {
   resolveNavIcon,
   resolveNavIconClass,
-} from '@core/content/resolve-nav-icon.js'
+} from '@core/content/resolve-nav-icon'
 
 const shell = shellStyles()
 

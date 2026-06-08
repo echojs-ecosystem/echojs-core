@@ -7,9 +7,9 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 import { mount as onMount } from '@echojs-ecosystem/framework/hyperdom/lifecycle/mount'
 
-import { playgroundStyles } from '@widgets/package-playground/ui/package-playground.view.styles.js'
+import { playgroundStyles } from '@widgets/package-playground/ui/package-playground.view.styles'
 
-import type { PackagePlaygroundVM } from '../model/package-playground.model.js'
+import type { PackagePlaygroundVM } from '../model/package-playground.model'
 
 const styles = playgroundStyles()
 

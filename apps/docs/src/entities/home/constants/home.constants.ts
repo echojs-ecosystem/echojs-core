@@ -1,4 +1,4 @@
-import type { CodeTab } from '@entities/home/types/home.types.js'
+import type { CodeTab } from '@entities/home/types/home.types'
 
 export const bootstrapExample = `import { createEchoApp } from "@echojs-ecosystem/framework/app"
 import { queryProvider } from "./providers/query"

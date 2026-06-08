@@ -1,10 +1,10 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 import { signal } from '@echojs-ecosystem/framework/reactivity'
 
-import { architectCodePanels } from '@entities/home/constants/architecture-advantages.js'
-import { codeTabs } from '@entities/home/constants/home.constants.js'
-import { testingCodePanels } from '@entities/home/constants/testing-advantages.js'
-import type { CodeTab, HomeVM } from '@entities/home/types/home.types.js'
+import { architectCodePanels } from '@entities/home/constants/architecture-advantages'
+import { codeTabs } from '@entities/home/constants/home.constants'
+import { testingCodePanels } from '@entities/home/constants/testing-advantages'
+import type { CodeTab, HomeVM } from '@entities/home/types/home.types'
 
 export const createHomeModel = createModel((): HomeVM => {
   const $codeTab = signal(0)

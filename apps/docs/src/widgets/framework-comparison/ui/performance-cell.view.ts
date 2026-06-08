@@ -4,10 +4,10 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { bestPerformanceIds } from '@widgets/framework-comparison/model/framework-comparison.model.js'
-import type { PerformanceCellViewProps } from '@widgets/framework-comparison/types/framework-comparison.types.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+import { bestPerformanceIds } from '@widgets/framework-comparison/model/framework-comparison.model'
+import type { PerformanceCellViewProps } from '@widgets/framework-comparison/types/framework-comparison.types'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
+import { cn } from '@core/styles/cn'
 
 const cmp = frameworkComparisonStyles()
 

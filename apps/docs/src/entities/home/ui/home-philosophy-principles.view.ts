@@ -8,12 +8,12 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import { philosophyPrinciples } from '@entities/home/constants/philosophy-principles.js'
+import { philosophyPrinciples } from '@entities/home/constants/philosophy-principles'
 import {
   homePhilosophyStyles,
   philosophyCardStyles,
-} from '@entities/home/ui/home-philosophy-principles.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+} from '@entities/home/ui/home-philosophy-principles.view.styles'
+import { cn } from '@core/styles/cn'
 
 const home = homePhilosophyStyles()
 const cardTones = ['honey', 'wheat', 'sand'] as const

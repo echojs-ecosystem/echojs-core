@@ -1,6 +1,6 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model.js'
+import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model'
 import { GlobeIcon } from '@widgets/icons'
 import { i18n, setAppLocale, type AppLocale } from '@core/providers'
 

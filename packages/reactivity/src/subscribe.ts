@@ -1,4 +1,4 @@
-import { createAlienEffect, type Disposer } from "./internals/alien.js";
+import { createAlienEffect, type Disposer } from "./internals/alien";
 import { isFunction } from "./utils";
 
 export const createSubscribe = (readTracked: () => unknown): ((fn: () => void) => Disposer) => {

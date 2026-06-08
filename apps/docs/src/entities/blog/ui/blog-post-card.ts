@@ -8,9 +8,9 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 import { NavLink, type AnyPage } from '@echojs-ecosystem/framework/router'
 
-import { blogCategoryLabels } from '@entities/blog/constants/blog.data.js'
-import type { BlogPost } from '@entities/blog/types/blog.types.js'
-import { blogCardStyles } from '@entities/blog/ui/blog.view.styles.js'
+import { blogCategoryLabels } from '@entities/blog/constants/blog.data'
+import type { BlogPost } from '@entities/blog/types/blog.types'
+import { blogCardStyles } from '@entities/blog/ui/blog.view.styles'
 
 export type BlogPostCardProps = {
   post: BlogPost

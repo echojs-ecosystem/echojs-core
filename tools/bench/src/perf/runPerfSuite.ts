@@ -1,8 +1,8 @@
 import { resolve } from "node:path";
 
-import type { PerfReport } from "./types.js";
-import { createDefaultBenches } from "./defaultBenches.js";
-import { runBenchCase } from "./runBench.js";
+import type { PerfReport } from "./types";
+import { createDefaultBenches } from "./defaultBenches";
+import { runBenchCase } from "./runBench";
 
 export async function runPerfSuite(opts: {
   root: string;

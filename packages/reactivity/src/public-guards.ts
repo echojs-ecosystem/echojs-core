@@ -1,4 +1,4 @@
-import { isBrandedReadonlySignal, isBrandedSignal } from "./internals/guards.js";
+import { isBrandedReadonlySignal, isBrandedSignal } from "./internals/guards";
 import type { ReadonlySignal, Signal } from "./types";
 
 export const isSignal = (value: unknown): value is Signal<unknown> | ReadonlySignal<unknown> => {

@@ -11,8 +11,8 @@ import {
 } from '@echojs-ecosystem/framework/router'
 import { createRouter } from '@echojs-ecosystem/framework/router'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const homePage = createRouteView({
   name: 'pg-home',

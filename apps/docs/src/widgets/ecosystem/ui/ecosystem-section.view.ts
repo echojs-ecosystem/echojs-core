@@ -8,10 +8,10 @@ import {
 import {
   ecosystemFrameworkPackage,
   ecosystemModulePackages,
-} from '@widgets/ecosystem/constants/ecosystem-packages.js'
-import { EcosystemFeaturedPackageCardView } from '@widgets/ecosystem/ui/ecosystem-featured-package-card.view.js'
-import { EcosystemPackageCardView } from '@widgets/ecosystem/ui/ecosystem-package-card.view.js'
-import { ecosystemSectionStyles } from '@widgets/ecosystem/ui/ecosystem-section.view.styles.js'
+} from '@widgets/ecosystem/constants/ecosystem-packages'
+import { EcosystemFeaturedPackageCardView } from '@widgets/ecosystem/ui/ecosystem-featured-package-card.view'
+import { EcosystemPackageCardView } from '@widgets/ecosystem/ui/ecosystem-package-card.view'
+import { ecosystemSectionStyles } from '@widgets/ecosystem/ui/ecosystem-section.view.styles'
 
 const section = ecosystemSectionStyles()
 

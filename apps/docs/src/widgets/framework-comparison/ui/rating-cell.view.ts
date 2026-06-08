@@ -4,8 +4,8 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { RatingCellViewProps } from '@widgets/framework-comparison/types/framework-comparison.types.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
+import type { RatingCellViewProps } from '@widgets/framework-comparison/types/framework-comparison.types'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
 
 const cmp = frameworkComparisonStyles()
 

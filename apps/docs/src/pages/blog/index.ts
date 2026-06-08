@@ -1,1 +1,1 @@
-export { blogPage, blogPostPage, blogSection } from '@pages/blog/blog.pages.js'
+export { blogPage, blogPostPage, blogSection } from '@pages/blog/blog.pages'

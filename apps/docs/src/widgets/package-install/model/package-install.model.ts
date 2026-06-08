@@ -6,12 +6,12 @@ import {
   projectScaffoldManagers,
   type PackageManager,
   type PackageManagerId,
-} from '@widgets/package-install/constants/install-commands.js'
+} from '@widgets/package-install/constants/install-commands'
 import type {
   PackageInstallMode,
   PackageInstallProps,
   PackageInstallVM,
-} from '@widgets/package-install/types/package-install.types.js'
+} from '@widgets/package-install/types/package-install.types'
 
 const resolveManagers = (mode: PackageInstallMode): PackageManager[] => {
   if (mode.kind === 'add') return addPackageManagers(mode.packageName)

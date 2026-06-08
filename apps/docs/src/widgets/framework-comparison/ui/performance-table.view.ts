@@ -7,7 +7,7 @@ import {
 import {
   comparisonFrameworks,
   performanceComparisonRows,
-} from '@widgets/framework-comparison/constants/framework-comparison.data.js'
+} from '@widgets/framework-comparison/constants/framework-comparison.data'
 import {
   comparisonFeatureBodyCell,
   comparisonFeatureHeadCell,
@@ -15,10 +15,10 @@ import {
   comparisonFrameworkHeadCell,
   comparisonGridHeader,
   comparisonGridRow,
-} from '@widgets/framework-comparison/ui/comparison-grid.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
-import { FrameworkHeadLabelView } from '@widgets/framework-comparison/ui/framework-head-label.view.js'
-import { PerformanceCellView } from '@widgets/framework-comparison/ui/performance-cell.view.js'
+} from '@widgets/framework-comparison/ui/comparison-grid'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
+import { FrameworkHeadLabelView } from '@widgets/framework-comparison/ui/framework-head-label.view'
+import { PerformanceCellView } from '@widgets/framework-comparison/ui/performance-cell.view'
 
 const cmp = frameworkComparisonStyles()
 

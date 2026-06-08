@@ -2,8 +2,8 @@ import { button, div, p } from '@echojs-ecosystem/framework/hyperdom'
 import { createI18n } from '@echojs-ecosystem/framework/i18n'
 import { effect, signal } from '@echojs-ecosystem/framework/reactivity'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const en = {
   greeting: 'Hello, {name}!',

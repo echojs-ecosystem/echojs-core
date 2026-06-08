@@ -9,26 +9,26 @@ import { NavLink } from '@echojs-ecosystem/framework/router'
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import { appRouter } from '@app/router/router.js'
+import { appRouter } from '@app/router/router'
 import {
   navLinkStyles,
   shellStyles,
-} from '@widgets/docs-shell/docs-shell.styles.js'
+} from '@widgets/docs-shell/docs-shell.styles'
 import { NavIcon } from '@widgets/icons'
-import type { NavIconId } from '@core/content/nav-icon-id.js'
+import type { NavIconId } from '@core/content/nav-icon-id'
 import {
   isPackageNavSubsection,
   packageIdFromPathname,
   type PackageNavChild,
   type PackageNavGroup,
   type PackageNavSubsection,
-} from '@core/content/package-nav.js'
+} from '@core/content/package-nav'
 import {
   resolveNavIcon,
   resolvePackageGroupIcon,
-} from '@core/content/resolve-nav-icon.js'
-import type { ContentId, DocsNavItem } from '@core/content/types.js'
-import { cn } from '@core/styles/cn.js'
+} from '@core/content/resolve-nav-icon'
+import type { ContentId, DocsNavItem } from '@core/content/types'
+import { cn } from '@core/styles/cn'
 
 const shell = shellStyles()
 

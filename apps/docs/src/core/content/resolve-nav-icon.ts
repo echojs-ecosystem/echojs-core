@@ -1,5 +1,5 @@
-import type { NavIconId } from './nav-icon-id.js'
-import type { ContentId } from './types.js'
+import type { NavIconId } from './nav-icon-id'
+import type { ContentId } from './types'
 
 const overviewNavIcon: NavIconId = 'app-window'
 
@@ -66,6 +66,7 @@ const packageGroupIcon: Record<string, NavIconId> = {
   router: 'route',
   store: 'database',
   query: 'refresh',
+  'network-http': 'plug',
   'url-state': 'link',
   persist: 'save',
   ui: 'palette',

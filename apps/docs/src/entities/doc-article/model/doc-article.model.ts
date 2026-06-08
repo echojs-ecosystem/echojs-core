@@ -2,14 +2,14 @@ import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 import { createQuery } from '@echojs-ecosystem/framework/query'
 import { effect, signal } from '@echojs-ecosystem/framework/reactivity'
 
-import { attachDocTocScrollSpy } from '@widgets/doc-content/helpers/doc-toc-scroll-spy.js'
-import type { DocArticleProps } from '@entities/doc-article/types/doc-article.types.js'
-import { extractDocToc } from '@core/content/extract-toc.js'
-import { loadContentRaw } from '@core/content/load-content.js'
-import { findNavItemByContentId } from '@core/content/nav.js'
-import { parseMarkdown } from '@core/content/parse-markdown.js'
-import type { ContentId, DocDocument } from '@core/content/types.js'
-import { applySeo } from '@core/seo/apply-seo.js'
+import { attachDocTocScrollSpy } from '@widgets/doc-content/helpers/doc-toc-scroll-spy'
+import type { DocArticleProps } from '@entities/doc-article/types/doc-article.types'
+import { extractDocToc } from '@core/content/extract-toc'
+import { loadContentRaw } from '@core/content/load-content'
+import { findNavItemByContentId } from '@core/content/nav'
+import { parseMarkdown } from '@core/content/parse-markdown'
+import type { ContentId, DocDocument } from '@core/content/types'
+import { applySeo } from '@core/seo/apply-seo'
 
 export type DocContentPayload = {
   document: DocDocument

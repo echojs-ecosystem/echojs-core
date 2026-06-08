@@ -1,4 +1,4 @@
-import type { CalloutVariant } from './callout-variants.js'
+import type { CalloutVariant } from './callout-variants'
 
 /** Block AST — extensible toward MDX component nodes later. */
 export type DocBlock =

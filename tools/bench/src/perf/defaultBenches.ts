@@ -1,4 +1,4 @@
-import type { BenchCase } from "./types.js";
+import type { BenchCase } from "./types";
 
 export async function createDefaultBenches(enabledPackages?: string[]): Promise<BenchCase[]> {
   const allow = (name: string) => !enabledPackages?.length || enabledPackages.includes(name);

@@ -6,9 +6,9 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { HeaderDropdownVM } from '@widgets/header-dropdown/model/header-dropdown.model.js'
-import { headerDropdownStyles } from '@widgets/header-dropdown/ui/header-dropdown.view.styles.js'
-import { cn } from '@core/styles/cn.js'
+import type { HeaderDropdownVM } from '@widgets/header-dropdown/model/header-dropdown.model'
+import { headerDropdownStyles } from '@widgets/header-dropdown/ui/header-dropdown.view.styles'
+import { cn } from '@core/styles/cn'
 
 const dd = headerDropdownStyles()
 

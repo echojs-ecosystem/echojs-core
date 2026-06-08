@@ -1,0 +1,40 @@
+{
+  "shell": {
+    "documentTitle": "EchoJS Workspace",
+    "brand": "EchoJS Workspace",
+    "tagline": "Демо админ-панели"
+  },
+  "nav": {
+    "dashboard": "Дашборд",
+    "users": "Пользователи",
+    "catalog": "Каталог",
+    "orders": "Заказы",
+    "org": "Организация",
+    "settings": "Настройки",
+    "login": "Войти"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "lead": "Обзор с виджетами по permission и live signals.",
+    "orders": "Открытые заказы",
+    "users": "Активные пользователи",
+    "revenue": "Выручка (mock)"
+  },
+  "auth": {
+    "title": "Вход",
+    "lead": "Mock-логин — роль можно сменить в настройках после входа.",
+    "email": "Email",
+    "password": "Пароль",
+    "submit": "Продолжить"
+  },
+  "settings": {
+    "title": "Настройки",
+    "role": "Демо-роль",
+    "roleHint": "Переключает шаблоны @echojs-ecosystem/permission на лету."
+  },
+  "permission": {
+    "allowed": "Разрешено",
+    "denied": "Запрещено",
+    "guard": "Route guard для настроек"
+  }
+}

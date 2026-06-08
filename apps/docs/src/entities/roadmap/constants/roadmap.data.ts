@@ -1,7 +1,7 @@
 import type {
   IdeaCategory,
   RoadmapColumn,
-} from '@entities/roadmap/types/roadmap.types.js'
+} from '@entities/roadmap/types/roadmap.types'
 
 export const roadmapColumns: RoadmapColumn[] = [
   {

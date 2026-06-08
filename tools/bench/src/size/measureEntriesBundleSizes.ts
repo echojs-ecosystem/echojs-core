@@ -1,8 +1,8 @@
 import { join, resolve } from "node:path";
 import { readFile } from "node:fs/promises";
 
-import { measureBundle } from "./measureBundle.js";
-import type { BundleSizeReport, BundleSizeRow } from "./types.js";
+import { measureBundle } from "./measureBundle";
+import type { BundleSizeReport, BundleSizeRow } from "./types";
 
 type ExportsField =
   | string
@@ -47,7 +47,7 @@ async function resolveWorkspaceEntry(opts: {
 
   const guess =
     guessDefaultExportPath(exp) ??
-    (exportKey === "." ? pkgJson.module ?? pkgJson.main ?? "./dist/index.js" : undefined);
+    (exportKey === "." ? pkgJson.module ?? pkgJson.main ?? "./dist/index" : undefined);
 
   if (!guess) {
     throw new Error(

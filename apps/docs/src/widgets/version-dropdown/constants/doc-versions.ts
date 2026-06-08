@@ -1,7 +1,7 @@
 import { signal } from '@echojs-ecosystem/framework/reactivity'
 
-import { DOC_VERSION_HISTORY } from '@core/content/doc-version-history.generated.js'
-import { ECOSYSTEM_VERSION } from '@core/content/ecosystem-version.generated.js'
+import { DOC_VERSION_HISTORY } from '@core/content/doc-version-history.generated'
+import { ECOSYSTEM_VERSION } from '@core/content/ecosystem-version.generated'
 
 export type DocVersionEntry = {
   id: string

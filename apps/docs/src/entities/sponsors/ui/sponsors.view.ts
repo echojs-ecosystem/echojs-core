@@ -9,12 +9,12 @@ import {
 } from '@echojs-ecosystem/framework/hyperdom'
 
 import { HomeFooter } from '@widgets/home-shell'
-import { HomeHeader } from '@widgets/home-shell/home-header.js'
-import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data.js'
-import { SponsorsBoard } from '@widgets/sponsors/sponsors-board.js'
-import { homeButtonStyles } from '@entities/home/ui/home-button.styles.js'
-import type { SponsorsVM } from '@entities/sponsors/types/sponsors.types.js'
-import { sponsorsPageStyles } from '@entities/sponsors/ui/sponsors.view.styles.js'
+import { HomeHeader } from '@widgets/home-shell/home-header'
+import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data'
+import { SponsorsBoard } from '@widgets/sponsors/sponsors-board'
+import { homeButtonStyles } from '@entities/home/ui/home-button.styles'
+import type { SponsorsVM } from '@entities/sponsors/types/sponsors.types'
+import { sponsorsPageStyles } from '@entities/sponsors/ui/sponsors.view.styles'
 
 const page = sponsorsPageStyles()
 const btn = homeButtonStyles()

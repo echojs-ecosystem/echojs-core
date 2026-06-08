@@ -7,7 +7,7 @@ export const packageInstallStyles = tv({
     panel:
       'max-w-full overflow-hidden rounded-xl border border-white/10 bg-code-bg shadow-2xl shadow-black/30 ring-1 ring-white/[0.06]',
     panelEmbedded: 'rounded-none border-0 bg-transparent shadow-none ring-0',
-    tabs: 'grid grid-cols-4 border-b border-white/10',
+    tabs: 'border-b border-white/10',
     tab: [
       'inline-flex items-center justify-center gap-2 border-b-2 border-transparent px-2 py-2.5 text-xs font-medium text-stone-400 sm:px-3 sm:text-sm',
       'transition hover:bg-white/[0.03] hover:text-stone-200',

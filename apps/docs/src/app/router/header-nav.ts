@@ -1,7 +1,7 @@
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
 import { blogPage } from '@pages/blog'
-import type { ContentId } from '@core/content/types.js'
+import type { ContentId } from '@core/content/types'
 
 export type SiteHeaderNavItem =
   | { label: string; kind: 'doc'; contentId: ContentId }

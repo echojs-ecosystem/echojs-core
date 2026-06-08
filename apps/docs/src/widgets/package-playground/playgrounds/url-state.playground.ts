@@ -7,8 +7,8 @@ import {
   parseAsString,
 } from '@echojs-ecosystem/framework/url-state'
 
-import type { PackagePlaygroundDef, PlaygroundInstance } from '../types.js'
-import { pg } from '../playground-ui.js'
+import type { PackagePlaygroundDef, PlaygroundInstance } from '../types'
+import { pg } from '../playground-ui'
 
 const adapter = createMemoryUrlStateAdapter('?q=echo&page=1')
 

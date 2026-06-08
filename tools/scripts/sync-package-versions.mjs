@@ -57,11 +57,25 @@ const collectVersions = () => {
   /** @type {Record<string, string>} */
   const versions = {};
 
+  const collectFromDir = (dir) => {
+    const pkgPath = join(dir, "package.json");
+    try {
+      const pkg = readPackageJson(pkgPath);
+      if (pkg.name) versions[pkg.name] = pkg.version;
+      return;
+    } catch {
+      // not a package root — scan one level of subdirectories
+    }
+
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      if (!entry.isDirectory()) continue;
+      collectFromDir(join(dir, entry.name));
+    }
+  };
+
   for (const entry of readdirSync(packagesDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
-    const pkgDir = join(packagesDir, entry.name);
-    const pkg = readPackageJson(join(pkgDir, "package.json"));
-    if (pkg.name) versions[pkg.name] = pkg.version;
+    collectFromDir(join(packagesDir, entry.name));
   }
 
   return versions;

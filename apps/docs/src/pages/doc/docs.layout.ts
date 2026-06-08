@@ -1,8 +1,8 @@
 import { div, main } from '@echojs-ecosystem/framework/hyperdom'
 import { createLayoutView } from '@echojs-ecosystem/framework/router'
 
-import { docsLayoutStyles } from '@pages/doc/docs.layout.styles.js'
-import { DocsSidebar } from '@widgets/docs-shell/docs-sidebar.js'
+import { docsLayoutStyles } from '@pages/doc/docs.layout.styles'
+import { DocsSidebar } from '@widgets/docs-shell/docs-sidebar'
 import { SiteHeader } from '@widgets/site-header'
 
 const layout = docsLayoutStyles()

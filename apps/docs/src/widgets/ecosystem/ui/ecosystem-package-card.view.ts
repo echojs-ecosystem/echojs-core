@@ -8,8 +8,8 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import type { EcosystemPackageCardViewProps } from '@widgets/ecosystem/types/ecosystem-package-card.types.js'
-import { ecosystemPackageStyles } from '@widgets/ecosystem/ui/ecosystem-package-card.view.styles.js'
+import type { EcosystemPackageCardViewProps } from '@widgets/ecosystem/types/ecosystem-package-card.types'
+import { ecosystemPackageStyles } from '@widgets/ecosystem/ui/ecosystem-package-card.view.styles'
 
 const card = ecosystemPackageStyles()
 

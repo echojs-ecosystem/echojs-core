@@ -7,8 +7,8 @@ import {
   p,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { DocTocVM } from '@widgets/doc-content/types/doc-toc.types.js'
-import { docTocStyles } from '@widgets/doc-content/ui/doc-toc.view.styles.js'
+import type { DocTocVM } from '@widgets/doc-content/types/doc-toc.types'
+import { docTocStyles } from '@widgets/doc-content/ui/doc-toc.view.styles'
 
 const toc = docTocStyles()
 

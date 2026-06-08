@@ -1,4 +1,4 @@
-import { brandReadonly } from "./internals/guards.js";
+import { brandReadonly } from "./internals/guards";
 import type { ReadonlySignal, Signal } from "./types";
 import { isFunction } from "./utils";
 

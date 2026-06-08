@@ -1,1 +1,1 @@
-export { roadmapPage } from '@pages/roadmap/roadmap.page.js'
+export { roadmapPage } from '@pages/roadmap/roadmap.page'

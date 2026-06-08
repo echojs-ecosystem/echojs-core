@@ -6,13 +6,13 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { ideaCategoryOptions } from '@entities/roadmap/constants/roadmap.data.js'
+import { ideaCategoryOptions } from '@entities/roadmap/constants/roadmap.data'
 import type {
   CommunityIdea,
   RoadmapColumn,
   RoadmapItem,
-} from '@entities/roadmap/types/roadmap.types.js'
-import { roadmapBoardStyles } from '@entities/roadmap/ui/roadmap-board.styles.js'
+} from '@entities/roadmap/types/roadmap.types'
+import { roadmapBoardStyles } from '@entities/roadmap/ui/roadmap-board.styles'
 
 const board = roadmapBoardStyles()
 

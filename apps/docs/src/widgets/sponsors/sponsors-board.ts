@@ -3,9 +3,9 @@ import { type Child, div } from '@echojs-ecosystem/framework/hyperdom'
 import {
   goldTier,
   sponsorTierGroups,
-} from '@widgets/sponsors/constants/sponsors.data.js'
-import { sponsorsBoardStyles } from '@widgets/sponsors/sponsors-board.styles.js'
-import { SponsorsTierPanel } from '@widgets/sponsors/sponsors-tier-panel.js'
+} from '@widgets/sponsors/constants/sponsors.data'
+import { sponsorsBoardStyles } from '@widgets/sponsors/sponsors-board.styles'
+import { SponsorsTierPanel } from '@widgets/sponsors/sponsors-tier-panel'
 
 const board = sponsorsBoardStyles()
 

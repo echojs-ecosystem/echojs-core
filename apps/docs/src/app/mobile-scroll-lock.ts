@@ -1,15 +1,15 @@
 import { effect } from '@echojs-ecosystem/framework/reactivity'
 
-import { appRouter } from '@app/router/router.js'
+import { appRouter } from '@app/router/router'
 import {
   $mobileNavOpen,
   closeMobileNav,
 } from '@widgets/docs-shell/model/mobile-nav'
-import { $mobileSearchOpen } from '@widgets/search/model/docs-search.model.js'
+import { $mobileSearchOpen } from '@widgets/search/model/docs-search.model'
 import {
   $homeNavOpen,
   closeHomeNav,
-} from '@widgets/site-header/model/home-mobile-nav.js'
+} from '@widgets/site-header/model/home-mobile-nav'
 
 let lockCount = 0
 

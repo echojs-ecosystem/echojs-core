@@ -15,16 +15,16 @@ import { EcosystemPackageCard } from '@widgets/ecosystem'
 import {
   ecosystemPackages,
   type EcosystemPackage,
-} from '@widgets/ecosystem/constants/ecosystem-packages.js'
+} from '@widgets/ecosystem/constants/ecosystem-packages'
 import {
   getPackageOverview,
   type PackageOverviewData,
-} from '@widgets/package-overview/constants/package-overview.data.js'
+} from '@widgets/package-overview/constants/package-overview.data'
 import {
   featureCardStyles,
   packageOverviewStyles,
-} from '@widgets/package-overview/ui/package-overview.view.styles.js'
-import { getPackageVersion } from '@core/content/ecosystem-version.generated.js'
+} from '@widgets/package-overview/ui/package-overview.view.styles'
+import { getPackageVersion } from '@core/content/ecosystem-version.generated'
 
 const ui = packageOverviewStyles()
 const pillar = featureCardStyles()

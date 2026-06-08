@@ -12,8 +12,8 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { SearchIcon } from '@widgets/icons'
-import type { DocsSearchVM } from '@widgets/search/model/docs-search.model.js'
-import { searchStyles } from '@widgets/search/ui/docs-search.view.styles.js'
+import type { DocsSearchVM } from '@widgets/search/model/docs-search.model'
+import { searchStyles } from '@widgets/search/ui/docs-search.view.styles'
 
 const search = searchStyles()
 

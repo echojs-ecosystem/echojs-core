@@ -3,8 +3,8 @@ import { type Child, code, span } from '@echojs-ecosystem/framework/hyperdom'
 import type {
   CommandToken,
   CommandTokenKind,
-} from '@widgets/package-install/constants/install-commands.js'
-import { packageInstallStyles } from '@widgets/package-install/ui/package-install.view.styles.js'
+} from '@widgets/package-install/constants/install-commands'
+import { packageInstallStyles } from '@widgets/package-install/ui/package-install.view.styles'
 
 const styles = packageInstallStyles()
 

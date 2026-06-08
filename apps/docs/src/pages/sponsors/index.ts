@@ -1,1 +1,1 @@
-export { sponsorsPage } from '@pages/sponsors/sponsors.page.js'
+export { sponsorsPage } from '@pages/sponsors/sponsors.page'

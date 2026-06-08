@@ -6,8 +6,8 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { whyChooseEchoCards } from '@widgets/framework-comparison/constants/framework-comparison.data.js'
-import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles.js'
+import { whyChooseEchoCards } from '@widgets/framework-comparison/constants/framework-comparison.data'
+import { frameworkComparisonStyles } from '@widgets/framework-comparison/ui/framework-comparison.view.styles'
 
 const cmp = frameworkComparisonStyles()
 

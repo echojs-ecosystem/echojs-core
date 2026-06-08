@@ -1,7 +1,7 @@
 import { type Child, div, h2, p, section } from '@echojs-ecosystem/framework/hyperdom'
-import { cn } from '@core/styles/cn.js'
+import { cn } from '@core/styles/cn'
 
-import { homeSectionStyles } from '@entities/home/ui/home-section.view.styles.js'
+import { homeSectionStyles } from '@entities/home/ui/home-section.view.styles'
 
 const sectionStyles = homeSectionStyles()
 

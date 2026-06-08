@@ -1,0 +1,40 @@
+{
+  "shell": {
+    "documentTitle": "EchoJS Workspace",
+    "brand": "EchoJS Workspace",
+    "tagline": "Admin panel demo"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "users": "Users",
+    "catalog": "Catalog",
+    "orders": "Orders",
+    "org": "Organization",
+    "settings": "Settings",
+    "login": "Sign in"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "lead": "Overview with permission-gated widgets and live signals.",
+    "orders": "Open orders",
+    "users": "Active users",
+    "revenue": "Revenue (mock)"
+  },
+  "auth": {
+    "title": "Sign in",
+    "lead": "Mock login — pick a role on the settings page after sign-in.",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Continue"
+  },
+  "settings": {
+    "title": "Settings",
+    "role": "Demo role",
+    "roleHint": "Switches @echojs-ecosystem/permission templates live."
+  },
+  "permission": {
+    "allowed": "Allowed",
+    "denied": "Denied",
+    "guard": "Route guard active for settings"
+  }
+}

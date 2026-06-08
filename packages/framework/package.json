@@ -68,6 +68,22 @@
       "types": "./dist/devtools.d.ts",
       "default": "./dist/devtools.js"
     },
+    "./network/http": {
+      "types": "./dist/network/http.d.ts",
+      "default": "./dist/network/http.js"
+    },
+    "./network/ws": {
+      "types": "./dist/network/ws.d.ts",
+      "default": "./dist/network/ws.js"
+    },
+    "./network/mock": {
+      "types": "./dist/network/mock.d.ts",
+      "default": "./dist/network/mock.js"
+    },
+    "./network/graphql": {
+      "types": "./dist/network/graphql.d.ts",
+      "default": "./dist/network/graphql.js"
+    },
     "./ui": {
       "types": "./dist/ui.d.ts",
       "default": "./dist/ui.js"
@@ -149,6 +165,7 @@
     "@echojs-ecosystem/form": "workspace:*",
     "@echojs-ecosystem/hyperdom": "workspace:*",
     "@echojs-ecosystem/i18n": "workspace:*",
+    "@echojs-ecosystem/network": "workspace:*",
     "@echojs-ecosystem/persist": "workspace:*",
     "@echojs-ecosystem/query": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*",

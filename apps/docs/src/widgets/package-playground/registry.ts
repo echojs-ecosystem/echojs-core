@@ -1,13 +1,13 @@
-import type { PackagePlaygroundDef } from './types.js'
-import { hyperdomPlayground } from './playgrounds/hyperdom.playground.js'
-import { i18nPlayground } from './playgrounds/i18n.playground.js'
-import { persistPlayground } from './playgrounds/persist.playground.js'
-import { queryPlayground } from './playgrounds/query.playground.js'
-import { reactivityPlayground } from './playgrounds/reactivity.playground.js'
-import { routerPlayground } from './playgrounds/router.playground.js'
-import { storePlayground } from './playgrounds/store.playground.js'
-import { createStubPlayground } from './playgrounds/stub.playground.js'
-import { urlStatePlayground } from './playgrounds/url-state.playground.js'
+import type { PackagePlaygroundDef } from './types'
+import { hyperdomPlayground } from './playgrounds/hyperdom.playground'
+import { i18nPlayground } from './playgrounds/i18n.playground'
+import { persistPlayground } from './playgrounds/persist.playground'
+import { queryPlayground } from './playgrounds/query.playground'
+import { reactivityPlayground } from './playgrounds/reactivity.playground'
+import { routerPlayground } from './playgrounds/router.playground'
+import { storePlayground } from './playgrounds/store.playground'
+import { createStubPlayground } from './playgrounds/stub.playground'
+import { urlStatePlayground } from './playgrounds/url-state.playground'
 
 const stubs: PackagePlaygroundDef[] = [
   createStubPlayground(
@@ -29,6 +29,11 @@ const stubs: PackagePlaygroundDef[] = [
     'cli',
     'CLI',
     '@echojs-ecosystem/cli is not released yet.'
+  ),
+  createStubPlayground(
+    'network-http',
+    'Network / HTTP',
+    'Interactive HTTP playground ships in a follow-up — use Examples for copy-paste patterns.'
   ),
 ]
 

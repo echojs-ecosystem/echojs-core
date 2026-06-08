@@ -6,14 +6,14 @@ import {
   ideaCategoryOptions,
   roadmapColumns,
   roadmapGithubRepo,
-} from '@entities/roadmap/constants/roadmap.data.js'
+} from '@entities/roadmap/constants/roadmap.data'
 import type {
   CommunityIdea,
   IdeaCategory,
   IdeaFormFields,
   IdeaFormValue,
   RoadmapVM,
-} from '@entities/roadmap/types/roadmap.types.js'
+} from '@entities/roadmap/types/roadmap.types'
 
 const trim = (value: string): string => value.trim()
 

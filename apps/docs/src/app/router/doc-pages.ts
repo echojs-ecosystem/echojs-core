@@ -1,8 +1,8 @@
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
-import { createDocPage } from '@pages/doc/doc.page.js'
-import { allDocsNavItems } from '@core/content/nav.js'
-import type { ContentId } from '@core/content/types.js'
+import { createDocPage } from '@pages/doc/doc.page'
+import { allDocsNavItems } from '@core/content/nav'
+import type { ContentId } from '@core/content/types'
 
 const cache = new Map<ContentId, AnyPage>()
 

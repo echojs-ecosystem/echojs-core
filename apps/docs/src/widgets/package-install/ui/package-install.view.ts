@@ -6,10 +6,10 @@ import {
   span,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import { HighlightedCommand } from '@widgets/package-install/highlighted-command.js'
-import { PackageManagerIcon } from '@widgets/package-install/pm-icons.js'
-import type { PackageInstallVM } from '@widgets/package-install/types/package-install.types.js'
-import { packageInstallStyles } from '@widgets/package-install/ui/package-install.view.styles.js'
+import { HighlightedCommand } from '@widgets/package-install/highlighted-command'
+import { PackageManagerIcon } from '@widgets/package-install/pm-icons'
+import type { PackageInstallVM } from '@widgets/package-install/types/package-install.types'
+import { packageInstallStyles } from '@widgets/package-install/ui/package-install.view.styles'
 
 const styles = packageInstallStyles()
 

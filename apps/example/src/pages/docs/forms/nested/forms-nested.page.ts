@@ -1,8 +1,0 @@
-import { createRouteView } from "@echojs-ecosystem/router";
-
-import { FormsNestedView } from "./ui/forms-nested.view.js";
-
-export const formsNestedPage = createRouteView({
-  name: "forms-nested",
-  view: FormsNestedView,
-});

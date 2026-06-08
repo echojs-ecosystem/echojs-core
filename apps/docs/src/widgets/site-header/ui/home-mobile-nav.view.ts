@@ -11,8 +11,8 @@ import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { buildSiteHeaderNavItems, docPageByContentId } from '@app/router'
 
-import { $homeNavOpen, closeHomeNav } from '../model/home-mobile-nav.js'
-import { homeMobileNavStyles } from './home-mobile-nav.view.styles.js'
+import { $homeNavOpen, closeHomeNav } from '../model/home-mobile-nav'
+import { homeMobileNavStyles } from './home-mobile-nav.view.styles'
 
 const styles = homeMobileNavStyles()
 

@@ -1,4 +1,4 @@
-import type { ContentId } from '@core/content/types.js'
+import type { ContentId } from '@core/content/types'
 
 export type EcosystemPackage = {
   name: string
@@ -52,6 +52,13 @@ export const ecosystemPackages: EcosystemPackage[] = [
     description: 'Signal-native data fetching and cache layer.',
     contentId: 'packages/query',
     icon: '↻',
+  },
+  {
+    name: '@echojs-ecosystem/network/http',
+    shortName: 'network/http',
+    description: 'Tree-shakeable HTTP client with hooks, retries, and typed responses.',
+    contentId: 'packages/network-http',
+    icon: '🌐',
   },
   {
     name: '@echojs-ecosystem/url-state',

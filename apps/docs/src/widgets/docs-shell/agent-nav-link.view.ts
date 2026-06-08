@@ -1,8 +1,8 @@
 import { createView, type Child } from '@echojs-ecosystem/framework/hyperdom'
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
-import { SidebarNavLinkView } from '@widgets/docs-shell/sidebar-nav-link.view.js'
-import type { NavIconId } from '@core/content/nav-icon-id.js'
+import { SidebarNavLinkView } from '@widgets/docs-shell/sidebar-nav-link.view'
+import type { NavIconId } from '@core/content/nav-icon-id'
 
 export type AgentNavLinkViewProps = {
   page: AnyPage

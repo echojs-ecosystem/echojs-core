@@ -6,10 +6,10 @@ import {
   p,
 } from '@echojs-ecosystem/framework/hyperdom'
 
-import type { RoadmapVM } from '@entities/roadmap/types/roadmap.types.js'
-import { RoadmapBoard } from '@entities/roadmap/ui/roadmap-board.js'
-import { RoadmapIdeaForm } from '@entities/roadmap/ui/roadmap-idea-form.js'
-import { roadmapPageStyles } from '@entities/roadmap/ui/roadmap.view.styles.js'
+import type { RoadmapVM } from '@entities/roadmap/types/roadmap.types'
+import { RoadmapBoard } from '@entities/roadmap/ui/roadmap-board'
+import { RoadmapIdeaForm } from '@entities/roadmap/ui/roadmap-idea-form'
+import { roadmapPageStyles } from '@entities/roadmap/ui/roadmap.view.styles'
 
 const page = roadmapPageStyles()
 

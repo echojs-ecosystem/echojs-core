@@ -8,8 +8,8 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import type { EcosystemPackage } from '@widgets/ecosystem/constants/ecosystem-packages.js'
-import { ecosystemFeaturedPackageStyles } from '@widgets/ecosystem/ui/ecosystem-section.view.styles.js'
+import type { EcosystemPackage } from '@widgets/ecosystem/constants/ecosystem-packages'
+import { ecosystemFeaturedPackageStyles } from '@widgets/ecosystem/ui/ecosystem-section.view.styles'
 
 const featured = ecosystemFeaturedPackageStyles()
 

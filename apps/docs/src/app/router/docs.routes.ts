@@ -2,9 +2,9 @@ import { createRoutes } from '@echojs-ecosystem/framework/router'
 
 import { getDocPage } from '@app/router'
 import { blogPage, blogPostPage, blogSection } from '@pages/blog'
-import { docsShellLayoutPage } from '@pages/doc/docs.layout.js'
+import { docsShellLayoutPage } from '@pages/doc/docs.layout'
 import { roadmapPage } from '@pages/roadmap'
-import { canonicalDocsRouteItems } from '@core/content/nav.js'
+import { canonicalDocsRouteItems } from '@core/content/nav'
 
 const docChildren = canonicalDocsRouteItems().map((item) => ({
   path: item.contentId,
