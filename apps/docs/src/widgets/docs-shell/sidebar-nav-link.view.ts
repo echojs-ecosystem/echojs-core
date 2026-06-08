@@ -24,7 +24,7 @@ export type SidebarNavLinkProps = {
   iconClassName?: string
   badge?: string
   external?: boolean
-} & ({ page: AnyPage } | { href: string })
+} & ({ page: AnyPage; match?: 'exact' | 'partial' } | { href: string })
 
 const linkInner = (props: SidebarNavLinkProps): Child[] => [
   props.icon
@@ -54,6 +54,7 @@ export const SidebarNavLinkView = createView(
 
     return NavLink({
       to: props.page,
+      match: props.match,
       activeClass: navLinkStyles({ active: true, withIcon }),
       class: navLinkStyles({ withIcon }),
       children: linkInner(props),

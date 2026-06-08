@@ -32,7 +32,8 @@
         "../../packages/framework/src/hyperdom-lifecycle-mount.ts"
       ],
       "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
-      "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"]
+      "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"],
+      "@echojs-ecosystem/router": ["../../packages/router/src/index.ts"]
     }
   },
   "include": ["src", "src/vite-env.d.ts"]

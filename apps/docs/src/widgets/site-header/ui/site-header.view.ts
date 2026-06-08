@@ -60,6 +60,7 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
               item.kind === 'doc'
                 ? docPageByContentId[item.contentId]!
                 : item.page,
+            match: item.kind === 'page' ? item.match : undefined,
             class: hdr().navLink(),
             children: item.label,
           })

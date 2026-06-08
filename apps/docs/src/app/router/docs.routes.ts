@@ -1,7 +1,7 @@
 import { createRoutes } from '@echojs-ecosystem/framework/router'
 
 import { getDocPage } from '@app/router'
-import { blogPage, blogPostPage } from '@pages/blog'
+import { blogPage, blogPostPage, blogSection } from '@pages/blog'
 import { docsShellLayoutPage } from '@pages/doc/docs.layout.js'
 import { roadmapPage } from '@pages/roadmap'
 import { canonicalDocsRouteItems } from '@core/content/nav.js'
@@ -21,13 +21,20 @@ export const docsRoutes = createRoutes([
       ...docChildren,
       {
         path: 'blog',
-        name: 'docs-blog',
-        routeView: blogPage,
-      },
-      {
-        path: 'blog/:slug',
-        name: 'docs-blog-post',
-        routeView: blogPostPage,
+        name: 'docs-blog-section',
+        route: blogSection,
+        children: [
+          {
+            path: '/',
+            name: 'docs-blog',
+            routeView: blogPage,
+          },
+          {
+            path: ':slug',
+            name: 'docs-blog-post',
+            routeView: blogPostPage,
+          },
+        ],
       },
       {
         path: 'roadmap',

@@ -1,4 +1,4 @@
-import { createModel } from '@echojs-ecosystem/framework/hyperdom'
+import { type Child, createModel } from '@echojs-ecosystem/framework/hyperdom'
 import { effect, signal } from '@echojs-ecosystem/framework/reactivity'
 import type { Signal } from '@echojs-ecosystem/framework/reactivity'
 
@@ -13,6 +13,7 @@ export type HeaderDropdownProps = {
   ariaLabel: string | (() => string)
   selectedId: () => string
   triggerLabel: () => string
+  triggerIcon: () => Child
   options: HeaderDropdownOption[] | (() => HeaderDropdownOption[])
   onSelect: (id: string) => void
 }

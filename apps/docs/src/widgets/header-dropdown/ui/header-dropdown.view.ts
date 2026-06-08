@@ -27,8 +27,11 @@ export const HeaderDropdownView = createView((vm: HeaderDropdownVM): Child => {
           onClick: vm.toggle,
         },
         [
-          span({ class: dd.triggerLabel() }, props.triggerLabel),
-          span({ class: dd.chevron() }, '▾'),
+          span({ class: dd.triggerIcon() }, [props.triggerIcon()]),
+          span({ class: dd.triggerText() }, [
+            span({ class: dd.triggerLabel() }, props.triggerLabel),
+            span({ class: dd.chevron() }, '▾'),
+          ]),
         ]
       ),
     () =>

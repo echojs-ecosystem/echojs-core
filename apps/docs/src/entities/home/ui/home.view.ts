@@ -105,8 +105,8 @@ export const HomeView = createView((vm: HomeVM): Child => {
 
         HomeSection({
           eyebrow: 'Architecture',
-          title: 'Structure that scales with your team',
-          lead: 'Six predictable layers, feature-first slices, and Architect lint — wrong imports fail in CI, not in code review.',
+          title: 'A layered stack you can lint',
+          lead: 'EchoJS apps often split code into layers — this site uses one example layout. Declare your own order in architect.config.ts and let Architect catch imports that break the rules you chose.',
           children: HomeArchitectureView(vm),
         }),
 

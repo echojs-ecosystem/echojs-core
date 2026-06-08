@@ -15,13 +15,13 @@ export type ArchitectureAdvantage = {
   docId: ContentId
 }
 
-/** Visual layer stack — matches apps/docs architect.config.ts order. */
+/** Example layer stack for the landing page — teams define their own order in architect.config.ts. */
 export const architectureLayers: ArchitectureLayer[] = [
   { id: 'app', name: 'app', hint: 'bootstrap & routes', emphasis: 'default' },
   { id: 'pages', name: 'pages', hint: 'route views', emphasis: 'default' },
-  { id: 'entities', name: 'entities', hint: 'model · view', emphasis: 'default' },
   { id: 'widgets', name: 'widgets', hint: 'composite UI', emphasis: 'foundation' },
   { id: 'features', name: 'features', hint: 'user flows', emphasis: 'default' },
+  { id: 'entities', name: 'entities', hint: 'model · view', emphasis: 'default' },
   { id: 'core', name: 'core', hint: 'content & providers', emphasis: 'default' },
 ]
 
@@ -43,14 +43,14 @@ export default defineConfig({
     children: {
       app: appLayer,
       pages: abstraction({ name: "pages", children: { "*": pageSlice } }),
-      entities: abstraction({ name: "entities", children: { "*": entitySlice } }),
       widgets: abstraction({ name: "widgets", children: { "*": widgetSlice } }),
       features: abstraction({ name: "features", children: { "*": featureSlice } }),
+      entities: abstraction({ name: "entities", children: { "*": entitySlice } }),
       core: coreLayer,
     },
     rules: [
       dependenciesDirection(
-        ["app", "pages", "entities", "widgets", "features", "core"],
+        ["app", "pages", "widgets", "features", "entities", "core"],
         { allowDownward: ["**/app/router/**"] },
       ),
     ],
@@ -69,7 +69,7 @@ export const architectCiOutput = `$ bun run architect
 
 src/widgets/site-header/model/site-header.model.ts
   ✘ Forbidden dependency "widgets" <= "pages".
-    allowed: app <= pages <= entities <= widgets <= features <= core
+    allowed: app <= pages <= widgets <= features <= entities <= core
     import { blogPage } from "@pages/blog"
            ─────────────────────────────────
 
@@ -84,7 +84,7 @@ export const architectCodePanels: ArchitectCodePanel[] = [
     lang: 'typescript',
     code: architectConfigExample,
     caption:
-      'One ordered stack for the whole repo — imports may only flow downward.',
+      'Your team picks the stack — Architect only enforces the order you declare.',
   },
   {
     id: 'violation',
@@ -104,42 +104,42 @@ export const architectCodePanels: ArchitectCodePanel[] = [
     lang: 'bash',
     code: architectCiOutput,
     caption:
-      'Run echo-architect lint locally and in CI — same check as this docs site.',
+      'Same lint locally and in CI — tuned to whatever layers you configured.',
   },
 ]
 
-/** Landing-page digest — why the layered stack is a competitive advantage. */
+/** Landing-page digest — why a lintable layer stack helps (example layout). */
 export const architectureAdvantages: ArchitectureAdvantage[] = [
   {
     id: 'layers',
-    title: 'Six layers, one direction',
+    title: 'Layers, one direction',
     summary:
-      'Each folder has a single job. Imports flow downward only — core never imports pages, features stay isolated.',
-    highlight: 'Refactors stay local as the codebase grows.',
+      'Split the repo by responsibility and pick an import order. In this example, higher layers depend on lower ones — not the only layout that works.',
+    highlight: 'Rename, reorder, or add layers in architect.config.ts.',
     docId: 'architecture/overview',
   },
   {
     id: 'feature-first',
-    title: 'Feature-first by default',
+    title: 'Feature-first slices',
     summary:
-      'Organize by what users do — search, checkout, locale — not by components/, hooks/, utils/ at the repo root.',
-    highlight: 'Onboarding maps to product areas, not file types.',
+      'One pattern EchoJS apps often use: group by what users do, not by components/, hooks/, utils/ at the repo root.',
+    highlight: 'Adapt the slice names to your product — the linter follows your config.',
     docId: 'architecture/feature-first',
   },
   {
     id: 'model-view',
-    title: 'Model · View at every level',
+    title: 'Model · View split',
     summary:
-      'Models own signals, effects, and data; views map a VM to HyperDOM. No fetch in views, no DOM in models.',
-    highlight: 'Test behavior without rendering the tree.',
+      'A convention many teams adopt: models own signals and data; views map a VM to HyperDOM. Optional, but easy to test when you do.',
+    highlight: 'Not required everywhere — useful at pages, widgets, and features.',
     docId: 'architecture/models',
   },
   {
     id: 'architect',
     title: 'Architect lints imports',
     summary:
-      'declare dependenciesDirection once — echo-architect reports forbidden upward imports with file paths.',
-    highlight: 'Ship the same lint in CI as apps/docs and apps/example.',
+      'Encode whichever stack you chose once — echo-architect reports forbidden imports with file paths, not opinions about folder names.',
+    highlight: 'apps/docs and apps/example each ship their own config.',
     docId: 'packages/architect/guides/layers',
   },
 ]

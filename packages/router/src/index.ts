@@ -10,7 +10,7 @@ export type { HyperdomRouter } from "./hyperdom/create-router";
 export { Link } from "./hyperdom/Link";
 export type { LinkProps } from "./hyperdom/Link";
 export { NavLink } from "./hyperdom/NavLink";
-export type { NavLinkProps } from "./hyperdom/NavLink";
+export type { NavLinkMatch, NavLinkProps } from "./hyperdom/NavLink";
 export {
   createRouterProvider,
   routerPlugin,

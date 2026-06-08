@@ -59,6 +59,7 @@ const resourceLink = (link: SidebarLink): Child => {
     page: link.page,
     label: link.label,
     icon: link.icon,
+    match: link.kind === 'page' ? link.match : undefined,
   })
 }
 

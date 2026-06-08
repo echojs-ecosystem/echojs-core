@@ -1,15 +1,21 @@
 import { tv } from 'tailwind-variants'
 
+import { headerIconBtnStyles } from '@widgets/site-header/ui/site-header.view.styles.js'
+
 export const headerDropdownStyles = tv({
   slots: {
-    root: 'relative hidden md:block',
+    root: 'relative shrink-0',
     trigger: [
-      'inline-flex max-w-[9.5rem] items-center gap-1.5 rounded-lg border border-border/90',
-      'bg-surface-elevated/90 px-2.5 py-1.5 text-sm font-medium text-fg-muted shadow-sm',
-      'transition hover:border-echo-500/35 hover:bg-surface-muted hover:text-fg',
-      'dark:border-white/10 dark:bg-white/5',
+      headerIconBtnStyles(),
+      'md:h-auto md:w-auto md:min-h-0 md:rounded-lg md:border-0 md:bg-transparent md:px-2 md:py-1.5',
+      'md:text-sm md:font-medium md:text-fg-muted md:shadow-none',
+      'md:hover:border-transparent md:hover:bg-surface-muted md:hover:text-fg',
+      'md:dark:border-transparent md:dark:hover:bg-echo-950/50',
     ].join(' '),
-    triggerLabel: 'truncate',
+    triggerIcon: 'inline-flex md:hidden',
+    triggerText:
+      'hidden items-center gap-1 md:inline-flex',
+    triggerLabel: 'max-w-[7rem] truncate',
     chevron: 'shrink-0 text-[10px] text-fg-subtle',
     panel: [
       'absolute right-0 top-full z-50 mt-2 min-w-[11rem] overflow-hidden rounded-xl',

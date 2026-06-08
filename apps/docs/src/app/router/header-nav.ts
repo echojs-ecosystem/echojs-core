@@ -5,7 +5,12 @@ import type { ContentId } from '@core/content/types.js'
 
 export type SiteHeaderNavItem =
   | { label: string; kind: 'doc'; contentId: ContentId }
-  | { label: string; kind: 'page'; page: AnyPage }
+  | {
+      label: string
+      kind: 'page'
+      page: AnyPage
+      match?: 'exact' | 'partial'
+    }
 
 /** Built at header mount — after blog routes are registered (avoids init-order TDZ). */
 export const buildSiteHeaderNavItems = (): SiteHeaderNavItem[] => [
@@ -21,5 +26,5 @@ export const buildSiteHeaderNavItems = (): SiteHeaderNavItem[] => [
   },
   { label: 'Packages', kind: 'doc', contentId: 'packages/framework' },
   { label: 'Guides', kind: 'doc', contentId: 'guides/routing' },
-  { label: 'Blog', kind: 'page', page: blogPage },
+  { label: 'Blog', kind: 'page', page: blogPage, match: 'partial' },
 ]

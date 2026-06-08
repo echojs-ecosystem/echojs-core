@@ -92,13 +92,18 @@ const collectChildPageNodes = (definitions: readonly RouteTreeEntry[]): PageNode
   const nodes: PageNode[] = [];
   for (const def of definitions) {
     const page = entryPage(def);
-    if (!page) continue;
-    assertPage(page, "createRouter");
-    nodes.push({
-      page,
-      children:
-        "children" in def && def.children ? collectChildPageNodes(def.children) : undefined,
-    });
+    if (page) {
+      assertPage(page, "createRouter");
+      nodes.push({
+        page,
+        children:
+          "children" in def && def.children ? collectChildPageNodes(def.children) : undefined,
+      });
+      continue;
+    }
+    if ("children" in def && def.children?.length) {
+      nodes.push(...collectChildPageNodes(def.children));
+    }
   }
   return nodes;
 };

@@ -1,8 +1,10 @@
 /** @vitest-environment jsdom */
 import { beforeEach, describe, expect, it } from "vitest";
 import { h, render } from "@echojs-ecosystem/hyperdom";
+import { createRouteView } from "../core/create-route-view";
 import { createRoute } from "../core/create-route";
 import { createRouter } from "../core/create-router";
+import { createRoutes } from "../core/create-routes";
 import { getRouterInternal } from "../core/router";
 import { Link } from "./Link";
 import { NavLink } from "./NavLink";
@@ -79,5 +81,84 @@ describe("NavLink", () => {
     expect(links[1]!.className).toContain("active");
     expect(links[0]!.getAttribute("aria-current")).toBeNull();
     expect(links[1]!.getAttribute("aria-current")).toBe("page");
+  });
+
+  it("applies activeClass with match partial on URL prefix", async () => {
+    const blogIndex = createRouteView({ name: "blog-index", view: () => "index" });
+    const blogPost = createRouteView<{ slug: string }>({
+      name: "blog-post",
+      view: () => "post",
+    });
+
+    const router = createRouter({
+      history: "memory",
+      routes: createRoutes([
+        { path: "/blog", name: "blog-index", routeView: blogIndex },
+        { path: "/blog/:slug", name: "blog-post", routeView: blogPost },
+      ]),
+    });
+    router.start();
+
+    const container = document.createElement("div");
+    render(
+      NavLink({
+        to: blogIndex,
+        match: "partial",
+        activeClass: "active",
+        children: "Blog",
+      }),
+      container,
+    );
+
+    const link = container.querySelector("a")!;
+    expect(link.className).not.toContain("active");
+
+    router.navigate("/blog/hello");
+    await Promise.resolve();
+    expect(link.className).toContain("active");
+  });
+
+  it("applies activeClass from activeOn sibling routes", async () => {
+    const blogIndex = createRouteView({ name: "blog-index", view: () => "index" });
+    const blogPost = createRouteView<{ slug: string }>({
+      name: "blog-post",
+      view: () => "post",
+    });
+    const blogSection = createRoute("blog-section");
+
+    const router = createRouter({
+      history: "memory",
+      routes: createRoutes([
+        {
+          path: "/blog",
+          name: "blog-section",
+          route: blogSection,
+          children: [
+            { path: "", name: "blog-index", routeView: blogIndex },
+            { path: ":slug", name: "blog-post", routeView: blogPost },
+          ],
+        },
+      ]),
+    });
+    router.start();
+
+    const container = document.createElement("div");
+    render(
+      NavLink({
+        to: blogIndex,
+        activeOn: [blogPost],
+        activeClass: "active",
+        children: "Blog",
+      }),
+      container,
+    );
+
+    const link = container.querySelector("a")!;
+    expect(link.className).toContain("active");
+
+    router.navigate("/blog/hello");
+    await Promise.resolve();
+    expect(link.className).toContain("active");
+    expect(link.getAttribute("aria-current")).toBe("page");
   });
 });

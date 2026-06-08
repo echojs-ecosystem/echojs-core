@@ -50,6 +50,7 @@ export const HomeMobileNav = (): Child =>
                 item.kind === 'doc'
                   ? docPageByContentId[item.contentId]!
                   : item.page,
+              match: item.kind === 'page' ? item.match : undefined,
               class: styles.link(),
               children: item.label,
             })

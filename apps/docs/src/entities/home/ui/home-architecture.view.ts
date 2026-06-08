@@ -42,7 +42,7 @@ const ArchitectureLayerStrip = (): Child =>
     div({ class: home.layerFooter() }, [
       p(
         { class: home.layerCaption() },
-        'Imports flow right → higher layers depend on lower ones'
+        'Example stack — imports flow right → your team defines the order'
       ),
       NavLink({
         to: docPageByContentId['packages/architect/guides/layers']!,

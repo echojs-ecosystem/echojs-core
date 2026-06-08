@@ -1,6 +1,7 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
 import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model.js'
+import { GlobeIcon } from '@widgets/icons'
 import { i18n, setAppLocale, type AppLocale } from '@core/providers'
 
 const localeKeys: Record<AppLocale, 'locale.en' | 'locale.ru'> = {
@@ -17,6 +18,7 @@ export const createLocaleDropdownModel = createModel((): LocaleDropdownVM => {
     dropdownProps: {
       ariaLabel: () => i18n.t('shell.localeMenu'),
       selectedId: () => i18n.locale(),
+      triggerIcon: GlobeIcon,
       triggerLabel: () => i18n.t(localeKeys[i18n.locale()]),
       options: () =>
         i18n.supportedLocales.map((locale) => ({

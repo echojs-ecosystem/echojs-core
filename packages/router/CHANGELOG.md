@@ -1,5 +1,18 @@
 # @echojs-ecosystem/router
 
+## 0.6.0
+
+### Minor Changes
+
+- release v-0.6.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/hyperdom@0.6.0
+  - @echojs-ecosystem/reactivity@0.6.0
+  - @echojs-ecosystem/url-state@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

@@ -1,4 +1,4 @@
-import { createRouteView } from '@echojs-ecosystem/framework/router'
+import { createRoute, createRouteView } from '@echojs-ecosystem/framework/router'
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
 import {
@@ -8,6 +8,8 @@ import {
   BlogIndex,
 } from '@entities/blog'
 import { applySeo } from '@core/seo/apply-seo.js'
+
+export const blogSection = createRoute('docs-blog-section')
 
 let blogPageRef!: AnyPage
 let blogPostPageRef!: AnyPage

@@ -1,5 +1,16 @@
 # @echojs-ecosystem/i18n
 
+## 0.6.0
+
+### Minor Changes
+
+- release v-0.6.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/reactivity@0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

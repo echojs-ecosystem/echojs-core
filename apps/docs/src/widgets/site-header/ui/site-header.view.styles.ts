@@ -1,5 +1,7 @@
 import { tv } from 'tailwind-variants'
 
+import { docsShellPadding } from '@core/styles/docs-shell.js'
+
 export const homeHeaderStyles = tv({
   slots: {
     root: [
@@ -7,7 +9,7 @@ export const homeHeaderStyles = tv({
       'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-200',
     ].join(' '),
     inner:
-      'flex w-full min-w-0 items-center gap-2 px-4 py-3 sm:gap-4 sm:px-8 sm:py-4',
+      'flex w-full min-w-0 items-center gap-2 py-3 sm:gap-3 sm:py-3.5',
     brand: 'flex min-w-0 items-center gap-2 sm:gap-2.5',
     logo: 'flex shrink-0 items-center justify-center',
     logoMark: 'h-10 w-10',
@@ -25,9 +27,11 @@ export const homeHeaderStyles = tv({
   variants: {
     layout: {
       home: {
-        inner: 'mx-auto max-w-7xl',
+        inner: `mx-auto max-w-7xl px-4 sm:px-8`,
       },
-      docs: {},
+      docs: {
+        inner: docsShellPadding,
+      },
     },
     scrolled: {
       true: {},
@@ -38,8 +42,8 @@ export const homeHeaderStyles = tv({
     {
       layout: 'docs',
       class: {
-        inner: 'gap-2 px-4 py-3 sm:px-8 sm:py-4',
         brandName: 'max-w-[8.5rem] sm:max-w-none',
+        searchWrap: 'min-w-0 flex-1 md:max-w-none lg:max-w-sm',
       },
     },
     {

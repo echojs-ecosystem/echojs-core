@@ -26,6 +26,8 @@ export type SidebarPageLink = {
   label: string
   icon: NavIconId
   page: AnyPage
+  /** `partial` — highlight on child URLs under this page's path (e.g. blog posts). */
+  match?: 'exact' | 'partial'
 }
 
 export type SidebarLink = SidebarDocLink | SidebarExternalLink | SidebarPageLink
@@ -52,6 +54,7 @@ export const sidebarResourceLinks: SidebarLink[] = [
     label: 'Blog',
     icon: 'newspaper',
     page: blogPage,
+    match: 'partial',
   },
   {
     kind: 'external',

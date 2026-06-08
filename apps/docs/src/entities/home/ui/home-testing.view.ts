@@ -37,7 +37,7 @@ const TestingPipelineStrip = (): Child =>
       ]),
     ]),
     div({ class: home.pipelineFooter() }, [
-      div(null, [
+      div([
         p(
           { class: home.pipelineCaption() },
           'State and behavior separate from markup at every layer'

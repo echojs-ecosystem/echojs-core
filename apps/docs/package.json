@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/docs",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,13 +18,13 @@
     "architect:fix": "echo-architect lint --fix"
   },
   "dependencies": {
-    "@echojs-ecosystem/framework": "^0.5.0",
+    "@echojs-ecosystem/framework": "^0.6.0",
     "shiki": "^3.4.0",
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^1.0.0"
   },
   "devDependencies": {
-    "@echojs-ecosystem/architect": "^0.5.0",
+    "@echojs-ecosystem/architect": "^0.6.0",
     "@tailwindcss/vite": "^4.1.8",
     "tailwindcss": "^4.1.8",
     "typescript": "5.9.2",

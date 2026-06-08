@@ -2,6 +2,8 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { div, main, nav, render, type Child } from "@echojs-ecosystem/hyperdom";
 import { createLayoutView } from "./create-layout-view";
+import { createRoute } from "./create-route";
+import { createRoutes } from "./create-routes";
 import { createRouteView } from "./create-route-view";
 import { createRouter } from "./create-router";
 import { NavLink } from "../hyperdom/NavLink";
@@ -178,5 +180,63 @@ describe("router view layout shell", () => {
 
     expect(container.querySelector('[data-testid="shell-nav"]')).not.toBeNull();
     expect(container.querySelector('[data-testid="doc-page"]')).not.toBeNull();
+  });
+
+  it("renders nested pages under a path-only route segment", async () => {
+    const blogSection = createRoute("blog-section");
+    const blogIndex = createRouteView({
+      name: "blog-index",
+      view: () => div({ "data-testid": "blog-index" }, "Blog"),
+    });
+    const blogPost = createRouteView({
+      name: "blog-post",
+      view: () => div({ "data-testid": "blog-post" }, "Post"),
+    });
+
+    const shellLayout = createLayoutView({
+      name: "docs-shell",
+      view: ({ outlet }) =>
+        div({ "data-testid": "docs-shell" }, [main(null, () => outlet() as Child)]) as Child,
+    });
+
+    const router = createRouter({
+      history: "memory",
+      routes: createRoutes([
+        {
+          path: "/docs",
+          name: "docs",
+          layoutView: shellLayout,
+          children: [
+            {
+              path: "blog",
+              name: "blog-section",
+              route: blogSection,
+              children: [
+                { path: "/", name: "blog-index", routeView: blogIndex },
+                { path: ":slug", name: "blog-post", routeView: blogPost },
+              ],
+            },
+          ],
+        },
+      ]),
+    });
+
+    router.start();
+    router.navigate("/docs/blog");
+    await flush();
+
+    const container = document.createElement("div");
+    render(router.View as () => Child, container);
+    await flush();
+
+    expect(container.querySelector('[data-testid="docs-shell"]')).not.toBeNull();
+    expect(container.querySelector('[data-testid="blog-index"]')).not.toBeNull();
+
+    router.navigate("/docs/blog/hello");
+    await flush();
+    await Promise.resolve();
+
+    expect(container.querySelector('[data-testid="blog-post"]')).not.toBeNull();
+    expect(container.querySelector('[data-testid="blog-index"]')).toBeNull();
   });
 });

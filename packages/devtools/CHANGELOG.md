@@ -1,5 +1,11 @@
 # @echojs-ecosystem/devtools
 
+## 0.6.0
+
+### Minor Changes
+
+- release v-0.6.0
+
 ## 0.5.0
 
 ### Minor Changes

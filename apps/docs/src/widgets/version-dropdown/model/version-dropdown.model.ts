@@ -1,6 +1,7 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 
 import type { HeaderDropdownProps } from '@widgets/header-dropdown/model/header-dropdown.model.js'
+import { VersionIcon } from '@widgets/icons'
 import {
   $docVersionId,
   DOC_VERSIONS,
@@ -17,6 +18,7 @@ export const createVersionDropdownModel = createModel((): VersionDropdownVM => {
     dropdownProps: {
       ariaLabel: () => i18n.t('shell.versionMenu'),
       selectedId: () => $docVersionId.value(),
+      triggerIcon: VersionIcon,
       triggerLabel: () => {
         const entry = DOC_VERSIONS.find((v) => v.id === $docVersionId.value())
         return entry?.label ?? 'v0.1'

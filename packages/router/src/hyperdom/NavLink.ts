@@ -4,6 +4,9 @@ import { getRouteState } from "../core/route";
 import type { Route } from "../core/types";
 import type { QueryRecord } from "../core/query";
 import type { LinkProps } from "./Link";
+import { isNavLinkActive, type NavLinkMatch } from "./nav-link-active";
+
+export type { NavLinkMatch } from "./nav-link-active";
 
 export type NavLinkProps<Params = Record<string, string>, Query = QueryRecord> = LinkProps<
   Params,
@@ -11,6 +14,13 @@ export type NavLinkProps<Params = Record<string, string>, Query = QueryRecord> =
 > & {
   activeClass?: string;
   class?: string;
+  /**
+   * `exact` — `to.$isOpened` (default).
+   * `partial` — route is in the matched chain, or the current path is under `to`'s URL prefix.
+   */
+  match?: NavLinkMatch;
+  /** Also mark active when any of these routes is opened (escape hatch for siblings). */
+  activeOn?: readonly Route<any, any>[];
 };
 
 export const NavLink = <Params = Record<string, string>, Query = QueryRecord>(
@@ -25,6 +35,8 @@ export const NavLink = <Params = Record<string, string>, Query = QueryRecord>(
     children,
     activeClass = "active",
     class: className,
+    match = "exact",
+    activeOn,
   } = props;
 
   const resolvedHref = (): string => {
@@ -38,8 +50,15 @@ export const NavLink = <Params = Record<string, string>, Query = QueryRecord>(
     >, { query: query as Record<string, unknown> | undefined });
   };
 
+  const activeOptions = () => ({
+    match,
+    activeOn,
+    params: (params ?? {}) as Record<string, string>,
+    query: query as QueryRecord | undefined,
+  });
+
   const classProp = (): string | undefined => {
-    const active = to?.$isOpened.value() ?? false;
+    const active = isNavLinkActive(to, activeOptions());
     return cx(className, active && activeClass);
   };
 
@@ -53,7 +72,8 @@ export const NavLink = <Params = Record<string, string>, Query = QueryRecord>(
     }
   };
 
-  const ariaCurrent = (): string | undefined => (to?.$isOpened.value() ? "page" : undefined);
+  const ariaCurrent = (): string | undefined =>
+    isNavLinkActive(to, activeOptions()) ? "page" : undefined;
 
   return h(
     "a",
