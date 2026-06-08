@@ -15,18 +15,13 @@ import { EcosystemSection } from '@widgets/ecosystem'
 import { FrameworkComparisonSection } from '@widgets/framework-comparison'
 import { HomeFooter } from '@widgets/home-shell'
 import { HomeHeader } from '@widgets/home-shell/home-header'
-import { PackageInstall } from '@widgets/package-install'
 import { SponsorsSection } from '@widgets/sponsors'
-import {
-  heroPills,
-  homeStats,
-} from '@entities/home/constants/home-landing.data'
+import { heroPills } from '@entities/home/constants/home-landing.data'
 import type { HomeVM } from '@entities/home/types/home.types'
 import { HomeArchitectureView } from '@entities/home/ui/home-architecture.view'
 import { homeButtonStyles } from '@entities/home/ui/home-button.styles'
 import { HomeCodeShowcaseView } from '@entities/home/ui/home-code-showcase.view'
 import { HomeCtaView } from '@entities/home/ui/home-cta.view'
-import { HomeHeroCodeWindowView } from '@entities/home/ui/home-hero-code-window.view'
 import {
   HomePhilosophyBridgeView,
   HomePhilosophyPrinciplesView,
@@ -46,56 +41,39 @@ export const HomeView = createView((vm: HomeVM): Child => {
     HomeHeader(),
 
     main({ class: home.main() }, [
-      div({ class: home.container() }, [
-        section({ class: home.hero() }, [
-          div({ class: home.heroGrid() }, [
-            div({ class: home.heroContent() }, [
-              p({ class: home.heroBadge() }, [
-                span({ class: home.heroBadgeDot() }),
-                'Signal-first · Official docs',
-              ]),
-              h1({ class: home.heroTitle() }, [
-                'Build faster with ',
-                span({ class: home.heroTitleAccent() }, 'EchoJS'),
-              ]),
-              p({ class: home.heroSubtitle() }, [
-                'A modern framework for scalable web apps — fine-grained signals, zero virtual DOM, and a composable ecosystem.',
-              ]),
-              div(
-                { class: home.heroPills() },
-                heroPills.map((pill) => span({ class: home.heroPill() }, pill))
-              ),
-              div({ class: home.heroActions() }, [
-                NavLink({
-                  to: docPageByContentId['getting-started/installation']!,
-                  class: btn.primary(),
-                  children: 'Get Started',
-                }),
-                NavLink({
-                  to: docPageByContentId['introduction/what-is-echojs']!,
-                  class: btn.secondary(),
-                  children: 'What is EchoJS?',
-                }),
-              ]),
-              div(
-                { class: home.heroStats() },
-                homeStats.map((stat) =>
-                  div({ class: home.heroStat() }, [
-                    p({ class: home.heroStatValue() }, stat.value),
-                    p({ class: home.heroStatLabel() }, stat.label),
-                  ])
-                )
-              ),
-            ]),
-            div({ class: home.heroVisual() }, [
-              div({ class: home.heroVisualStack() }, [
-                HomeHeroCodeWindowView(),
-                PackageInstall(),
-              ]),
-            ]),
+      section({ class: home.hero() }, [
+        div({ class: home.heroContent() }, [
+          p({ class: home.heroBadge() }, [
+            span({ class: home.heroBadgeDot() }),
+            'Signal-first · Official docs',
+          ]),
+          h1({ class: home.heroTitle() }, [
+            'Build faster with ',
+            span({ class: home.heroTitleAccent() }, 'EchoJS'),
+          ]),
+          p({ class: home.heroSubtitle() }, [
+            'A modern framework for scalable web apps — fine-grained signals, zero virtual DOM, and a composable ecosystem.',
+          ]),
+          div(
+            { class: home.heroPills() },
+            heroPills.map((pill) => span({ class: home.heroPill() }, pill))
+          ),
+          div({ class: home.heroActions() }, [
+            NavLink({
+              to: docPageByContentId['getting-started/installation']!,
+              class: btn.primary(),
+              children: 'Get Started',
+            }),
+            NavLink({
+              to: docPageByContentId['introduction/what-is-echojs']!,
+              class: btn.secondary(),
+              children: 'What is EchoJS?',
+            }),
           ]),
         ]),
+      ]),
 
+      div({ class: home.container() }, [
         HomeSection({
           eyebrow: 'Ecosystem',
           title: 'One framework, many packages',
