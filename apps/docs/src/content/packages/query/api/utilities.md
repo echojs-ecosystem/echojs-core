@@ -1,54 +1,24 @@
 ---
-title: Managers & Utilities
-description:
-  Abort helpers, focus/online managers, key hashing, and low-level classes.
+title: Managers & utilities
+description: Managers & utilities — Utilities API.
 package: '@echojs-ecosystem/query'
+keywords: [Managers & utilities, query]
 ---
 
-# Managers & Utilities
+@echojs-ecosystem/query
 
-## Key utilities
+## Usage
 
-| Export                       | Description             |
-| ---------------------------- | ----------------------- |
-| `hashKey`, `partialMatchKey` | Key hashing             |
-| `matchQuery`                 | Filter queries in cache |
+```ts
+import { Managers & utilities } from '@echojs-ecosystem/query'
 
-## Abort helpers
+// See guides for patterns.
+```
 
-| Export                                                                                    | Description      |
-| ----------------------------------------------------------------------------------------- | ---------------- |
-| `CancelledError`, `isCancelledError`                                                      | Cancel detection |
-| `createFetchAbortHandle`, `mergeFetchAbortSource`, `resolveAbortInput`, `abortWithReason` | Abort wiring     |
+## Type Declarations
 
-## Refetch managers
+```ts
+export const Managers & utilities: unknown
+```
 
-| Export                           | Description          |
-| -------------------------------- | -------------------- |
-| `FocusManager`, `focusManager`   | Window focus refetch |
-| `OnlineManager`, `onlineManager` | Reconnect refetch    |
-
-## Pagination helpers
-
-| Export                                           | Description      |
-| ------------------------------------------------ | ---------------- |
-| `hasInfiniteNextPage`, `hasInfinitePreviousPage` | Pagination flags |
-
-## Low-level classes (advanced)
-
-`Query`, `QueryCache`, `InfiniteQuery`, `InfiniteQueryCache`, `Mutation`,
-`MutationCache`, `QueryObserver`, `InfiniteQueryObserver`
-
-## Exported types (selected)
-
-`QueryClientConfig`, `QueryKey`, `QueryDefinition`, `QueryInstance`,
-`InfiniteQueryDefinition`, `InfiniteQueryInstance`, `InfiniteQueryData`,
-`QueryStatus`, `QueryFetchStatus`, `MutationDefinition`, `MutationInstance`,
-`MutationStatus`, `QueryOptions`, `QueryInstanceOptions`, `QueryFnContext`,
-`InvalidateQueriesOptions`, `QueryFilter`, `RefetchOptions`, `FetchPageOptions`,
-`MutationRunOptions`, `AbortControlOptions`, `StoreLike`, …
-
-## See also
-
-- [Guides: Abort & Cancellation](/docs/packages/query/guides/abort-and-cancellation)
-- [Guides: QueryClient & Cache](/docs/packages/query/guides/query-client)
+## API

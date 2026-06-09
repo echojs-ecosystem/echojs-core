@@ -2,9 +2,12 @@
 title: defineConfig
 description: defineConfig and abstraction tree structure.
 package: '@echojs-ecosystem/architect'
+keywords: [defineConfig, architect]
 ---
 
-# defineConfig
+@echojs-ecosystem/architect
+
+## Usage
 
 ```ts
 import { defineConfig, abstraction } from '@echojs-ecosystem/architect'
@@ -24,30 +27,28 @@ export default defineConfig({
 })
 ```
 
-## Config fields
-
-| Field     | Description                                           |
-| --------- | ----------------------------------------------------- |
-| `baseUrl` | Source root relative to config file (usually `"src"`) |
-| `ignores` | Glob patterns excluded from analysis                  |
-| `root`    | Root `abstraction()` tree                             |
-
-## abstraction()
+## Type Declarations
 
 ```ts
-abstraction('pages') // simple named segment
+import { defineConfig, abstraction } from '@echojs-ecosystem/architect'
 
-abstraction({
-  name: 'page',
-  children: {
-    '*.page.ts': abstraction('page'),
-    'index.ts': abstraction('public-api'),
-  },
-  rules: [publicAbstraction('public-api'), noUnabstractionFiles()],
+export default defineConfig({
+  baseUrl: 'src',
+  ignores: ['**/*.md', '**/*.css', '**/*.json'],
+  root: abstraction({
+    name: 'src',
+    children: {
+      /* layer abstractions */
+    },
+    rules: [
+      /* presets */
+    ],
+  }),
 })
 ```
 
-## See also
+## API
 
-- [Presets & Config](/docs/packages/architect/guides/presets)
-- [Docs Site Config](/docs/packages/architect/examples/docs-site-config)
+### Returns
+
+`defineConfig` — see Type Declarations for the full signature.

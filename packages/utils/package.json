@@ -1,0 +1,206 @@
+{
+  "name": "@echojs-ecosystem/utils",
+  "version": "0.6.0",
+  "description": "Signal-native utilities and composables for EchoJS — inspired by ReactUse, built on @echojs-ecosystem/reactivity",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./is": {
+      "types": "./dist/is/index.d.ts",
+      "import": "./dist/is/index.js"
+    },
+    "./window-size": {
+      "types": "./dist/sensors/window-size/index.d.ts",
+      "import": "./dist/sensors/window-size/index.js"
+    },
+    "./media-query": {
+      "types": "./dist/sensors/media-query/index.d.ts",
+      "import": "./dist/sensors/media-query/index.js"
+    },
+    "./breakpoints": {
+      "types": "./dist/sensors/breakpoints/index.d.ts",
+      "import": "./dist/sensors/breakpoints/index.js"
+    },
+    "./mouse": {
+      "types": "./dist/sensors/mouse/index.d.ts",
+      "import": "./dist/sensors/mouse/index.js"
+    },
+    "./scroll": {
+      "types": "./dist/sensors/scroll/index.d.ts",
+      "import": "./dist/sensors/scroll/index.js"
+    },
+    "./network": {
+      "types": "./dist/sensors/network/index.d.ts",
+      "import": "./dist/sensors/network/index.js"
+    },
+    "./online": {
+      "types": "./dist/sensors/online/index.d.ts",
+      "import": "./dist/sensors/online/index.js"
+    },
+    "./clipboard": {
+      "types": "./dist/browser/clipboard/index.d.ts",
+      "import": "./dist/browser/clipboard/index.js"
+    },
+    "./document-title": {
+      "types": "./dist/browser/document-title/index.d.ts",
+      "import": "./dist/browser/document-title/index.js"
+    },
+    "./favicon": {
+      "types": "./dist/browser/favicon/index.d.ts",
+      "import": "./dist/browser/favicon/index.js"
+    },
+    "./color-scheme": {
+      "types": "./dist/browser/color-scheme/index.d.ts",
+      "import": "./dist/browser/color-scheme/index.js"
+    },
+    "./event-listener": {
+      "types": "./dist/browser/event-listener/index.d.ts",
+      "import": "./dist/browser/event-listener/index.js"
+    },
+    "./timeout": {
+      "types": "./dist/timing/timeout/index.d.ts",
+      "import": "./dist/timing/timeout/index.js"
+    },
+    "./interval": {
+      "types": "./dist/timing/interval/index.d.ts",
+      "import": "./dist/timing/interval/index.js"
+    },
+    "./debounce": {
+      "types": "./dist/timing/debounce/index.d.ts",
+      "import": "./dist/timing/debounce/index.js"
+    },
+    "./throttle": {
+      "types": "./dist/timing/throttle/index.d.ts",
+      "import": "./dist/timing/throttle/index.js"
+    },
+    "./toggle": {
+      "types": "./dist/state/toggle/index.d.ts",
+      "import": "./dist/state/toggle/index.js"
+    },
+    "./counter": {
+      "types": "./dist/state/counter/index.d.ts",
+      "import": "./dist/state/counter/index.js"
+    },
+    "./boolean": {
+      "types": "./dist/state/boolean/index.d.ts",
+      "import": "./dist/state/boolean/index.js"
+    },
+    "./previous": {
+      "types": "./dist/state/previous/index.d.ts",
+      "import": "./dist/state/previous/index.js"
+    },
+    "./element-size": {
+      "types": "./dist/dom/element-size/index.d.ts",
+      "import": "./dist/dom/element-size/index.js"
+    },
+    "./resize-observer": {
+      "types": "./dist/dom/resize-observer/index.d.ts",
+      "import": "./dist/dom/resize-observer/index.js"
+    },
+    "./intersection-observer": {
+      "types": "./dist/dom/intersection-observer/index.d.ts",
+      "import": "./dist/dom/intersection-observer/index.js"
+    },
+    "./click-outside": {
+      "types": "./dist/dom/click-outside/index.d.ts",
+      "import": "./dist/dom/click-outside/index.js"
+    },
+    "./package.json": "./package.json",
+    "./document-visibility": {
+      "types": "./dist/browser/document-visibility/index.d.ts",
+      "import": "./dist/browser/document-visibility/index.js"
+    },
+    "./device-pixel-ratio": {
+      "types": "./dist/browser/device-pixel-ratio/index.d.ts",
+      "import": "./dist/browser/device-pixel-ratio/index.js"
+    },
+    "./fullscreen": {
+      "types": "./dist/browser/fullscreen/index.d.ts",
+      "import": "./dist/browser/fullscreen/index.js"
+    },
+    "./active-element": {
+      "types": "./dist/browser/active-element/index.d.ts",
+      "import": "./dist/browser/active-element/index.js"
+    },
+    "./permission": {
+      "types": "./dist/browser/permission/index.d.ts",
+      "import": "./dist/browser/permission/index.js"
+    },
+    "./css-var": {
+      "types": "./dist/browser/css-var/index.d.ts",
+      "import": "./dist/browser/css-var/index.js"
+    },
+    "./idle": {
+      "types": "./dist/sensors/idle/index.d.ts",
+      "import": "./dist/sensors/idle/index.js"
+    },
+    "./geolocation": {
+      "types": "./dist/sensors/geolocation/index.d.ts",
+      "import": "./dist/sensors/geolocation/index.js"
+    },
+    "./hotkeys": {
+      "types": "./dist/sensors/hotkeys/index.d.ts",
+      "import": "./dist/sensors/hotkeys/index.js"
+    },
+    "./page-leave": {
+      "types": "./dist/sensors/page-leave/index.d.ts",
+      "import": "./dist/sensors/page-leave/index.js"
+    },
+    "./key-press": {
+      "types": "./dist/sensors/key-press/index.d.ts",
+      "import": "./dist/sensors/key-press/index.js"
+    },
+    "./hover": {
+      "types": "./dist/dom/hover/index.d.ts",
+      "import": "./dist/dom/hover/index.js"
+    },
+    "./focus": {
+      "types": "./dist/dom/focus/index.d.ts",
+      "import": "./dist/dom/focus/index.js"
+    },
+    "./local-storage": {
+      "types": "./dist/state/local-storage/index.d.ts",
+      "import": "./dist/state/local-storage/index.js"
+    },
+    "./hash": {
+      "types": "./dist/state/hash/index.d.ts",
+      "import": "./dist/state/hash/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "check-types": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.typing.json --noEmit",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "@echojs-ecosystem/reactivity": "workspace:*"
+  },
+  "devDependencies": {
+    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "jsdom": "^26.1.0",
+    "typescript": "5.9.2",
+    "vitest": "^4.1.4"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/echojs-ecosystem/echojs-core.git",
+    "directory": "packages/utils"
+  }
+}

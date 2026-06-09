@@ -1,25 +1,13 @@
 ---
 title: createModel
-description:
-  createModel(factory, name) — model factory with model context and displayName.
+description: createModel — Model & View API.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [createModel, hyperdom]
 ---
 
-# createModel
+@echojs-ecosystem/hyperdom
 
-```ts
-function createModel<VM>(
-  factory: () => VM,
-  name: string
-): (() => VM) & { displayName: string }
-```
-
-Returns a callable model factory that runs `factory` inside **model context**.
-Sets `displayName`.
-
-Also exports **`isInModelContext()`** — returns `true` while the factory runs.
-
-## Example
+## Usage
 
 ```ts
 import { createModel } from '@echojs-ecosystem/hyperdom'
@@ -34,10 +22,17 @@ export const createCounterModel = createModel((): CounterVM => {
 }, 'CounterModel')
 ```
 
-Each call to `createCounterModel()` creates a fresh VM instance.
+## Type Declarations
 
-## See also
+```ts
+function createModel<VM>(
+  factory: () => VM,
+  name: string
+): (() => VM) & { displayName: string }
+```
 
-- [Guides: Models & Components](/docs/packages/hyperdom/guides/models-and-components)
-- [createView](/docs/packages/hyperdom/api/create-view)
-- [Reactivity package](/docs/packages/reactivity)
+## API
+
+### Returns
+
+`createModel` — see Type Declarations for the full signature.

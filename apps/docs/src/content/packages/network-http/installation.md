@@ -66,4 +66,4 @@ console.log(res.url)
 
 - [Important Defaults](/docs/packages/network-http/guides/important-defaults) — retries, errors, redirects
 - [Client Composition](/docs/packages/network-http/guides/client-composition) — `extend`, `withAuth`, headers
-- [API Reference](/docs/packages/network-http/api) — full export index
+- [Functions](/docs/packages/network-http/functions) — full export index

@@ -1,19 +1,13 @@
 ---
 title: batch
-description: batch(fn) — defer reactive notifications until fn completes.
+description: Defer reactive notifications until a synchronous block completes.
 package: '@echojs-ecosystem/reactivity'
+keywords: [batch, reactivity]
 ---
 
-# batch
+@echojs-ecosystem/reactivity
 
-```ts
-function batch<T>(fn: () => T): T
-```
-
-Runs `fn`, batches reactive notifications until `fn` completes, returns `fn()`'s
-return value. `fn` must be a function.
-
-## Example
+## Usage
 
 ```ts
 import { batch, signal } from '@echojs-ecosystem/reactivity'
@@ -27,6 +21,27 @@ batch(() => {
 })
 ```
 
-## See also
+## Type Declarations
 
-- [Guides: Batching](/docs/packages/reactivity/guides/batching)
+```ts
+export const batch: <T>(fn: () => T) => T
+```
+
+## API
+
+### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fn` | `() => T` | — | Synchronous block; returns `fn()` result |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| result | `T` | Return value of `fn` |
+
+### Related
+
+- [signal](/docs/packages/reactivity/api/signal)
+- [effect](/docs/packages/reactivity/api/effect)

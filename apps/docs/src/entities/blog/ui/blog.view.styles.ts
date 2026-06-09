@@ -1,11 +1,7 @@
 import { tv } from 'tailwind-variants'
 
-import { docsShellPadding } from '@core/styles/docs-shell'
-
 export const blogPageStyles = tv({
   slots: {
-    page: 'py-6 sm:py-8 lg:py-10',
-    inner: ['w-full max-w-6xl', docsShellPadding].join(' '),
     header: 'mb-10 max-w-3xl',
     title: 'text-3xl font-bold tracking-tight text-fg sm:text-4xl',
     lead: 'mt-3 text-base leading-relaxed text-fg-muted',

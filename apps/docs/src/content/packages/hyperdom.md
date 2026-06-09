@@ -9,5 +9,12 @@ keywords: [hyperdom, createView, createModel, h, Show]
 
 :::install @echojs-ecosystem/hyperdom
 
-> [!tip] Open **Guides & Concepts** for patterns, **API Reference** for every
-> export, **Examples** for copy-paste apps, and **Playground** for a live demo.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Installation](/docs/packages/hyperdom/installation) | Package install |
+| [Functions](/docs/packages/hyperdom/functions) | Full index by category |
+| [Guides & Concepts](/docs/packages/hyperdom/guides/important-defaults) | Views, DSL, reactivity |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createView](/docs/packages/hyperdom/api/create-view)).

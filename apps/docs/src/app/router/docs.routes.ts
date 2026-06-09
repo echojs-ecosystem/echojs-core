@@ -2,6 +2,11 @@ import { createRoutes } from '@echojs-ecosystem/framework/router'
 
 import { getDocPage } from '@app/router'
 import { blogPage, blogPostPage, blogSection } from '@pages/blog'
+import {
+  changelogPage,
+  changelogReleasePage,
+  changelogSection,
+} from '@pages/changelog'
 import { docsShellLayoutPage } from '@pages/doc/docs.layout'
 import { roadmapPage } from '@pages/roadmap'
 import { canonicalDocsRouteItems } from '@core/content/nav'
@@ -33,6 +38,23 @@ export const docsRoutes = createRoutes([
             path: ':slug',
             name: 'docs-blog-post',
             routeView: blogPostPage,
+          },
+        ],
+      },
+      {
+        path: 'changelog',
+        name: 'docs-changelog-section',
+        route: changelogSection,
+        children: [
+          {
+            path: '/',
+            name: 'docs-changelog',
+            routeView: changelogPage,
+          },
+          {
+            path: ':version',
+            name: 'docs-changelog-release',
+            routeView: changelogReleasePage,
           },
         ],
       },

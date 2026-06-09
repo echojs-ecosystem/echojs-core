@@ -1,11 +1,13 @@
 ---
 title: createInfiniteQuery
-description:
-  createInfiniteQuery(options, meta?) — paginated query with fetchNextPage.
+description: createInfiniteQuery — Factories API.
 package: '@echojs-ecosystem/query'
+keywords: [createInfiniteQuery, query]
 ---
 
-# createInfiniteQuery
+@echojs-ecosystem/query
+
+## Usage
 
 ```ts
 function createInfiniteQuery<TData, TParams, TPageParam, TError, TQueryData>(
@@ -14,30 +16,17 @@ function createInfiniteQuery<TData, TParams, TPageParam, TError, TQueryData>(
 ): InfiniteQueryDefinition<TData, TParams, TPageParam, TError>
 ```
 
-Extends query-like options with pagination fields.
+## Type Declarations
 
-## Pagination options
+```ts
+function createInfiniteQuery<TData, TParams, TPageParam, TError, TQueryData>(
+  options: InfiniteQueryOptions<TData, TParams, TPageParam, TError, TQueryData>,
+  meta?: { provider?: QueryProvider | null }
+): InfiniteQueryDefinition<TData, TParams, TPageParam, TError>
+```
 
-| Field                  | Description                                         |
-| ---------------------- | --------------------------------------------------- |
-| `initialPageParam`     | First page cursor                                   |
-| `getNextPageParam`     | `(lastPage, allPages) => next \| null \| undefined` |
-| `getPreviousPageParam` | Optional backward pagination                        |
+## API
 
-## InfiniteQueryInstance
+### Returns
 
-| Member                                                       | Description                |
-| ------------------------------------------------------------ | -------------------------- |
-| `pages()` / `pageParams()`                                   | Loaded pages               |
-| `data()`                                                     | `{ pages, pageParams }`    |
-| `flatMap(selector)`                                          | Flatten items across pages |
-| `fetchNextPage()` / `fetchPreviousPage()`                    | Pagination                 |
-| `hasNextPage()` / `hasPreviousPage()`                        | Flags                      |
-| `fetchingNextPage()` / `fetchingPreviousPage()`              | Loading flags              |
-| `refetch()` / `reset()` / `cancel()` / `remove()`            | Lifecycle                  |
-| `$data`, `$pages`, `$pageParams`, `$pending`, `$fetching`, … | Signals                    |
-
-## See also
-
-- [Guides: Infinite Queries](/docs/packages/query/guides/infinite-queries)
-- [API: createQuery](/docs/packages/query/api/create-query)
+`createInfiniteQuery` — see Type Declarations for the full signature.

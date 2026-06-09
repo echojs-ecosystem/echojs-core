@@ -10,6 +10,14 @@ keywords: [createRouter, NavLink, createRouteView, guards]
 
 :::install @echojs-ecosystem/router
 
-> [!tip] Open **Guides & Concepts** for route trees and navigation, **API
-> Reference** for every export, and **Examples** for patterns from `apps/docs`
-> and `apps/example`. Search params and filters → `@echojs-ecosystem/url-state`.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Installation](/docs/packages/router/installation) | Package install |
+| [Functions](/docs/packages/router/functions) | Full index by category — links to each API page |
+| [Guides & Concepts](/docs/packages/router/guides/route-trees) | Route trees, navigation, guards |
+
+Each API page follows: **Usage** → **Type Declarations** → **API** (see [createRouter](/docs/packages/router/api/create-router) for the reference layout).
+
+Search params and filters → `@echojs-ecosystem/url-state`.

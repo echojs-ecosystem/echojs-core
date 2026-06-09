@@ -42,4 +42,4 @@ model vs store boundaries.
 ## Related
 
 - [Guides & Concepts](/docs/packages/store/guides/creating-stores)
-- [API Reference](/docs/packages/store/api)
+- [Functions](/docs/packages/store/functions)

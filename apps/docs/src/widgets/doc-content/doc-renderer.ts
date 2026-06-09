@@ -31,6 +31,7 @@ import {
 import { PackageInstallAdd } from '@widgets/package-install'
 import { PackageOverview } from '@widgets/package-overview'
 import { PackagePlayground } from '@widgets/package-playground'
+import { UtilDemo } from '@widgets/util-demo'
 import {
   calloutDefaultTitle,
   calloutIcon,
@@ -145,6 +146,8 @@ const renderBlock = (block: DocBlock): Child => {
       )
     case 'playground':
       return PackagePlayground({ packageId: block.packageId })
+    case 'util-demo':
+      return UtilDemo({ slug: block.slug })
     case 'package-overview':
       return PackageOverview({ packageId: block.packageId })
     case 'table':

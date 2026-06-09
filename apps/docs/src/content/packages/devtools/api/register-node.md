@@ -2,43 +2,12 @@
 title: registerDevtoolsNode
 description: Register an inspectable devtools node and emit timeline events.
 package: '@echojs-ecosystem/devtools'
+keywords: [registerDevtoolsNode, devtools]
 ---
 
-# registerDevtoolsNode
+@echojs-ecosystem/devtools
 
-```ts
-function registerDevtoolsNode(input: RegisterDevtoolsNodeInput): RegisteredNode
-function unregisterDevtoolsNode(nodeId: string): boolean
-function emitDevtoolsEvent(input: EmitDevtoolsEventInput): DevtoolsEvent | null
-```
-
-## RegisterDevtoolsNodeInput
-
-| Field         | Description                                                  |
-| ------------- | ------------------------------------------------------------ |
-| `type`        | `DevtoolsNodeType` — `store`, `query`, `router`, `custom`, … |
-| `id`          | Unique node id                                               |
-| `name`        | Display name                                                 |
-| `getSnapshot` | Optional `() => unknown` for current state                   |
-
-## RegisteredNode
-
-| Member         | Description               |
-| -------------- | ------------------------- |
-| `unregister()` | Remove node from registry |
-
-Returns a no-op handle when devtools is disabled.
-
-## Timeline helpers
-
-```ts
-getNodeSnapshot(nodeId)
-getAllSnapshots()
-getTimelineEvents()
-subscribeTimeline(listener) // returns unsubscribe
-```
-
-## Example
+## Usage
 
 ```ts
 setDevtoolsEnabled(import.meta.env.DEV)
@@ -58,6 +27,16 @@ emitDevtoolsEvent({
 })
 ```
 
-## See also
+## Type Declarations
 
-- [Registry & Timeline](/docs/packages/devtools/guides/registry)
+```ts
+function registerDevtoolsNode(input: RegisterDevtoolsNodeInput): RegisteredNode
+function unregisterDevtoolsNode(nodeId: string): boolean
+function emitDevtoolsEvent(input: EmitDevtoolsEventInput): DevtoolsEvent | null
+```
+
+## API
+
+### Returns
+
+`registerDevtoolsNode` — see Type Declarations for the full signature.

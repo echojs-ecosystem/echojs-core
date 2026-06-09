@@ -33,5 +33,5 @@ the persist controller and record envelope.
 ## Related
 
 - [Guides & Concepts](/docs/packages/persist/guides/important-defaults)
-- [API Reference](/docs/packages/persist/api)
+- [Functions](/docs/packages/persist/functions)
 - [Store Examples](/docs/packages/store/example)

@@ -34,5 +34,5 @@ export const http = createHttpClient({
 ## Related
 
 - [Guides & Concepts](/docs/packages/network-http/guides/important-defaults)
-- [API Reference](/docs/packages/network-http/api)
+- [Functions](/docs/packages/network-http/functions)
 - [Query Integration](/docs/packages/network-http/guides/query-integration)

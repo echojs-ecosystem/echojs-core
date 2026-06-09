@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@echojs-ecosystem/framework": "^0.6.0",
+    "@echojs-ecosystem/utils": "workspace:*",
     "shiki": "^3.4.0",
     "tailwind-merge": "^3.3.1",
     "tailwind-variants": "^1.0.0"

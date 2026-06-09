@@ -33,4 +33,4 @@ NavLink({
 ## Related
 
 - [Navigation guide](/docs/packages/router/guides/navigation)
-- [HyperDOM Integration API](/docs/packages/router/api/hyperdom)
+- [NavLink](/docs/packages/router/api/nav-link)

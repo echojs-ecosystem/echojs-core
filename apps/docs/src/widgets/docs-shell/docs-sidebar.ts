@@ -93,8 +93,13 @@ const SidebarPanel = (): Child =>
             return sectionNav(
               section.id,
               section.title,
-              section.items.map((item) =>
-                SidebarNavLinkView({
+              section.items.flatMap((item, index) => {
+                const groupLabel =
+                  item.group &&
+                  (index === 0 || section.items[index - 1]?.group !== item.group)
+                    ? p({ class: shell.navSubgroupLabel() }, item.group)
+                    : null
+                const link = SidebarNavLinkView({
                   page: docPageByContentId[item.contentId]!,
                   label: item.title,
                   ...(sectionsWithoutItemIcons.has(section.id)
@@ -107,7 +112,8 @@ const SidebarPanel = (): Child =>
                             : undefined,
                       }),
                 })
-              )
+                return groupLabel ? [groupLabel, link] : [link]
+              })
             )
           }),
           div({ class: shell.agentsDivider() }),

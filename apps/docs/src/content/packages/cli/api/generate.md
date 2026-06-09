@@ -2,37 +2,27 @@
 title: generate (planned)
 description: echojs generate — scaffold feature slices (planned).
 package: '@echojs-ecosystem/cli'
+keywords: [generate (planned), cli]
 ---
 
-# generate (planned)
+@echojs-ecosystem/cli
 
-> [!warning] **Not implemented.** Target command for feature slice scaffolding.
+## Usage
 
-```bash
-# planned
-bunx @echojs-ecosystem/cli generate feature product-catalog
+```ts
+import { generate (planned) } from '@echojs-ecosystem/cli'
+
+// See guides for patterns.
 ```
 
-## Planned output
+## Type Declarations
 
-```
-src/features/product-catalog/
-  index.ts          # public API
-  model/
-  ui/
+```ts
+export const generate (planned): unknown
 ```
 
-Aligned with [Architect](/docs/packages/architect) layer and public-api rules.
+## API
 
-## Planned flags
+### Returns
 
-| Flag           | Description                 |
-| -------------- | --------------------------- |
-| `--dry-run`    | Print files without writing |
-| `--with-model` | Include `createModel` stub  |
-| `--with-page`  | Add `*.page.ts` route entry |
-
-## See also
-
-- [Planned Commands](/docs/packages/cli/guides/planned-commands)
-- [Architect Feature Slice](/docs/packages/architect/examples/feature-slice)
+`generate (planned)` — see Type Declarations for the full signature.

@@ -1,11 +1,24 @@
 ---
 title: mount
-description:
-  mount(view, options?) — app mount helper returning node and dispose.
+description: mount — Core API.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [mount, hyperdom]
 ---
 
-# mount
+@echojs-ecosystem/hyperdom
+
+## Usage
+
+```ts
+import { mount } from '@echojs-ecosystem/hyperdom'
+
+const { node, dispose } = mount(counterView, {
+  container: document.getElementById('app')!,
+  className: 'app-root',
+})
+```
+
+## Type Declarations
 
 ```ts
 interface MountResult {
@@ -19,38 +32,8 @@ function mount(
 ): MountResult
 ```
 
-**App mount helper** on the main package entry. Wraps `render()` and optionally
-creates a container element.
+## API
 
-## Example
+### Returns
 
-```ts
-import { mount } from '@echojs-ecosystem/hyperdom'
-
-const { node, dispose } = mount(counterView, {
-  container: document.getElementById('app')!,
-  className: 'app-root',
-})
-```
-
-| Option      | Default                    |
-| ----------- | -------------------------- |
-| `container` | New `<div>` element        |
-| `className` | Applied to `node` when set |
-
-The returned `node` may expose `__echoDispose` for framework unmount interop.
-
-## Not lifecycle mount
-
-This is **not** the lifecycle hook. For after-insert children use:
-
-```ts
-import { mount } from '@echojs-ecosystem/hyperdom/lifecycle/mount'
-```
-
-See [lifecycle/mount](/docs/packages/hyperdom/api/lifecycle-mount).
-
-## See also
-
-- [render](/docs/packages/hyperdom/api/render)
-- [Guides: Rendering & Teardown](/docs/packages/hyperdom/guides/rendering-and-teardown)
+`mount` — see Type Declarations for the full signature.

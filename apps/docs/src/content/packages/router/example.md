@@ -29,5 +29,5 @@ Practical routing patterns from production EchoJS apps.
 ## Related
 
 - [Guides & Concepts](/docs/packages/router/guides/route-trees)
-- [API Reference](/docs/packages/router/api)
+- [Functions](/docs/packages/router/functions)
 - [URL State Example](/docs/packages/url-state/example)

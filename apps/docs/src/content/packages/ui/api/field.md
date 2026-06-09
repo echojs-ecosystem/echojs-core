@@ -2,38 +2,25 @@
 title: Field
 description: Field wrapper, mergeFieldControlProps, and form wiring.
 package: '@echojs-ecosystem/ui'
+keywords: [Field, ui]
 ---
 
-# Field
+@echojs-ecosystem/ui/field
+
+## Usage
 
 ```ts
 import { Field, mergeFieldControlProps } from '@echojs-ecosystem/ui/field'
 ```
 
-Accessible form row — label, control slot, error message, and `inputProps` for
-ARIA.
-
-## Field props
-
-| Prop       | Description                                    |
-| ---------- | ---------------------------------------------- |
-| `label`    | Visible label text                             |
-| `error`    | Error message (sets `aria-invalid` on control) |
-| `children` | Control element or render fn `(ctx) => …`      |
-
-## mergeFieldControlProps
-
-Merges field context (`id`, `aria-*`) with control-specific props:
+## Type Declarations
 
 ```ts
-Field({
-  label: 'Email',
-  children: (ctx) =>
-    Input(mergeFieldControlProps(ctx.inputProps, { type: 'email' })),
-})
+import { Field, mergeFieldControlProps } from '@echojs-ecosystem/ui/field'
 ```
 
-## See also
+## API
 
-- [Form Controls](/docs/packages/ui/guides/forms)
-- [Form Row example](/docs/packages/ui/examples/form-row)
+### Returns
+
+`Field` — see Type Declarations for the full signature.

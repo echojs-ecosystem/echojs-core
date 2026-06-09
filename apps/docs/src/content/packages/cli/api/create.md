@@ -2,37 +2,27 @@
 title: create (planned)
 description: echojs create — scaffold a new EchoJS app (planned).
 package: '@echojs-ecosystem/cli'
+keywords: [create (planned), cli]
 ---
 
-# create (planned)
+@echojs-ecosystem/cli
 
-> [!warning] **Not implemented.** Target command for the first CLI release.
+## Usage
 
-```bash
-# planned
-bunx @echojs-ecosystem/cli create my-shop
+```ts
+import { create (planned) } from '@echojs-ecosystem/cli'
 
-cd my-shop
-bun install
-bun run dev
+// See guides for patterns.
 ```
 
-## Planned flags
+## Type Declarations
 
-| Flag                | Description              |
-| ------------------- | ------------------------ |
-| `--template`        | App template variant     |
-| `--package-manager` | `bun` \| `npm` \| `pnpm` |
-| `--no-git`          | Skip git init            |
+```ts
+export const create (planned): unknown
+```
 
-## Planned output
+## API
 
-- `package.json` with EchoJS dependencies
-- `src/` with app shell, router, providers
-- `architect.config.ts` starter config
-- Example feature slice
+### Returns
 
-## See also
-
-- [Scaffold App example](/docs/packages/cli/examples/scaffold-app)
-- [Overview](/docs/packages/cli/guides/overview)
+`create (planned)` — see Type Declarations for the full signature.

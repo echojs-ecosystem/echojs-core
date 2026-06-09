@@ -22,5 +22,13 @@ const counter = createStore({ count: 0 }).extend(
 )
 ```
 
-> [!tip] Persist slices with `@echojs-ecosystem/persist` on the same store
-> instance.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/store/functions) | API index — `createStore`, `select`, `combine` |
+| [Guides & Concepts](/docs/packages/store/guides/creating-stores) | Actions, derived state, events |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createStore](/docs/packages/store/api/create-store)).
+
+> [!tip] Persist slices with `@echojs-ecosystem/persist` on the same store instance.

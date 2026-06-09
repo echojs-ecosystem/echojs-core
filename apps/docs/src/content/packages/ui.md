@@ -17,5 +17,13 @@ import { Button, UIProvider } from '@echojs-ecosystem/ui'
 // Register UIProvider in createEchoApp, then use Button in views.
 ```
 
-> [!note] Full component docs are expanding — **Playground** shows a live Button
-> demo today.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/ui/functions) | Button, Field, UIProvider |
+| [Guides & Concepts](/docs/packages/ui/guides/ui-provider) | Theme and form controls |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [Button](/docs/packages/ui/api/button)).
+
+> [!note] **Playground** shows a live Button demo.

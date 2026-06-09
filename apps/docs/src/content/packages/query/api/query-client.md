@@ -1,45 +1,26 @@
 ---
 title: QueryClient & Provider
-description:
-  createQueryClient, createQueryProvider, and imperative cache methods.
+description: QueryClient & Provider — Client API.
 package: '@echojs-ecosystem/query'
+keywords: [QueryClient & Provider, query]
 ---
 
-# QueryClient & Provider
+@echojs-ecosystem/query
 
-## createQueryClient
+## Usage
 
 ```ts
 function createQueryClient(config?: QueryClientConfig): QueryClient
 ```
 
-## QueryClient methods
+## Type Declarations
 
-| Method                                | Description            |
-| ------------------------------------- | ---------------------- |
-| `fetchQuery(definition, params)`      | Fetch or return cached |
-| `prefetchQuery(definition, params)`   | Warm cache             |
-| `getQueryData` / `setQueryData`       | Read/write cache entry |
-| `invalidateQueries(filter, options?)` | Mark stale             |
-| `refetchQueries(filter)`              | Refetch matches        |
-| `cancelQueries(filter)`               | Cancel in-flight       |
-| `removeQueries(filter)`               | Remove from cache      |
-| `clear()`                             | Clear all              |
+```ts
+function createQueryClient(config?: QueryClientConfig): QueryClient
+```
 
-## Provider
+## API
 
-| Export                                                | Description                                         |
-| ----------------------------------------------------- | --------------------------------------------------- |
-| `createQueryProvider(config)`                         | Echo provider; sets global provider + `app.provide` |
-| `createQueryPlugin`                                   | Deprecated alias                                    |
-| `QueryProvider`                                       | Class with `.client` and `.config`                  |
-| `getQueryProvider()`                                  | Current provider or `null`                          |
-| `requireQueryProvider()`                              | Throws if missing                                   |
-| `setQueryProvider` / `resetQueryProvider`             | Test / advanced setup                               |
-| `QUERY_PROVIDER_KEY`                                  | Symbol for DI                                       |
-| `getDefaultQueryClient()` / `setDefaultQueryClient()` | Fallback client                                     |
+### Returns
 
-## See also
-
-- [Guides: QueryClient & Cache](/docs/packages/query/guides/query-client)
-- [Installation](/docs/packages/query/installation)
+`QueryClient & Provider` — see Type Declarations for the full signature.

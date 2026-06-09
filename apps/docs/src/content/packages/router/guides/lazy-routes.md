@@ -40,4 +40,4 @@ export const appRoutes = createRoutes([
 ## Related
 
 - [Route Trees](/docs/packages/router/guides/route-trees)
-- [createLazyRouteView API](/docs/packages/router/api/route-views)
+- [createLazyRouteView](/docs/packages/router/api/create-lazy-route-view)

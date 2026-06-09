@@ -2,27 +2,12 @@
 title: detectLocale
 description: Resolve locale from localStorage and navigator rules.
 package: '@echojs-ecosystem/i18n'
+keywords: [detectLocale, i18n]
 ---
 
-# detectLocale
+@echojs-ecosystem/i18n
 
-```ts
-function detectLocale(options): string
-```
-
-Standalone browser locale resolution — used internally by `createI18n` /
-provider when browser options are set.
-
-## Options
-
-| Field            | Description                                                 |
-| ---------------- | ----------------------------------------------------------- |
-| `supported`      | Allowed locale ids                                          |
-| `fallback`       | Fallback when no match                                      |
-| `storageKey`     | Read persisted locale from `localStorage`                   |
-| `navigatorRules` | `{ prefix, locale }[]` matched against `navigator.language` |
-
-## Example
+## Usage
 
 ```ts
 import { detectLocale } from '@echojs-ecosystem/i18n'
@@ -35,8 +20,14 @@ const locale = detectLocale({
 })
 ```
 
-Priority: `localStorage[storageKey]` → `navigatorRules` → `fallback`.
+## Type Declarations
 
-## See also
+```ts
+function detectLocale(options): string
+```
 
-- [Locales](/docs/packages/i18n/guides/locales)
+## API
+
+### Returns
+
+`detectLocale` — see Type Declarations for the full signature.

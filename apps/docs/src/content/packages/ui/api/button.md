@@ -2,29 +2,12 @@
 title: Button
 description: Button component — variants, sizes, and icons.
 package: '@echojs-ecosystem/ui'
+keywords: [Button, ui]
 ---
 
-# Button
+@echojs-ecosystem/ui/button
 
-```ts
-import { Button } from '@echojs-ecosystem/ui/button'
-```
-
-Primary action control with **tailwind-variants** styling.
-
-## Props (common)
-
-| Prop                     | Description                        |
-| ------------------------ | ---------------------------------- |
-| `variant`                | `primary`, `secondary`, `ghost`, … |
-| `size`                   | `sm`, `md`, `lg`                   |
-| `leftIcon` / `rightIcon` | Optional icon slot                 |
-| `children`               | Label content                      |
-| `disabled`               | Disable interaction                |
-
-Defaults resolve from `UIProvider` theme.
-
-## Example
+## Usage
 
 ```ts
 Button({
@@ -34,7 +17,14 @@ Button({
 })
 ```
 
-## See also
+## Type Declarations
 
-- [Button & Field guide](/docs/packages/ui/guides/button-and-field)
-- [Button Demo](/docs/packages/ui/examples/button-demo)
+```ts
+import { Button } from '@echojs-ecosystem/ui/button'
+```
+
+## API
+
+### Returns
+
+`Button` — see Type Declarations for the full signature.

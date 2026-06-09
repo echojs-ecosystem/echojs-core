@@ -1,0 +1,12 @@
+import { defineConfig } from "vitest/config";
+
+import { echoVitestConfig } from "../.configs/vitest.config";
+
+export default defineConfig(
+  echoVitestConfig(__dirname, {
+    test: {
+      environment: "jsdom",
+      environmentMatchGlobs: [["src/core/**", "node"]],
+    },
+  }),
+);

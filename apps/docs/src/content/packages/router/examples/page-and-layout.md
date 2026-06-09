@@ -39,4 +39,4 @@ In the tree:
 ## Related
 
 - [beforeLoad guide](/docs/packages/router/guides/before-load)
-- [Route Views API](/docs/packages/router/api/route-views)
+- [createRouteView](/docs/packages/router/api/create-route-view)

@@ -1,65 +1,69 @@
 ---
-title: createRoutes & createRouter
-description:
-  createRoutes, createRouter options, authorizationGuard, and router instance.
+title: createRouter
+description: Create a router with HyperDOM `View`, signals, and navigation API.
 package: '@echojs-ecosystem/router'
+keywords: [createRouter, router]
 ---
 
-# createRoutes & createRouter
+@echojs-ecosystem/router
 
-## createRoutes
-
-```ts
-function createRoutes(config: RouteTreeBranch[]): RouterRoutes
-```
-
-Build typed route tree + `router.routes` map. Each branch `name` must be unique.
-
-## createRouter (core)
+## Usage
 
 ```ts
-function createRouter(options: CreateRouterOptions): Router
+import { createRouter, createRoutes } from '@echojs-ecosystem/router'
+
+export const appRouter = createRouter({
+  routes,
+  history: 'browser',
+  notFoundView: () => NotFoundView(),
+})
+
+appRouter.start()
 ```
 
-Use `@echojs-ecosystem/router/hyperdom` in apps for HyperDOM `View` integration.
+## Type Declarations
 
-### Options
+```ts
+export type HyperdomRouter<TRoutes> = Router<TRoutes> & {
+  readonly View: () => Child
+  createQueryParams: RouterBoundQueryParams
+}
 
-| Field                | Type                                                               | Notes          |
-| -------------------- | ------------------------------------------------------------------ | -------------- |
-| `routes`             | `createRoutes(...)` result                                         | Required       |
-| `history`            | `"browser"` \| `"hash"` \| `"memory"` \| config \| `RouterHistory` |                |
-| `loadingView`        | `RouteLoadingView` or page                                         | Global loading |
-| `errorView`          | `RouteErrorView` or page                                           | Global error   |
-| `notFoundView`       | `RouteView` or page                                                | Unmatched URL  |
-| `authorizationGuard` | See below                                                          | Auth redirects |
+export const createRouter: <const TRoutes extends readonly RouteTreeBranch[]>(
+  options: CreateRouterOptions<TRoutes>,
+) => HyperdomRouter<CollectNamedRoutes<TRoutes>>
 
-### authorizationGuard
+export type CreateRouterOptions<TRoutes> = {
+  routes: TRoutes
+  history?: RouterHistoryKind | RouterHistoryConfig | RouterHistory
+  loadingView?: RouteLoadingView
+  errorView?: RouteErrorView
+  notFoundView?: RouterNotFoundView
+  authorizationGuard?: AuthorizationGuardOptions
+}
+```
 
-| Field                      | Role                                      |
-| -------------------------- | ----------------------------------------- |
-| `isAuthorized()`           | Boolean or reactive check                 |
-| `allowedUnauthorizedPaths` | Guest-only URLs                           |
-| `allowedAuthorizedPaths`   | Optional allow-list when logged in        |
-| `redirectTo`               | Path or `(ctx) => path` when unauthorized |
-| `redirectWhenAuthorized`   | After login redirect                      |
+## API
 
-## Router instance
+### Parameters
 
-| Member                                                                                                      | Description                      |
-| ----------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| `start()` / `stop()`                                                                                        | History listeners                |
-| `go(path, { replace? })`                                                                                    | Navigate by path string          |
-| `replace(path)`                                                                                             | `go` with replace                |
-| `back()` / `forward()`                                                                                      | History                          |
-| `reload()`                                                                                                  | Re-sync current URL              |
-| `resolve(route, params?, { query? })`                                                                       | Build URL string                 |
-| `isActive(route)`                                                                                           | Whether route is in active chain |
-| `View` / `view()`                                                                                           | HyperDOM root render fn          |
-| `routes`                                                                                                    | Named route map from tree        |
-| `$path`, `$query`, `$fullPath`, `$activePage`, `$activeRoutes`, `$matched`, `$params`, `$pending`, `$error` | Reactive state                   |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `routes` | `createRoutes(...)` | — | Route tree |
+| `history` | `browser \| hash \| memory \| config` | `browser` | History adapter |
+| `authorizationGuard` | options | optional | Auth redirect rules |
 
-## Related
+### Returns
 
-- [Router Lifecycle guide](/docs/packages/router/guides/router-lifecycle)
-- [Guards & Redirects guide](/docs/packages/router/guides/guards-and-redirects)
+| Member | Type | Description |
+| --- | --- | --- |
+| `start()` / `stop()` | void | History listeners |
+| `go()` / `replace()` | void | Navigate by path |
+| `resolve()` | string | Build URL from route + params |
+| `$path` / `$query` / `$params` | signals | Reactive router state |
+| `View` | `() => Child` | Root outlet for HyperDOM |
+
+### Related
+
+- [createRouterProvider](/docs/packages/router/api/create-router-provider)
+- [createRoutes](/docs/packages/router/api/create-routes)

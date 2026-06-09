@@ -54,5 +54,5 @@ export const Feature = (props: Props) =>
 ## Related
 
 - [Guides & Concepts](/docs/packages/hyperdom/guides/important-defaults)
-- [API Reference](/docs/packages/hyperdom/api)
+- [Functions](/docs/packages/hyperdom/functions)
 - [Reactivity Examples](/docs/packages/reactivity/example)

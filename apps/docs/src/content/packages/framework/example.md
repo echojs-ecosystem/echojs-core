@@ -33,4 +33,4 @@ dispose()
 ## Related
 
 - [Guides & Concepts](/docs/packages/framework/guides/important-defaults)
-- [API Reference](/docs/packages/framework/api)
+- [Functions](/docs/packages/framework/functions)

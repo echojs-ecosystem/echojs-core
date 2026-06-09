@@ -2,9 +2,12 @@
 title: Types
 description: TranslationKey, locale inference, and message schema types.
 package: '@echojs-ecosystem/i18n'
+keywords: [Types, i18n]
 ---
 
-# Types
+@echojs-ecosystem/i18n
+
+## Usage
 
 ```ts
 import type {
@@ -19,19 +22,19 @@ import type {
 } from '@echojs-ecosystem/i18n'
 ```
 
-| Type                             | Description                       |
-| -------------------------------- | --------------------------------- |
-| `TranslationKey<TMessages>`      | Union of nested key paths         |
-| `InferMessagesFromLocalesMap<T>` | Message schema from eager locales |
-| `InferLocaleFromLocalesMap<T>`   | `keyof locales`                   |
-| `LocaleSource<T>`                | Object or lazy importer           |
-| `MessageSchema` / `Messages`     | JSON tree shape                   |
-| `MissingKeyStrategy`             | `"key"` \| `"empty"`              |
-| `EchoI18nProvider`               | Provider return type              |
+## Type Declarations
 
-Enable `resolveJsonModule` and import at least one eager locale JSON file for
-full key inference.
+```ts
+import type {
+  TranslationKey,
+  InferMessagesFromLocalesMap,
+  InferLocaleFromLocalesMap,
+  LocaleSource,
+  MessageSchema,
+  Messages,
+  MissingKeyStrategy,
+  EchoI18nProvider,
+} from '@echojs-ecosystem/i18n'
+```
 
-## See also
-
-- [Messages & Keys](/docs/packages/i18n/guides/messages-and-keys)
+## API

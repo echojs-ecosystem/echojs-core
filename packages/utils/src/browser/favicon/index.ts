@@ -1,0 +1,2 @@
+export { favicon } from "./favicon";
+

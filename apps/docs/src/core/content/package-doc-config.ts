@@ -1,6 +1,29 @@
 /** Nav page lists for modern package docs (reactivity-style layout). */
 
+import { packageApiDocCategoriesById } from './package-api-catalogs.generated'
+import { reactivityDocCategories } from './reactivity-docs-catalog'
+import { routerDocCategories } from './router-docs-catalog'
+import { utilsDocCategories } from './utils-docs-catalog'
+
+const apiCategoriesFromCatalog = (
+  packageId: keyof typeof packageApiDocCategoriesById
+): PackageDocCategory[] =>
+  packageApiDocCategoriesById[packageId].map((category) => ({
+    id: `api-${category.id}`,
+    title: category.title,
+    pages: category.entries.map((entry) => ({
+      slug: entry.slug,
+      title: entry.name,
+    })),
+  }))
+
 export type PackageDocPage = { slug: string; title: string }
+
+export type PackageDocCategory = {
+  id: string
+  title: string
+  pages: PackageDocPage[]
+}
 
 export type ModernPackageDocConfig = {
   id: string
@@ -10,7 +33,12 @@ export type ModernPackageDocConfig = {
   featured?: boolean
   frameworkSubpath?: string
   guides: PackageDocPage[]
+  /** Top-level API index pages (e.g. overview). */
   api: PackageDocPage[]
+  /** Nested API nav — one subsection per category (utils-style). */
+  apiCategories?: PackageDocCategory[]
+  /** Functions index page (utils package). */
+  functions?: PackageDocPage
   examples: PackageDocPage[]
 }
 
@@ -31,18 +59,16 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'immutable-updates', title: 'Immutable Updates' },
       { slug: 'hyperdom-integration', title: 'HyperDOM Integration' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'signal', title: 'signal' },
-      { slug: 'computed', title: 'computed' },
-      { slug: 'effect', title: 'effect' },
-      { slug: 'batch', title: 'batch' },
-      { slug: 'scope', title: 'scope' },
-      { slug: 'cleanup', title: 'cleanup' },
-      { slug: 'readonly', title: 'readonly' },
-      { slug: 'type-guards', title: 'Type Guards' },
-      { slug: 'types', title: 'Types' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: reactivityDocCategories.map((category) => ({
+      id: `api-${category.id}`,
+      title: category.title,
+      pages: category.entries.map((entry) => ({
+        slug: entry.slug,
+        title: entry.name,
+      })),
+    })),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'counter', title: 'Counter' },
@@ -72,22 +98,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'lifecycle-mount', title: 'Lifecycle Mount' },
       { slug: 'trusted-html', title: 'Trusted HTML' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'h', title: 'h' },
-      { slug: 'render', title: 'render' },
-      { slug: 'mount', title: 'mount' },
-      { slug: 'lifecycle-mount', title: 'lifecycle/mount' },
-      { slug: 'create-view', title: 'createView' },
-      { slug: 'create-model', title: 'createModel' },
-      { slug: 'create-component', title: 'createComponent' },
-      { slug: 'show', title: 'Show' },
-      { slug: 'list', title: 'List' },
-      { slug: 'strict-context', title: 'Strict Context' },
-      { slug: 'dsl', title: 'DSL Tags' },
-      { slug: 'cx', title: 'cx' },
-      { slug: 'types', title: 'Types' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('hyperdom'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'counter', title: 'Counter' },
@@ -110,13 +123,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'dependency-injection', title: 'Dependency Injection' },
       { slug: 'subpath-imports', title: 'Subpath Imports' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create-echo-app', title: 'createEchoApp' },
-      { slug: 'create-provider', title: 'createProvider' },
-      { slug: 'provide-inject', title: 'provide / inject' },
-      { slug: 'app-exports', title: 'App Exports' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('framework'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'minimal-app', title: 'Minimal App' },
@@ -138,14 +147,16 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'lazy-routes', title: 'Lazy Routes' },
       { slug: 'guards-and-redirects', title: 'Guards & Redirects' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'route-views', title: 'Route Views' },
-      { slug: 'create-router', title: 'createRoutes & createRouter' },
-      { slug: 'hyperdom', title: 'HyperDOM Integration' },
-      { slug: 'operators', title: 'Operators' },
-      { slug: 'path-query-history', title: 'Path, Query & History' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: routerDocCategories.map((category) => ({
+      id: `api-${category.id}`,
+      title: category.title,
+      pages: category.entries.map((entry) => ({
+        slug: entry.slug,
+        title: entry.name,
+      })),
+    })),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'docs-routes', title: 'Docs Dynamic Routes' },
@@ -168,14 +179,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'readonly', title: 'Readonly Stores' },
       { slug: 'hyperdom-integration', title: 'HyperDOM Integration' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create-store', title: 'createStore' },
-      { slug: 'select', title: 'select' },
-      { slug: 'combine', title: 'combine' },
-      { slug: 'extensions', title: 'Extensions' },
-      { slug: 'readonly', title: 'readonly' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('store'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'theme-and-counter', title: 'Theme & Counter' },
@@ -199,14 +205,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'hooks-and-middleware', title: 'Hooks & Middleware' },
       { slug: 'query-integration', title: 'Query Integration' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create-http-client', title: 'createHttpClient' },
-      { slug: 'request-options', title: 'RequestOptions' },
-      { slug: 'hooks', title: 'Hooks' },
-      { slug: 'errors', title: 'Errors' },
-      { slug: 'types', title: 'Types' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('network-http'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'rest-api', title: 'REST API Client' },
@@ -227,14 +228,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'infinite-queries', title: 'Infinite Queries' },
       { slug: 'abort-and-cancellation', title: 'Abort & Cancellation' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create-query', title: 'createQuery' },
-      { slug: 'create-infinite-query', title: 'createInfiniteQuery' },
-      { slug: 'create-mutation', title: 'createMutation' },
-      { slug: 'query-client', title: 'QueryClient & Provider' },
-      { slug: 'utilities', title: 'Managers & Utilities' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('query'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'jsonplaceholder', title: 'JSONPlaceholder' },
@@ -256,13 +252,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'router-adapter', title: 'Router Adapter' },
       { slug: 'history-and-sync', title: 'History & Sync' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'parsers', title: 'parseAs*' },
-      { slug: 'create-query-params', title: 'createQueryParams' },
-      { slug: 'adapters', title: 'Adapters' },
-      { slug: 'types', title: 'Types' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('url-state'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'catalog-filters', title: 'Catalog Filters' },
@@ -282,13 +274,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'slicing-and-merge', title: 'Slicing & Merge' },
       { slug: 'migration-and-ttl', title: 'Migration & TTL' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'with-storage', title: 'withStorage' },
-      { slug: 'adapters', title: 'Adapters' },
-      { slug: 'serializers', title: 'Serializers' },
-      { slug: 'persist-controller', title: 'Persist Controller' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('persist'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'theme-store', title: 'Theme Store' },
@@ -306,12 +294,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'button-and-field', title: 'Button & Field' },
       { slug: 'forms', title: 'Form Controls' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'button', title: 'Button' },
-      { slug: 'field', title: 'Field' },
-      { slug: 'provider', title: 'UIProvider' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('ui'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'button-demo', title: 'Button Demo' },
@@ -330,19 +315,32 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'interpolation-and-plural', title: 'Interpolation & Plural' },
       { slug: 'intl-helpers', title: 'Intl Helpers' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create-i18n', title: 'createI18n' },
-      { slug: 'create-i18n-provider', title: 'createI18nProvider' },
-      { slug: 'detect-locale', title: 'detectLocale' },
-      { slug: 'types', title: 'Types' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('i18n'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'locale-switcher', title: 'Locale Switcher' },
       { slug: 'docs-locales', title: 'Docs Locales' },
       { slug: 'plural-messages', title: 'Plural Messages' },
     ],
+  },
+  {
+    id: 'utils',
+    title: 'Utils',
+    npmPackage: '@echojs-ecosystem/utils',
+    guides: [],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: utilsDocCategories.map((category) => ({
+      id: `api-${category.id}`,
+      title: category.title,
+      pages: category.utils.map((util) => ({
+        slug: util.slug,
+        title: util.name,
+      })),
+    })),
+    examples: [],
   },
   {
     id: 'devtools',
@@ -354,11 +352,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'registry', title: 'Registry & Timeline' },
       { slug: 'integration', title: 'Package Integration' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'register-node', title: 'registerDevtoolsNode' },
-      { slug: 'bridge', title: 'Bridge' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('devtools'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'local-debug', title: 'Local Debug' },
@@ -372,11 +368,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'overview', title: 'Overview' },
       { slug: 'planned-commands', title: 'Planned Commands' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'create', title: 'create (planned)' },
-      { slug: 'generate', title: 'generate (planned)' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('cli'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'scaffold-app', title: 'Scaffold App (planned)' },
@@ -393,12 +387,9 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'presets', title: 'Presets & Config' },
       { slug: 'ci-integration', title: 'CI Integration' },
     ],
-    api: [
-      { slug: 'overview', title: 'Overview' },
-      { slug: 'lint', title: 'lint' },
-      { slug: 'define-config', title: 'defineConfig' },
-      { slug: 'presets', title: 'Presets' },
-    ],
+    functions: { slug: 'functions', title: 'Functions' },
+    api: [],
+    apiCategories: apiCategoriesFromCatalog('architect'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'docs-site-config', title: 'Docs Site Config' },

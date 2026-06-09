@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 export const docTocStyles = tv({
   slots: {
     root: [
-      'flex w-full max-h-[calc(100vh-6.5rem)] flex-col rounded-2xl border border-border/80',
+      'flex w-full max-h-[min(24rem,calc(100vh-18rem))] flex-col rounded-2xl border border-border/80',
       'bg-surface-elevated/60 p-5 dark:border-white/10 dark:bg-surface-elevated/40',
     ].join(' '),
     title:

@@ -17,7 +17,9 @@ import {
 import { NavIcon } from '@widgets/icons'
 import type { NavIconId } from '@core/content/nav-icon-id'
 import {
+  isPackageNavLabel,
   isPackageNavSubsection,
+  subsectionContainsContentId,
   packageIdFromPathname,
   type PackageNavChild,
   type PackageNavGroup,
@@ -97,10 +99,7 @@ const readSubsectionExpanded = (
 ): boolean => {
   if (typeof window === 'undefined') return false
   const contentId = pathnameToContentId(window.location.pathname)
-  if (
-    contentId &&
-    subsection.children.some((child) => child.contentId === contentId)
-  )
+  if (contentId && subsectionContainsContentId(subsection, contentId))
     return true
   return (
     window.localStorage.getItem(`docs:pkg:${groupId}:${subsection.id}`) ===
@@ -121,6 +120,11 @@ const persistSubsectionExpanded = (
 }
 
 const subsectionsWithoutItemIcons = new Set(['guides', 'api', 'examples'])
+
+const isFlatApiNavItem = (_groupId: string, slug: string): boolean => slug.startsWith('api-')
+
+const navGroupLabel = (title: string): Child =>
+  div({ class: shell.packageNavGroupLabel() }, title)
 
 const childLink = (
   page: AnyPage,
@@ -164,7 +168,8 @@ const childLink = (
 const PackageNavSubsectionView = (
   groupId: string,
   subsection: PackageNavSubsection,
-  ensureGroupOpen: () => void
+  ensureGroupOpen: () => void,
+  nested = false
 ): Child => {
   const $open = signal(readSubsectionExpanded(groupId, subsection))
 
@@ -177,10 +182,7 @@ const PackageNavSubsectionView = (
 
   const syncOpenForActivePage = (): void => {
     const contentId = pathnameToContentId(appRouter.$path.value())
-    if (
-      contentId &&
-      subsection.children.some((child) => child.contentId === contentId)
-    ) {
+    if (contentId && subsectionContainsContentId(subsection, contentId)) {
       setOpen(true)
       ensureGroupOpen()
     }
@@ -206,11 +208,22 @@ const PackageNavSubsectionView = (
       showItemIcon
     )
 
-  return div({ class: shell.packageSubsection() }, [
+  const renderChild = (child: PackageNavChild): Child =>
+    isPackageNavSubsection(child)
+      ? PackageNavSubsectionView(groupId, child, ensureGroupOpen, true)
+      : renderLeaf(child)
+
+  return div(
+    { class: nested ? shell.packageSubsectionNested() : shell.packageSubsection() },
+    [
     button(
       {
         type: 'button',
-        class: () => cn(shell.packageSubsectionBtn(), 'group'),
+        class: () =>
+          cn(
+            nested ? shell.packageSubsectionBtnNested() : shell.packageSubsectionBtn(),
+            'group'
+          ),
         onClick: toggle,
       },
       [
@@ -228,10 +241,11 @@ const PackageNavSubsectionView = (
       $open.value()
         ? div(
             { class: shell.packageSubsectionChildren() },
-            subsection.children.map(renderLeaf)
+            subsection.children.map(renderChild)
           )
         : null,
-  ])
+  ]
+  )
 }
 
 export type PackageNavGroupViewOptions = {
@@ -269,16 +283,19 @@ export const PackageNavGroupView = (
   }
 
   const renderChild = (child: PackageNavChild): Child => {
+    if (isPackageNavLabel(child)) return navGroupLabel(child.title)
     if (isPackageNavSubsection(child)) {
       return PackageNavSubsectionView(group.id, child, ensureGroupOpen)
     }
+    const flatApi = isFlatApiNavItem(group.id, child.slug)
     return childLink(
       docPageByContentId[child.contentId]!,
       child.title,
       child.contentId,
       child.slug,
-      false,
-      ensureGroupOpen
+      flatApi,
+      ensureGroupOpen,
+      !flatApi
     )
   }
 

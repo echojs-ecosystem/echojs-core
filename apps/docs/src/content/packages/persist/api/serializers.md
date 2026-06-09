@@ -2,14 +2,12 @@
 title: Serializers
 description: JSON serializer, persist record envelope, and TTL helpers.
 package: '@echojs-ecosystem/persist'
+keywords: [Serializers, persist]
 ---
 
-# Serializers
+@echojs-ecosystem/persist
 
-Persist wraps snapshots in a versioned record envelope before writing to
-storage.
-
-## Record shape
+## Usage
 
 ```ts
 type PersistRecord<Snapshot> = {
@@ -21,18 +19,16 @@ type PersistRecord<Snapshot> = {
 }
 ```
 
-## Exports
+## Type Declarations
 
-| Export                                   | Description             |
-| ---------------------------------------- | ----------------------- |
-| `jsonSerializer`                         | Default JSON serializer |
-| `createJsonSerializer()`                 | Serializer factory      |
-| `createPersistRecord(snapshot, options)` | Build record envelope   |
-| `isRecordExpired(record)`                | TTL check               |
+```ts
+type PersistRecord<Snapshot> = {
+  version: number
+  createdAt: number
+  updatedAt: number
+  expiresAt?: number
+  data: Snapshot
+}
+```
 
-Pass a custom `serializer` in `PersistOptions` when you need compression or
-encryption.
-
-## See also
-
-- [Migration & TTL](/docs/packages/persist/guides/migration-and-ttl)
+## API

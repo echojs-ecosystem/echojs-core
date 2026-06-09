@@ -26,6 +26,7 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
 
   const headerRootClass = (): string => {
     vm.$scrolled.value()
+    vm.$scrollLocked.value()
     return hdr().root()
   }
 

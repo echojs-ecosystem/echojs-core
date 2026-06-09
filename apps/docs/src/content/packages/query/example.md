@@ -40,4 +40,4 @@ Show(() => user.hasData(), () => p(null, () => user.data()!.name));
 ## Related
 
 - [Guides & Concepts](/docs/packages/query/guides/query-definitions)
-- [API Reference](/docs/packages/query/api)
+- [Functions](/docs/packages/query/functions)

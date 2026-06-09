@@ -664,4 +664,4 @@ not compiler.
 - [Data fetching](/docs/guides/data-fetching)
 - [Routing guide](/docs/guides/routing)
 - [State overview](/docs/state/overview)
-- [Why EchoJS](/docs/introduction/why-echojs)
+- [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)

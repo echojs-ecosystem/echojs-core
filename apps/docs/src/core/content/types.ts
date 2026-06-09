@@ -11,6 +11,7 @@ export type DocBlock =
   | { type: 'package-badge'; name: string }
   | { type: 'package-install'; packageName: string }
   | { type: 'playground'; packageId: string }
+  | { type: 'util-demo'; slug: string }
   | { type: 'package-overview'; packageId: string }
   | { type: 'list'; ordered: boolean; items: string[] }
   | { type: 'hr' }
@@ -39,6 +40,8 @@ export type DocsNavItem = {
   package?: string
   /** Small label in sidebar (e.g. "Reference", "Preview"). */
   badge?: string
+  /** Sidebar subgroup label within a section (shown when it changes). */
+  group?: string
 }
 
 export type DocsNavSection = {

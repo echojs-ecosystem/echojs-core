@@ -1,12 +1,13 @@
 ---
 title: createComponent
-description:
-  createComponent(model, view, options?) — bind model factory and view into a
-  component.
+description: createComponent — Model & View API.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [createComponent, hyperdom]
 ---
 
-# createComponent
+@echojs-ecosystem/hyperdom
+
+## Usage
 
 ```ts
 type ModelFactory<VM> = () => VM
@@ -23,36 +24,25 @@ function createComponent<VM>(
 ): () => Child
 ```
 
-Binds a model factory and view into a callable `() => Child`. Each invocation
-runs `model()` then `view(vm)`.
-
-## No props
+## Type Declarations
 
 ```ts
-export const Counter = createComponent(createCounterModel, CounterView, {
-  name: 'Counter',
-})
+type ModelFactory<VM> = () => VM
+type ViewFn<VM> = (vm: VM) => Child
 
-// route: view: () => Counter()
+type CreateComponentOptions = {
+  name?: string
+}
+
+function createComponent<VM>(
+  model: ModelFactory<VM>,
+  view: ViewFn<VM>,
+  options?: CreateComponentOptions
+): () => Child
 ```
 
-Optional `options.name` sets `displayName` on the returned function.
+## API
 
-## With props
+### Returns
 
-Pass a **bound** model factory when props are required:
-
-```ts
-export const DocArticle = (props: { contentId: string }) =>
-  createComponent(createDocArticleModel(props), DocArticleView, {
-    name: 'DocArticle',
-  })()
-```
-
-Here `createDocArticleModel(props)` returns `() => VM`.
-
-## See also
-
-- [Guides: Models & Components](/docs/packages/hyperdom/guides/models-and-components)
-- [Examples: Model + View Counter](/docs/packages/hyperdom/examples/model-view-counter)
-- [Examples: Doc Article](/docs/packages/hyperdom/examples/doc-article)
+`createComponent` — see Type Declarations for the full signature.

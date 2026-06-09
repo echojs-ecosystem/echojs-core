@@ -40,11 +40,12 @@ import { createRouter } from '@echojs-ecosystem/framework/router'
 > [Subpath Imports](/docs/packages/framework/guides/subpath-imports) and each
 > module's Installation page.
 
-## What to read next
+## Documentation map
 
-- [Important Defaults](/docs/packages/framework/guides/important-defaults) —
-  mount pipeline and provider order
-- [createEchoApp](/docs/packages/framework/guides/create-echo-app) — options and
-  teardown
-- [Examples](/docs/packages/framework/example) — wiring from `apps/docs` and
-  `apps/example`
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/framework/functions) | API index — `createEchoApp`, providers, DI |
+| [Guides & Concepts](/docs/packages/framework/guides/important-defaults) | Mount pipeline and provider order |
+| [Examples](/docs/packages/framework/example) | Wiring from `apps/docs` and `apps/example` |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createEchoApp](/docs/packages/framework/api/create-echo-app)).

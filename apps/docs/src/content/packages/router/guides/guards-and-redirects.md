@@ -68,5 +68,5 @@ legacy.close()
 
 ## Related
 
-- [Operators API](/docs/packages/router/api/operators)
+- [redirect](/docs/packages/router/api/redirect) · [guardRoute](/docs/packages/router/api/guard-route)
 - [Router Lifecycle](/docs/packages/router/guides/router-lifecycle)

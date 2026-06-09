@@ -1,12 +1,13 @@
 ---
 title: createMutation
-description:
-  createMutation(options, meta?) — define a write operation with lifecycle
-  hooks.
+description: createMutation — Factories API.
 package: '@echojs-ecosystem/query'
+keywords: [createMutation, query]
 ---
 
-# createMutation
+@echojs-ecosystem/query
+
+## Usage
 
 ```ts
 function createMutation<TData, TVariables, TError, TContext>(
@@ -15,27 +16,17 @@ function createMutation<TData, TVariables, TError, TContext>(
 ): MutationDefinition<TData, TVariables, TError, TContext>
 ```
 
-## MutationOptions
+## Type Declarations
 
-| Field                                              | Description                                          |
-| -------------------------------------------------- | ---------------------------------------------------- |
-| `mutationFn`                                       | `(ctx) => Promise<TData>` — `variables`, `signal`, … |
-| `onMutate` / `onSuccess` / `onError` / `onSettled` | Lifecycle                                            |
-| `retry` / `retryDelay`                             | Same as queries                                      |
-| `abortController` / `signal`                       | Abort wiring                                         |
+```ts
+function createMutation<TData, TVariables, TError, TContext>(
+  options: MutationOptions<TData, TVariables, TError, TContext>,
+  meta?: { provider?: QueryProvider | null }
+): MutationDefinition<TData, TVariables, TError, TContext>
+```
 
-## MutationDefinition / MutationInstance
+## API
 
-| Member                                                     | Description        |
-| ---------------------------------------------------------- | ------------------ |
-| `.create({ client? })`                                     | `MutationInstance` |
-| `run(variables, options?)`                                 | Execute mutation   |
-| `data()`, `error()`, `variables()`, `status()`             | State              |
-| `isPending()`, `isSuccess()`, …                            | Helpers            |
-| `reset()` / `cancel()`                                     | Control            |
-| `$data`, `$error`, `$variables`, `$status`, `$abortSignal` | Signals            |
+### Returns
 
-## See also
-
-- [Guides: Mutations](/docs/packages/query/guides/mutations)
-- [Guides: Abort & Cancellation](/docs/packages/query/guides/abort-and-cancellation)
+`createMutation` — see Type Declarations for the full signature.

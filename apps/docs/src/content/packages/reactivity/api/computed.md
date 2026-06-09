@@ -1,43 +1,45 @@
 ---
 title: computed
-description: computed(getter) — create a readonly derived signal.
+description: Create a readonly derived signal from a getter function.
 package: '@echojs-ecosystem/reactivity'
+keywords: [computed, derived, reactivity]
 ---
 
-# computed
+@echojs-ecosystem/reactivity
 
-```ts
-function computed<T>(getter: () => T): ReadonlySignal<T>
-```
-
-Creates a **readonly** derived signal. `getter` must be a function or
-`TypeError` is thrown.
-
-## Methods
-
-| Method           | Description                           |
-| ---------------- | ------------------------------------- |
-| `.value()`       | Read (tracks deps, may recompute)     |
-| `.peek()`        | Read without tracking                 |
-| `.subscribe(fn)` | Same change-only contract as `signal` |
-
-No `.set()` / `.update()`.
-
-## Example
+## Usage
 
 ```ts
 import { computed, signal } from '@echojs-ecosystem/reactivity'
 
 const $a = signal(1)
 const $double = computed(() => $a.value() * 2)
+$double.value()
 ```
 
-## Errors
+## Type Declarations
 
-| Call                       | Error                                            |
-| -------------------------- | ------------------------------------------------ |
-| `computed(x)` non-function | `TypeError: computed(getter) expects a function` |
+```ts
+export const computed: <T>(getter: () => T) => ReadonlySignal<T>
+```
 
-## See also
+## API
 
-- [Guides: Computed Values](/docs/packages/reactivity/guides/computed)
+### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `getter` | `() => T` | — | Re-runs when tracked deps inside change |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| `.value()` | `ReadValue<T>` | Read (tracks deps, may recompute) |
+| `.peek()` | `ReadValue<T>` | Read without tracking |
+| `.subscribe(fn)` | `() => void` | Same change-only contract as `signal` |
+
+### Related
+
+- [signal](/docs/packages/reactivity/api/signal)
+- [effect](/docs/packages/reactivity/api/effect)

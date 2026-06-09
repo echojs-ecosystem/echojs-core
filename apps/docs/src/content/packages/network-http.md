@@ -24,4 +24,13 @@ const api = createHttpClient({
 const users = await api.get('/users').json<User[]>()
 ```
 
-> [!tip] Import the **`/http` subpath** only — `@echojs-ecosystem/network/ws`, `/mock`, and `/graphql` are separate entry points.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/network-http/functions) | `createHttpClient`, hooks, errors |
+| [Guides & Concepts](/docs/packages/network-http/guides/important-defaults) | Client composition, retries |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createHttpClient](/docs/packages/network-http/api/create-http-client)).
+
+> [!tip] Import the **`/http` subpath** only — `/ws`, `/mock`, `/graphql` are separate entry points.

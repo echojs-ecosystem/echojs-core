@@ -56,9 +56,9 @@ export const HomePhilosophyBridgeView = createView(
         ' — flexible on product features. Six ideas below shape every package and how we build the docs site itself.',
       ]),
       NavLink({
-        to: docPageByContentId['introduction/philosophy']!,
+        to: docPageByContentId['introduction/what-is-echojs']!,
         class: home.philosophyBridgeLink(),
-        children: ['Full philosophy', span(null, '→')],
+        children: ['Full overview', span(null, '→')],
       }),
     ]),
   'HomePhilosophyBridgeView'

@@ -15,14 +15,9 @@ export type SiteHeaderNavItem =
 /** Built at header mount — after blog routes are registered (avoids init-order TDZ). */
 export const buildSiteHeaderNavItems = (): SiteHeaderNavItem[] => [
   {
-    label: 'Introduction',
-    kind: 'doc',
-    contentId: 'introduction/what-is-echojs',
-  },
-  {
     label: 'Getting Started',
     kind: 'doc',
-    contentId: 'getting-started/installation',
+    contentId: 'introduction/what-is-echojs',
   },
   { label: 'Packages', kind: 'doc', contentId: 'packages/framework' },
   { label: 'Guides', kind: 'doc', contentId: 'guides/routing' },

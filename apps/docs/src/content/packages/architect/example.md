@@ -24,5 +24,5 @@ bun run architect
 ## Related
 
 - [Guides & Concepts](/docs/packages/architect/guides/important-defaults)
-- [API Reference](/docs/packages/architect/api)
+- [Functions](/docs/packages/architect/functions)
 - [Project Structure](/docs/getting-started/project-structure)

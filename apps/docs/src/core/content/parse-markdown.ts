@@ -168,6 +168,13 @@ export const parseMarkdown = (raw: string): DocDocument => {
       continue
     }
 
+    if (line.startsWith(':::util-demo')) {
+      const slug = line.slice(':::util-demo'.length).trim()
+      if (slug) blocks.push({ type: 'util-demo', slug })
+      i++
+      continue
+    }
+
     if (line.startsWith(':::package-overview')) {
       const packageId = line.slice(':::package-overview'.length).trim()
       if (packageId) blocks.push({ type: 'package-overview', packageId })

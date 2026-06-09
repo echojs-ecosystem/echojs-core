@@ -19,4 +19,13 @@ const prefs = createStore({ theme: 'system' }).extend(
 )
 ```
 
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/persist/functions) | `withStorage`, adapters, serializers |
+| [Guides & Concepts](/docs/packages/persist/guides/storage-adapters) | Hydrate, migrate, TTL |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [withStorage](/docs/packages/persist/api/with-storage)).
+
 > [!tip] Call `.persist.hydrate()` after app bootstrap when using SSR or guards.

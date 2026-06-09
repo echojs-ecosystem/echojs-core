@@ -1,7 +1,12 @@
 import type { AnyPage } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
-import { blogPage, roadmapPage, sponsorsPage } from '@app/router'
+import {
+  blogPage,
+  changelogPage,
+  roadmapPage,
+  sponsorsPage,
+} from '@app/router'
 import type { NavIconId } from '@core/content/nav-icon-id'
 
 export type SidebarDocLink = {
@@ -57,11 +62,12 @@ export const sidebarResourceLinks: SidebarLink[] = [
     match: 'partial',
   },
   {
-    kind: 'external',
+    kind: 'page',
     id: 'changelog',
     label: 'Changelog',
     icon: 'list',
-    href: 'https://github.com/echojs/echojs/releases',
+    page: changelogPage,
+    match: 'partial',
   },
   {
     kind: 'page',

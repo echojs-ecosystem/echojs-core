@@ -21,4 +21,13 @@ const userQuery = createQuery({
 })
 ```
 
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/query/functions) | API index — queries, mutations, client |
+| [Guides & Concepts](/docs/packages/query/guides/query-definitions) | Definitions, cache, cancellation |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createQuery](/docs/packages/query/api/create-query)).
+
 > [!tip] Bind `.with(() => params)` inside `createModel`, not in views.

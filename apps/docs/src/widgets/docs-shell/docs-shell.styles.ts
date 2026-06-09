@@ -81,6 +81,10 @@ export const shellStyles = tv({
     packageChildIcon:
       'text-fg-subtle/90 group-hover:text-fg group-[.font-medium]:text-amber-600 dark:group-[.font-medium]:text-amber-400',
     packageChildNested: 'text-[13px]',
+    packageNavGroupLabel:
+      'px-2 pb-0.5 pt-2.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-fg-subtle/75 first:pt-1',
+    navSubgroupLabel:
+      'mb-0.5 mt-2 px-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-fg-subtle/70 first:mt-0',
     packageSubsection: 'min-w-0',
     packageSubsectionBtn: [
       'group flex w-full items-center gap-2 rounded-md py-1.5 pl-2 pr-1 text-left text-sm font-medium text-fg-muted transition',
@@ -89,6 +93,11 @@ export const shellStyles = tv({
     packageSubsectionIcon: 'text-fg-subtle/80 group-hover:text-fg-muted',
     packageSubsectionChildren:
       'ml-2 flex flex-col gap-0.5 border-l border-border/50 pl-2 dark:border-white/10',
+    packageSubsectionNested: 'min-w-0',
+    packageSubsectionBtnNested: [
+      'group flex w-full items-center gap-2 rounded-md py-1 pl-2 pr-1 text-left text-[13px] font-medium text-fg-muted transition',
+      'hover:bg-surface-muted/60 hover:text-fg',
+    ].join(' '),
     sectionTitle:
       'mb-1.5 mt-5 flex items-center gap-1.5 px-2 text-[10px] font-bold uppercase tracking-[0.14em] text-fg-subtle first:mt-2',
     sectionTitleIcon:

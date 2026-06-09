@@ -1,5 +1,9 @@
 import { effect } from '@echojs-ecosystem/framework/reactivity'
 
+import {
+  $docsHeaderScrollLockActive,
+  syncDocsHeaderScrolled,
+} from '@app/docs-header-scroll'
 import { appRouter } from '@app/router/router'
 import {
   $mobileNavOpen,
@@ -12,6 +16,37 @@ import {
 } from '@widgets/site-header/model/home-mobile-nav'
 
 let lockCount = 0
+let savedScrollY = 0
+
+/** `overflow-hidden` on `html`/`body` breaks `position: sticky` after scroll. */
+const lockBodyScroll = (): void => {
+  savedScrollY = window.scrollY
+  $docsHeaderScrollLockActive.set(true)
+  const { body, documentElement: html } = document
+
+  body.style.position = 'fixed'
+  body.style.top = `-${savedScrollY}px`
+  body.style.left = '0'
+  body.style.right = '0'
+  body.style.width = '100%'
+
+  html.style.scrollBehavior = 'auto'
+}
+
+const unlockBodyScroll = (): void => {
+  const { body, documentElement: html } = document
+
+  body.style.position = ''
+  body.style.top = ''
+  body.style.left = ''
+  body.style.right = ''
+  body.style.width = ''
+
+  html.style.scrollBehavior = ''
+  $docsHeaderScrollLockActive.set(false)
+  window.scrollTo(0, savedScrollY)
+  syncDocsHeaderScrolled()
+}
 
 const setLocked = (locked: boolean): void => {
   if (typeof document === 'undefined') return
@@ -19,16 +54,14 @@ const setLocked = (locked: boolean): void => {
   if (locked) {
     lockCount += 1
     if (lockCount === 1) {
-      document.documentElement.classList.add('overflow-hidden')
-      document.body.classList.add('overflow-hidden')
+      lockBodyScroll()
     }
     return
   }
 
   lockCount = Math.max(0, lockCount - 1)
   if (lockCount === 0) {
-    document.documentElement.classList.remove('overflow-hidden')
-    document.body.classList.remove('overflow-hidden')
+    unlockBodyScroll()
   }
 }
 

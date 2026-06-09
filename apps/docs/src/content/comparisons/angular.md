@@ -726,7 +726,7 @@ Material**, not signal syntax.
 - [Architecture overview](/docs/architecture/overview)
 - [State overview](/docs/state/overview)
 - [Data fetching](/docs/guides/data-fetching)
-- [Why EchoJS](/docs/introduction/why-echojs)
+- [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)
 - [@echojs-ecosystem/store](/docs/packages/store) ·
   [@echojs-ecosystem/query](/docs/packages/query) ·
   [@echojs-ecosystem/router](/docs/packages/router)

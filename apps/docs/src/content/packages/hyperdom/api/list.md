@@ -2,30 +2,12 @@
 title: List
 description: List(source, renderItem) — collection dynamic region.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [List, hyperdom]
 ---
 
-# List
+@echojs-ecosystem/hyperdom
 
-```ts
-function List<T>(
-  source: { value(): readonly T[] } | (() => readonly T[]),
-  renderItem: (item: T, index: () => number) => Child
-): () => Child
-```
-
-Returns a **dynamic child** that re-renders when reactive dependencies in
-`source` or `renderItem` change.
-
-## Parameters
-
-| Param        | Type                                                                   |
-| ------------ | ---------------------------------------------------------------------- |
-| `source`     | Signal-like `{ value(): readonly T[] }` or getter `() => readonly T[]` |
-| `renderItem` | `(item: T, index: () => number) => Child`                              |
-
-`index` is a getter function — call `index()` inside reactive children.
-
-## Example
+## Usage
 
 ```ts
 import { List } from '@echojs-ecosystem/hyperdom'
@@ -39,12 +21,17 @@ ul(
 )
 ```
 
-## Performance note
+## Type Declarations
 
-Current `List` re-renders the full list when the array reference or tracked
-contents change. Keyed diff optimization is planned.
+```ts
+function List<T>(
+  source: { value(): readonly T[] } | (() => readonly T[]),
+  renderItem: (item: T, index: () => number) => Child
+): () => Child
+```
 
-## See also
+## API
 
-- [Guides: Show & List](/docs/packages/hyperdom/guides/show-and-list)
-- [Examples: Todo List](/docs/packages/hyperdom/examples/todo-list)
+### Returns
+
+`List` — see Type Declarations for the full signature.

@@ -2,46 +2,12 @@
 title: createProvider
 description: createProvider factory, EchoProvider, and CreateProviderOptions.
 package: '@echojs-ecosystem/framework'
+keywords: [createProvider, framework]
 ---
 
-# createProvider
+@echojs-ecosystem/framework/app
 
-```ts
-function createProvider<TInstance>(
-  options: CreateProviderOptions<TInstance>
-): EchoProviderWithInstance<TInstance>
-function defineProvider(options: EchoProvider): EchoProvider
-function definePlugin(options: EchoPlugin): EchoPlugin
-function createPlugin<TInstance>(
-  options: CreatePluginOptions<TInstance>
-): EchoPluginWithInstance<TInstance>
-```
-
-Typed provider factory with optional `install`, `setup`, `provideKey`, and
-`wrapRoot`.
-
-## EchoProvider
-
-| Field              | Description                              |
-| ------------------ | ---------------------------------------- |
-| `name`             | Provider id (logging)                    |
-| `setup(app)`       | Sync or async registration               |
-| `resolveRoot?`     | Return root `Child` (router)             |
-| `wrapRoot?(inner)` | `(previous: () => Child) => () => Child` |
-
-## CreateProviderOptions
-
-| Field         | Description                                |
-| ------------- | ------------------------------------------ |
-| `name`        | Required                                   |
-| `install?`    | `() => TInstance` at factory time          |
-| `setup?`      | `(app, instance) => void \| Promise<void>` |
-| `provideKey?` | Auto-provide instance                      |
-| `wrapRoot?`   | Root wrapper                               |
-
-Returns `EchoProviderWithInstance<TInstance>` with `.instance`.
-
-## Example
+## Usage
 
 ```ts
 import { createProvider } from '@echojs-ecosystem/framework/app'
@@ -54,6 +20,21 @@ export const themeProvider = createProvider({
 })
 ```
 
-## Related
+## Type Declarations
 
-- [Providers guide](/docs/packages/framework/guides/providers)
+```ts
+function createProvider<TInstance>(
+  options: CreateProviderOptions<TInstance>
+): EchoProviderWithInstance<TInstance>
+function defineProvider(options: EchoProvider): EchoProvider
+function definePlugin(options: EchoPlugin): EchoPlugin
+function createPlugin<TInstance>(
+  options: CreatePluginOptions<TInstance>
+): EchoPluginWithInstance<TInstance>
+```
+
+## API
+
+### Returns
+
+`createProvider` — see Type Declarations for the full signature.

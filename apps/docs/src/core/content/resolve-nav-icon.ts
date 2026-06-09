@@ -17,9 +17,6 @@ const isOverviewNavItem = (contentId: ContentId, slug?: string): boolean => {
 
 const byContentId: Record<ContentId, NavIconId> = {
   'introduction/what-is-echojs': 'book',
-  'introduction/why-echojs': 'lightbulb',
-  'introduction/philosophy': 'compass',
-  'introduction/why-not-jsx': 'code',
   'getting-started/installation': 'download',
   'getting-started/first-application': 'rocket',
   'getting-started/project-structure': 'folder-tree',
@@ -34,6 +31,7 @@ const byContentId: Record<ContentId, NavIconId> = {
   'comparisons/angular': 'fw-angular',
   'comparisons/solid': 'fw-solid',
   'comparisons/svelte': 'fw-svelte',
+  'guides/reactivity': 'zap',
   'guides/routing': 'route',
   'guides/data-fetching': 'refresh',
   'state/overview': 'database',
@@ -47,7 +45,7 @@ const byContentId: Record<ContentId, NavIconId> = {
   'guides/conventions': 'scale',
   'guides/authentication': 'shield',
   'guides/internationalization': 'globe',
-  'guides/callouts': 'megaphone',
+  'guides/best-practices': 'compass',
   'examples/todo-app': 'list',
   'examples/dashboard': 'layout-grid',
   'examples/admin-panel': 'shield',

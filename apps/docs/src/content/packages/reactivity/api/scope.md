@@ -1,38 +1,46 @@
 ---
 title: scope
-description: scope(fn) — create a disposable effect scope.
+description: Create a disposable effect scope with registered cleanups.
 package: '@echojs-ecosystem/reactivity'
+keywords: [scope, cleanup, reactivity]
 ---
 
-# scope
+@echojs-ecosystem/reactivity
 
-```ts
-function scope(fn: () => void): () => void
-```
-
-Starts an effect scope. Returns disposer that tears down effects created inside
-and runs registered `cleanup()` callbacks.
-
-`fn` must be a function or `TypeError` is thrown.
-
-## Example
+## Usage
 
 ```ts
 import { scope, effect, cleanup } from '@echojs-ecosystem/reactivity'
 
 const stop = scope(() => {
-  effect(() => {
-    /* ... */
-  })
-  cleanup(() => {
-    /* teardown */
-  })
+  effect(() => { /* … */ })
+  cleanup(() => { /* teardown */ })
 })
 
 stop()
 ```
 
-## See also
+## Type Declarations
 
-- [Guides: Scopes & Cleanup](/docs/packages/reactivity/guides/scopes-and-cleanup)
+```ts
+export const scope: (fn: () => void) => () => void
+```
+
+## API
+
+### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fn` | `() => void` | — | Body runs inside a new scope |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| disposer | `() => void` | Tears down effects and `cleanup()` callbacks |
+
+### Related
+
 - [cleanup](/docs/packages/reactivity/api/cleanup)
+- [effect](/docs/packages/reactivity/api/effect)

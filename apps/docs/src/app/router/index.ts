@@ -2,6 +2,8 @@ export { docPageByContentId, getDocPage } from './doc-pages'
 export {
   blogPage,
   blogPostPage,
+  changelogPage,
+  changelogReleasePage,
   homePage,
   roadmapPage,
   sponsorsPage,

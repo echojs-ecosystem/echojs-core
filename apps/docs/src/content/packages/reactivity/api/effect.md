@@ -1,21 +1,13 @@
 ---
 title: effect
-description: effect(fn) — run side effects when tracked dependencies change.
+description: Run a side effect when tracked dependencies change.
 package: '@echojs-ecosystem/reactivity'
+keywords: [effect, reactivity]
 ---
 
-# effect
+@echojs-ecosystem/reactivity
 
-```ts
-function effect(fn: () => void): () => void
-```
-
-Runs `fn` **synchronously**, then re-runs when dependencies read via `.value()`
-inside `fn` change. Returns **disposer** `() => void`.
-
-`fn` must be a function or `TypeError` is thrown.
-
-## Example
+## Usage
 
 ```ts
 import { effect, signal } from '@echojs-ecosystem/reactivity'
@@ -25,7 +17,27 @@ const stop = effect(() => console.log($n.value()))
 stop()
 ```
 
-## See also
+## Type Declarations
 
-- [Guides: Effects](/docs/packages/reactivity/guides/effects)
+```ts
+export const effect: (fn: () => void) => () => void
+```
+
+## API
+
+### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fn` | `() => void` | — | Runs synchronously, then on dep changes |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| disposer | `() => void` | Stops the effect |
+
+### Related
+
 - [scope](/docs/packages/reactivity/api/scope)
+- [cleanup](/docs/packages/reactivity/api/cleanup)

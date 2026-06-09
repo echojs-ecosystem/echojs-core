@@ -1299,6 +1299,86 @@ const users = await api.get('/users').json<User[]>()`,
     ],
     relatedIds: ['query', 'framework'],
   },
+  utils: {
+    id: 'utils',
+    npmPackage: '@echojs-ecosystem/utils',
+    icon: '🧰',
+    tagline: 'Signal-native composables for the browser',
+    heroTitle: 'Utilities without hooks or a virtual DOM.',
+    summary:
+      'Inspired by ReactUse and VueUse, rebuilt for EchoJS signals: window size, media queries, clipboard, debounce, observers, and more. SSR-safe, tree-shakeable subpath imports, explicit dispose().',
+    pills: ['windowSize', 'mediaQuery', 'dispose()', 'subpath imports'],
+    pillars: [
+      {
+        icon: '◎',
+        title: 'Signals first',
+        body: 'Every util exposes $signals and value getters.',
+      },
+      {
+        icon: '🛡',
+        title: 'SSR-safe',
+        body: 'No listeners on the server — safe defaults.',
+      },
+      {
+        icon: '📦',
+        title: 'Tree-shakeable',
+        body: 'Import only what you need per util.',
+      },
+    ],
+    whyTitle: 'Why Utils',
+    whySubtitle: 'Not React hooks — composables you call anywhere.',
+    whyCards: [
+      {
+        icon: '⚠',
+        title: 'Plain function names',
+        body: 'windowSize, debounce — no use* prefix and no hook rules. Call anywhere in models or modules.',
+      },
+      {
+        icon: '🧹',
+        title: 'Explicit dispose',
+        body: 'Listeners, timers, and observers clean up when you call dispose().',
+      },
+      {
+        icon: '🌐',
+        title: 'Browser without framework lock-in',
+        body: 'Built on @echojs-ecosystem/reactivity only — no HyperDOM or UI dependency.',
+      },
+      {
+        icon: '✂️',
+        title: 'Optimized imports',
+        body: '@echojs-ecosystem/utils/window-size keeps bundles small.',
+      },
+    ],
+    codeExample: {
+      title: 'Just a quick look…',
+      language: 'ts',
+      code: `import { windowSize } from "@echojs-ecosystem/utils/window-size";
+
+const size = windowSize({ initialWidth: 0, initialHeight: 0 });
+console.log(size.width(), size.height());
+size.dispose();`,
+    },
+    whenToUse: [
+      'Window / viewport tracking',
+      'Clipboard & document title',
+      'Debounce / throttle in models',
+      'Click outside & observers',
+    ],
+    whenNot: ['Server cache → use Query', 'Global app state → use Store'],
+    dependsOn: ['@echojs-ecosystem/reactivity'],
+    powers: ['hyperdom', 'framework'],
+    learnPath: [
+      step('utils', 'installation', 'Installation', 'Package & imports.'),
+      step('utils', 'functions', 'Functions', 'Full util index.'),
+      step(
+        'utils',
+        'api/active-element',
+        'API',
+        'Demo + types + API per util.'
+      ),
+    ],
+    relatedIds: ['reactivity', 'hyperdom'],
+  },
   architect: {
     id: 'architect',
     npmPackage: '@echojs-ecosystem/architect',

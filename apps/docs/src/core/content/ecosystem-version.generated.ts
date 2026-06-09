@@ -9,7 +9,9 @@ export const packageVersions = {
   "@echojs-ecosystem/framework": "0.6.0",
   "@echojs-ecosystem/hyperdom": "0.6.0",
   "@echojs-ecosystem/i18n": "0.6.0",
+  "@echojs-ecosystem/network": "0.6.0",
   "@echojs-ecosystem/oxc-config": "0.1.0",
+  "@echojs-ecosystem/permission": "0.6.0",
   "@echojs-ecosystem/persist": "0.6.0",
   "@echojs-ecosystem/query": "0.6.0",
   "@echojs-ecosystem/reactivity": "0.6.0",
@@ -17,6 +19,7 @@ export const packageVersions = {
   "@echojs-ecosystem/store": "0.6.0",
   "@echojs-ecosystem/ui": "0.6.0",
   "@echojs-ecosystem/url-state": "0.6.0",
+  "@echojs-ecosystem/utils": "0.6.0",
 } as const;
 
 export type PackageName = keyof typeof packageVersions;

@@ -1,23 +1,13 @@
 ---
-title: App Exports
+title: App exports
 description: Root barrel @echojs-ecosystem/framework re-exports.
 package: '@echojs-ecosystem/framework'
+keywords: [App exports, framework]
 ---
 
-# App Exports
+@echojs-ecosystem/framework/app
 
-Root barrel `@echojs-ecosystem/framework` re-exports sub-packages for
-convenience. Size-sensitive apps may import narrowly.
-
-| Module                                                 | Re-exports         |
-| ------------------------------------------------------ | ------------------ |
-| `hyperdom`                                             | HyperDOM surface   |
-| `reactivity`                                           | Signals            |
-| `router` / `router-hyperdom`                           | Router             |
-| `query`, `store`, `persist`, `url-state`, `ui`, `form` | Ecosystem packages |
-
-Prefer **`@echojs-ecosystem/framework/app`** in bootstrap; import feature
-packages directly in features.
+## Usage
 
 ```ts
 // bootstrap
@@ -28,6 +18,15 @@ import { signal } from '@echojs-ecosystem/reactivity'
 import { signal as $s } from '@echojs-ecosystem/framework/reactivity' // same API
 ```
 
-## Related
+## Type Declarations
 
-- [Subpath Imports guide](/docs/packages/framework/guides/subpath-imports)
+```ts
+// bootstrap
+import { createEchoApp } from '@echojs-ecosystem/framework/app'
+
+// features — direct or via barrel
+import { signal } from '@echojs-ecosystem/reactivity'
+import { signal as $s } from '@echojs-ecosystem/framework/reactivity' // same API
+```
+
+## API

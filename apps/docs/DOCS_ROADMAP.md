@@ -59,7 +59,7 @@ Legacy `usage.md` удалены — контент в `guides/*`.
 | `guides/forms`                | [x]    |
 | `guides/authentication`       | [x]    |
 | `guides/internationalization` | [x]    |
-| `guides/callouts`             | [x]    |
+| `guides/best-practices`       | [x]    |
 
 ## Этап 5 — State, comparisons, examples
 

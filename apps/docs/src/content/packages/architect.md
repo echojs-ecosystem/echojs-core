@@ -45,6 +45,13 @@ bun add -D @echojs-ecosystem/architect
 bun run architect
 ```
 
-> [!tip] Pair with [Project Structure](/docs/getting-started/project-structure)
-> and [Dependency Flow](/docs/architecture/dependency-flow) so layer names in
-> config match your folders.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/architect/functions) | `defineConfig`, presets, `lint` |
+| [Guides & Concepts](/docs/packages/architect/guides/layers) | Layer rules, CI |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [defineConfig](/docs/packages/architect/api/define-config)).
+
+> [!tip] Pair with [Project Structure](/docs/getting-started/project-structure) and [Dependency Flow](/docs/architecture/dependency-flow).

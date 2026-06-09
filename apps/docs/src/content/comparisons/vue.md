@@ -747,7 +747,7 @@ Theme → `prefsStore` + `@echojs-ecosystem/persist` or UI provider.
 
 ## Related docs
 
-- [Why EchoJS](/docs/introduction/why-echojs)
+- [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)
 - [Feature-first design](/docs/architecture/feature-first)
 - [State overview](/docs/state/overview)
 - [Data fetching](/docs/guides/data-fetching)

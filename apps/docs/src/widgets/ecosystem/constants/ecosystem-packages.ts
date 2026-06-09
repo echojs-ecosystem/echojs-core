@@ -75,6 +75,13 @@ export const ecosystemPackages: EcosystemPackage[] = [
     icon: '💾',
   },
   {
+    name: '@echojs-ecosystem/utils',
+    shortName: 'utils',
+    description: 'Signal-native composables — sensors, DOM, timing, browser.',
+    contentId: 'packages/utils',
+    icon: '🧰',
+  },
+  {
     name: '@echojs-ecosystem/ui',
     shortName: 'ui',
     description: 'Accessible UI primitives built on HyperDOM.',

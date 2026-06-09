@@ -10,13 +10,33 @@ keywords: [auth, session, guardRoute, authorizationGuard, persist, cookie]
 
 EchoJS has no built-in auth server — you integrate your API and keep **session
 state** in stores, **persistence** in `@echojs-ecosystem/persist`, and **access
-control** in the router. `apps/example` demonstrates a mock login you can
-replace with real endpoints.
+control** in the router. `apps/example` demonstrates a mock login you can replace
+with real endpoints.
+
+> [!TIP] Session reads use `computed` and stores — see
+> [Reactivity](/docs/guides/reactivity). Guards read `$isLoggedIn.value()` the
+> same way as any reactive guard.
+
+## End-to-end flow
+
+```
+Login form submit → API → token + user stores → persist adapters
+       ↓
+guardRoute / authorizationGuard reads $isLoggedIn
+       ↓
+Authenticated queries attach Bearer token → 401 → logout + redirect
+```
+
+| Step            | Layer        | Guide                          |
+| --------------- | ------------ | ------------------------------ |
+| Collect credentials | Form     | [Forms](/docs/guides/forms)    |
+| Call API        | Model/mutation | [Data fetching](/docs/guides/data-fetching) |
+| Store session   | Store + persist | this guide                  |
+| Block routes    | Router guards | [Routing](/docs/guides/routing) |
 
 ## Session shape
 
-Split **token** (credential) and **user** (profile) so you can clear or refresh
-them independently:
+Split **token** (credential) and **user** (profile):
 
 ```ts
 import { computed } from '@echojs-ecosystem/reactivity'
@@ -53,6 +73,9 @@ export const $authUser = computed(() => authUserStore.value())
 > without threat modeling. Prefer **httpOnly** cookies set by your backend for
 > primary session credentials.
 
+Place session module in **`entities/session/`** — imported by guards, shell
+widgets, and API layers.
+
 ## Login and logout
 
 ```ts
@@ -87,7 +110,7 @@ export const logout = (): void => {
 }
 ```
 
-Wire login submit in a page model:
+Wire login in a page model:
 
 ```ts
 const res = await authLoginForm.submit(async (value) => {
@@ -98,12 +121,11 @@ const res = await authLoginForm.submit(async (value) => {
 if (res.ok) homePage.go()
 ```
 
-Forms: [Forms guide](/docs/guides/forms). Example page:
-`apps/example/src/pages/auth/login/`.
+Example: `apps/example/src/pages/auth/login/`.
 
 ## Protect routes
 
-### `guardRoute` (recommended for a few pages)
+### `guardRoute` (few protected pages)
 
 ```ts
 import { guardRoute } from '@echojs-ecosystem/router'
@@ -118,7 +140,8 @@ guardRoute({
 })
 ```
 
-Load guards from `entities/__routes__/guards.ts` when the router module imports.
+Register in `entities/__routes__/guards.ts` — import that module from router
+bootstrap so guards run at startup.
 
 ### `authorizationGuard` (app-wide)
 
@@ -136,9 +159,20 @@ createRouter({
 
 Use for “entire app behind login” with a small public allowlist.
 
-## Auth layout routes
+### `beforeLoad` gate
 
-Group login/signup under a shared shell:
+For data-heavy protected areas, combine guard with loader:
+
+```ts
+beforeLoad: async () => {
+  if (!$isLoggedIn.value()) throw redirect(authLoginPage)
+  await sessionQuery.prefetch()
+}
+```
+
+See [Routing](/docs/guides/routing#beforeload-and-route-data).
+
+## Auth layout routes
 
 ```ts
 export const appRoutes = createRoutes([
@@ -151,48 +185,82 @@ export const appRoutes = createRoutes([
       { path: 'signup', name: 'auth-signup', routeView: authSignupPage },
     ],
   },
-  // …
 ])
 ```
 
+Public auth shell without app sidebar — redirect authenticated users away via
+`redirectWhenAuthorized` or layout `beforeLoad`.
+
 ## Authenticated API calls
 
-Attach the token in query/mutation `queryFn` or a thin `fetch` wrapper:
+Centralize headers in network client or query defaults:
 
 ```ts
 queryFn: async ({ signal }) => {
-  const token = authTokenStore.value();
-  const res = await fetch("/api/me", {
+  const token = authTokenStore.value()
+  const res = await fetch('/api/me', {
     signal,
     headers: token ? { Authorization: `Bearer ${token}` } : {},
-  });
+  })
   if (res.status === 401) {
-    logout();
-    throw new Error("Unauthorized");
+    logout()
+    throw new Error('Unauthorized')
   }
-  return res.json();
-},
+  return res.json()
+}
 ```
 
-Invalidate user queries on logout; optional `beforeLoad` redirect if session is
-missing.
+On logout:
+
+- Clear session stores (with persist pause).
+- `queryClient.clear()` or invalidate user-scoped keys.
+- Navigate to login with `authLoginPage.go({ replace: true })`.
 
 ## UI session block
 
-Shell widgets can read `$authUser` / `$isLoggedIn` and call `authLoginPage.go()`
-or `logout()` — see `apps/example/src/widgets/docs-shell/docs-sidebar.ts`.
+Shell widgets read `$authUser` / `$isLoggedIn`:
+
+```ts
+Show(
+  () => $isLoggedIn.value(),
+  () => UserMenu({ user: $authUser.value()! }),
+  () => NavLink({ to: authLoginPage, children: 'Sign in' })
+)
+```
+
+See `apps/example/src/widgets/docs-shell/docs-sidebar.ts`.
+
+## Token refresh (optional)
+
+Pattern for short-lived access + refresh token (server-mediated):
+
+1. Access token in memory or short-lived cookie.
+2. Refresh via httpOnly cookie endpoint — not in localStorage.
+3. On 401, single-flight refresh then retry query; on failure, `logout()`.
+
+Implement in network middleware — [Network HTTP](/docs/packages/network-http).
 
 ## SSR and OAuth
 
-This guide targets **client SPAs** (`createEchoApp` + `history: "browser"`). SSR
-and OAuth redirects depend on your host (Node, edge, static). Keep callback URLs
-on the server; exchange code for tokens server-side when possible.
+This guide targets **client SPAs** (`createEchoApp` + `history: 'browser'`).
+SSR and OAuth redirects depend on your host. Exchange authorization codes
+**server-side**; SPA receives session via cookie or short-lived token.
+
+## Checklist
+
+1. `entities/session/` — stores, `$isLoggedIn`, `logout`.
+2. Persist adapters with pause/clear on logout.
+3. Login form + model submit ([Forms](/docs/guides/forms)).
+4. Guards registered at router startup.
+5. API layer attaches token; 401 triggers logout.
+6. Query cache cleared on logout.
 
 ## Related
 
+- [Reactivity](/docs/guides/reactivity) — `$isLoggedIn` computed
 - [Routing](/docs/guides/routing) — guards, auth routes
+- [Forms](/docs/guides/forms) — login form
+- [Data fetching](/docs/guides/data-fetching) — 401, mutations
 - [Persist](/docs/packages/persist/overview)
-- [Forms](/docs/guides/forms)
-- [Data fetching](/docs/guides/data-fetching) — 401 handling
 - Example — `apps/example/src/entities/session/`,
   `entities/__routes__/guards.ts`

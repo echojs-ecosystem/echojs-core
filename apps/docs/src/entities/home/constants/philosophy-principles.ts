@@ -9,7 +9,7 @@ export type PhilosophyPrinciple = {
   docId: ContentId
 }
 
-/** Landing-page digest of /docs/introduction/philosophy — concrete ideas, not slogans. */
+/** Landing-page digest of /docs/introduction/what-is-echojs — concrete ideas, not slogans. */
 export const philosophyPrinciples: PhilosophyPrinciple[] = [
   {
     id: 'signals',
@@ -65,6 +65,6 @@ export const philosophyPrinciples: PhilosophyPrinciple[] = [
       'Router for URL, Query for server cache, Form for input, Store for shared client state, signals for local UI — never one mega-store for everything.',
     example:
       'Session in store; product list in createQuery; filters in url-state.',
-    docId: 'state/overview',
+    docId: 'guides/conventions',
   },
 ]

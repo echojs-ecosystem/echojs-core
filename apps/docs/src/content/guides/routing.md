@@ -9,9 +9,14 @@ keywords: [router, routes, NavLink, beforeLoad, layout, guard]
 # Routing
 
 EchoJS routing lives in `@echojs-ecosystem/router`: a typed route tree,
-signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). This guide
-focuses on **how to structure routes in a real app**; package details are in
-[Router guides](/docs/packages/router/guides/route-trees).
+signal-driven URL state, and HyperDOM helpers (`NavLink`, `Link`). URLs decide
+which page renders; route objects expose **`$params`**, **`$query`**, and
+**`$isOpened`** as signals.
+
+> [!TIP] New to signals? Start with [Reactivity](/docs/guides/reactivity) — route
+> state uses the same `.value()` tracking as models.
+
+Package reference: [Router guides](/docs/packages/router/guides/route-trees).
 
 ## Mental model
 
@@ -21,9 +26,9 @@ focuses on **how to structure routes in a real app**; package details are in
 | `createRouteView` / `createLayoutView` | Page UI + optional `beforeLoad`                    |
 | `createRouter`                         | History, global loading/error, optional auth guard |
 | `routerProvider`                       | Starts router and mounts `router.View` at app root |
+| Route page object                      | `go()`, `$params`, `$query`, `$data`, `$isOpened`  |
 
-URLs drive which **route view** renders. Layouts wrap children and must call
-`outlet()` where nested pages appear.
+Layouts wrap children and must call `outlet()` where nested pages appear.
 
 ## Minimal app
 
@@ -49,8 +54,8 @@ export const appRouter = createRouter({
 })
 ```
 
-Register once via `createRouterProvider(appRouter)` in bootstrap (see
-[First Application](/docs/getting-started/first-application)).
+Register once via `createRouterProvider(appRouter)` in bootstrap — see
+[First Application](/docs/getting-started/first-application).
 
 ## Layouts and nested routes
 
@@ -103,28 +108,66 @@ export const settingsPage = createRouteView({
 
 The route `view` is a HyperDOM child factory — no JSX, no hooks.
 
-## Navigation in UI
+## Route objects as links
 
-Prefer **`NavLink`** for in-app navigation (no full reload, active class from
-`$isOpened`):
+Pass **page objects** to `NavLink`, not string paths — refactors stay safe and
+types flow through params:
 
 ```ts
 import { NavLink } from '@echojs-ecosystem/router/hyperdom'
 
 NavLink({
-  to: settingsPage,
+  to: userPage,
+  params: { id: '42' },
+  query: { tab: 'posts' },
   class: 'nav-item',
   activeClass: 'nav-item--active',
-  children: 'Settings',
+  children: 'Profile',
 })
 ```
 
-Imperative navigation when needed:
+`activeClass` applies when `userPage.$isOpened.value()` is true (including
+partial matches if configured on the route).
+
+## Imperative navigation
 
 ```ts
 settingsPage.go()
 userPage.go({ id: '42' }, { query: { tab: 'posts' }, replace: true })
+history.back() // prefer page.go() for typed targets
 ```
+
+`replace: true` swaps the current history entry — useful for redirects after
+login or filter-only URL tweaks.
+
+## Params and query in models
+
+Route signals work like any other reactive source — read `.value()` inside
+models, computeds, or query `.with()`:
+
+```ts
+export const createUserModel = createModel(
+  (props: { userId: string }): UserVM => {
+    const profile = getUserQuery.with(() => ({ id: props.userId }))
+    return {
+      name: () => profile.data()?.name ?? '',
+      isLoading: () => profile.isPending(),
+    }
+  },
+  'UserModel'
+)
+
+// Page wires route params into the model:
+export const userPage = createRouteView({
+  name: 'user',
+  view: ({ params }) =>
+    bindModelView(() => createUserModel({ userId: params.id }), UserView),
+})
+```
+
+For shareable UI state (filters, tabs), prefer
+[URL state](/docs/packages/url-state) instead of duplicating query in a local
+signal.
 
 ## `beforeLoad` and route data
 
@@ -145,8 +188,11 @@ export const userPage = createRouteView({
   children.
 - Loading/error UI priority: page → parent layout → router globals.
 
-See `apps/example` → `workspace/users/user-detail.page.ts` and `workspace/slow`
-for delayed loaders.
+Combine with Query when the same resource is cached across pages — see
+[Data fetching](/docs/guides/data-fetching#beforeload-vs-query).
+
+Reference: `apps/example` → `workspace/users/user-detail.page.ts`,
+`workspace/slow` for delayed loaders.
 
 ## Guards
 
@@ -184,8 +230,8 @@ createRouter({
 })
 ```
 
-Use **global** guard for “whole app behind login”; use **`guardRoute`** for a
-few protected pages.
+Use **global** guard for “whole app behind login”; use **`guardRoute`** for a few
+protected pages.
 
 ## Lazy routes
 
@@ -204,27 +250,43 @@ the chunk on hover.
 
 ## Docs site pattern
 
-`apps/docs` maps markdown `contentId` to routes and keeps nav in
-`core/content/nav.ts`:
+`apps/docs` generates one route per markdown `contentId` and keeps nav in
+`core/content/nav/`:
 
 ```ts
-{ path: "guides/routing", name: "docs-guides-routing", routeView: getDocPage("guides/routing") }
+const docChildren = canonicalDocsRouteItems().map((item) => ({
+  path: item.contentId,
+  name: item.routeName,
+  routeView: getDocPage(item.contentId),
+}))
 ```
 
-Shell chrome can sit **outside** `router.View` with a pass-through layout — see
+Blog and changelog nest under `/docs` with section routes — same layout shell,
+different `createRouteView` trees. Shell chrome can sit **outside**
+`router.View` with a pass-through layout — see
 [Providers](/docs/architecture/providers).
 
-## URL query state
+## Prefetch and scroll
 
-For filters, tabs, and shareable UI state prefer `@echojs-ecosystem/url-state`
-over ad-hoc `location.search` parsing — see [URL state](/docs/state/url-state)
-and [State overview](/docs/state/overview).
+- **Prefetch queries** in `beforeLoad` when the next page always needs the same
+  cache key — `queryClient.prefetchQuery(...)` (Query package).
+- **Scroll restoration** — configure on `createRouter` history; reset scroll on
+  `page.go()` when switching major sections.
+
+## Checklist for new routes
+
+1. Page factory in `pages/**` — `createRouteView` + model/view bind.
+2. Entry in `entities/__routes__/app.routes.ts` (or feature route module).
+3. Nav link via `NavLink({ to: page })` — no hard-coded path strings in widgets.
+4. Async data — `beforeLoad` and/or `createQuery` per
+   [Data fetching](/docs/guides/data-fetching).
+5. Protected? — `guardRoute` or global `authorizationGuard`.
 
 ## Related
 
-- [Router package](/docs/packages/router/overview) — installation, API,
-  playground
+- [Reactivity](/docs/guides/reactivity) — signals, models, route `$params`
+- [Router package](/docs/packages/router/overview) — installation, API, playground
 - [Authentication](/docs/guides/authentication) — session + guards
-- [Data fetching](/docs/guides/data-fetching) — async data with `beforeLoad` vs
-  query
-- Example app routes — `apps/example/src/entities/__routes__/`
+- [Data fetching](/docs/guides/data-fetching) — `beforeLoad` vs query
+- [URL state](/docs/state/url-state) — query params as signals
+- Example app — `apps/example/src/entities/__routes__/`

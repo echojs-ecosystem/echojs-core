@@ -9,5 +9,11 @@ keywords: [cli, scaffold, generate]
 
 :::install @echojs-ecosystem/cli
 
-> [!note] CLI is on the roadmap. Use `apps/example` as the reference layout
-> until `create-echo` ships.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/cli/functions) | Planned commands (`create`, `generate`) |
+| [Guides](/docs/packages/cli/guides/overview) | Roadmap |
+
+> [!note] CLI is on the roadmap. Use `apps/example` as the reference layout until `create-echo` ships.

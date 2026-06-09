@@ -67,6 +67,6 @@ core framework; **React** and **Angular** rely on larger external ecosystems.
 
 ## Related
 
-- [Why EchoJS](/docs/introduction/why-echojs)
+- [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)
 - [Architecture overview](/docs/architecture/overview)
 - [State overview](/docs/state/overview)

@@ -8,6 +8,7 @@ import { routerPlayground } from './playgrounds/router.playground'
 import { storePlayground } from './playgrounds/store.playground'
 import { createStubPlayground } from './playgrounds/stub.playground'
 import { urlStatePlayground } from './playgrounds/url-state.playground'
+import { utilsPlayground } from './playgrounds/utils.playground'
 
 const stubs: PackagePlaygroundDef[] = [
   createStubPlayground(
@@ -46,6 +47,7 @@ const all: PackagePlaygroundDef[] = [
   urlStatePlayground,
   persistPlayground,
   i18nPlayground,
+  utilsPlayground,
   ...stubs,
 ]
 

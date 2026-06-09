@@ -1,57 +1,61 @@
 ---
 title: Types
-description: Signal, ReadonlySignal, ReadValue, and DeepReadonly type reference.
+description: Public TypeScript types exported from the package.
 package: '@echojs-ecosystem/reactivity'
+keywords: [Signal, ReadonlySignal, ReadValue, DeepReadonly]
 ---
 
-# Types
+@echojs-ecosystem/reactivity
 
-## Signal&lt;T&gt;
-
-Writable signal interface extending read methods with `set`, `update`,
-`readonly`.
+## Usage
 
 ```ts
-import type { Signal } from '@echojs-ecosystem/reactivity'
+import type {
+  Signal,
+  ReadonlySignal,
+  ReadValue,
+  DeepReadonly,
+} from '@echojs-ecosystem/reactivity'
 ```
 
-## ReadonlySignal&lt;T&gt;
-
-Read + `subscribe` only — returned by `computed()` and `readonly()`.
+## Type Declarations
 
 ```ts
-import type { ReadonlySignal } from '@echojs-ecosystem/reactivity'
+export interface ReadonlySignal<T> {
+  value(): ReadValue<T>
+  peek(): ReadValue<T>
+  subscribe(fn: () => void): () => void
+}
+
+export interface Signal<T> extends ReadonlySignal<T> {
+  set(next: T): void
+  update(fn: (prev: T) => T): void
+  readonly(): ReadonlySignal<T>
+}
+
+export type ReadValue<T> = T extends object ? DeepReadonly<T> : T
+
+export type DeepReadonly<T> = T extends (...args: any[]) => any
+  ? T
+  : T extends readonly (infer U)[]
+    ? readonly DeepReadonly<U>[]
+    : T extends object
+      ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
+      : T
 ```
 
-## ReadValue&lt;T&gt;
+## API
 
-Result of `.value()` / `.peek()`:
+### Exports
 
-| Stored `T`       | Read result       |
-| ---------------- | ----------------- |
-| Primitives       | `T`               |
-| Objects / arrays | `DeepReadonly<T>` |
+| Member | Type | Description |
+| --- | --- | --- |
+| `Signal<T>` | interface | Writable signal |
+| `ReadonlySignal<T>` | interface | Read + subscribe only |
+| `ReadValue<T>` | type | Result of `.value()` / `.peek()` |
+| `DeepReadonly<T>` | type | Recursive readonly for object reads |
 
-```ts
-import type { ReadValue } from '@echojs-ecosystem/reactivity'
-```
+### Related
 
-## DeepReadonly&lt;T&gt;
-
-Utility type for immutable reads — prevents `user.tags.push(...)` on values from
-`.value()`.
-
-Recursive readonly mapping for objects and arrays; primitives unchanged.
-
-```ts
-import type { DeepReadonly } from '@echojs-ecosystem/reactivity'
-
-type User = { name: string; tags: string[] }
-type Frozen = DeepReadonly<User>
-// { readonly name: string; readonly tags: readonly string[] }
-```
-
-## See also
-
-- [Guides: Immutable Updates](/docs/packages/reactivity/guides/immutable-updates)
 - [signal](/docs/packages/reactivity/api/signal)
+- [Type guards](/docs/packages/reactivity/api/type-guards)

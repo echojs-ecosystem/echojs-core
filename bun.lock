@@ -23,6 +23,7 @@
       "version": "0.6.0",
       "dependencies": {
         "@echojs-ecosystem/framework": "^0.6.0",
+        "@echojs-ecosystem/utils": "workspace:*",
         "shiki": "^3.4.0",
         "tailwind-merge": "^3.3.1",
         "tailwind-variants": "^1.0.0",
@@ -31,27 +32,6 @@
         "@echojs-ecosystem/architect": "^0.6.0",
         "@tailwindcss/vite": "^4.1.8",
         "tailwindcss": "^4.1.8",
-        "typescript": "5.9.2",
-        "vite": "^6.0.0",
-      },
-    },
-    "apps/example": {
-      "name": "@echojs-ecosystem/example",
-      "dependencies": {
-        "@echojs-ecosystem/form": "workspace:*",
-        "@echojs-ecosystem/framework": "workspace:*",
-        "@echojs-ecosystem/hyperdom": "workspace:*",
-        "@echojs-ecosystem/i18n": "workspace:*",
-        "@echojs-ecosystem/persist": "workspace:*",
-        "@echojs-ecosystem/query": "workspace:*",
-        "@echojs-ecosystem/reactivity": "workspace:*",
-        "@echojs-ecosystem/router": "workspace:*",
-        "@echojs-ecosystem/store": "workspace:*",
-        "@echojs-ecosystem/ui": "workspace:*",
-        "@echojs-ecosystem/url-state": "workspace:*",
-        "zod": "^3.25.28",
-      },
-      "devDependencies": {
         "typescript": "5.9.2",
         "vite": "^6.0.0",
       },
@@ -366,6 +346,19 @@
         "vitest": "^4.1.4",
       },
     },
+    "packages/utils": {
+      "name": "@echojs-ecosystem/utils",
+      "version": "0.6.0",
+      "dependencies": {
+        "@echojs-ecosystem/reactivity": "workspace:*",
+      },
+      "devDependencies": {
+        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "jsdom": "^26.1.0",
+        "typescript": "5.9.2",
+        "vitest": "^4.1.4",
+      },
+    },
     "tools/bench": {
       "name": "@echojs-ecosystem/bench",
       "version": "0.0.0",
@@ -462,8 +455,6 @@
 
     "@echojs-ecosystem/docs": ["@echojs-ecosystem/docs@workspace:apps/docs"],
 
-    "@echojs-ecosystem/example": ["@echojs-ecosystem/example@workspace:apps/example"],
-
     "@echojs-ecosystem/form": ["@echojs-ecosystem/form@workspace:packages/form"],
 
     "@echojs-ecosystem/framework": ["@echojs-ecosystem/framework@workspace:packages/framework"],
@@ -491,6 +482,8 @@
     "@echojs-ecosystem/ui": ["@echojs-ecosystem/ui@workspace:packages/ui"],
 
     "@echojs-ecosystem/url-state": ["@echojs-ecosystem/url-state@workspace:packages/url-state"],
+
+    "@echojs-ecosystem/utils": ["@echojs-ecosystem/utils@workspace:packages/utils"],
 
     "@echojs-ecosystem/workspace": ["@echojs-ecosystem/workspace@workspace:apps/workspace"],
 
@@ -1672,8 +1665,6 @@
 
     "@echojs-ecosystem/docs/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
-    "@echojs-ecosystem/example/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
-
     "@echojs-ecosystem/form/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/framework/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
@@ -1699,6 +1690,8 @@
     "@echojs-ecosystem/ui/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/url-state/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
+
+    "@echojs-ecosystem/utils/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/workspace-client/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 

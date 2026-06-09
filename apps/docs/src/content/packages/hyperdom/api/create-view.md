@@ -1,23 +1,13 @@
 ---
 title: createView
-description:
-  createView(viewFn, name) — view factory with view context and displayName.
+description: createView — Model & View API.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [createView, hyperdom]
 ---
 
-# createView
+@echojs-ecosystem/hyperdom
 
-```ts
-function createView<VM = void>(
-  viewFn: (vm: VM) => Child,
-  name: string
-): (vm: VM) => Child & { displayName: string }
-```
-
-Returns a view function that runs `viewFn` inside **view context**. Sets
-`displayName` for debugging and strict checks.
-
-## Example
+## Usage
 
 ```ts
 import { createView, button } from '@echojs-ecosystem/hyperdom'
@@ -29,16 +19,17 @@ export const CounterView = createView(
 )
 ```
 
-`CounterView.displayName === "CounterView"`.
+## Type Declarations
 
-## Why use it
+```ts
+function createView<VM = void>(
+  viewFn: (vm: VM) => Child,
+  name: string
+): (vm: VM) => Child & { displayName: string }
+```
 
-- Enables strict `h()` / lifecycle `mount()` checks
-- Identifies views in devtools and error messages
-- EchoJS convention — keeps presentation separate from models
+## API
 
-## See also
+### Returns
 
-- [Guides: Models & Components](/docs/packages/hyperdom/guides/models-and-components)
-- [createModel](/docs/packages/hyperdom/api/create-model)
-- [isInViewContext](/docs/packages/hyperdom/api/strict-context)
+`createView` — see Type Declarations for the full signature.

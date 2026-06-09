@@ -8,10 +8,17 @@ export type PackageNavSubsection = {
   kind: 'subsection'
   id: string
   title: string
-  children: DocsNavItem[]
+  children: PackageNavChild[]
 }
 
-export type PackageNavChild = DocsNavItem | PackageNavSubsection
+/** Non-interactive subgroup heading in a flat nav list (e.g. Sensors, Browser). */
+export type PackageNavLabel = {
+  kind: 'label'
+  id: string
+  title: string
+}
+
+export type PackageNavChild = DocsNavItem | PackageNavSubsection | PackageNavLabel
 
 export type PackageNavGroup = {
   id: string
@@ -32,11 +39,28 @@ export const isPackageNavSubsection = (
 ): child is PackageNavSubsection =>
   'kind' in child && child.kind === 'subsection'
 
+export const isPackageNavLabel = (
+  child: PackageNavChild
+): child is PackageNavLabel => 'kind' in child && child.kind === 'label'
+
+const flattenNavChild = (child: PackageNavChild): DocsNavItem[] => {
+  if (isPackageNavLabel(child)) return []
+  if (isPackageNavSubsection(child)) return child.children.flatMap(flattenNavChild)
+  return [child]
+}
+
 export const flattenPackageNavChildren = (
   children: PackageNavChild[]
-): DocsNavItem[] =>
-  children.flatMap((child) =>
-    isPackageNavSubsection(child) ? child.children : [child]
+): DocsNavItem[] => children.flatMap(flattenNavChild)
+
+const subsectionContainsContentId = (
+  subsection: PackageNavSubsection,
+  contentId: ContentId
+): boolean =>
+  subsection.children.some((child) =>
+    isPackageNavSubsection(child)
+      ? subsectionContainsContentId(child, contentId)
+      : child.contentId === contentId
   )
 
 const pkgItem = (
@@ -56,7 +80,7 @@ const pkgItem = (
 const subsection = (
   id: string,
   title: string,
-  children: DocsNavItem[]
+  children: PackageNavChild[]
 ): PackageNavSubsection => ({
   kind: 'subsection',
   id,
@@ -95,6 +119,32 @@ const examplePages = (cfg: ModernPackageDocConfig): DocsNavItem[] =>
     return pkgItem(cfg.id, navSlug, title, contentId, cfg.npmPackage)
   })
 
+const navLabel = (id: string, title: string): PackageNavLabel => ({
+  kind: 'label',
+  id,
+  title,
+})
+
+/** Flat API list with subgroup labels — no nested dropdowns. */
+const apiFlatCategoryPages = (cfg: ModernPackageDocConfig): PackageNavChild[] => {
+  const items: PackageNavChild[] = []
+  for (const category of cfg.apiCategories ?? []) {
+    items.push(navLabel(category.id, category.title))
+    for (const { slug, title } of category.pages) {
+      items.push(
+        pkgItem(
+          cfg.id,
+          `api-${slug}`,
+          title,
+          `packages/${cfg.id}/api/${slug}` as ContentId,
+          cfg.npmPackage
+        )
+      )
+    }
+  }
+  return items
+}
+
 const modernPackageDocPages = (
   cfg: ModernPackageDocConfig
 ): PackageNavChild[] => [
@@ -106,23 +156,42 @@ const modernPackageDocPages = (
     `packages/${cfg.id}/installation`,
     cfg.npmPackage
   ),
+  ...(cfg.functions
+    ? [
+        pkgItem(
+          cfg.id,
+          'functions',
+          cfg.functions.title,
+          `packages/${cfg.id}/functions` as ContentId,
+          cfg.npmPackage
+        ),
+      ]
+    : []),
   ...(cfg.guides.length > 0
     ? [subsection('guides', 'Guides & Concepts', guidePages(cfg))]
     : []),
-  ...(cfg.api.length > 0
-    ? [subsection('api', 'API Reference', apiPages(cfg))]
-    : []),
+  ...(cfg.apiCategories?.length
+    ? apiFlatCategoryPages(cfg)
+    : cfg.api.length > 0
+      ? [subsection('api', 'API', apiPages(cfg))]
+      : []),
   ...(cfg.examples.length > 0
     ? [subsection('examples', 'Examples', examplePages(cfg))]
     : []),
-  pkgItem(
-    cfg.id,
-    'playground',
-    'Playground',
-    `packages/${cfg.id}/playground`,
-    cfg.npmPackage
-  ),
+  ...(cfg.id !== 'utils'
+    ? [
+        pkgItem(
+          cfg.id,
+          'playground',
+          'Playground',
+          `packages/${cfg.id}/playground`,
+          cfg.npmPackage
+        ),
+      ]
+    : []),
 ]
+
+export { subsectionContainsContentId }
 
 const sortFeaturedFirst = (groups: PackageNavGroup[]): PackageNavGroup[] => {
   const featured = groups.filter((g) => g.featured)

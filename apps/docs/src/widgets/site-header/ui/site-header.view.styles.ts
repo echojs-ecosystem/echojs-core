@@ -5,7 +5,7 @@ import { docsShellPadding } from '@core/styles/docs-shell'
 export const homeHeaderStyles = tv({
   slots: {
     root: [
-      'sticky top-0 z-50 border-b',
+      'top-0 z-50 border-b',
       'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-200',
     ].join(' '),
     inner:
@@ -37,6 +37,14 @@ export const homeHeaderStyles = tv({
       true: {},
       false: {},
     },
+    scrollLocked: {
+      true: {
+        root: 'fixed inset-x-0',
+      },
+      false: {
+        root: 'sticky',
+      },
+    },
   },
   compoundVariants: [
     {
@@ -49,6 +57,7 @@ export const homeHeaderStyles = tv({
     {
       layout: 'home',
       scrolled: false,
+      scrollLocked: false,
       class: {
         root: 'border-transparent bg-transparent shadow-none',
       },
@@ -56,6 +65,7 @@ export const homeHeaderStyles = tv({
     {
       layout: 'docs',
       scrolled: false,
+      scrollLocked: false,
       class: {
         root: 'border-transparent bg-transparent shadow-none',
       },
@@ -71,8 +81,18 @@ export const homeHeaderStyles = tv({
         ].join(' '),
       },
     },
+    {
+      scrollLocked: true,
+      class: {
+        root: [
+          'border-border/60 bg-surface/90 shadow-sm shadow-black/10',
+          'backdrop-blur-xl backdrop-saturate-150',
+          'dark:border-white/10 dark:bg-surface/90',
+        ].join(' '),
+      },
+    },
   ],
-  defaultVariants: { layout: 'home', scrolled: false },
+  defaultVariants: { layout: 'home', scrolled: false, scrollLocked: false },
 })
 
 export const headerIconBtnStyles = tv({

@@ -2,42 +2,23 @@
 title: Types
 description: Exported TypeScript types for parsers, adapters, and param state.
 package: '@echojs-ecosystem/url-state'
+keywords: [Types, url-state]
 ---
 
-# Types
+@echojs-ecosystem/url-state
 
-## Parser types
+## Usage
 
-| Type                                | Description                          |
-| ----------------------------------- | ------------------------------------ |
-| `Parser<T>`                         | Single-value parser                  |
-| `ParserWithDefault<T>`              | Parser with default value            |
-| `MultiParser<T>`                    | Multi-key parser                     |
-| `QueryParamParser<T>`               | Union of parser shapes               |
-| `CustomParserConfig<T>`             | Config for `createCustomParser`      |
-| `CustomMultiParserConfig<T>`        | Config for `createCustomMultiParser` |
-| `JsonSchema` / `StandardSchemaLike` | JSON parser validation               |
+```ts
+import { Types } from '@echojs-ecosystem/url-state'
 
-## State types
+// See guides for patterns.
+```
 
-| Type                       | Description              |
-| -------------------------- | ------------------------ |
-| `QueryParamState<T>`       | Single param instance    |
-| `QueryParamsState<Schema>` | Param group instance     |
-| `QueryStateOptions`        | Options for single param |
-| `CreateQueryParamsOptions` | Options for param group  |
-| `QueryStateSetOptions`     | Per-write options        |
-| `DefaultVisibility`        | `"hide"` \| `"show"`     |
+## Type Declarations
 
-## Adapter types
+```ts
+export const Types: unknown
+```
 
-| Type                     | Description                     |
-| ------------------------ | ------------------------------- |
-| `UrlStateAdapter`        | Read/write search string        |
-| `RouterBoundQueryParams` | Router-scoped param group       |
-| `RouterWithQueryParams`  | Router with `createQueryParams` |
-
-## See also
-
-- [API: parseAs\*](/docs/packages/url-state/api/parsers)
-- [API: createQueryParams](/docs/packages/url-state/api/create-query-params)
+## API

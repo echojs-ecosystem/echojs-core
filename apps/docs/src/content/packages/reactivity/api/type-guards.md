@@ -1,45 +1,42 @@
 ---
-title: Type Guards
-description: isSignal and isReadonlySignal runtime type guards.
+title: Type guards
+description: Runtime type guards for branded signal instances.
 package: '@echojs-ecosystem/reactivity'
+keywords: [isSignal, isReadonlySignal, reactivity]
 ---
 
-# Type Guards
+@echojs-ecosystem/reactivity
 
-## isSignal
-
-```ts
-function isSignal(
-  value: unknown
-): value is Signal<unknown> | ReadonlySignal<unknown>
-```
-
-Type guard for branded writable or readonly signal instances from this package.
+## Usage
 
 ```ts
-import { isSignal, signal } from '@echojs-ecosystem/reactivity'
+import { isSignal, isReadonlySignal, signal, computed } from '@echojs-ecosystem/reactivity'
 
-if (isSignal(maybe)) {
-  maybe.value()
-}
+if (isSignal(maybe)) maybe.value()
+if (isReadonlySignal(maybe)) maybe.value()
 ```
 
-## isReadonlySignal
+## Type Declarations
 
 ```ts
-function isReadonlySignal(value: unknown): value is ReadonlySignal<unknown>
+export const isSignal: (
+  value: unknown,
+) => value is Signal<unknown> | ReadonlySignal<unknown>
+
+export const isReadonlySignal: (
+  value: unknown,
+) => value is ReadonlySignal<unknown>
 ```
 
-Type guard for readonly/branded computed-style signals (no `.set()` /
-`.update()`).
+## API
 
-```ts
-import { computed, isReadonlySignal } from '@echojs-ecosystem/reactivity'
+### Exports
 
-const $x = computed(() => 1)
-isReadonlySignal($x) // true
-```
+| Member | Type | Description |
+| --- | --- | --- |
+| `isSignal` | `boolean` | Writable or readonly branded signal |
+| `isReadonlySignal` | `boolean` | Readonly / computed-style signal |
 
-## See also
+### Related
 
 - [Types](/docs/packages/reactivity/api/types)

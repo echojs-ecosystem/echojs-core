@@ -2,32 +2,12 @@
 title: Show
 description: Show(condition, then, else?) — conditional dynamic region.
 package: '@echojs-ecosystem/hyperdom'
+keywords: [Show, hyperdom]
 ---
 
-# Show
+@echojs-ecosystem/hyperdom
 
-```ts
-function Show(
-  condition: () => boolean,
-  then: () => Child,
-  fallback?: () => Child
-): () => Child
-```
-
-Returns a **dynamic child** that re-evaluates `condition()` and renders `then()`
-or `fallback()` on each update.
-
-## Parameters
-
-| Param       | Type                   |
-| ----------- | ---------------------- |
-| `condition` | `() => boolean`        |
-| `then`      | `() => Child`          |
-| `fallback`  | optional `() => Child` |
-
-Omit `fallback` for no else branch (`null`).
-
-## Example
+## Usage
 
 ```ts
 import { Show } from '@echojs-ecosystem/hyperdom'
@@ -39,18 +19,18 @@ Show(
 )
 ```
 
-Use as a child in a parent tree:
+## Type Declarations
 
 ```ts
-article(null, [
-  Show(
-    () => vm.$count.value() > 0,
-    () => p(null, 'Positive')
-  ),
-])
+function Show(
+  condition: () => boolean,
+  then: () => Child,
+  fallback?: () => Child
+): () => Child
 ```
 
-## See also
+## API
 
-- [Guides: Show & List](/docs/packages/hyperdom/guides/show-and-list)
-- [Examples: Conditional UI](/docs/packages/hyperdom/examples/conditional-ui)
+### Returns
+
+`Show` — see Type Declarations for the full signature.

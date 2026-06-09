@@ -1,30 +1,13 @@
 ---
 title: signal
-description: signal(initial) — create a writable reactive cell.
+description: Create a writable reactive cell with `value`, `set`, and `update`.
 package: '@echojs-ecosystem/reactivity'
+keywords: [signal, writable, reactivity]
 ---
 
-# signal
+@echojs-ecosystem/reactivity
 
-```ts
-function signal<T>(initial: T): Signal<T>
-```
-
-Creates a **writable** signal. **`initial` is required** — calling `signal()`
-with no argument throws `TypeError`.
-
-## Methods
-
-| Method           | Description                             |
-| ---------------- | --------------------------------------- |
-| `.value()`       | Read with dependency tracking           |
-| `.peek()`        | Read without tracking                   |
-| `.set(next)`     | Replace value                           |
-| `.update(fn)`    | `fn(previous)` → next value             |
-| `.subscribe(fn)` | Notify on change; returns `unsubscribe` |
-| `.readonly()`    | Readonly facade (no set/update)         |
-
-## Example
+## Usage
 
 ```ts
 import { signal } from '@echojs-ecosystem/reactivity'
@@ -32,21 +15,41 @@ import { signal } from '@echojs-ecosystem/reactivity'
 const $count = signal(0)
 $count.set(1)
 $count.update((n) => n + 1)
+$count.value()
 ```
 
-## Subscribe contract
+## Type Declarations
 
-Listener runs only when `Object.is(prev, next)` is false; **not** invoked
-immediately on subscribe.
+```ts
+export interface Signal<T> extends ReadonlySignal<T> {
+  set(next: T): void
+  update(fn: (prev: T) => T): void
+  readonly(): ReadonlySignal<T>
+}
 
-## Errors
+export const signal: <T>(initial: T) => Signal<T>
+```
 
-| Call                         | Error                                           |
-| ---------------------------- | ----------------------------------------------- |
-| `signal()`                   | `TypeError: signal(initial) expects 1 argument` |
-| `.subscribe(x)` non-function | `TypeError: subscribe(fn) expects a function`   |
+## API
 
-## See also
+### Parameters
 
-- [Guides: Signals](/docs/packages/reactivity/guides/signals)
-- [Types: Signal](/docs/packages/reactivity/api/types)
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `initial` | `T` | — | Required starting value; `signal()` without args throws |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| `.value()` | `ReadValue<T>` | Read with dependency tracking |
+| `.peek()` | `ReadValue<T>` | Read without tracking |
+| `.set(next)` | `void` | Replace value |
+| `.update(fn)` | `void` | Set from previous value |
+| `.subscribe(fn)` | `() => void` | Change listener; not called on subscribe |
+| `.readonly()` | `ReadonlySignal<T>` | Readonly facade without set/update |
+
+### Related
+
+- [computed](/docs/packages/reactivity/api/computed)
+- [Types](/docs/packages/reactivity/api/types)

@@ -11,5 +11,12 @@ keywords: [signals, computed, effect, batch, scope, reactivity]
 
 :::install @echojs-ecosystem/reactivity
 
-> [!tip] Open **Guides & Concepts** for patterns, **API Reference** for every
-> export, and **Playground** for a live demo.
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Installation](/docs/packages/reactivity/installation) | Package install |
+| [Functions](/docs/packages/reactivity/functions) | Full index by category — links to each API page |
+| [Guides & Concepts](/docs/packages/reactivity/guides/important-defaults) | Patterns and defaults |
+
+Each API page follows: **Usage** → **Type Declarations** → **API** (see [signal](/docs/packages/reactivity/api/signal) for the reference layout).

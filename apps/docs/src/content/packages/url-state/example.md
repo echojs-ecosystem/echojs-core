@@ -37,4 +37,4 @@ filters.update((v) => ({ ...v, page: v.page + 1 }));
 ## Related
 
 - [Guides & Concepts](/docs/packages/url-state/guides/important-defaults)
-- [API Reference](/docs/packages/url-state/api)
+- [Functions](/docs/packages/url-state/functions)

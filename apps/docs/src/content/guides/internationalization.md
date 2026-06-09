@@ -10,8 +10,23 @@ keywords: [i18n, locale, createI18nProvider, translations]
 
 EchoJS i18n is **`@echojs-ecosystem/i18n`**: typed message maps, lazy locale
 chunks, browser detection, and HyperDOM-friendly `t()` that tracks the active
-locale. The docs site (`apps/docs`) and example app both use the same provider
-pattern.
+locale. `apps/docs` and `apps/example` use the same provider pattern.
+
+> [!TIP] Call `i18n.t()` inside reactive children (`() => i18n.t('key')`) — same
+> rule as [Reactivity](/docs/guides/reactivity) for signal reads.
+
+## Mental model
+
+| Piece            | Role                                      |
+| ---------------- | ----------------------------------------- |
+| `createI18n`     | Message catalogs, fallback, lazy loaders  |
+| `createI18nProvider` | DI + `start()` on app bootstrap       |
+| `i18n.t(key)`    | Translate; tracks locale signal         |
+| `i18n.setLocale` | Switch language + persist                 |
+| `navigatorRules` | Map browser lang → locale                 |
+
+Translations live in **JSON** (or TS maps). Views and models call `t()` — do not
+hard-code user-visible strings in production UI.
 
 ## Provider at bootstrap
 
@@ -33,16 +48,20 @@ export const i18n = i18nProvider.i18n
 export type AppLocale = (typeof i18n.supportedLocales)[number]
 ```
 
-Register with `createEchoApp().use(i18nProvider)` **before** routes that read
-translations in `beforeLoad` if needed.
+```ts
+createEchoApp({ strictContextChecks: true })
+  .use(i18nProvider)
+  .use(routerProvider)
+  .mount('#app')
+```
 
-`setup()` calls `i18n.start()` — applies detect rules, sets
-`document.documentElement.lang`, optional `document.title`, and persists locale
-changes to `storageKey`.
+Register **before** routes if `beforeLoad` reads translated metadata. `setup()`
+calls `i18n.start()` — detect locale, set `document.documentElement.lang`,
+optional `document.title`, persist to `storageKey`.
 
 ## Message files
 
-Nested JSON keys map to dot paths:
+Nested JSON → dot paths:
 
 ```json
 {
@@ -53,7 +72,11 @@ Nested JSON keys map to dot paths:
     "save": "Save",
     "login": "Sign in"
   },
-  "greeting": "Hello, {name}"
+  "greeting": "Hello, {name}",
+  "locale": {
+    "en": "English",
+    "ru": "Русский"
+  }
 }
 ```
 
@@ -64,9 +87,11 @@ i18n.t('greeting', { name: 'Alex' })
 i18n.exists('common.save')
 ```
 
+Keep keys **stable** — rename keys only with migration or compatibility shims.
+
 ## Lazy locales
 
-Eager import for default; lazy for others:
+Eager default; lazy others to shrink initial bundle:
 
 ```ts
 const appLocales = {
@@ -77,75 +102,143 @@ const appLocales = {
 createI18n({ defaultLocale: 'en', fallbackLocale: 'en', locales: appLocales })
 ```
 
-Function entries load on first `setLocale` / `start`.
+Function entries load on first `setLocale` / `start`. Show loading state in
+locale picker while chunk loads.
 
 ## Browser detection
 
-Omit `defaultLocale` when using detection — priority:
+Priority when `defaultLocale` omitted:
 
-1. `localStorage[storageKey]`
-2. `navigatorRules` (prefix → locale)
+1. `localStorage[storageKey]` (user choice)
+2. `navigatorRules` (prefix match → locale)
 3. `fallbackLocale`
 
 ```ts
 navigatorRules: [
-  { prefix: "ru", locale: "ru" },
-  { prefix: "de", locale: "de" },
-],
+  { prefix: 'ru', locale: 'ru' },
+  { prefix: 'de', locale: 'de' },
+]
 ```
 
-## Use in views and models
+## Use in views
 
-Call `i18n.t()` inside reactive contexts so UI updates on locale change:
+Function children re-run when locale changes:
+
+```ts
+import { i18n } from '@core/providers/i18n.js'
+
+export const ShellView = createView(
+  (_vm): Child =>
+    nav(null, [
+      NavLink({ to: homePage, children: () => i18n.t('nav.home') }),
+      button({ onClick: () => i18n.setLocale('ru') }, () =>
+        i18n.t('locale.ru')
+      ),
+    ]),
+  'ShellView'
+)
+```
+
+Reactive props work too:
+
+```ts
+button({ 'aria-label': () => i18n.t('common.close') }, () => '×')
+```
+
+## Use in models
+
+Side effects that touch document or external APIs:
 
 ```ts
 import { effect } from '@echojs-ecosystem/reactivity'
 import { i18n } from '@core/providers/i18n.js'
 
-// In createView — function child re-runs when locale signal updates
-p(null, () => i18n.t('common.session'))
-
-// In model effect — SEO, document metadata
 effect(() => {
   document.title = i18n.t('shell.documentTitle')
 })
 ```
 
-Do **not** cache translated strings in plain variables outside signals/effects
-unless the locale is fixed.
+Do **not** cache `const label = i18n.t('x')` at module top level — stale after
+locale switch.
 
-## Switching locale
+## Locale picker feature
 
-```ts
-await i18n.setLocale('ru')
-// or exported helper:
-export const setAppLocale = (locale: AppLocale) => i18n.setLocale(locale)
+Typical feature slice:
+
+```
+features/locale-switcher/
+  model/locale-switcher.model.ts   # setLocale, supportedLocales
+  ui/locale-switcher.view.ts
 ```
 
-Build a locale picker with `i18n.supportedLocales` and labels from
-`i18n.t("locale.ru")` keys.
+```ts
+export const createLocaleSwitcherModel = createModel((): LocaleSwitcherVM => ({
+  locales: () => i18n.supportedLocales,
+  active: () => i18n.locale.value(),
+  setLocale: (l: AppLocale) => i18n.setLocale(l),
+  label: (l: AppLocale) => i18n.t(`locale.${l}`),
+}), 'LocaleSwitcherModel')
+```
 
 ## Plural and Intl
 
-Use built-in plural helpers and `Intl` formatters from the package (dates,
-numbers, relative time) — see
-[i18n guides](/docs/packages/i18n/guides/messages-and-keys).
+Package helpers for plural rules and formatters:
+
+```ts
+i18n.t('items.count', { count: 3 })
+i18n.formatDate(date, { dateStyle: 'medium' })
+i18n.formatNumber(1234.5)
+```
+
+See [Messages and keys](/docs/packages/i18n/guides/messages-and-keys),
+[Interpolation and plural](/docs/packages/i18n/guides/interpolation-and-plural).
 
 ## Router and URLs
 
-Locale in the **path** (`/en/docs/...`) is an app choice — combine with route
-params or `@echojs-ecosystem/url-state`. The i18n provider does not replace
-routing; sync `setLocale` when the URL locale segment changes.
+Locale in the **path** (`/en/docs/...`) is an app decision — i18n does not
+replace routing.
+
+| Approach              | When                                    |
+| --------------------- | --------------------------------------- |
+| Storage + detect only | Docs-style SPA, single URL space        |
+| Prefix routes `/en/*` | SEO, shareable localized URLs           |
+| Query `?lang=ru`      | Quick prototype — prefer url-state      |
+
+Sync `i18n.setLocale` when route locale param changes:
+
+```ts
+effect(() => {
+  const lang = localePage.$params.value().lang
+  if (lang) void i18n.setLocale(lang as AppLocale)
+})
+```
 
 ## Testing
 
-- Import a single JSON fixture in tests.
-- Call `i18n.setLocale("en")` in `beforeEach` for deterministic snapshots.
-- Prefer `exists()` before optional keys in shared components.
+```ts
+beforeEach(async () => {
+  await i18n.setLocale('en')
+})
+```
+
+- Fixture JSON for unit tests.
+- `exists()` before optional keys in shared components.
+- Snapshot tests after locale is fixed in `beforeEach`.
+
+## Checklist
+
+1. Provider registered in app bootstrap.
+2. All user strings via `t()` — no literals in views.
+3. Reactive `() => i18n.t(...)` in HyperDOM.
+4. `storageKey` for user preference.
+5. Lazy load non-default locales in production.
+6. `document.documentElement.lang` synced (`syncDocument: true`).
 
 ## Related
 
+- [Reactivity](/docs/guides/reactivity) — reactive `t()` in views
 - [i18n package](/docs/packages/i18n/overview)
 - [Providers](/docs/architecture/providers)
-- Example locales — `apps/example/public/locales/`
-- Docs provider — `apps/docs/src/core/providers/i18n.ts`
+- [URL state](/docs/state/url-state) — locale in query
+- Example — `apps/example/public/locales/`
+- Docs — `apps/docs/src/core/providers/i18n.ts`

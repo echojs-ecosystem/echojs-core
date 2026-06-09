@@ -1,37 +1,25 @@
-import type { ContentId, DocsNavItem, DocsNavSection } from './types'
+import type { DocsNavItem, DocsNavSection } from './types'
+import { createDocNavItem } from './nav/doc-nav-item'
+import { createDocNavSection } from './nav/doc-nav-section'
 
-const agentItem = (
-  slug: string,
-  title: string,
-  contentId: ContentId,
-  extra?: Partial<Pick<DocsNavItem, 'keywords' | 'badge'>>
-): DocsNavItem => ({
-  slug,
-  title,
-  contentId,
-  routeName: `docs-${contentId.replace(/\//g, '-')}`,
-  ...extra,
-})
-
-export const agentsNavSection: DocsNavSection = {
-  id: 'agents',
-  title: 'For agents',
-  slug: 'agents',
-  items: [],
-}
+export const agentsNavSection: DocsNavSection = createDocNavSection(
+  'agents',
+  'For agents',
+  []
+)
 
 export const agentsNavItems: DocsNavItem[] = [
-  agentItem('llms-txt', 'LLMs.txt', 'agents/llms-txt', {
+  createDocNavItem('agents/llms-txt', 'LLMs.txt', {
     keywords: ['llms', 'cursor', 'copilot', 'ai', 'rules'],
   }),
-  agentItem('agents', 'AGENTS.md', 'agents/agents', {
+  createDocNavItem('agents/agents', 'AGENTS.md', {
     badge: 'Reference',
     keywords: ['agents', 'contributing', 'conventions', 'architecture'],
   }),
-  agentItem('model-and-view', 'Model & View', 'agents/model-and-view', {
+  createDocNavItem('agents/model-and-view', 'Model & View', {
     keywords: ['createModel', 'createView', 'hyperdom', 'vm'],
   }),
-  agentItem('project-layout', 'Project layout', 'agents/project-layout', {
+  createDocNavItem('agents/project-layout', 'Project layout', {
     keywords: ['folders', 'structure', 'feature', 'widget'],
   }),
 ]

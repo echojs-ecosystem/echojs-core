@@ -1,38 +1,13 @@
 ---
 title: readonly
-description:
-  readonly(store) — create a ReadonlyStore view without mutation methods.
+description: readonly — Readonly API.
 package: '@echojs-ecosystem/store'
+keywords: [readonly, store]
 ---
 
-# readonly
+@echojs-ecosystem/store
 
-```ts
-function readonly<State>(store: Store<State>): ReadonlyStore<State>
-```
-
-Returns a separate **ReadonlyStore** that mirrors the source store's changes but
-has no `set`, `update`, or `reset`.
-
-## ReadonlyStore instance
-
-| Member                | Description             |
-| --------------------- | ----------------------- |
-| `kind`                | `"readonly-store"`      |
-| `name`                | Optional                |
-| `value()`             | Current state           |
-| `$value`              | `ReadonlySignal<State>` |
-| `changed`             | Store event             |
-| `subscribe(listener)` | Unsubscribe return      |
-
-## vs `withReadonly()`
-
-|                 | `readonly(store)` | `withReadonly()`      |
-| --------------- | ----------------- | --------------------- |
-| Instance        | New readonly view | Same instance, locked |
-| Writable source | Still mutable     | Throws on mutation    |
-
-## Example
+## Usage
 
 ```ts
 import { createStore, readonly } from '@echojs-ecosystem/store'
@@ -44,7 +19,14 @@ view.value()
 view.subscribe((v) => {})
 ```
 
-## See also
+## Type Declarations
 
-- [Guides: Readonly Stores](/docs/packages/store/guides/readonly)
-- [API: Extensions](/docs/packages/store/api/extensions)
+```ts
+function readonly<State>(store: Store<State>): ReadonlyStore<State>
+```
+
+## API
+
+### Returns
+
+`readonly` — see Type Declarations for the full signature.

@@ -787,7 +787,7 @@ loop** for UI updates by design.
 
 ## Related docs
 
-- [Why EchoJS](/docs/introduction/why-echojs)
+- [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)
 - [Architecture overview](/docs/architecture/overview)
 - [State overview](/docs/state/overview)
 - [Data fetching](/docs/guides/data-fetching)

@@ -19,5 +19,5 @@ Patterns from the EchoJS docs app and example lab.
 ## Related
 
 - [Guides & Concepts](/docs/packages/i18n/guides/important-defaults)
-- [API Reference](/docs/packages/i18n/api)
+- [Functions](/docs/packages/i18n/functions)
 - [Framework With i18n](/docs/packages/framework/examples/with-i18n)

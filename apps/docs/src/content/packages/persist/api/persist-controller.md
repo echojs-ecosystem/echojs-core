@@ -1,34 +1,13 @@
 ---
-title: Persist Controller
+title: Persist controller
 description: hydrate, save, clear, pause/resume, and status signals.
 package: '@echojs-ecosystem/persist'
+keywords: [Persist controller, persist]
 ---
 
-# Persist Controller
+@echojs-ecosystem/persist
 
-Every store extended with persist gains a `persist` controller.
-
-## Methods
-
-| Member                 | Description               |
-| ---------------------- | ------------------------- |
-| `key`                  | Storage key               |
-| `hydrate()`            | Load snapshot into target |
-| `save()`               | Write current value       |
-| `clear()`              | Remove storage entry      |
-| `pause()` / `resume()` | Toggle auto persistence   |
-
-## Status signals
-
-| Signal      | Description               |
-| ----------- | ------------------------- |
-| `$hydrated` | Hydration completed       |
-| `$pending`  | Async operation in flight |
-| `$error`    | Last error                |
-
-IndexedDB hydrate/save is **async** — await methods and watch `$pending`.
-
-## Example
+## Usage
 
 ```ts
 await themeStore.persist.hydrate()
@@ -36,6 +15,16 @@ themeStore.set('light')
 await themeStore.persist.save()
 ```
 
-## See also
+## Type Declarations
 
-- [Hydrate & Save](/docs/packages/persist/guides/hydrate-and-save)
+```ts
+await themeStore.persist.hydrate()
+themeStore.set('light')
+await themeStore.persist.save()
+```
+
+## API
+
+### Returns
+
+`Persist controller` — see Type Declarations for the full signature.

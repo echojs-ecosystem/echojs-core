@@ -1,25 +1,13 @@
 ---
 title: cleanup
-description: cleanup(fn) — register teardown inside an active scope.
+description: Register teardown to run when the current `scope()` disposes.
 package: '@echojs-ecosystem/reactivity'
+keywords: [cleanup, scope, reactivity]
 ---
 
-# cleanup
+@echojs-ecosystem/reactivity
 
-```ts
-function cleanup(fn: () => void): void
-```
-
-Registers `fn` to run when the current `scope()` disposes. **Must** be called
-inside an active scope or throws:
-
-```
-cleanup(fn) must be called inside scope()
-```
-
-`fn` must be a function or `TypeError` is thrown.
-
-## Example
+## Usage
 
 ```ts
 import { scope, cleanup } from '@echojs-ecosystem/reactivity'
@@ -30,6 +18,26 @@ scope(() => {
 })
 ```
 
-## See also
+## Type Declarations
 
-- [Guides: Scopes & Cleanup](/docs/packages/reactivity/guides/scopes-and-cleanup)
+```ts
+export const cleanup: (fn: () => void) => void
+```
+
+## API
+
+### Parameters
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `fn` | `() => void` | — | Must be called inside `scope()` or throws |
+
+### Returns
+
+| Member | Type | Description |
+| --- | --- | --- |
+| — | `void` | Registers fn on the active scope bucket |
+
+### Related
+
+- [scope](/docs/packages/reactivity/api/scope)

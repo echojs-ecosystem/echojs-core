@@ -20,4 +20,13 @@ const catalogParams = createQueryParams({
 })
 ```
 
+## Documentation map
+
+| Section | Description |
+| ------- | ----------- |
+| [Functions](/docs/packages/url-state/functions) | Parsers, `createQueryParams`, adapters |
+| [Guides & Concepts](/docs/packages/url-state/guides/parsers) | Router sync, history |
+
+Each API page: **Usage** → **Type Declarations** → **API** (see [createQueryParams](/docs/packages/url-state/api/create-query-params)).
+
 > [!tip] Path segments and layouts stay in `@echojs-ecosystem/router`.

@@ -47,4 +47,4 @@ for why views rarely call `effect()` directly.
 ## Related
 
 - [Guides & Concepts](/docs/packages/reactivity/guides/important-defaults)
-- [API Reference](/docs/packages/reactivity/api)
+- [Functions](/docs/packages/reactivity/functions)

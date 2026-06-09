@@ -1,7 +1,10 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
 import type { Signal } from '@echojs-ecosystem/framework/reactivity'
 
-import { $docsHeaderScrolled } from '@app/docs-header-scroll'
+import {
+  $docsHeaderScrolled,
+  $docsHeaderScrollLockActive,
+} from '@app/docs-header-scroll'
 import { buildSiteHeaderNavItems, type SiteHeaderNavItem } from '@app/router'
 import { toggleMobileNav } from '@widgets/docs-shell/model/mobile-nav'
 
@@ -19,6 +22,7 @@ export type SiteHeaderOptions = {
 export type SiteHeaderVM = {
   mode: SiteHeaderMode
   $scrolled: Signal<boolean>
+  $scrollLocked: Signal<boolean>
   headerStyles: () => ReturnType<typeof homeHeaderStyles>
   navItems: SiteHeaderNavItem[]
   showMenu: boolean
@@ -32,10 +36,12 @@ export const createSiteHeaderModel = (options: SiteHeaderOptions = {}) =>
     return {
       mode,
       $scrolled: $docsHeaderScrolled,
+      $scrollLocked: $docsHeaderScrollLockActive,
       headerStyles: () =>
         homeHeaderStyles({
           layout: mode,
           scrolled: $docsHeaderScrolled.value(),
+          scrollLocked: $docsHeaderScrollLockActive.value(),
         }),
       navItems: buildSiteHeaderNavItems(),
       showMenu: true,
