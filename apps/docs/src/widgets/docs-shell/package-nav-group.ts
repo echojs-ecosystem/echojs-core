@@ -208,10 +208,13 @@ const PackageNavSubsectionView = (
       showItemIcon
     )
 
-  const renderChild = (child: PackageNavChild): Child =>
-    isPackageNavSubsection(child)
-      ? PackageNavSubsectionView(groupId, child, ensureGroupOpen, true)
-      : renderLeaf(child)
+  const renderChild = (child: PackageNavChild): Child => {
+    if (isPackageNavLabel(child)) return navGroupLabel(child.title)
+    if (isPackageNavSubsection(child)) {
+      return PackageNavSubsectionView(groupId, child, ensureGroupOpen, true)
+    }
+    return renderLeaf(child)
+  }
 
   return div(
     { class: nested ? shell.packageSubsectionNested() : shell.packageSubsection() },

@@ -31,7 +31,9 @@ export const activeElementDemo: UtilDemoDef = {
             p({ class: ud.title() }, 'Contact form'),
             p({ class: ud.hint() }, [
               'Focus any field, textarea, or button to see which element is active: ',
-              span({ class: ud.code() }, () => activeId(active.$value.value())),
+              span({ class: ud.code() }, () =>
+                activeId(active.$value.value() as Element | null)
+              ),
             ]),
           ]),
           div({ class: ud.form() }, [

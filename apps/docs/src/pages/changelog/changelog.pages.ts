@@ -5,7 +5,7 @@ import {
   changelogReleases,
   findChangelogReleaseBySlug,
   ChangelogIndex,
-  ChangelogRelease,
+  ChangelogReleaseArticle,
 } from '@entities/changelog'
 import { applySeo } from '@core/seo/apply-seo'
 
@@ -24,7 +24,7 @@ changelogReleasePageRef = createRouteView<{ version: string }>({
       path: `/docs/changelog/${params.version}`,
       noindex: !release,
     })
-    return ChangelogRelease({
+    return ChangelogReleaseArticle({
       slug: params.version,
       indexPage: changelogPageRef,
     })

@@ -25,7 +25,7 @@ export const ChangelogIndex = (props: ChangelogIndexProps): Child =>
     name: 'ChangelogIndex',
   })()
 
-export const ChangelogRelease = (props: ChangelogReleaseProps): Child =>
+export const ChangelogReleaseArticle = (props: ChangelogReleaseProps): Child =>
   createComponent(createChangelogReleaseModel(props), ChangelogReleaseView, {
-    name: 'ChangelogRelease',
+    name: 'ChangelogReleaseArticle',
   })()

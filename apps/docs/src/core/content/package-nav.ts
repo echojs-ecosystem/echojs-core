@@ -57,11 +57,13 @@ const subsectionContainsContentId = (
   subsection: PackageNavSubsection,
   contentId: ContentId
 ): boolean =>
-  subsection.children.some((child) =>
-    isPackageNavSubsection(child)
-      ? subsectionContainsContentId(child, contentId)
-      : child.contentId === contentId
-  )
+  subsection.children.some((child) => {
+    if (isPackageNavSubsection(child)) {
+      return subsectionContainsContentId(child, contentId)
+    }
+    if (isPackageNavLabel(child)) return false
+    return child.contentId === contentId
+  })
 
 const pkgItem = (
   packageId: string,
