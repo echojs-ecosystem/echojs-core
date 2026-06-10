@@ -20,7 +20,7 @@ const PUBLISHABLE = [
   { name: "@echojs-ecosystem/form", dir: "form" },
   { name: "@echojs-ecosystem/persist", dir: "persist" },
   { name: "@echojs-ecosystem/store", dir: "store" },
-  { name: "@echojs-ecosystem/query", dir: "query" },
+  { name: "@echojs-ecosystem/async", dir: "async" },
   { name: "@echojs-ecosystem/url-state", dir: "url-state" },
   { name: "@echojs-ecosystem/i18n", dir: "i18n" },
   { name: "@echojs-ecosystem/ui", dir: "ui" },

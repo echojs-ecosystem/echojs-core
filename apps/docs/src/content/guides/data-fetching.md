@@ -8,7 +8,7 @@ keywords: [createQuery, createMutation, beforeLoad, QueryClient]
 
 # Data Fetching
 
-Async data in EchoJS flows through **`@echojs-ecosystem/query`** (cache,
+Async data in EchoJS flows through **`@echojs-ecosystem/async`** (cache,
 retries, staleness) or **`beforeLoad`** on routes (one-shot loader data). Views
 stay declarative; **models and API modules** own fetch wiring.
 
@@ -35,7 +35,7 @@ Register defaults once — **before** `routerProvider` if routes prefetch in
 `beforeLoad`:
 
 ```ts
-import { createQueryProvider } from '@echojs-ecosystem/query'
+import { createQueryProvider } from '@echojs-ecosystem/async'
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {
@@ -58,7 +58,7 @@ createEchoApp()
 ## Define a query
 
 ```ts
-import { createQuery } from '@echojs-ecosystem/query'
+import { createQuery } from '@echojs-ecosystem/async'
 
 export type User = { id: number; name: string }
 
@@ -178,7 +178,7 @@ re-renders when `doc.data()` updates.
 ## Mutations
 
 ```ts
-import { createMutation } from '@echojs-ecosystem/query'
+import { createMutation } from '@echojs-ecosystem/async'
 
 export const updateProfileMutation = createMutation({
   name: 'update-profile',
@@ -274,7 +274,7 @@ resource — pick one source of truth.
 ## Related
 
 - [Reactivity](/docs/guides/reactivity) — signals, models, query binding
-- [Query package](/docs/packages/query/overview)
+- [Query package](/docs/packages/async/overview)
 - [Network HTTP](/docs/packages/network-http) — client, retries, hooks
 - [Routing](/docs/guides/routing) — `beforeLoad`, loading views
 - [Server state](/docs/state/server-state)

@@ -6,9 +6,10 @@
   "scripts": {
     "dev": "bun run dev:server & bun run dev:client",
     "dev:client": "bun run --cwd client dev",
-    "dev:server": "bun run --cwd server dev",
+    "dev:server": "cd server && go run .",
     "build": "bun run --cwd client build",
-    "typecheck": "bun run --cwd shared typecheck && bun run --cwd server typecheck && bun run --cwd client typecheck",
+    "build:server": "cd server && go build -o workspace-server .",
+    "typecheck": "bun run --cwd shared typecheck && bun run --cwd client typecheck",
     "lint": "bun run --cwd client lint"
   }
 }

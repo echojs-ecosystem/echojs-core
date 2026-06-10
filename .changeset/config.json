@@ -12,7 +12,7 @@
       "@echojs-ecosystem/form",
       "@echojs-ecosystem/persist",
       "@echojs-ecosystem/store",
-      "@echojs-ecosystem/query",
+      "@echojs-ecosystem/async",
       "@echojs-ecosystem/url-state",
       "@echojs-ecosystem/i18n",
       "@echojs-ecosystem/ui",

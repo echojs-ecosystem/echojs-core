@@ -65,7 +65,7 @@ createEchoApp({ strictContextChecks: true }).use(routerProvider).mount('#app')
 | Area                | Package                       |
 | ------------------- | ----------------------------- |
 | Routing & `NavLink` | `@echojs-ecosystem/router`    |
-| Server/async data   | `@echojs-ecosystem/query`     |
+| Server/async data   | `@echojs-ecosystem/async`     |
 | Client store        | `@echojs-ecosystem/store`     |
 | URL-bound state     | `@echojs-ecosystem/url-state` |
 | Local persistence   | `@echojs-ecosystem/persist`   |

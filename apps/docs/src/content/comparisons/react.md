@@ -59,7 +59,7 @@ EchoJS.
 | **Virtual DOM**        | Yes (core model)                                | No                                                        |
 | **Structure**          | Team convention, lint rules optional            | **Feature-first** dependency direction (documented)       |
 | **Routing**            | React Router, TanStack Router, Next file routes | `@echojs-ecosystem/router` (typed route table)            |
-| **Server / cache**     | TanStack Query, SWR, Apollo, RTK Query          | `@echojs-ecosystem/query`                                 |
+| **Server / cache**     | TanStack Query, SWR, Apollo, RTK Query          | `@echojs-ecosystem/async`                                 |
 | **Client global**      | Redux, Zustand, Jotai, Context                  | `@echojs-ecosystem/store` (+ `@echojs-ecosystem/persist`) |
 | **URL state**          | `useSearchParams`, nuqs, manual                 | `@echojs-ecosystem/url-state`                             |
 | **UI**                 | MUI, Chakra, Radix + shadcn, Ant Design         | `@echojs-ecosystem/hyperdom` + `@echojs-ecosystem/ui`     |
@@ -68,7 +68,7 @@ EchoJS.
 | **Official SSR story** | Next / Remix mature                             | SPA-first today; plan SSR separately                      |
 
 > [!NOTE] Performance numbers Illustrative benchmarks are on the
-> [home page Compare section](/). Treat them as layout previews until official
+> [comparisons overview](/docs/comparisons). Treat them as layout previews until official
 > lab results ship.
 
 ---
@@ -236,7 +236,7 @@ Context.
 | ------------------ | -------------------------- | ----------------------------------- | ------------------------------------------------------- |
 | **Local UI**       | modals, hover, field focus | `useState`                          | `signal` in model                                       |
 | **Screen model**   | step wizard, derived UI    | hooks + `useMemo`                   | `createModel`                                           |
-| **Server / async** | API lists, detail          | React Query, SWR, Apollo, RTK Query | `@echojs-ecosystem/query`                               |
+| **Server / async** | API lists, detail          | React Query, SWR, Apollo, RTK Query | `@echojs-ecosystem/async`                               |
 | **URL**            | filters, tab, pagination   | `useSearchParams`, nuqs             | `@echojs-ecosystem/url-state`                           |
 | **App client**     | session, theme, cart       | Redux, Zustand, Jotai, Context      | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
@@ -249,7 +249,7 @@ Context.
 | **Jotai / Recoil**        | Atomic global           | `signal` / small stores                                  |
 | **MobX**                  | Observable OOP          | `signal` + `computed` (similar mental model)             |
 | **Context**               | DI + theme + session    | `provide` / `inject`, `@echojs-ecosystem/ui` theme       |
-| **Apollo Client (local)** | Cache + local state     | `@echojs-ecosystem/query` for server; store for UI       |
+| **Apollo Client (local)** | Cache + local state     | `@echojs-ecosystem/async` for server; store for UI       |
 | **react-use** misc        | One-off hooks           | model methods or `core/` utils                           |
 | **Immer**                 | Immutable patches       | `store.update` / `set` with spread                       |
 | **xstate**                | State machines          | model + explicit transitions (or port machine in shared) |
@@ -306,7 +306,7 @@ export const sessionStore = createStore({
 
 ## Async data: Query, SWR, Apollo, RTK Query
 
-### TanStack Query → `@echojs-ecosystem/query`
+### TanStack Query → `@echojs-ecosystem/async`
 
 | TanStack Query                    | EchoJS                                      |
 | --------------------------------- | ------------------------------------------- |
@@ -575,7 +575,7 @@ vnodes.
 
 | Problem         | React                    | EchoJS                      |
 | --------------- | ------------------------ | --------------------------- |
-| REST cache      | TanStack Query, SWR      | `@echojs-ecosystem/query`   |
+| REST cache      | TanStack Query, SWR      | `@echojs-ecosystem/async`   |
 | GraphQL         | Apollo, urql             | `queryFn` + optional client |
 | WebSockets      | socket.io-client + hooks | `effect` + client in entity |
 | Upload progress | xhr + state              | model signals               |
@@ -774,7 +774,7 @@ loop** for UI updates by design.
 | --------------- | --------------------------- | ----------------------------------------------------------- |
 | Core loop       | Render → diff → patch       | Signal → targeted write                                     |
 | State libraries | Many overlapping            | Layered + `@echojs-ecosystem/store` / `query` / `url-state` |
-| Data fetching   | TanStack Query, SWR, Apollo | `@echojs-ecosystem/query`                                   |
+| Data fetching   | TanStack Query, SWR, Apollo | `@echojs-ecosystem/async`                                   |
 | Routing         | RR, TanStack, Next          | `@echojs-ecosystem/router`                                  |
 | Meta-framework  | Next, Remix                 | `@echojs-ecosystem/framework` + Vite SPA                    |
 | Architecture    | Convention                  | Feature-first rules                                         |
@@ -794,5 +794,5 @@ loop** for UI updates by design.
 - [Routing guide](/docs/guides/routing)
 - [Providers](/docs/architecture/providers)
 - [@echojs-ecosystem/reactivity](/docs/packages/reactivity) ·
-  [@echojs-ecosystem/query](/docs/packages/query) ·
+  [@echojs-ecosystem/async](/docs/packages/async) ·
   [@echojs-ecosystem/router](/docs/packages/router)

@@ -2,7 +2,8 @@ import { tv } from 'tailwind-variants'
 
 export const homeStyles = tv({
   slots: {
-    root: 'relative min-h-dvh overflow-x-clip bg-surface',
+    page: 'min-h-dvh bg-surface',
+    shell: 'relative overflow-x-clip',
     mesh: 'pointer-events-none absolute inset-0 bg-hero-mesh',
     glow: 'pointer-events-none absolute -top-32 left-1/2 h-[20rem] max-w-[min(40rem,100%)] w-[85%] -translate-x-1/2 rounded-full bg-echo-400/12 blur-[90px] dark:bg-echo-500/8',
     main: 'relative min-w-0 overflow-x-clip',

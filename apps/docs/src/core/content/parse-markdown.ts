@@ -182,6 +182,12 @@ export const parseMarkdown = (raw: string): DocDocument => {
       continue
     }
 
+    if (line.startsWith(':::framework-comparison')) {
+      blocks.push({ type: 'framework-comparison' })
+      i++
+      continue
+    }
+
     if (line.startsWith('@echojs-ecosystem/')) {
       blocks.push({ type: 'package-badge', name: line.trim() })
       i++

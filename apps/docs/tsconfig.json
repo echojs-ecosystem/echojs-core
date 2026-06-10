@@ -33,6 +33,7 @@
       ],
       "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
       "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"],
+      "@echojs-ecosystem/async": ["../../packages/async/src/index.ts"],
       "@echojs-ecosystem/router": ["../../packages/router/src/index.ts"]
     }
   },

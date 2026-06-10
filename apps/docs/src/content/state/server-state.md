@@ -1,7 +1,7 @@
 ---
 title: Server state
 description:
-  Async data, cache, and mutations with @echojs-ecosystem/query — separate from
+  Async data, cache, and mutations with @echojs-ecosystem/async — separate from
   router and stores.
 keywords: [createQuery, createMutation, cache, staleTime]
 ---
@@ -10,7 +10,7 @@ keywords: [createQuery, createMutation, cache, staleTime]
 
 **Server state** is data that **originates on the server** (or any async
 source): REST, GraphQL, edge functions. The client keeps a **cache** with
-staleness, refetch, and invalidation via `@echojs-ecosystem/query`. It is not
+staleness, refetch, and invalidation via `@echojs-ecosystem/async`. It is not
 the same as [router loader](/docs/state/router-state) data or a manual
 [store](/docs/state/client-store) copy.
 
@@ -107,5 +107,5 @@ The URL is shareable; the query cache avoids refetching identical keys within
 
 - [State overview](/docs/state/overview)
 - [Data fetching guide](/docs/guides/data-fetching)
-- [Query package](/docs/packages/query/guides/query-definitions)
+- [Query package](/docs/packages/async/guides/query-definitions)
 - Example — `apps/example/src/features/query-demo/`

@@ -31,7 +31,7 @@ export default echoTsupConfig({
     form: 'src/form.ts',
     persist: 'src/persist.ts',
     store: 'src/store.ts',
-    query: 'src/query.ts',
+    async: 'src/async.ts',
     i18n: 'src/i18n.ts',
     devtools: 'src/devtools.ts',
     ui: 'src/ui.ts',

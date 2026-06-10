@@ -43,7 +43,7 @@ Typical stack for a full SPA:
 
 :::install @echojs-ecosystem/router
 
-:::install @echojs-ecosystem/query
+:::install @echojs-ecosystem/async
 
 ## Minimal bootstrap
 

@@ -47,10 +47,10 @@ export const ecosystemPackages: EcosystemPackage[] = [
     icon: '▣',
   },
   {
-    name: '@echojs-ecosystem/query',
-    shortName: 'query',
+    name: '@echojs-ecosystem/async',
+    shortName: 'async',
     description: 'Signal-native data fetching and cache layer.',
-    contentId: 'packages/query',
+    contentId: 'packages/async',
     icon: '↻',
   },
   {
@@ -125,4 +125,27 @@ export const ecosystemFrameworkPackage = ecosystemPackages.find(
 
 export const ecosystemModulePackages = ecosystemPackages.filter(
   (pkg) => !pkg.featured
+)
+
+/** Spotlight modules on the home page mobile layout (core adoption path). */
+export const ecosystemSpotlightShortNames = [
+  'reactivity',
+  'hyperdom',
+  'router',
+  'async',
+  'store',
+  'ui',
+] as const
+
+export const ecosystemSpotlightPackages = ecosystemSpotlightShortNames
+  .map((shortName) =>
+    ecosystemModulePackages.find((pkg) => pkg.shortName === shortName)
+  )
+  .filter((pkg): pkg is EcosystemPackage => pkg !== undefined)
+
+export const ecosystemMorePackages = ecosystemModulePackages.filter(
+  (pkg) =>
+    !ecosystemSpotlightShortNames.includes(
+      pkg.shortName as (typeof ecosystemSpotlightShortNames)[number]
+    )
 )

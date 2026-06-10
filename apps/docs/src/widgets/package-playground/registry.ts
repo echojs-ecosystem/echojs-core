@@ -2,7 +2,7 @@ import type { PackagePlaygroundDef } from './types'
 import { hyperdomPlayground } from './playgrounds/hyperdom.playground'
 import { i18nPlayground } from './playgrounds/i18n.playground'
 import { persistPlayground } from './playgrounds/persist.playground'
-import { queryPlayground } from './playgrounds/query.playground'
+import { asyncPlayground } from './playgrounds/async.playground'
 import { reactivityPlayground } from './playgrounds/reactivity.playground'
 import { routerPlayground } from './playgrounds/router.playground'
 import { storePlayground } from './playgrounds/store.playground'
@@ -43,7 +43,7 @@ const all: PackagePlaygroundDef[] = [
   hyperdomPlayground,
   routerPlayground,
   storePlayground,
-  queryPlayground,
+  asyncPlayground,
   urlStatePlayground,
   persistPlayground,
   i18nPlayground,

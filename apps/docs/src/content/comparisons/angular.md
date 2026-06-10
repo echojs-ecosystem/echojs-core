@@ -58,7 +58,7 @@ RxJS/NgRx, router, forms, Material, SSR, and **library-by-library** mapping.
 | **Reactivity**    | `signal`, `computed`, `effect` + RxJS | `signal`, `computed`, `effect` only in UI path |
 | **Templates**     | HTML + directives + pipes             | HyperDOM `.view.ts`                            |
 | **DI**            | Hierarchical injectors                | `provide` / `inject` on `createEchoApp`        |
-| **Async default** | Observables (`HttpClient`)            | `fetch` + `@echojs-ecosystem/query`            |
+| **Async default** | Observables (`HttpClient`)            | `fetch` + `@echojs-ecosystem/async`            |
 | **Global state**  | NgRx, ComponentStore, services        | `@echojs-ecosystem/store`                      |
 | **Routing**       | `@angular/router`                     | `@echojs-ecosystem/router`                     |
 | **Forms**         | Reactive / template-driven            | model signals + views                          |
@@ -67,7 +67,7 @@ RxJS/NgRx, router, forms, Material, SSR, and **library-by-library** mapping.
 | **SSR**           | `@angular/ssr` mature                 | SPA-first; SSR planned separately              |
 | **Structure**     | Modules → standalone; team-defined    | **Feature-first** (documented)                 |
 
-> [!NOTE] Performance numbers See the [home page Compare section](/). Angular
+> [!NOTE] Performance numbers See the [comparisons overview](/docs/comparisons). Angular
 > bundle size is typically larger than Echo’s modular packages — measure your
 > feature set.
 
@@ -264,7 +264,7 @@ feature-to-feature imports.
 | ------------------ | -------------------------- | ------------------------------------------------------- |
 | **Local UI**       | signal, component fields   | `signal` in model                                       |
 | **Screen**         | component + service        | `createModel`                                           |
-| **Server / cache** | HttpClient, NgRx, TanStack | `@echojs-ecosystem/query`                               |
+| **Server / cache** | HttpClient, NgRx, TanStack | `@echojs-ecosystem/async`                               |
 | **URL**            | `queryParams` observable   | `@echojs-ecosystem/url-state`                           |
 | **App client**     | NgRx, services, signals    | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
@@ -516,7 +516,7 @@ expect(vm.total.value()).toBe(90)
 | Problem       | Angular             | EchoJS                      |
 | ------------- | ------------------- | --------------------------- |
 | HTTP          | `HttpClient`        | `fetch` in query            |
-| Cache         | NgRx, TanStack      | `@echojs-ecosystem/query`   |
+| Cache         | NgRx, TanStack      | `@echojs-ecosystem/async`   |
 | WebSocket     | RxJS                | effect + client             |
 | Local storage | services, ngrx meta | `@echojs-ecosystem/persist` |
 | GraphQL       | Apollo Angular      | queryFn                     |
@@ -728,5 +728,5 @@ Material**, not signal syntax.
 - [Data fetching](/docs/guides/data-fetching)
 - [Why EchoJS](/docs/introduction/what-is-echojs#why-echojs)
 - [@echojs-ecosystem/store](/docs/packages/store) ·
-  [@echojs-ecosystem/query](/docs/packages/query) ·
+  [@echojs-ecosystem/async](/docs/packages/async) ·
   [@echojs-ecosystem/router](/docs/packages/router)

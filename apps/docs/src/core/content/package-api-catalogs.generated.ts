@@ -123,7 +123,7 @@ export const networkHttpDocCategories = [
   },
 ] as const
 
-export const queryDocCategories = [
+export const asyncDocCategories = [
   {
     id: 'factories',
     title: 'Factories',
@@ -161,7 +161,19 @@ export const urlStateDocCategories = [
     id: 'parsers',
     title: 'Parsers',
     entries: [
-      { slug: 'parsers', name: 'parseAs*', description: 'parseAs* — see API page.' },
+      { slug: 'parse-as-string', name: 'parseAsString', description: 'parseAsString — see API page.' },
+      { slug: 'parse-as-integer', name: 'parseAsInteger', description: 'parseAsInteger — see API page.' },
+      { slug: 'parse-as-float', name: 'parseAsFloat', description: 'parseAsFloat — see API page.' },
+      { slug: 'parse-as-boolean', name: 'parseAsBoolean', description: 'parseAsBoolean — see API page.' },
+      { slug: 'parse-as-iso-date', name: 'parseAsIsoDate', description: 'parseAsIsoDate — see API page.' },
+      { slug: 'parse-as-timestamp', name: 'parseAsTimestamp', description: 'parseAsTimestamp — see API page.' },
+      { slug: 'parse-as-literal', name: 'parseAsLiteral', description: 'parseAsLiteral — see API page.' },
+      { slug: 'parse-as-array-of', name: 'parseAsArrayOf', description: 'parseAsArrayOf — see API page.' },
+      { slug: 'parse-as-native-array-of', name: 'parseAsNativeArrayOf', description: 'parseAsNativeArrayOf — see API page.' },
+      { slug: 'parse-as-json', name: 'parseAsJson', description: 'parseAsJson — see API page.' },
+      { slug: 'create-custom-parser', name: 'createCustomParser', description: 'createCustomParser — see API page.' },
+      { slug: 'create-custom-multi-parser', name: 'createCustomMultiParser', description: 'createCustomMultiParser — see API page.' },
+      { slug: 'is-multi-parser', name: 'isMultiParser', description: 'isMultiParser — see API page.' },
     ],
   },
   {
@@ -311,7 +323,7 @@ export const packageApiDocCategoriesById = {
   'framework': frameworkDocCategories,
   'store': storeDocCategories,
   'network-http': networkHttpDocCategories,
-  'query': queryDocCategories,
+  'async': asyncDocCategories,
   'url-state': urlStateDocCategories,
   'persist': persistDocCategories,
   'ui': uiDocCategories,

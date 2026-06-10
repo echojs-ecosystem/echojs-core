@@ -15,7 +15,7 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "lead": "Live data from Elysia API via @echojs-ecosystem/query — signals update without Virtual DOM.",
+    "lead": "Live data from Elysia API via @echojs-ecosystem/async — signals update without Virtual DOM.",
     "orders": "Open orders",
     "users": "Active users",
     "revenue": "Revenue (mock)"

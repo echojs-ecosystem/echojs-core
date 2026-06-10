@@ -31,7 +31,7 @@
       "@echojs-ecosystem/framework/ui/*": ["../../../packages/framework/src/ui/*"],
       "@echojs-ecosystem/framework/*": ["../../../packages/framework/src/*"],
       "@echojs-ecosystem/permission": ["../../../packages/permission/src/index.ts"],
-      "@echojs-ecosystem/query": ["../../../packages/query/src/index.ts"],
+      "@echojs-ecosystem/async": ["../../../packages/async/src/index.ts"],
       "@echojs-ecosystem/reactivity": ["../../../packages/reactivity/src/index.ts"],
       "@echojs-ecosystem/router": ["../../../packages/router/src/index.ts"],
       "@echojs-ecosystem/store": ["../../../packages/store/src/index.ts"],

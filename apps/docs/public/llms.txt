@@ -4,7 +4,7 @@
 
 ## Stack
 
-- EchoJS: @echojs-ecosystem/framework, @echojs-ecosystem/hyperdom, @echojs-ecosystem/router, @echojs-ecosystem/reactivity, @echojs-ecosystem/query, @echojs-ecosystem/i18n
+- EchoJS: @echojs-ecosystem/framework, @echojs-ecosystem/hyperdom, @echojs-ecosystem/router, @echojs-ecosystem/reactivity, @echojs-ecosystem/async, @echojs-ecosystem/i18n
 - UI: hyperdom + tailwind-variants (`tv()`), no React
 - Content: markdown under `apps/docs/src/content/`
 

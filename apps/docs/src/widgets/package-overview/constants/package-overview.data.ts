@@ -145,11 +145,11 @@ count.set(1);`,
       'Derived UI with computed',
     ],
     whenNot: [
-      'Remote server cache → @echojs-ecosystem/query',
+      'Remote server cache → @echojs-ecosystem/async',
       'Cross-route session → @echojs-ecosystem/store',
     ],
     dependsOn: [],
-    powers: ['hyperdom', 'store', 'query', 'router'],
+    powers: ['hyperdom', 'store', 'async', 'router'],
     learnPath: [
       step(
         'reactivity',
@@ -368,7 +368,7 @@ render(
       title: 'Just a quick look…',
       language: 'ts',
       code: `import { createEchoApp } from "@echojs-ecosystem/framework/app";
-import { createQueryProvider } from "@echojs-ecosystem/framework/query";
+import { createQueryProvider } from "@echojs-ecosystem/framework/async";
 
 createEchoApp()
   .use(createQueryProvider())
@@ -377,7 +377,7 @@ createEchoApp()
     whenToUse: ['App entry', 'DI via provide/inject', 'Custom docs chrome'],
     whenNot: ['Leaf widgets', 'Low-level signals'],
     dependsOn: ['@echojs-ecosystem/hyperdom'],
-    powers: ['router', 'query', 'i18n', 'ui'],
+    powers: ['router', 'async', 'i18n', 'ui'],
     learnPath: [
       step(
         'framework',
@@ -400,7 +400,7 @@ createEchoApp()
       step('framework', 'examples/minimal-app', 'Minimal App', 'Smallest SPA.'),
       step('framework', 'api', 'API Reference', 'App exports.'),
     ],
-    relatedIds: ['router', 'query'],
+    relatedIds: ['router', 'async'],
   },
   router: {
     id: 'router',
@@ -585,12 +585,12 @@ export const themeStore = createStore({ mode: "light" as "light" | "dark" })
       ),
       step('store', 'api', 'API Reference', 'Full reference.'),
     ],
-    relatedIds: ['persist', 'query'],
+    relatedIds: ['persist', 'async'],
   },
-  query: {
-    id: 'query',
-    npmPackage: '@echojs-ecosystem/query',
-    frameworkImport: '@echojs-ecosystem/framework/query',
+  async: {
+    id: 'async',
+    npmPackage: '@echojs-ecosystem/async',
+    frameworkImport: '@echojs-ecosystem/framework/async',
     icon: '↻',
     tagline: 'Async cache for models',
     heroTitle: 'Stop syncing server data by hand.',
@@ -602,7 +602,7 @@ export const themeStore = createStore({ mode: "light" as "light" | "dark" })
       { icon: '🔌', title: 'Instance', body: 'Reactive params binding.' },
       { icon: '🌐', title: 'Client', body: 'invalidate & prefetch.' },
     ],
-    whyTitle: 'Why Query',
+    whyTitle: 'Why Async',
     whySubtitle: 'Server state is not the same problem as client state.',
     whyCards: [
       {
@@ -649,7 +649,7 @@ export const themeStore = createStore({ mode: "light" as "light" | "dark" })
     codeExample: {
       title: 'Just a quick look…',
       language: 'ts',
-      code: `import { createQuery } from "@echojs-ecosystem/framework/query";
+      code: `import { createQuery } from "@echojs-ecosystem/framework/async";
 
 const userQuery = createQuery({
   queryKey: ["user", "me"],
@@ -661,22 +661,22 @@ const userQuery = createQuery({
     dependsOn: ['@echojs-ecosystem/reactivity'],
     powers: ['framework'],
     learnPath: [
-      step('query', 'installation', 'Installation', 'Query + provider.'),
+      step('async', 'installation', 'Installation', 'Async + provider.'),
       step(
-        'query',
+        'async',
         'guides/query-definitions',
         'Query Definitions',
         'Keys & queryFn.'
       ),
-      step('query', 'guides/mutations', 'Mutations', 'Writes & invalidation.'),
+      step('async', 'guides/mutations', 'Mutations', 'Writes & invalidation.'),
       step(
-        'query',
+        'async',
         'examples/query-demo-model',
         'Query Demo',
         'Example app model.'
       ),
-      step('query', 'playground', 'Playground', 'Fake fetch demo.'),
-      step('query', 'api', 'API Reference', 'Full reference.'),
+      step('async', 'playground', 'Playground', 'Fake fetch demo.'),
+      step('async', 'api', 'API Reference', 'Full reference.'),
     ],
     relatedIds: ['framework', 'store'],
   },
@@ -1297,7 +1297,7 @@ const users = await api.get('/users').json<User[]>()`,
       ),
       step('network-http', 'api', 'API Reference', 'Full export index.'),
     ],
-    relatedIds: ['query', 'framework'],
+    relatedIds: ['async', 'framework'],
   },
   utils: {
     id: 'utils',

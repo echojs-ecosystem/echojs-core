@@ -13,7 +13,4 @@ export const guidesNavSection = createDocNavSection('guides', 'Guides', [
   }),
   doc('guides/authentication', 'Authentication'),
   doc('guides/internationalization', 'Internationalization'),
-  doc('guides/best-practices', 'Best Practices', {
-    keywords: ['patterns', 'do and dont', 'checklist', 'architecture', 'models'],
-  }),
 ])

@@ -6,7 +6,7 @@ Docusaurus/VitePress/Nextra.
 ## Stack
 
 - `@echojs-ecosystem/framework`, `@echojs-ecosystem/router`,
-  `@echojs-ecosystem/ui`, `@echojs-ecosystem/query`, `@echojs-ecosystem/store`,
+  `@echojs-ecosystem/ui`, `@echojs-ecosystem/async`, `@echojs-ecosystem/store`,
   `@echojs-ecosystem/url-state`
 - Tailwind CSS v4 + **tailwind-variants** (`tv()`)
 - Shiki (syntax highlighting)

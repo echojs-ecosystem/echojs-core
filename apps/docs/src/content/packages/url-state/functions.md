@@ -18,7 +18,19 @@ package: '@echojs-ecosystem/url-state'
 
 | Export | Page |
 | ------ | ---- |
-| parseAs* | [parseAs*](/docs/packages/url-state/api/parsers) |
+| parseAsString | [parseAsString](/docs/packages/url-state/api/parse-as-string) |
+| parseAsInteger | [parseAsInteger](/docs/packages/url-state/api/parse-as-integer) |
+| parseAsFloat | [parseAsFloat](/docs/packages/url-state/api/parse-as-float) |
+| parseAsBoolean | [parseAsBoolean](/docs/packages/url-state/api/parse-as-boolean) |
+| parseAsIsoDate | [parseAsIsoDate](/docs/packages/url-state/api/parse-as-iso-date) |
+| parseAsTimestamp | [parseAsTimestamp](/docs/packages/url-state/api/parse-as-timestamp) |
+| parseAsLiteral | [parseAsLiteral](/docs/packages/url-state/api/parse-as-literal) |
+| parseAsArrayOf | [parseAsArrayOf](/docs/packages/url-state/api/parse-as-array-of) |
+| parseAsNativeArrayOf | [parseAsNativeArrayOf](/docs/packages/url-state/api/parse-as-native-array-of) |
+| parseAsJson | [parseAsJson](/docs/packages/url-state/api/parse-as-json) |
+| createCustomParser | [createCustomParser](/docs/packages/url-state/api/create-custom-parser) |
+| createCustomMultiParser | [createCustomMultiParser](/docs/packages/url-state/api/create-custom-multi-parser) |
+| isMultiParser | [isMultiParser](/docs/packages/url-state/api/is-multi-parser) |
 
 ## Adapters
 

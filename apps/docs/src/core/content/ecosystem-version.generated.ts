@@ -13,7 +13,7 @@ export const packageVersions = {
   "@echojs-ecosystem/oxc-config": "0.1.0",
   "@echojs-ecosystem/permission": "0.6.0",
   "@echojs-ecosystem/persist": "0.6.0",
-  "@echojs-ecosystem/query": "0.6.0",
+  "@echojs-ecosystem/async": "0.6.0",
   "@echojs-ecosystem/reactivity": "0.6.0",
   "@echojs-ecosystem/router": "0.6.0",
   "@echojs-ecosystem/store": "0.6.0",

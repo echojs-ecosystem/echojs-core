@@ -54,4 +54,4 @@ See [Guides: Trusted HTML](/docs/packages/hyperdom/guides/trusted-html).
 
 - [Guides: Models & Components](/docs/packages/hyperdom/guides/models-and-components)
 - [API: createComponent](/docs/packages/hyperdom/api/create-component)
-- [Query: Doc Content](/docs/packages/query/examples/doc-content)
+- [Query: Doc Content](/docs/packages/async/examples/doc-content)

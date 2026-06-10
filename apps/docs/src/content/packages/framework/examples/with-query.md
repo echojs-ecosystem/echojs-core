@@ -57,4 +57,4 @@ void bootstrap()
 ## Related
 
 - [Providers guide](/docs/packages/framework/guides/providers)
-- [Query Examples](/docs/packages/query/example)
+- [Query Examples](/docs/packages/async/example)

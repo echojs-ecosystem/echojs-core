@@ -38,6 +38,18 @@ export const ecosystemSectionStyles = tv({
     root: 'flex flex-col gap-6',
     divider:
       'border-t border-border/70 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle dark:border-white/10',
-    grid: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+    mobileGrid: 'grid grid-cols-2 gap-2 sm:hidden',
+    mobileFooter: 'flex flex-col items-center gap-3 sm:hidden',
+    expandButton: [
+      'inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-surface-elevated px-4 py-2',
+      'text-xs font-semibold text-fg-muted transition hover:border-echo-500/35 hover:text-fg',
+      'dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-echo-500/35',
+    ].join(' '),
+    expandChevron: 'text-[10px] text-echo-600 dark:text-echo-400',
+    browseLink: [
+      'inline-flex items-center gap-1 text-xs font-semibold text-echo-700 transition hover:gap-1.5 hover:text-echo-600',
+      'dark:text-echo-400 dark:hover:text-echo-300',
+    ].join(' '),
+    grid: 'hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
   },
 })

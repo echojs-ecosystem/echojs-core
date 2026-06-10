@@ -57,7 +57,7 @@ const p = api.get('/slow', { signal: controller.signal })
 controller.abort()
 ```
 
-Works naturally with `@echojs-ecosystem/query` — forward `signal` from `queryFn`.
+Works naturally with `@echojs-ecosystem/async` — forward `signal` from `queryFn`.
 
 ## Redirects
 

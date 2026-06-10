@@ -1,4 +1,4 @@
-import { getQueryProvider } from '@echojs-ecosystem/query'
+import { getQueryProvider } from '@echojs-ecosystem/async'
 import { computed, effect, signal } from '@echojs-ecosystem/reactivity'
 import { createStore } from '@echojs-ecosystem/store'
 import { withLocalStorage } from '@echojs-ecosystem/persist'

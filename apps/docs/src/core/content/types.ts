@@ -13,6 +13,7 @@ export type DocBlock =
   | { type: 'playground'; packageId: string }
   | { type: 'util-demo'; slug: string }
   | { type: 'package-overview'; packageId: string }
+  | { type: 'framework-comparison' }
   | { type: 'list'; ordered: boolean; items: string[] }
   | { type: 'hr' }
   | { type: 'html'; value: string }

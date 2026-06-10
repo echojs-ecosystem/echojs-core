@@ -33,8 +33,6 @@ import {
 
 const shell = shellStyles()
 
-const sectionsWithoutItemIcons = new Set(['api'])
-
 const closeMobileNavOnLinkClick = (event: MouseEvent): void => {
   const target = event.target as HTMLElement | null
   if (target?.closest('a')) $mobileNavOpen.set(false)
@@ -102,20 +100,23 @@ const SidebarPanel = (): Child =>
                 const link = SidebarNavLinkView({
                   page: docPageByContentId[item.contentId]!,
                   label: item.title,
-                  ...(sectionsWithoutItemIcons.has(section.id)
-                    ? {}
-                    : {
-                        icon: resolveNavIcon(item.contentId, item.slug),
-                        iconClassName:
-                          section.id === 'comparisons'
-                            ? resolveNavIconClass(item.contentId)
-                            : undefined,
-                      }),
+                  icon: resolveNavIcon(item.contentId, item.slug),
+                  iconClassName:
+                    section.id === 'comparisons'
+                      ? resolveNavIconClass(item.contentId)
+                      : undefined,
                 })
                 return groupLabel ? [groupLabel, link] : [link]
               })
             )
           }),
+          div({ class: shell.sidebarResources() }, [
+            ...sectionNav(
+              'resources',
+              'Resources',
+              sidebarResourceLinks.map(resourceLink)
+            ),
+          ]),
           div({ class: shell.agentsDivider() }),
           ...sectionNav(
             agentsNavSection.id,
@@ -129,13 +130,6 @@ const SidebarPanel = (): Child =>
               })
             )
           ),
-          div({ class: shell.sidebarResources() }, [
-            ...sectionNav(
-              'resources',
-              'Resources',
-              sidebarResourceLinks.map(resourceLink)
-            ),
-          ]),
         ]
       ),
     ]

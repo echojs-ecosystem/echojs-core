@@ -1,15 +1,20 @@
 # EchoJS Workspace — full-stack admin demo
 
-Showcase admin panel: **client** (EchoJS + HyperDOM + signals) + **server** (Elysia API).
+Showcase admin panel: **client** (EchoJS + HyperDOM + signals) + **server** (Go + Gin API).
 
 ## Structure
 
 ```
 apps/workspace/
   client/   Vite SPA — router, query, permission, url-state
-  server/   Bun + Elysia — REST API, in-memory store
-  shared/   DTO types shared between client and server
+  server/   Go + Gin — REST API, in-memory store
+  shared/   DTO types shared with the client (TypeScript)
 ```
+
+## Prerequisites
+
+- [Bun](https://bun.sh) — client dev server
+- [Go](https://go.dev) 1.22+ — API server
 
 ## Quick start
 
@@ -35,7 +40,7 @@ Open **http://localhost:3002/admin**
 | Layer | EchoJS packages | Demo |
 |-------|-----------------|------|
 | UI | `hyperdom`, `framework` | Nested admin layouts, signal-native views |
-| Data | `@echojs-ecosystem/query` | `createQuery` / `createMutation` → Elysia |
+| Data | `@echojs-ecosystem/async` | `createQuery` / `createMutation` → Gin API |
 | URL | `@echojs-ecosystem/url-state` | Orders filters synced to search params |
 | AuthZ | `@echojs-ecosystem/permission` | Role templates + payload rules + hydrate from API |
 | State | `@echojs-ecosystem/store`, `persist` | Session in localStorage |

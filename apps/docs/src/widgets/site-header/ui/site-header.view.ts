@@ -19,6 +19,8 @@ import { VersionDropdown } from '@widgets/version-dropdown'
 
 import type { SiteHeaderVM } from '../model/site-header.model'
 import { HomeMobileNav } from './home-mobile-nav.view'
+import { cn } from '@core/styles/cn'
+
 import { headerIconBtnStyles } from './site-header.view.styles'
 
 export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
@@ -30,19 +32,29 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
     return hdr().root()
   }
 
-  return header({ class: headerRootClass }, [
-    div({ class: () => hdr().inner() }, [
-      vm.showMenu
-        ? button(
-            {
-              type: 'button',
-              class: [hdr().menuBtn(), headerIconBtnStyles()].join(' '),
-              onClick: vm.openMobileNav,
-              'aria-label': 'Open navigation',
-            },
-            [MenuIcon()]
-          )
-        : null,
+  return [
+    header({ class: headerRootClass }, [
+      div({ class: () => hdr().inner() }, [
+        vm.showMenu
+          ? button(
+              {
+                type: 'button',
+                class: () =>
+                  cn(
+                    hdr().menuBtn(),
+                    headerIconBtnStyles(),
+                    vm.isMobileNavOpen() && hdr().menuBtnActive()
+                  ),
+                onClick: vm.openMobileNav,
+                'aria-expanded': () => String(vm.isMobileNavOpen()),
+                'aria-label': () =>
+                  vm.isMobileNavOpen()
+                    ? 'Close navigation'
+                    : 'Open navigation',
+              },
+              [MenuIcon()]
+            )
+          : null,
       NavLink({
         to: homePage,
         class: hdr().brand(),
@@ -84,7 +96,8 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
         ),
         ThemeToggle(),
       ]),
+      ]),
     ]),
     vm.mode === 'home' ? HomeMobileNav() : null,
-  ])
+  ]
 }, 'SiteHeaderView')

@@ -12,7 +12,7 @@ copy also lives at [/llms.txt](/llms.txt).
 ## Stack
 
 - **EchoJS** — `@echojs-ecosystem/hyperdom`, `@echojs-ecosystem/reactivity`,
-  `@echojs-ecosystem/router`, `@echojs-ecosystem/query`,
+  `@echojs-ecosystem/router`, `@echojs-ecosystem/async`,
   `@echojs-ecosystem/i18n`, `@echojs-ecosystem/framework`
 - **Styling** — Tailwind v4 + `tailwind-variants` (`tv()`)
 - **Content** — Markdown in `src/content/`, lazy-loaded per route

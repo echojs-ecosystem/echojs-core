@@ -56,7 +56,7 @@ Schema keys (`inStock`) can differ from URL keys (`stock`) via `urlKeys` option
 | ------------------- | -------------------------- |
 | Route path matching | `@echojs-ecosystem/router` |
 | Shared app state    | `@echojs-ecosystem/store`  |
-| Server fetch cache  | `@echojs-ecosystem/query`  |
+| Server fetch cache  | `@echojs-ecosystem/async`  |
 
 ## Next steps
 

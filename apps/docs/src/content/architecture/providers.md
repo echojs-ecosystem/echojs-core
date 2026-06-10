@@ -54,14 +54,14 @@ remounting `router.View` — still a valid provider pattern.
 | Provider               | Package                             | Role                       |
 | ---------------------- | ----------------------------------- | -------------------------- |
 | `createRouterProvider` | `@echojs-ecosystem/router/hyperdom` | SPA navigation, `NavLink`  |
-| `createQueryProvider`  | `@echojs-ecosystem/query`           | Query client defaults      |
+| `createQueryProvider`  | `@echojs-ecosystem/async`           | Query client defaults      |
 | UI / theme             | `@echojs-ecosystem/ui`              | Design system context      |
 | i18n                   | `@echojs-ecosystem/i18n`            | Messages, locale switching |
 
 ### Query example (`apps/docs`)
 
 ```ts
-import { createQueryProvider } from '@echojs-ecosystem/query'
+import { createQueryProvider } from '@echojs-ecosystem/async'
 
 export const queryProvider = createQueryProvider({
   defaultOptions: {

@@ -1,5 +1,5 @@
 import { createModel } from '@echojs-ecosystem/framework/hyperdom'
-import { createQuery } from '@echojs-ecosystem/framework/query'
+import { createQuery } from '@echojs-ecosystem/framework/async'
 import { effect, signal } from '@echojs-ecosystem/framework/reactivity'
 
 import { attachDocTocScrollSpy } from '@widgets/doc-content/helpers/doc-toc-scroll-spy'

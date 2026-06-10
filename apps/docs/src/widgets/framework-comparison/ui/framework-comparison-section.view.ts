@@ -1,13 +1,5 @@
-import {
-  type Child,
-  createView,
-  div,
-  p,
-  span,
-} from '@echojs-ecosystem/framework/hyperdom'
-import { NavLink } from '@echojs-ecosystem/framework/router'
+import { type Child, createView, div, p } from '@echojs-ecosystem/framework/hyperdom'
 
-import { docPageByContentId } from '@app/router'
 import { performanceDisclaimer } from '@widgets/framework-comparison/constants/framework-comparison.data'
 import { ComparisonGuideCardsView } from '@widgets/framework-comparison/ui/comparison-guide-cards.view'
 import { FeatureTableView } from '@widgets/framework-comparison/ui/feature-table.view'
@@ -34,11 +26,6 @@ export const FrameworkComparisonSectionView = createView(
               p({ class: cmp.deepDiveLead() }, [
                 'Reactivity models, architecture, state layers, and ecosystem mapping for each mainstream stack.',
               ]),
-              NavLink({
-                to: docPageByContentId['comparisons/index']!,
-                class: cmp.deepDiveIndexLink(),
-                children: ['All comparisons', span(null, '→')],
-              }),
             ]),
             ComparisonGuideCardsView(),
           ]),

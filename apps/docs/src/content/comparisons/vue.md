@@ -59,13 +59,13 @@ routing, Nuxt, and a **library-by-library** map to EchoJS.
 | **Structure**      | Flexible; Nuxt adds opinions                                                      | **Feature-first** dependency rules                        |
 | **Routing**        | Vue Router 4                                                                      | `@echojs-ecosystem/router`                                |
 | **Global store**   | Pinia (Vuex legacy)                                                               | `@echojs-ecosystem/store`                                 |
-| **Server / cache** | Pinia actions, TanStack Query, `useFetch`                                         | `@echojs-ecosystem/query`                                 |
+| **Server / cache** | Pinia actions, TanStack Query, `useFetch`                                         | `@echojs-ecosystem/async`                                 |
 | **URL state**      | `route.query`, manual sync                                                        | `@echojs-ecosystem/url-state`                             |
 | **Meta-framework** | Nuxt 3/4                                                                          | Vite + `@echojs-ecosystem/framework` (SPA-first)          |
 | **SSR**            | Nuxt mature                                                                       | Plan separately; docs/example are CSR                     |
 | **DX**             | `script setup`, auto-imports                                                      | Models + providers; no `ref` unwrap in templates          |
 
-> [!NOTE] Performance numbers See the [home page Compare section](/). Vue’s
+> [!NOTE] Performance numbers See the [comparisons overview](/docs/comparisons). Vue’s
 > compiler reduces real-world VDOM cost; EchoJS removes the reconciliation pass
 > entirely.
 
@@ -272,7 +272,7 @@ by tooling.
 | ------------------ | --------------------------------------------- | ------------------------------------------------------- |
 | **Local UI**       | `ref`, `shallowRef`                           | `signal` in model                                       |
 | **Screen model**   | composables + `computed`                      | `createModel`                                           |
-| **Server / async** | Pinia + fetch, TanStack Query, `useAsyncData` | `@echojs-ecosystem/query`                               |
+| **Server / async** | Pinia + fetch, TanStack Query, `useAsyncData` | `@echojs-ecosystem/async`                               |
 | **URL**            | `useRoute().query`                            | `@echojs-ecosystem/url-state`                           |
 | **App client**     | Pinia, persisted state plugins                | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
@@ -554,7 +554,7 @@ expect(vm.errors.value().email).toBeUndefined()
 
 | Problem      | Vue                         | EchoJS                      |
 | ------------ | --------------------------- | --------------------------- |
-| REST cache   | TanStack Query              | `@echojs-ecosystem/query`   |
+| REST cache   | TanStack Query              | `@echojs-ecosystem/async`   |
 | GraphQL      | Villus, Apollo              | `queryFn`                   |
 | Global store | Pinia                       | `@echojs-ecosystem/store`   |
 | Persistence  | pinia-plugin-persistedstate | `@echojs-ecosystem/persist` |
@@ -736,7 +736,7 @@ Theme → `prefsStore` + `@echojs-ecosystem/persist` or UI provider.
 | Reactivity | Proxy + ref                  | Explicit signals                  |
 | UI         | SFC + optional compiler opts | HyperDOM direct                   |
 | Structure  | Progressive / Nuxt opinions  | Feature-first rules               |
-| Data       | Pinia + Query + useFetch     | `@echojs-ecosystem/query` + store |
+| Data       | Pinia + Query + useFetch     | `@echojs-ecosystem/async` + store |
 | Routing    | Vue Router / Nuxt pages      | `@echojs-ecosystem/router`        |
 | Full-stack | Nuxt mature                  | SPA-first; split marketing SSR    |
 | DX         | Volar, script setup          | Models, providers, strict layers  |
@@ -754,4 +754,4 @@ Theme → `prefsStore` + `@echojs-ecosystem/persist` or UI provider.
 - [Routing guide](/docs/guides/routing)
 - [@echojs-ecosystem/reactivity](/docs/packages/reactivity) ·
   [@echojs-ecosystem/store](/docs/packages/store) ·
-  [@echojs-ecosystem/query](/docs/packages/query)
+  [@echojs-ecosystem/async](/docs/packages/async)

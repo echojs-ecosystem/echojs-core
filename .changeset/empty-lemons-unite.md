@@ -14,7 +14,7 @@
 "@echojs-ecosystem/network": minor
 "@echojs-ecosystem/permission": minor
 "@echojs-ecosystem/persist": minor
-"@echojs-ecosystem/query": minor
+"@echojs-ecosystem/async": minor
 "@echojs-ecosystem/reactivity": minor
 "@echojs-ecosystem/router": minor
 "@echojs-ecosystem/store": minor

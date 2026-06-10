@@ -1,4 +1,4 @@
-import { createMutation, createQuery, getQueryProvider } from '@echojs-ecosystem/query'
+import { createMutation, createQuery, getQueryProvider } from '@echojs-ecosystem/async'
 import type {
   AdminOrder,
   AdminUser,

@@ -1,10 +1,8 @@
 import {
   aside,
-  button,
   type Child,
   div,
   nav as navEl,
-  p,
   Show,
 } from '@echojs-ecosystem/framework/hyperdom'
 import { NavLink } from '@echojs-ecosystem/framework/router'
@@ -30,18 +28,6 @@ export const HomeMobileNav = (): Child =>
         onClick: closeHomeNav,
       }),
       aside({ class: styles.panel() }, [
-        div({ class: styles.header() }, [
-          p({ class: styles.title() }, 'Navigation'),
-          button(
-            {
-              type: 'button',
-              class: styles.closeBtn(),
-              onClick: closeHomeNav,
-              'aria-label': 'Close navigation',
-            },
-            'Close'
-          ),
-        ]),
         navEl(
           { class: styles.links(), onClick: closeOnLinkClick },
           buildSiteHeaderNavItems().map((item) =>

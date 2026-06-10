@@ -8,7 +8,7 @@ package: '@echojs-ecosystem/network'
 # Query Integration
 
 `@echojs-ecosystem/network/http` is the recommended transport for
-`@echojs-ecosystem/query` `queryFn` implementations. Forward the query
+`@echojs-ecosystem/async` `queryFn` implementations. Forward the query
 `signal` for automatic cancellation.
 
 ## Shared API client
@@ -26,7 +26,7 @@ export const http = createHttpClient({
 ## Query definition
 
 ```ts
-import { createQuery } from '@echojs-ecosystem/query'
+import { createQuery } from '@echojs-ecosystem/async'
 import { http } from '@/shared/api/http'
 
 type User = { id: number; name: string }
@@ -83,6 +83,6 @@ const billingHttp = http.extend({
 
 ## Related
 
-- [Query Definitions](/docs/packages/query/guides/query-definitions)
-- [Abort & Cancellation](/docs/packages/query/guides/abort-and-cancellation)
+- [Query Definitions](/docs/packages/async/guides/query-definitions)
+- [Abort & Cancellation](/docs/packages/async/guides/abort-and-cancellation)
 - [Client Composition](/docs/packages/network-http/guides/client-composition)

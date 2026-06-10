@@ -65,7 +65,7 @@ Application layers may import published workspace packages:
 
 - `@echojs-ecosystem/reactivity`, `@echojs-ecosystem/hyperdom`,
   `@echojs-ecosystem/framework`
-- `@echojs-ecosystem/router`, `@echojs-ecosystem/query`,
+- `@echojs-ecosystem/router`, `@echojs-ecosystem/async`,
   `@echojs-ecosystem/store`, …
 
 Packages **must not** import application folders (`@pages`, etc.).

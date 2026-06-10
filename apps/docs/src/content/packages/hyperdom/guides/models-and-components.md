@@ -54,7 +54,7 @@ export const CounterView = createView(
 ```
 
 `displayName` helps debugging and devtools. Keep `.view.ts` free of `fetch` —
-use models + `@echojs-ecosystem/query` for async data.
+use models + `@echojs-ecosystem/async` for async data.
 
 See [API: createView](/docs/packages/hyperdom/api/create-view).
 

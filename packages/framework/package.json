@@ -48,9 +48,9 @@
       "types": "./dist/store.d.ts",
       "default": "./dist/store.js"
     },
-    "./query": {
-      "types": "./dist/query.d.ts",
-      "default": "./dist/query.js"
+    "./async": {
+      "types": "./dist/async.d.ts",
+      "default": "./dist/async.js"
     },
     "./persist": {
       "types": "./dist/persist.d.ts",
@@ -167,7 +167,7 @@
     "@echojs-ecosystem/i18n": "workspace:*",
     "@echojs-ecosystem/network": "workspace:*",
     "@echojs-ecosystem/persist": "workspace:*",
-    "@echojs-ecosystem/query": "workspace:*",
+    "@echojs-ecosystem/async": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*",
     "@echojs-ecosystem/router": "workspace:*",
     "@echojs-ecosystem/store": "workspace:*",

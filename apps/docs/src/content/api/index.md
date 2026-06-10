@@ -10,7 +10,7 @@ keywords: api, reference, exports
 | ---------------------------- | -------------------------- |
 | @echojs-ecosystem/reactivity | Documented in package page |
 | @echojs-ecosystem/router     | Documented in package page |
-| @echojs-ecosystem/query      | Documented in package page |
+| @echojs-ecosystem/async      | Documented in package page |
 
 :::callout type=tip Full symbol-level API search is planned for a future
 release. :::

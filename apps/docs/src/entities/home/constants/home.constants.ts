@@ -13,7 +13,7 @@ createEchoApp({ strictContextChecks: true })
   .use(routerProvider)
   .mount("#app")`
 
-export const queryExample = `import { createQuery } from "@echojs-ecosystem/framework/query"
+export const queryExample = `import { createQuery } from "@echojs-ecosystem/framework/async"
 
 export const usersQuery = createQuery({
   name: "users",
@@ -67,7 +67,7 @@ export const codeTabs: readonly CodeTab[] = [
     ],
   },
   {
-    id: 'query',
+    id: 'async',
     label: 'users.query.ts',
     layer: 'Server state',
     icon: '↻',

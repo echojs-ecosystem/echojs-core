@@ -216,10 +216,10 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
     ],
   },
   {
-    id: 'query',
-    title: 'Query',
-    npmPackage: '@echojs-ecosystem/query',
-    frameworkSubpath: 'query',
+    id: 'async',
+    title: 'Async',
+    npmPackage: '@echojs-ecosystem/async',
+    frameworkSubpath: 'async',
     guides: [
       { slug: 'query-definitions', title: 'Query Definitions' },
       { slug: 'reactive-binding', title: 'Reactive Binding' },
@@ -230,7 +230,7 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
     ],
     functions: { slug: 'functions', title: 'Functions' },
     api: [],
-    apiCategories: apiCategoriesFromCatalog('query'),
+    apiCategories: apiCategoriesFromCatalog('async'),
     examples: [
       { slug: 'overview', title: 'Overview' },
       { slug: 'jsonplaceholder', title: 'JSONPlaceholder' },

@@ -30,7 +30,7 @@
       "@echojs-ecosystem/ui/utils": ["../ui/src/utils/index.ts"],
       "@echojs-ecosystem/ui/primitives": ["../ui/src/primitives/index.ts"],
       "@echojs-ecosystem/i18n": ["../i18n/src/index.ts"],
-      "@echojs-ecosystem/query": ["../query/src/index.ts"],
+      "@echojs-ecosystem/async": ["../async/src/index.ts"],
       "@echojs-ecosystem/devtools": ["../devtools/src/index.ts"],
       "@echojs-ecosystem/url-state": ["../url-state/src/index.ts"],
       "@echojs-ecosystem/network/http": ["../network/src/http/index.ts"],

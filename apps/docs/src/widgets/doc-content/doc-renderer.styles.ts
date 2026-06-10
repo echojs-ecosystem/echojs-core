@@ -27,6 +27,7 @@ export const docStyles = tv({
     badge:
       'my-4 inline-flex items-center rounded-full border border-echo-500/30 bg-echo-50 px-3 py-1 font-mono text-sm text-echo-800 dark:bg-echo-950/50 dark:text-echo-200',
     packageInstall: 'my-8 not-prose',
+    frameworkComparison: 'my-10 not-prose',
   },
 })
 

@@ -6,7 +6,7 @@ const ecosystemPackages = (version: string): string[] => [
   `@echojs-ecosystem/framework@${version}`,
   `@echojs-ecosystem/router@${version}`,
   `@echojs-ecosystem/store@${version}`,
-  `@echojs-ecosystem/query@${version}`,
+  `@echojs-ecosystem/async@${version}`,
   `@echojs-ecosystem/form@${version}`,
   `@echojs-ecosystem/persist@${version}`,
   `@echojs-ecosystem/url-state@${version}`,

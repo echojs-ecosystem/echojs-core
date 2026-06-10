@@ -18,7 +18,7 @@ in route params) causes bugs and duplicate sources of truth.
 | -------------------------------------------- | -------------------- | ------------------------------------------------------- | ------------------------------------- |
 | [Router state](/docs/state/router-state)     | URL + navigation     | `@echojs-ecosystem/router`                              | `:userId`, `?tab=`, `beforeLoad` data |
 | [URL state](/docs/state/url-state)           | Query string (typed) | `@echojs-ecosystem/url-state`                           | Search `q`, `page`, `view=grid`       |
-| [Server state](/docs/state/server-state)     | HTTP / async         | `@echojs-ecosystem/query`                               | User list, product details            |
+| [Server state](/docs/state/server-state)     | HTTP / async         | `@echojs-ecosystem/async`                               | User list, product details            |
 | [Form state](/docs/state/form-state)         | User input           | `@echojs-ecosystem/form`                                | Login fields, checkout lines          |
 | [Client store](/docs/state/client-store)     | App logic            | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` | Theme, session, cart id               |
 | [Local UI state](/docs/state/local-ui-state) | Interaction          | `@echojs-ecosystem/reactivity` in models                | Open modal, active tab index          |
@@ -41,7 +41,7 @@ flowchart TB
   subgraph urlState["URL state (@echojs-ecosystem/url-state)"]
     TypedQ["typed filters page q"]
   end
-  subgraph server["Server state (@echojs-ecosystem/query)"]
+  subgraph server["Server state (@echojs-ecosystem/async)"]
     Cache["cached API responses"]
   end
   URL --> Params
@@ -109,7 +109,7 @@ Ask in order:
 Task-oriented walkthroughs (routing, fetching, forms, auth) live under
 [Guides](/docs/guides/routing). Package reference:
 [Router](/docs/packages/router/overview),
-[Query](/docs/packages/query/overview), [Store](/docs/packages/store/overview),
+[Query](/docs/packages/async/overview), [Store](/docs/packages/store/overview),
 [URL State](/docs/packages/url-state/overview).
 
 ## In this section

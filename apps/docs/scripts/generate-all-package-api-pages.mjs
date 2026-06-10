@@ -15,6 +15,10 @@ const generatePackage = (packageId, manifest) => {
   let count = 0
   for (const category of manifest.categories) {
     for (const page of category.pages) {
+      if (page.skipGeneration) {
+        console.log(`  ${page.slug} (skip)`)
+        continue
+      }
       const srcPath = join(apiDir, `${page.slug}.md`)
       const parsed = existsSync(srcPath)
         ? parseExistingApiPage(readFileSync(srcPath, 'utf8'), page.name)

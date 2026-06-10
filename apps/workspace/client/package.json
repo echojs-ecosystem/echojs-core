@@ -22,7 +22,7 @@
     "@echojs-ecosystem/network": "workspace:*",
     "@echojs-ecosystem/permission": "workspace:*",
     "@echojs-ecosystem/persist": "workspace:*",
-    "@echojs-ecosystem/query": "workspace:*",
+    "@echojs-ecosystem/async": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*",
     "@echojs-ecosystem/router": "workspace:*",
     "@echojs-ecosystem/store": "workspace:*",

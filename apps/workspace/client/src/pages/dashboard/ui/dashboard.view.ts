@@ -49,7 +49,7 @@ export const DashboardView = (): Child =>
     section({ class: `${layout.card()} mt-6` }, [
       p({ class: layout.cardTitle() }, 'EchoJS stack in this demo'),
       p({ class: layout.muted() }, [
-        code({ class: layout.code() }, '@echojs-ecosystem/query'),
+        code({ class: layout.code() }, '@echojs-ecosystem/async'),
         ' → Elysia API • ',
         code({ class: layout.code() }, '@echojs-ecosystem/permission'),
         ' • ',

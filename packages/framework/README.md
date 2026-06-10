@@ -25,7 +25,7 @@ No separate installs for `query`, `i18n`, `router`, etc. — they are bundled as
 
 ```ts
 import { createEchoApp } from "@echojs-ecosystem/framework/app";
-import { createQueryProvider } from "@echojs-ecosystem/framework/query";
+import { createQueryProvider } from "@echojs-ecosystem/framework/async";
 import { createI18nProvider } from "@echojs-ecosystem/framework/i18n";
 import { routes } from "./routes";
 import en from "./locales/en.json";
@@ -47,7 +47,7 @@ createEchoApp({ strictContextChecks: true })
 | `@echojs-ecosystem/framework/router` | SPA router |
 | `@echojs-ecosystem/framework/router/hyperdom` | `NavLink`, `createRouter` |
 | `@echojs-ecosystem/framework/store` | Client state |
-| `@echojs-ecosystem/framework/query` | Async cache, mutations |
+| `@echojs-ecosystem/framework/async` | Async cache, mutations |
 | `@echojs-ecosystem/framework/form` | Fields & validation |
 | `@echojs-ecosystem/framework/persist` | localStorage, cookies, IDB |
 | `@echojs-ecosystem/framework/url-state` | Typed URL params |
@@ -77,7 +77,7 @@ Available UI subpaths: `button`, `icon-button`, `input`, `input-mask`, `input-ot
 ```ts
 import { signal, computed } from "@echojs-ecosystem/framework/reactivity";
 import { div, button, createView } from "@echojs-ecosystem/framework/hyperdom";
-import { createQuery } from "@echojs-ecosystem/framework/query";
+import { createQuery } from "@echojs-ecosystem/framework/async";
 import { createI18nProvider } from "@echojs-ecosystem/framework/i18n";
 import { createStore } from "@echojs-ecosystem/framework/store";
 import { withLocalStorage } from "@echojs-ecosystem/framework/persist";

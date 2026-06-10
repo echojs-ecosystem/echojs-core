@@ -50,8 +50,8 @@ export default defineConfig({
         replacement: resolve(packagesRoot, 'permission/src/index.ts'),
       },
       {
-        find: /^@echojs-ecosystem\/query$/,
-        replacement: resolve(packagesRoot, 'query/src/index.ts'),
+        find: /^@echojs-ecosystem\/async$/,
+        replacement: resolve(packagesRoot, 'async/src/index.ts'),
       },
       {
         find: /^@echojs-ecosystem\/reactivity$/,
@@ -113,7 +113,7 @@ export default defineConfig({
     exclude: [
       '@echojs-ecosystem/framework',
       '@echojs-ecosystem/permission',
-      '@echojs-ecosystem/query',
+      '@echojs-ecosystem/async',
       '@echojs-ecosystem/reactivity',
       '@echojs-ecosystem/router',
       '@echojs-ecosystem/store',

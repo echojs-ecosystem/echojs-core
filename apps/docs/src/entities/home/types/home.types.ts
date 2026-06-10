@@ -1,5 +1,4 @@
-import type { ArchitectCodePanel } from '@entities/home/constants/architecture-advantages'
-import type { TestingCodePanel } from '@entities/home/constants/testing-advantages'
+import type { StructureCodePanel } from '@entities/home/constants/home-structure.types'
 
 export type CompareTone = 'muted' | 'accent'
 
@@ -21,15 +20,16 @@ export type CodeTab = {
 }
 
 export type HomeVM = {
-  activeCodeTab: () => CodeTab
-  setCodeTab: (index: number) => void
-  isCodeTabActive: (index: number) => boolean
-  activeTestingPanel: () => TestingCodePanel
-  setTestingPanel: (index: number) => void
-  isTestingPanelActive: (index: number) => boolean
-  activeArchitectPanel: () => ArchitectCodePanel
-  setArchitectPanel: (index: number) => void
-  isArchitectPanelActive: (index: number) => boolean
+  selectedStructureNodeId: () => string
+  openStructureTabs: () => readonly string[]
+  openStructureFile: (id: string, options?: { closeExplorer?: boolean }) => void
+  closeStructureTab: (id: string) => void
+  isFolderExpanded: (id: string) => boolean
+  toggleFolder: (id: string) => void
+  isExplorerOpen: () => boolean
+  toggleExplorer: () => void
+  closeExplorer: () => void
+  activeStructurePanel: () => StructureCodePanel
 }
 
 export type CompareCardViewProps = {

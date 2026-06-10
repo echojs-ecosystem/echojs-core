@@ -20,7 +20,7 @@ const PUBLISHABLE = [
   "form",
   "persist",
   "store",
-  "query",
+  "async",
   "url-state",
   "i18n",
   "ui",

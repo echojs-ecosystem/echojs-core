@@ -9,20 +9,23 @@ export const homeHeaderStyles = tv({
       'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-200',
     ].join(' '),
     inner:
-      'flex w-full min-w-0 items-center gap-2 py-3 sm:gap-3 sm:py-3.5',
+      'flex w-full min-w-0 flex-nowrap items-center gap-2 py-3 sm:gap-3 sm:py-3.5',
     brand: 'flex min-w-0 items-center gap-2 sm:gap-2.5',
     logo: 'flex shrink-0 items-center justify-center',
     logoMark: 'h-10 w-10',
-    brandName: 'truncate text-base font-bold tracking-tight text-fg',
+    brandName:
+      'hidden min-[22rem]:block truncate text-base font-bold tracking-tight text-fg',
     brandTag: 'hidden text-xs text-fg-subtle sm:block',
     menuBtn: 'shrink-0 lg:hidden',
+    menuBtnActive:
+      'border-echo-500/35 bg-echo-50/80 text-fg dark:bg-echo-950/50',
     nav: 'hidden items-center gap-1 lg:flex',
     navLink:
       'rounded-lg px-3 py-2 text-sm font-medium text-fg-muted transition hover:bg-surface-muted hover:text-fg',
     searchWrap:
-      'flex min-w-0 flex-1 items-center justify-end md:max-w-xs lg:max-w-sm',
-    actions: 'flex shrink-0 items-center gap-1.5 sm:gap-2',
-    githubBtn: 'inline-flex',
+      'flex min-w-0 flex-1 items-center justify-end sm:max-w-[9rem] md:max-w-xs lg:max-w-sm',
+    actions: 'flex shrink-0 items-center gap-1 sm:gap-2',
+    githubBtn: 'hidden sm:inline-flex',
   },
   variants: {
     layout: {
@@ -59,7 +62,12 @@ export const homeHeaderStyles = tv({
       scrolled: false,
       scrollLocked: false,
       class: {
-        root: 'border-transparent bg-transparent shadow-none',
+        root: [
+          'border-transparent bg-transparent shadow-none',
+          'max-sm:border-border/60 max-sm:bg-surface/90 max-sm:shadow-sm',
+          'max-sm:backdrop-blur-xl max-sm:backdrop-saturate-150',
+          'max-sm:dark:border-white/10 max-sm:dark:bg-surface/90',
+        ].join(' '),
       },
     },
     {

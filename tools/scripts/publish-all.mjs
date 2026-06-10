@@ -24,7 +24,7 @@ const PUBLISHABLE = [
   "hyperdom",
   "i18n",
   "url-state",
-  "query",
+  "async",
   "persist",
   "form",
   "router",

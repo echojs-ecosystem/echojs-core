@@ -57,7 +57,7 @@ legacy stores, compiler ergonomics, and **library-by-library** mapping.
 | **VDOM**           | No (compiled updates)           | No (HyperDOM bindings)                         |
 | **Authoring**      | `.svelte` SFC                   | `.view.ts` + `.model.ts`                       |
 | **Routing**        | File routes (`+page.svelte`)    | `createRoutes` in entities                     |
-| **Server data**    | `load`, `+server`, form actions | `@echojs-ecosystem/query`, API routes external |
+| **Server data**    | `load`, `+server`, form actions | `@echojs-ecosystem/async`, API routes external |
 | **Global client**  | runes modules, stores (legacy)  | `@echojs-ecosystem/store`                      |
 | **URL state**      | `$page.url.searchParams`        | `@echojs-ecosystem/url-state`                  |
 | **SSR**            | SvelteKit adapters (mature)     | SPA-first today                                |
@@ -248,7 +248,7 @@ component pile.
 | -------------- | --------------------------- | ------------------------------------------------------- |
 | **Local UI**   | `$state` in component       | `signal` in model                                       |
 | **Screen**     | runes in `.svelte` / module | `createModel`                                           |
-| **Server**     | `load`, server actions      | `@echojs-ecosystem/query`                               |
+| **Server**     | `load`, server actions      | `@echojs-ecosystem/async`                               |
 | **URL**        | `$page.url.searchParams`    | `@echojs-ecosystem/url-state`                           |
 | **App client** | stores / rune modules       | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
@@ -256,11 +256,11 @@ component pile.
 
 | Library                    | Svelte role       | EchoJS                         |
 | -------------------------- | ----------------- | ------------------------------ |
-| **TanStack Query Svelte**  | `createQuery`     | `@echojs-ecosystem/query`      |
+| **TanStack Query Svelte**  | `createQuery`     | `@echojs-ecosystem/async`      |
 | **sveltekit-superforms**   | forms + zod       | model + mutation               |
 | **formsnap**               | accessible fields | `@echojs-ecosystem/ui` + model |
 | **nanostores**             | tiny stores       | signals / store                |
-| **@tanstack/svelte-query** | cache             | `@echojs-ecosystem/query`      |
+| **@tanstack/svelte-query** | cache             | `@echojs-ecosystem/async`      |
 | **paraglide**              | i18n              | `@echojs-ecosystem/i18n`       |
 | **svelte-i18n**            | dictionaries      | `@echojs-ecosystem/i18n`       |
 | **lucide-svelte**          | icons             | SVG in views                   |
@@ -474,7 +474,7 @@ expect(vm.results.value().length).toBeGreaterThan(0)
 | Routes     | filesystem                    | `createRoutes`                |
 | Prefetch   | `data-sveltekit-preload-data` | router / query prefetch       |
 | Mutations  | form actions                  | `createMutation`              |
-| REST cache | TanStack / load               | `@echojs-ecosystem/query`     |
+| REST cache | TanStack / load               | `@echojs-ecosystem/async`     |
 | URL params | `$page.url`                   | `@echojs-ecosystem/url-state` |
 
 ### UI & content
@@ -648,7 +648,7 @@ not compiler.
 | Reactivity   | Runes (compiled)   | Runtime signals                  |
 | UI           | `.svelte`          | HyperDOM `.view.ts`              |
 | Routing      | File-based Kit     | Code route table                 |
-| Data         | `load`, actions    | `@echojs-ecosystem/query`        |
+| Data         | `load`, actions    | `@echojs-ecosystem/async`        |
 | SSR          | Mature adapters    | SPA-first                        |
 | Architecture | Kit + `lib/`       | Feature-first rules              |
 | Platform     | Kit + community    | `@echojs-ecosystem/*` integrated |

@@ -1,7 +1,7 @@
 import type { DocsNavSection } from '../../types'
 
-import { apiNavSection } from './api'
 import { architectureNavSection } from './architecture'
+import { bestPracticesNavSection } from './best-practices'
 import { comparisonsNavSection } from './comparisons'
 import { examplesNavSection } from './examples'
 import { gettingStartedNavSection } from './getting-started'
@@ -9,8 +9,8 @@ import { guidesNavSection } from './guides'
 import { packagesNavSection } from './packages'
 
 export {
-  apiNavSection,
   architectureNavSection,
+  bestPracticesNavSection,
   comparisonsNavSection,
   examplesNavSection,
   gettingStartedNavSection,
@@ -24,7 +24,7 @@ export const docsNavSections: DocsNavSection[] = [
   architectureNavSection,
   guidesNavSection,
   packagesNavSection,
+  bestPracticesNavSection,
   comparisonsNavSection,
   examplesNavSection,
-  apiNavSection,
 ]

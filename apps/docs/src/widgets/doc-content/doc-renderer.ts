@@ -28,6 +28,7 @@ import {
   docStyles,
   tabButtonStyles,
 } from '@widgets/doc-content/doc-renderer.styles'
+import { FrameworkComparisonSection } from '@widgets/framework-comparison'
 import { PackageInstallAdd } from '@widgets/package-install'
 import { PackageOverview } from '@widgets/package-overview'
 import { PackagePlayground } from '@widgets/package-playground'
@@ -150,6 +151,11 @@ const renderBlock = (block: DocBlock): Child => {
       return UtilDemo({ slug: block.slug })
     case 'package-overview':
       return PackageOverview({ packageId: block.packageId })
+    case 'framework-comparison':
+      return div(
+        { class: docUi.frameworkComparison() },
+        FrameworkComparisonSection()
+      )
     case 'table':
       return div({ class: docUi.tableWrap() }, [
         table({ class: docUi.table() }, [

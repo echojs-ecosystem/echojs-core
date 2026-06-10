@@ -30,7 +30,6 @@ export const homeStats = [
 export const heroPills = [
   'Fine-grained signals',
   'No reconciliation',
-  'Provider composition',
   'Typed routes',
 ] as const
 

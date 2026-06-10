@@ -2,7 +2,8 @@ import { tv } from 'tailwind-variants'
 
 export const sponsorsPageStyles = tv({
   slots: {
-    root: 'relative min-h-dvh overflow-hidden bg-surface',
+    page: 'min-h-dvh bg-surface',
+    root: 'relative overflow-hidden',
     mesh: 'pointer-events-none absolute inset-0 bg-hero-mesh opacity-80 dark:opacity-60',
     main: 'relative',
     container: 'mx-auto max-w-5xl px-5 pb-20 pt-8 sm:px-8 sm:pt-12',

@@ -45,7 +45,7 @@ const byContentId: Record<ContentId, NavIconId> = {
   'guides/conventions': 'scale',
   'guides/authentication': 'shield',
   'guides/internationalization': 'globe',
-  'guides/best-practices': 'compass',
+  'best-practices/overview': 'compass',
   'examples/todo-app': 'list',
   'examples/dashboard': 'layout-grid',
   'examples/admin-panel': 'shield',

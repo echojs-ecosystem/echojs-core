@@ -6,10 +6,13 @@ import {
   $docsHeaderScrollLockActive,
 } from '@app/docs-header-scroll'
 import { buildSiteHeaderNavItems, type SiteHeaderNavItem } from '@app/router'
-import { toggleMobileNav } from '@widgets/docs-shell/model/mobile-nav'
+import {
+  $mobileNavOpen,
+  toggleMobileNav,
+} from '@widgets/docs-shell/model/mobile-nav'
 
 import { homeHeaderStyles } from '../ui/site-header.view.styles'
-import { toggleHomeNav } from './home-mobile-nav'
+import { $homeNavOpen, toggleHomeNav } from './home-mobile-nav'
 
 export type { SiteHeaderNavItem } from '@app/router'
 
@@ -26,6 +29,7 @@ export type SiteHeaderVM = {
   headerStyles: () => ReturnType<typeof homeHeaderStyles>
   navItems: SiteHeaderNavItem[]
   showMenu: boolean
+  isMobileNavOpen: () => boolean
   openMobileNav: () => void
 }
 
@@ -45,6 +49,8 @@ export const createSiteHeaderModel = (options: SiteHeaderOptions = {}) =>
         }),
       navItems: buildSiteHeaderNavItems(),
       showMenu: true,
+      isMobileNavOpen: () =>
+        mode === 'docs' ? $mobileNavOpen.value() : $homeNavOpen.value(),
       openMobileNav: mode === 'docs' ? toggleMobileNav : toggleHomeNav,
     }
   }, 'SiteHeaderModel')

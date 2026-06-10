@@ -60,7 +60,7 @@ This guide is the **Solid migration reference** — primitives, mental model tra
 | **Component re-run**  | **Never** (function runs once)   | Views are factories; models are plain    |
 | **Structure**         | Team convention                  | **Feature-first** (documented)           |
 | **Routing**           | `@solidjs/router`                | `@echojs-ecosystem/router`               |
-| **Async**             | `createResource`, TanStack Query | `@echojs-ecosystem/query`                |
+| **Async**             | `createResource`, TanStack Query | `@echojs-ecosystem/async`                |
 | **Global state**      | `createStore`, context, signals  | `@echojs-ecosystem/store`                |
 | **Meta-framework**    | SolidStart (Vinxi/Nitro)         | `@echojs-ecosystem/framework` + Vite SPA |
 | **SSR**               | SolidStart mature path           | CSR-first today                          |
@@ -271,7 +271,7 @@ Imports between features are **unrestricted** unless you add lint boundaries.
 | ------------------ | -------------------------------- | ------------------------------------------------------- |
 | **Local UI**       | `createSignal`                   | `signal` in model                                       |
 | **Screen**         | component + memos                | `createModel`                                           |
-| **Server / cache** | `createResource`, TanStack Query | `@echojs-ecosystem/query`                               |
+| **Server / cache** | `createResource`, TanStack Query | `@echojs-ecosystem/async`                               |
 | **URL**            | router search, `useSearchParams` | `@echojs-ecosystem/url-state`                           |
 | **App client**     | `createStore`, context           | `@echojs-ecosystem/store` + `@echojs-ecosystem/persist` |
 
@@ -282,7 +282,7 @@ Imports between features are **unrestricted** unless you add lint boundaries.
 | **solid-js/store** `createStore` | nested immutable store | `@echojs-ecosystem/store`                 |
 | **solid-js/store** `produce`     | Immer-like             | `store.update`                            |
 | **context API**                  | DI + theme             | framework `inject`                        |
-| **@tanstack/solid-query**        | `createQuery`          | `@echojs-ecosystem/query` (same concepts) |
+| **@tanstack/solid-query**        | `createQuery`          | `@echojs-ecosystem/async` (same concepts) |
 | **solid-primitives**             | utilities              | `shared/` + model                         |
 | **@solidjs/meta**                | head tags              | SPA head / future SSR                     |
 | **valtio** (rare)                | proxy state            | signals / store                           |
@@ -310,7 +310,7 @@ const user = userQuery.with(() => ({ id: params.id }))
 // user.isPending(), user.data() in view
 ```
 
-| createResource   | `@echojs-ecosystem/query`            |
+| createResource   | `@echojs-ecosystem/async`            |
 | ---------------- | ------------------------------------ |
 | Source + fetcher | `queryKey` + `queryFn`               |
 | `refetch`        | invalidate / refetch                 |
@@ -464,7 +464,7 @@ recommended).
 | Compile JSX      | babel/solid plugin | no JSX compile step           |
 | List performance | `<For>` keyed      | map + signal per row          |
 | Dev rebuild      | fast HMR           | Vite HMR                      |
-| Benchmarks       | strong 10k updates | see home Compare (mock)       |
+| Benchmarks       | strong 10k updates | see comparisons overview (mock) |
 
 Both avoid VDOM — differences show up in **ecosystem weight** and **view
 authoring style**, not fundamental update algorithm for simple counters.
@@ -504,7 +504,7 @@ expect(vm.total.value()).toBe(19.99)
 | ---------- | ------------------------- | ----------------------------- |
 | Router     | `@solidjs/router`         | `@echojs-ecosystem/router`    |
 | Meta       | SolidStart                | `@echojs-ecosystem/framework` |
-| REST cache | TanStack Query / resource | `@echojs-ecosystem/query`     |
+| REST cache | TanStack Query / resource | `@echojs-ecosystem/async`     |
 | URL state  | manual / router           | `@echojs-ecosystem/url-state` |
 | Persist    | localStorage manual       | `@echojs-ecosystem/persist`   |
 
@@ -678,7 +678,7 @@ Keep on Nitro or move to your API; Echo client uses `queryFn` + `fetch`.
 | Reactivity   | Nearly identical primitives | `signal` / `computed` / `effect` |
 | Views        | JSX (compile-time bindings) | HyperDOM TS                      |
 | Architecture | Optional discipline         | Feature-first rules              |
-| Data         | Resource + TanStack         | `@echojs-ecosystem/query`        |
+| Data         | Resource + TanStack         | `@echojs-ecosystem/async`        |
 | Routing      | solid-router / Start        | `@echojs-ecosystem/router`       |
 | SSR          | SolidStart                  | SPA-first                        |
 | Platform     | Minimal + community         | Integrated `@echojs-ecosystem/*` |

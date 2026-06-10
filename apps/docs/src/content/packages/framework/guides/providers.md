@@ -35,7 +35,7 @@ export { themeProvider } from './theme.js'
 
 | Provider               | Package                             | Notes                                  |
 | ---------------------- | ----------------------------------- | -------------------------------------- |
-| `createQueryProvider`  | `@echojs-ecosystem/query`           | Global query defaults                  |
+| `createQueryProvider`  | `@echojs-ecosystem/async`           | Global query defaults                  |
 | `createRouterProvider` | `@echojs-ecosystem/router/hyperdom` | `router.start()`, root = `router.View` |
 | UI / theme             | `@echojs-ecosystem/ui`              | Design tokens                          |
 | i18n                   | `@echojs-ecosystem/i18n`            | Locale + messages                      |

@@ -25,7 +25,7 @@ Then import subpaths, for example:
 
 - `@echojs-ecosystem/framework/app` — bootstrap
 - `@echojs-ecosystem/framework/reactivity` — signals
-- `@echojs-ecosystem/framework/query` — data fetching
+- `@echojs-ecosystem/framework/async` — data fetching
 - `@echojs-ecosystem/framework/i18n` — translations
 - `@echojs-ecosystem/framework/ui/button` — UI components
 
@@ -43,7 +43,7 @@ If you prefer explicit dependencies instead of the meta-package:
 
 When not using `framework`, add each package you need:
 
-:::install @echojs-ecosystem/query
+:::install @echojs-ecosystem/async
 
 :::install @echojs-ecosystem/i18n
 

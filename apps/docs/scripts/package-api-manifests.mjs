@@ -124,9 +124,9 @@ export const packageApiManifests = {
       },
     ],
   },
-  query: {
-    npmPackage: '@echojs-ecosystem/query',
-    importBadge: '@echojs-ecosystem/query',
+  async: {
+    npmPackage: '@echojs-ecosystem/async',
+    importBadge: '@echojs-ecosystem/async',
     categories: [
       {
         id: 'factories',
@@ -161,7 +161,21 @@ export const packageApiManifests = {
       {
         id: 'parsers',
         title: 'Parsers',
-        pages: [{ slug: 'parsers', name: 'parseAs*', isModule: true }],
+        pages: [
+          { slug: 'parse-as-string', name: 'parseAsString', skipGeneration: true },
+          { slug: 'parse-as-integer', name: 'parseAsInteger', skipGeneration: true },
+          { slug: 'parse-as-float', name: 'parseAsFloat', skipGeneration: true },
+          { slug: 'parse-as-boolean', name: 'parseAsBoolean', skipGeneration: true },
+          { slug: 'parse-as-iso-date', name: 'parseAsIsoDate', skipGeneration: true },
+          { slug: 'parse-as-timestamp', name: 'parseAsTimestamp', skipGeneration: true },
+          { slug: 'parse-as-literal', name: 'parseAsLiteral', skipGeneration: true },
+          { slug: 'parse-as-array-of', name: 'parseAsArrayOf', skipGeneration: true },
+          { slug: 'parse-as-native-array-of', name: 'parseAsNativeArrayOf', skipGeneration: true },
+          { slug: 'parse-as-json', name: 'parseAsJson', skipGeneration: true },
+          { slug: 'create-custom-parser', name: 'createCustomParser', skipGeneration: true },
+          { slug: 'create-custom-multi-parser', name: 'createCustomMultiParser', skipGeneration: true },
+          { slug: 'is-multi-parser', name: 'isMultiParser', skipGeneration: true },
+        ],
       },
       {
         id: 'adapters',
