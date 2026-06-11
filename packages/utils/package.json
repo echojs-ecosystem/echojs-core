@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/utils",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Signal-native utilities and composables for EchoJS — inspired by ReactUse, built on @echojs-ecosystem/reactivity",
   "files": [
     "dist"

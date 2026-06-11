@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/architect",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Architecture linter for EchoJS projects — core engine and CLI",
   "files": [
     "dist"
