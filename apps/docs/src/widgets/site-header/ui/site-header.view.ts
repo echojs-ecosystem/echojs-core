@@ -20,6 +20,7 @@ import { VersionDropdown } from '@widgets/version-dropdown'
 import type { SiteHeaderVM } from '../model/site-header.model'
 import { HomeMobileNav } from './home-mobile-nav.view'
 import { cn } from '@core/styles/cn'
+import { i18n } from '@core/providers'
 
 import { headerIconBtnStyles } from './site-header.view.styles'
 
@@ -49,53 +50,53 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
                 'aria-expanded': () => String(vm.isMobileNavOpen()),
                 'aria-label': () =>
                   vm.isMobileNavOpen()
-                    ? 'Close navigation'
-                    : 'Open navigation',
+                    ? i18n.t('shell.closeNavigation')
+                    : i18n.t('shell.openNavigation'),
               },
               [MenuIcon()]
             )
           : null,
-      NavLink({
-        to: homePage,
-        class: hdr().brand(),
-        children: [
-          div({ class: hdr().logo() }, [
-            EchoBrandLogo({ className: hdr().logoMark(), size: 40 }),
-          ]),
-          div([p({ class: hdr().brandName() }, 'EchoJS')]),
-        ],
-      }),
-      navEl(
-        { class: hdr().nav() },
-        vm.navItems.map((item) =>
-          NavLink({
-            to:
-              item.kind === 'doc'
-                ? docPageByContentId[item.contentId]!
-                : item.page,
-            match: item.kind === 'page' ? item.match : undefined,
-            class: hdr().navLink(),
-            children: item.label,
-          })
-        )
-      ),
-      div({ class: hdr().searchWrap() }, [DocsSearch()]),
-      div({ class: hdr().actions() }, [
-        VersionDropdown(),
-        LocaleDropdown(),
-        h(
-          'a',
-          {
-            href: 'https://github.com/echojs/echojs',
-            target: '_blank',
-            rel: 'noopener noreferrer',
-            class: [hdr().githubBtn(), headerIconBtnStyles()].join(' '),
-            'aria-label': 'EchoJS on GitHub',
-          },
-          [GitHubIcon()]
+        NavLink({
+          to: homePage,
+          class: hdr().brand(),
+          children: [
+            div({ class: hdr().logo() }, [
+              EchoBrandLogo({ className: hdr().logoMark(), size: 40 }),
+            ]),
+            div([p({ class: hdr().brandName() }, 'EchoJS')]),
+          ],
+        }),
+        navEl(
+          { class: hdr().nav() },
+          vm.navItems.map((item) =>
+            NavLink({
+              to:
+                item.kind === 'doc'
+                  ? docPageByContentId[item.contentId]!
+                  : item.page,
+              match: item.kind === 'page' ? item.match : undefined,
+              class: hdr().navLink(),
+              children: () => i18n.t(item.labelKey),
+            })
+          )
         ),
-        ThemeToggle(),
-      ]),
+        div({ class: hdr().searchWrap() }, [DocsSearch()]),
+        div({ class: hdr().actions() }, [
+          VersionDropdown(),
+          LocaleDropdown(),
+          h(
+            'a',
+            {
+              href: 'https://github.com/echojs/echojs',
+              target: '_blank',
+              rel: 'noopener noreferrer',
+              class: [hdr().githubBtn(), headerIconBtnStyles()].join(' '),
+              'aria-label': () => i18n.t('shell.github'),
+            },
+            [GitHubIcon()]
+          ),
+          ThemeToggle(),
+        ]),
       ]),
     ]),
     vm.mode === 'home' ? HomeMobileNav() : null,

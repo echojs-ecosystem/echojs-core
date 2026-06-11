@@ -36,18 +36,22 @@ adapter).
 
 ## Where code lives
 
-| Piece            | Location                          |
-| ---------------- | --------------------------------- |
-| Form definition  | `features/<name>/model/*-form.ts` |
-| Model + actions  | `features/<name>/model/*.model.ts` |
-| `bindField` UI   | `features/<name>/ui/*.view.ts`    |
-| Validation schema| Same file as form or `*.schema.ts` |
+| Piece            | Location                                      |
+| ---------------- | --------------------------------------------- |
+| Form definition  | `features/<name>/model/*-form.ts`             |
+| Model + actions  | `features/<name>/model/*.model.ts`            |
+| `bindField` view | `features/<name>/view/*.view.ts`              |
+| Component wiring | `features/<name>/component/*.component.ts`    |
+| Public API       | `features/<name>/index.ts`                    |
+| Validation schema| Same file as form or `*.schema.ts`            |
 
 ```
 features/checkout/
+  index.ts
+  component/checkout.component.ts
   model/checkout-form.ts
   model/checkout.model.ts
-  ui/checkout.view.ts
+  view/checkout.view.ts
 ```
 
 ## Simple login form
@@ -266,5 +270,5 @@ Do not mirror every keystroke into a global store.
 - [Conventions](/docs/guides/conventions) — `authLoginForm` naming
 - [Authentication](/docs/guides/authentication) — login flow
 - [Data fetching](/docs/guides/data-fetching) — `createMutation` after submit
-- [UI package](/docs/packages/ui/overview)
+- [UI package](/docs/packages/ui)
 - Example — `apps/example/src/features/forms-mini/`, `pages/auth/login/`

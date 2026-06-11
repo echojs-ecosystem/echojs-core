@@ -48,106 +48,74 @@ export const docHeadingStyles = tv({
 
 export const calloutStyles = tv({
   slots: {
-    root: 'my-6 overflow-hidden rounded-lg border shadow-sm',
-    header: 'flex items-start gap-3 px-4 py-3',
-    icon: 'flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-sm font-bold',
-    headerText: 'min-w-0 flex-1 pt-0.5',
-    title: 'text-sm font-semibold text-fg',
-    body: 'border-t border-border/50 px-4 py-3 text-sm leading-relaxed text-fg-muted dark:border-white/10',
+    root: 'my-6 rounded-xl px-4 py-3.5',
+    inner: 'flex items-start gap-3',
+    icon: 'mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-[15px] font-bold leading-none',
+    content: 'min-w-0 flex-1 space-y-1.5',
+    title: 'text-sm font-semibold leading-relaxed',
+    body: 'text-sm leading-relaxed',
   },
   variants: {
     variant: {
       note: {
-        root: 'border-sky-500/25 bg-sky-50/60 dark:border-sky-500/30 dark:bg-sky-950/25',
-        icon: 'bg-sky-500/15 text-sky-700 dark:bg-sky-500/20 dark:text-sky-300',
+        root: 'bg-sky-500/[0.08] dark:bg-sky-400/10',
+        icon: 'text-sky-600 dark:text-sky-400',
+        title: 'text-sky-950 dark:text-sky-100',
+        body: 'text-sky-900/85 dark:text-sky-100/85',
       },
       info: {
-        root: 'border-sky-500/25 bg-sky-50/50 dark:border-sky-500/30 dark:bg-sky-950/20',
-        icon: 'bg-sky-500/15 text-sky-700 dark:bg-sky-500/20 dark:text-sky-300',
+        root: 'bg-sky-500/[0.08] dark:bg-sky-400/10',
+        icon: 'text-sky-600 dark:text-sky-400',
+        title: 'text-sky-950 dark:text-sky-100',
+        body: 'text-sky-900/85 dark:text-sky-100/85',
       },
       tip: {
-        root: [
-          'border-emerald-400/55 bg-emerald-100 shadow-none',
-          'dark:border-emerald-500/45 dark:bg-emerald-800/40',
-        ].join(' '),
-        icon: 'bg-emerald-500/20 text-emerald-600 dark:bg-emerald-500/25 dark:text-emerald-300',
-        title: 'text-emerald-950 dark:text-emerald-100',
-        body: 'border-emerald-400/40 text-emerald-950/85 dark:border-emerald-500/35 dark:text-emerald-50/90',
+        root: 'bg-emerald-500/10 dark:bg-emerald-400/10',
+        icon: 'text-emerald-600 dark:text-emerald-400',
+        title: 'text-emerald-950 dark:text-emerald-50',
+        body: 'text-emerald-900/85 dark:text-emerald-50/90',
       },
       recommendation: {
-        root: [
-          'border-echo-400/55 bg-echo-100 shadow-none',
-          'dark:border-echo-500/45 dark:bg-echo-800/40',
-        ].join(' '),
-        icon: 'bg-echo-500/20 text-echo-600 dark:bg-echo-500/25 dark:text-echo-300',
-        title: 'text-echo-950 dark:text-echo-100',
-        body: 'border-echo-400/40 text-echo-950/85 dark:border-echo-500/35 dark:text-echo-50/90',
+        root: 'bg-yellow-400/15 dark:bg-yellow-400/10',
+        icon: 'text-yellow-600 dark:text-yellow-400',
+        title: 'text-yellow-950 dark:text-yellow-50',
+        body: 'text-yellow-900/85 dark:text-yellow-50/90',
       },
       warning: {
-        root: [
-          'border-amber-400/60 bg-amber-100 shadow-none',
-          'dark:border-amber-400/50 dark:bg-amber-700/45',
-        ].join(' '),
-        icon: 'bg-amber-500/25 text-amber-700 dark:bg-amber-500/30 dark:text-amber-200',
+        root: 'bg-amber-400/12 dark:bg-amber-400/10',
+        icon: 'text-amber-600 dark:text-amber-400',
         title: 'text-amber-950 dark:text-amber-50',
-        body: 'border-amber-400/45 text-amber-950/90 dark:border-amber-400/40 dark:text-amber-50/95',
+        body: 'text-amber-900/85 dark:text-amber-50/90',
       },
       danger: {
-        root: [
-          'border-red-400/55 bg-red-100 shadow-none',
-          'dark:border-red-500/45 dark:bg-red-800/40',
-        ].join(' '),
-        icon: 'bg-red-500/20 text-red-600 dark:bg-red-500/25 dark:text-red-300',
-        title: 'text-red-950 dark:text-red-100',
-        body: 'border-red-400/40 text-red-950/85 dark:border-red-500/35 dark:text-red-50/90',
+        root: 'bg-rose-500/10 dark:bg-rose-400/10',
+        icon: 'text-rose-600 dark:text-rose-400',
+        title: 'text-rose-950 dark:text-rose-50',
+        body: 'text-rose-900/85 dark:text-rose-50/90',
       },
       important: {
-        root: 'border-violet-500/30 bg-violet-50/60 dark:border-violet-500/30 dark:bg-violet-950/25',
-        icon: 'bg-violet-500/15 text-violet-700 dark:bg-violet-500/20 dark:text-violet-300',
+        root: 'bg-violet-500/10 dark:bg-violet-400/10',
+        icon: 'text-violet-600 dark:text-violet-400',
+        title: 'text-violet-950 dark:text-violet-50',
+        body: 'text-violet-900/85 dark:text-violet-50/90',
       },
     },
-    compact: {
+    titled: {
       true: {},
       false: {},
     },
   },
   compoundVariants: [
     {
-      variant: 'tip',
-      compact: true,
+      titled: false,
       class: {
-        root: 'px-4 py-3.5',
-        body: 'border-0 px-0 py-0 text-[0.9375rem] leading-relaxed',
-      },
-    },
-    {
-      variant: 'warning',
-      compact: true,
-      class: {
-        root: 'px-4 py-3.5',
-        body: 'border-0 px-0 py-0 text-[0.9375rem] leading-relaxed',
-      },
-    },
-    {
-      variant: 'danger',
-      compact: true,
-      class: {
-        root: 'px-4 py-3.5',
-        body: 'border-0 px-0 py-0 text-[0.9375rem] leading-relaxed',
-      },
-    },
-    {
-      variant: 'recommendation',
-      compact: true,
-      class: {
-        root: 'px-4 py-3.5',
-        body: 'border-0 px-0 py-0 text-[0.9375rem] leading-relaxed',
+        body: 'text-[0.9375rem]',
       },
     },
   ],
   defaultVariants: {
     variant: 'note',
-    compact: false,
+    titled: true,
   },
 })
 

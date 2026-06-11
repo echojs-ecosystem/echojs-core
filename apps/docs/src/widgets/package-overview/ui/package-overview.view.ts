@@ -24,12 +24,27 @@ import {
   featureCardStyles,
   packageOverviewStyles,
 } from '@widgets/package-overview/ui/package-overview.view.styles'
+import { NavIcon } from '@widgets/icons'
 import { getPackageVersion } from '@core/content/ecosystem-version.generated'
+import { isNavIconId, type NavIconId } from '@core/content/nav-icon-id'
+import { resolvePackageGroupIcon } from '@core/content/resolve-nav-icon'
 
 const ui = packageOverviewStyles()
 const pillar = featureCardStyles()
 
 export type PackageOverviewViewProps = { packageId: string }
+
+const OverviewIcon = (props: {
+  icon: NavIconId | string
+  wrapClass: string
+  glyphClass: string
+}): Child => {
+  const { icon, wrapClass, glyphClass } = props
+  if (isNavIconId(icon)) {
+    return span({ class: wrapClass }, NavIcon(icon, glyphClass))
+  }
+  return span({ class: `${wrapClass} text-base font-semibold` }, icon)
+}
 
 const toEcosystemCard = (id: string): EcosystemPackage | null => {
   const listed = ecosystemPackages.find((p) => p.shortName === id)
@@ -39,9 +54,7 @@ const toEcosystemCard = (id: string): EcosystemPackage | null => {
   return {
     name: data.npmPackage,
     shortName: data.id,
-    description: data.tagline,
     contentId: `packages/${data.id}`,
-    icon: data.icon,
   }
 }
 
@@ -67,13 +80,20 @@ const OverviewBody = (data: PackageOverviewData): Child => {
   const packageLabel = version
     ? `${data.npmPackage}@${version}`
     : data.npmPackage
+  const heroIconId = isNavIconId(data.icon)
+    ? data.icon
+    : resolvePackageGroupIcon(data.id)
 
   return div({ class: ui.root() }, [
     div({ class: ui.hero() }, [
       div({ class: ui.heroGlow() }),
       div({ class: ui.heroInner() }, [
         div({ class: ui.heroIconWrap() }, [
-          span({ class: ui.heroIcon() }, data.icon),
+          OverviewIcon({
+            icon: heroIconId,
+            wrapClass: ui.heroIcon(),
+            glyphClass: ui.heroIconGlyph(),
+          }),
         ]),
         div({ class: ui.heroContent() }, [
           data.id === 'framework'
@@ -93,74 +113,76 @@ const OverviewBody = (data: PackageOverviewData): Child => {
           NavLink({
             to: docPageByContentId[`packages/${data.id}/installation`]!,
             class: ui.importPathsLink(),
-            children: 'Import paths → Installation',
+            children: ['Import paths', span(null, '→')],
           }),
         ]),
       ]),
     ]),
 
     data.whyCards && data.whyCards.length > 0
-      ? sectionBlock(data.whyTitle ?? 'Why this package', () =>
-          div(null, [
-            data.whySubtitle
-              ? p(
-                  { class: 'mt-1 max-w-2xl text-sm text-fg-muted' },
-                  data.whySubtitle
-                )
-              : null,
+      ? sectionBlock(
+          data.whyTitle ?? 'Why this package',
+          data.whySubtitle,
+          () =>
             div(
               { class: ui.whyGrid() },
               data.whyCards!.map((card) =>
                 div({ class: ui.whyCard() }, [
-                  span({ class: ui.whyCardIcon() }, card.icon),
+                  span({ class: ui.whyAccent() }),
+                  OverviewIcon({
+                    icon: card.icon,
+                    wrapClass: ui.whyCardIconWrap(),
+                    glyphClass: ui.whyCardIconGlyph(),
+                  }),
                   h3({ class: ui.whyCardTitle() }, card.title),
                   p({ class: ui.whyCardBody() }, card.body),
                 ])
               )
-            ),
-          ])
+            )
         )
       : null,
 
-    sectionBlock('Core concepts', () =>
+    sectionBlock('Core concepts', undefined, () =>
       div(
         { class: ui.pillarGrid() },
         data.pillars.map((card) =>
           div({ class: pillar.root() }, [
-            div({ class: pillar.shine() }),
-            div({ class: pillar.iconWrap() }, card.icon),
-            h3({ class: pillar.title() }, card.title),
-            p({ class: pillar.body() }, card.body),
+            span({ class: pillar.accent() }),
+            OverviewIcon({
+              icon: card.icon,
+              wrapClass: pillar.iconWrap(),
+              glyphClass: pillar.iconGlyph(),
+            }),
+            div({ class: pillar.body() }, [
+              h3({ class: pillar.title() }, card.title),
+              p({ class: pillar.text() }, card.body),
+            ]),
           ])
         )
       )
     ),
 
     data.lifecycleSteps && data.lifecycleSteps.length > 0
-      ? sectionBlock(data.lifecycleTitle ?? 'Lifecycle', () =>
-          div(null, [
-            data.lifecycleSubtitle
-              ? p(
-                  { class: 'mt-1 max-w-2xl text-sm text-fg-muted' },
-                  data.lifecycleSubtitle
-                )
-              : null,
+      ? sectionBlock(
+          data.lifecycleTitle ?? 'Lifecycle',
+          data.lifecycleSubtitle,
+          () =>
             div(
               { class: ui.lifecycleGrid() },
               data.lifecycleSteps!.map((step) =>
                 div({ class: ui.lifecycleCard() }, [
+                  span({ class: ui.lifecycleAccent() }),
                   span({ class: ui.lifecycleStep() }, step.step),
                   p({ class: ui.lifecycleTitle() }, step.title),
                   p({ class: ui.lifecycleBody() }, step.body),
                 ])
               )
-            ),
-          ])
+            )
         )
       : null,
 
     data.codeExample
-      ? sectionBlock(data.codeExample.title, () =>
+      ? sectionBlock(data.codeExample.title, undefined, () =>
           div({ class: ui.codeSection() }, [
             div({ class: ui.codeSectionTitle() }, data.codeExample!.language),
             CodeBlock({
@@ -198,17 +220,22 @@ const OverviewBody = (data: PackageOverviewData): Child => {
         ])
       : null,
 
-    sectionBlock('Learn this package', () =>
+    sectionBlock('Learn this package', undefined, () =>
       div(
         { class: ui.learnGrid() },
-        data.learnPath.map((step) =>
+        data.learnPath.map((step, index) =>
           NavLink({
             to: docPageByContentId[step.contentId]!,
             class: ui.learnCard(),
             children: [
+              span({ class: ui.learnAccent() }),
+              p({ class: ui.learnStep() }, `Step ${index + 1}`),
               p({ class: ui.learnTitle() }, step.title),
               p({ class: ui.learnDesc() }, step.description),
-              span({ class: ui.learnLink() }, ['Open', span(null, '→')]),
+              span({ class: ui.learnLink() }, [
+                'Open',
+                NavIcon('chevron-right', 'h-3.5 w-3.5'),
+              ]),
             ],
           })
         )
@@ -216,7 +243,7 @@ const OverviewBody = (data: PackageOverviewData): Child => {
     ),
 
     related.length > 0
-      ? sectionBlock('Related packages', () =>
+      ? sectionBlock('Related packages', undefined, () =>
           div(
             { class: ui.relatedGrid() },
             related.map((pkg) => EcosystemPackageCard(pkg))
@@ -226,9 +253,14 @@ const OverviewBody = (data: PackageOverviewData): Child => {
   ])
 }
 
-const sectionBlock = (title: string, body: () => Child): Child =>
+const sectionBlock = (
+  title: string,
+  lead: string | undefined,
+  body: () => Child
+): Child =>
   div({ class: ui.section() }, [
     h2({ class: ui.sectionTitle() }, title),
+    lead ? p({ class: ui.sectionLead() }, lead) : null,
     body(),
   ])
 

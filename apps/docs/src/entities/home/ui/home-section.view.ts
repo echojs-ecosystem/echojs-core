@@ -6,8 +6,8 @@ import { homeSectionStyles } from '@entities/home/ui/home-section.view.styles'
 const sectionStyles = homeSectionStyles()
 
 export type HomeSectionProps = {
-  eyebrow: string
-  title: string
+  eyebrow: Child
+  title: Child
   lead?: Child
   children: Child
   class?: string

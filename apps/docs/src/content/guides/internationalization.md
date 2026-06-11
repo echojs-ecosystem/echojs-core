@@ -237,7 +237,7 @@ beforeEach(async () => {
 ## Related
 
 - [Reactivity](/docs/guides/reactivity) — reactive `t()` in views
-- [i18n package](/docs/packages/i18n/overview)
+- [i18n package](/docs/packages/i18n)
 - [Providers](/docs/architecture/providers)
 - [URL state](/docs/state/url-state) — locale in query
 - Example — `apps/example/public/locales/`

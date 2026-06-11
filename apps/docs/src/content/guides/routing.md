@@ -285,7 +285,7 @@ different `createRouteView` trees. Shell chrome can sit **outside**
 ## Related
 
 - [Reactivity](/docs/guides/reactivity) — signals, models, route `$params`
-- [Router package](/docs/packages/router/overview) — installation, API, playground
+- [Router package](/docs/packages/router) — installation, API, playground
 - [Authentication](/docs/guides/authentication) — session + guards
 - [Data fetching](/docs/guides/data-fetching) — `beforeLoad` vs query
 - [URL state](/docs/state/url-state) — query params as signals

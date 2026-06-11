@@ -274,7 +274,7 @@ resource — pick one source of truth.
 ## Related
 
 - [Reactivity](/docs/guides/reactivity) — signals, models, query binding
-- [Query package](/docs/packages/async/overview)
+- [Query package](/docs/packages/async)
 - [Network HTTP](/docs/packages/network-http) — client, retries, hooks
 - [Routing](/docs/guides/routing) — `beforeLoad`, loading views
 - [Server state](/docs/state/server-state)

@@ -29,6 +29,7 @@ export const structurePanelById: Record<string, StructureCodePanel> = {
     "@echojs-ecosystem/ui": "^0.6.0",
     "@echojs-ecosystem/i18n": "^0.6.0",
     "@echojs-ecosystem/form": "^0.6.0",
+    "@echojs-ecosystem/permission": "^0.6.0",
     "@echojs-ecosystem/network-http": "^0.6.0",
     "@echojs-ecosystem/utils": "^0.6.0"
   }
@@ -81,17 +82,160 @@ export default defineConfig({
   architect: panel(
     'architect',
     'architect.config.ts',
-    `import { defineConfig, dependenciesDirection } from "@echojs-ecosystem/architect"
+    `import {
+  abstraction,
+  defineConfig,
+  dependenciesDirection,
+  noUnabstractionFiles,
+  publicAbstraction,
+  restrictCrossImports,
+} from "@echojs-ecosystem/architect"
+
+const coreModule = (name: string) =>
+  abstraction({
+    name,
+    children: {
+      "*.ts": abstraction("module"),
+      "index.ts": abstraction("public-api"),
+    },
+    rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+  })
+
+const pageSlice = abstraction({
+  name: "page",
+  children: {
+    "*.page.ts": abstraction("page"),
+    "*.layout.ts": abstraction("layout"),
+    "index.ts": abstraction("public-api"),
+    model: abstraction("model"),
+    view: abstraction("view"),
+    component: abstraction("component"),
+  },
+  rules: [
+    publicAbstraction("page"),
+    publicAbstraction("public-api"),
+    noUnabstractionFiles(),
+  ],
+})
+
+const featureSlice = abstraction({
+  name: "slice",
+  children: {
+    model: abstraction("model"),
+    view: abstraction("view"),
+    component: abstraction("component"),
+    "index.ts": abstraction("public-api"),
+  },
+  rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+})
 
 export default defineConfig({
-  rules: [
-    dependenciesDirection(
-      ["app", "pages", "widgets", "features", "entities", "core"],
-      { allowDownward: ["**/app/router/**"] },
-    ),
-  ],
+  baseUrl: "src",
+  ignores: ["**/*.md", "**/*.css", "**/*.json", "**/*.html"],
+  root: abstraction({
+    name: "src",
+    children: {
+      app: abstraction({
+        name: "app",
+        children: {
+          router: abstraction({
+            name: "router",
+            children: { "*.ts": abstraction("routes-module") },
+            rules: [noUnabstractionFiles()],
+          }),
+          providers: abstraction({
+            name: "providers",
+            children: {
+              "index.ts": abstraction("public-api"),
+            },
+            rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+          }),
+          "main.ts": abstraction("entry"),
+          "bootstrap.ts": abstraction("entry"),
+        },
+        rules: [noUnabstractionFiles()],
+      }),
+      pages: abstraction({
+        name: "pages",
+        children: { "*": pageSlice, "**/*": pageSlice },
+        rules: [restrictCrossImports()],
+      }),
+      widgets: abstraction({
+        name: "widgets",
+        children: { "*": featureSlice },
+        rules: [restrictCrossImports()],
+      }),
+      features: abstraction({
+        name: "features",
+        children: { "*": featureSlice },
+        rules: [restrictCrossImports()],
+      }),
+      entities: abstraction({
+        name: "entities",
+        children: {
+          "*": abstraction({
+            name: "slice",
+            children: {
+              api: abstraction("api"),
+              model: abstraction("model"),
+              view: abstraction("view"),
+              component: abstraction("component"),
+              "index.ts": abstraction("public-api"),
+            },
+            rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+          }),
+        },
+      }),
+      core: abstraction({
+        name: "core",
+        children: {
+          async: coreModule("async"),
+          router: coreModule("router"),
+          ui: coreModule("ui"),
+          store: coreModule("store"),
+          i18n: abstraction({
+            name: "i18n",
+            children: {
+              "*.ts": abstraction("module"),
+              "index.ts": abstraction("public-api"),
+              "en.json": abstraction("locale"),
+            },
+            rules: [publicAbstraction("public-api"), noUnabstractionFiles()],
+          }),
+          api: abstraction({
+            name: "api",
+            children: { "**/*": abstraction("api-module") },
+          }),
+          permission: coreModule("permission"),
+          hooks: abstraction({
+            name: "hooks",
+            children: { "**/*": abstraction("hook-module") },
+          }),
+          styles: abstraction({
+            name: "styles",
+            children: { "**/*": abstraction("style-module") },
+          }),
+        },
+      }),
+    },
+    rules: [
+      dependenciesDirection(
+        ["app", "pages", "widgets", "features", "entities", "core"],
+        {
+          allowDownward: [
+            "**/app/router/**",
+            "**/core/async/**",
+            "**/core/router/**",
+            "**/core/ui/**",
+            "**/core/store/**",
+            "**/core/i18n/**",
+          ],
+        },
+      ),
+    ],
+  }),
 })`,
-    'Architect enforces layer order in CI'
+    'Architect — FSD layers, public API barrels, view/component slices, core modules'
   ),
   'app-main': panel(
     'app-main',
@@ -106,13 +250,11 @@ void bootstrap()`,
     'app-bootstrap',
     'src/app/bootstrap.ts',
     `import { createEchoApp } from "@echojs-ecosystem/framework/app"
-import {
-  queryProvider,
-  routerProvider,
-  uiProvider,
-  i18nProvider,
-  storeProvider,
-} from "@core/providers"
+import { queryProvider } from "@core/async"
+import { routerProvider } from "@core/router"
+import { uiProvider } from "@core/ui"
+import { i18nProvider } from "@core/i18n"
+import { storeProvider } from "@core/store"
 
 export const bootstrap = () =>
   createEchoApp({ strictContextChecks: true })
@@ -127,14 +269,12 @@ export const bootstrap = () =>
   'app-prov-index': panel(
     'app-prov-index',
     'src/app/providers/index.ts',
-    `export {
-  queryProvider,
-  routerProvider,
-  uiProvider,
-  i18nProvider,
-  storeProvider,
-} from "@core/providers"`,
-    'App re-exports core providers — pages never import app/'
+    `export { queryProvider } from "@core/async"
+export { routerProvider } from "@core/router"
+export { uiProvider } from "@core/ui"
+export { i18nProvider, i18n } from "@core/i18n"
+export { storeProvider } from "@core/store"`,
+    'App re-exports core wiring — views import i18n from @core/i18n'
   ),
   'routes-index': panel(
     'routes-index',
@@ -152,73 +292,81 @@ import { workspaceSection } from "@entities/__routes__/workspace.routes"
 
 export const appRouter = createRoutes([
   { path: "/", routeView: homePage },
-  {
-    path: "/workspace",
-    route: workspaceSection,
-    children: [
-      { path: "/", routeView: dashboardPage },
-      { path: "settings", routeView: settingsPage },
-    ],
-  },
+  workspaceSection,
 ])`,
-    'router — nested sections, layouts, and typed child routes'
+    'router — compose feature route trees from entities/__routes__'
   ),
   'routes-entity': panel(
     'routes-entity',
     'src/entities/__routes__/workspace.routes.ts',
-    `import { createRoute } from "@echojs-ecosystem/framework/router"
+    `import { dashboardPage } from "@pages/workspace/dashboard/dashboard.page"
+import { settingsPage } from "@pages/workspace/settings/settings.page"
 import { workspaceLayoutPage } from "@pages/workspace/workspace.layout"
 
-export const workspaceSection = createRoute("workspace-section")
-
-export const workspaceLayout = createRouteView({
-  name: "workspace-layout",
-  route: workspaceSection,
-  view: () => workspaceLayoutPage,
-})`,
+export const workspaceSection = {
+  path: "/workspace",
+  name: "workspace",
+  layoutView: workspaceLayoutPage,
+  children: [
+    { path: "/", name: "dashboard", routeView: dashboardPage },
+    { path: "settings", name: "settings", routeView: settingsPage },
+  ],
+}`,
     'Route slices live in entities/__routes__ — reusable across apps'
+  ),
+  'pages-home-index': panel(
+    'pages-home-index',
+    'src/pages/home/index.ts',
+    `export { Home } from "./component/home.component"
+export { createHomeModel } from "./model/home.model"
+export { HomeView } from "./view/home.view"`,
+    'Public slice API — re-exports from component/, model/, view/'
+  ),
+  'pages-home-component': panel(
+    'pages-home-component',
+    'src/pages/home/component/home.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createHomeModel } from "../model/home.model"
+import { HomeView } from "../view/home.view"
+
+export const Home = createComponent(createHomeModel, HomeView, {
+  name: "Home",
+})`,
+    'createComponent lives in component/*.component.ts — not in index or page'
   ),
   'pages-home-page': panel(
     'pages-home-page',
     'src/pages/home/home.page.ts',
     `import { createRouteView } from "@echojs-ecosystem/framework/router"
-import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
-import { createHomeModel } from "./model/home.model"
-import { HomeView } from "./ui/home.view"
 
-const Home = createComponent(createHomeModel, HomeView)
+import { Home } from "./component/home.component"
 
 export const homePage = createRouteView({
   name: "home",
   view: () => Home(),
 })`,
-    'Page glue — createRouteView + createComponent(model, view)'
+    'Page glue — route imports the wired component only'
   ),
   'pages-home-model': panel(
     'pages-home-model',
     'src/pages/home/model/home.model.ts',
     `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
-import { createSearchModel } from "@features/search"
-
-export const createHomeModel = createModel(() => {
-  const search = createSearchModel()
-  return {
-    searchVm: () => search,
-    heroTitle: () => "Build with EchoJS",
-  }
-}, "HomeModel")`,
-    'Page model composes features — no markup here'
+export const createHomeModel = createModel(() => ({
+  heroTitle: () => "Build with EchoJS",
+}), "HomeModel")`,
+    'Page model — behavior only; features mount as components in the view'
   ),
   'pages-home-view': panel(
     'pages-home-view',
-    'src/pages/home/ui/home.view.ts',
+    'src/pages/home/view/home.view.ts',
     `import { createView, main, section } from "@echojs-ecosystem/framework/hyperdom"
-import { SearchView } from "@features/search"
+import { Search } from "@features/search"
 
 export const HomeView = createView((vm) =>
-  main(null, [
-    section(null, vm.heroTitle()),
-    SearchView(vm.searchVm()),
+  main([
+    section(vm.heroTitle()),
+    Search(),
   ]),
   "HomeView",
 )`,
@@ -227,23 +375,49 @@ export const HomeView = createView((vm) =>
   'ws-layout': panel(
     'ws-layout',
     'src/pages/workspace/workspace.layout.ts',
-    `import { createLayoutView, div, outlet } from "@echojs-ecosystem/framework/hyperdom"
+    `import { createLayoutView } from "@echojs-ecosystem/framework/router"
+
 import { AppShellLayout } from "@widgets/app-shell"
 
-export const workspaceLayoutPage = createLayoutView(() =>
-  AppShellLayout({
-    sidebar: true,
-    children: outlet(),
-  }),
-  "WorkspaceLayout",
+export const workspaceLayoutPage = createLayoutView({
+  name: "workspace-layout",
+  view: ({ outlet }) =>
+    AppShellLayout({
+      sidebar: true,
+      children: outlet(),
+    }),
+})`,
+    'createLayoutView — outlet() from view context renders the active child'
+  ),
+  'ws-dashboard-index': panel(
+    'ws-dashboard-index',
+    'src/pages/workspace/dashboard/index.ts',
+    `export { Dashboard } from "./component/dashboard.component"
+export { createDashboardModel } from "./model/dashboard.model"
+export { DashboardView } from "./view/dashboard.view"`,
+    'Page slice barrel — component + model + view'
+  ),
+  'ws-dashboard-component': panel(
+    'ws-dashboard-component',
+    'src/pages/workspace/dashboard/component/dashboard.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createDashboardModel } from "../model/dashboard.model"
+import { DashboardView } from "../view/dashboard.view"
+
+export const Dashboard = createComponent(
+  createDashboardModel,
+  DashboardView,
+  { name: "Dashboard" },
 )`,
-    'Nested layout — outlet() renders active child route'
+    'Page component — model + view wired once'
   ),
   'ws-dashboard-page': panel(
     'ws-dashboard-page',
     'src/pages/workspace/dashboard/dashboard.page.ts',
     `import { createRouteView } from "@echojs-ecosystem/framework/router"
-import { Dashboard } from "./dashboard.component"
+
+import { Dashboard } from "./component/dashboard.component"
 
 export const dashboardPage = createRouteView({
   name: "workspace-dashboard",
@@ -272,28 +446,52 @@ export const createDashboardModel = createModel(() => {
   ),
   'ws-dashboard-view': panel(
     'ws-dashboard-view',
-    'src/pages/workspace/dashboard/ui/dashboard.view.ts',
+    'src/pages/workspace/dashboard/view/dashboard.view.ts',
     `import { createView, div, h1, Show } from "@echojs-ecosystem/framework/hyperdom"
 import { Skeleton } from "@echojs-ecosystem/framework/ui"
 
 export const DashboardView = createView((vm) =>
-  div(null, [
-    h1(null, () => \`Hello, \${vm.userName()}\`),
+  div([
+    h1(() => \`Hello, \${vm.userName()}\`),
     Show(
       vm.isLoading,
       () => Skeleton({ class: "h-8 w-32" }),
-      () => div(null, () => \`\${vm.totalUsers()} users\`),
+      () => div(() => \`\${vm.totalUsers()} users\`),
     ),
   ]),
   "DashboardView",
 )`,
     'ui + Show — loading states without hook rules'
   ),
+  'ws-settings-index': panel(
+    'ws-settings-index',
+    'src/pages/workspace/settings/index.ts',
+    `export { Settings } from "./component/settings.component"
+export { createSettingsModel } from "./model/settings.model"
+export { SettingsView } from "./view/settings.view"`,
+    'Settings slice barrel next to component/'
+  ),
+  'ws-settings-component': panel(
+    'ws-settings-component',
+    'src/pages/workspace/settings/component/settings.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createSettingsModel } from "../model/settings.model"
+import { SettingsView } from "../view/settings.view"
+
+export const Settings = createComponent(
+  createSettingsModel,
+  SettingsView,
+  { name: "Settings" },
+)`,
+    'Settings component — model + view wiring'
+  ),
   'ws-settings-page': panel(
     'ws-settings-page',
     'src/pages/workspace/settings/settings.page.ts',
     `import { createRouteView } from "@echojs-ecosystem/framework/router"
-import { Settings } from "./settings.component"
+
+import { Settings } from "./component/settings.component"
 
 export const settingsPage = createRouteView({
   name: "workspace-settings",
@@ -318,19 +516,20 @@ export const createSettingsModel = createModel(() => {
   ),
   'ws-settings-view': panel(
     'ws-settings-view',
-    'src/pages/workspace/settings/ui/settings.view.ts',
+    'src/pages/workspace/settings/view/settings.view.ts',
     `import { createView, div, button } from "@echojs-ecosystem/framework/hyperdom"
-import { LoginFormView } from "@features/login-form"
+
+import { LoginForm } from "@features/login-form"
 
 export const SettingsView = createView((vm) =>
-  div(null, [
+  div([
     ["profile", "security"].map((tab) =>
       button({
         class: () => (vm.activeTab() === tab ? "active" : ""),
         onClick: () => vm.setTab(tab),
       }, tab),
     ),
-    LoginFormView(),
+    LoginForm(),
   ]),
   "SettingsView",
 )`,
@@ -340,8 +539,8 @@ export const SettingsView = createView((vm) =>
     'shell-layout',
     'src/widgets/app-shell/app-shell.layout.ts',
     `import { createView, div } from "@echojs-ecosystem/framework/hyperdom"
-import { AppHeaderView } from "./ui/app-header.view"
-import { AppSidebarView } from "./ui/app-sidebar.view"
+import { AppHeaderView } from "./view/app-header.view"
+import { AppSidebarView } from "./view/app-sidebar.view"
 
 export const AppShellLayout = createView(
   (props: { sidebar?: boolean; children: Child }) =>
@@ -356,17 +555,17 @@ export const AppShellLayout = createView(
   ),
   'shell-header': panel(
     'shell-header',
-    'src/widgets/app-shell/ui/app-header.view.ts',
+    'src/widgets/app-shell/view/app-header.view.ts',
     `import { createView, header } from "@echojs-ecosystem/framework/hyperdom"
 import { NavLink } from "@echojs-ecosystem/framework/router"
-import { ThemeToggleView } from "@features/theme-toggle"
+import { ThemeToggle } from "@features/theme-toggle"
 import { homePage, dashboardPage } from "@entities/__routes__"
 
 export const AppHeaderView = createView(() =>
-  header(null, [
+  header([
     NavLink({ to: homePage, children: "Home" }),
     NavLink({ to: dashboardPage, children: "Workspace" }),
-    ThemeToggleView(),
+    ThemeToggle(),
   ]),
   "AppHeaderView",
 )`,
@@ -374,20 +573,21 @@ export const AppHeaderView = createView(() =>
   ),
   'shell-sidebar': panel(
     'shell-sidebar',
-    'src/widgets/app-shell/ui/app-sidebar.view.ts',
+    'src/widgets/app-shell/view/app-sidebar.view.ts',
     `import { createView, nav } from "@echojs-ecosystem/framework/hyperdom"
 import { NavLink } from "@echojs-ecosystem/framework/router"
-import { dashboardPage, settingsPage } from "@entities/__routes__"
-import { useTranslate } from "@echojs-ecosystem/i18n"
 
-export const AppSidebarView = createView(() => {
-  const t = useTranslate()
-  return nav(null, [
-    NavLink({ to: dashboardPage, children: t("nav.dashboard") }),
-    NavLink({ to: settingsPage, children: t("nav.settings") }),
-  ])
-}, "AppSidebarView")`,
-    'i18n in widgets — locale-aware navigation labels'
+import { dashboardPage, settingsPage } from "@entities/__routes__"
+import { i18n } from "@core/i18n"
+
+export const AppSidebarView = createView(() =>
+  nav([
+    NavLink({ to: dashboardPage, children: () => i18n.t("nav.dashboard") }),
+    NavLink({ to: settingsPage, children: () => i18n.t("nav.settings") }),
+  ]),
+  "AppSidebarView",
+)`,
+    'i18n from @core/i18n — wired at bootstrap via i18nProvider'
   ),
   'feat-search-model': panel(
     'feat-search-model',
@@ -410,9 +610,30 @@ export const createSearchModel = createModel(() => {
 }, "SearchModel")`,
     'reactivity + url-state — draft locally, commit to URL on submit'
   ),
+  'feat-search-index': panel(
+    'feat-search-index',
+    'src/features/search/index.ts',
+    `export { Search } from "./component/search.component"
+export { createSearchModel } from "./model/search.model"
+export { SearchView } from "./view/search.view"`,
+    'Feature barrel — import Search from the slice root'
+  ),
+  'feat-search-component': panel(
+    'feat-search-component',
+    'src/features/search/component/search.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createSearchModel } from "../model/search.model"
+import { SearchView } from "../view/search.view"
+
+export const Search = createComponent(createSearchModel, SearchView, {
+  name: "Search",
+})`,
+    'Feature component — wires model + view once'
+  ),
   'feat-search-view': panel(
     'feat-search-view',
-    'src/features/search/ui/search.view.ts',
+    'src/features/search/view/search.view.ts',
     `import { createView, form, input, button } from "@echojs-ecosystem/framework/hyperdom"
 
 export const SearchView = createView((vm) =>
@@ -430,44 +651,106 @@ export const SearchView = createView((vm) =>
 )`,
     'Feature UI — portable across home, docs, workspace'
   ),
-  'feat-login-model': panel(
-    'feat-login-model',
-    'src/features/login-form/model/login-form.model.ts',
-    `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
-import { createForm, field } from "@echojs-ecosystem/form"
+  'feat-login-form': panel(
+    'feat-login-form',
+    'src/features/login-form/model/login-form.form.ts',
+    `import { createField, createForm } from "@echojs-ecosystem/form"
+import { withLocalStorage } from "@echojs-ecosystem/persist"
 import { z } from "zod"
 
-const schema = z.object({
+const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 })
 
-export const createLoginFormModel = createModel(() => {
-  const form = createForm({ schema, defaultValues: { email: "", password: "" } })
-  return {
-    email: field(form, "email"),
-    password: field(form, "password"),
-    submit: () => form.handleSubmit((values) => signIn(values)),
-    errors: () => form.errors(),
-  }
-}, "LoginFormModel")`,
-    'form — schema-driven fields bound to signals'
+type LoginFormValue = z.infer<typeof loginSchema>
+
+type LoginFormFields = {
+  email: ReturnType<typeof createField<string>>
+  password: ReturnType<typeof createField<string>>
+}
+
+export const loginForm = createForm<LoginFormValue, LoginFormFields>(
+  {
+    email: createField("").extend(
+      withLocalStorage({ key: "echojs:login:email" })
+    ),
+    password: createField(""),
+  },
+  {
+    name: "LoginForm",
+    validationSchema: loginSchema,
+    defaultValues: { email: "", password: "" },
+  },
+)`,
+    'createField + createForm — persist on fields via .extend()'
+  ),
+  'feat-login-model': panel(
+    'feat-login-model',
+    'src/features/login-form/model/login-form.model.ts',
+    `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
+
+import { signInMutation } from "@entities/session"
+
+import { loginForm } from "./login-form.form"
+
+export const createLoginFormModel = createModel(() => ({
+  fields: loginForm.fields,
+  submit: async () => {
+    const result = await loginForm.submit(async (value) => {
+      await signInMutation.create().mutate(value)
+    })
+    return result.ok
+  },
+  reset: () => loginForm.reset(),
+}), "LoginFormModel")`,
+    'model wires submit — form tree lives in *.form.ts'
+  ),
+  'feat-login-index': panel(
+    'feat-login-index',
+    'src/features/login-form/index.ts',
+    `export { LoginForm } from "./component/login-form.component"
+export { loginForm } from "./model/login-form.form"
+export { createLoginFormModel } from "./model/login-form.model"
+export { LoginFormView } from "./view/login-form.view"`,
+    'Login feature — form in model/, component in component/'
+  ),
+  'feat-login-component': panel(
+    'feat-login-component',
+    'src/features/login-form/component/login-form.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createLoginFormModel } from "../model/login-form.model"
+import { LoginFormView } from "../view/login-form.view"
+
+export const LoginForm = createComponent(
+  createLoginFormModel,
+  LoginFormView,
+  { name: "LoginForm" },
+)`,
+    'LoginForm component — drop into any page view'
   ),
   'feat-login-view': panel(
     'feat-login-view',
-    'src/features/login-form/ui/login-form.view.ts',
+    'src/features/login-form/view/login-form.view.ts',
     `import { createView, form, input, button } from "@echojs-ecosystem/framework/hyperdom"
 import { bindField } from "@echojs-ecosystem/form/hyperdom"
 
-export const LoginFormView = createView((vm) =>
-  form({ onSubmit: (e) => { e.preventDefault(); vm.submit() } }, [
-    input(bindField(vm.email)),
-    input({ ...bindField(vm.password), type: "password" }),
+import type { LoginFormVM } from "../model/login-form.model"
+
+export const LoginFormView = createView((vm: LoginFormVM) => {
+  const { email, password } = vm.fields
+
+  return form({ onSubmit: (e) => { e.preventDefault(); void vm.submit() } }, [
+    input({ ...bindField(email, { variant: "email", controlledValue: true }) }),
+    input({
+      ...bindField(password, { variant: "text", controlledValue: true }),
+      type: "password",
+    }),
     button({ type: "submit" }, "Sign in"),
-  ]),
-  "LoginFormView",
-)`,
-    'form/hyperdom bindings — no manual onInput wiring'
+  ])
+}, "LoginFormView")`,
+    'bindField on fields from *.form.ts — no manual onInput'
   ),
   'feat-theme-model': panel(
     'feat-theme-model',
@@ -487,9 +770,32 @@ export const createThemeToggleModel = createModel(() => ({
 }), "ThemeToggleModel")`,
     'store + persist — client preferences survive reloads'
   ),
+  'feat-theme-index': panel(
+    'feat-theme-index',
+    'src/features/theme-toggle/index.ts',
+    `export { ThemeToggle } from "./component/theme-toggle.component"
+export { createThemeToggleModel } from "./model/theme-toggle.model"
+export { ThemeToggleView } from "./view/theme-toggle.view"`,
+    'Theme toggle — small feature, same slice layout'
+  ),
+  'feat-theme-component': panel(
+    'feat-theme-component',
+    'src/features/theme-toggle/component/theme-toggle.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createThemeToggleModel } from "../model/theme-toggle.model"
+import { ThemeToggleView } from "../view/theme-toggle.view"
+
+export const ThemeToggle = createComponent(
+  createThemeToggleModel,
+  ThemeToggleView,
+  { name: "ThemeToggle" },
+)`,
+    'ThemeToggle component — used in app-shell header'
+  ),
   'feat-theme-view': panel(
     'feat-theme-view',
-    'src/features/theme-toggle/ui/theme-toggle.view.ts',
+    'src/features/theme-toggle/view/theme-toggle.view.ts',
     `import { createView, button } from "@echojs-ecosystem/framework/hyperdom"
 import { Button } from "@echojs-ecosystem/framework/ui"
 
@@ -585,9 +891,23 @@ export const createUserListModel = createModel(() => {
   'counter-index': panel(
     'counter-index',
     'src/entities/counter/index.ts',
-    `export { createCounterModel } from "./model/counter.model"
-export { CounterView } from "./ui/counter.view"`,
-    'Public entity API — pages import from the slice root'
+    `export { Counter } from "./component/counter.component"
+export { createCounterModel } from "./model/counter.model"
+export { CounterView } from "./view/counter.view"`,
+    'Entity barrel — re-exports only, wiring in component/'
+  ),
+  'counter-component': panel(
+    'counter-component',
+    'src/entities/counter/component/counter.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createCounterModel } from "../model/counter.model"
+import { CounterView } from "../view/counter.view"
+
+export const Counter = createComponent(createCounterModel, CounterView, {
+  name: "Counter",
+})`,
+    'Entity component — Counter() mounts model + view together'
   ),
   'counter-model': panel(
     'counter-model',
@@ -607,7 +927,7 @@ export const createCounterModel = createModel(() => {
   ),
   'counter-view': panel(
     'counter-view',
-    'src/entities/counter/ui/counter.view.ts',
+    'src/entities/counter/view/counter.view.ts',
     `import { button, createView } from "@echojs-ecosystem/framework/hyperdom"
 
 export const CounterView = createView((vm) =>
@@ -632,67 +952,91 @@ describe("CounterModel", () => {
     'Vitest on models — no DOM for most unit tests',
     'Vitest'
   ),
-  'core-providers': panel(
-    'core-providers',
-    'src/core/providers/index.ts',
-    `export { queryProvider } from "./query"
-export { routerProvider } from "./router"
-export { uiProvider } from "./ui"
-export { i18nProvider } from "./i18n"
-export { storeProvider } from "./store"`,
-    'core/providers — register each package once for the whole app'
+  'core-async-index': panel(
+    'core-async-index',
+    'src/core/async/index.ts',
+    `export { queryProvider } from "./create-query-provider"`,
+    'core/async barrel — import queryProvider from @core/async'
   ),
-  'core-query': panel(
-    'core-query',
-    'src/core/providers/query.ts',
+  'core-async-provider': panel(
+    'core-async-provider',
+    'src/core/async/create-query-provider.ts',
     `import { createQueryProvider } from "@echojs-ecosystem/framework/async"
 
 export const queryProvider = createQueryProvider({
   defaultOptions: { staleTime: 30_000, retry: 1 },
 })`,
-    'async provider — global cache defaults'
+    'async — createQueryProvider with global cache defaults'
   ),
-  'core-router': panel(
-    'core-router',
-    'src/core/providers/router.ts',
+  'core-router-index': panel(
+    'core-router-index',
+    'src/core/router/index.ts',
+    `export { routerProvider } from "./create-router-provider"`,
+    'core/router barrel'
+  ),
+  'core-router-provider': panel(
+    'core-router-provider',
+    'src/core/router/create-router-provider.ts',
     `import { createRouterProvider } from "@echojs-ecosystem/framework/router"
+
 import { appRouter } from "@app/router"
 
 export const routerProvider = createRouterProvider({
   router: appRouter,
   history: "browser",
 })`,
-    'router provider — history + scroll restoration'
+    'router — createRouterProvider wired to app routes'
   ),
-  'core-ui': panel(
-    'core-ui',
-    'src/core/providers/ui.ts',
+  'core-ui-index': panel(
+    'core-ui-index',
+    'src/core/ui/index.ts',
+    `export { uiProvider } from "./create-ui-provider"`,
+    'core/ui barrel'
+  ),
+  'core-ui-provider': panel(
+    'core-ui-provider',
+    'src/core/ui/create-ui-provider.ts',
     `import { createUiProvider } from "@echojs-ecosystem/framework/ui"
 
 export const uiProvider = createUiProvider({
   defaultTheme: "light",
 })`,
-    'ui provider — design tokens and primitives context'
+    'ui — createUiProvider for primitives context'
   ),
-  'core-i18n': panel(
-    'core-i18n',
-    'src/core/providers/i18n.ts',
+  'core-i18n-index': panel(
+    'core-i18n-index',
+    'src/core/i18n/index.ts',
+    `export { i18n, i18nProvider } from "./create-i18n-provider"`,
+    'Public i18n API — views import i18n.t(), bootstrap uses i18nProvider'
+  ),
+  'core-i18n-provider': panel(
+    'core-i18n-provider',
+    'src/core/i18n/create-i18n-provider.ts',
     `import { createI18nProvider } from "@echojs-ecosystem/framework/i18n"
-import en from "../i18n/en.json"
+
+import en from "./en.json"
 
 export const i18nProvider = createI18nProvider({
-  locale: "en",
-  messages: { en },
-})`,
-    'i18n provider — dictionaries loaded at bootstrap'
+  fallbackLocale: "en",
+  locales: { en },
+})
+
+export const i18n = i18nProvider.i18n`,
+    'i18n — createI18nProvider + app instance beside en.json'
   ),
-  'core-store': panel(
-    'core-store',
-    'src/core/providers/store.ts',
+  'core-store-index': panel(
+    'core-store-index',
+    'src/core/store/index.ts',
+    `export { storeProvider } from "./create-store-provider"`,
+    'core/store barrel'
+  ),
+  'core-store-provider': panel(
+    'core-store-provider',
+    'src/core/store/create-store-provider.ts',
     `import { createStoreProvider } from "@echojs-ecosystem/framework/store"
 
 export const storeProvider = createStoreProvider()`,
-    'store provider — global client state registry'
+    'store — createStoreProvider for global client state'
   ),
   'core-http': panel(
     'core-http',
@@ -739,5 +1083,176 @@ export const cn = (...classes: (string | false | undefined)[]) =>
 export const useBreakpoint = () =>
   useMediaQuery("(min-width: 1024px)")`,
     'utils — signal-native composables for browser APIs'
+  ),
+  'core-permission-engine': panel(
+    'core-permission-engine',
+    'src/core/permission/permission-engine.ts',
+    `import {
+  createPermission,
+  createPermissionTemplate,
+} from "@echojs-ecosystem/permission"
+
+export type User = { id: string; role: string; authorId: string }
+
+export type AppPermissionSchema = {
+  user: [
+    "read",
+    { name: "update"; type: User },
+    { name: "delete"; type: User },
+  ]
+  order: ["read", "update", "delete"]
+}
+
+const adminTemplate = createPermissionTemplate<AppPermissionSchema>({
+  user: { read: true, update: true, delete: true },
+  order: { read: true, update: true, delete: true },
+})
+
+const viewerTemplate = createPermissionTemplate<AppPermissionSchema>({
+  user: {
+    read: true,
+    update: false,
+    delete: (user) => user.authorId === user.id,
+  },
+  order: { read: true, update: false, delete: false },
+})
+
+export const appPermission = createPermission<AppPermissionSchema>()
+
+export const applyRolePermissions = (role: "admin" | "viewer"): void => {
+  appPermission.setup(role === "admin" ? adminTemplate : viewerTemplate)
+}`,
+    'permission — typed RBAC/ABAC engine on signals + SSR hydrate'
+  ),
+  'core-permission-index': panel(
+    'core-permission-index',
+    'src/core/permission/index.ts',
+    `export {
+  appPermission,
+  applyRolePermissions,
+  type AppPermissionSchema,
+  type User,
+} from "./permission-engine"`,
+    'core/permission — single import for views and route guards'
+  ),
+  'widget-data-table-compound': panel(
+    'widget-data-table-compound',
+    'src/widgets/data-table/view/data-table.compound.ts',
+    `import {
+  createCompoundView,
+  table,
+  thead,
+  tbody,
+  tr,
+  th,
+  td,
+} from "@echojs-ecosystem/framework/hyperdom"
+
+export const DataTable = createCompoundView({
+  name: "DataTable",
+  parts: {
+    Head: (props) => thead({ class: "data-table__head" }, props.children),
+    Body: (props) => tbody({ class: "data-table__body" }, props.children),
+    Row: (props) => tr({ class: "data-table__row" }, props.children),
+    HeaderCell: (props) => th({ class: "data-table__th" }, props.children),
+    Cell: (props) => td({ class: "data-table__td" }, props.children),
+  },
+  render: ({ Head, Body }) =>
+    table({ class: "data-table w-full" }, [Head(), Body()]),
+})`,
+    'createCompoundView — namespaced slots (DataTable.Head, .Body, …)'
+  ),
+  'widget-data-table-index': panel(
+    'widget-data-table-index',
+    'src/widgets/data-table/index.ts',
+    `export { DataTable } from "./view/data-table.compound"`,
+    'widgets public API — compound table reused by features'
+  ),
+  'feat-users-list-model': panel(
+    'feat-users-list-model',
+    'src/features/users-list/model/users-list.model.ts',
+    `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
+
+import { usersQuery } from "@entities/user/api/users.query"
+
+export const createUsersListModel = createModel(() => {
+  const users = usersQuery.with()
+
+  return {
+    rows: () => users.data() ?? [],
+    isPending: () => users.isPending(),
+    refetch: () => users.refetch(),
+  }
+}, "UsersListModel")`,
+    'feature model — server state from entity queries'
+  ),
+  'feat-users-list-view': panel(
+    'feat-users-list-view',
+    'src/features/users-list/view/users-list.view.ts',
+    `import {
+  button,
+  createView,
+  div,
+  Show,
+} from "@echojs-ecosystem/framework/hyperdom"
+
+import { appPermission } from "@core/permission"
+import { DataTable } from "@widgets/data-table"
+
+import type { UsersListVM } from "../model/users-list.model"
+
+export const UsersListView = createView((vm: UsersListVM) =>
+  div({ class: "users-page" }, [
+    DataTable([
+      DataTable.Head([
+        DataTable.Row([
+          DataTable.HeaderCell("Name"),
+          DataTable.HeaderCell("Role"),
+          DataTable.HeaderCell(""),
+        ]),
+      ]),
+      DataTable.Body(() =>
+        vm.rows().map((user) =>
+          DataTable.Row([
+            DataTable.Cell(user.name),
+            DataTable.Cell(user.role),
+            DataTable.Cell([
+              Show(
+                () => appPermission.check("user.delete", user),
+                () => button({ type: "button" }, "Delete"),
+              ),
+            ]),
+          ]),
+        ),
+      ),
+    ]),
+  ]),
+  "UsersListView",
+)`,
+    'permission.check + compound DataTable in one feature view'
+  ),
+  'feat-users-list-component': panel(
+    'feat-users-list-component',
+    'src/features/users-list/component/users-list.component.ts',
+    `import { createComponent } from "@echojs-ecosystem/framework/hyperdom"
+
+import { createUsersListModel } from "../model/users-list.model"
+import { UsersListView } from "../view/users-list.view"
+
+export const UsersList = createComponent(
+  createUsersListModel,
+  UsersListView,
+  { name: "UsersList" },
+)`,
+    'UsersList component — permission + DataTable inside the view'
+  ),
+  'feat-users-list-index': panel(
+    'feat-users-list-index',
+    'src/features/users-list/index.ts',
+    `export { UsersList } from "./component/users-list.component"
+export { createUsersListModel } from "./model/users-list.model"
+export type { UsersListVM } from "./model/users-list.model"
+export { UsersListView } from "./view/users-list.view"`,
+    'Feature barrel — pages import UsersList from index.ts'
   ),
 }

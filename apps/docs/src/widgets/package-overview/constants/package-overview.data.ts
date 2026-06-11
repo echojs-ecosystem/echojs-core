@@ -1,12 +1,19 @@
+import type { NavIconId } from '@core/content/nav-icon-id'
 import type { ContentId } from '@core/content/types'
 
-export type PackagePillar = { title: string; body: string; icon: string }
+export type PackageIcon = NavIconId | (string & {})
+
+export type PackagePillar = { title: string; body: string; icon: PackageIcon }
 export type PackageLearnStep = {
   title: string
   description: string
   contentId: ContentId
 }
-export type PackageWhyCard = { title: string; body: string; icon: string }
+export type PackageWhyCard = {
+  title: string
+  body: string
+  icon: PackageIcon
+}
 export type PackageLifecycleStep = { step: string; title: string; body: string }
 export type PackageCodeExample = {
   title: string
@@ -18,7 +25,7 @@ export type PackageOverviewData = {
   id: string
   npmPackage: string
   frameworkImport?: string
-  icon: string
+  icon: PackageIcon
   tagline: string
   heroTitle?: string
   summary: string
@@ -55,7 +62,7 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     id: 'reactivity',
     npmPackage: '@echojs-ecosystem/reactivity',
     frameworkImport: '@echojs-ecosystem/framework/reactivity',
-    icon: '⚡',
+    icon: 'zap',
     tagline: 'Fine-grained reactive primitives',
     heroTitle: 'Stop hand-rolling reactive updates.',
     summary:
@@ -63,17 +70,17 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
     pills: ['signal', 'computed', 'effect', 'batch', 'scope'],
     pillars: [
       {
-        icon: '◎',
+        icon: 'zap',
         title: 'Signals',
         body: 'Mutable cells: .value(), .set(), .update().',
       },
       {
-        icon: 'ƒ',
+        icon: 'layers',
         title: 'Computed',
         body: 'Cached derived values from dependencies.',
       },
       {
-        icon: '↻',
+        icon: 'refresh',
         title: 'Effects',
         body: 'Side effects that track signal reads.',
       },
@@ -83,22 +90,22 @@ export const packageOverviewById: Record<string, PackageOverviewData> = {
       'Fine-grained state is not the same problem as server cache or global stores.',
     whyCards: [
       {
-        icon: '◎',
+        icon: 'sparkles',
         title: 'Important defaults do the boring work',
         body: 'Dependency tracking, batching, change-only subscriptions, and dev-time immutability guards are wired for real apps.',
       },
       {
-        icon: '🔑',
+        icon: 'database',
         title: 'Signals are the cache contract',
         body: 'Reads via .value() declare dependencies. Computed caches invalidations. Effects re-run when tracked inputs change.',
       },
       {
-        icon: '↻',
+        icon: 'refresh',
         title: 'Effects have a real lifecycle',
         body: 'Run immediately, re-run on change, dispose with stop(). Group work in scope() with cleanup() for timers and subscriptions.',
       },
       {
-        icon: '👁',
+        icon: 'code',
         title: 'HyperDOM makes the graph visible',
         body: 'Reactive children and props register effects automatically — only what changed updates in the DOM.',
       },

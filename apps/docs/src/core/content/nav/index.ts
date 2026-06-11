@@ -8,6 +8,7 @@ import { allPackageNavItems } from '../package-nav'
 
 import {
   canonicalDocsRouteItems as buildCanonicalRoutes,
+  docHref,
   docPath,
   enrichNavItems,
   findNavItemByContentId as findNavItem,
@@ -23,7 +24,7 @@ export { createDocNavItem, doc, type DocNavItemOptions } from './doc-nav-item'
 export { createDocNavSection } from './doc-nav-section'
 export { docsNavSections } from './sections'
 export type { DocNavAdjacent }
-export { docPath }
+export { docHref, docPath }
 
 const mapSectionItems = (
   section: DocsNavSection,

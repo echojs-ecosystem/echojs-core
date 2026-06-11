@@ -1,10 +1,10 @@
 import type { CodeTab } from '@entities/home/types/home.types'
 
 export const bootstrapExample = `import { createEchoApp } from "@echojs-ecosystem/framework/app"
-import { queryProvider } from "./providers/query"
-import { uiProvider } from "./providers/ui"
-import { i18nProvider } from "./providers/i18n"
-import { routerProvider } from "./providers/router"
+import { queryProvider } from "@core/async"
+import { uiProvider } from "@core/ui"
+import { i18nProvider } from "@core/i18n"
+import { routerProvider } from "@core/router"
 
 createEchoApp({ strictContextChecks: true })
   .use(queryProvider)

@@ -136,20 +136,21 @@ const IdeWindowChrome = (vm: HomeVM): Child =>
     },
   ])
 
-const StructureExplorerPanel = (vm: HomeVM): Child => [
-  div({ class: home.explorerHead() }, [
-    span({ class: home.explorerTitle() }, 'Explorer'),
-    NavLink({
-      to: docPageByContentId['getting-started/project-structure']!,
-      class: home.explorerLink(),
-      children: ['Layout guide', span(null, '→')],
-    }),
-  ]),
-  div(
-    { class: home.tree() },
-    structureTree.flatMap((node) => StructureTreeNodeView(node, vm))
-  ),
-]
+const StructureExplorerPanel = (vm: HomeVM): Child =>
+  div({ class: home.explorerPanel() }, [
+    div({ class: home.explorerHead() }, [
+      span({ class: home.explorerTitle() }, 'Explorer'),
+      NavLink({
+        to: docPageByContentId['getting-started/project-structure']!,
+        class: home.explorerLink(),
+        children: ['Layout guide', span(null, '→')],
+      }),
+    ]),
+    div(
+      { class: home.tree() },
+      structureTree.flatMap((node) => StructureTreeNodeView(node, vm))
+    ),
+  ])
 
 const StructureExplorerAccordion = (vm: HomeVM): Child =>
   div(
@@ -222,12 +223,12 @@ const StructureCodeEditor = (vm: HomeVM): Child =>
     EditorTabs(vm),
     () => {
       const panel = vm.activeStructurePanel()
-      return [
+      return div({ class: home.editorContent() }, [
         Breadcrumb(panel.file),
         div({ class: home.editorBody() }, [
           CodeBlock({ language: panel.lang, code: panel.code, bare: true }),
         ]),
-      ]
+      ])
     },
   ])
 

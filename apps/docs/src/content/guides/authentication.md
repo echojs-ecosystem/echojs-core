@@ -261,6 +261,6 @@ SSR and OAuth redirects depend on your host. Exchange authorization codes
 - [Routing](/docs/guides/routing) — guards, auth routes
 - [Forms](/docs/guides/forms) — login form
 - [Data fetching](/docs/guides/data-fetching) — 401, mutations
-- [Persist](/docs/packages/persist/overview)
+- [Persist](/docs/packages/persist)
 - Example — `apps/example/src/entities/session/`,
   `entities/__routes__/guards.ts`

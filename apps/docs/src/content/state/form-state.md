@@ -29,27 +29,58 @@ leaving values in fields forever.
 
 ## Structure
 
+Keep the **field tree** in `features/<name>/model/<name>.form.ts`. The model
+imports that form and owns submit / navigation side effects.
+
+```
+features/login-form/
+  index.ts
+  component/login-form.component.ts
+  model/login-form.form.ts   ← createField, createFieldArray, persist
+  model/login-form.model.ts  ← createModel, submit, reset
+  view/login-form.view.ts    ← bindField
+```
+
+**`login-form.form.ts`** — fields + validation + optional persist:
+
 ```ts
 import { createField, createForm } from '@echojs-ecosystem/form'
+import { withLocalStorage } from '@echojs-ecosystem/persist'
 import { z } from 'zod'
 
-const schema = z.object({
+const loginSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
 })
 
 export const loginForm = createForm(
   {
-    email: createField(''),
+    email: createField('').extend(
+      withLocalStorage({ key: 'echojs:login:email' })
+    ),
     password: createField(''),
   },
-  { name: 'LoginForm', validationSchema: schema }
+  { name: 'LoginForm', validationSchema: loginSchema }
 )
+```
+
+**`login-form.model.ts`** — wire submit, expose `fields`:
+
+```ts
+import { createModel } from '@echojs-ecosystem/hyperdom'
+import { loginForm } from './login-form.form'
+
+export const createLoginFormModel = createModel(() => ({
+  fields: loginForm.fields,
+  submit: () => loginForm.submit(async (value) => api.login(value)),
+  reset: () => loginForm.reset(),
+}), 'LoginFormModel')
 ```
 
 - Each **field** has `$value`, `meta()` (errors, touched).
 - **Form** coordinates `submit()`, maps schema errors to paths, optional
   `defaultValues` / `defaultAsyncValues`.
+- Do **not** call `createForm` inside `createModel` — define once in `*.form.ts`.
 
 ## Binding to the DOM
 

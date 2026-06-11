@@ -61,29 +61,32 @@ const COMPACT_CALLOUT_VARIANTS = new Set<CalloutVariant>([
 
 const Callout = (block: Extract<DocBlock, { type: 'callout' }>): Child => {
   const variant = block.variant as CalloutVariant
-  const isCompact = !block.title && COMPACT_CALLOUT_VARIANTS.has(variant)
-  const callout = calloutStyles({ variant, compact: isCompact })
+  const hasCustomTitle = Boolean(block.title)
+  const showTitle =
+    hasCustomTitle ||
+    !COMPACT_CALLOUT_VARIANTS.has(variant)
+  const callout = calloutStyles({ variant, titled: showTitle })
   const title = block.title ?? calloutDefaultTitle[variant]
   const bodyChunks = block.body
     .split(/\n\n+/)
     .map((chunk) => chunk.trim())
     .filter(Boolean)
 
-  if (isCompact) {
-    return div(
-      { class: callout.root() },
-      bodyChunks.map((chunk) => p({ class: callout.body() }, inline(chunk)))
-    )
-  }
-
   return div({ class: callout.root() }, [
-    div({ class: callout.header() }, [
+    div({ class: callout.inner() }, [
       span({ class: callout.icon() }, calloutIcon[variant]),
-      div({ class: callout.headerText() }, [
-        p({ class: callout.title() }, inline(title)),
+      div({ class: callout.content() }, [
+        showTitle
+          ? p(
+              { class: callout.title() },
+              hasCustomTitle ? inline(title) : title
+            )
+          : null,
+        ...bodyChunks.map((chunk) =>
+          p({ class: callout.body() }, inline(chunk))
+        ),
       ]),
     ]),
-    ...bodyChunks.map((chunk) => p({ class: callout.body() }, inline(chunk))),
   ])
 }
 

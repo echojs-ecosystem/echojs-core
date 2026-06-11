@@ -16,6 +16,7 @@ import {
   type FooterLink,
 } from '@widgets/home-shell/constants/home-footer.links'
 import { homeFooterStyles } from '@widgets/home-shell/ui/home-footer.view.styles'
+import { i18n } from '@core/providers'
 
 const ft = homeFooterStyles()
 
@@ -28,7 +29,7 @@ const FooterLinkItem = (link: FooterLink): Child => {
     return NavLink({
       to: docPageByContentId[link.contentId]!,
       class: ft.columnLink(),
-      children: link.label,
+      children: () => i18n.t(link.labelKey),
     })
   }
 
@@ -41,14 +42,14 @@ const FooterLinkItem = (link: FooterLink): Child => {
         rel: 'noopener noreferrer',
         class: ft.columnLink(),
       },
-      link.label
+      () => i18n.t(link.labelKey)
     )
   }
 
   return NavLink({
     href: link.href,
     class: ft.columnLink(),
-    children: link.label,
+    children: () => i18n.t(link.labelKey),
   })
 }
 
@@ -58,13 +59,13 @@ export const HomeFooterView = createView(
       div({ class: ft.inner() }, [
         div({ class: ft.brand() }, [
           p({ class: ft.brandName() }, 'EchoJS'),
-          p({ class: ft.brandTag() }, 'Signal-first framework for scalable web apps.'),
+          p({ class: ft.brandTag() }, () => i18n.t('footer.tagline')),
         ]),
         div(
           { class: ft.columns() },
           homeFooterColumns.map((column) =>
             div({ class: ft.column() }, [
-              p({ class: ft.columnTitle() }, column.title),
+              p({ class: ft.columnTitle() }, () => i18n.t(column.titleKey)),
               ul(
                 { class: ft.columnList() },
                 column.links.map((link) => li(null, FooterLinkItem(link)))
@@ -75,7 +76,7 @@ export const HomeFooterView = createView(
       ]),
       div({ class: ft.bottom() }, [
         p(null, `© ${new Date().getFullYear()} EchoJS`),
-        p({ class: ft.bottomNote() }, 'Built with EchoJS'),
+        p({ class: ft.bottomNote() }, () => i18n.t('footer.builtWith')),
       ]),
     ]),
   'HomeFooterView'

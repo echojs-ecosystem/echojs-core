@@ -9,7 +9,7 @@ import {
 import { getDocPage } from '@app/router'
 import { docPagerStyles } from '@widgets/doc-pager/ui/doc-pager.view.styles'
 import { NavIcon } from '@widgets/icons'
-import { docPath, getAdjacentDocNavItems } from '@core/content/nav'
+import { docHref, getAdjacentDocNavItems } from '@core/content/nav'
 import type { ContentId } from '@core/content/types'
 import type { DocsNavItemEnriched } from '@core/content/types'
 
@@ -26,7 +26,7 @@ const pagerLink = (
   return h(
     'a',
     {
-      href: docPath(item.sectionSlug, item.slug),
+      href: docHref(item.contentId),
       class: [pager.link(), isNext ? pager.linkNext() : '']
         .filter(Boolean)
         .join(' '),

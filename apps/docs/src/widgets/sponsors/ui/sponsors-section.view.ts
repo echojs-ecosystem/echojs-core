@@ -14,6 +14,7 @@ import { sponsorsPage } from '@app/router'
 import { becomeSponsorUrl } from '@widgets/sponsors/constants/sponsors.data'
 import { SponsorsBoard } from '@widgets/sponsors/sponsors-board'
 import { sponsorsSectionStyles } from '@widgets/sponsors/ui/sponsors-section.view.styles'
+import { i18n } from '@core/providers'
 
 const s = sponsorsSectionStyles()
 
@@ -23,16 +24,14 @@ export const SponsorsSectionView = createView(
       div({ class: s.inner() }, [
         div({ class: s.headerRow() }, [
           div({ class: s.header() }, [
-            p({ class: s.eyebrow() }, 'Community'),
-            h2({ id: 'sponsors-heading', class: s.title() }, 'Sponsors'),
-            p({ class: s.lead() }, [
-              'Teams backing EchoJS development — Gold, Silver, and Bronze tiers on the sponsors page.',
-            ]),
+            p({ class: s.eyebrow() }, () => i18n.t('sponsors.eyebrow')),
+            h2({ id: 'sponsors-heading', class: s.title() }, () => i18n.t('sponsors.title')),
+            p({ class: s.lead() }, () => i18n.t('sponsors.lead')),
           ]),
           NavLink({
             to: sponsorsPage,
             class: s.viewAll(),
-            children: ['View all sponsors', span(null, '→')],
+            children: [() => i18n.t('sponsors.viewAll'), span(null, '→')],
           }),
         ]),
         SponsorsBoard({ variant: 'preview' }),
@@ -45,7 +44,7 @@ export const SponsorsSectionView = createView(
               rel: 'noopener noreferrer',
               class: s.becomeBtn(),
             },
-            [span({ class: s.becomeIcon() }, '♥'), 'Become a sponsor']
+            [span({ class: s.becomeIcon() }, '♥'), () => i18n.t('sponsors.become')]
           ),
         ]),
       ]),

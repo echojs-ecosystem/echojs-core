@@ -141,6 +141,9 @@ const NAV_ICON_SVGS: Record<NavIconId, string> = {
   refresh: wrap(
     '<path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>'
   ),
+  toolbox: wrap(
+    '<path d="M16 12v4"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M16 12H8"/><rect width="20" height="8" x="2" y="12" rx="2"/>'
+  ),
   ...FRAMEWORK_NAV_ICON_SVGS,
 }
 

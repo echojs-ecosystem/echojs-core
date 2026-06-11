@@ -4,10 +4,137 @@
     "locale": "Language",
     "version": "Version",
     "localeMenu": "Choose language",
-    "versionMenu": "Choose documentation version"
+    "versionMenu": "Choose documentation version",
+    "openNavigation": "Open navigation",
+    "closeNavigation": "Close navigation",
+    "github": "EchoJS on GitHub"
   },
   "locale": {
     "en": "English",
     "ru": "Русский"
+  },
+  "nav": {
+    "gettingStarted": "Getting Started",
+    "packages": "Packages",
+    "guides": "Guides",
+    "blog": "Blog"
+  },
+  "home": {
+    "hero": {
+      "badge": "Signal-first · Official docs",
+      "titlePrefix": "Web framework ",
+      "subtitle": "A modern framework for scalable web apps — fine-grained signals, zero virtual DOM, and a composable ecosystem.",
+      "pillSignals": "Fine-grained signals",
+      "pillNoReconciliation": "No reconciliation",
+      "pillTypedRoutes": "Typed routes",
+      "getStarted": "Get Started",
+      "whatIsEcho": "What is EchoJS?"
+    },
+    "ecosystem": {
+      "eyebrow": "Ecosystem",
+      "title": "One framework, many packages",
+      "lead": "Adopt incrementally — each package solves one problem and plugs in through providers."
+    },
+    "structure": {
+      "eyebrow": "Structure",
+      "title": "A full app in one tree",
+      "lead": "Landing, nested workspace routes, async queries, URL state, forms, store, i18n, and UI primitives — every EchoJS package wired through providers and feature slices. Open any file."
+    },
+    "cta": {
+      "eyebrow": "Next step",
+      "title": "Ready to build with EchoJS?",
+      "body": "Scaffold a project, wire providers once, and open your first typed route — the same flow as apps/docs and apps/example.",
+      "startBuilding": "Start building",
+      "whatIsEcho": "What is EchoJS?"
+    }
+  },
+  "ecosystem": {
+    "modulesDivider": "Ecosystem modules",
+    "showLess": "Show less",
+    "showMore": "Show {count} more packages",
+    "browseAll": "Browse all packages",
+    "featured": {
+      "core": "Core",
+      "compositionRoot": "Composition root",
+      "readDocs": "Read docs"
+    },
+    "status": {
+      "stable": "Stable",
+      "development": "In dev",
+      "experimental": "Experimental"
+    },
+    "packages": {
+      "reactivity": {
+        "description": "Signals, computed, effects — the reactive core."
+      },
+      "hyperdom": {
+        "description": "Fine-grained DOM runtime without a virtual DOM."
+      },
+      "framework": {
+        "description": "App bootstrap, providers, and composition root."
+      },
+      "router": {
+        "description": "Type-safe, file-oriented routing for Echo apps."
+      },
+      "store": {
+        "description": "Structured state with actions and selectors."
+      },
+      "async": {
+        "description": "Signal-native data fetching and cache layer."
+      },
+      "network_http": {
+        "description": "Tree-shakeable HTTP client with hooks, retries, and typed responses."
+      },
+      "url-state": {
+        "description": "Sync UI state with URL search params."
+      },
+      "persist": {
+        "description": "Persist stores and signals to storage."
+      },
+      "utils": {
+        "description": "Signal-native composables — sensors, DOM, timing, browser."
+      },
+      "ui": {
+        "description": "Accessible UI primitives built on HyperDOM."
+      },
+      "i18n": {
+        "description": "Lightweight internationalization for Echo apps."
+      },
+      "devtools": {
+        "description": "Developer tools for debugging Echo applications."
+      },
+      "cli": {
+        "description": "Scaffold apps and feature slices (planned)."
+      },
+      "architect": {
+        "description": "Architecture linter — layers, public APIs, import boundaries."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Signal-first framework for scalable web apps.",
+    "builtWith": "Built with EchoJS",
+    "columns": {
+      "documentation": "Documentation",
+      "project": "Project",
+      "community": "Community"
+    },
+    "links": {
+      "gettingStarted": "Getting Started",
+      "architecture": "Architecture",
+      "packages": "Packages",
+      "comparisons": "Comparisons",
+      "changelog": "Changelog",
+      "roadmap": "Roadmap",
+      "sponsors": "Sponsors",
+      "github": "GitHub"
+    }
+  },
+  "sponsors": {
+    "eyebrow": "Community",
+    "title": "Sponsors",
+    "lead": "Teams backing EchoJS development — Gold, Silver, and Bronze tiers on the sponsors page.",
+    "viewAll": "View all sponsors",
+    "become": "Become a sponsor"
   }
 }

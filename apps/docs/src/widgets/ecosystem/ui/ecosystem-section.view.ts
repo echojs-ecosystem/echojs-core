@@ -19,8 +19,8 @@ import {
 import type { EcosystemVM } from '@widgets/ecosystem/model/ecosystem.model'
 import { EcosystemFeaturedPackageCardView } from '@widgets/ecosystem/ui/ecosystem-featured-package-card.view'
 import { EcosystemPackageCompactCardView } from '@widgets/ecosystem/ui/ecosystem-package-compact-card.view'
-import { EcosystemPackageCardView } from '@widgets/ecosystem/ui/ecosystem-package-card.view'
 import { ecosystemSectionStyles } from '@widgets/ecosystem/ui/ecosystem-section.view.styles'
+import { i18n } from '@core/providers'
 
 const section = ecosystemSectionStyles()
 
@@ -28,7 +28,7 @@ export const EcosystemSectionView = createView(
   (vm: EcosystemVM): Child =>
     div({ class: section.root() }, [
       EcosystemFeaturedPackageCardView(ecosystemFrameworkPackage),
-      p({ class: section.divider() }, 'Ecosystem modules'),
+      p({ class: section.divider() }, () => i18n.t('ecosystem.modulesDivider')),
       div({ class: section.mobileGrid() }, [
         ...ecosystemSpotlightPackages.map((pkg) =>
           EcosystemPackageCompactCardView({ pkg })
@@ -51,23 +51,31 @@ export const EcosystemSectionView = createView(
           () =>
             vm.showAllModules()
               ? [
-                  'Show less',
+                  () => i18n.t('ecosystem.showLess'),
                   span({ class: section.expandChevron() }, '⌃'),
                 ]
               : [
-                  `Show ${ecosystemMorePackages.length} more packages`,
+                  () =>
+                    i18n.t('ecosystem.showMore', {
+                      count: ecosystemMorePackages.length,
+                    }),
                   span({ class: section.expandChevron() }, '⌄'),
                 ]
         ),
         NavLink({
           to: docPageByContentId['packages/framework']!,
           class: section.browseLink(),
-          children: ['Browse all packages', span(null, '→')],
+          children: [
+            () => i18n.t('ecosystem.browseAll'),
+            span(null, '→'),
+          ],
         }),
       ]),
       div(
-        { class: section.grid() },
-        ecosystemModulePackages.map((pkg) => EcosystemPackageCardView({ pkg }))
+        { class: section.desktopGrid() },
+        ecosystemModulePackages.map((pkg) =>
+          EcosystemPackageCompactCardView({ pkg })
+        )
       ),
     ]),
   'EcosystemSectionView'

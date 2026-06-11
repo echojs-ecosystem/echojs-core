@@ -4,10 +4,137 @@
     "locale": "Язык",
     "version": "Версия",
     "localeMenu": "Выберите язык",
-    "versionMenu": "Выберите версию документации"
+    "versionMenu": "Выберите версию документации",
+    "openNavigation": "Открыть навигацию",
+    "closeNavigation": "Закрыть навигацию",
+    "github": "EchoJS на GitHub"
   },
   "locale": {
     "en": "English",
     "ru": "Русский"
+  },
+  "nav": {
+    "gettingStarted": "Начало работы",
+    "packages": "Пакеты",
+    "guides": "Гайды",
+    "blog": "Блог"
+  },
+  "home": {
+    "hero": {
+      "badge": "Signal-first · Официальная документация",
+      "titlePrefix": "Создавайте быстрее с ",
+      "subtitle": "Современный фреймворк для масштабируемых веб-приложений — тонкие сигналы, без virtual DOM и с модульной экосистемой.",
+      "pillSignals": "Тонкие сигналы",
+      "pillNoReconciliation": "Без reconciliation",
+      "pillTypedRoutes": "Типизированные маршруты",
+      "getStarted": "Начать",
+      "whatIsEcho": "Что такое EchoJS?"
+    },
+    "ecosystem": {
+      "eyebrow": "Экосистема",
+      "title": "Один фреймворк — много пакетов",
+      "lead": "Подключайте постепенно — каждый пакет решает одну задачу и встраивается через providers."
+    },
+    "structure": {
+      "eyebrow": "Структура",
+      "title": "Полное приложение в одном дереве",
+      "lead": "Лендинг, вложенные маршруты workspace, async-запросы, URL state, формы, store, i18n и UI-примитивы — все пакеты EchoJS через providers и feature-слайсы. Откройте любой файл."
+    },
+    "cta": {
+      "eyebrow": "Следующий шаг",
+      "title": "Готовы строить на EchoJS?",
+      "body": "Создайте проект, подключите providers один раз и откройте первый типизированный маршрут — тот же поток, что в apps/docs и apps/example.",
+      "startBuilding": "Начать разработку",
+      "whatIsEcho": "Что такое EchoJS?"
+    }
+  },
+  "ecosystem": {
+    "modulesDivider": "Модули экосистемы",
+    "showLess": "Свернуть",
+    "showMore": "Показать ещё {count} пакетов",
+    "browseAll": "Все пакеты",
+    "featured": {
+      "core": "Ядро",
+      "compositionRoot": "Корень композиции",
+      "readDocs": "Документация"
+    },
+    "status": {
+      "stable": "Стабильный",
+      "development": "В разработке",
+      "experimental": "Эксперимент"
+    },
+    "packages": {
+      "reactivity": {
+        "description": "Сигналы, computed, effects — реактивное ядро."
+      },
+      "hyperdom": {
+        "description": "Тонкий DOM-runtime без virtual DOM."
+      },
+      "framework": {
+        "description": "Bootstrap приложения, providers и корень композиции."
+      },
+      "router": {
+        "description": "Типобезопасная маршрутизация для Echo-приложений."
+      },
+      "store": {
+        "description": "Структурированное состояние с actions и селекторами."
+      },
+      "async": {
+        "description": "Загрузка данных и кэш на сигналах."
+      },
+      "network_http": {
+        "description": "HTTP-клиент с хуками, ретраями и типизированными ответами."
+      },
+      "url-state": {
+        "description": "Синхронизация UI-состояния с URL search params."
+      },
+      "persist": {
+        "description": "Сохранение store и сигналов в storage."
+      },
+      "utils": {
+        "description": "Композаблы на сигналах — sensors, DOM, таймеры, браузер."
+      },
+      "ui": {
+        "description": "Доступные UI-примитивы на HyperDOM."
+      },
+      "i18n": {
+        "description": "Лёгкая интернационализация для Echo-приложений."
+      },
+      "devtools": {
+        "description": "Инструменты отладки Echo-приложений."
+      },
+      "cli": {
+        "description": "Скаффолдинг приложений и feature-слайсов (в планах)."
+      },
+      "architect": {
+        "description": "Линтер архитектуры — слои, public API, границы импортов."
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Signal-first фреймворк для масштабируемых веб-приложений.",
+    "builtWith": "Собрано на EchoJS",
+    "columns": {
+      "documentation": "Документация",
+      "project": "Проект",
+      "community": "Сообщество"
+    },
+    "links": {
+      "gettingStarted": "Начало работы",
+      "architecture": "Архитектура",
+      "packages": "Пакеты",
+      "comparisons": "Сравнения",
+      "changelog": "Changelog",
+      "roadmap": "Roadmap",
+      "sponsors": "Спонсоры",
+      "github": "GitHub"
+    }
+  },
+  "sponsors": {
+    "eyebrow": "Сообщество",
+    "title": "Спонсоры",
+    "lead": "Команды, поддерживающие разработку EchoJS — уровни Gold, Silver и Bronze на странице спонсоров.",
+    "viewAll": "Все спонсоры",
+    "become": "Стать спонсором"
   }
 }

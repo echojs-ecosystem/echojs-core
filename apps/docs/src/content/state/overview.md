@@ -108,9 +108,9 @@ Ask in order:
 
 Task-oriented walkthroughs (routing, fetching, forms, auth) live under
 [Guides](/docs/guides/routing). Package reference:
-[Router](/docs/packages/router/overview),
-[Query](/docs/packages/async/overview), [Store](/docs/packages/store/overview),
-[URL State](/docs/packages/url-state/overview).
+[Router](/docs/packages/router),
+[Query](/docs/packages/async), [Store](/docs/packages/store),
+[URL State](/docs/packages/url-state).
 
 ## In this section
 

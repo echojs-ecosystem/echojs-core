@@ -65,5 +65,9 @@ export const getAdjacentDocNavItems = (
   }
 }
 
+/** Canonical URL for a doc route — matches `path: contentId` in docs routes. */
+export const docHref = (contentId: ContentId): string => `/docs/${contentId}`
+
+/** @deprecated Prefer {@link docHref} when you have a `contentId`. */
 export const docPath = (sectionSlug: string, pageSlug: string): string =>
   `/docs/${sectionSlug}/${pageSlug}`

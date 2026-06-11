@@ -14,7 +14,8 @@ export const ecosystemFeaturedPackageStyles = tv({
       'ring-1 ring-echo-500/15 dark:bg-surface-elevated/50 dark:ring-echo-500/20',
     ].join(' '),
     iconWrap:
-      'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-echo-100 to-echo-50 text-2xl text-echo-800 ring-1 ring-echo-500/25 dark:from-echo-950/80 dark:to-echo-900/50 dark:text-echo-200 dark:ring-echo-500/35',
+      'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-echo-100 to-echo-50 text-echo-700 ring-1 ring-echo-500/25 dark:from-echo-950/80 dark:to-echo-900/50 dark:text-echo-300 dark:ring-echo-500/35',
+    iconGlyph: 'h-7 w-7',
     copy: 'min-w-0 flex-1',
     eyebrow: 'inline-flex items-center gap-2',
     badge:
@@ -35,10 +36,10 @@ export const ecosystemFeaturedPackageStyles = tv({
 
 export const ecosystemSectionStyles = tv({
   slots: {
-    root: 'flex flex-col gap-6',
+    root: 'flex flex-col gap-4 sm:gap-5',
     divider:
-      'border-t border-border/70 pt-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle dark:border-white/10',
-    mobileGrid: 'grid grid-cols-2 gap-2 sm:hidden',
+      'border-t border-border/50 pt-3 text-[10px] font-medium uppercase tracking-[0.12em] text-fg-subtle dark:border-white/10',
+    mobileGrid: 'grid grid-cols-2 gap-2.5 sm:hidden',
     mobileFooter: 'flex flex-col items-center gap-3 sm:hidden',
     expandButton: [
       'inline-flex items-center gap-1.5 rounded-full border border-border/80 bg-surface-elevated px-4 py-2',
@@ -50,6 +51,7 @@ export const ecosystemSectionStyles = tv({
       'inline-flex items-center gap-1 text-xs font-semibold text-echo-700 transition hover:gap-1.5 hover:text-echo-600',
       'dark:text-echo-400 dark:hover:text-echo-300',
     ].join(' '),
-    grid: 'hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+    desktopGrid:
+      'hidden gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
   },
 })

@@ -8,6 +8,7 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { buildSiteHeaderNavItems, docPageByContentId } from '@app/router'
+import { i18n } from '@core/providers'
 
 import { $homeNavOpen, closeHomeNav } from '../model/home-mobile-nav'
 import { homeMobileNavStyles } from './home-mobile-nav.view.styles'
@@ -38,7 +39,7 @@ export const HomeMobileNav = (): Child =>
                   : item.page,
               match: item.kind === 'page' ? item.match : undefined,
               class: styles.link(),
-              children: item.label,
+              children: () => i18n.t(item.labelKey),
             })
           )
         ),
