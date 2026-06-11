@@ -11,7 +11,7 @@ export const shellStyles = tv({
     searchWrap: 'flex-1 max-w-xl',
     overlay:
       'fixed inset-x-0 bottom-0 top-[3.75rem] z-30 bg-black/40 backdrop-blur-[2px] sm:top-[4.25rem] lg:hidden',
-    sidebarWrap: 'lg:w-[18.5rem] lg:shrink-0 lg:px-4 lg:py-4',
+    sidebarWrap: 'lg:w-[17rem] lg:shrink-0 lg:self-stretch',
     sidebarBrand: 'border-b border-border/70 px-4 py-4 dark:border-white/10',
     sidebarBrandLink:
       'flex items-center gap-3 transition opacity-90 hover:opacity-100',
@@ -19,8 +19,9 @@ export const shellStyles = tv({
     sidebarBrandText: 'min-w-0',
     sidebarBrandName: 'text-base font-bold tracking-tight text-fg',
     sidebarBrandTag: 'text-xs text-fg-subtle',
-    sidebarNav:
-      'echo-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 lg:mr-2.5 lg:my-2.5 lg:px-2',
+    sidebarNav: [
+      'echo-scrollbar relative min-h-0 flex-1 overflow-y-auto overscroll-contain px-3 py-3',
+    ].join(' '),
     sidebarQuick:
       'mb-1 flex flex-col gap-0.5 border-b border-border/60 pb-3 dark:border-white/10',
     sidebarNavIcon:
@@ -116,11 +117,10 @@ export const shellStyles = tv({
 
 export const sidebarPanelStyles = tv({
   base: [
-    'flex flex-col',
-    'lg:h-auto lg:max-h-[calc(100vh-2rem)] lg:w-full',
-    'lg:rounded-2xl lg:border lg:border-border/80 lg:bg-surface-elevated/90',
-    'lg:shadow-lg lg:shadow-black/5 lg:ring-1 lg:ring-black/[0.04]',
-    'lg:backdrop-blur-xl lg:dark:border-white/10 lg:dark:ring-white/[0.06]',
+    'flex min-h-0 flex-col lg:w-full',
+    'lg:sticky lg:top-0 lg:h-dvh lg:max-h-dvh lg:self-stretch',
+    'lg:border-r lg:border-border/80',
+    'lg:bg-surface-elevated lg:dark:border-white/10',
   ].join(' '),
   variants: {
     mobileOpen: {
@@ -128,11 +128,66 @@ export const sidebarPanelStyles = tv({
         'fixed inset-x-0 bottom-0 top-[3.75rem] z-40 w-full max-w-none',
         'max-h-[calc(100dvh-3.75rem)] border-t border-border bg-surface-elevated shadow-xl',
         'sm:top-[4.25rem] sm:max-h-[calc(100dvh-4.25rem)]',
-        'lg:static lg:inset-auto lg:top-auto lg:max-h-[calc(100vh-2rem)] lg:w-full lg:max-w-none',
-        'lg:border lg:shadow-lg',
+        'lg:static lg:inset-auto lg:top-auto lg:h-dvh lg:max-h-dvh lg:w-full lg:max-w-none',
+        'lg:border-r lg:shadow-none',
       ].join(' '),
-      false: 'hidden lg:sticky lg:top-4 lg:flex lg:self-start',
+      false: 'hidden lg:flex',
     },
+  },
+})
+
+export const drillSidebarStyles = tv({
+  slots: {
+    body: 'flex min-w-0 flex-col gap-0',
+    panel: 'flex flex-col gap-0',
+    backRow: [
+      'group relative mb-3 flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm font-semibold text-fg-muted transition',
+      'hover:text-amber-950 dark:hover:text-amber-50',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+    ].join(' '),
+    backIcon:
+      'h-4 w-4 shrink-0 rotate-180 text-fg-muted transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+    backLabel: 'min-w-0 truncate',
+    sectionTitle:
+      'mb-1.5 mt-5 text-[11px] font-bold uppercase tracking-[0.14em] text-fg-subtle first:mt-1',
+    group: 'flex flex-col gap-0.5 border-l border-border/60 pl-3 dark:border-white/10',
+    groupLabel:
+      'pt-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-fg-subtle/80 first:pt-0',
+    packageRow: 'flex w-full min-w-0 items-stretch gap-0.5',
+    packageRowMain: 'min-w-0 flex-1 pr-1',
+    packageRowChevron: [
+      'group relative inline-flex shrink-0 items-center justify-center rounded-md px-1.5 text-fg-subtle transition',
+      'hover:text-amber-600 dark:hover:text-amber-400',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1.5 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+    ].join(' '),
+    row: [
+      'group relative flex w-full items-center gap-2.5 rounded-md px-2 py-2 pr-1 text-left text-sm text-fg-muted transition',
+      'hover:text-amber-950 dark:hover:text-amber-50',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+    ].join(' '),
+    featuredWrap: [
+      'mb-2 rounded-xl border border-echo-500/30 bg-gradient-to-br from-echo-50/70 via-surface-elevated/40 to-transparent p-1',
+      'dark:border-echo-500/25 dark:from-echo-950/45 dark:via-echo-950/20',
+    ].join(' '),
+    rowFeatured: 'font-medium text-fg',
+    iconFeatured: 'text-echo-600 dark:text-echo-400',
+    rowActive: [
+      'bg-amber-500/12 font-medium text-amber-50',
+      'before:pointer-events-none before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:rounded-full before:bg-amber-500',
+      'dark:bg-amber-500/15',
+    ].join(' '),
+    iconSlot:
+      'inline-flex h-4 w-4 shrink-0 items-center justify-center text-fg-subtle transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+    iconGlyph: 'h-3.5 w-3.5',
+    label: 'min-w-0 flex-1 truncate',
+    chevronSlot: 'inline-flex h-4 w-4 shrink-0 items-center justify-center',
+    chevronIcon:
+      'h-3.5 w-3.5 text-fg-subtle/70 transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+    externalIcon: 'h-3 w-3 text-fg-subtle/70',
+    badge:
+      'shrink-0 rounded-md border border-border/70 px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle dark:border-white/10',
+    featuredBadge:
+      'ml-2 shrink-0 rounded-md bg-echo-600 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.06em] text-white dark:bg-echo-500',
   },
 })
 

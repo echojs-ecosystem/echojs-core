@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 
 import { arrayGenerator, createField, createFieldArray } from "../index";
-import { createFieldSet } from "./fieldSet";
+import { createFieldSet } from "./field-set";
 import { createForm } from "./create-form";
 
 describe("createForm()", () => {

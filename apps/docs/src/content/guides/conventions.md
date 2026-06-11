@@ -221,6 +221,7 @@ New doc page: markdown under `content/` + entry in
 
 ## Related
 
+- [Best practices](/docs/best-practices/overview) — routing, models, views, styling
 - [Reactivity](/docs/guides/reactivity) — signals in models
 - [Models](/docs/architecture/models) — VM design
 - [Feature first](/docs/architecture/feature-first) — slice boundaries

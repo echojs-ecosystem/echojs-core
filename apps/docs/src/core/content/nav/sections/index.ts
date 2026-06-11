@@ -22,9 +22,9 @@ export {
 export const docsNavSections: DocsNavSection[] = [
   gettingStartedNavSection,
   architectureNavSection,
+  bestPracticesNavSection,
   guidesNavSection,
   packagesNavSection,
-  bestPracticesNavSection,
   comparisonsNavSection,
   examplesNavSection,
 ]

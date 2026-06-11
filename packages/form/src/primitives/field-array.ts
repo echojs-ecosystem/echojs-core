@@ -5,7 +5,7 @@ import { attachFieldArrayPersist } from "./field-persist";
 /**
  * Creates a dynamic array helper for form state (append/remove/move/update).
  *
- * This primitive only manages the array itself; compose it with fields/fieldSets for rich models.
+ * This primitive only manages the array itself; compose it with fields/field-sets for rich models.
  */
 export const createFieldArray = <Item>(initial: Item[] = []): FieldArray<Item> => {
   const initialSnapshot = [...initial];

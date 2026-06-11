@@ -1,7 +1,7 @@
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 
-/** True if the value has a `validate()` function (field/fieldSet-ish). */
+/** True if the value has a `validate()` function (field/field-set-ish). */
 const hasValidateSync = (value: unknown): value  is { validate: () => unknown } =>
   isPlainObject(value) && typeof (value as any).validate === "function";
 

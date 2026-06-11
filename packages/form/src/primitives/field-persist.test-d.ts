@@ -2,7 +2,7 @@ import { describe, expectTypeOf, it } from "vitest";
 import { withMemoryStorage } from "@echojs-ecosystem/persist";
 
 import { createField } from "./field";
-import { createFieldArray } from "./fieldArray";
+import { createFieldArray } from "./field-array";
 describe("field.extend() typing", () => {
   it("preserves Field core after persist extension", () => {
     const email = createField("").extend(withMemoryStorage({ key: "form:email" }));

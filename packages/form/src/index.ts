@@ -1,7 +1,7 @@
 export { createField } from "./primitives/field";
-export { createFieldArray } from "./primitives/fieldArray";
+export { createFieldArray } from "./primitives/field-array";
 export { defineNestedFieldArrayOps } from "./primitives/nested-field-array-ops";
-export { createFieldSet } from "./primitives/fieldSet";
+export { createFieldSet } from "./primitives/field-set";
 export { createForm } from "./primitives/create-form";
 export { arrayGenerator } from "./primitives/array-generator";
 export { generateAppendToArray } from "./primitives/generate-append-to-array";
@@ -38,5 +38,11 @@ export type {
   Form,
   FormSubmitResult,
 } from "./types";
-export type { bindFieldOptions, HyperdomFormFieldRef } from "./bindings/hyperdom";
+export type {
+  BindFieldBase,
+  BindFieldBooleanResult,
+  BindFieldResult,
+  BindFieldValueResult,
+  HyperdomFormFieldRef,
+} from "./bindings/hyperdom";
 export type { FieldArrayBranchConfig } from "./primitives/nested-field-array-ops";

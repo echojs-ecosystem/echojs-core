@@ -16,6 +16,28 @@ and package guides.
 > [Conventions](/docs/guides/conventions),
 > [Architecture](/docs/architecture/overview).
 
+## In this section
+
+- [Routing](/docs/best-practices/routing) — URLs, layouts, guards, `beforeLoad`
+- [Models](/docs/best-practices/models) — VM design, lifetime, queries
+- [Views](/docs/best-practices/views) — `createView`, composition
+- [Styling](/docs/best-practices/styling) — `tv` slots, file layout
+- [New screen](/docs/best-practices/new-screen) — end-to-end workflow
+
+## Layered responsibility
+
+| Layer        | Owns                                                         | Must not own                                      |
+| ------------ | ------------------------------------------------------------ | ------------------------------------------------- |
+| **Route**    | URL, params, query, `beforeLoad`, guards, layout `outlet()`  | DOM structure, Tailwind classes, form field state |
+| **Page**     | SEO for the screen, wiring model + view, route props         | Reusable UI blocks, API client details            |
+| **Model**    | Signals, stores, queries, effects, user actions              | `h()` / `div()` / markup                          |
+| **View**     | HyperDOM tree, styles, composition of child views            | `fetch`, router `go()`, raw `signal()` creation   |
+| **Widget**   | Cross-route UI + its model (header, sidebar, code block)     | Route tables, page-only business rules            |
+| **Feature**  | Vertical slice (search, auth form, query demo)               | Imports from `pages/`                             |
+
+**Dependency rule:** `pages` → `widgets` / `features` → `entities` / `shared`.
+Never the reverse. Run `@echojs-ecosystem/architect` in CI to catch violations.
+
 ## Do / don't at a glance
 
 | Do | Don't |
@@ -60,15 +82,7 @@ See [Reactivity guide](/docs/guides/reactivity).
 | Query `.with()`, form submit | Reading VM accessors only |
 | Side effects (API, timers) | No business rules |
 
-```ts
-// Page wires model + view once
-export const settingsPage = createRouteView({
-  name: 'settings',
-  view: () => bindModelView(createSettingsModel, SettingsView),
-})
-```
-
-Views stay **dumb** — if logic grows, extract a feature model.
+See [Models](/docs/best-practices/models) and [Views](/docs/best-practices/views).
 
 ## Pick the right state layer
 
@@ -92,7 +106,7 @@ Never one mega-store for the whole app.
 4. Lazy-load heavy pages with **`createLazyRouteView`** + `preload()` on hover.
 5. Shareable UI state → url-state, not duplicate signals.
 
-See [Routing guide](/docs/guides/routing).
+See [Routing](/docs/best-practices/routing) and [Routing guide](/docs/guides/routing).
 
 ## Data fetching
 
@@ -179,6 +193,8 @@ See [Authentication guide](/docs/guides/authentication).
 4. Naming matches [Conventions](/docs/guides/conventions).
 5. State layer chosen from table above.
 6. `echo-architect lint` passes.
+
+See [New screen](/docs/best-practices/new-screen) for the full workflow.
 
 ## Related
 

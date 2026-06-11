@@ -103,10 +103,13 @@ import { bindField } from '@echojs-ecosystem/form'
 import { button, div, input, label, p } from '@echojs-ecosystem/hyperdom'
 
 div(null, [
-  label(null, ['Email', input({ ...bindField(email, { variant: 'email' }) })]),
+  label(null, [
+    'Email',
+    input({ type: 'email', ...bindField(email) }),
+  ]),
   (): Child => {
-    const errs = email.meta().errors
-    return errs.length ? p({ class: 'text-danger' }, errs.join(', ')) : null
+    const err = email.meta().errors[0]
+    return err ? p({ class: 'text-danger' }, err) : null
   },
   button(
     {
@@ -123,13 +126,22 @@ div(null, [
 ])
 ```
 
-`bindField` sets `value`, `onInput` / `onChange`, and accessibility hooks for
-the chosen **variant** (`text`, `email`, `checkbox`, `textarea`, `select`,
-`number`, …).
+`bindField(field)` infers behavior from the **field value type**:
 
-> [!WARNING] Inside **`List`** / dynamic rows, pass `controlledValue: true` on
-> text-like fields so HyperDOM does not lose input text after re-renders
-> (`apps/example` forms-mini demo).
+| Field type        | Returns                         | Put on element              |
+| ----------------- | ------------------------------- | --------------------------- |
+| `Field<string>`   | `value`, `onInput`, `onChange`  | `input` / `textarea` / `select` |
+| `Field<number>`   | same + parses DOM as number     | `type: 'number'` or `range` |
+| `Field<boolean>`  | `checked`, `onChange`           | `type: 'checkbox'`          |
+
+Always **controlled** — `value` / `checked` are reactive functions, safe inside
+`List` and dynamic rows.
+
+`onChange` accepts a DOM event **or** a value directly: `onChange('draft')`.
+
+`error()` returns the first validation message from `field.meta().errors`.
+HTML attributes (`type`, `placeholder`, `min`, `max`) belong on the element, not
+on `bindField`.
 
 ## With `@echojs-ecosystem/ui`
 
@@ -138,7 +150,8 @@ import { Input } from '@echojs-ecosystem/ui'
 import { bindField } from '@echojs-ecosystem/form'
 
 Input({
-  ...bindField(email, { variant: 'email' }),
+  type: 'email',
+  ...bindField(email),
   invalid: () => email.meta().errors.length > 0,
   placeholder: 'you@example.com',
 })
@@ -208,7 +221,7 @@ const hobbiesForm = createForm(
 ```
 
 Render rows with `List(fieldArray.$items, …)` and
-`bindField(row.tag, { variant: 'text', controlledValue: true })`.
+`bindField(row.tag)`.
 
 Nested catalog demo: `apps/example/src/features/forms-nested-catalog/`.
 

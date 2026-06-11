@@ -59,7 +59,7 @@ await loginForm.submit();
 ```ts
 import { bindField } from "@echojs-ecosystem/form";
 
-bindField(loginForm.fields.email, { variant: "email" });
+input({ type: "email", ...bindField(loginForm.fields.email) });
 ```
 
 ## API

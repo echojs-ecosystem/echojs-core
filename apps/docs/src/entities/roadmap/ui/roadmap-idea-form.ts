@@ -56,7 +56,7 @@ export const RoadmapIdeaForm = ({
         input({
           class: form.input(),
           placeholder: 'e.g. Built-in auth templates',
-          ...bindField(title, { variant: 'text', controlledValue: true }),
+          ...bindField(title),
         }),
         (): Child => fieldError(title.meta().errors),
       ]),
@@ -65,10 +65,7 @@ export const RoadmapIdeaForm = ({
         select(
           {
             class: [form.input(), form.select()].join(' '),
-            ...bindField(category, {
-              variant: 'select',
-              controlledValue: true,
-            }),
+            ...bindField(category),
           },
           ideaCategoryOptions.map((opt) =>
             option({ value: opt.value }, opt.label)
@@ -81,10 +78,7 @@ export const RoadmapIdeaForm = ({
         textarea({
           class: [form.input(), form.textarea()].join(' '),
           placeholder: 'What problem does this solve? Who benefits?',
-          ...bindField(description, {
-            variant: 'textarea',
-            controlledValue: true,
-          }),
+          ...bindField(description),
         }),
         (): Child => fieldError(description.meta().errors),
       ]),
@@ -93,7 +87,7 @@ export const RoadmapIdeaForm = ({
         input({
           class: form.input(),
           placeholder: '@you',
-          ...bindField(github, { variant: 'text', controlledValue: true }),
+          ...bindField(github),
         }),
         (): Child => fieldError(github.meta().errors),
       ]),

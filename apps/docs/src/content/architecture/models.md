@@ -139,6 +139,7 @@ Do not import models from `pages/` into other pages — lift shared logic to
 
 ## Related
 
+- [Best practices](/docs/best-practices/overview) — models, views, styling, routing
 - Model & View (agents) — `/docs/agents/model-and-view`
 - State overview — `/docs/state/overview`
 - Data fetching guide — `/docs/guides/data-fetching`

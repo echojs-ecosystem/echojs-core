@@ -48,15 +48,15 @@ export const UserEditView = (props: { params: { id: string } }): Child => {
       div({ class: 'mt-6 grid gap-4 sm:grid-cols-2' }, [
         div({ class: 'grid gap-1 sm:col-span-2' }, [
           label({ class: layout.muted() }, () => i18n.t('users.colName')),
-          input({ class: layout.input(), ...bindField(fields.name, { variant: 'text', controlledValue: true }) }),
+          input({ class: layout.input(), ...bindField(fields.name) }),
         ]),
         div({ class: 'grid gap-1 sm:col-span-2' }, [
           label({ class: layout.muted() }, () => i18n.t('users.colEmail')),
-          input({ class: layout.input(), ...bindField(fields.email, { variant: 'email', controlledValue: true }) }),
+          input({ type: 'email', class: layout.input(), ...bindField(fields.email) }),
         ]),
         div({ class: 'grid gap-1' }, [
           label({ class: layout.muted() }, () => i18n.t('users.role')),
-          select({ class: layout.select(), ...bindField(fields.role, { variant: 'select', controlledValue: true }) }, [
+          select({ class: layout.select(), ...bindField(fields.role) }, [
             option({ value: 'admin' }, 'admin'),
             option({ value: 'manager' }, 'manager'),
             option({ value: 'editor' }, 'editor'),
@@ -65,7 +65,7 @@ export const UserEditView = (props: { params: { id: string } }): Child => {
         ]),
         div({ class: 'grid gap-1' }, [
           label({ class: layout.muted() }, () => i18n.t('users.status')),
-          select({ class: layout.select(), ...bindField(fields.status, { variant: 'select', controlledValue: true }) }, [
+          select({ class: layout.select(), ...bindField(fields.status) }, [
             option({ value: 'active' }, 'active'),
             option({ value: 'invited' }, 'invited'),
             option({ value: 'suspended' }, 'suspended'),
@@ -73,7 +73,7 @@ export const UserEditView = (props: { params: { id: string } }): Child => {
         ]),
         div({ class: 'grid gap-1' }, [
           label({ class: layout.muted() }, () => i18n.t('users.department')),
-          select({ class: layout.select(), ...bindField(fields.department, { variant: 'select', controlledValue: true }) }, [
+          select({ class: layout.select(), ...bindField(fields.department) }, [
             option({ value: 'engineering' }, 'engineering'),
             option({ value: 'sales' }, 'sales'),
             option({ value: 'support' }, 'support'),
@@ -83,12 +83,12 @@ export const UserEditView = (props: { params: { id: string } }): Child => {
         ]),
         div({ class: 'grid gap-1' }, [
           label({ class: layout.muted() }, () => i18n.t('users.country')),
-          select({ class: layout.select(), ...bindField(fields.country, { variant: 'select', controlledValue: true }) }, [
+          select({ class: layout.select(), ...bindField(fields.country) }, [
             ...COUNTRIES.map((country) => option({ value: country }, country)),
           ]),
         ]),
         label({ class: 'flex items-center gap-2 text-sm text-fg-muted sm:col-span-2' }, [
-          input({ ...bindField(fields.verified, { variant: 'checkbox' }) }),
+          input({ type: 'checkbox', ...bindField(fields.verified) }),
           span(null, () => i18n.t('users.verifiedLabel')),
         ]),
         div({ class: 'grid gap-2 sm:col-span-2' }, [

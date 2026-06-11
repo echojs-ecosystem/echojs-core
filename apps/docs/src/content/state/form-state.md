@@ -85,12 +85,11 @@ export const createLoginFormModel = createModel(() => ({
 ## Binding to the DOM
 
 ```ts
-input({ ...bindField(loginForm.email, { variant: 'email' }) })
+input({ type: 'email', ...bindField(loginForm.email) })
 ```
 
-`bindField` connects HyperDOM inputs to field signals. For dynamic rows inside
-`List`, use `controlledValue: true` on text fields (see
-[Forms guide](/docs/guides/forms)).
+`bindField` connects HyperDOM inputs to field signals — always controlled, safe
+inside `List` and dynamic rows (see [Forms guide](/docs/guides/forms)).
 
 ## Validation modes
 

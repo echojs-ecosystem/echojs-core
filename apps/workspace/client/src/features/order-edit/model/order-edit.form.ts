@@ -6,7 +6,7 @@ import {
   type OrderFormValue,
 } from '@entities/order/model/order-form.schema'
 
-type OrderEditFields = {
+export type OrderEditFields = {
   customer: ReturnType<typeof createField<string>>
   total: ReturnType<typeof createField<number>>
   status: ReturnType<typeof createField<OrderFormValue['status']>>

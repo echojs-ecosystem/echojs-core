@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 import { createField } from "./field";
-import { createFieldSet } from "./fieldSet";
+import { createFieldSet } from "./field-set";
 
 describe("createFieldSet", () => {
   it("validate collects errors from child validate()", () => {

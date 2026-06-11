@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createField } from "./field";
-import { createFieldArray } from "./fieldArray";
+import { createFieldArray } from "./field-array";
 import { defineNestedFieldArrayOps } from "./nested-field-array-ops";
 
 type Child = { id: ReturnType<typeof createField<number>> };

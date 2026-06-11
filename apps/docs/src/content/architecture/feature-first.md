@@ -93,3 +93,8 @@ Rule of thumb:
 | -------------- | --------------------------------------- |
 | `apps/docs`    | MV pages, widgets, content pipeline     |
 | `apps/example` | Hub + module routes, `features/*` demos |
+
+## Related
+
+- [New screen](/docs/best-practices/new-screen) — end-to-end feature workflow
+- [Conventions](/docs/guides/conventions) — naming tables

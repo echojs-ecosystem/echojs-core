@@ -742,9 +742,9 @@ export const LoginFormView = createView((vm: LoginFormVM) => {
   const { email, password } = vm.fields
 
   return form({ onSubmit: (e) => { e.preventDefault(); void vm.submit() } }, [
-    input({ ...bindField(email, { variant: "email", controlledValue: true }) }),
+    input({ type: "email", ...bindField(email) }),
     input({
-      ...bindField(password, { variant: "text", controlledValue: true }),
+      ...bindField(password),
       type: "password",
     }),
     button({ type: "submit" }, "Sign in"),

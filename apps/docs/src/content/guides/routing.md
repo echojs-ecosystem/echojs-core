@@ -284,6 +284,7 @@ different `createRouteView` trees. Shell chrome can sit **outside**
 
 ## Related
 
+- [Routing best practices](/docs/best-practices/routing) — decisions, mobile nav, model lifetime
 - [Reactivity](/docs/guides/reactivity) — signals, models, route `$params`
 - [Router package](/docs/packages/router) — installation, API, playground
 - [Authentication](/docs/guides/authentication) — session + guards

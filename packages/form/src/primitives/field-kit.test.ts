@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { z } from "zod";
 import { createField } from "./field";
-import { createFieldArray } from "./fieldArray";
+import { createFieldArray } from "./field-array";
 import { createFieldKit } from "./field-kit";
 import { createForm } from "./create-form";
 

@@ -124,7 +124,7 @@ export const loginForm = createForm(
   { name: "LoginForm", validationSchema: schema },
 );
 
-// В UI: bindField(loginForm.fields.email, { variant: "email" })
+// В UI: input({ type: "email", ...bindField(loginForm.fields.email) })
 // Ошибки: loginForm.fields.email.meta().errors
 ```
 

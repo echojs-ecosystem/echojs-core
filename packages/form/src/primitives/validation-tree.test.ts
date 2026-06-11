@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createField } from "./field";
-import { createFieldArray } from "./fieldArray";
-import { createFieldSet } from "./fieldSet";
+import { createFieldArray } from "./field-array";
+import { createFieldSet } from "./field-set";
 import { deepReset, deepValidateAsync, deepValidateSync } from "./validation-tree";
 
 describe("deepValidateSync()", () => {
