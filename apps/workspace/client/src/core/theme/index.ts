@@ -1,2 +1,2 @@
-export { themeProvider, type ThemeMode } from './theme'
-export { $themeMode, initTheme, setThemeMode, toggleTheme } from './theme-store'
+export { themeProvider, type ThemeMode } from './theme-provider'
+export { themeStore, initTheme, setThemeMode, toggleTheme } from './theme.store'

@@ -19,7 +19,21 @@ func main() {
 	}
 
 	startedAt := time.Now()
-	store := data.NewStore()
+
+	var store *data.Store
+	if databaseURL := os.Getenv("DATABASE_URL"); databaseURL != "" {
+		var err error
+		store, err = data.NewStoreFromURL(databaseURL)
+		if err != nil {
+			panic(fmt.Errorf("database: %w", err))
+		}
+		defer store.Close()
+		fmt.Println("workspace-server → PostgreSQL")
+	} else {
+		store = data.NewStore()
+		fmt.Println("workspace-server → in-memory store (set DATABASE_URL for PostgreSQL)")
+	}
+
 	h := handlers.New(store, startedAt)
 
 	router := gin.Default()

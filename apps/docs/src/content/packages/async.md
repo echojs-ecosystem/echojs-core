@@ -10,16 +10,25 @@ keywords: [createQuery, createMutation, queryClient]
 
 :::install @echojs-ecosystem/async
 
-## Quick start
+## Key APIs
 
-```ts
-import { createQuery } from '@echojs-ecosystem/async'
+| Export | Role |
+| ------ | ---- |
+| [`createQuery`](/docs/packages/async/api/create-query) | Fetch + cache with loading/error signals |
+| [`createMutation`](/docs/packages/async/api/create-mutation) | POST/PUT/DELETE with optimistic updates |
+| [`createInfiniteQuery`](/docs/packages/async/api/create-infinite-query) | Paginated lists with `fetchNextPage` |
+| [`QueryClient`](/docs/packages/async/api/query-client) | Global cache, defaults, and invalidation |
+| [`createQueryProvider`](/docs/packages/async/api/query-client) | Register client on `createEchoApp` |
 
-const userQuery = createQuery({
-  queryKey: ['user', id] as const,
-  queryFn: ({ signal }) => fetchUser(id, { signal }),
-})
-```
+## Common patterns
+
+- Define queries in **`createModel`**, not views — bind `.with(() => params)` when
+  route or filter signals change.
+- Pass `signal` from `queryFn` to `fetch` for automatic abort on refetch.
+- Invalidate with `queryClient.invalidateQueries({ queryKey: ['users'] })` after
+  mutations.
+
+> [!tip] Bind `.with(() => params)` inside `createModel`, not in views.
 
 ## Documentation map
 
@@ -29,5 +38,3 @@ const userQuery = createQuery({
 | [Guides & Concepts](/docs/packages/async/guides/query-definitions) | Definitions, cache, cancellation |
 
 Each API page: **Usage** → **Type Declarations** → **API** (see [createQuery](/docs/packages/async/api/create-query)).
-
-> [!tip] Bind `.with(() => params)` inside `createModel`, not in views.

@@ -4,7 +4,7 @@ import { effect, signal } from '@echojs-ecosystem/reactivity'
 import { ordersPage } from '@app/router/index'
 import { i18n } from '@core/i18n/index'
 import { appPermission } from '@core/permission/index.js'
-import { updateOrderMutation } from '@entities/api/index'
+import { updateOrderMutation } from '@core/api/index'
 import { orderToFormValue, parseTagsInput } from '@entities/order/model/order-form.mapper'
 import { routeOrderDetail, syncRouteOrderId } from '@entities/order/index'
 

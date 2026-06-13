@@ -36,22 +36,25 @@ func BuildBootstrap(store *data.Store, role models.WorkspaceRole) models.Bootstr
 		role = models.RoleManager
 	}
 
+	orders, _ := store.AllOrders()
+	users, _ := store.AllUsers()
+
 	openOrders := 0
-	for _, order := range store.Orders {
+	for _, order := range orders {
 		if order.Status != models.OrderRefunded {
 			openOrders++
 		}
 	}
 
 	activeUsers := 0
-	for _, user := range store.Users {
+	for _, user := range users {
 		if user.Status == models.StatusActive {
 			activeUsers++
 		}
 	}
 
 	var revenue float64
-	for _, order := range store.Orders {
+	for _, order := range orders {
 		revenue += order.Total
 	}
 

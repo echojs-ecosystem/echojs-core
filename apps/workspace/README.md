@@ -7,7 +7,7 @@ Showcase admin panel: **client** (EchoJS + HyperDOM + signals) + **server** (Go 
 ```
 apps/workspace/
   client/   Vite SPA — router, query, permission, url-state
-  server/   Go + Gin — REST API, in-memory store
+  server/   Go + Gin — REST API, PostgreSQL (or in-memory fallback)
   shared/   DTO types shared with the client (TypeScript)
 ```
 
@@ -15,8 +15,20 @@ apps/workspace/
 
 - [Bun](https://bun.sh) — client dev server
 - [Go](https://go.dev) 1.22+ — API server
+- [Docker](https://www.docker.com) — optional, for PostgreSQL + API
 
-## Quick start
+## Quick start (Docker)
+
+```bash
+cd apps/workspace
+bun run docker:up
+```
+
+API: **http://localhost:3003** — PostgreSQL on port **5432**.
+
+Stop: `bun run docker:down` · wipe DB volume: `bun run docker:reset`
+
+## Quick start (local)
 
 ```bash
 # from repo root
@@ -57,7 +69,9 @@ Open **http://localhost:3002/admin**
 | GET | `/api/users/:id` | User detail |
 | GET | `/api/orders` | Filtered paginated orders |
 | POST | `/api/orders/:id/refund` | Refund mutation |
-| POST | `/api/demo/reset` | Reset in-memory DB |
+| POST | `/api/demo/reset` | Reset demo data (re-seed) |
+
+Without `DATABASE_URL` the server uses an in-memory store. With PostgreSQL, data persists across restarts.
 
 ## Nested routes
 

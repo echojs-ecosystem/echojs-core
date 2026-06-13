@@ -19,7 +19,9 @@ import {
   skeletonStyles,
 } from '@entities/doc-article/ui/doc-article.view.styles'
 import { routerStateStyles } from '@entities/router-states/ui/router-states.view.styles'
+import { PackageAside } from '@widgets/package-overview'
 import { extractDocToc } from '@core/content/extract-toc'
+import type { DocBlock, DocDocument } from '@core/content/types'
 
 const page = docContentPageStyles()
 const articleChrome = docArticlePageStyles()
@@ -30,6 +32,24 @@ const tocSpy = (vm: DocArticleVM) => ({
   isActive: vm.isTocActive,
   setActiveId: vm.setTocActiveId,
 })
+
+const findPackageOverviewBlock = (
+  blocks: DocBlock[]
+): Extract<DocBlock, { type: 'package-overview' }> | undefined =>
+  blocks.find(
+    (block): block is Extract<DocBlock, { type: 'package-overview' }> =>
+      block.type === 'package-overview'
+  )
+
+const packageOverviewAside = (doc: DocDocument): Child | null => {
+  const overview = findPackageOverviewBlock(doc.blocks)
+  if (!overview) return null
+  return PackageAside({
+    packageId: overview.packageId,
+    keywords: doc.frontmatter.keywords,
+    npmPackage: doc.frontmatter.package,
+  })
+}
 
 export const DocArticleView = createView((vm: DocArticleVM): Child => {
   const { query } = vm
@@ -55,8 +75,10 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
             if (!content) return null
             const doc = content.document
             const toc = extractDocToc(doc)
+            const packageAside = packageOverviewAside(doc)
             return DocContentLayout({
-              toc: DocToc(toc, tocSpy(vm)),
+              width: packageAside ? 'wide' : 'prose',
+              toc: div(null, [packageAside, DocToc(toc, tocSpy(vm))]),
               children: [
                 div({ class: articleChrome.toolbar() }, [
                   button(

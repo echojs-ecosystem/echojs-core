@@ -1,8 +1,12 @@
 import { createRouteView } from '@echojs-ecosystem/framework/router'
 
-import { DashboardView } from './ui/dashboard.view'
+import { dashboardStatsQuery } from '@core/api/index'
+import { Dashboard } from '@features/dashboard/index'
 
 export const dashboardPage = createRouteView({
   name: 'dashboard',
-  view: DashboardView,
+  beforeLoad: () => {
+    void dashboardStatsQuery.with().refetch()
+  },
+  view: () => Dashboard(),
 })

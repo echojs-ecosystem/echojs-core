@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/devtools",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Runtime registry and timeline infrastructure for EchoJS DevTools",
   "files": [
     "dist"

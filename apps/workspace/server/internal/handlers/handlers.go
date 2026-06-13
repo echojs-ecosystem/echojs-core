@@ -215,7 +215,10 @@ func (h *Handler) RefundOrder(c *gin.Context) {
 }
 
 func (h *Handler) ResetDemo(c *gin.Context) {
-	h.store.Reset()
+	if err := h.store.Reset(); err != nil {
+		c.JSON(http.StatusInternalServerError, models.ErrorResponse{Error: err.Error()})
+		return
+	}
 	c.JSON(http.StatusOK, models.OkResponse{OK: true})
 }
 

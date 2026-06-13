@@ -10,259 +10,205 @@ import {
 import { NavLink } from '@echojs-ecosystem/framework/router'
 
 import { docPageByContentId } from '@app/router'
+import { getPackageVersion } from '@core/content/ecosystem-version.generated'
+import { isNavIconId, type NavIconId } from '@core/content/nav-icon-id'
+import { resolvePackageGroupIcon } from '@core/content/resolve-nav-icon'
 import { CodeBlock } from '@widgets/code-block'
-import { EcosystemPackageCard } from '@widgets/ecosystem'
-import {
-  ecosystemPackages,
-  type EcosystemPackage,
-} from '@widgets/ecosystem/constants/ecosystem-packages'
+import { NavIcon } from '@widgets/icons'
 import {
   getPackageOverview,
   type PackageOverviewData,
 } from '@widgets/package-overview/constants/package-overview.data'
 import {
-  featureCardStyles,
-  packageOverviewStyles,
-} from '@widgets/package-overview/ui/package-overview.view.styles'
-import { NavIcon } from '@widgets/icons'
-import { getPackageVersion } from '@core/content/ecosystem-version.generated'
-import { isNavIconId, type NavIconId } from '@core/content/nav-icon-id'
-import { resolvePackageGroupIcon } from '@core/content/resolve-nav-icon'
+  ECHOJS_LICENSE,
+  ECHOJS_MIN_VERSION,
+  NODE_MIN_VERSION,
+} from '@widgets/package-overview/constants/package-meta'
+import { packageOverviewStyles } from '@widgets/package-overview/ui/package-overview.view.styles'
 
 const ui = packageOverviewStyles()
-const pillar = featureCardStyles()
 
 export type PackageOverviewViewProps = { packageId: string }
 
 const OverviewIcon = (props: {
   icon: NavIconId | string
-  wrapClass: string
+  wrapClass?: string
   glyphClass: string
 }): Child => {
-  const { icon, wrapClass, glyphClass } = props
-  if (isNavIconId(icon)) {
-    return span({ class: wrapClass }, NavIcon(icon, glyphClass))
-  }
-  return span({ class: `${wrapClass} text-base font-semibold` }, icon)
+  const glyph = isNavIconId(props.icon) ? (
+    NavIcon(props.icon, props.glyphClass)
+  ) : (
+    span({ class: 'text-base font-semibold' }, props.icon)
+  )
+  return props.wrapClass ? span({ class: props.wrapClass }, glyph) : glyph
 }
 
-const toEcosystemCard = (id: string): EcosystemPackage | null => {
-  const listed = ecosystemPackages.find((p) => p.shortName === id)
-  if (listed) return listed
-  const data = getPackageOverview(id)
-  if (!data) return null
-  return {
-    name: data.npmPackage,
-    shortName: data.id,
-    contentId: `packages/${data.id}`,
-  }
-}
-
-const ListSection = (props: { title: string; items: string[] }): Child =>
-  div(null, [
-    h3({ class: ui.sectionTitle() }, props.title),
-    div(
-      { class: ui.list() },
-      props.items.map((item) =>
-        div({ class: ui.listItem() }, [
-          span({ class: ui.listBullet() }),
-          span(null, item),
-        ])
-      )
-    ),
+const Stat = (props: { label: string; value: string }): Child =>
+  div({ class: ui.statCell() }, [
+    p({ class: ui.statLabel() }, props.label),
+    p({ class: ui.statValue() }, props.value),
   ])
 
+const ListSection = (props: { title: string; items: string[] }): Child | null =>
+  props.items.length === 0
+    ? null
+    : div({ class: ui.section() }, [
+        h3({ class: ui.sectionTitle() }, props.title),
+        div(
+          { class: ui.list() },
+          props.items.map((item) =>
+            div({ class: ui.listItem() }, [
+              span({ class: ui.listBullet() }),
+              span(null, item),
+            ])
+          )
+        ),
+      ])
+
 const OverviewBody = (data: PackageOverviewData): Child => {
-  const related = data.relatedIds
-    .map(toEcosystemCard)
-    .filter((p): p is EcosystemPackage => p !== null)
   const version = getPackageVersion(data.npmPackage)
-  const packageLabel = version
-    ? `${data.npmPackage}@${version}`
-    : data.npmPackage
   const heroIconId = isNavIconId(data.icon)
     ? data.icon
     : resolvePackageGroupIcon(data.id)
+  const isOfficial = data.id === 'framework'
+  const seeAlso = data.learnPath.slice(0, 4)
 
   return div({ class: ui.root() }, [
     div({ class: ui.hero() }, [
-      div({ class: ui.heroGlow() }),
-      div({ class: ui.heroInner() }, [
-        div({ class: ui.heroIconWrap() }, [
-          OverviewIcon({
-            icon: heroIconId,
-            wrapClass: ui.heroIcon(),
-            glyphClass: ui.heroIconGlyph(),
-          }),
+      div({ class: ui.heroTop() }, [
+        div({ class: ui.heroIconBox() }, [
+          OverviewIcon({ icon: heroIconId, glyphClass: ui.heroIconGlyph() }),
         ]),
-        div({ class: ui.heroContent() }, [
-          data.id === 'framework'
-            ? p(
-                { class: ui.heroFeaturedBanner() },
-                'Recommended starting point'
-              )
-            : null,
-          p({ class: ui.heroEyebrow() }, packageLabel),
-          data.heroTitle ? p({ class: ui.heroTitle() }, data.heroTitle) : null,
-          p({ class: ui.heroHeadline() }, data.tagline),
-          p({ class: ui.heroSummary() }, data.summary),
-          div(
-            { class: ui.pillRow() },
-            data.pills.map((pill) => span({ class: ui.pill() }, pill))
-          ),
-          NavLink({
-            to: docPageByContentId[`packages/${data.id}/installation`]!,
-            class: ui.importPathsLink(),
-            children: ['Import paths', span(null, '→')],
-          }),
+        div({ class: ui.heroMain() }, [
+          div({ class: ui.badgeRow() }, [
+            isOfficial
+              ? span({ class: ui.badgeOfficial() }, 'Official')
+              : null,
+            version
+              ? span({ class: ui.badgeAccent() }, `v${version}`)
+              : null,
+            span({ class: ui.badge() }, ECHOJS_LICENSE),
+            span({ class: ui.badge() }, `echojs >=${ECHOJS_MIN_VERSION}`),
+            span({ class: ui.badge() }, `node ${NODE_MIN_VERSION}`),
+          ]),
+          h2({ id: 'page-title', class: ui.packageName() }, data.npmPackage),
+          data.heroTitle
+            ? p({ class: ui.tagline() }, data.heroTitle)
+            : p({ class: ui.tagline() }, data.tagline),
+          p({ class: ui.description() }, data.summary),
         ]),
+      ]),
+
+      div({ class: ui.statsBar() }, [
+        Stat({
+          label: 'Version',
+          value: version ? `v${version}` : '—',
+        }),
+        Stat({ label: 'License', value: ECHOJS_LICENSE }),
+        Stat({ label: 'EchoJS', value: `>=${ECHOJS_MIN_VERSION}` }),
+        Stat({ label: 'Node', value: NODE_MIN_VERSION }),
       ]),
     ]),
 
-    data.whyCards && data.whyCards.length > 0
-      ? sectionBlock(
-          data.whyTitle ?? 'Why this package',
-          data.whySubtitle,
-          () =>
-            div(
-              { class: ui.whyGrid() },
-              data.whyCards!.map((card) =>
-                div({ class: ui.whyCard() }, [
-                  span({ class: ui.whyAccent() }),
-                  OverviewIcon({
-                    icon: card.icon,
-                    wrapClass: ui.whyCardIconWrap(),
-                    glyphClass: ui.whyCardIconGlyph(),
-                  }),
-                  h3({ class: ui.whyCardTitle() }, card.title),
-                  p({ class: ui.whyCardBody() }, card.body),
-                ])
-              )
-            )
-        )
-      : null,
-
-    sectionBlock('Core concepts', undefined, () =>
-      div(
-        { class: ui.pillarGrid() },
-        data.pillars.map((card) =>
-          div({ class: pillar.root() }, [
-            span({ class: pillar.accent() }),
-            OverviewIcon({
-              icon: card.icon,
-              wrapClass: pillar.iconWrap(),
-              glyphClass: pillar.iconGlyph(),
-            }),
-            div({ class: pillar.body() }, [
-              h3({ class: pillar.title() }, card.title),
-              p({ class: pillar.text() }, card.body),
+    div({ class: ui.body() }, [
+      data.codeExample
+        ? div({ class: ui.section() }, [
+            h2({ class: ui.sectionTitle() }, 'Example'),
+            p({ class: ui.sectionLead() }, data.codeExample.title),
+            div({ class: ui.codeWrap() }, [
+              CodeBlock({
+                language: data.codeExample.language,
+                code: data.codeExample.code,
+              }),
             ]),
           ])
-        )
-      )
-    ),
+        : null,
 
-    data.lifecycleSteps && data.lifecycleSteps.length > 0
-      ? sectionBlock(
-          data.lifecycleTitle ?? 'Lifecycle',
-          data.lifecycleSubtitle,
-          () =>
+      data.pillars.length > 0
+        ? div({ class: ui.section() }, [
+            h2({ class: ui.sectionTitle() }, 'Core concepts'),
             div(
-              { class: ui.lifecycleGrid() },
-              data.lifecycleSteps!.map((step) =>
-                div({ class: ui.lifecycleCard() }, [
-                  span({ class: ui.lifecycleAccent() }),
-                  span({ class: ui.lifecycleStep() }, step.step),
-                  p({ class: ui.lifecycleTitle() }, step.title),
-                  p({ class: ui.lifecycleBody() }, step.body),
+              { class: ui.pillarGrid() },
+              data.pillars.map((pillar) =>
+                div({ class: ui.pillarCard() }, [
+                  OverviewIcon({
+                    icon: pillar.icon,
+                    wrapClass: ui.iconWrapSm(),
+                    glyphClass: ui.iconGlyphSm(),
+                  }),
+                  h3({ class: ui.pillarTitle() }, pillar.title),
+                  p({ class: ui.pillarBody() }, pillar.body),
                 ])
               )
-            )
-        )
-      : null,
+            ),
+          ])
+        : null,
 
-    data.codeExample
-      ? sectionBlock(data.codeExample.title, undefined, () =>
-          div({ class: ui.codeSection() }, [
-            div({ class: ui.codeSectionTitle() }, data.codeExample!.language),
-            CodeBlock({
-              language: data.codeExample!.language,
-              code: data.codeExample!.code,
+      data.whenToUse.length > 0 || data.whenNot.length > 0
+        ? div({ class: ui.twoCol() }, [
+            ListSection({ title: 'Use when', items: data.whenToUse }),
+            ListSection({
+              title: 'Reach for something else',
+              items: data.whenNot,
             }),
           ])
-        )
-      : null,
+        : null,
 
-    div({ class: ui.twoCol() }, [
-      ListSection({ title: 'Use when', items: data.whenToUse }),
-      ListSection({ title: 'Reach for something else', items: data.whenNot }),
+      data.dependsOn.length > 0 || data.powers.length > 0
+        ? div({ class: ui.section() }, [
+            data.dependsOn.length > 0
+              ? div(null, [
+                  h3({ class: ui.sectionTitle() }, 'Depends on'),
+                  div(
+                    { class: ui.metaRow() },
+                    data.dependsOn.map((dep) =>
+                      span({ class: ui.metaPill() }, dep)
+                    )
+                  ),
+                ])
+              : null,
+            data.powers.length > 0
+              ? div({ class: data.dependsOn.length > 0 ? 'mt-4' : undefined }, [
+                  h3({ class: ui.sectionTitle() }, 'Often paired with'),
+                  div(
+                    { class: ui.metaRow() },
+                    data.powers.map((pkg) =>
+                      span(
+                        { class: ui.metaPill() },
+                        `@echojs-ecosystem/${pkg}`
+                      )
+                    )
+                  ),
+                ])
+              : null,
+          ])
+        : null,
+
+      seeAlso.length > 0
+        ? div({ class: ui.section() }, [
+            h2({ class: ui.sectionTitle() }, 'See also'),
+            div(
+              { class: ui.seeAlsoGrid() },
+              seeAlso.map((item) =>
+                NavLink({
+                  to: docPageByContentId[item.contentId]!,
+                  class: ui.seeAlsoCard(),
+                  children: [
+                    p({ class: ui.seeAlsoTitle() }, item.title),
+                    p({ class: ui.seeAlsoDesc() }, item.description),
+                    span({ class: ui.seeAlsoLink() }, [
+                      'Open guide',
+                      NavIcon('chevron-right', 'h-3.5 w-3.5'),
+                    ]),
+                  ],
+                })
+              )
+            ),
+          ])
+        : null,
     ]),
-
-    data.dependsOn.length > 0
-      ? div(null, [
-          h3({ class: ui.sectionTitle() }, 'Depends on'),
-          div(
-            { class: ui.pillRow() },
-            data.dependsOn.map((dep) => span({ class: ui.pill() }, dep))
-          ),
-        ])
-      : null,
-
-    data.powers.length > 0
-      ? div(null, [
-          h3({ class: ui.sectionTitle() }, 'Often paired with'),
-          div(
-            { class: ui.pillRow() },
-            data.powers.map((pkg) =>
-              span({ class: ui.pill() }, `@echojs-ecosystem/${pkg}`)
-            )
-          ),
-        ])
-      : null,
-
-    sectionBlock('Learn this package', undefined, () =>
-      div(
-        { class: ui.learnGrid() },
-        data.learnPath.map((step, index) =>
-          NavLink({
-            to: docPageByContentId[step.contentId]!,
-            class: ui.learnCard(),
-            children: [
-              span({ class: ui.learnAccent() }),
-              p({ class: ui.learnStep() }, `Step ${index + 1}`),
-              p({ class: ui.learnTitle() }, step.title),
-              p({ class: ui.learnDesc() }, step.description),
-              span({ class: ui.learnLink() }, [
-                'Open',
-                NavIcon('chevron-right', 'h-3.5 w-3.5'),
-              ]),
-            ],
-          })
-        )
-      )
-    ),
-
-    related.length > 0
-      ? sectionBlock('Related packages', undefined, () =>
-          div(
-            { class: ui.relatedGrid() },
-            related.map((pkg) => EcosystemPackageCard(pkg))
-          )
-        )
-      : null,
   ])
 }
-
-const sectionBlock = (
-  title: string,
-  lead: string | undefined,
-  body: () => Child
-): Child =>
-  div({ class: ui.section() }, [
-    h2({ class: ui.sectionTitle() }, title),
-    lead ? p({ class: ui.sectionLead() }, lead) : null,
-    body(),
-  ])
 
 export const PackageOverviewView = createView(
   (props: PackageOverviewViewProps): Child => {

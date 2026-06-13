@@ -1,6 +1,6 @@
 import { signal } from '@echojs-ecosystem/reactivity'
 
-import { userDetailQuery } from '@entities/api/index'
+import { userDetailQuery } from '@core/api/index'
 
 export const $routeUserId = signal('')
 

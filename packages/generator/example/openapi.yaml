@@ -1,0 +1,6 @@
+openapi: 3.0.3
+info:
+  title: Generator Example API
+  version: 0.0.0
+  description: Replace this file with your OpenAPI spec.
+paths: {}

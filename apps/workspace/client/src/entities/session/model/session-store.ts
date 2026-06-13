@@ -1,4 +1,6 @@
 import { getQueryProvider } from '@echojs-ecosystem/async'
+
+import { apiKeys } from '@core/api/index'
 import { computed, effect, signal } from '@echojs-ecosystem/reactivity'
 import { createStore } from '@echojs-ecosystem/store'
 import { withLocalStorage } from '@echojs-ecosystem/persist'
@@ -46,8 +48,8 @@ export const setWorkspaceRole = (role: WorkspaceRole): void => {
   }
 
   const queryClient = getQueryProvider()
-  void queryClient?.invalidateQueries(['workspace', 'bootstrap'])
-  void queryClient?.invalidateQueries(['workspace', 'dashboard-stats'])
+  void queryClient?.invalidateQueries(apiKeys.bootstrap(role))
+  void queryClient?.invalidateQueries(apiKeys.dashboardStats())
 }
 
 effect(() => {

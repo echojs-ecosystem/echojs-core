@@ -1,1 +1,0 @@
-export { queryProvider } from './query'

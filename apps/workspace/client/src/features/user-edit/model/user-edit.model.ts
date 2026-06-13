@@ -1,7 +1,7 @@
 import { signal } from '@echojs-ecosystem/reactivity'
 import type { AdminUser } from '@echojs-ecosystem/workspace-shared'
 
-import { updateUserMutation } from '@entities/api/index'
+import { updateUserMutation } from '@core/api/index'
 import { userEditForm } from './user-edit.form'
 
 export const updateUserAction = updateUserMutation.create()

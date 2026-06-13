@@ -7,7 +7,8 @@ import type {
   QueryStateSetOptions,
 } from "./types";
 import { resolveSetOptions } from "./options";
-import { defaultEquals } from "../utils/equality";
+import { queryParamsEquals } from "../utils/equality";
+import { mergeSchemaSnapshot } from "./schema-snapshot";
 import { getSearchParam, type SearchParamValue } from "./url";
 import { queueUrlUpdate } from "./update-queue";
 import { createAutoRouterUrlStateAdapter } from "../adapters/auto-router-adapter";
@@ -49,9 +50,10 @@ export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
   const $value = signal<ParsedSchema<Schema>>(readSchema());
 
   const syncFromAdapter = (): void => {
-    const next = readSchema();
-    const equals = resolveOptions().equals === false ? null : (resolveOptions().equals ?? defaultEquals);
-    if (!equals || !equals(next, $value.peek())) $value.set(next);
+    const prev = $value.peek();
+    const next = mergeSchemaSnapshot(schema, prev, readSchema());
+    const equals = resolveOptions().equals === false ? null : (resolveOptions().equals ?? queryParamsEquals);
+    if (!equals || !equals(next, prev)) $value.set(next);
   };
 
   const unsubscribe = adapter.subscribe(syncFromAdapter);
@@ -77,8 +79,10 @@ export const createQueryParams = <Schema extends Record<string, Parser<any>>>(
     setOptions?: QueryStateSetOptions,
   ): void => {
     const resolved = resolveOptions(setOptions);
-    const equals = resolved.equals === false ? null : (resolved.equals ?? defaultEquals);
-    if (!equals || !equals(nextValue, $value.peek())) $value.set(nextValue);
+    const prev = $value.peek();
+    const merged = mergeSchemaSnapshot(schema, prev, nextValue);
+    const equals = resolved.equals === false ? null : (resolved.equals ?? queryParamsEquals);
+    if (!equals || !equals(merged, prev)) $value.set(merged);
     queueUrlUpdate(adapter, ops, resolved);
   };
 

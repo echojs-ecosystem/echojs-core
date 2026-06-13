@@ -11,6 +11,28 @@ keywords: [signals, computed, effect, batch, scope, reactivity]
 
 :::install @echojs-ecosystem/reactivity
 
+## Key APIs
+
+| Export | Role |
+| ------ | ---- |
+| [`signal`](/docs/packages/reactivity/api/signal) | Writable reactive cell — `.value()`, `.set()`, `.update()` |
+| [`computed`](/docs/packages/reactivity/api/computed) | Cached derived value from tracked reads |
+| [`effect`](/docs/packages/reactivity/api/effect) | Side effect that re-runs when dependencies change |
+| [`batch`](/docs/packages/reactivity/api/batch) | Coalesce multiple writes before notifications |
+| [`scope`](/docs/packages/reactivity/api/scope) | Group effects with `cleanup()` for disposal |
+
+## Common patterns
+
+- **Models** — keep writable state in `createModel` as signals; expose read-only
+  getters to views.
+- **Derived UI** — prefer `computed` over manual subscriptions; HyperDOM tracks
+  `.value()` in view trees automatically.
+- **Async** — use `@echojs-ecosystem/async` for server cache; reactivity is for
+  local graph state, not HTTP lifecycles.
+
+> [!tip] Read [Important Defaults](/docs/packages/reactivity/guides/important-defaults)
+> before mixing signals with stores or queries.
+
 ## Documentation map
 
 | Section | Description |

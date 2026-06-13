@@ -2,7 +2,7 @@ import { createEchoApp } from '@echojs-ecosystem/framework/app'
 
 import { i18nProvider } from '@core/i18n/index'
 import { permissionProvider } from '@core/permission/index'
-import { queryProvider } from '@core/query/index'
+import { asyncProvider } from '@core/async/index'
 import { themeProvider } from '@core/theme/index'
 import { uiProvider } from '@core/ui/index'
 import { routerProvider } from '@app/router-provider'
@@ -11,7 +11,7 @@ export const bootstrap = (): Promise<() => void> =>
   createEchoApp({
     strictContextChecks: true,
   })
-    .use(queryProvider)
+    .use(asyncProvider)
     .use(uiProvider)
     .use(i18nProvider)
     .use(themeProvider)

@@ -1,7 +1,7 @@
 import { createI18nProvider } from '@echojs-ecosystem/framework/i18n'
 
-import en from '../../locales/en.json'
-import ru from '../../locales/ru.json'
+import en from '../../../public/locales/en.json'
+import ru from '../../../public/locales/ru.json'
 
 export type AppMessages = typeof en
 

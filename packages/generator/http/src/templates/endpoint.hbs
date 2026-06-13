@@ -1,0 +1,39 @@
+import type { RequestOptions } from "{{typesImportPath}}";
+import { {{clientExportName}} } from "{{clientImportPath}}";
+{{#if typeImports}}
+import type { {{typeImports}} } from "{{modelsImportPath}}";
+{{/if}}
+import { buildPath } from "{{buildPathImportPath}}";
+
+export const {{functionName}} = (
+{{#if hasArgs}}
+  args: {
+{{#if hasPathParams}}
+    params: {{pathParamsType}};
+{{/if}}
+{{#if hasQueryParams}}
+    query: {{queryParamsType}};
+{{/if}}
+{{#if hasBody}}
+    body: {{bodyType}};
+{{/if}}
+{{#if hasHeaders}}
+    headers: {{headerParamsType}};
+{{/if}}
+  },
+{{/if}}
+  options?: RequestOptions,
+){{#if responseType}}: Promise<{{responseType}}>{{/if}} => {
+  return {{{clientExpression}}}.{{method}}(buildPath("{{path}}"{{#if hasPathParams}}, { params: args.params }{{/if}}), {
+    ...options,
+{{#if hasQueryParams}}
+    searchParams: args.query,
+{{/if}}
+{{#if hasBody}}
+    json: args.body,
+{{/if}}
+{{#if hasHeaders}}
+    headers: args.headers,
+{{/if}}
+  }){{#if responseType}}.json<{{responseType}}>(){{else}}.unwrapJson(){{/if}};
+};

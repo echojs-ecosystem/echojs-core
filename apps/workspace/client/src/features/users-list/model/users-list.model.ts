@@ -1,4 +1,4 @@
-import { deleteUserMutation, usersListQuery } from '@entities/api/index'
+import { deleteUserMutation, usersListQuery } from '@core/api/index'
 
 import { usersQueryParams } from './users-filters'
 

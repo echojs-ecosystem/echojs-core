@@ -1,1 +1,1 @@
-export { uiProvider } from './ui'
+export { uiProvider } from './ui.provider'

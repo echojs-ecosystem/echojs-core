@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/workspace",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,9 @@
     "dev:server": "cd server && go run .",
     "build": "bun run --cwd client build",
     "build:server": "cd server && go build -o workspace-server .",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down",
+    "docker:reset": "docker compose down -v",
     "typecheck": "bun run --cwd shared typecheck && bun run --cwd client typecheck",
     "lint": "bun run --cwd client lint"
   }

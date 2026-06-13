@@ -10,17 +10,24 @@ keywords: [createStore, withActions, select, combine]
 
 :::install @echojs-ecosystem/store
 
-## Quick start
+## Key APIs
 
-```ts
-import { createStore, withActions } from '@echojs-ecosystem/store'
+| Export | Role |
+| ------ | ---- |
+| [`createStore`](/docs/packages/store/api/create-store) | Immutable-friendly state container with `.get()` / `.set()` |
+| [`withActions`](/docs/packages/store/guides/actions) | Named methods that call `set` / `update` |
+| [`select`](/docs/packages/store/api/select) | Derived slice as a readonly signal |
+| [`combine`](/docs/packages/store/api/combine) | Merge multiple stores for cross-slice reads |
+| [`withEvents`](/docs/packages/store/api/extensions) | Pub/sub between stores without tight coupling |
 
-const counter = createStore({ count: 0 }).extend(
-  withActions((store) => ({
-    increment: () => store.update((s) => ({ count: s.count + 1 })),
-  }))
-)
-```
+## Common patterns
+
+- Place stores in **`entities/<name>/model/`** — one store per domain aggregate.
+- Use **`select`** for view-friendly projections instead of reading full state in
+  every component.
+- Persist slices with `@echojs-ecosystem/persist` on the same store instance.
+
+> [!tip] Persist slices with `@echojs-ecosystem/persist` on the same store instance.
 
 ## Documentation map
 
@@ -30,5 +37,3 @@ const counter = createStore({ count: 0 }).extend(
 | [Guides & Concepts](/docs/packages/store/guides/creating-stores) | Actions, derived state, events |
 
 Each API page: **Usage** → **Type Declarations** → **API** (see [createStore](/docs/packages/store/api/create-store)).
-
-> [!tip] Persist slices with `@echojs-ecosystem/persist` on the same store instance.

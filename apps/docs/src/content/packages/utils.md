@@ -11,15 +11,22 @@ keywords: [windowSize, clipboard, debounce, composables]
 
 :::install @echojs-ecosystem/utils
 
-## Quick start
+## Key APIs
 
-```ts
-import { windowSize } from '@echojs-ecosystem/utils/window-size'
+| Export | Role |
+| ------ | ---- |
+| [`windowSize`](/docs/packages/utils/api/window-size) | Viewport width/height signals |
+| [`clipboard`](/docs/packages/utils/api/clipboard) | Read/write clipboard with permissions |
+| [`debounce`](/docs/packages/utils/api/debounce) | Debounced signal or callback |
+| [`mediaQuery`](/docs/packages/utils/api/media-query) | Reactive `matchMedia` breakpoint |
+| [`eventListener`](/docs/packages/utils/api/event-listener) | DOM events with auto cleanup |
 
-const size = windowSize({ initialWidth: 0, initialHeight: 0 })
-console.log(size.width(), size.height())
-size.dispose()
-```
+## Common patterns
+
+- Import from **subpaths** — `@echojs-ecosystem/utils/window-size` — so unused
+  utils never land in the bundle.
+- Call **`.dispose()`** when a util is created in a model that can unmount.
+- Prefer utils over raw `addEventListener` in effects — disposal is built in.
 
 ## Documentation map
 

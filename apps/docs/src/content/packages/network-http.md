@@ -11,18 +11,22 @@ keywords: [createHttpClient, fetch, hooks, retry]
 
 :::install @echojs-ecosystem/network
 
-## Quick start
+## Key APIs
 
-```ts
-import { createHttpClient } from '@echojs-ecosystem/network/http'
+| Export | Role |
+| ------ | ---- |
+| [`createHttpClient`](/docs/packages/network-http/api/create-http-client) | Immutable client with `get` / `post` / `json()` |
+| [`Hooks`](/docs/packages/network-http/api/hooks) | Request/response middleware chain |
+| [`Errors`](/docs/packages/network-http/api/errors) | Typed HTTP and network failures |
+| Client composition | `.extend()` for auth headers, base URL, retries |
 
-const api = createHttpClient({
-  baseUrl: 'https://api.example.com',
-  headers: { accept: 'application/json' },
-})
+## Common patterns
 
-const users = await api.get('/users').json<User[]>()
-```
+- Create one **`api` client** per backend in `shared/api` or `entities/*/api`.
+- Use **`api.get('/users').json<User[]>()`** inside `createQuery` `queryFn`.
+- Import **`/http` subpath only** — WebSocket and GraphQL are separate entries.
+
+> [!tip] Import the **`/http` subpath** only — `/ws`, `/mock`, `/graphql` are separate entry points.
 
 ## Documentation map
 
@@ -32,5 +36,3 @@ const users = await api.get('/users').json<User[]>()
 | [Guides & Concepts](/docs/packages/network-http/guides/important-defaults) | Client composition, retries |
 
 Each API page: **Usage** → **Type Declarations** → **API** (see [createHttpClient](/docs/packages/network-http/api/create-http-client)).
-
-> [!tip] Import the **`/http` subpath** only — `/ws`, `/mock`, `/graphql` are separate entry points.

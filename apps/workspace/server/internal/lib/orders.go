@@ -49,7 +49,8 @@ func FilterOrders(orders []models.AdminOrder, query OrdersListQuery) []models.Ad
 }
 
 func ListOrders(store *data.Store, query OrdersListQuery) models.OrdersListResponse {
-	filtered := FilterOrders(store.Orders, query)
+	orders, _ := store.AllOrders()
+	filtered := FilterOrders(orders, query)
 	totalPages := max(1, (len(filtered)+orderPageSize-1)/orderPageSize)
 	page := query.Page
 	if page < 1 {
@@ -83,53 +84,45 @@ func CreateOrder(store *data.Store, input models.CreateOrderInput) models.AdminO
 		Status:   input.Status,
 		Tags:     append([]string(nil), input.Tags...),
 	}
-	store.Orders = append([]models.AdminOrder{order}, store.Orders...)
+	_ = store.AddOrder(order)
 	return order
 }
 
 func UpdateOrder(store *data.Store, id string, input models.UpdateOrderInput) (*models.AdminOrder, bool) {
-	for i := range store.Orders {
-		if store.Orders[i].ID != id {
-			continue
-		}
-		order := &store.Orders[i]
-		if input.Customer != nil {
-			order.Customer = *input.Customer
-		}
-		if input.Total != nil {
-			order.Total = *input.Total
-		}
-		if input.Status != nil {
-			order.Status = *input.Status
-		}
-		if input.Tags != nil {
-			order.Tags = append([]string(nil), input.Tags...)
-		}
-		return order, true
+	order, ok := store.FindOrder(id)
+	if !ok {
+		return nil, false
 	}
-	return nil, false
+	if input.Customer != nil {
+		order.Customer = *input.Customer
+	}
+	if input.Total != nil {
+		order.Total = *input.Total
+	}
+	if input.Status != nil {
+		order.Status = *input.Status
+	}
+	if input.Tags != nil {
+		order.Tags = append([]string(nil), input.Tags...)
+	}
+	if err := store.SaveOrder(*order); err != nil {
+		return nil, false
+	}
+	return order, true
 }
 
 func DeleteOrder(store *data.Store, id string) bool {
-	for i, order := range store.Orders {
-		if order.ID == id {
-			store.Orders = append(store.Orders[:i], store.Orders[i+1:]...)
-			return true
-		}
-	}
-	return false
+	return store.DeleteOrder(id)
 }
 
 func RefundOrder(store *data.Store, id string) (*models.AdminOrder, bool) {
-	for i := range store.Orders {
-		if store.Orders[i].ID != id {
-			continue
-		}
-		if store.Orders[i].Status == models.OrderRefunded {
-			return nil, false
-		}
-		store.Orders[i].Status = models.OrderRefunded
-		return &store.Orders[i], true
+	order, ok := store.FindOrder(id)
+	if !ok || order.Status == models.OrderRefunded {
+		return nil, false
 	}
-	return nil, false
+	order.Status = models.OrderRefunded
+	if err := store.SaveOrder(*order); err != nil {
+		return nil, false
+	}
+	return order, true
 }

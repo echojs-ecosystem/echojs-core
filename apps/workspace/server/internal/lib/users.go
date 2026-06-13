@@ -126,7 +126,8 @@ func ListUsers(store *data.Store, query UsersListQuery) models.UsersListResponse
 		pageSize = 50
 	}
 
-	filtered := FilterUsers(store.Users, query)
+	users, _ := store.AllUsers()
+	filtered := FilterUsers(users, query)
 	totalPages := max(1, (len(filtered)+pageSize-1)/pageSize)
 	page := query.Page
 	if page < 1 {
@@ -166,54 +167,48 @@ func CreateUser(store *data.Store, input models.CreateUserInput) models.AdminUse
 		CreatedAt:    time.Now().UTC().Format(time.RFC3339Nano),
 		LastActiveAt: time.Now().UTC().Format(time.RFC3339Nano),
 	}
-	store.Users = append([]models.AdminUser{user}, store.Users...)
+	_ = store.AddUser(user)
 	return user
 }
 
 func UpdateUser(store *data.Store, id string, input models.UpdateUserInput) (*models.AdminUser, bool) {
-	for i := range store.Users {
-		if store.Users[i].ID != id {
-			continue
-		}
-		user := &store.Users[i]
-		if input.Name != nil {
-			user.Name = *input.Name
-		}
-		if input.Email != nil {
-			user.Email = *input.Email
-		}
-		if input.Role != nil {
-			user.Role = *input.Role
-		}
-		if input.Status != nil {
-			user.Status = *input.Status
-		}
-		if input.Department != nil {
-			user.Department = *input.Department
-		}
-		if input.Country != nil {
-			user.Country = strings.ToUpper(*input.Country)
-		}
-		if input.Verified != nil {
-			user.Verified = *input.Verified
-		}
-		if input.Tags != nil {
-			user.Tags = append([]string(nil), input.Tags...)
-		}
-		user.LastActiveAt = time.Now().UTC().Format(time.RFC3339Nano)
-		return user, true
+	user, ok := store.FindUser(id)
+	if !ok {
+		return nil, false
 	}
-	return nil, false
+	if input.Name != nil {
+		user.Name = *input.Name
+	}
+	if input.Email != nil {
+		user.Email = *input.Email
+	}
+	if input.Role != nil {
+		user.Role = *input.Role
+	}
+	if input.Status != nil {
+		user.Status = *input.Status
+	}
+	if input.Department != nil {
+		user.Department = *input.Department
+	}
+	if input.Country != nil {
+		user.Country = strings.ToUpper(*input.Country)
+	}
+	if input.Verified != nil {
+		user.Verified = *input.Verified
+	}
+	if input.Tags != nil {
+		user.Tags = append([]string(nil), input.Tags...)
+	}
+	user.LastActiveAt = time.Now().UTC().Format(time.RFC3339Nano)
+	if err := store.SaveUser(*user); err != nil {
+		return nil, false
+	}
+	return user, true
 }
 
 func DeleteUser(store *data.Store, id string) bool {
-	for i, user := range store.Users {
-		if user.ID == id {
-			store.Users = append(store.Users[:i], store.Users[i+1:]...)
-			return true
-		}
-	}
-	return false
+	return store.DeleteUser(id)
 }
 
 func SuspendUser(store *data.Store, id string) (*models.AdminUser, bool) {
@@ -228,16 +223,7 @@ func ActivateUser(store *data.Store, id string) (*models.AdminUser, bool) {
 }
 
 func EmailExists(store *data.Store, email string, excludeID string) bool {
-	lower := strings.ToLower(email)
-	for _, user := range store.Users {
-		if excludeID != "" && user.ID == excludeID {
-			continue
-		}
-		if strings.ToLower(user.Email) == lower {
-			return true
-		}
-	}
-	return false
+	return store.EmailExists(email, excludeID)
 }
 
 func hasAnyTag(userTags, filterTags []string) bool {

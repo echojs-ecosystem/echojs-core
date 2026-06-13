@@ -1,5 +1,17 @@
 # @echojs-ecosystem/form
 
+## 0.8.0
+
+### Minor Changes
+
+- release v-0.8.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/persist@0.8.0
+  - @echojs-ecosystem/reactivity@0.8.0
+
 ## 0.7.0
 
 ### Minor Changes
