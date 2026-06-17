@@ -2,19 +2,24 @@ import path from "node:path";
 
 import type { HttpMethod, Operation } from "@kubb/oas";
 import type { OperationSchemas } from "@kubb/plugin-oas";
-import { camelCase, kebabCase } from "../../../core/src/utils/naming";
+import { camelCase, kebabCase, pascalCase } from "../../../core/src/utils/naming";
 import type { HttpClientAccess, ResolvedHttpClientGeneratorConfig } from "../config/types";
+import { buildUrlPathExpression, extractPathParamNames } from "./url-expression";
 
 export interface EndpointTemplateContext {
   functionName: string;
+  urlFunctionName: string;
   method: Lowercase<HttpMethod>;
   path: string;
+  urlPathExpression: string;
+  summary?: string;
+  description?: string;
+  docLink: string;
   typesImportPath: string;
   clientImportPath: string;
   clientExportName: string;
   clientExpression: string;
   modelsImportPath: string;
-  buildPathImportPath: string;
   typeImports: string;
   hasArgs: boolean;
   hasPathParams: boolean;
@@ -36,6 +41,10 @@ export function buildClientExpression(access: HttpClientAccess, exportName: stri
   return access === "function" ? `${exportName}()` : exportName;
 }
 
+export function resolveUrlFunctionName(functionName: string): string {
+  return `get${pascalCase(functionName)}Url`;
+}
+
 export function resolveModuleImportPath(fromFile: string, projectRoot: string, importPath: string): string {
   if (!importPath.startsWith(".") && !path.isAbsolute(importPath)) {
     return importPath;
@@ -52,10 +61,12 @@ export function resolveModelsImportPath(endpointFilePath: string, outputRoot: st
   return relative.startsWith(".") ? relative : `./${relative}`;
 }
 
-export function resolveBuildPathImportPath(endpointFilePath: string, outputRoot: string): string {
-  const runtimeFile = path.join(outputRoot, "runtime", "build-path.ts");
-  const relative = path.relative(path.dirname(endpointFilePath), runtimeFile).replace(/\\/g, "/").replace(/\.ts$/, "");
-  return relative.startsWith(".") ? relative : `./${relative}`;
+function readOperationMeta(operation: Operation): { summary?: string; description?: string } {
+  const raw = (operation as { schema?: { summary?: string; description?: string } }).schema;
+  return {
+    summary: raw?.summary,
+    description: raw?.description,
+  };
 }
 
 export function buildEndpointTemplateContext(options: {
@@ -68,6 +79,8 @@ export function buildEndpointTemplateContext(options: {
   client: ResolvedHttpClientGeneratorConfig;
 }): EndpointTemplateContext {
   const { operation, schemas, functionName, endpointFilePath, outputRoot, projectRoot, client } = options;
+  const meta = readOperationMeta(operation);
+  const pathParamNames = extractPathParamNames(operation.path);
 
   const typeNames = [
     schemas.response?.name,
@@ -85,14 +98,18 @@ export function buildEndpointTemplateContext(options: {
 
   return {
     functionName,
+    urlFunctionName: resolveUrlFunctionName(functionName),
     method: toClientMethod(operation.method),
     path: operation.path,
+    urlPathExpression: buildUrlPathExpression(operation.path, pathParamNames),
+    summary: meta.summary,
+    description: meta.description,
+    docLink: `{@link ${operation.path}}`,
     typesImportPath: client.typesImportPath,
     clientImportPath: resolveModuleImportPath(endpointFilePath, projectRoot, client.importPath),
     clientExportName: client.exportName,
     clientExpression: buildClientExpression(client.access, client.exportName),
     modelsImportPath: resolveModelsImportPath(endpointFilePath, outputRoot),
-    buildPathImportPath: resolveBuildPathImportPath(endpointFilePath, outputRoot),
     typeImports: [...new Set(typeNames)].join(", "),
     hasArgs,
     hasPathParams,

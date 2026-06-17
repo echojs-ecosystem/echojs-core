@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { createLayoutView } from "./create-layout-view";
 import { createRouteView } from "./create-route-view";
-import { createRouter } from "./create-router";
 import { buildNamedRoutes } from "./build-named-routes";
 
 describe("buildNamedRoutes", () => {

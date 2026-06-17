@@ -3,7 +3,7 @@ title: Authentication
 description:
   Session stores, persisted tokens, route guards, and login flows in EchoJS
   SPAs.
-keywords: [auth, session, guardRoute, authorizationGuard, persist, cookie]
+keywords: [auth, session, guards, persist, cookie]
 ---
 
 # Authentication
@@ -22,7 +22,7 @@ with real endpoints.
 ```
 Login form submit → API → token + user stores → persist adapters
        ↓
-guardRoute / authorizationGuard reads $isLoggedIn
+createRouter guards read $isLoggedIn
        ↓
 Authenticated queries attach Bearer token → 401 → logout + redirect
 ```
@@ -125,39 +125,29 @@ Example: `apps/example/src/pages/auth/login/`.
 
 ## Protect routes
 
-### `guardRoute` (few protected pages)
+Declare guards in `createRouter`:
 
 ```ts
-import { guardRoute } from '@echojs-ecosystem/router'
+import type { GuardRouteOptions } from '@echojs-ecosystem/router'
 import { $isLoggedIn } from '@entities/session/index.js'
 import { authLoginPage } from '@pages/auth/login/auth-login.page.js'
 import { settingsPage } from '@pages/workspace/settings/workspace-settings.page.js'
 
-guardRoute({
-  route: settingsPage,
-  canOpen: () => $isLoggedIn.value(),
-  otherwise: authLoginPage,
-})
-```
+export const appGuards: GuardRouteOptions[] = [
+  {
+    route: settingsPage,
+    canOpen: () => $isLoggedIn.value(),
+    otherwise: authLoginPage,
+  },
+]
 
-Register in `entities/__routes__/guards.ts` — import that module from router
-bootstrap so guards run at startup.
-
-### `authorizationGuard` (app-wide)
-
-```ts
 createRouter({
   routes: appRoutes,
-  authorizationGuard: {
-    isAuthorized: () => $isLoggedIn.value(),
-    allowedUnauthorizedPaths: ['/', '/auth/login', '/auth/signup'],
-    redirectTo: '/auth/login',
-    redirectWhenAuthorized: '/',
-  },
+  guards: appGuards,
 })
 ```
 
-Use for “entire app behind login” with a small public allowlist.
+Keep guard definitions in `app/router/guards.ts` and pass the array into `createRouter`.
 
 ### `beforeLoad` gate
 

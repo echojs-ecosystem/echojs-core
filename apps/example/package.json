@@ -1,0 +1,21 @@
+{
+  "name": "@echojs-ecosystem/generator-example",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Minimal example — OpenAPI codegen + typed HTTP requests",
+  "type": "module",
+  "scripts": {
+    "generate": "bun run scripts/generate-http.ts",
+    "format:generated": "bunx oxfmt src/core/generated",
+    "typecheck": "tsc --noEmit",
+    "example": "bun run src/examples/users-api.ts"
+  },
+  "dependencies": {
+    "@echojs-ecosystem/async": "workspace:*",
+    "@echojs-ecosystem/generator": "workspace:*",
+    "@echojs-ecosystem/network": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  }
+}

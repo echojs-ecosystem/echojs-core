@@ -1,8 +1,8 @@
 ---
-title: redirect
-description: Route operator — redirect when `from` route opens.
+title: Route redirects
+description: Path redirects via `createRouter({ redirects })` and `addRedirect`.
 package: '@echojs-ecosystem/router'
-keywords: [redirect, router]
+keywords: [redirects, router, RedirectOptions]
 ---
 
 @echojs-ecosystem/router
@@ -10,44 +10,65 @@ keywords: [redirect, router]
 ## Usage
 
 ```ts
-import { createRoute, redirect } from '@echojs-ecosystem/router'
+import { createRoute, createRouter } from '@echojs-ecosystem/router'
 
-const old = createRoute('old')
-const next = createRoute('next')
+const rootRoute = createRoute('root')
 
-// In createRoutes:
-{ path: '/old', name: 'old', route: redirect({ from: old, to: next }) }
+export const appRedirects = [
+  { from: rootRoute, to: dashboardPage },
+]
+
+export const appRouter = createRouter({
+  routes: [
+    { path: '/', name: 'root', route: rootRoute },
+    ...appRoutes,
+  ],
+  redirects: appRedirects,
+})
+```
+
+With param/query mapping:
+
+```ts
+{
+  from: oldUserPage,
+  to: newUserPage,
+  mapParams: ({ id }) => ({ userId: id }),
+  mapQuery: (query) => ({ ...query, migrated: '1' }),
+}
 ```
 
 ## Type Declarations
 
 ```ts
-export type RedirectOptions<FromParams, FromQuery, ToParams, ToQuery> = {
+export type RedirectOptions<
+  FromParams = Record<string, unknown>,
+  FromQuery = Record<string, unknown>,
+  ToParams = FromParams,
+  ToQuery = FromQuery,
+> = {
   from: Route<FromParams, FromQuery>
   to: Route<ToParams, ToQuery>
   mapParams?: (params: FromParams) => ToParams
   mapQuery?: (query: FromQuery) => ToQuery
 }
-
-export const redirect: <...>(options: RedirectOptions<...>) => () => void
 ```
 
 ## API
 
-### Parameters
+### `createRouter({ redirects })`
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `from` / `to` | `Route` | — | Source and destination routes |
-| `mapParams` / `mapQuery` | functions | optional | Transform payload |
+| `redirects` | `RedirectOptions[]` | `[]` | Redirect rules |
 
-### Returns
+### `router.addRedirect(options)`
 
-| Member | Type | Description |
-| --- | --- | --- |
-| unsubscribe | `() => void` | Route operator teardown |
+| Returns | Description |
+| --- | --- |
+| `() => void` | Unregister the redirect |
 
 ### Related
 
-- [guardRoute](/docs/packages/router/api/guard-route)
+- [Guards & Redirects](/docs/packages/router/guides/guards-and-redirects)
 - [createRoute](/docs/packages/router/api/create-route)

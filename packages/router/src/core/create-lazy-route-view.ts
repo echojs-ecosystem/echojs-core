@@ -7,7 +7,7 @@ import type {
   LazyRouteViewParamsFromOptions,
   LazyRouteViewQueryFromOptions,
 } from "./lazy-route-view-options-types";
-import type { BeforeLoadContext, CreateRouteViewOptions } from "./page";
+import type { BeforeLoadContext } from "./page";
 import type { NamedPage, RouteLoadingView, RouteErrorView } from "./types";
 
 export type CreateLazyRouteViewOptions<
@@ -23,13 +23,13 @@ export type CreateLazyRouteViewOptions<
   errorView?: RouteErrorView;
 };
 
-export function createLazyRouteView<const O extends LazyRouteViewOptionsConstraint>(
-  options: O,
+export function createLazyRouteView<const Options extends LazyRouteViewOptionsConstraint>(
+  options: Options,
 ): NamedPage<
-  LazyRouteViewNameFromOptions<O>,
-  LazyRouteViewParamsFromOptions<O>,
-  LazyRouteViewQueryFromOptions<O>,
-  LazyRouteViewDataFromOptions<O>
+  LazyRouteViewNameFromOptions<Options>,
+  LazyRouteViewParamsFromOptions<Options>,
+  LazyRouteViewQueryFromOptions<Options>,
+  LazyRouteViewDataFromOptions<Options>
 >;
 
 export function createLazyRouteView<

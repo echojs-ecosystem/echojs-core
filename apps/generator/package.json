@@ -1,0 +1,18 @@
+{
+  "name": "@echojs-ecosystem/generator-app",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Local playground for @echojs-ecosystem/generator (OpenAPI → typed clients)",
+  "type": "module",
+  "scripts": {
+    "generate:http": "bun run scripts/generate-http.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@echojs-ecosystem/generator": "workspace:*",
+    "@echojs-ecosystem/network": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "5.9.2"
+  }
+}

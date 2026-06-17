@@ -1,0 +1,9 @@
+{
+  "kind": "bundle-size-all",
+  "generatedAt": "2026-06-15T20:15:21.129Z",
+  "node": "v22.22.0",
+  "entry": "packages/framework/src/__size__/all.ts",
+  "bytes": 150449,
+  "gzipBytes": 45791,
+  "brotliBytes": 40631
+}

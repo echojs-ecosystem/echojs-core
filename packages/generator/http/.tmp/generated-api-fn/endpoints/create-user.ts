@@ -7,15 +7,21 @@
 import type { RequestOptions } from "@echojs-ecosystem/network/http";
 import { getHttpClient } from "../../../src/fixtures/http-client";
 import type { CreateUserMutationResponse, CreateUserMutationRequest } from "../models";
-import { buildPath } from "../runtime/build-path";
 
+function getCreateUserUrl() {
+  return "/users" as const;
+}
+/**
+ * @summary Create user
+ * {@link /users}
+ */
 export const createUser = (
   args: {
     body: CreateUserMutationRequest;
   },
   options?: RequestOptions,
 ): Promise<CreateUserMutationResponse> => {
-  return getHttpClient().post(buildPath("/users"), {
+  return getHttpClient().post(getCreateUserUrl(), {
     ...options,
     json: args.body,
   }).json<CreateUserMutationResponse>();

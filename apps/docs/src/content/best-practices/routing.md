@@ -30,7 +30,7 @@ entities/__routes__/
   app.routes.ts       # top-level tree passed to createRouter
   docs.routes.ts      # optional feature-specific trees
   router.ts             # createRouter({ routes, history, … })
-  guards.ts             # guardRoute registrations (import at bootstrap)
+  guards.ts             # GuardRouteOptions[] passed to createRouter
   doc-pages.ts          # contentId → page map (docs site)
 pages/
   home/home.page.ts     # createRouteView — only file routes import
@@ -100,14 +100,12 @@ you lose loading/error boundaries and duplicate requests on re-render.
 
 ## Guards
 
-| Mechanism               | Scope                    | Example                                      |
-| ----------------------- | ------------------------ | -------------------------------------------- |
-| `authorizationGuard`    | Whole app                | Login wall with `allowedUnauthorizedPaths`   |
-| `guardRoute({ route })` | Single page or subtree   | Settings page requires `$isLoggedIn`         |
-| `beforeLoad` throw/redirect | One-off data guard   | Redirect unknown `contentId` to 404 page     |
+| Mechanism | Scope | Example |
+| --- | --- | --- |
+| `createRouter({ guards })` | Single page or subtree | Settings page requires `$isLoggedIn` |
+| `beforeLoad` throw/redirect | One-off data guard | Redirect unknown `contentId` to 404 page |
 
-Register `guardRoute` from `entities/__routes__/guards.ts` at startup so rules
-are visible in one file.
+Define guards in `app/router/guards.ts` and pass the array into `createRouter`.
 
 ## Imperative navigation
 
@@ -158,7 +156,7 @@ Default export of the lazy chunk must be a `RouteView`.
 2. Tree entry in `entities/__routes__/`.
 3. Links use `NavLink({ to: page })` or `page.go()`.
 4. Async data: `beforeLoad` and/or module-scoped `createQuery`.
-5. Protected route: `guardRoute` or global `authorizationGuard`.
+5. Protected route: add a guard in `app/router/guards.ts`.
 6. New doc/content route: markdown + `contentId` in `core/content/nav/`.
 
 ## Related

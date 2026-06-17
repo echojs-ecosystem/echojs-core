@@ -31,9 +31,17 @@ node tools/bench/dist/cli.js size --packages reactivity,store,router
 bun run size
 ```
 
-Результаты пишутся в `tools/bench-results/`:
+Результаты пишутся в `tools/bench-results/` (локально, в `.gitignore`):
+
 - `tools/bench-results/bundle-size.json`
 - `tools/bench-results/bundle-size.md`
+
+Актуальный снимок для просмотра в репозитории — `tools/bench/baselines/` (обновляется `bun run size` из корня):
+
+- `bundle-size-packages.json` / `.md` — standalone-пакеты
+- `bundle-size-package-entries.json` / `.md` — subpath-only (`network/http`, …)
+- `bundle-size-framework.json` / `.md` — subpath `@echojs-ecosystem/framework/*`
+- `bundle-size-framework-all.json` — один бандл со всеми public subpath
 
 ## Perf
 

@@ -1,4 +1,4 @@
-import { createRouteViewModel, getPageState, type CreateRouteViewOptions } from "./page";
+import { createRouteViewModel, getPageState } from "./page";
 import type {
   RouteViewDataFromOptions,
   RouteViewNameFromOptions,
@@ -15,21 +15,21 @@ export type NamedLayoutView<
   Data = void,
 > = LayoutPage & NamedPage<Name, Params, Query, Data>;
 
-export const createLayoutView = <const O extends RouteViewOptionsConstraint>(
-  options: O,
+export const createLayoutView = <const Options extends RouteViewOptionsConstraint>(
+  options: Options,
 ): NamedLayoutView<
-  RouteViewNameFromOptions<O>,
-  RouteViewParamsFromOptions<O>,
-  RouteViewQueryFromOptions<O>,
-  RouteViewDataFromOptions<O>
+  RouteViewNameFromOptions<Options>,
+  RouteViewParamsFromOptions<Options>,
+  RouteViewQueryFromOptions<Options>,
+  RouteViewDataFromOptions<Options>
 > => {
   const layout = createRouteViewModel(options);
   getPageState(layout).kind = "layout";
   return layout as NamedLayoutView<
-    RouteViewNameFromOptions<O>,
-    RouteViewParamsFromOptions<O>,
-    RouteViewQueryFromOptions<O>,
-    RouteViewDataFromOptions<O>
+    RouteViewNameFromOptions<Options>,
+    RouteViewParamsFromOptions<Options>,
+    RouteViewQueryFromOptions<Options>,
+    RouteViewDataFromOptions<Options>
   >;
 };
 

@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { readFile } from "node:fs/promises";
 
@@ -16,6 +17,37 @@ function guessDefaultExportPath(exp: ExportsField): string | undefined {
   return undefined;
 }
 
+function srcEntryCandidates(subpath?: string): string[] {
+  if (!subpath || subpath === ".") return ["index.ts"];
+
+  const segments = subpath.split("/").filter(Boolean);
+  return [
+    `${segments.join("/")}/index.ts`,
+    `${segments.join("/")}.ts`,
+    `${segments.join("-")}.ts`,
+  ];
+}
+
+function resolveSrcEntry(
+  pkgAbs: string,
+  packageDirName: string,
+  subpath?: string,
+): { entry: string; absEntryPath: string } {
+  for (const rel of srcEntryCandidates(subpath)) {
+    const absEntryPath = join(pkgAbs, "src", rel);
+    if (existsSync(absEntryPath)) {
+      return {
+        entry: `packages/${packageDirName}/src/${rel}`,
+        absEntryPath,
+      };
+    }
+  }
+
+  throw new Error(
+    `Cannot resolve src entry for packages/${packageDirName}${subpath ? `/${subpath}` : ""}. Tried: ${srcEntryCandidates(subpath).join(", ")}`,
+  );
+}
+
 async function resolveWorkspaceEntry(opts: {
   root: string;
   packageDirName: string;
@@ -27,12 +59,7 @@ async function resolveWorkspaceEntry(opts: {
   const subpath = opts.subpath?.trim().replace(/^\//, "");
 
   if (opts.from === "src") {
-    const file =
-      !subpath || subpath === "."
-        ? "index.ts"
-        : `${subpath.split("/").filter(Boolean).join("-")}.ts`;
-    const absEntryPath = join(pkgAbs, "src", file);
-    return { entry: `packages/${opts.packageDirName}/src/${file}`, absEntryPath };
+    return resolveSrcEntry(pkgAbs, opts.packageDirName, subpath);
   }
 
   const pkgJsonPath = join(pkgAbs, "package.json");

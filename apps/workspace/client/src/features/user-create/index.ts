@@ -1,1 +1,1 @@
-export { UserCreateView } from './ui/user-create.view'
+export { UserCreateView } from './view/user-create.view'

@@ -26,11 +26,21 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage"
   },
+  "peerDependencies": {
+    "@echojs-ecosystem/hyperdom": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@echojs-ecosystem/hyperdom": {
+      "optional": true
+    }
+  },
   "dependencies": {
+    "@echojs-ecosystem/hyperdom": "workspace:*",
     "@echojs-ecosystem/reactivity": "workspace:*"
   },
   "devDependencies": {
     "@echojs-ecosystem/oxc-config": "workspace:*",
+    "jsdom": "^26.1.0",
     "typescript": "5.9.2",
     "vitest": "^4.1.4"
   },

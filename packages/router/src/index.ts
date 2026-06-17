@@ -7,18 +7,16 @@ export type { NamedLayoutView } from "./core/create-layout-view";
 export { createRouter as createRouterCore } from "./core/create-router";
 export { createRouter } from "./hyperdom/create-router";
 export type { HyperdomRouter } from "./hyperdom/create-router";
-export { Link } from "./hyperdom/Link";
-export type { LinkProps } from "./hyperdom/Link";
-export { NavLink } from "./hyperdom/NavLink";
-export type { NavLinkMatch, NavLinkProps } from "./hyperdom/NavLink";
+export { Link } from "./hyperdom/link";
+export type { LinkProps } from "./hyperdom/link";
+export { NavLink } from "./hyperdom/nav-link";
+export type { NavLinkMatch, NavLinkProps } from "./hyperdom/nav-link";
 export {
   createRouterProvider,
-  routerPlugin,
   isRouterLike,
   ROUTER_KEY,
   type RouterLike,
   type RouterProvider,
-  type RouterPlugin,
 } from "./plugin/router-plugin";
 export { createRoutes } from "./core/create-routes";
 export type { RoutesFromConfig } from "./core/create-routes";
@@ -66,10 +64,6 @@ export type {
   JoinPaths,
   RouterBase,
   CreateRouterOptions,
-  AuthorizationGuardOptions,
-  AuthorizationGuardRedirect,
-  AuthorizationGuardRedirectTarget,
-  AuthorizationGuardRedirectContext,
   RouteEvent,
   RouteOpenedPayload,
   GoOptions,
@@ -96,9 +90,7 @@ export { createBrowserHistory } from "./histories/browser-history";
 export { createMemoryHistory } from "./histories/memory-history";
 export { createHashHistory } from "./histories/hash-history";
 
-export { guardRoute } from "./operators/guard";
-export type { GuardRouteOptions } from "./operators/guard";
-export { redirect } from "./operators/redirect";
-export type { RedirectOptions } from "./operators/redirect";
+export type { GuardRouteOptions } from "./core/guard-registry";
+export type { RedirectOptions, TypedRedirectOptions } from "./core/redirect-registry";
 export { chainRoute } from "./operators/chain-route";
 export type { ChainRouteOptions } from "./operators/chain-route";

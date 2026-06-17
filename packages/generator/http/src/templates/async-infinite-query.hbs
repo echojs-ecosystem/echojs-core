@@ -1,0 +1,33 @@
+import { createInfiniteQuery } from "{{asyncImportPath}}";
+import { {{endpointFunctionName}} } from "{{endpointImportPath}}";
+{{#if typeImports}}
+import type { {{typeImports}} } from "{{modelsImportPath}}";
+{{/if}}
+{{#if defaultsImportPath}}
+import { infiniteQueryDefaults } from "{{defaultsImportPath}}";
+{{/if}}
+{{#if queryKeysImportPath}}
+import { {{queryKeysExportName}} } from "{{queryKeysImportPath}}";
+{{/if}}
+
+{{#if summary}}
+/**
+ * @summary {{summary}}
+{{#if description}}
+ * @description {{description}}
+{{/if}}
+ */
+{{/if}}
+export const {{exportName}} = createInfiniteQuery<{{responseType}}, {{paramsType}}, {{pageParamType}}>({
+{{#if defaultsSpread}}
+  {{defaultsSpread}}
+{{/if}}
+  name: "{{asyncName}}",
+  queryKey: {{{queryKeyExpression}}},
+  initialPageParam: {{{initialPageParam}}},
+  getNextPageParam: {{{getNextPageParam}}},
+{{#if getPreviousPageParam}}
+  getPreviousPageParam: {{{getPreviousPageParam}}},
+{{/if}}
+  queryFn: ({ params, pageParam, signal }) => {{endpointFunctionName}}({{infiniteEndpointArgsExpression}}, { signal }),
+});

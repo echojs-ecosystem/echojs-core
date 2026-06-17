@@ -101,8 +101,7 @@ Never one mega-store for the whole app.
 
 1. Define routes in **`entities/__routes__/`**; pages export `*Page` factories.
 2. Load route-critical data in **`beforeLoad`**, not in `createView`.
-3. Protect with **`guardRoute`** (few pages) or **`authorizationGuard`** (whole
-   app) — [Authentication](/docs/guides/authentication).
+3. Protect routes with **`createRouter({ guards })`** — [Authentication](/docs/guides/authentication).
 4. Lazy-load heavy pages with **`createLazyRouteView`** + `preload()` on hover.
 5. Shareable UI state → url-state, not duplicate signals.
 

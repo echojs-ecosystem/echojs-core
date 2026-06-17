@@ -66,6 +66,15 @@ export function operationNameFromPath(method: string, path: string): string {
 
 export function resolveOperationName(operationId: string | undefined, method: string, path: string): string {
   if (operationId) {
+    // Prefer explicit operationId, but normalize common REST naming:
+    // GET collection endpoints should start with the method ("get"), not "list".
+    if (method.toLowerCase() === "get") {
+      const normalized = operationId.trim();
+      // listUsers -> getUsers, list_users -> get_users, list-users -> get-users
+      if (/^list([A-Z0-9_ -].*)/.test(normalized)) {
+        return camelCase(`get${normalized.slice(4)}`);
+      }
+    }
     return camelCase(operationId);
   }
 

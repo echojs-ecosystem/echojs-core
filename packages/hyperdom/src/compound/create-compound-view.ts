@@ -7,16 +7,19 @@ import {
   type SlotMarker,
 } from './slot-marker'
 
-/** Part renderers passed to {@link createCompoundView}. */
-export type CompoundPartDefs = Record<string, Component<any>>
+/** Slot renderers passed to {@link createCompoundView}. */
+export type CompoundSlotDefs = Record<string, Component<any>>
 
-type PartPropsFromRender<R> = R extends Component<infer P>
+/** @deprecated Use {@link CompoundSlotDefs}. */
+export type CompoundPartDefs = CompoundSlotDefs
+
+type SlotPropsFromRender<R> = R extends Component<infer P>
   ? P & { children?: Child }
   : { children?: Child }
 
 /**
- * Callable shape shared by compound roots and parts — same ergonomics as DSL tags:
- * `Part()`, `Part(props)`, `Part('text')`, `Part(props, children, …)`.
+ * Callable shape shared by compound roots and slots — same ergonomics as DSL tags:
+ * `Slot()`, `Slot(props)`, `Slot('text')`, `Slot(props, children, …)`.
  */
 export type CompoundCallFn<Props extends { children?: Child } = { children?: Child }> = {
   (): Child
@@ -25,55 +28,69 @@ export type CompoundCallFn<Props extends { children?: Child } = { children?: Chi
   (children?: Child, ...rest: Child[]): Child
 }
 
-export type CompoundPartFn<Props extends { children?: Child } = { children?: Child }> =
+export type CompoundSlotFn<Props extends { children?: Child } = { children?: Child }> =
   CompoundCallFn<Props> & {
     readonly displayName: string
     readonly slotName: string
   }
+
+/** @deprecated Use {@link CompoundSlotFn}. */
+export type CompoundPartFn<Props extends { children?: Child } = { children?: Child }> =
+  CompoundSlotFn<Props>
 
 export type CompoundRootFn<RootProps extends { children?: Child } = { children?: Child }> =
   CompoundCallFn<RootProps> & {
     readonly displayName: string
   }
 
-export type MappedCompoundParts<Parts extends CompoundPartDefs> = {
-  [K in keyof Parts]: CompoundPartFn<PartPropsFromRender<Parts[K]>>
+export type MappedCompoundSlots<Slots extends CompoundSlotDefs> = {
+  [K in keyof Slots]: CompoundSlotFn<SlotPropsFromRender<Slots[K]>>
 }
 
-export type SlotRenderers<Parts extends CompoundPartDefs> = {
-  readonly [K in keyof Parts]: () => Child
+/** @deprecated Use {@link MappedCompoundSlots}. */
+export type MappedCompoundParts<Parts extends CompoundSlotDefs> = MappedCompoundSlots<Parts>
+
+export type SlotRenderers<Slots extends CompoundSlotDefs> = {
+  readonly [K in keyof Slots]: () => Child
 }
 
 export type CompoundViewConfig<
-  Parts extends CompoundPartDefs,
+  Slots extends CompoundSlotDefs,
   RootProps extends { children?: Child } = { children?: Child },
 > = {
   /** Debug label — e.g. `"Layout"` → `Layout.Header.displayName`. */
   name: string
-  /** Named sub-views attached as `Root.Part` (e.g. `Layout.Header`). */
-  parts: Parts
+  /** Named slot renderers attached as `Root.Slot` (e.g. `Layout.Header`). */
+  slots: Slots
   /** Compose collected slots into the root tree. */
-  render: (slots: SlotRenderers<Parts>, props: RootProps) => Child
+  layout: (slots: SlotRenderers<Slots>, props: RootProps) => Child
 }
 
+type SlotComponentProps<R> = R extends Component<infer P> ? P : { children?: Child }
+
+type RootPropsFromSlots<Slots extends CompoundSlotDefs> = Omit<
+  SlotComponentProps<Slots[keyof Slots]>,
+  'children'
+> & { children?: Child }
+
 export type CompoundView<
-  Parts extends CompoundPartDefs,
+  Slots extends CompoundSlotDefs,
   RootProps extends { children?: Child } = { children?: Child },
-> = CompoundRootFn<RootProps> & MappedCompoundParts<Parts>
+> = CompoundRootFn<RootProps> & MappedCompoundSlots<Slots>
 
 const resolveSlotChildren = (
   children: Child | undefined,
-  parts: CompoundPartDefs,
+  slots: CompoundSlotDefs,
 ): Child | undefined => {
   if (children == null || children === false || children === true) return children ?? undefined
 
   if (typeof children === 'function') {
-    return () => resolveSlotChildren(children(), parts)
+    return () => resolveSlotChildren(children(), slots)
   }
 
   if (Array.isArray(children)) {
     const resolved = children.flatMap((child) => {
-      const next = resolveOne(child, parts)
+      const next = resolveOne(child, slots)
       if (next == null || next === false || next === true) return []
       return Array.isArray(next) ? next : [next]
     })
@@ -82,57 +99,57 @@ const resolveSlotChildren = (
     return resolved
   }
 
-  return resolveOne(children, parts)
+  return resolveOne(children, slots)
 }
 
-const resolveOne = (child: Child, parts: CompoundPartDefs): Child => {
+const resolveOne = (child: Child, slots: CompoundSlotDefs): Child => {
   if (child == null || child === false || child === true) return child
 
-  if (isSlotMarker(child)) return renderSlotMarker(child, parts)
+  if (isSlotMarker(child)) return renderSlotMarker(child, slots)
 
   if (typeof child === 'function') {
-    return () => resolveSlotChildren(child(), parts) as Child
+    return () => resolveSlotChildren(child(), slots) as Child
   }
 
   if (Array.isArray(child)) {
-    return resolveSlotChildren(child, parts) ?? []
+    return resolveSlotChildren(child, slots) ?? []
   }
 
   return child
 }
 
-const renderSlotMarker = (marker: SlotMarker, parts: CompoundPartDefs): Child =>
+const renderSlotMarker = (marker: SlotMarker, slots: CompoundSlotDefs): Child =>
   withViewContext(() =>
     marker.render({
       ...marker.props,
-      children: resolveSlotChildren(marker.props.children as Child | undefined, parts),
+      children: resolveSlotChildren(marker.props.children as Child | undefined, slots),
     }),
   )
 
-const renderCollected = (markers: SlotMarker[], parts: CompoundPartDefs): Child => {
+const renderCollected = (markers: SlotMarker[], slots: CompoundSlotDefs): Child => {
   if (markers.length === 0) return null
-  if (markers.length === 1) return renderSlotMarker(markers[0]!, parts)
+  if (markers.length === 1) return renderSlotMarker(markers[0]!, slots)
 
-  return markers.map((marker) => renderSlotMarker(marker, parts))
+  return markers.map((marker) => renderSlotMarker(marker, slots))
 }
 
-const createSlotHelpers = <Parts extends CompoundPartDefs>(
+const createSlotHelpers = <Slots extends CompoundSlotDefs>(
   collected: Map<string, SlotMarker[]>,
-  parts: Parts,
-): SlotRenderers<Parts> =>
+  slots: Slots,
+): SlotRenderers<Slots> =>
   Object.fromEntries(
-    Object.keys(parts).map((name) => [
+    Object.keys(slots).map((name) => [
       name,
-      () => renderCollected(collected.get(name) ?? [], parts),
+      () => renderCollected(collected.get(name) ?? [], slots),
     ]),
-  ) as SlotRenderers<Parts>
+  ) as SlotRenderers<Slots>
 
-const createSlotPart = <P>(
+const createCompoundSlot = <P>(
   compoundName: string,
-  partName: string,
+  slotName: string,
   render: Component<P>,
-): CompoundPartFn<P & { children?: Child }> => {
-  const part = ((arg1?: unknown, arg2?: unknown, ...rest: unknown[]): Child => {
+): CompoundSlotFn<P & { children?: Child }> => {
+  const slot = ((arg1?: unknown, arg2?: unknown, ...rest: unknown[]): Child => {
     const propsBag = isPropsBag(arg1)
       ? ({ ...(arg1 ?? {}) } as P & { children?: Child })
       : ({} as P & { children?: Child })
@@ -144,12 +161,12 @@ const createSlotPart = <P>(
       children: children ?? propsBag.children,
     } as P & { children?: Child }
 
-    return createSlotMarker(partName, props, render as Component) as unknown as Child
-  }) as CompoundPartFn<P & { children?: Child }>
+    return createSlotMarker(slotName, props, render as Component) as unknown as Child
+  }) as CompoundSlotFn<P & { children?: Child }>
 
-  return Object.assign(part, {
-    displayName: `${compoundName}.${partName}`,
-    slotName: partName,
+  return Object.assign(slot, {
+    displayName: `${compoundName}.${slotName}`,
+    slotName,
   })
 }
 
@@ -169,22 +186,22 @@ const normalizeCallChildren = (list: unknown[]): Child | undefined => {
 }
 
 const buildCompoundTree = <
-  Parts extends CompoundPartDefs,
+  Slots extends CompoundSlotDefs,
   RootProps extends { children?: Child },
 >(
-  config: CompoundViewConfig<Parts, RootProps>,
+  config: CompoundViewConfig<Slots, RootProps>,
   props: RootProps,
 ): Child => {
   const collected = collectSlotMarkers(props.children)
-  const slots = createSlotHelpers(collected, config.parts)
-  return withViewContext(() => config.render(slots, props))
+  const slotRenderers = createSlotHelpers(collected, config.slots)
+  return withViewContext(() => config.layout(slotRenderers, props))
 }
 
 const renderCompoundRoot = <
-  Parts extends CompoundPartDefs,
+  Slots extends CompoundSlotDefs,
   RootProps extends { children?: Child },
 >(
-  config: CompoundViewConfig<Parts, RootProps>,
+  config: CompoundViewConfig<Slots, RootProps>,
   props: RootProps,
 ): Child => {
   if (typeof props.children === 'function') {
@@ -196,39 +213,41 @@ const renderCompoundRoot = <
 }
 
 /**
- * Compound view factory — namespaced sub-parts (`Layout.Header`, `Table.Row`, …).
+ * Compound view factory — namespaced slots (`Layout.Header`, `Table.Row`, …).
  *
- * Sub-parts return slot markers when called; the root collects them and renders
- * the layout. Nested parts inside a slot are resolved automatically.
+ * Slots return markers when called; the root collects them and renders the layout.
+ * Nested slots inside a slot tree are resolved automatically.
  *
  * @example
  * ```ts
  * const Layout = createCompoundView({
  *   name: 'Layout',
- *   parts: {
+ *   slots: {
  *     Header: (props) => header(null, props.children),
  *     Main: (props) => main(null, props.children),
  *   },
- *   render: ({ Header, Main }) => div({ class: 'layout' }, [Header(), Main()]),
+ *   layout: ({ Header, Main }) => div({ class: 'layout' }, [Header(), Main()]),
  * })
  *
  * Layout(null, [Layout.Header(null, 'Title'), Layout.Main(null, content)])
  * ```
  */
-export const createCompoundView = <
-  Parts extends CompoundPartDefs,
-  RootProps extends { children?: Child } = { children?: Child },
->(
-  config: CompoundViewConfig<Parts, RootProps>,
-): CompoundView<Parts, RootProps> => {
-  const parts = {} as MappedCompoundParts<Parts>
+export function createCompoundView<const Slots extends CompoundSlotDefs>(
+  config: {
+    name: string
+    slots: Slots
+    layout: (slots: SlotRenderers<Slots>, props: RootPropsFromSlots<Slots>) => Child
+  },
+): CompoundView<Slots, RootPropsFromSlots<Slots>> {
+  type RootProps = RootPropsFromSlots<Slots>
+  const compoundSlots = {} as MappedCompoundSlots<Slots>
 
-  for (const [partName, render] of Object.entries(config.parts)) {
-    parts[partName as keyof Parts] = createSlotPart(
+  for (const [slotName, render] of Object.entries(config.slots)) {
+    compoundSlots[slotName as keyof Slots] = createCompoundSlot(
       config.name,
-      partName,
+      slotName,
       render,
-    ) as MappedCompoundParts<Parts>[keyof Parts]
+    ) as MappedCompoundSlots<Slots>[keyof Slots]
   }
 
   const root = ((arg1?: unknown, arg2?: unknown, ...rest: unknown[]): Child => {
@@ -241,10 +260,13 @@ export const createCompoundView = <
       children: children ?? propsBag.children,
     } as RootProps
 
-    return renderCompoundRoot(config, props)
-  }) as CompoundView<Parts, RootProps>
+    return renderCompoundRoot(
+      config as CompoundViewConfig<Slots, RootProps>,
+      props,
+    )
+  }) as CompoundView<Slots, RootProps>
 
-  return Object.assign(root, parts, { displayName: config.name })
+  return Object.assign(root, compoundSlots, { displayName: config.name })
 }
 
 /** Alias for {@link createCompoundView}. */

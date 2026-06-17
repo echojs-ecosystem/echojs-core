@@ -1,36 +1,33 @@
 import { createField, createForm } from '@echojs-ecosystem/form'
 
-import {
-  userFormDefaults,
-  userFormSchema,
-  type UserFormValue,
-} from '@entities/user/model/user-form.schema'
+import { userCreateFormDefaults } from './user-create.constants'
+import { userCreateFormSchema, type UserCreateFormValue } from './user-create.validation'
 
 type UserCreateFields = {
   name: ReturnType<typeof createField<string>>
   email: ReturnType<typeof createField<string>>
-  role: ReturnType<typeof createField<UserFormValue['role']>>
-  status: ReturnType<typeof createField<UserFormValue['status']>>
-  department: ReturnType<typeof createField<UserFormValue['department']>>
+  role: ReturnType<typeof createField<UserCreateFormValue['role']>>
+  status: ReturnType<typeof createField<UserCreateFormValue['status']>>
+  department: ReturnType<typeof createField<UserCreateFormValue['department']>>
   country: ReturnType<typeof createField<string>>
   verified: ReturnType<typeof createField<boolean>>
   tags: ReturnType<typeof createField<string[]>>
 }
 
-export const userCreateForm = createForm<UserFormValue, UserCreateFields>(
+export const userCreateForm = createForm<UserCreateFormValue, UserCreateFields>(
   {
     name: createField(''),
     email: createField(''),
-    role: createField(userFormDefaults.role),
-    status: createField(userFormDefaults.status),
-    department: createField(userFormDefaults.department),
-    country: createField(userFormDefaults.country),
-    verified: createField(userFormDefaults.verified),
+    role: createField(userCreateFormDefaults.role),
+    status: createField(userCreateFormDefaults.status),
+    department: createField(userCreateFormDefaults.department),
+    country: createField(userCreateFormDefaults.country),
+    verified: createField(userCreateFormDefaults.verified),
     tags: createField<string[]>([]),
   },
   {
     name: 'UserCreateForm',
-    validationSchema: userFormSchema,
-    defaultValues: userFormDefaults,
+    validationSchema: userCreateFormSchema,
+    defaultValues: userCreateFormDefaults,
   },
 )

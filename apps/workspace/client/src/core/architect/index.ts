@@ -1,0 +1,17 @@
+export { workspaceArchitectConfig } from './config'
+
+export { appLayer } from './layers/app.layer'
+export { coreLayer } from './layers/core.layer'
+export { entityLayer } from './layers/entity.layer'
+export { entitiesLayer } from './layers/entities.layer'
+export { featuresLayer } from './layers/features.layer'
+export { moduleLayer } from './layers/module.layer'
+export { pageLayer } from './layers/page.layer'
+export { pagesLayer } from './layers/pages.layer'
+export { widgetsLayer } from './layers/widgets.layer'
+
+export { apiLayer } from './layers/segments/api.layer'
+export { entityModelLayer } from './layers/segments/entity-model.layer'
+export { helpersLayer, modelLayer } from './layers/segments/model.layer'
+export { typesLayer } from './layers/segments/types.layer'
+export { viewLayer } from './layers/segments/view.layer'

@@ -4,14 +4,14 @@ import type { Child } from '../types'
 import { createCompoundView } from './create-compound-view'
 
 describe('createCompoundView types', () => {
-  it('attaches typed parts to the root component', () => {
+  it('attaches typed slots to the root component', () => {
     const Layout = createCompoundView({
       name: 'Layout',
-      parts: {
+      slots: {
         Header: (props: { title?: string; children?: Child }) => props.children ?? null,
         Main: (props: { children?: Child }) => props.children ?? null,
       },
-      render: ({ Header, Main }) => [Header(), Main()],
+      layout: ({ Header, Main }) => [Header(), Main()],
     })
 
     expectTypeOf(Layout.displayName).toEqualTypeOf<string>()
@@ -23,18 +23,33 @@ describe('createCompoundView types', () => {
     Layout.Main(null, 'content')
   })
 
-  it('types slot helpers in render', () => {
+  it('types slot helpers in layout', () => {
     createCompoundView({
       name: 'Table',
-      parts: {
+      slots: {
         Head: (props: { children?: Child }) => props.children ?? null,
         Row: (props: { children?: Child }) => props.children ?? null,
       },
-      render: (slots) => {
+      layout: (slots) => {
         expectTypeOf(slots.Head).toEqualTypeOf<() => Child>()
         expectTypeOf(slots.Row).toEqualTypeOf<() => Child>()
         return slots.Head()
       },
     })
+  })
+
+  it('infers root props from slot renderers', () => {
+    const Page = createCompoundView({
+      name: 'Page',
+      slots: {
+        Main: (props: { vm: { id: string }; children?: Child }) => props.children ?? null,
+      },
+      layout: ({ Main }, { vm }) => {
+        expectTypeOf(vm).toEqualTypeOf<{ id: string }>()
+        return Main()
+      },
+    })
+
+    Page({ vm: { id: '1' } }, [Page.Main({ vm: { id: '1' } })])
   })
 })

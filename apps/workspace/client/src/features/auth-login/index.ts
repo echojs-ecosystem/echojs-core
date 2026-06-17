@@ -1,1 +1,1 @@
-export { AuthLoginView } from './ui/login.view'
+export { AuthLoginView } from './view/login.view'

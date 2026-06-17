@@ -72,15 +72,15 @@ await runHttpGenerator({ config: defineHttpGeneratorConfig({ /* ... */ }) });
 
 | Example | Purpose |
 |---------|---------|
-| [`http/echo-http.generator.ts`](./http/echo-http.generator.ts) | Internal fixture → `http/.tmp` |
-| [`example/`](./example/) | Standalone app → `example/src/core/generated` |
+| [`http/echo-http.generator.ts`](./http/echo-http.generator.ts) | Internal petstore fixture → `http/.tmp` |
+| [`apps/generator`](../../apps/generator/) | Real OpenAPI playground → `apps/generator/src/core/generated` |
 
 ```bash
-# internal fixture
-bun run generate:example
+# petstore fixture (package dev)
+bun run --filter @echojs-ecosystem/generator generate:example
 
-# standalone example app
-cd example && bun run generate
+# real spec (apps/generator)
+bun run generate:http
 ```
 
 ### OpenAPI Support

@@ -1,0 +1,24 @@
+import { createMutation } from "{{asyncImportPath}}";
+import { {{endpointFunctionName}} } from "{{endpointImportPath}}";
+{{#if typeImports}}
+import type { {{typeImports}} } from "{{modelsImportPath}}";
+{{/if}}
+{{#if defaultsImportPath}}
+import { mutationDefaults } from "{{defaultsImportPath}}";
+{{/if}}
+
+{{#if summary}}
+/**
+ * @summary {{summary}}
+{{#if description}}
+ * @description {{description}}
+{{/if}}
+ */
+{{/if}}
+export const {{exportName}} = createMutation<{{responseType}}, {{variablesType}}>({
+{{#if defaultsSpread}}
+  {{defaultsSpread}}
+{{/if}}
+  name: "{{asyncName}}",
+  mutationFn: ({ variables, signal }) => {{endpointFunctionName}}({{endpointArgsExpression}}, { signal }),
+});

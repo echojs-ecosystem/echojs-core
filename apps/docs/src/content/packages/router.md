@@ -19,7 +19,7 @@ keywords: [createRouter, NavLink, createRouteView, guards]
 | [`createRouteView`](/docs/packages/router/api/create-route-view) | Leaf page bound to a route |
 | [`createLayoutView`](/docs/packages/router/api/create-layout-view) | Shared chrome with nested `<Outlet />` |
 | [`NavLink`](/docs/packages/router/api/nav-link) | Active-aware links for sidebars and tabs |
-| [`guardRoute`](/docs/packages/router/api/guard-route) | Redirect or block navigation before enter |
+| [`GuardRouteOptions`](/docs/packages/router/api/guard-route) | Block or redirect navigation before enter |
 
 ## Common patterns
 

@@ -7,4 +7,5 @@ export {
   appPermission,
   applyRolePermissions,
   hydratePermissionFromBootstrap,
+  PermissionCheck,
 } from './permission.helpers.js'

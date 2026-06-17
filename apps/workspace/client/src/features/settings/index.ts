@@ -1,8 +1,8 @@
 import { createComponent } from '@echojs-ecosystem/framework/hyperdom'
 
-import { createSettingsModel } from './model/settings.model'
-import { SettingsView } from './ui/settings.view'
+import { settingsModel } from './model/settings.model'
+import { SettingsView } from './view/settings.view'
 
-export const Settings = createComponent(createSettingsModel, SettingsView, {
+export const Settings = createComponent(settingsModel, SettingsView, {
   name: 'Settings',
 })

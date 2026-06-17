@@ -1,0 +1,36 @@
+{
+  "name": "@echojs-ecosystem/package-tests",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:install": "playwright install chromium",
+    "test:all": "vitest run && playwright test",
+    "e2e:serve": "vite --config packages/router/e2e/fixture/vite.config.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p packages/router/e2e/tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@echojs-ecosystem/async": "workspace:*",
+    "@echojs-ecosystem/form": "workspace:*",
+    "@echojs-ecosystem/hyperdom": "workspace:*",
+    "@echojs-ecosystem/network": "workspace:*",
+    "@echojs-ecosystem/oxc-config": "workspace:*",
+    "@echojs-ecosystem/permission": "workspace:*",
+    "@echojs-ecosystem/persist": "workspace:*",
+    "@echojs-ecosystem/reactivity": "workspace:*",
+    "@echojs-ecosystem/router": "workspace:*",
+    "@echojs-ecosystem/url-state": "workspace:*",
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^24.13.2",
+    "jsdom": "^26.1.0",
+    "typescript": "5.9.2",
+    "vite": "^6.0.0",
+    "vitest": "^4.1.4",
+    "zod": "^3.25.28"
+  }
+}

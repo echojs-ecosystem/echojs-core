@@ -1,5 +1,4 @@
 import { computed, signal } from "@echojs-ecosystem/reactivity";
-import { runAuthorizationGuard } from "./auth-guard";
 import { buildRouteLocation, parseLocation } from "./navigation";
 import {
   flattenRouteTree,
@@ -14,7 +13,14 @@ import {
   getRouteState,
   rawQueryToTyped,
 } from "./route";
-import { runRouteGuards } from "./guard-registry";
+import {
+  createRouteGuardRegistry,
+  type GuardRouteOptions,
+} from "./guard-registry";
+import {
+  createRouteRedirectRegistry,
+  type RedirectOptions,
+} from "./redirect-registry";
 import { toRouteConfigs } from "./route-config";
 import { buildNamedRoutes } from "./build-named-routes";
 import {
@@ -37,7 +43,8 @@ import type {
 export type RouterModelOptions = {
   history: import("./types").RouterHistory;
   routes: readonly import("./path-types").RouteTreeEntry[];
-  authorizationGuard?: import("./types").AuthorizationGuardOptions;
+  guards?: readonly GuardRouteOptions[];
+  redirects?: readonly RedirectOptions[];
   loadingView?: RouteLoadingView | import("./types").AnyPage;
   errorView?: RouteErrorView | import("./types").AnyPage;
   notFoundView?: RouteView | import("./types").AnyPage;
@@ -63,6 +70,8 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
   const flatRoutes = flattenRouteTree(routeConfigs);
   const allRoutes = flatRoutes.map((entry) => entry.route);
   const allPages = allRoutes.filter(isPage);
+  const guardRegistry = createRouteGuardRegistry(options.guards ?? []);
+  const redirectRegistry = createRouteRedirectRegistry(options.redirects ?? []);
 
   const $path = signal("/");
   const $query = signal<Record<string, string>>({});
@@ -94,6 +103,7 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
 
   let started = false;
   let unlisten: (() => void) | null = null;
+  let unbindRedirects: (() => void) | null = null;
   let syncing = false;
   let syncQueued = false;
   let navigationId = 0;
@@ -137,6 +147,8 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
         bindRouteToRouter(entry.route, router, entry.path);
       }
 
+      unbindRedirects = redirectRegistry.bind();
+
       unlisten = options.history.listen(() => {
         router.sync();
       });
@@ -148,6 +160,8 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
       started = false;
       unlisten?.();
       unlisten = null;
+      unbindRedirects?.();
+      unbindRedirects = null;
       closeAllRoutes();
       $activeRoute.set(null);
       $activeRoutes.set([]);
@@ -157,10 +171,6 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
     go(path: string, opts?: { replace?: boolean }) {
       if (opts?.replace) options.history.replace(path);
       else options.history.push(path);
-    },
-
-    navigate(path: string, opts?: { replace?: boolean }) {
-      router.go(path, opts);
     },
 
     replace(path: string) {
@@ -204,6 +214,27 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
       options.history.push("/");
     },
 
+    addGuard(options) {
+      return guardRegistry.add(options);
+    },
+
+    addRedirect(options) {
+      const unregister = redirectRegistry.add(options);
+      if (started) {
+        const previous = unbindRedirects;
+        unbindRedirects = redirectRegistry.bind();
+        previous?.();
+      }
+      return () => {
+        unregister();
+        if (started) {
+          const previous = unbindRedirects;
+          unbindRedirects = redirectRegistry.bind();
+          previous?.();
+        }
+      };
+    },
+
     sync() {
       if (syncing) {
         syncQueued = true;
@@ -223,13 +254,6 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
           $query.set(query);
           $fullPath.set(fullPath);
 
-          if (
-            options.authorizationGuard &&
-            !runAuthorizationGuard(pathname, options.authorizationGuard, options.history)
-          ) {
-            continue;
-          }
-
           const match = matchRouteChain(pathname, flatRoutes);
 
           if (!match) {
@@ -241,7 +265,13 @@ export const createRouterModel = (options: RouterModelOptions): RouterInternal =
             return;
           }
 
-          if (!runRouteGuards(options.history, match.leaf.route, query)) {
+          if (
+            !guardRegistry.run(
+              options.history,
+              match.chain.map((entry) => entry.route),
+              query,
+            )
+          ) {
             continue;
           }
 

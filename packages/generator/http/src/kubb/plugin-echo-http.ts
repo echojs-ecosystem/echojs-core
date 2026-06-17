@@ -7,7 +7,6 @@ import { camelCase, kebabCase } from "../../../core/src/utils/naming";
 import { createRootBarrelSource, resolveRootBarrelPath } from "../generators/barrel";
 import { endpointGenerator } from "../generators/endpoint";
 import type { PluginEchoHttp } from "../types/plugin";
-import { readBuildPathSource } from "../utils/runtime-source";
 
 export const pluginEchoHttpName = "plugin-echo-http" satisfies PluginEchoHttp["name"];
 
@@ -16,7 +15,7 @@ export const pluginEchoHttp = definePlugin<PluginEchoHttp>((options) => {
     output = { path: "endpoints", barrelType: "named" },
     grouping = "tag",
     client,
-    naming = { operation: "camelCase", models: "pascalCase", files: "kebabCase" },
+    naming = { operation: "camelCase", models: "pascalCase", files: "kebabCase", modelFiles: "kebabCase" },
     group,
   } = options;
 
@@ -89,21 +88,6 @@ export const pluginEchoHttp = definePlugin<PluginEchoHttp>((options) => {
       const root = path.resolve(this.config.root, this.config.output.path);
       const mode = getMode(path.resolve(root, output.path));
       const oas = await this.getOas();
-
-      await this.addFile({
-        baseName: "build-path.ts",
-        path: path.resolve(root, "runtime", "build-path.ts"),
-        sources: [
-          {
-            name: "buildPath",
-            value: readBuildPathSource(),
-            isExportable: true,
-            isIndexable: true,
-          },
-        ],
-        imports: [],
-        exports: [],
-      });
 
       const operationGenerator = new OperationGenerator(this.plugin.options, {
         fabric: this.fabric,

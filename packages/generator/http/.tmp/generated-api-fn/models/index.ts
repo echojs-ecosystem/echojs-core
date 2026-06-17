@@ -1,6 +1,6 @@
-export type { CreateUser201, CreateUserMutation, CreateUserMutationRequest, CreateUserMutationResponse } from "./CreateUser";
-export type { CreateUserRequest } from "./CreateUserRequest";
-export type { DeleteUser204, DeleteUserMutation, DeleteUserMutationResponse, DeleteUserPathParams } from "./DeleteUser";
-export type { GetUser200, GetUserPathParams, GetUserQuery, GetUserQueryResponse } from "./GetUser";
-export type { ListUsers200, ListUsersQuery, ListUsersQueryResponse } from "./ListUsers";
-export type { User } from "./User";
+export type { CreateUserRequest } from "./create-user-request";
+export type { CreateUser201, CreateUserMutation, CreateUserMutationRequest, CreateUserMutationResponse } from "./create-user";
+export type { DeleteUser204, DeleteUserMutation, DeleteUserMutationResponse, DeleteUserPathParams } from "./delete-user";
+export type { GetUser200, GetUserPathParams, GetUserQuery, GetUserQueryResponse } from "./get-user";
+export type { ListUsers200, ListUsersQuery, ListUsersQueryResponse } from "./list-users";
+export type { User } from "./user";

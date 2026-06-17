@@ -1,1 +1,1 @@
-export { UserEditView } from './ui/user-edit.view'
+export { UserEditView } from './view/user-edit.view'

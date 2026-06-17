@@ -1,5 +1,6 @@
 export { createPermission } from "./core/create-permission";
 export { createPermissionTemplate } from "./core/template";
+export { createPermissionCheck } from "./hyperdom/create-permission-check";
 
 export type {
   CheckPayload,
@@ -14,3 +15,5 @@ export type {
   PermissionSetupConfig,
   PermissionSnapshot,
 } from "./core/types";
+
+export type { PermissionCheckFn } from "./hyperdom/create-permission-check";

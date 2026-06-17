@@ -5,7 +5,7 @@ export default defineConfig(
   echoVitestConfig(__dirname, {
     test: {
       environment: "node",
-      include: ["tests/**/*.test.ts", "src/**/*.test.ts"],
+      include: ["tests/**/*.test.ts", "src/**/*.test.ts", "src/hyperdom/**/*.test.ts"],
     },
   }),
 );

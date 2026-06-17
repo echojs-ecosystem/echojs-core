@@ -44,5 +44,5 @@ export const chainRoute: <Params, Query, Result>(
 
 ### Related
 
-- [guardRoute](/docs/packages/router/api/guard-route)
+- [Route guards](/docs/packages/router/api/guard-route)
 - [createRouteView](/docs/packages/router/api/create-route-view)

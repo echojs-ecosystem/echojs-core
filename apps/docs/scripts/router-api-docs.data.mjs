@@ -184,13 +184,15 @@ export type CreateRouterOptions<TRoutes> = {
   loadingView?: RouteLoadingView
   errorView?: RouteErrorView
   notFoundView?: RouterNotFoundView
-  authorizationGuard?: AuthorizationGuardOptions
+  guards?: GuardRouteOptions[]
+  redirects?: RedirectOptions[]
 }
 `),
     params: [
       ['`routes`', '`createRoutes(...)`', '—', 'Route tree'],
       ['`history`', '`browser | hash | memory | config`', '`browser`', 'History adapter'],
-      ['`authorizationGuard`', 'options', 'optional', 'Auth redirect rules'],
+      ['`guards`', '`GuardRouteOptions[]`', '`[]`', 'Route protection rules'],
+      ['`redirects`', '`RedirectOptions[]`', '`[]`', 'Path redirect rules'],
     ],
     returns: [
       ['`start()` / `stop()`', 'void', 'History listeners'],
@@ -307,17 +309,22 @@ export const NavLink: <Params, Query>(props: NavLinkProps<Params, Query>) => Chi
   },
   {
     slug: 'redirect',
-    name: 'redirect',
-    description: 'Route operator — redirect when `from` route opens.',
-    keywords: ['redirect', 'router'],
+    name: 'RedirectOptions',
+    description: 'Path redirects via `createRouter({ redirects })`.',
+    keywords: ['redirects', 'router', 'RedirectOptions'],
     usage: sig(`
-import { createRoute, redirect } from '@echojs-ecosystem/router'
+import { createRoute, createRouter } from '@echojs-ecosystem/router'
 
-const old = createRoute('old')
-const next = createRoute('next')
+const rootRoute = createRoute('root')
 
-// In createRoutes:
-{ path: '/old', name: 'old', route: redirect({ from: old, to: next }) }
+export const appRedirects = [
+  { from: rootRoute, to: dashboardPage },
+]
+
+createRouter({
+  routes: [{ path: '/', name: 'root', route: rootRoute }, ...appRoutes],
+  redirects: appRedirects,
+})
 `),
     types: sig(`
 export type RedirectOptions<FromParams, FromQuery, ToParams, ToQuery> = {
@@ -326,45 +333,48 @@ export type RedirectOptions<FromParams, FromQuery, ToParams, ToQuery> = {
   mapParams?: (params: FromParams) => ToParams
   mapQuery?: (query: FromQuery) => ToQuery
 }
-
-export const redirect: <...>(options: RedirectOptions<...>) => () => void
 `),
     params: [
+      ['`redirects`', '`RedirectOptions[]`', '`[]`', 'Redirect rules on createRouter'],
       ['`from` / `to`', '`Route`', '—', 'Source and destination routes'],
       ['`mapParams` / `mapQuery`', 'functions', 'optional', 'Transform payload'],
     ],
-    returns: [['unsubscribe', '`() => void`', 'Route operator teardown']],
+    returns: [['`addRedirect()`', '`() => void`', 'Runtime unregister handle']],
     related: ['guard-route', 'create-route'],
   },
   {
     slug: 'guard-route',
-    name: 'guardRoute',
-    description: 'Prevent or redirect navigation when `canOpen` returns false.',
-    keywords: ['guardRoute', 'router', 'guard'],
+    name: 'GuardRouteOptions',
+    description: 'Protect routes via `createRouter({ guards })`.',
+    keywords: ['guards', 'router', 'GuardRouteOptions'],
     usage: sig(`
-import { guardRoute } from '@echojs-ecosystem/router'
+import type { GuardRouteOptions } from '@echojs-ecosystem/router'
+import { createRouter } from '@echojs-ecosystem/router'
 
-guardRoute({
-  route: adminPage,
-  canOpen: () => isAdmin(),
-  otherwise: () => loginPage.go(),
-})
+export const appGuards: GuardRouteOptions[] = [
+  {
+    route: adminPage,
+    canOpen: () => isAdmin(),
+    otherwise: loginPage,
+  },
+]
+
+createRouter({ routes: appRoutes, guards: appGuards })
 `),
     types: sig(`
 export type GuardRouteOptions = {
-  route: Route
-  canOpen: () => boolean | Promise<boolean>
-  otherwise?: () => void
+  route: Route<any, any>
+  canOpen: () => boolean
+  otherwise: Route<any, any>
 }
-
-export const guardRoute: (options: GuardRouteOptions) => () => void
 `),
     params: [
+      ['`guards`', '`GuardRouteOptions[]`', '`[]`', 'Guard rules on createRouter'],
       ['`route`', '`Route`', '—', 'Protected route'],
       ['`canOpen`', '`() => boolean`', '—', 'Allow navigation'],
-      ['`otherwise`', '`() => void`', 'optional', 'Fallback when blocked'],
+      ['`otherwise`', '`Route`', '—', 'Fallback when blocked'],
     ],
-    returns: [['unsubscribe', '`() => void`', 'Remove guard']],
+    returns: [['`addGuard()`', '`() => void`', 'Runtime unregister handle']],
     related: ['redirect', 'chain-route'],
   },
   {

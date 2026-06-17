@@ -25,7 +25,13 @@ const templatesDir = resolveTemplatesDir();
 const templateCache = new Map<string, HandlebarsTemplateDelegate>();
 
 export function renderTemplate<TContext>(
-  templateName: "endpoint.hbs" | "index.hbs",
+  templateName:
+    | "endpoint.hbs"
+    | "index.hbs"
+    | "async-query.hbs"
+    | "async-mutation.hbs"
+    | "async-infinite-query.hbs"
+    | "async-defaults.hbs",
   context: TContext,
 ): string {
   const cached = templateCache.get(templateName);

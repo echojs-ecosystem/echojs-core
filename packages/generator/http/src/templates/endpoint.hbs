@@ -3,8 +3,19 @@ import { {{clientExportName}} } from "{{clientImportPath}}";
 {{#if typeImports}}
 import type { {{typeImports}} } from "{{modelsImportPath}}";
 {{/if}}
-import { buildPath } from "{{buildPathImportPath}}";
 
+function {{urlFunctionName}}({{#if hasPathParams}}params: {{pathParamsType}}{{/if}}) {
+  return {{{urlPathExpression}}} as const;
+}
+{{#if summary}}
+/**
+ * @summary {{summary}}
+{{#if description}}
+ * @description {{description}}
+{{/if}}
+ * {{docLink}}
+ */
+{{/if}}
 export const {{functionName}} = (
 {{#if hasArgs}}
   args: {
@@ -24,7 +35,7 @@ export const {{functionName}} = (
 {{/if}}
   options?: RequestOptions,
 ){{#if responseType}}: Promise<{{responseType}}>{{/if}} => {
-  return {{{clientExpression}}}.{{method}}(buildPath("{{path}}"{{#if hasPathParams}}, { params: args.params }{{/if}}), {
+  return {{{clientExpression}}}.{{method}}({{urlFunctionName}}({{#if hasPathParams}}args.params{{/if}}), {
     ...options,
 {{#if hasQueryParams}}
     searchParams: args.query,

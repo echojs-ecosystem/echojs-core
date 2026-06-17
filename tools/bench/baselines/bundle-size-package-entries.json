@@ -1,0 +1,36 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-06-15T20:15:20.325Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "network/ws",
+      "entry": "packages/network/src/ws/index.ts",
+      "bytes": 65,
+      "gzipBytes": 85,
+      "brotliBytes": 69
+    },
+    {
+      "package": "network/mock",
+      "entry": "packages/network/src/mock/index.ts",
+      "bytes": 67,
+      "gzipBytes": 87,
+      "brotliBytes": 71
+    },
+    {
+      "package": "network/graphql",
+      "entry": "packages/network/src/graphql/index.ts",
+      "bytes": 70,
+      "gzipBytes": 90,
+      "brotliBytes": 73
+    },
+    {
+      "package": "network/http",
+      "entry": "packages/network/src/http/index.ts",
+      "bytes": 21504,
+      "gzipBytes": 6808,
+      "brotliBytes": 6128
+    }
+  ]
+}

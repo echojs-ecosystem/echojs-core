@@ -1,0 +1,28 @@
+import { createQuery } from "{{asyncImportPath}}";
+import { {{endpointFunctionName}} } from "{{endpointImportPath}}";
+{{#if typeImports}}
+import type { {{typeImports}} } from "{{modelsImportPath}}";
+{{/if}}
+{{#if defaultsImportPath}}
+import { queryDefaults } from "{{defaultsImportPath}}";
+{{/if}}
+{{#if queryKeysImportPath}}
+import { {{queryKeysExportName}} } from "{{queryKeysImportPath}}";
+{{/if}}
+
+{{#if summary}}
+/**
+ * @summary {{summary}}
+{{#if description}}
+ * @description {{description}}
+{{/if}}
+ */
+{{/if}}
+export const {{exportName}} = createQuery<{{responseType}}, {{paramsType}}>({
+{{#if defaultsSpread}}
+  {{defaultsSpread}}
+{{/if}}
+  name: "{{asyncName}}",
+  queryKey: {{{queryKeyExpression}}},
+  queryFn: ({ params, signal }) => {{endpointFunctionName}}({{#if hasEndpointArgs}}{{endpointArgsExpression}}, {{/if}}{ signal }),
+});

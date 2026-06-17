@@ -1,9 +1,0 @@
-{
-  "extends": "../../.configs/tsconfig.json",
-  "compilerOptions": {
-    "types": ["@playwright/test", "node"],
-    "noEmit": true,
-    "rootDir": "."
-  },
-  "include": ["tests/**/*.ts", "fixture/**/*.ts", "../playwright.config.ts"]
-}

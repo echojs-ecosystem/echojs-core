@@ -1,14 +1,11 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createLazyRouteView } from "./create-lazy-route-view";
 import { createRouteView } from "./create-route-view";
 import { createRouter } from "./create-router";
 import { getPageState } from "./page";
 import { isLazyRouteView } from "./lazy-view";
-import { clearGuards } from "../operators/guard";
 
 describe("createLazyRouteView", () => {
-  beforeEach(() => clearGuards());
-
   it("marks page as lazy and loads default export on navigation", async () => {
     let loadCount = 0;
 
@@ -95,9 +92,9 @@ describe("createLazyRouteView", () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
     expect(loadCount).toBe(1);
 
-    router.navigate("/home");
+    router.go("/home");
     await new Promise((resolve) => setTimeout(resolve, 0));
-    router.navigate("/");
+    router.go("/");
     await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(loadCount).toBe(1);

@@ -38,8 +38,8 @@ Typed SPA routing — route trees, HyperDOM views, operators, and history adapte
 
 | Export | Description |
 | ------ | ----------- |
-| [redirect](/docs/packages/router/api/redirect) | Redirect route |
-| [guardRoute](/docs/packages/router/api/guard-route) | Open guard |
+| [RedirectOptions](/docs/packages/router/api/redirect) | Path redirect rules |
+| [GuardRouteOptions](/docs/packages/router/api/guard-route) | Route open guard |
 | [chainRoute](/docs/packages/router/api/chain-route) | `beforeOpen` chain |
 
 ## Utilities

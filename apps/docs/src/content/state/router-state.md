@@ -107,11 +107,15 @@ re-render.
 ## Guards read router + store
 
 ```ts
-guardRoute({
-  route: settingsPage,
-  canOpen: () => $isLoggedIn.value(),
-  otherwise: authLoginPage,
-})
+export const appGuards = [
+  {
+    route: settingsPage,
+    canOpen: () => $isLoggedIn.value(),
+    otherwise: authLoginPage,
+  },
+]
+
+createRouter({ routes: appRoutes, guards: appGuards })
 ```
 
 `canOpen` often reads [client store](/docs/state/client-store) (session), but

@@ -10,20 +10,20 @@ import { isSlotMarker } from './slot-marker'
 describe('createCompoundView()', () => {
   const Layout = createCompoundView({
     name: 'Layout',
-    parts: {
+    slots: {
       Header: (props) => header({ class: 'layout-header' }, props.children),
       Main: (props) => main({ class: 'layout-main' }, props.children),
     },
-    render: ({ Header, Main }) => div({ class: 'layout' }, [Header(), Main()]),
+    layout: ({ Header, Main }) => div({ class: 'layout' }, [Header(), Main()]),
   })
 
-  it('exposes namespaced parts on the root', () => {
+  it('exposes namespaced slots on the root', () => {
     expect(Layout.Header.displayName).toBe('Layout.Header')
     expect(Layout.Main.displayName).toBe('Layout.Main')
     expect(Layout.displayName).toBe('Layout')
   })
 
-  it('part calls return slot markers (not DOM)', () => {
+  it('slot calls return slot markers (not DOM)', () => {
     const marker = Layout.Header(null, 'Title')
     expect(isSlotMarker(marker)).toBe(true)
   })
@@ -42,16 +42,16 @@ describe('createCompoundView()', () => {
     expect(root.querySelector('main')?.textContent).toBe('Content')
   })
 
-  it('resolves nested parts inside a slot', () => {
+  it('resolves nested slots inside a slot', () => {
     const Table = createCompoundView({
       name: 'Table',
-      parts: {
+      slots: {
         Head: (props) => thead(null, props.children),
         Body: (props) => tbody(null, props.children),
         Row: (props) => tr(null, props.children),
         Cell: (props) => td(null, props.children),
       },
-      render: ({ Head, Body }) => table({ class: 'data-table' }, [Head(), Body()]),
+      layout: ({ Head, Body }) => table({ class: 'data-table' }, [Head(), Body()]),
     })
 
     const container = document.createElement('div')
@@ -118,10 +118,10 @@ describe('createCompoundView()', () => {
   it('renders multiple instances of the same slot in order', () => {
     const Stack = createCompoundView({
       name: 'Stack',
-      parts: {
+      slots: {
         Item: (props) => div({ class: 'stack-item' }, props.children),
       },
-      render: ({ Item }) => div({ class: 'stack' }, Item()),
+      layout: ({ Item }) => div({ class: 'stack' }, Item()),
     })
 
     const container = document.createElement('div')

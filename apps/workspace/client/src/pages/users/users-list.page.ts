@@ -1,8 +1,8 @@
 import { createRouteView } from '@echojs-ecosystem/framework/router'
 
-import { UsersListView } from '@features/users-list/index'
+import { UsersList } from '@features/users-list/index'
 
 export const usersListPage = createRouteView({
   name: 'users-list',
-  view: UsersListView,
+  view: () => UsersList(),
 })

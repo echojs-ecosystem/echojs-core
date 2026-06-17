@@ -1,5 +1,3 @@
-import { createRouteView } from '@echojs-ecosystem/framework/router'
-
 import { createLayoutView } from '@echojs-ecosystem/framework/router'
 
 import { apiHealthQuery } from '@core/api/index'

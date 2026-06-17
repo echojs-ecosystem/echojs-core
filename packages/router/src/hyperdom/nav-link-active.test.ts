@@ -1,13 +1,10 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createRouteView } from "../core/create-route-view";
 import { createRouter } from "../core/create-router";
 import { createRoutes } from "../core/create-routes";
-import { clearGuards } from "../operators/guard";
 import { isNavLinkActive } from "./nav-link-active";
 
 describe("isNavLinkActive", () => {
-  beforeEach(() => clearGuards());
-
   it("exact matches only opened route", () => {
     const home = createRouteView({ name: "home", view: () => "home" });
     const user = createRouteView<{ id: string }>({ name: "user", view: () => "user" });
@@ -19,7 +16,7 @@ describe("isNavLinkActive", () => {
       ]),
     });
     router.start();
-    router.navigate("/users/1");
+    router.go("/users/1");
 
     expect(isNavLinkActive(home, { match: "exact" })).toBe(false);
     expect(isNavLinkActive(user, { match: "exact" })).toBe(true);
@@ -39,7 +36,7 @@ describe("isNavLinkActive", () => {
       ]),
     });
     router.start();
-    router.navigate("/blog/hello");
+    router.go("/blog/hello");
 
     expect(isNavLinkActive(blogIndex, { match: "partial" })).toBe(true);
     expect(isNavLinkActive(blogPost, { match: "partial" })).toBe(true);

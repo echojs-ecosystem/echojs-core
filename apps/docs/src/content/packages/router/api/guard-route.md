@@ -1,8 +1,8 @@
 ---
-title: guardRoute
-description: Prevent or redirect navigation when `canOpen` returns false.
+title: Route guards
+description: Protect routes via `createRouter({ guards })` and `addGuard`.
 package: '@echojs-ecosystem/router'
-keywords: [guardRoute, router, guard]
+keywords: [guards, router, GuardRouteOptions]
 ---
 
 @echojs-ecosystem/router
@@ -10,12 +10,20 @@ keywords: [guardRoute, router, guard]
 ## Usage
 
 ```ts
-import { guardRoute } from '@echojs-ecosystem/router'
+import type { GuardRouteOptions } from '@echojs-ecosystem/router'
+import { createRouter } from '@echojs-ecosystem/router'
 
-guardRoute({
-  route: adminPage,
-  canOpen: () => isAdmin(),
-  otherwise: () => loginPage.go(),
+export const appGuards: GuardRouteOptions[] = [
+  {
+    route: settingsPage,
+    canOpen: () => $isLoggedIn.value(),
+    otherwise: authLoginPage,
+  },
+]
+
+export const appRouter = createRouter({
+  routes: appRoutes,
+  guards: appGuards,
 })
 ```
 
@@ -23,31 +31,27 @@ guardRoute({
 
 ```ts
 export type GuardRouteOptions = {
-  route: Route
-  canOpen: () => boolean | Promise<boolean>
-  otherwise?: () => void
+  route: Route<any, any>
+  canOpen: () => boolean
+  otherwise: Route<any, any>
 }
-
-export const guardRoute: (options: GuardRouteOptions) => () => void
 ```
 
 ## API
 
-### Parameters
+### `createRouter({ guards })`
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| `route` | `Route` | — | Protected route |
-| `canOpen` | `() => boolean` | — | Allow navigation |
-| `otherwise` | `() => void` | optional | Fallback when blocked |
+| `guards` | `GuardRouteOptions[]` | `[]` | Routes to protect |
 
-### Returns
+### `router.addGuard(options)`
 
-| Member | Type | Description |
-| --- | --- | --- |
-| unsubscribe | `() => void` | Remove guard |
+| Returns | Description |
+| --- | --- |
+| `() => void` | Unregister the guard |
 
 ### Related
 
-- [redirect](/docs/packages/router/api/redirect)
+- [Guards & Redirects](/docs/packages/router/guides/guards-and-redirects)
 - [chainRoute](/docs/packages/router/api/chain-route)

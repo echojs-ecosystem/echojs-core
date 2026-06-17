@@ -21,12 +21,8 @@ const router = createRouter({
   loadingView: globalLoading,
   errorView: globalError,
   notFoundView: notFound,
-  authorizationGuard: {
-    isAuthorized: () => $session.value() != null,
-    allowedUnauthorizedPaths: ['/', '/login'],
-    redirectTo: '/login',
-    redirectWhenAuthorized: '/',
-  },
+  guards: appGuards,
+  redirects: appRedirects,
 })
 
 router.start() // listen to history / apply initial URL

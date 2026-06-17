@@ -202,34 +202,15 @@ export type RouterHistory = {
   forward(): void;
 };
 
-export type AuthorizationGuardRedirectContext = {
-  readonly pathname: string;
-  readonly authorized: boolean;
-};
-
-/** Resolves a redirect path when the user must leave the current URL. */
-export type AuthorizationGuardRedirect<Paths extends string = string> = (
-  context: AuthorizationGuardRedirectContext,
-) => Paths;
-
-export type AuthorizationGuardRedirectTarget<Paths extends string = string> =
-  | Paths
-  | AuthorizationGuardRedirect<Paths>;
-
-export type AuthorizationGuardOptions<Paths extends string = string> = {
-  isAuthorized: () => boolean;
-  allowedUnauthorizedPaths: readonly Paths[];
-  allowedAuthorizedPaths?: readonly Paths[];
-  redirectTo?: AuthorizationGuardRedirectTarget<Paths>;
-  redirectWhenAuthorized?: AuthorizationGuardRedirectTarget<Paths>;
-};
-
 export type CreateRouterOptions<
   TRoutes extends readonly RouteTreeNode[] = readonly RouteTreeNode[],
 > = {
   history: RouterHistoryConfig;
   routes: TRoutes;
-  authorizationGuard?: AuthorizationGuardOptions<CollectRoutePaths<TRoutes>>;
+  /** Route guards checked on every navigation (layout → leaf order). */
+  guards?: readonly import("./guard-registry").GuardRouteOptions[];
+  /** Redirect when a source route opens (replace navigation). */
+  redirects?: readonly import("./redirect-registry").RedirectOptions[];
   loadingView?: RouteLoadingView | AnyPage;
   errorView?: RouteErrorView | AnyPage;
   notFoundView?: RouterNotFoundView | AnyPage;
@@ -265,8 +246,6 @@ export type RouterBase = {
   start(): void;
   stop(): void;
   go(path: string, options?: { replace?: boolean }): void;
-  /** @deprecated Use `go()` */
-  navigate(path: string, options?: { replace?: boolean }): void;
   replace(path: string): void;
   back(): void;
   forward(): void;
@@ -279,6 +258,10 @@ export type RouterBase = {
   isActive(route: AnyRoute): boolean;
   view(): RouterViewComponent;
   closeRoute(route: AnyRoute): void;
+  /** Register a guard at runtime. Prefer `createRouter({ guards })` for static rules. */
+  addGuard(options: import("./guard-registry").GuardRouteOptions): () => void;
+  /** Register a redirect at runtime. Prefer `createRouter({ redirects })` for static rules. */
+  addRedirect(options: import("./redirect-registry").RedirectOptions): () => void;
 };
 
 export type Router<TRoutes extends RouterRoutes = RouterRoutes> = RouterBase & {

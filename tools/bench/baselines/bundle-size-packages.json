@@ -1,0 +1,106 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-06-15T20:15:20.201Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "devtools",
+      "entry": "packages/devtools/src/index.ts",
+      "bytes": 3351,
+      "gzipBytes": 1427,
+      "brotliBytes": 1348
+    },
+    {
+      "package": "reactivity",
+      "entry": "packages/reactivity/src/index.ts",
+      "bytes": 7147,
+      "gzipBytes": 2643,
+      "brotliBytes": 2454
+    },
+    {
+      "package": "store",
+      "entry": "packages/store/src/index.ts",
+      "bytes": 8553,
+      "gzipBytes": 3246,
+      "brotliBytes": 2997
+    },
+    {
+      "package": "permission",
+      "entry": "packages/permission/src/index.ts",
+      "bytes": 8332,
+      "gzipBytes": 3309,
+      "brotliBytes": 3050
+    },
+    {
+      "package": "i18n",
+      "entry": "packages/i18n/src/index.ts",
+      "bytes": 9969,
+      "gzipBytes": 3909,
+      "brotliBytes": 3541
+    },
+    {
+      "package": "persist",
+      "entry": "packages/persist/src/index.ts",
+      "bytes": 12839,
+      "gzipBytes": 4827,
+      "brotliBytes": 4380
+    },
+    {
+      "package": "hyperdom",
+      "entry": "packages/hyperdom/src/index.ts",
+      "bytes": 14583,
+      "gzipBytes": 5487,
+      "brotliBytes": 5016
+    },
+    {
+      "package": "core",
+      "entry": "packages/core/src/index.ts",
+      "bytes": 16504,
+      "gzipBytes": 5869,
+      "brotliBytes": 5327
+    },
+    {
+      "package": "form",
+      "entry": "packages/form/src/index.ts",
+      "bytes": 18241,
+      "gzipBytes": 6261,
+      "brotliBytes": 5709
+    },
+    {
+      "package": "url-state",
+      "entry": "packages/url-state/src/index.ts",
+      "bytes": 18064,
+      "gzipBytes": 6349,
+      "brotliBytes": 5735
+    },
+    {
+      "package": "utils",
+      "entry": "packages/utils/src/index.ts",
+      "bytes": 23552,
+      "gzipBytes": 8127,
+      "brotliBytes": 7403
+    },
+    {
+      "package": "ui",
+      "entry": "packages/ui/src/index.ts",
+      "bytes": 32322,
+      "gzipBytes": 10596,
+      "brotliBytes": 9658
+    },
+    {
+      "package": "async",
+      "entry": "packages/async/src/index.ts",
+      "bytes": 40779,
+      "gzipBytes": 10693,
+      "brotliBytes": 9792
+    },
+    {
+      "package": "router",
+      "entry": "packages/router/src/index.ts",
+      "bytes": 39369,
+      "gzipBytes": 13665,
+      "brotliBytes": 12375
+    }
+  ]
+}

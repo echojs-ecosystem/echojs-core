@@ -34,3 +34,4 @@ export const usersQueryParams = createQueryParams(
     urlKeys: { pageSize: 'size' },
   },
 )
+

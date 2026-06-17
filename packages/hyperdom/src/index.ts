@@ -2,6 +2,14 @@ export { h } from "./h";
 export { render } from "./render";
 export { mount } from "./mount";
 export { createModel, isInModelContext } from "./create-model";
+export type {
+  CreateModelOptions,
+  ModelFactory,
+  ModelFactoryFn,
+  ModelSection,
+  ModelSectionRecord,
+  StructuredModelShape,
+} from "./create-model";
 export { createView } from "./create-view";
 export {
   createCompoundView,
@@ -12,16 +20,18 @@ export {
   type CompoundPartDefs,
   type CompoundPartFn,
   type CompoundRootFn,
+  type CompoundSlotDefs,
+  type CompoundSlotFn,
   type CompoundView,
   type CompoundViewConfig,
   type MappedCompoundParts,
+  type MappedCompoundSlots,
   type SlotMarker,
   type SlotRenderers,
 } from "./compound";
 export { isInViewContext } from "./view-context";
 export {
   createComponent,
-  type ModelFactory,
   type ViewFn,
   type CreateComponentOptions,
 } from "./component";

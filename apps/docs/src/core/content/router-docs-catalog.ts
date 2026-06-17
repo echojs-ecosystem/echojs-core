@@ -44,8 +44,8 @@ export const routerDocCategories: RouterDocCategory[] = [
     id: 'operators',
     title: 'Operators',
     entries: [
-      { slug: 'redirect', name: 'redirect', description: 'Redirect between routes.' },
-      { slug: 'guard-route', name: 'guardRoute', description: 'Route open guard.' },
+      { slug: 'redirect', name: 'RedirectOptions', description: 'Path redirect rules.' },
+      { slug: 'guard-route', name: 'GuardRouteOptions', description: 'Route open guard.' },
       { slug: 'chain-route', name: 'chainRoute', description: 'beforeOpen hook chain.' },
     ],
   },

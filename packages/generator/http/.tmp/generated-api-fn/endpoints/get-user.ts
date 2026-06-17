@@ -7,15 +7,21 @@
 import type { RequestOptions } from "@echojs-ecosystem/network/http";
 import { getHttpClient } from "../../../src/fixtures/http-client";
 import type { GetUserQueryResponse, GetUserPathParams } from "../models";
-import { buildPath } from "../runtime/build-path";
 
+function getGetUserUrl(params: GetUserPathParams) {
+  return `/users/${encodeURIComponent(String(params.id))}` as const;
+}
+/**
+ * @summary Get user by id
+ * {@link /users/{id}}
+ */
 export const getUser = (
   args: {
     params: GetUserPathParams;
   },
   options?: RequestOptions,
 ): Promise<GetUserQueryResponse> => {
-  return getHttpClient().get(buildPath("/users/{id}", { params: args.params }), {
+  return getHttpClient().get(getGetUserUrl(args.params), {
     ...options,
   }).json<GetUserQueryResponse>();
 };

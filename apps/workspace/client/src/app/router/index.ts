@@ -1,5 +1,5 @@
-export { appRouter } from '@app/router/router'
-export { appRoutes } from '@app/router/app.routes'
+export { appRouter } from '@app/router/app.router'
+export { appRoutes } from '@app/router/app.router.routes'
 export { dashboardPage } from '@pages/dashboard/index'
 export {
   userCreatePage,

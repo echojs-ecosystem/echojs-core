@@ -8,13 +8,13 @@ import type {
 } from "./route-view-options-types";
 import type { NamedPage } from "./types";
 
-export function createRouteView<const O extends RouteViewOptionsConstraint>(
-  options: O,
+export function createRouteView<const Options extends RouteViewOptionsConstraint>(
+  options: Options,
 ): NamedPage<
-  RouteViewNameFromOptions<O>,
-  RouteViewParamsFromOptions<O>,
-  RouteViewQueryFromOptions<O>,
-  RouteViewDataFromOptions<O>
+  RouteViewNameFromOptions<Options>,
+  RouteViewParamsFromOptions<Options>,
+  RouteViewQueryFromOptions<Options>,
+  RouteViewDataFromOptions<Options>
 >;
 
 export function createRouteView<

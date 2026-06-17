@@ -1,3 +1,3 @@
-export { RouterErrorView } from './ui/error.view'
-export { RouterLoadingView } from './ui/loading.view'
-export { RouterNotFoundView } from './ui/not-found.view'
+export { RouterErrorView } from './view/error.view'
+export { RouterLoadingView } from './view/loading.view'
+export { RouterNotFoundView } from './view/not-found.view'

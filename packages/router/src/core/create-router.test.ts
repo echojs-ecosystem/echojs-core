@@ -1,15 +1,12 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { createRouteView } from "./create-route-view";
 import { createRoute } from "./create-route";
 import { createRouter } from "./create-router";
 import { createMemoryHistory } from "../histories/memory-history";
-import { clearGuards } from "../operators/guard";
 import { r } from "../test-utils";
 
 describe("createRouter", () => {
-  beforeEach(() => clearGuards());
-
   it("start/stop syncs routes", () => {
     const home = createRoute("home");
     const router = createRouter({

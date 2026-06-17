@@ -8,34 +8,53 @@ export type GuardRouteOptions = {
   otherwise: Route<any, any>;
 };
 
-const guards: GuardRouteOptions[] = [];
-
-export const registerGuard = (options: GuardRouteOptions): (() => void) => {
-  guards.push(options);
-  return () => {
-    const index = guards.indexOf(options);
-    if (index !== -1) guards.splice(index, 1);
-  };
-};
-
-export const clearGuards = (): void => {
-  guards.length = 0;
-};
-
 export const runRouteGuards = (
   history: RouterHistory,
-  matchedRoute: Route<any, any>,
+  matchedRoutes: readonly Route<any, any>[],
   query: Record<string, string>,
+  guards: readonly GuardRouteOptions[],
 ): boolean => {
-  for (const guard of guards) {
-    if (guard.route !== matchedRoute) continue;
-    if (guard.canOpen()) return true;
+  for (const matchedRoute of matchedRoutes) {
+    for (const guard of guards) {
+      if (guard.route !== matchedRoute) continue;
+      if (guard.canOpen()) continue;
 
-    const otherwiseState = getRouteState(guard.otherwise);
-    const params = (otherwiseState.$params.peek() ?? {}) as Record<string, string>;
-    const target = resolveRoutePath(guard.otherwise, params, { query });
-    history.replace(target);
-    return false;
+      const otherwiseState = getRouteState(guard.otherwise);
+      const params = (otherwiseState.$params.peek() ?? {}) as Record<string, string>;
+      const target = resolveRoutePath(guard.otherwise, params, { query });
+      history.replace(target);
+      return false;
+    }
   }
   return true;
+};
+
+export type RouteGuardRegistry = {
+  readonly guards: GuardRouteOptions[];
+  add(options: GuardRouteOptions): () => void;
+  run(
+    history: RouterHistory,
+    matchedRoutes: readonly Route<any, any>[],
+    query: Record<string, string>,
+  ): boolean;
+};
+
+export const createRouteGuardRegistry = (
+  initial: readonly GuardRouteOptions[] = [],
+): RouteGuardRegistry => {
+  const guards = [...initial];
+
+  return {
+    guards,
+    add(options) {
+      guards.push(options);
+      return () => {
+        const index = guards.indexOf(options);
+        if (index !== -1) guards.splice(index, 1);
+      };
+    },
+    run(history, matchedRoutes, query) {
+      return runRouteGuards(history, matchedRoutes, query, guards);
+    },
+  };
 };

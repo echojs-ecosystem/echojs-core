@@ -7,14 +7,14 @@
       "devDependencies": {
         "@changesets/cli": "^2.31.0",
         "@echojs-ecosystem/oxc-config": "workspace:*",
-        "@types/node": "^24.13.1",
+        "@types/node": "^24.13.2",
         "@vitest/coverage-v8": "^4.1.8",
         "bun-types": "^1.3.14",
         "oxfmt": "^0.46.0",
-        "oxlint": "^1.68.0",
+        "oxlint": "^1.69.0",
         "stylelint-standard": "^1.2.3",
         "tsup": "^8.5.1",
-        "turbo": "^2.9.16",
+        "turbo": "^2.9.18",
         "typescript": "^5.9.3",
       },
     },
@@ -34,6 +34,28 @@
         "tailwindcss": "^4.1.8",
         "typescript": "5.9.2",
         "vite": "^6.0.0",
+      },
+    },
+    "apps/example": {
+      "name": "@echojs-ecosystem/generator-example",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs-ecosystem/generator": "workspace:*",
+        "@echojs-ecosystem/network": "workspace:*",
+      },
+      "devDependencies": {
+        "typescript": "5.9.2",
+      },
+    },
+    "apps/generator": {
+      "name": "@echojs-ecosystem/generator-app",
+      "version": "0.0.0",
+      "dependencies": {
+        "@echojs-ecosystem/generator": "workspace:*",
+        "@echojs-ecosystem/network": "workspace:*",
+      },
+      "devDependencies": {
+        "typescript": "5.9.2",
       },
     },
     "apps/workspace": {
@@ -65,6 +87,7 @@
         "tailwindcss": "^4.1.8",
         "typescript": "5.9.2",
         "vite": "^6.0.0",
+        "vitest": "^4.1.4",
       },
     },
     "apps/workspace/shared": {
@@ -83,6 +106,29 @@
         "tsup": "^8.5.0",
         "typescript": "^5.9.0",
         "vitest": "^4.1.5",
+      },
+    },
+    "packages/__tests__": {
+      "name": "@echojs-ecosystem/package-tests",
+      "version": "0.0.0",
+      "devDependencies": {
+        "@echojs-ecosystem/async": "workspace:*",
+        "@echojs-ecosystem/form": "workspace:*",
+        "@echojs-ecosystem/hyperdom": "workspace:*",
+        "@echojs-ecosystem/network": "workspace:*",
+        "@echojs-ecosystem/oxc-config": "workspace:*",
+        "@echojs-ecosystem/permission": "workspace:*",
+        "@echojs-ecosystem/persist": "workspace:*",
+        "@echojs-ecosystem/reactivity": "workspace:*",
+        "@echojs-ecosystem/router": "workspace:*",
+        "@echojs-ecosystem/url-state": "workspace:*",
+        "@playwright/test": "^1.52.0",
+        "@types/node": "^24.13.2",
+        "jsdom": "^26.1.0",
+        "typescript": "5.9.2",
+        "vite": "^6.0.0",
+        "vitest": "^4.1.4",
+        "zod": "^3.25.28",
       },
     },
     "packages/architect": {
@@ -201,8 +247,10 @@
         "@kubb/ast": "^4.38.0",
         "@kubb/core": "^4.38.0",
         "@kubb/oas": "^4.38.0",
+        "@kubb/plugin-msw": "^4.38.0",
         "@kubb/plugin-oas": "^4.38.0",
         "@kubb/plugin-ts": "^4.38.0",
+        "@kubb/plugin-zod": "^4.38.0",
         "handlebars": "^4.7.9",
         "zod": "^4.4.3",
       },
@@ -215,17 +263,6 @@
       },
       "peerDependencies": {
         "typescript": ">=5",
-      },
-    },
-    "packages/generator/example": {
-      "name": "@echojs-ecosystem/generator-example",
-      "version": "0.1.0",
-      "dependencies": {
-        "@echojs-ecosystem/generator": "workspace:*",
-        "@echojs-ecosystem/network": "workspace:*",
-      },
-      "devDependencies": {
-        "typescript": "5.9.2",
       },
     },
     "packages/hyperdom": {
@@ -266,13 +303,21 @@
       "name": "@echojs-ecosystem/permission",
       "version": "0.8.0",
       "dependencies": {
+        "@echojs-ecosystem/hyperdom": "workspace:*",
         "@echojs-ecosystem/reactivity": "workspace:*",
       },
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
+        "jsdom": "^26.1.0",
         "typescript": "5.9.2",
         "vitest": "^4.1.4",
       },
+      "peerDependencies": {
+        "@echojs-ecosystem/hyperdom": "workspace:*",
+      },
+      "optionalPeers": [
+        "@echojs-ecosystem/hyperdom",
+      ],
     },
     "packages/persist": {
       "name": "@echojs-ecosystem/persist",
@@ -312,10 +357,8 @@
       },
       "devDependencies": {
         "@echojs-ecosystem/oxc-config": "workspace:*",
-        "@playwright/test": "^1.52.0",
         "jsdom": "^26.1.0",
         "typescript": "5.9.2",
-        "vite": "^6.0.0",
         "vitest": "^4.1.4",
       },
     },
@@ -487,7 +530,9 @@
 
     "@echojs-ecosystem/generator": ["@echojs-ecosystem/generator@workspace:packages/generator"],
 
-    "@echojs-ecosystem/generator-example": ["@echojs-ecosystem/generator-example@workspace:packages/generator/example"],
+    "@echojs-ecosystem/generator-app": ["@echojs-ecosystem/generator-app@workspace:apps/generator"],
+
+    "@echojs-ecosystem/generator-example": ["@echojs-ecosystem/generator-example@workspace:apps/example"],
 
     "@echojs-ecosystem/hyperdom": ["@echojs-ecosystem/hyperdom@workspace:packages/hyperdom"],
 
@@ -496,6 +541,8 @@
     "@echojs-ecosystem/network": ["@echojs-ecosystem/network@workspace:packages/network"],
 
     "@echojs-ecosystem/oxc-config": ["@echojs-ecosystem/oxc-config@workspace:packages/.configs"],
+
+    "@echojs-ecosystem/package-tests": ["@echojs-ecosystem/package-tests@workspace:packages/__tests__"],
 
     "@echojs-ecosystem/permission": ["@echojs-ecosystem/permission@workspace:packages/permission"],
 
@@ -599,9 +646,15 @@
 
     "@kubb/oas": ["@kubb/oas@4.38.0", "", { "dependencies": { "@kubb/ast": "4.38.0", "@kubb/core": "4.38.0", "@kubb/fabric-core": "0.14.0", "@redocly/openapi-core": "^2.31.6", "@stoplight/yaml": "^4.3.0", "jsonpointer": "^5.0.1", "oas": "^31.1.2", "oas-normalize": "^16.0.5", "openapi-types": "^12.1.3", "remeda": "^2.37.0", "swagger2openapi": "^7.0.8" } }, "sha512-Lzn9ljpI4eSOvX9oG7ttP0ayZgYPrlHdAnHUZ10LTwrcZbK9oSf7yVFNqUxsVAFxPNk0ASAvMHcHs8ZLwAykxg=="],
 
+    "@kubb/plugin-faker": ["@kubb/plugin-faker@4.38.0", "", { "dependencies": { "@kubb/core": "4.38.0", "@kubb/oas": "4.38.0", "@kubb/plugin-oas": "4.38.0", "@kubb/plugin-ts": "4.38.0", "@kubb/react-fabric": "0.14.0" } }, "sha512-v5UbKZmqdE4xrYteTPPEg2pBqYGbwmK4SL0oCxd55HXlHbhW6t6CBc0Ovm2IRO4CAz0Y0qxXuMkkEmmXVFhYfQ=="],
+
+    "@kubb/plugin-msw": ["@kubb/plugin-msw@4.38.0", "", { "dependencies": { "@kubb/core": "4.38.0", "@kubb/oas": "4.38.0", "@kubb/plugin-faker": "4.38.0", "@kubb/plugin-oas": "4.38.0", "@kubb/plugin-ts": "4.38.0", "@kubb/react-fabric": "0.14.0" } }, "sha512-EIrIklRzwHJSYyq+XkAakepPqw4c8fgBUdY/v5cixRFI3ImhLjAmRXT4wL3FN21lJY3dl9RC2q+39ioK8DfvVg=="],
+
     "@kubb/plugin-oas": ["@kubb/plugin-oas@4.38.0", "", { "dependencies": { "@kubb/core": "4.38.0", "@kubb/fabric-core": "0.14.0", "@kubb/oas": "4.38.0", "@kubb/react-fabric": "0.14.0", "remeda": "^2.37.0" } }, "sha512-BHVoKZQktSXZ4etRAyn0XCI+SObsJi0+Tx04Csy1xmjBahjmuu/yAoUYW2Lq21S0QUMPgJVwdbmifMUU8pgcJg=="],
 
     "@kubb/plugin-ts": ["@kubb/plugin-ts@4.38.0", "", { "dependencies": { "@kubb/ast": "4.38.0", "@kubb/core": "4.38.0", "@kubb/fabric-core": "0.14.0", "@kubb/oas": "4.38.0", "@kubb/plugin-oas": "4.38.0", "@kubb/react-fabric": "0.14.0", "remeda": "^2.37.0", "typescript": "5.9.3" } }, "sha512-3x/Rr+O0z2vakiLOc7xCEYiMJPSHxV4YX92LwgreCEAEHdMxQJvKSPuzdO3oJYzMtPp/O7+k+COFL9Ny9+5dOw=="],
+
+    "@kubb/plugin-zod": ["@kubb/plugin-zod@4.38.0", "", { "dependencies": { "@kubb/core": "4.38.0", "@kubb/oas": "4.38.0", "@kubb/plugin-oas": "4.38.0", "@kubb/plugin-ts": "4.38.0", "@kubb/react-fabric": "0.14.0", "remeda": "^2.37.0" } }, "sha512-cfTIpf+Fc4/TQbNjGARm70YYHiisOaEQHT5HfYaWntorP+JKYPlzV13NGfUsk8MAI+jVAePayXoTn3Wkq5/a0Q=="],
 
     "@kubb/react-fabric": ["@kubb/react-fabric@0.14.0", "", { "dependencies": { "@kubb/fabric-core": "0.14.0", "react-devtools-core": "6.1.5", "remeda": "^2.33.6", "ws": "8.18.0" } }, "sha512-rYBSpjG/1jrv/H5zMLK+JciuaFRXFue99nZkjNaWWGN5YAK/OwpButeJtMMCluE0EnhOxXqD3gfjyAUxO765XA=="],
 
@@ -1911,6 +1964,8 @@
 
     "@echojs-ecosystem/generator/zod": ["zod@4.4.3", "", {}, "sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ=="],
 
+    "@echojs-ecosystem/generator-app/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
+
     "@echojs-ecosystem/generator-example/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/hyperdom/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
@@ -1918,6 +1973,8 @@
     "@echojs-ecosystem/i18n/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/network/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
+
+    "@echojs-ecosystem/package-tests/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 
     "@echojs-ecosystem/permission/typescript": ["typescript@5.9.2", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A=="],
 

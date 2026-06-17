@@ -17,7 +17,7 @@ Programmatic router for EchoJS. Syncs **URL ↔ route state** with guards, lazy 
 
 - **Route views** — `createRouteView`, `createLayoutView`, `createLazyRouteView`
 - **Signal-backed state** — `$path`, `$params`, `$query`, `$activePage`, `$pending`, `$error`
-- **Guards & redirects** — `authorizationGuard`, `guardRoute`, `redirect`, `chainRoute`
+- **Guards & redirects** — `createRouter({ guards, redirects })`, `chainRoute`
 - **History adapters** — `browser`, `hash`, `memory`, or custom
 - **Hyperdom** — `@echojs-ecosystem/router/hyperdom` for `Link`, `NavLink`, `createRouter`
 
@@ -66,7 +66,7 @@ NavLink({ to: homePage, activeClass: "active", children: "Home" });
 | `createRouteView` / `createLayoutView` | Page & layout views |
 | `createLazyRouteView` | Code-split routes |
 | `createRoute` | Legacy imperative routes |
-| `guardRoute`, `redirect`, `chainRoute` | Route operators |
+| `createRouter({ guards, redirects })`, `chainRoute` | Route operators |
 
 ## Related packages
 

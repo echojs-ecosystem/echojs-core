@@ -1150,14 +1150,14 @@ export const applyRolePermissions = (role: "admin" | "viewer"): void => {
 
 export const DataTable = createCompoundView({
   name: "DataTable",
-  parts: {
+  slots: {
     Head: (props) => thead({ class: "data-table__head" }, props.children),
     Body: (props) => tbody({ class: "data-table__body" }, props.children),
     Row: (props) => tr({ class: "data-table__row" }, props.children),
     HeaderCell: (props) => th({ class: "data-table__th" }, props.children),
     Cell: (props) => td({ class: "data-table__td" }, props.children),
   },
-  render: ({ Head, Body }) =>
+  layout: ({ Head, Body }) =>
     table({ class: "data-table w-full" }, [Head(), Body()]),
 })`,
     'createCompoundView — namespaced slots (DataTable.Head, .Body, …)'

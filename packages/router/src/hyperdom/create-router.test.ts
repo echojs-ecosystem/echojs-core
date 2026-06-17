@@ -1,13 +1,10 @@
 /** @vitest-environment jsdom */
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { render } from "@echojs-ecosystem/hyperdom";
 import { createRouteView } from "../core/create-route-view";
 import { createRouter } from "../core/create-router";
-import { clearGuards } from "../operators/guard";
 
 describe("router.view()", () => {
-  beforeEach(() => clearGuards());
-
   it("renders active page component", async () => {
     const home = createRouteView({
       name: "home",

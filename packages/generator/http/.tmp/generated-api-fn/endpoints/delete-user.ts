@@ -7,15 +7,21 @@
 import type { RequestOptions } from "@echojs-ecosystem/network/http";
 import { getHttpClient } from "../../../src/fixtures/http-client";
 import type { DeleteUserMutationResponse, DeleteUserPathParams } from "../models";
-import { buildPath } from "../runtime/build-path";
 
+function getDeleteUserUrl(params: DeleteUserPathParams) {
+  return `/users/${encodeURIComponent(String(params.id))}` as const;
+}
+/**
+ * @summary Delete user
+ * {@link /users/{id}}
+ */
 export const deleteUser = (
   args: {
     params: DeleteUserPathParams;
   },
   options?: RequestOptions,
 ): Promise<DeleteUserMutationResponse> => {
-  return getHttpClient().delete(buildPath("/users/{id}", { params: args.params }), {
+  return getHttpClient().delete(getDeleteUserUrl(args.params), {
     ...options,
   }).json<DeleteUserMutationResponse>();
 };

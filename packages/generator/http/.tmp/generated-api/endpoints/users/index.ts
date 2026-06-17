@@ -1,4 +1,4 @@
 export { createUser } from "./create-user";
 export { deleteUser } from "./delete-user";
 export { getUser } from "./get-user";
-export { listUsers } from "./list-users";
+export { getUsers } from "./get-users";

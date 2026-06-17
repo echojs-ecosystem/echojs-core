@@ -1,28 +1,25 @@
 import { createField, createForm } from '@echojs-ecosystem/form'
 
-import {
-  orderFormDefaults,
-  orderFormSchema,
-  type OrderFormValue,
-} from '@entities/order/model/order-form.schema'
+import { orderCreateFormDefaults } from './order-create.constants'
+import { orderCreateFormSchema, type OrderCreateFormValue } from './order-create.validation'
 
 export type OrderCreateFields = {
   customer: ReturnType<typeof createField<string>>
   total: ReturnType<typeof createField<number>>
-  status: ReturnType<typeof createField<OrderFormValue['status']>>
+  status: ReturnType<typeof createField<OrderCreateFormValue['status']>>
   tags: ReturnType<typeof createField<string[]>>
 }
 
-export const orderCreateForm = createForm<OrderFormValue, OrderCreateFields>(
+export const orderCreateForm = createForm<OrderCreateFormValue, OrderCreateFields>(
   {
     customer: createField(''),
     total: createField(0),
-    status: createField(orderFormDefaults.status),
+    status: createField(orderCreateFormDefaults.status),
     tags: createField<string[]>([]),
   },
   {
     name: 'OrderCreateForm',
-    validationSchema: orderFormSchema,
-    defaultValues: orderFormDefaults,
+    validationSchema: orderCreateFormSchema,
+    defaultValues: orderCreateFormDefaults,
   },
 )

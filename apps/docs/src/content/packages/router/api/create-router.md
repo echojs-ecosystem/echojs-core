@@ -39,7 +39,8 @@ export type CreateRouterOptions<TRoutes> = {
   loadingView?: RouteLoadingView
   errorView?: RouteErrorView
   notFoundView?: RouterNotFoundView
-  authorizationGuard?: AuthorizationGuardOptions
+  guards?: GuardRouteOptions[]
+  redirects?: RedirectOptions[]
 }
 ```
 
@@ -51,7 +52,8 @@ export type CreateRouterOptions<TRoutes> = {
 | --- | --- | --- | --- |
 | `routes` | `createRoutes(...)` | — | Route tree |
 | `history` | `browser \| hash \| memory \| config` | `browser` | History adapter |
-| `authorizationGuard` | options | optional | Auth redirect rules |
+| `guards` | `GuardRouteOptions[]` | `[]` | Route protection rules |
+| `redirects` | `RedirectOptions[]` | `[]` | Path redirect rules |
 
 ### Returns
 

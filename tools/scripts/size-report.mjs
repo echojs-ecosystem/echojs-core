@@ -2,15 +2,20 @@
 /**
  * Workspace bundle + dist size report.
  * Usage: node tools/scripts/size-report.mjs
+ *
+ * Writes local reports to tools/bench-results/ (gitignored)
+ * and a committed snapshot to tools/bench/baselines/ (for docs / CI diff).
  */
 import { spawn } from 'node:child_process'
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('../..', import.meta.url))
 const benchCli = join(root, 'tools/bench/dist/cli.js')
+const baselinesDir = join(root, 'tools/bench/baselines')
 
+/** Standalone @echojs-ecosystem/* packages (src/index.ts entry). */
 const PACKAGES = [
   'reactivity',
   'core',
@@ -22,19 +27,29 @@ const PACKAGES = [
   'router',
   'url-state',
   'i18n',
+  'async',
+  'permission',
+  'utils',
+  'devtools',
 ]
+
+/** Subpath-only packages (no root index). */
+const PACKAGE_ENTRIES = ['network/http', 'network/ws', 'network/mock', 'network/graphql']
 
 const FRAMEWORK_ENTRIES = [
   'framework/core',
   'framework/reactivity',
   'framework/router',
-  'framework/router/hyperdom',
   'framework/form',
   'framework/persist',
   'framework/store',
   'framework/ui',
   'framework/hyperdom',
   'framework/url-state',
+  'framework/async',
+  'framework/i18n',
+  'framework/devtools',
+  'framework/network/http',
 ]
 
 const fmt = (n) => {
@@ -90,6 +105,12 @@ const measureAllFramework = async () => {
 const readReport = (dir) =>
   JSON.parse(readFileSync(join(dir, 'bundle-size.json'), 'utf8'))
 
+const writeBaseline = (name, jsonPath, mdPath) => {
+  mkdirSync(baselinesDir, { recursive: true })
+  copyFileSync(jsonPath, join(baselinesDir, `${name}.json`))
+  copyFileSync(mdPath, join(baselinesDir, `${name}.md`))
+}
+
 async function main() {
   if (!existsSync(benchCli)) {
     console.error(
@@ -99,6 +120,7 @@ async function main() {
   }
 
   const outPackages = join(root, 'tools/bench-results', 'size-packages')
+  const outPackageEntries = join(root, 'tools/bench-results', 'size-package-entries')
   const outFramework = join(root, 'tools/bench-results', 'size-framework')
 
   await runBench([
@@ -109,6 +131,16 @@ async function main() {
     '--outDir',
     outPackages,
   ])
+
+  await runBench([
+    '--from',
+    'src',
+    '--entries',
+    PACKAGE_ENTRIES.join(','),
+    '--outDir',
+    outPackageEntries,
+  ])
+
   await runBench([
     '--from',
     'src',
@@ -119,27 +151,45 @@ async function main() {
   ])
 
   const pkgReport = readReport(outPackages)
+  const entryReport = readReport(outPackageEntries)
   const fwReport = readReport(outFramework)
   const frameworkAll = await measureAllFramework()
 
-  const urlStateRow = pkgReport.rows.find((r) => r.package === 'url-state')
-  const urlStateFw = fwReport.rows.find(
-    (r) => r.package === 'framework/url-state'
+  const allPackageRows = [...pkgReport.rows, ...entryReport.rows].sort(
+    (a, b) => a.gzipBytes - b.gzipBytes,
   )
+
+  writeBaseline('bundle-size-packages', join(outPackages, 'bundle-size.json'), join(outPackages, 'bundle-size.md'))
+  writeBaseline('bundle-size-package-entries', join(outPackageEntries, 'bundle-size.json'), join(outPackageEntries, 'bundle-size.md'))
+  writeBaseline('bundle-size-framework', join(outFramework, 'bundle-size.json'), join(outFramework, 'bundle-size.md'))
+
+  const frameworkAllReport = {
+    kind: 'bundle-size-all',
+    generatedAt: new Date().toISOString(),
+    node: process.version,
+    entry: 'packages/framework/src/__size__/all.ts',
+    ...frameworkAll,
+  }
+  writeFileSync(
+    join(baselinesDir, 'bundle-size-framework-all.json'),
+    JSON.stringify(frameworkAllReport, null, 2) + '\n',
+  )
+
+  const urlStateRow = allPackageRows.find((r) => r.package === 'url-state')
+  const urlStateFw = fwReport.rows.find((r) => r.package === 'framework/url-state')
 
   console.log('\n=== EchoJS bundle size (esbuild, browser, minified) ===\n')
-  console.log('Packages (entry: src/index.ts):\n')
+  console.log('Packages (entry: src/index.ts or subpath):\n')
   console.log(
-    `${'Package'.padEnd(14)} ${'Minified'.padStart(10)} ${'Gzip'.padStart(10)} ${'Brotli'.padStart(10)} ${'dist .js'.padStart(10)}`
+    `${'Package'.padEnd(22)} ${'Minified'.padStart(10)} ${'Gzip'.padStart(10)} ${'Brotli'.padStart(10)} ${'dist .js'.padStart(10)}`
   )
-  console.log('-'.repeat(58))
+  console.log('-'.repeat(66))
 
-  let sumGzip = 0
-  for (const row of pkgReport.rows) {
-    const dist = distJsBytes(row.package)
-    if (row.package !== 'framework') sumGzip += row.gzipBytes
+  for (const row of allPackageRows) {
+    const pkgName = row.package.split('/')[0]
+    const dist = distJsBytes(pkgName)
     console.log(
-      `${row.package.padEnd(14)} ${fmt(row.bytes).padStart(10)} ${fmt(row.gzipBytes).padStart(10)} ${fmt(row.brotliBytes).padStart(10)} ${dist === null ? 'n/a'.padStart(10) : fmt(dist).padStart(10)}`
+      `${row.package.padEnd(22)} ${fmt(row.bytes).padStart(10)} ${fmt(row.gzipBytes).padStart(10)} ${fmt(row.brotliBytes).padStart(10)} ${dist === null ? 'n/a'.padStart(10) : fmt(dist).padStart(10)}`
     )
   }
 
@@ -187,7 +237,7 @@ async function main() {
   }
 
   console.log(
-    '\nReports: tools/bench-results/size-packages/, tools/bench-results/size-framework/\n'
+    '\nReports: tools/bench-results/ (local)  |  Snapshot: tools/bench/baselines/\n'
   )
 }
 

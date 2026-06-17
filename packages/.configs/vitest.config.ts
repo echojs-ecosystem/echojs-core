@@ -17,6 +17,7 @@ export const sharedVitestConfig = defineConfig({
 
 export const echoWorkspaceAliases = (fromDir: string): NonNullable<ViteUserConfig["resolve"]>["alias"] => {
   return {
+    "@echojs-ecosystem/async": resolve(fromDir, "../async/src/index.ts"),
     "@echojs-ecosystem/core": resolve(fromDir, "../core/src/index.ts"),
     "@echojs-ecosystem/reactivity": resolve(fromDir, "../reactivity/src/index.ts"),
     "@echojs-ecosystem/hyperdom": resolve(fromDir, "../hyperdom/src/index.ts"),

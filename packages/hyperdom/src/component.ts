@@ -1,6 +1,5 @@
+import type { ModelFactoryFn } from "./create-model.types";
 import type { Child } from "./types";
-
-export type ModelFactory<VM> = () => VM;
 export type ViewFn<VM> = (vm: VM) => Child;
 
 export type CreateComponentOptions = {
@@ -29,7 +28,7 @@ const labelComponent = (fn: () => Child, name?: string): (() => Child) => {
  * ```
  */
 export const createComponent = <VM>(
-  model: ModelFactory<VM>,
+  model: ModelFactoryFn<VM>,
   view: ViewFn<VM>,
   options?: CreateComponentOptions,
 ): (() => Child) =>

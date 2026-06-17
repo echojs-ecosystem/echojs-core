@@ -1,5 +1,6 @@
 import {
   createPermission,
+  createPermissionCheck,
   createPermissionTemplate,
   type PermissionInstance,
 } from '@echojs-ecosystem/permission'
@@ -21,6 +22,8 @@ const templates: Record<
 
 export const appPermission: PermissionInstance<AppPermissionSchema> =
   createPermission<AppPermissionSchema>()
+
+export const PermissionCheck = createPermissionCheck(appPermission)
 
 export const applyRolePermissions = (role: WorkspaceRole): void => {
   appPermission.setup(templates[role])

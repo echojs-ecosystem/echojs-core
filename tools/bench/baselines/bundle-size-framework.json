@@ -1,0 +1,99 @@
+{
+  "kind": "bundle-size",
+  "generatedAt": "2026-06-15T20:15:20.844Z",
+  "node": "v22.22.0",
+  "root": "/home/jombozana/Desktop/JombozanaLabs/echojs-ecosystem/echojs-core",
+  "rows": [
+    {
+      "package": "framework/devtools",
+      "entry": "packages/framework/src/devtools.ts",
+      "bytes": 3351,
+      "gzipBytes": 1427,
+      "brotliBytes": 1348
+    },
+    {
+      "package": "framework/reactivity",
+      "entry": "packages/framework/src/reactivity.ts",
+      "bytes": 7147,
+      "gzipBytes": 2643,
+      "brotliBytes": 2454
+    },
+    {
+      "package": "framework/store",
+      "entry": "packages/framework/src/store.ts",
+      "bytes": 8553,
+      "gzipBytes": 3246,
+      "brotliBytes": 2997
+    },
+    {
+      "package": "framework/i18n",
+      "entry": "packages/framework/src/i18n.ts",
+      "bytes": 9969,
+      "gzipBytes": 3909,
+      "brotliBytes": 3541
+    },
+    {
+      "package": "framework/persist",
+      "entry": "packages/framework/src/persist.ts",
+      "bytes": 12839,
+      "gzipBytes": 4827,
+      "brotliBytes": 4380
+    },
+    {
+      "package": "framework/hyperdom",
+      "entry": "packages/framework/src/hyperdom.ts",
+      "bytes": 14583,
+      "gzipBytes": 5487,
+      "brotliBytes": 5016
+    },
+    {
+      "package": "framework/core",
+      "entry": "packages/framework/src/core.ts",
+      "bytes": 16504,
+      "gzipBytes": 5869,
+      "brotliBytes": 5327
+    },
+    {
+      "package": "framework/form",
+      "entry": "packages/framework/src/form.ts",
+      "bytes": 18241,
+      "gzipBytes": 6261,
+      "brotliBytes": 5709
+    },
+    {
+      "package": "framework/url-state",
+      "entry": "packages/framework/src/url-state.ts",
+      "bytes": 18064,
+      "gzipBytes": 6349,
+      "brotliBytes": 5735
+    },
+    {
+      "package": "framework/network/http",
+      "entry": "packages/framework/src/network/http.ts",
+      "bytes": 21504,
+      "gzipBytes": 6808,
+      "brotliBytes": 6128
+    },
+    {
+      "package": "framework/ui",
+      "entry": "packages/framework/src/ui.ts",
+      "bytes": 32322,
+      "gzipBytes": 10596,
+      "brotliBytes": 9658
+    },
+    {
+      "package": "framework/async",
+      "entry": "packages/framework/src/async.ts",
+      "bytes": 40779,
+      "gzipBytes": 10693,
+      "brotliBytes": 9792
+    },
+    {
+      "package": "framework/router",
+      "entry": "packages/framework/src/router.ts",
+      "bytes": 39369,
+      "gzipBytes": 13665,
+      "brotliBytes": 12375
+    }
+  ]
+}

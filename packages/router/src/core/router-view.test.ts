@@ -1,19 +1,16 @@
 /** @vitest-environment jsdom */
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { div, main, nav, render, type Child } from "@echojs-ecosystem/hyperdom";
 import { createLayoutView } from "./create-layout-view";
 import { createRoute } from "./create-route";
 import { createRoutes } from "./create-routes";
 import { createRouteView } from "./create-route-view";
 import { createRouter } from "./create-router";
-import { NavLink } from "../hyperdom/NavLink";
-import { clearGuards } from "../operators/guard";
+import { NavLink } from "../hyperdom/nav-link";
 
 const flush = (): Promise<void> => new Promise((resolve) => setTimeout(resolve, 0));
 
 describe("router view layout shell", () => {
-  beforeEach(() => clearGuards());
-
   it("keeps layout DOM mounted when navigating between child routes", async () => {
     const pageA = createRouteView({
       name: "docs-a",
@@ -53,7 +50,7 @@ describe("router view layout shell", () => {
     });
 
     router.start();
-    router.navigate("/docs/a");
+    router.go("/docs/a");
     await flush();
 
     const container = document.createElement("div");
@@ -66,7 +63,7 @@ describe("router view layout shell", () => {
     expect(navEl).not.toBeNull();
     expect(container.querySelector('[data-testid="page-a"]')).not.toBeNull();
 
-    router.navigate("/docs/b");
+    router.go("/docs/b");
     await flush();
     await Promise.resolve();
 
@@ -110,7 +107,7 @@ describe("router view layout shell", () => {
     });
 
     router.start();
-    router.navigate("/docs/page");
+    router.go("/docs/page");
     await flush();
 
     const container = document.createElement("div");
@@ -119,7 +116,7 @@ describe("router view layout shell", () => {
 
     expect(container.querySelector('[data-testid="shell-nav"]')).not.toBeNull();
 
-    router.navigate("/");
+    router.go("/");
     await flush();
 
     expect(container.querySelector('[data-testid="shell-nav"]')).toBeNull();
@@ -160,7 +157,7 @@ describe("router view layout shell", () => {
     });
 
     router.start();
-    router.navigate("/docs/page");
+    router.go("/docs/page");
     await flush();
 
     const container = document.createElement("div");
@@ -170,11 +167,11 @@ describe("router view layout shell", () => {
     expect(container.querySelector('[data-testid="shell-nav"]')).not.toBeNull();
     expect(container.querySelector('[data-testid="doc-page"]')).not.toBeNull();
 
-    router.navigate("/");
+    router.go("/");
     await flush();
     expect(container.querySelector('[data-testid="shell-nav"]')).toBeNull();
 
-    router.navigate("/docs/page");
+    router.go("/docs/page");
     await flush();
     await Promise.resolve();
 
@@ -222,7 +219,7 @@ describe("router view layout shell", () => {
     });
 
     router.start();
-    router.navigate("/docs/blog");
+    router.go("/docs/blog");
     await flush();
 
     const container = document.createElement("div");
@@ -232,7 +229,7 @@ describe("router view layout shell", () => {
     expect(container.querySelector('[data-testid="docs-shell"]')).not.toBeNull();
     expect(container.querySelector('[data-testid="blog-index"]')).not.toBeNull();
 
-    router.navigate("/docs/blog/hello");
+    router.go("/docs/blog/hello");
     await flush();
     await Promise.resolve();
 

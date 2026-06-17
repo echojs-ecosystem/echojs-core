@@ -33,6 +33,14 @@ describe("router.routes typing", () => {
     const router = createRouter({
       history: "memory",
       routes,
+      guards: [
+        {
+          route: user,
+          canOpen: () => true,
+          otherwise: home,
+        },
+      ],
+      redirects: [{ from: legacy, to: user }],
     });
 
     type Routes = typeof router.routes;

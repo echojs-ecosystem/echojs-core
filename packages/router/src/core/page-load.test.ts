@@ -1,12 +1,9 @@
-import { beforeEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { createLayoutView } from "./create-layout-view";
 import { createRouteView } from "./create-route-view";
 import { createRouter } from "./create-router";
-import { clearGuards } from "../operators/guard";
 
 describe("page-load", () => {
-  beforeEach(() => clearGuards());
-
   it("ignores stale beforeLoad after fast navigation", async () => {
     let resolveSlow!: (value: { id: string }) => void;
     const slowPage = createRouteView({
@@ -29,8 +26,8 @@ describe("page-load", () => {
     });
 
     router.start();
-    router.navigate("/slow");
-    router.navigate("/fast");
+    router.go("/slow");
+    router.go("/fast");
     await Promise.resolve();
 
     resolveSlow({ id: "stale" });
@@ -74,7 +71,7 @@ describe("page-load", () => {
     });
 
     router.start();
-    router.navigate("/app/child");
+    router.go("/app/child");
     await new Promise((resolve) => setTimeout(resolve, 0));
 
     expect(order).toEqual(["layout", "page"]);

@@ -11,16 +11,10 @@ export type RouterProviderHost = {
   provide?<T>(key: symbol, value: T): unknown;
 };
 
-/** @deprecated Use {@link RouterProviderHost} */
-export type RouterPluginHost = RouterProviderHost;
-
 export type RouterProviderOptions = {
   /** @default true */
   autoStart?: boolean;
 };
-
-/** @deprecated Use {@link RouterProviderOptions} */
-export type RouterPluginOptions = RouterProviderOptions;
 
 /** Provider shape accepted by `createEchoApp().use(...)`. */
 export type RouterProvider = {
@@ -28,9 +22,6 @@ export type RouterProvider = {
   setup: (app: RouterProviderHost) => void;
   resolveRoot: () => Child;
 };
-
-/** @deprecated Use {@link RouterProvider} */
-export type RouterPlugin = RouterProvider;
 
 export const isRouterLike = (value: unknown): value is RouterLike =>
   typeof value === "object" &&
@@ -56,6 +47,3 @@ export const createRouterProvider = (
     return RootView();
   },
 });
-
-/** @deprecated Use {@link createRouterProvider} */
-export const routerPlugin = createRouterProvider;

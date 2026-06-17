@@ -196,42 +196,29 @@ Reference: `apps/example` → `workspace/users/user-detail.page.ts`,
 
 ## Guards
 
-### Per-route (`guardRoute`)
+Declare guards in `createRouter`:
 
 ```ts
-import { guardRoute } from '@echojs-ecosystem/router'
+import type { GuardRouteOptions } from '@echojs-ecosystem/router'
 import { $isLoggedIn } from '@entities/session/index.js'
 import { authLoginPage } from '@pages/auth/login/auth-login.page.js'
 import { settingsPage } from '@pages/workspace/settings/workspace-settings.page.js'
 
-guardRoute({
-  route: settingsPage,
-  canOpen: () => $isLoggedIn.value(),
-  otherwise: authLoginPage,
-})
-```
+export const appGuards: GuardRouteOptions[] = [
+  {
+    route: settingsPage,
+    canOpen: () => $isLoggedIn.value(),
+    otherwise: authLoginPage,
+  },
+]
 
-Import guard modules from `entities/__routes__/guards.ts` so they run at startup
-(`apps/example` pattern).
-
-### Global (`authorizationGuard`)
-
-On `createRouter`:
-
-```ts
 createRouter({
   routes: appRoutes,
-  authorizationGuard: {
-    isAuthorized: () => authTokenStore.value() != null,
-    allowedUnauthorizedPaths: ['/', '/auth/login'],
-    redirectTo: '/auth/login',
-    redirectWhenAuthorized: '/',
-  },
+  guards: appGuards,
 })
 ```
 
-Use **global** guard for “whole app behind login”; use **`guardRoute`** for a few
-protected pages.
+Keep guard definitions in a dedicated module (for example `app/router/guards.ts`) and pass the array into `createRouter`.
 
 ## Lazy routes
 
@@ -280,7 +267,7 @@ different `createRouteView` trees. Shell chrome can sit **outside**
 3. Nav link via `NavLink({ to: page })` — no hard-coded path strings in widgets.
 4. Async data — `beforeLoad` and/or `createQuery` per
    [Data fetching](/docs/guides/data-fetching).
-5. Protected? — `guardRoute` or global `authorizationGuard`.
+5. Protected? — add a guard in `app/router/guards.ts` and pass `guards` to `createRouter`.
 
 ## Related
 

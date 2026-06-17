@@ -35,8 +35,10 @@
     "@kubb/ast": "^4.38.0",
     "@kubb/core": "^4.38.0",
     "@kubb/oas": "^4.38.0",
+    "@kubb/plugin-msw": "^4.38.0",
     "@kubb/plugin-oas": "^4.38.0",
     "@kubb/plugin-ts": "^4.38.0",
+    "@kubb/plugin-zod": "^4.38.0",
     "handlebars": "^4.7.9",
     "zod": "^4.4.3"
   },

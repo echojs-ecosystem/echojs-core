@@ -1,5 +1,7 @@
 import type { BaseGeneratorConfig, GeneratorNamingConfig } from "../../../core/src/config/types";
 
+import type { AsyncGeneratorDefaultsConfig } from "./async-types";
+
 export type HttpGrouping = "tag" | "none";
 
 /** How generated endpoints access the HTTP client export. */
@@ -23,16 +25,72 @@ export interface ResolvedHttpClientGeneratorConfig {
   typesImportPath: string;
 }
 
+export type HttpGeneratorPluginToggle<T = Record<string, unknown>> =
+  | boolean
+  | ({ enabled?: boolean } & T);
+
+export interface HttpGeneratorPluginsConfig {
+  /** Generate Zod schemas via `@kubb/plugin-zod`. */
+  zod?: HttpGeneratorPluginToggle<{ path?: string }>;
+  /** Generate MSW handlers via `@kubb/plugin-msw`. */
+  msw?: HttpGeneratorPluginToggle<{ path?: string; handlers?: boolean }>;
+  /** Generate `@echojs-ecosystem/async` query/mutation definitions. */
+  async?: HttpGeneratorPluginToggle<{
+    path?: string;
+    /** Module import for `createQuery` / `createMutation` / `createInfiniteQuery`. */
+    importPath?: string;
+    /** Shared query-key factory import (optional). */
+    queryKeys?: {
+      importPath: string;
+      exportName: string;
+    };
+    /** Base config merged into every generated definition. */
+    defaults?: AsyncGeneratorDefaultsConfig;
+  }>;
+}
+
+export interface HttpGeneratorNamingConfig extends GeneratorNamingConfig {
+  /** Endpoint file naming style. */
+  files?: "kebabCase" | "camelCase";
+  /** Model/type file naming style (`CreateUser.ts` vs `create-user.ts`). */
+  modelFiles?: "kebabCase" | "camelCase" | "pascalCase";
+}
+
+export interface HttpGeneratorHooks {
+  /** Shell commands executed after a successful generation run (`cwd` = app root). */
+  afterGenerate?: string[];
+}
+
 export interface HttpGeneratorConfig extends BaseGeneratorConfig {
   client: HttpClientGeneratorConfig;
+  /** Base URL for MSW handlers (`@kubb/plugin-msw`). Configure the HTTP client separately. */
+  baseUrl?: string;
   grouping?: HttpGrouping;
-  naming?: GeneratorNamingConfig & {
-    files?: "kebabCase" | "camelCase";
-  };
+  naming?: HttpGeneratorNamingConfig;
+  plugins?: HttpGeneratorPluginsConfig;
+  hooks?: HttpGeneratorHooks;
 }
 
 export interface ResolvedHttpGeneratorConfig extends HttpGeneratorConfig {
   client: ResolvedHttpClientGeneratorConfig;
+  baseUrl: string;
   grouping: HttpGrouping;
-  naming: Required<GeneratorNamingConfig> & { files: "kebabCase" | "camelCase" };
+  naming: Required<HttpGeneratorNamingConfig> & {
+    files: "kebabCase" | "camelCase";
+    modelFiles: "kebabCase" | "camelCase" | "pascalCase";
+  };
+  plugins: {
+    zod: { enabled: boolean; path: string };
+    msw: { enabled: boolean; path: string; handlers: boolean };
+    async: {
+      enabled: boolean;
+      path: string;
+      importPath: string;
+      queryKeys?: { importPath: string; exportName: string };
+      defaults: import("./async-types").ResolvedAsyncGeneratorDefaults;
+    };
+  };
+  hooks: {
+    afterGenerate: string[];
+  };
 }

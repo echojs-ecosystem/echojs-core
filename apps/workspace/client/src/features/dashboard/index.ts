@@ -1,8 +1,8 @@
 import { createComponent } from '@echojs-ecosystem/framework/hyperdom'
 
-import { createDashboardModel } from './model/dashboard.model'
-import { DashboardView } from './ui/dashboard.view'
+import { dashboardModel } from './model/dashboard.model'
+import { DashboardView } from './view/dashboard.view'
 
-export const Dashboard = createComponent(createDashboardModel, DashboardView, {
+export const Dashboard = createComponent(dashboardModel, DashboardView, {
   name: 'Dashboard',
 })
