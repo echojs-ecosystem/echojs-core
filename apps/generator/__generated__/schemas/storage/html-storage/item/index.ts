@@ -1,0 +1,1 @@
+export { StorageHtmlStorageItemReadGetIdPropertyReadSchema } from "./read-get-id-property/read-schema";

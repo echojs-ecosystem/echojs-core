@@ -1,0 +1,1 @@
+export type { PropertyValueHtmlStorageConfigDetailGetId } from "./detail-get-id";

@@ -1,0 +1,1 @@
+export { apiCurrentTenantGet } from "./api-current-tenant-get";

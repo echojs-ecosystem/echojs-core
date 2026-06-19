@@ -1,0 +1,1 @@
+export type { SubscriptionPlanSubscriptionPlanRequestDtoJsonMergePatch } from "./json-merge-patch";

@@ -1,0 +1,1 @@
+export type { PropertyValueStorageConfigCreateJsonMergePatch } from "./json-merge-patch";

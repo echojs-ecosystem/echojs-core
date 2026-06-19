@@ -5,37 +5,12 @@ import { composeEventHandlers } from "../../utils/compose-event-handlers";
 import { dataDisabled, dataPending } from "../../utils/data-attributes";
 import { defaultButtonSpinner } from "./button-spinner";
 import { buttonStyles } from "./button.styles";
-import type { ButtonProps, ButtonSize } from "./button.types";
-
-const INTERNAL_KEYS = new Set([
-  "variant",
-  "size",
-  "radius",
-  "fullWidth",
-  "iconOnly",
-  "pending",
-  "loading",
-  "disabled",
-  "leftIcon",
-  "rightIcon",
-  "spinner",
-  "headless",
-  "children",
-  "onClick",
-]);
-
-const pickDomProps = (props: Record<string, unknown>): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (!INTERNAL_KEYS.has(key)) out[key] = value;
-  }
-  return out;
-};
+import { BUTTON_OWN_KEYS, type ButtonOwnProps, type ButtonProps, type ButtonSize } from "./button.types";
 
 const wrapIcon = (node: Child): Child =>
   h(
     "span",
-    { "data-btn-icon": "", className: "inline-flex shrink-0", "aria-hidden": "true" } as any,
+    { "data-btn-icon": "", className: "inline-flex shrink-0", "aria-hidden": "true" } as const,
     node,
   );
 
@@ -68,9 +43,10 @@ const buildContent = (options: {
   return parts;
 };
 
-export const Button = createUIComponent<ButtonProps, HTMLButtonElement>({
+export const Button = createUIComponent<"button", ButtonOwnProps>({
   name: "Button",
-  defaultTag: "button",
+  tag: "button",
+  ownKeys: BUTTON_OWN_KEYS,
   defaultProps: {
     variant: "primary",
     size: "md",
@@ -83,7 +59,7 @@ export const Button = createUIComponent<ButtonProps, HTMLButtonElement>({
     disabled: false,
   },
   variants: buttonStyles,
-  render: ({ props, className, headless }) => {
+  render: ({ props, domProps, className, headless }) => {
     const {
       pending: pendingProp,
       loading: loadingProp = false,
@@ -95,27 +71,15 @@ export const Button = createUIComponent<ButtonProps, HTMLButtonElement>({
       children,
       size = "md",
       onClick,
-      ...rest
-    } = props as ButtonProps & Record<string, unknown>;
+    } = props;
 
     const pending = Boolean(pendingProp || loadingProp);
     const inactive = Boolean(disabledProp || pending);
-
-    const content = buildContent({
-      pending,
-      size: size as ButtonSize,
-      leftIcon,
-      rightIcon,
-      spinner,
-      children,
-    });
-
-    const domProps = pickDomProps(rest as Record<string, unknown>);
     const visualClass = headless ? undefined : className;
 
     const handleClick = composeEventHandlers(
-      onClick as ((e: MouseEvent) => void) | undefined,
-      inactive ? (event: MouseEvent) => event.preventDefault() : undefined,
+      onClick,
+      inactive ? (event) => event.preventDefault() : undefined,
       { checkDefaultPrevented: true },
     );
 
@@ -132,8 +96,15 @@ export const Button = createUIComponent<ButtonProps, HTMLButtonElement>({
         "aria-disabled": inactive ? "true" : undefined,
         "aria-busy": pending ? "true" : undefined,
         onClick: inactive ? handleClick : onClick,
-      } as any,
-      content as Child,
+      },
+      buildContent({
+        pending,
+        size,
+        leftIcon,
+        rightIcon,
+        spinner,
+        children,
+      }),
     );
   },
 });

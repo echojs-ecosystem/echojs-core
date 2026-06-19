@@ -142,9 +142,14 @@ describe("http generator", () => {
     expect(result.failed, result.error?.message).toBe(false);
 
     const defaults = await readFile(path.join(outputDir, "async", "defaults.ts"), "utf8");
+    expect(defaults).toContain("export type GeneratedQueryDefaults");
+    expect(defaults).toContain("export const queryDefaults");
+    expect(defaults).toContain("export const infiniteQueryDefaults");
+    expect(defaults).toContain("export const mutationDefaults");
     expect(defaults).toContain("keepPreviousData: true");
     expect(defaults).toContain("staleTime: 60000");
     expect(defaults).toContain("retry: false");
+    expect(defaults).toContain("satisfies GeneratedQueryDefaults");
 
     const getUsersQuery = await readFile(path.join(outputDir, "async", "users", "get-users.query.ts"), "utf8");
     expect(getUsersQuery).toContain('import { createQuery } from "@echojs-ecosystem/async"');

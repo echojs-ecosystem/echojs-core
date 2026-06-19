@@ -1,29 +1,26 @@
-import type { Props } from "@echojs-ecosystem/hyperdom";
-import type { UIComponentBaseProps } from "../../core/types";
+import type { UIComponentProps } from "../../core/props-types";
 
 export type TextareaVariant = "outline" | "filled" | "ghost";
 export type TextareaSize = "sm" | "md" | "lg";
 export type TextareaResize = "none" | "vertical" | "horizontal" | "both";
 
-export type TextareaProps = UIComponentBaseProps &
-  Omit<Props<HTMLTextAreaElement>, "children" | "value" | "defaultValue"> & {
-    value?: string;
-    defaultValue?: string;
+export type TextareaOwnProps = {
+  invalid?: boolean;
+  resize?: TextareaResize;
+  size?: TextareaSize;
+  variant?: TextareaVariant;
+};
 
-    name?: string;
-    placeholder?: string;
+export type TextareaProps = UIComponentProps<"textarea", TextareaOwnProps, "children" | "value" | "defaultValue"> & {
+  value?: string;
+  defaultValue?: string;
+  name?: string;
+  placeholder?: string;
+  rows?: number;
+  cols?: number;
+  disabled?: boolean;
+  readonly?: boolean;
+  required?: boolean;
+};
 
-    rows?: number;
-    cols?: number;
-
-    disabled?: boolean;
-    readonly?: boolean;
-    required?: boolean;
-    invalid?: boolean;
-
-    resize?: TextareaResize;
-
-    size?: TextareaSize;
-    variant?: TextareaVariant;
-  };
-
+export const TEXTAREA_OWN_KEYS = ["invalid", "resize", "size", "variant"] as const satisfies readonly (keyof TextareaOwnProps)[];

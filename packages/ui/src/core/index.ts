@@ -1,5 +1,7 @@
 export { createUIComponent } from "./component";
 export type { CreateUIComponentConfig, UIComponentRenderContext } from "./component";
+export type { UIComponentProps, DomPropsForTag, ElementForTag } from "./props-types";
+export { toDomProps, buildStripKeys } from "./props-types";
 export type { UIComponentBaseProps } from "./types";
 export { mergeProps } from "./props";
 export type { MergeableProps } from "./props";

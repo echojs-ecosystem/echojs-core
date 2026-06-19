@@ -1,0 +1,1 @@
+export { RecorderJsonldRecorderCollectionReadGetIdSchema } from "./read-get-id-schema";

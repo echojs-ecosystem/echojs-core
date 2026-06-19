@@ -1,0 +1,1 @@
+export type { MeetConsumeTokenDtoReportIntegrationErrorRequestJsonMergePatch } from "./json-merge-patch";

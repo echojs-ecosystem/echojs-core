@@ -1,0 +1,1 @@
+export type { RecorderJsonldRecorderItemReadGetIdPropertyRead } from "./read-get-id-property/read";

@@ -1,0 +1,1 @@
+export type { RecorderHtmlRecorderItemReadGetIdPropertyRead } from "./read";

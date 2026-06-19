@@ -1,0 +1,1 @@
+export { PropertyValueJsonldStorageConfigDetailGetIdSchema } from "./detail-get-id-schema";

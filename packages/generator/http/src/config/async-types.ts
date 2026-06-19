@@ -7,19 +7,60 @@ export type AsyncGeneratorDefaultValue =
   | AsyncGeneratorDefaultValue[]
   | { [key: string]: AsyncGeneratorDefaultValue };
 
+/**
+ * Serializable subset of `QueryOptions` from `@echojs-ecosystem/async`.
+ * Used in generator config and re-exported in generated `async/defaults.ts`.
+ */
+export type AsyncGeneratorQueryDefaults = {
+  staleTime?: number;
+  cacheTime?: number;
+  keepPreviousData?: boolean;
+  abortPrevious?: boolean;
+  refetchOnMount?: boolean | "stale";
+  refetchOnWindowFocus?: boolean;
+  refetchOnReconnect?: boolean;
+  retry?: number | false;
+  retryDelay?: number;
+  enabled?: boolean;
+};
+
+/**
+ * Serializable subset of `InfiniteQueryOptions` from `@echojs-ecosystem/async`.
+ */
+export type AsyncGeneratorInfiniteQueryDefaults = {
+  staleTime?: number;
+  cacheTime?: number;
+  keepPreviousData?: boolean;
+  abortPrevious?: boolean;
+  refetchOnMount?: boolean | "stale";
+  refetchOnWindowFocus?: boolean;
+  refetchOnReconnect?: boolean;
+  retry?: number | false;
+  retryDelay?: number;
+  enabled?: boolean;
+};
+
+/**
+ * Serializable subset of `MutationOptions` from `@echojs-ecosystem/async`.
+ */
+export type AsyncGeneratorMutationDefaults = {
+  retry?: number | false;
+  retryDelay?: number;
+};
+
 export interface AsyncGeneratorDefaultsConfig {
   /** Base options spread into every generated `createQuery` definition. */
-  query?: Record<string, AsyncGeneratorDefaultValue>;
+  query?: AsyncGeneratorQueryDefaults;
   /** Base options spread into every generated `createInfiniteQuery` definition. */
-  infiniteQuery?: Record<string, AsyncGeneratorDefaultValue>;
+  infiniteQuery?: AsyncGeneratorInfiniteQueryDefaults;
   /** Base options spread into every generated `createMutation` definition. */
-  mutation?: Record<string, AsyncGeneratorDefaultValue>;
+  mutation?: AsyncGeneratorMutationDefaults;
 }
 
 export interface ResolvedAsyncGeneratorDefaults {
-  query: Record<string, AsyncGeneratorDefaultValue>;
-  infiniteQuery: Record<string, AsyncGeneratorDefaultValue>;
-  mutation: Record<string, AsyncGeneratorDefaultValue>;
+  query: AsyncGeneratorQueryDefaults;
+  infiniteQuery: AsyncGeneratorInfiniteQueryDefaults;
+  mutation: AsyncGeneratorMutationDefaults;
 }
 
 /** Per-operation OpenAPI extension (`x-echo-async`). */

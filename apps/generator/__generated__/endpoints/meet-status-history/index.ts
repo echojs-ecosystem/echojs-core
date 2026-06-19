@@ -1,0 +1,1 @@
+export { apiMeetsIdhistoryStatusesGetCollection } from "./api-meets-idhistory-statuses-get-collection";

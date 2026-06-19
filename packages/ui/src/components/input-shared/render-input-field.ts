@@ -5,30 +5,6 @@ import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { inputStyles } from "./input.styles";
 import type { InputSize, InputVariant } from "./field.types";
 
-export const INPUT_INTERNAL_KEYS = new Set([
-  "variant",
-  "size",
-  "startContent",
-  "endContent",
-  "invalid",
-  "disabled",
-  "readonly",
-  "readOnly",
-  "required",
-  "headless",
-  "children",
-  "className",
-  "class",
-]);
-
-export const pickInputDomProps = (props: Record<string, unknown>): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (!INPUT_INTERNAL_KEYS.has(key)) out[key] = value;
-  }
-  return out;
-};
-
 export type RenderInputFieldOptions = {
   headless: boolean;
   className?: string;

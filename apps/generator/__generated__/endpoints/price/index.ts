@@ -1,0 +1,1 @@
+export { apiPricesIdGet } from "./api-prices-id-get";

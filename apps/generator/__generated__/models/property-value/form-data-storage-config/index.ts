@@ -1,0 +1,1 @@
+export type { PropertyValueFormDataStorageConfigDetailGetId } from "./detail-get-id";

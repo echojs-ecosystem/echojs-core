@@ -1,0 +1,1 @@
+export { PropertyValueRecorderConfigWriteJsonMergePatchSchema } from "./json-merge-patch-schema";

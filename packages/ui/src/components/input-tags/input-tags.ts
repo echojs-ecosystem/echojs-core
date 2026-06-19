@@ -4,19 +4,8 @@ import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { inputStyles } from "../input-shared/input.styles";
-import { pickInputDomProps, renderInputField } from "../input-shared/render-input-field";
-import type { InputTagsProps } from "./input-tags.types";
-
-const TAG_PROP_KEYS = new Set(["value", "onValueChange", "separators", "allowDuplicates", "maxTags"]);
-
-const pickTagsDomProps = (props: Record<string, unknown>): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (TAG_PROP_KEYS.has(key)) continue;
-    out[key] = value;
-  }
-  return pickInputDomProps(out);
-};
+import { renderInputField } from "../input-shared/render-input-field";
+import { INPUT_TAGS_OWN_KEYS, type InputTagsOwnProps } from "./input-tags.types";
 
 const normalizeTag = (raw: string): string => raw.trim();
 
@@ -31,9 +20,10 @@ const canAddTag = (
   return true;
 };
 
-export const InputTags = createUIComponent<InputTagsProps, HTMLDivElement>({
+export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
   name: "InputTags",
-  defaultTag: "div",
+  tag: "div",
+  ownKeys: INPUT_TAGS_OWN_KEYS,
   defaultProps: {
     value: [],
     separators: [",", "Enter"],
@@ -42,8 +32,8 @@ export const InputTags = createUIComponent<InputTagsProps, HTMLDivElement>({
     size: "md",
     placeholder: "Add tag…",
   },
-  variants: (options) => inputStyles.wrapper(options as Record<string, unknown>),
-  render: ({ props, headless, className }) => {
+  variants: inputStyles.wrapper,
+  render: ({ props, domProps, headless, className }) => {
     const {
       value = [],
       separators = [",", "Enter"],
@@ -61,11 +51,9 @@ export const InputTags = createUIComponent<InputTagsProps, HTMLDivElement>({
       placeholder,
       onValueChange,
       onInput,
-      ...rest
-    } = props as InputTagsProps & Record<string, unknown>;
+    } = props;
 
     const readonly = readonlyProp ?? readOnly;
-    const domProps = pickTagsDomProps(rest as Record<string, unknown>);
     const tags = Array.isArray(value) ? value : [];
     const slotOptions = { variant, size };
 
@@ -109,8 +97,8 @@ export const InputTags = createUIComponent<InputTagsProps, HTMLDivElement>({
 
     const innerInput = renderInputField({
       headless: true,
-      variant: variant as InputTagsProps["variant"],
-      size: size as InputTagsProps["size"],
+      variant: variant,
+      size: size,
       disabled,
       invalid,
       readonly,

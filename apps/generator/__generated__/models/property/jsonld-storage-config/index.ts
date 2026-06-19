@@ -1,0 +1,2 @@
+export type { PropertyJsonldStorageConfigDetailGetId, PropertyJsonldStorageConfigDetailGetIdTypeEnumKey } from "./detail-get-id";
+export { propertyJsonldStorageConfigDetailGetIdTypeEnum } from "./detail-get-id";

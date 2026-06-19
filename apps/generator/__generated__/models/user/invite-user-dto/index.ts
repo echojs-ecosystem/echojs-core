@@ -1,0 +1,1 @@
+export type { UserInviteUserDtoJsonMergePatch } from "./json-merge-patch";

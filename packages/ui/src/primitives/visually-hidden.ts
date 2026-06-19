@@ -1,29 +1,31 @@
-import { h } from "@echojs-ecosystem/hyperdom";
-import type { Child } from "@echojs-ecosystem/hyperdom";
-import type { UIComponentBaseProps } from "../core/types";
-import { createUIComponent } from "../core/component";
+import { h, type Child } from "@echojs-ecosystem/hyperdom";
 
-export type VisuallyHiddenProps = UIComponentBaseProps & {
+import { createUIComponent } from "../core/component";
+import type { UIComponentProps } from "../core/props-types";
+
+export type VisuallyHiddenOwnProps = {
   as?: keyof HTMLElementTagNameMap;
 };
 
-const defaultProps: Partial<VisuallyHiddenProps> = {
-  as: "span",
-};
+export type VisuallyHiddenProps = UIComponentProps<"span", VisuallyHiddenOwnProps>;
+
+export const VISUALLY_HIDDEN_OWN_KEYS = ["as"] as const satisfies readonly (keyof VisuallyHiddenOwnProps)[];
 
 /**
  * Hides content visually while keeping it available to assistive tech.
  */
-export const VisuallyHidden = createUIComponent<VisuallyHiddenProps>({
+export const VisuallyHidden = createUIComponent<"span", VisuallyHiddenOwnProps>({
   name: "VisuallyHidden",
-  defaultTag: "span",
+  tag: "span",
+  ownKeys: VISUALLY_HIDDEN_OWN_KEYS,
   defaultProps: {
-    ...defaultProps,
+    as: "span",
     className: "sr-only",
   },
-  render: ({ props, headless, className }) => {
-    const { as = "span", children, ...rest } = props;
-    const classes = headless ? undefined : className ?? "sr-only";
-    return h(as, { ...rest, className: classes, class: classes }, children as Child);
+  render: ({ props, domProps, headless, className }) => {
+    const tag = props.as ?? "span";
+    const classes = headless ? undefined : (className ?? "sr-only");
+
+    return h(tag, { ...domProps, className: classes, class: classes }, props.children as Child);
   },
 });

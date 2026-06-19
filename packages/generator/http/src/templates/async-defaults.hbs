@@ -1,9 +1,14 @@
-{{#if queryDefaults}}
-export const queryDefaults = {{{queryDefaults}}} as const;
-{{/if}}
-{{#if infiniteQueryDefaults}}
-export const infiniteQueryDefaults = {{{infiniteQueryDefaults}}} as const;
-{{/if}}
-{{#if mutationDefaults}}
-export const mutationDefaults = {{{mutationDefaults}}} as const;
-{{/if}}
+import type { InfiniteQueryOptions, MutationOptions, QueryOptions } from "{{asyncImportPath}}";
+
+export type GeneratedQueryDefaults = Partial<Omit<QueryOptions<unknown>, "queryKey" | "queryFn">>;
+export type GeneratedInfiniteQueryDefaults = Partial<
+  Omit<
+    InfiniteQueryOptions<unknown>,
+    "queryKey" | "queryFn" | "initialPageParam" | "getNextPageParam" | "getPreviousPageParam"
+  >
+>;
+export type GeneratedMutationDefaults = Partial<Omit<MutationOptions<unknown, unknown>, "mutationFn">>;
+
+export const queryDefaults = {{#if queryDefaults}}{{{queryDefaults}}}{{else}}{}{{/if}} satisfies GeneratedQueryDefaults;
+export const infiniteQueryDefaults = {{#if infiniteQueryDefaults}}{{{infiniteQueryDefaults}}}{{else}}{}{{/if}} satisfies GeneratedInfiniteQueryDefaults;
+export const mutationDefaults = {{#if mutationDefaults}}{{{mutationDefaults}}}{{else}}{}{{/if}} satisfies GeneratedMutationDefaults;

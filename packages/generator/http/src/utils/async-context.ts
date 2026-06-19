@@ -290,8 +290,6 @@ export function buildAsyncTemplateContext(options: {
     schemas.headerParams?.name,
   ].filter((value): value is string => Boolean(value));
 
-  const defaultsKey = kind === "query" ? "query" : kind === "mutation" ? "mutation" : "infiniteQuery";
-  const hasDefaults = Object.keys(plugin.defaults[defaultsKey]).length > 0;
   const defaultsExportName =
     kind === "query" ? "queryDefaults" : kind === "mutation" ? "mutationDefaults" : "infiniteQueryDefaults";
 
@@ -302,7 +300,7 @@ export function buildAsyncTemplateContext(options: {
     asyncImportPath: plugin.importPath,
     endpointImportPath,
     modelsImportPath: resolveModelsImportPath(asyncFilePath, outputRoot),
-    defaultsImportPath: hasDefaults ? resolveAsyncDefaultsImportPath(asyncFilePath, outputRoot) : undefined,
+    defaultsImportPath: resolveAsyncDefaultsImportPath(asyncFilePath, outputRoot),
     queryKeysImportPath: plugin.queryKeys?.importPath,
     queryKeysExportName: plugin.queryKeys?.exportName,
     endpointFunctionName: functionName,
@@ -329,7 +327,7 @@ export function buildAsyncTemplateContext(options: {
           )
         : paramsShape.endpointArgsExpression,
     queryKeyExpression: buildQueryKeyExpression(functionName, plugin.queryKeys),
-    defaultsSpread: hasDefaults ? `...${defaultsExportName},` : undefined,
+    defaultsSpread: `...${defaultsExportName},`,
     pageParamType: pagination?.pageParamType ?? "unknown",
     initialPageParam: pagination?.initialPageParam,
     getNextPageParam: pagination?.getNextPageParam,

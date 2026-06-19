@@ -4,74 +4,40 @@ import { createUIComponent } from "../../core/component";
 import { ariaBool } from "../../core/aria";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { checkboxStyles } from "./checkbox.styles";
-import type { CheckboxProps } from "./checkbox.types";
+import { CHECKBOX_OWN_KEYS, type CheckboxOwnProps } from "./checkbox.types";
 
-const INTERNAL_KEYS = new Set([
-  "size",
-  "indeterminate",
-  "invalid",
-  "disabled",
-  "checked",
-  "defaultChecked",
-  "required",
-  "headless",
-  "children",
-  "className",
-  "class",
-]);
-
-const pickDomProps = (props: Record<string, unknown>): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (!INTERNAL_KEYS.has(key)) out[key] = value;
-  }
-  return out;
-};
-
-export const Checkbox = createUIComponent<CheckboxProps, HTMLInputElement>({
+export const Checkbox = createUIComponent<"input", CheckboxOwnProps>({
   name: "Checkbox",
-  defaultTag: "input",
+  tag: "input",
+  ownKeys: CHECKBOX_OWN_KEYS,
   defaultProps: {
     size: "md",
   },
   variants: checkboxStyles,
-  render: ({ props, headless, className }) => {
-    const {
-      checked,
-      defaultChecked,
-      indeterminate = false,
-      disabled,
-      invalid,
-      required,
-      ...rest
-    } = props as CheckboxProps & Record<string, unknown>;
-
-    const domProps = pickDomProps(rest as Record<string, unknown>);
+  render: ({ props, domProps, className, headless }) => {
+    const { checked, defaultChecked, indeterminate = false, disabled, invalid, required } = props;
     const visualClass = headless ? undefined : className;
 
-    return h(
-      "input",
-      {
-        ...domProps,
-        type: "checkbox",
-        checked,
-        defaultChecked,
-        disabled,
-        required,
-        indeterminate,
-        "aria-checked": indeterminate
-          ? "mixed"
-          : checked !== undefined
-            ? ariaBool(Boolean(checked))
-            : undefined,
-        "aria-invalid": invalid ? "true" : undefined,
-        "aria-required": required ? "true" : undefined,
-        ...dataDisabled(Boolean(disabled)),
-        ...dataInvalid(Boolean(invalid)),
-        ...(indeterminate ? { "data-indeterminate": "" } : {}),
-        className: visualClass,
-        class: visualClass,
-      } as any,
-    );
+    return h("input", {
+      ...domProps,
+      type: "checkbox",
+      checked,
+      defaultChecked,
+      disabled,
+      required,
+      indeterminate,
+      "aria-checked": indeterminate
+        ? "mixed"
+        : checked !== undefined
+          ? ariaBool(Boolean(checked))
+          : undefined,
+      "aria-invalid": invalid ? "true" : undefined,
+      "aria-required": required ? "true" : undefined,
+      ...dataDisabled(Boolean(disabled)),
+      ...dataInvalid(Boolean(invalid)),
+      ...(indeterminate ? { "data-indeterminate": "" } : {}),
+      className: visualClass,
+      class: visualClass,
+    });
   },
 });

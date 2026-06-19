@@ -1,4 +1,0 @@
-access=public
-# registry=https://registry.npmjs.org/
-# Auth for local publish only — copy to .npmrc (gitignored):
-# //registry.npmjs.org/:_authToken=${NPM_TOKEN}

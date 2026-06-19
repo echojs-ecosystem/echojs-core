@@ -1,0 +1,2 @@
+export type { PropertyFormDataStorageConfigDetailGetId, PropertyFormDataStorageConfigDetailGetIdTypeEnumKey } from "./detail-get-id";
+export { propertyFormDataStorageConfigDetailGetIdTypeEnum } from "./detail-get-id";

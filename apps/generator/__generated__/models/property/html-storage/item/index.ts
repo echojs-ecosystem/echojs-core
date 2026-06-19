@@ -1,0 +1,3 @@
+export type { PropertyHtmlStorageItemReadGetIdPropertyRead, PropertyHtmlStorageItemReadGetIdPropertyReadForEntityEnumKey, PropertyHtmlStorageItemReadGetIdPropertyReadTypeEnumKey } from "./read-get-id-property/read";
+export { propertyHtmlStorageItemReadGetIdPropertyReadForEntityEnum } from "./read-get-id-property/read";
+export { propertyHtmlStorageItemReadGetIdPropertyReadTypeEnum } from "./read-get-id-property/read";

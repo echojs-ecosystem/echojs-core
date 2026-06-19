@@ -35,6 +35,15 @@ export {
   type ViewFn,
   type CreateComponentOptions,
 } from "./component";
+export {
+  createAsyncComponent,
+  type AsyncComponent,
+  type AsyncComponentChunk,
+  type AsyncComponentLoader,
+  type AsyncErrorComponent,
+  type AsyncLoadingComponent,
+  type CreateAsyncComponentOptions,
+} from "./create-async-component";
 export { setStrictContextChecks, getStrictContextChecks } from "./config";
 export { Show } from "./control/show";
 export { List } from "./control/list";

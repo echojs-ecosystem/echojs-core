@@ -32,6 +32,7 @@ export type { UITheme, ComponentThemeConfig } from "./theme/types";
 // Core
 export { createUIComponent } from "./core/component";
 export type { CreateUIComponentConfig, UIComponentRenderContext } from "./core/component";
+export type { UIComponentProps, DomPropsForTag, ElementForTag } from "./core/props-types";
 export type { UIComponentBaseProps } from "./core/types";
 export { mergeProps } from "./core/props";
 export { mergeRefs } from "./core/refs";

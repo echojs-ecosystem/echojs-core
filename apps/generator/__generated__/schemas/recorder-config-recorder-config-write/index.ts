@@ -1,0 +1,1 @@
+export { RecorderConfigRecorderConfigWriteJsonMergePatchSchema } from "./json-merge-patch-schema";

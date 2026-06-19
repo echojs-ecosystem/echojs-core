@@ -97,37 +97,31 @@ export const pluginEchoAsync = definePlugin<PluginEchoAsync>((options) => {
       const oas = await this.getOas();
       const asyncRoot = path.resolve(root, output.path);
 
-      const hasAnyDefaults =
-        hasSerializedDefaults(defaults.query) ||
-        hasSerializedDefaults(defaults.infiniteQuery) ||
-        hasSerializedDefaults(defaults.mutation);
-
-      if (hasAnyDefaults) {
-        await this.addFile({
-          baseName: "defaults.ts",
-          path: path.resolve(asyncRoot, "defaults.ts"),
-          sources: [
-            {
-              name: "defaults",
-              value: renderTemplate("async-defaults.hbs", {
-                queryDefaults: hasSerializedDefaults(defaults.query)
-                  ? serializeTsObjectLiteral(defaults.query)
-                  : undefined,
-                infiniteQueryDefaults: hasSerializedDefaults(defaults.infiniteQuery)
-                  ? serializeTsObjectLiteral(defaults.infiniteQuery)
-                  : undefined,
-                mutationDefaults: hasSerializedDefaults(defaults.mutation)
-                  ? serializeTsObjectLiteral(defaults.mutation)
-                  : undefined,
-              }),
-              isExportable: true,
-              isIndexable: true,
-            },
-          ],
-          imports: [],
-          exports: [],
-        });
-      }
+      await this.addFile({
+        baseName: "defaults.ts",
+        path: path.resolve(asyncRoot, "defaults.ts"),
+        sources: [
+          {
+            name: "defaults",
+            value: renderTemplate("async-defaults.hbs", {
+              asyncImportPath: importPath,
+              queryDefaults: hasSerializedDefaults(defaults.query)
+                ? serializeTsObjectLiteral(defaults.query)
+                : undefined,
+              infiniteQueryDefaults: hasSerializedDefaults(defaults.infiniteQuery)
+                ? serializeTsObjectLiteral(defaults.infiniteQuery)
+                : undefined,
+              mutationDefaults: hasSerializedDefaults(defaults.mutation)
+                ? serializeTsObjectLiteral(defaults.mutation)
+                : undefined,
+            }),
+            isExportable: true,
+            isIndexable: true,
+          },
+        ],
+        imports: [],
+        exports: [],
+      });
 
       const operationGenerator = new OperationGenerator(this.plugin.options, {
         fabric: this.fabric,

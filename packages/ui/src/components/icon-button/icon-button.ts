@@ -1,21 +1,23 @@
 import { createUIComponent } from "../../core/component";
 import { Button } from "../button/button";
+import { BUTTON_OWN_KEYS } from "../button/button.types";
 import { iconButtonStyles } from "./icon-button.styles";
-import type { IconButtonProps } from "./icon-button.types";
+import { ICON_BUTTON_OWN_KEYS, type IconButtonOwnProps } from "./icon-button.types";
 
 const isDev = (): boolean => {
   const env = (globalThis as { process?: { env?: { NODE_ENV?: string } } }).process?.env?.NODE_ENV;
   return env !== "production";
 };
 
-export const IconButton = createUIComponent<IconButtonProps, HTMLElement>({
+export const IconButton = createUIComponent<"button", IconButtonOwnProps>({
   name: "IconButton",
-  defaultTag: "button",
+  tag: "button",
+  ownKeys: [...BUTTON_OWN_KEYS, ...ICON_BUTTON_OWN_KEYS],
   defaultProps: {
     variant: "ghost",
     size: "md",
   },
-  variants: (options) => iconButtonStyles(options as Record<string, unknown>),
+  variants: iconButtonStyles,
   render: ({ props, className, headless }) => {
     const ariaLabel = props["aria-label"];
     if (isDev() && (!ariaLabel || String(ariaLabel).trim().length === 0)) {

@@ -1,18 +1,19 @@
 import { createUIComponent } from "../../core/component";
+import { INPUT_FIELD_OWN_KEYS, type InputFieldOwnProps } from "../input-shared/field.types";
 import { inputStyles } from "../input-shared/input.styles";
-import { pickInputDomProps, renderInputField } from "../input-shared/render-input-field";
-import type { InputProps } from "./input.types";
+import { renderInputField } from "../input-shared/render-input-field";
 
-export const Input = createUIComponent<InputProps, HTMLInputElement>({
+export const Input = createUIComponent<"input", InputFieldOwnProps>({
   name: "Input",
-  defaultTag: "input",
+  tag: "input",
+  ownKeys: INPUT_FIELD_OWN_KEYS,
   defaultProps: {
     type: "text",
     variant: "outline",
     size: "md",
   },
-  variants: (options) => inputStyles.wrapper(options as Record<string, unknown>),
-  render: ({ props, headless, className }) => {
+  variants: inputStyles.wrapper,
+  render: ({ props, domProps, headless, className }) => {
     const {
       startContent,
       endContent,
@@ -23,24 +24,20 @@ export const Input = createUIComponent<InputProps, HTMLInputElement>({
       required,
       variant,
       size,
-      ...rest
-    } = props as InputProps & Record<string, unknown>;
-
-    const readonly = readonlyProp ?? readOnly;
-    const domProps = pickInputDomProps(rest as Record<string, unknown>);
+    } = props;
 
     return renderInputField({
       headless,
       className,
-      variant: variant as InputProps["variant"],
-      size: size as InputProps["size"],
+      variant,
+      size,
       disabled,
       invalid,
-      readonly,
+      readonly: readonlyProp ?? readOnly,
       required,
       startContent,
       endContent,
-      inputProps: domProps,
+      inputProps: { ...domProps, type: props.type ?? "text" },
     });
   },
 });

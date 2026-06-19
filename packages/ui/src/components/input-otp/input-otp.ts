@@ -4,34 +4,23 @@ import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { inputStyles } from "../input-shared/input.styles";
-import { pickInputDomProps } from "../input-shared/render-input-field";
-import type { InputOtpProps } from "./input-otp.types";
-
-const OTP_PROP_KEYS = new Set(["length", "onValueChange", "value", "defaultValue"]);
-
-const pickOtpDomProps = (props: Record<string, unknown>): Record<string, unknown> => {
-  const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(props)) {
-    if (OTP_PROP_KEYS.has(key)) continue;
-    out[key] = value;
-  }
-  return pickInputDomProps(out);
-};
+import { INPUT_OTP_OWN_KEYS, type InputOtpOwnProps } from "./input-otp.types";
 
 const normalizeOtp = (value: string, length: number): string =>
   value.replace(/\D/g, "").slice(0, length);
 
-export const InputOtp = createUIComponent<InputOtpProps, HTMLDivElement>({
+export const InputOtp = createUIComponent<"div", InputOtpOwnProps>({
   name: "InputOtp",
-  defaultTag: "div",
+  tag: "div",
+  ownKeys: INPUT_OTP_OWN_KEYS,
   defaultProps: {
     length: 6,
     variant: "outline",
     size: "md",
     autocomplete: "one-time-code",
   },
-  variants: (options) => inputStyles.wrapper(options as Record<string, unknown>),
-  render: ({ props, headless, className }) => {
+  variants: inputStyles.wrapper,
+  render: ({ props, domProps, headless, className }) => {
     const {
       length = 6,
       value = "",
@@ -45,11 +34,9 @@ export const InputOtp = createUIComponent<InputOtpProps, HTMLDivElement>({
       autocomplete = "one-time-code",
       onValueChange,
       onInput,
-      ...rest
-    } = props as InputOtpProps & Record<string, unknown>;
+    } = props;
 
     const readonly = readonlyProp ?? readOnly;
-    const domProps = pickOtpDomProps(rest as Record<string, unknown>);
     const digits = normalizeOtp(String(value), length);
     const slotOptions = { variant, size };
     const cellClass = headless

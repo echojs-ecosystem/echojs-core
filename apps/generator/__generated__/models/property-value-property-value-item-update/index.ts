@@ -1,0 +1,1 @@
+export type { PropertyValuePropertyValueItemUpdateJsonMergePatch } from "./json-merge-patch";

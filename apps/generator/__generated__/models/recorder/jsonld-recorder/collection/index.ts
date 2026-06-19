@@ -1,0 +1,1 @@
+export type { RecorderJsonldRecorderCollectionReadGetId } from "./read-get-id";

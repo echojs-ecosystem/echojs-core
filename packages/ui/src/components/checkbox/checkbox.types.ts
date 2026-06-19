@@ -1,22 +1,26 @@
 import type { Props } from "@echojs-ecosystem/hyperdom";
-import type { UIComponentBaseProps } from "../../core/types";
+
+import type { UIComponentProps } from "../../core/props-types";
 
 export type CheckboxSize = "sm" | "md" | "lg";
 
-export type CheckboxProps = UIComponentBaseProps &
-  Omit<Props<HTMLInputElement>, "children" | "type" | "checked" | "defaultChecked" | "size"> & {
-    /** Controlled checked state. */
-    checked?: boolean;
-    /** Uncontrolled initial state. */
-    defaultChecked?: boolean;
+export type CheckboxOwnProps = {
+  indeterminate?: boolean;
+  invalid?: boolean;
+  size?: CheckboxSize;
+};
 
-    indeterminate?: boolean;
-    disabled?: boolean;
-    invalid?: boolean;
-    required?: boolean;
+export type CheckboxProps = UIComponentProps<
+  "input",
+  CheckboxOwnProps,
+  "children" | "type" | "checked" | "defaultChecked" | "size"
+> & {
+  checked?: boolean;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  name?: string;
+  value?: string;
+};
 
-    size?: CheckboxSize;
-
-    name?: string;
-    value?: string;
-  };
+export const CHECKBOX_OWN_KEYS = ["size", "indeterminate", "invalid"] as const satisfies readonly (keyof CheckboxOwnProps)[];

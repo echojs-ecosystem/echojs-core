@@ -1,0 +1,1 @@
+export { PropertyValueHtmlStorageConfigDetailGetIdSchema } from "./detail-get-id-schema";

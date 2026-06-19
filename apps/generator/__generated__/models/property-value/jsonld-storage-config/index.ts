@@ -1,0 +1,1 @@
+export type { PropertyValueJsonldStorageConfigDetailGetId } from "./detail-get-id";

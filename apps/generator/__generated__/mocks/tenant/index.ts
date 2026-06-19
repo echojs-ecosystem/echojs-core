@@ -1,0 +1,1 @@
+export { ApiCurrentTenantGetHandler, ApiCurrentTenantGetHandlerResponse200, ApiCurrentTenantGetHandlerResponse403, ApiCurrentTenantGetHandlerResponse404 } from "./api-current-tenant-get-handler";

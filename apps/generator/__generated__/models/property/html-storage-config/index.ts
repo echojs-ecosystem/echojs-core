@@ -1,0 +1,2 @@
+export type { PropertyHtmlStorageConfigDetailGetId, PropertyHtmlStorageConfigDetailGetIdTypeEnumKey } from "./detail-get-id";
+export { propertyHtmlStorageConfigDetailGetIdTypeEnum } from "./detail-get-id";

@@ -1,0 +1,1 @@
+export { apiPropertyValuesIdPatch } from "./api-property-values-id-patch";

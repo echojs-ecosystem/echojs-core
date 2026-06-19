@@ -1,0 +1,1 @@
+export type { StorageConfigStorageConfigUpdateJsonMergePatch } from "./json-merge-patch";

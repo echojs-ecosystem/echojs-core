@@ -1,0 +1,1 @@
+export type { StorageJsonldStorageItemReadGetIdPropertyRead } from "./read-get-id-property/read";

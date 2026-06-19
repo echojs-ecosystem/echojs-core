@@ -1,36 +1,35 @@
 import { h } from "@echojs-ecosystem/hyperdom";
+
 import { createUIComponent } from "../../core/component";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { textareaStyles } from "./textarea.styles";
-import type { TextareaProps } from "./textarea.types";
+import { TEXTAREA_OWN_KEYS, type TextareaOwnProps } from "./textarea.types";
 
-export const Textarea = createUIComponent<TextareaProps, HTMLTextAreaElement>({
+export const Textarea = createUIComponent<"textarea", TextareaOwnProps>({
   name: "Textarea",
-  defaultTag: "textarea",
+  tag: "textarea",
+  ownKeys: TEXTAREA_OWN_KEYS,
   defaultProps: {
     variant: "outline",
     size: "md",
     resize: "vertical",
   },
-  variants: (options) => textareaStyles(options as any),
-  render: ({ props, headless, className }) => {
-    const { invalid, disabled, readonly, required, ...rest } = props as any;
-
-    const ariaInvalid = invalid ? "true" : (rest["aria-invalid"] as any);
-    const dataReadonly = readonly ? { "data-readonly": "" } : {};
+  variants: textareaStyles,
+  render: ({ props, domProps, className, headless }) => {
+    const { invalid, disabled, readonly, required } = props;
+    const visualClass = headless ? undefined : className;
 
     return h("textarea", {
-      ...rest,
+      ...domProps,
       disabled,
       readonly,
       required,
-      "aria-invalid": ariaInvalid,
+      "aria-invalid": invalid ? "true" : domProps["aria-invalid"],
       ...dataDisabled(Boolean(disabled)),
       ...dataInvalid(Boolean(invalid)),
-      ...dataReadonly,
-      className: headless ? undefined : className,
-      class: headless ? undefined : className,
+      ...(readonly ? { "data-readonly": "" } : {}),
+      className: visualClass,
+      class: visualClass,
     });
   },
 });
-

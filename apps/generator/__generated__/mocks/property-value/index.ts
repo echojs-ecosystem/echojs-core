@@ -1,0 +1,1 @@
+export { ApiPropertyValuesIdPatchHandler, ApiPropertyValuesIdPatchHandlerResponse200, ApiPropertyValuesIdPatchHandlerResponse400, ApiPropertyValuesIdPatchHandlerResponse403, ApiPropertyValuesIdPatchHandlerResponse404, ApiPropertyValuesIdPatchHandlerResponse422 } from "./api-property-values-id-patch-handler";

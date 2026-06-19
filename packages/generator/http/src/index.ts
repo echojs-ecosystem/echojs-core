@@ -10,6 +10,9 @@ export type {
 } from "./config/types";
 export type {
   AsyncGeneratorDefaultsConfig,
+  AsyncGeneratorInfiniteQueryDefaults,
+  AsyncGeneratorMutationDefaults,
+  AsyncGeneratorQueryDefaults,
   EchoAsyncOperationExtension,
 } from "./config/async-types";
 export { createKubbConfig } from "./kubb/create-kubb-config";

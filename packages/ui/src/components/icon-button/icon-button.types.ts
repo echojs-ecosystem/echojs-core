@@ -1,10 +1,17 @@
 import type { Child } from "@echojs-ecosystem/hyperdom";
-import type { ButtonProps } from "../button/button.types";
+
+import type { ButtonOwnProps } from "../button/button.types";
+import type { UIComponentProps } from "../../core/props-types";
 
 export type IconButtonSize = "xs" | "sm" | "md" | "lg";
 
-export type IconButtonProps = Omit<ButtonProps, "size" | "children"> & {
+export type IconButtonOwnProps = ButtonOwnProps & {
   size?: IconButtonSize;
+};
+
+export type IconButtonProps = UIComponentProps<"button", IconButtonOwnProps, "disabled" | "children"> & {
+  disabled?: boolean;
   children: Child;
 };
 
+export const ICON_BUTTON_OWN_KEYS = ["size"] as const satisfies readonly (keyof Pick<IconButtonOwnProps, "size">)[];

@@ -31,9 +31,10 @@ describe("UIProvider", () => {
   });
 
   it("applies global headless mode to createUIComponent", () => {
-    const Button = createUIComponent({
+    const Button = createUIComponent<"button", Record<string, never>>({
       name: "Button",
-      defaultTag: "button",
+      tag: "button",
+      ownKeys: [],
       defaultProps: { className: "btn" },
       render: ({ className, headless }) => {
         return h("button", {
@@ -59,9 +60,10 @@ describe("UIProvider", () => {
   });
 
   it("supports component-local headless override", () => {
-    const Button = createUIComponent({
+    const Button = createUIComponent<"button", Record<string, never>>({
       name: "Button",
-      defaultTag: "button",
+      tag: "button",
+      ownKeys: [],
       defaultProps: { className: "btn" },
       render: ({ className, headless }) =>
         h("button", {
@@ -80,9 +82,10 @@ describe("UIProvider", () => {
   });
 
   it("merges provider defaultVariants into components", () => {
-    const Button = createUIComponent({
+    const Button = createUIComponent<"button", { variant?: string }>({
       name: "Button",
-      defaultTag: "button",
+      tag: "button",
+      ownKeys: ["variant"],
       variants: (options) => `variant-${options?.variant ?? "none"}`,
       render: ({ className }) => h("button", { className }),
     });
@@ -103,4 +106,3 @@ describe("UIProvider", () => {
     expect(node.className).toContain("variant-primary");
   });
 });
-

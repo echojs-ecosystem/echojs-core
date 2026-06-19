@@ -1,28 +1,21 @@
 import { h, type Child } from "@echojs-ecosystem/hyperdom";
+
 import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { labelStyles } from "./label.styles";
-import type { LabelProps } from "./label.types";
+import { LABEL_OWN_KEYS, type LabelOwnProps } from "./label.types";
 
-export const Label = createUIComponent<LabelProps, HTMLLabelElement>({
+export const Label = createUIComponent<"label", LabelOwnProps>({
   name: "Label",
-  defaultTag: "label",
+  tag: "label",
+  ownKeys: LABEL_OWN_KEYS,
   defaultProps: {
     requiredIndicator: "*",
   },
-  variants: () => labelStyles({} as any),
-  render: ({ props, headless, className }) => {
-    const {
-      for: htmlFor,
-      required,
-      disabled,
-      invalid,
-      requiredIndicator,
-      optionalIndicator,
-      children,
-      ...rest
-    } = props as any;
+  variants: () => labelStyles({}),
+  render: ({ props, domProps, className, headless }) => {
+    const { for: htmlFor, required, disabled, invalid, requiredIndicator, optionalIndicator, children } = props;
 
     const indicator =
       required === true
@@ -36,13 +29,13 @@ export const Label = createUIComponent<LabelProps, HTMLLabelElement>({
     return h(
       "label",
       {
-        ...rest,
+        ...domProps,
         for: htmlFor,
         ...dataDisabled(Boolean(disabled)),
         ...dataInvalid(Boolean(invalid)),
         className: visualClass,
         class: visualClass,
-      } as any,
+      },
       [
         children as Child,
         indicator ? h("span", { "aria-hidden": "true", className: headless ? undefined : "ml-1" }, indicator) : null,
@@ -50,4 +43,3 @@ export const Label = createUIComponent<LabelProps, HTMLLabelElement>({
     );
   },
 });
-
