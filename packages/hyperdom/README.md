@@ -17,7 +17,7 @@ The view layer of EchoJS. Maps **views to real DOM nodes** with a hyperscript AP
 
 - **`h()`** — create elements, components, and reactive regions
 - **`createView` / `createModel`** — structured UI with context checks
-- **`Show` / `List`** — conditional and list rendering
+- **`Show` / `If` / `List`** — conditional and list rendering
 - **Reactive props & children** — `() => value` registers effects; only what changed updates
 - **`render()` + `dispose()`** — mount with full cleanup (listeners, effects, DOM)
 
@@ -56,8 +56,28 @@ const dispose = render(view, document.getElementById("app")!);
 | `render(view, container)` | Mount view, return `dispose()` |
 | `createView` / `createModel` | View/model factories |
 | `createComponent` | Model + view composition |
-| `Show` / `List` | Control-flow helpers |
-| `mount` | Lifecycle mount helper |
+| `mount` | Mount view tree into a DOM container |
+| `Show` | Boolean toggle (`display: none`) |
+| `effect` | Model lifecycle — reactive side effects |
+| `If(cond, render).IfElse().Else()` | If / else-if / else with explicit conditions |
+| `Match().When().Otherwise()` | Pattern matching on objects |
+
+## Package layout
+
+```
+src/
+  core/           types, config, view-context
+  hyperscript/    h()
+  dsl/            div, button, span, …
+  render/         render(), mount()
+  view/           createView
+  model/          createModel
+  lifecycle/      effect (model), render scopes (cleanup)
+  component/      createComponent, createAsyncComponent
+  compound/       createCompoundView (slots)
+  control/        Show, If, List, Match
+  dom/            DOM mount engine (internal)
+```
 
 ### Reactive patterns
 

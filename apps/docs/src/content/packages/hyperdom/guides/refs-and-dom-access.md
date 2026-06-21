@@ -36,9 +36,29 @@ nav(
 Unlike `class` or `value`, `ref` is **not** a reactive getter. HyperDOM calls it
 on mount and unmount only — not when signals change.
 
-For reactive DOM work based on signal values, use a
-[lifecycle mount](/docs/packages/hyperdom/guides/lifecycle-mount) child or read
-signals inside the ref callback without expecting re-runs.
+## Observers and subscriptions
+
+Use `ref` for DOM APIs that need setup on insert and teardown on remove:
+
+```ts
+let observer: ResizeObserver | undefined
+
+div({
+  ref: (el) => {
+    if (!el) {
+      observer?.disconnect()
+      observer = undefined
+      return
+    }
+    observer = new ResizeObserver(onResize)
+    observer.observe(el)
+  },
+})
+```
+
+Side effects that belong to **model state** belong in the model layer —
+`effect`, `effect.mount`, `effect.unmount`, `effect.watch`. See
+[Models & Components](/docs/packages/hyperdom/guides/models-and-components).
 
 ## Focus management
 
@@ -49,9 +69,6 @@ input({
   },
 })
 ```
-
-Prefer lifecycle `mount()` when setup needs cleanup (e.g. `ResizeObserver`). See
-[Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount).
 
 ## When to avoid `ref`
 
@@ -66,4 +83,4 @@ Reach for `ref` when the DOM API has no declarative equivalent.
 ## Related
 
 - [API: Types — Props](/docs/packages/hyperdom/api/types)
-- [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount)
+- [Models & Components](/docs/packages/hyperdom/guides/models-and-components)

@@ -36,7 +36,6 @@ export default echoTsupConfig({
     devtools: 'src/devtools.ts',
     ui: 'src/ui.ts',
     hyperdom: 'src/hyperdom.ts',
-    'hyperdom-lifecycle-mount': 'src/hyperdom-lifecycle-mount.ts',
     'url-state': 'src/url-state.ts',
     'network/http': 'src/network/http.ts',
     'network/ws': 'src/network/ws.ts',

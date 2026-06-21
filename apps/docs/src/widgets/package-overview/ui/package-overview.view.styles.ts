@@ -85,10 +85,7 @@ export const packageOverviewStyles = tv({
 export const packageAsideStyles = tv({
   slots: {
     root: 'space-y-5',
-    section: [
-      'rounded-2xl border border-border/80 bg-surface-elevated/60 p-4',
-      'dark:border-white/10 dark:bg-surface-elevated/40',
-    ].join(' '),
+    section: 'space-y-3',
     title:
       'mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-fg-subtle',
     linkList: 'flex flex-col gap-0.5',
@@ -97,14 +94,5 @@ export const packageAsideStyles = tv({
       'hover:bg-echo-50/80 hover:text-echo-800 dark:hover:bg-echo-950/40 dark:hover:text-echo-200',
     ].join(' '),
     linkIcon: 'h-4 w-4 shrink-0 opacity-70 transition group-hover:opacity-100',
-    tagRow: 'flex flex-wrap gap-1.5',
-    tag: [
-      'rounded-md border border-border/70 bg-surface-muted/60 px-2 py-0.5',
-      'font-mono text-[10px] font-medium text-fg-muted dark:border-white/10 dark:bg-white/[0.04]',
-    ].join(' '),
-    detailList: 'space-y-2',
-    detailRow: 'flex items-baseline justify-between gap-3 text-[13px]',
-    detailLabel: 'shrink-0 text-fg-subtle',
-    detailValue: 'truncate text-right font-medium text-fg-muted',
   },
 })

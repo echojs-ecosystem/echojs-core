@@ -1,10 +1,11 @@
 import { createUIComponent } from "../../core/component";
 import { attachInputMask } from "../../utils/input-mask";
+import { asOptionalBool } from "../input-shared/as-optional-bool";
 import { inputStyles } from "../input-shared/input.styles";
 import { renderInputField } from "../input-shared/render-input-field";
 import { INPUT_MASK_OWN_KEYS, type InputMaskOwnProps } from "./input-mask.types";
 
-export const InputMask = createUIComponent<"input", InputMaskOwnProps>({
+export const InputMask = createUIComponent<"input", InputMaskOwnProps, "children" | "size">({
   name: "InputMask",
   tag: "input",
   ownKeys: INPUT_MASK_OWN_KEYS,
@@ -19,7 +20,6 @@ export const InputMask = createUIComponent<"input", InputMaskOwnProps>({
       mask,
       onMaskValueChange,
       onInput,
-      readonly: readonlyProp,
       readOnly,
       variant,
       size,
@@ -30,7 +30,7 @@ export const InputMask = createUIComponent<"input", InputMaskOwnProps>({
       endContent,
     } = props;
 
-    const readonly = Boolean(readonlyProp ?? readOnly);
+    const readonly = asOptionalBool(readOnly);
     let disposeMask: (() => void) | undefined;
 
     const inputRef = (element: HTMLInputElement | null) => {
@@ -54,10 +54,10 @@ export const InputMask = createUIComponent<"input", InputMaskOwnProps>({
       className,
       variant,
       size,
-      disabled,
-      invalid,
+      disabled: asOptionalBool(disabled),
+      invalid: asOptionalBool(invalid),
       readonly,
-      required,
+      required: asOptionalBool(required),
       startContent,
       endContent,
       inputRef,

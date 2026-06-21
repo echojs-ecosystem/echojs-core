@@ -9,4 +9,5 @@ export type DocVersionHistoryEntry = {
 export const DOC_VERSION_HISTORY: readonly DocVersionHistoryEntry[] = [
   { id: "0.6", label: "v0.6.0", disabled: true },
   { id: "0.7", label: "v0.7.0", disabled: true },
+  { id: "0.8", label: "v0.8.0", disabled: true },
 ];

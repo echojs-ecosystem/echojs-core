@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, it } from 'vitest'
 
-import { h } from '../../h'
-import type { Child } from '../../types'
+import { h } from '../../hyperscript/h'
+import type { Child } from '../../core/types'
 import { Match, P } from './index'
 
 type Status =

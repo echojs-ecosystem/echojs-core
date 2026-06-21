@@ -28,9 +28,6 @@
       "@echojs-ecosystem/framework/router/hyperdom": [
         "../../packages/framework/src/router.ts"
       ],
-      "@echojs-ecosystem/framework/hyperdom/lifecycle/mount": [
-        "../../packages/framework/src/hyperdom-lifecycle-mount.ts"
-      ],
       "@echojs-ecosystem/framework/ui/*": ["../../packages/framework/src/ui/*"],
       "@echojs-ecosystem/framework/*": ["../../packages/framework/src/*"],
       "@echojs-ecosystem/async": ["../../packages/async/src/index.ts"],

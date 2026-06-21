@@ -144,7 +144,7 @@ effect(() => console.log(double.value()))
 | `$:` { effect }         | `$effect`      | `effect`                |
 | `export let prop`       | `$props()`     | view props              |
 | `createEventDispatcher` | callback props | model methods           |
-| `onMount`               | `$effect`      | effect / view lifecycle |
+| `onMount`               | `effect.mount` / `ref` | model or imperative DOM in view |
 
 Teams on Svelte 4 should upgrade to **runes** first; Echo migration is then
 **SFC → HyperDOM**, not rune syntax.

@@ -71,8 +71,8 @@ export const createPanelModel = createModel(() => {
 }, 'PanelModel')
 ```
 
-In views, use HyperDOM [lifecycle `mount`](/docs/packages/hyperdom/guides/lifecycle-mount)
-for DOM-bound cleanup. For utils created in a model factory, prefer
+In views, use `ref(null)` for DOM-bound cleanup. For utils created in a model
+factory, prefer `effect.mount` / `effect.unmount` in `createModel` or
 `createCleanupScope`:
 
 ```ts

@@ -3,6 +3,7 @@ import { h, type Child } from "@echojs-ecosystem/hyperdom";
 import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
+import { asOptionalBool } from "../input-shared/as-optional-bool";
 import { inputStyles } from "../input-shared/input.styles";
 import { renderInputField } from "../input-shared/render-input-field";
 import { INPUT_TAGS_OWN_KEYS, type InputTagsOwnProps } from "./input-tags.types";
@@ -42,10 +43,7 @@ export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
       startContent,
       endContent,
       invalid,
-      disabled,
-      readonly: readonlyProp,
       readOnly,
-      required,
       variant = "outline",
       size = "md",
       placeholder,
@@ -53,7 +51,7 @@ export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
       onInput,
     } = props;
 
-    const readonly = readonlyProp ?? readOnly;
+    const readonly = asOptionalBool(readOnly);
     const tags = Array.isArray(value) ? value : [];
     const slotOptions = { variant, size };
 
@@ -79,7 +77,7 @@ export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
         },
         [
           tag,
-          readonly || disabled
+          readonly
             ? null
             : h(
                 "button",
@@ -99,10 +97,8 @@ export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
       headless: true,
       variant: variant,
       size: size,
-      disabled,
-      invalid,
+      invalid: asOptionalBool(invalid),
       readonly,
-      required,
       inputProps: {
         type: "text",
         className: "min-w-24 flex-1 border-0 bg-transparent shadow-none outline-none",
@@ -132,7 +128,6 @@ export const InputTags = createUIComponent<"div", InputTagsOwnProps>({
         ...domProps,
         className: wrapperClass,
         class: wrapperClass,
-        ...dataDisabled(Boolean(disabled)),
         ...dataInvalid(Boolean(invalid)),
         ...(readonly ? { "data-readonly": "" } : {}),
       } as any,

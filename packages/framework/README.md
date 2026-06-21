@@ -59,7 +59,7 @@ createEchoApp({ strictContextChecks: true })
 | `@echojs-ecosystem/framework/network/ws` | WebSocket client (stub) |
 | `@echojs-ecosystem/framework/network/mock` | Network mocking utilities (stub) |
 | `@echojs-ecosystem/framework/network/graphql` | GraphQL client (stub) |
-| `@echojs-ecosystem/framework/core` | Low-level component runtime |
+| `@echojs-ecosystem/framework/core` | Hyperdom + reactivity (legacy alias; prefer `hyperdom`) |
 
 ### UI granular imports
 

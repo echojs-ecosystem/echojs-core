@@ -3,6 +3,7 @@ import { h } from "@echojs-ecosystem/hyperdom";
 import { createUIComponent } from "../../core/component";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
+import { asOptionalBool } from "../input-shared/as-optional-bool";
 import { inputStyles } from "../input-shared/input.styles";
 import { INPUT_OTP_OWN_KEYS, type InputOtpOwnProps } from "./input-otp.types";
 
@@ -26,7 +27,6 @@ export const InputOtp = createUIComponent<"div", InputOtpOwnProps>({
       value = "",
       invalid,
       disabled,
-      readonly: readonlyProp,
       readOnly,
       required,
       variant = "outline",
@@ -36,7 +36,7 @@ export const InputOtp = createUIComponent<"div", InputOtpOwnProps>({
       onInput,
     } = props;
 
-    const readonly = readonlyProp ?? readOnly;
+    const readonly = asOptionalBool(readOnly);
     const digits = normalizeOtp(String(value), length);
     const slotOptions = { variant, size };
     const cellClass = headless

@@ -13,7 +13,6 @@ const REPO = "https://github.com/echojs-ecosystem/echojs-core.git";
 /** Must match `.changeset/config.json` fixed group. */
 const PUBLISHABLE = [
   { name: "@echojs-ecosystem/reactivity", dir: "reactivity" },
-  { name: "@echojs-ecosystem/core", dir: "core" },
   { name: "@echojs-ecosystem/hyperdom", dir: "hyperdom" },
   { name: "@echojs-ecosystem/framework", dir: "framework" },
   { name: "@echojs-ecosystem/router", dir: "router" },

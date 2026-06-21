@@ -16,12 +16,6 @@ package: '@echojs-ecosystem/hyperdom'
 | render | [render](/docs/packages/hyperdom/api/render) |
 | mount | [mount](/docs/packages/hyperdom/api/mount) |
 
-## Lifecycle
-
-| Export | Page |
-| ------ | ---- |
-| lifecycle/mount | [lifecycle/mount](/docs/packages/hyperdom/api/lifecycle-mount) |
-
 ## Model & View
 
 | Export | Page |

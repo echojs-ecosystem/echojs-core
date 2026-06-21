@@ -1,6 +1,7 @@
-import { h, type Child } from "@echojs-ecosystem/hyperdom";
+import { type Child } from "@echojs-ecosystem/hyperdom";
 
 import { createUIComponent } from "../../core/component";
+import { hTag } from "../../core/h-tag";
 import { cn } from "../../utils/cn";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { labelStyles } from "./label.styles";
@@ -25,12 +26,13 @@ export const Label = createUIComponent<"label", LabelOwnProps>({
           : null;
 
     const visualClass = headless ? undefined : cn(className);
+    const { children: _domChildren, ...labelDomProps } = domProps;
 
-    return h(
+    return hTag(
       "label",
       {
-        ...domProps,
-        for: htmlFor,
+        ...labelDomProps,
+        htmlFor,
         ...dataDisabled(Boolean(disabled)),
         ...dataInvalid(Boolean(invalid)),
         className: visualClass,
@@ -38,7 +40,9 @@ export const Label = createUIComponent<"label", LabelOwnProps>({
       },
       [
         children as Child,
-        indicator ? h("span", { "aria-hidden": "true", className: headless ? undefined : "ml-1" }, indicator) : null,
+        indicator
+          ? hTag("span", { "aria-hidden": "true", className: headless ? undefined : "ml-1" }, indicator)
+          : null,
       ],
     );
   },

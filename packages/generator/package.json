@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/generator",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "EchoJS code generation toolkit — extensible OpenAPI generators built on Kubb",
   "files": [
     "dist"

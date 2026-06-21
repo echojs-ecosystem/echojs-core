@@ -9,6 +9,7 @@ export type TextareaOwnProps = {
   resize?: TextareaResize;
   size?: TextareaSize;
   variant?: TextareaVariant;
+  readOnly?: boolean;
 };
 
 export type TextareaProps = UIComponentProps<"textarea", TextareaOwnProps, "children" | "value" | "defaultValue"> & {
@@ -19,8 +20,9 @@ export type TextareaProps = UIComponentProps<"textarea", TextareaOwnProps, "chil
   rows?: number;
   cols?: number;
   disabled?: boolean;
+  /** @deprecated Use `readOnly`. */
   readonly?: boolean;
   required?: boolean;
 };
 
-export const TEXTAREA_OWN_KEYS = ["invalid", "resize", "size", "variant"] as const satisfies readonly (keyof TextareaOwnProps)[];
+export const TEXTAREA_OWN_KEYS = ["invalid", "resize", "size", "variant", "readOnly"] as const satisfies readonly (keyof TextareaOwnProps)[];

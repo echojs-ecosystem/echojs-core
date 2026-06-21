@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/network",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "EchoJS network toolkit — tree-shakeable HTTP, WebSocket, GraphQL, and mock subpath imports",
   "files": [
     "dist"

@@ -1,4 +1,4 @@
-import type { Child } from '../../types'
+import type { Child } from '../../core/types'
 import type { OtherwiseCase, Pattern, WhenCase } from './types'
 
 /** @internal */

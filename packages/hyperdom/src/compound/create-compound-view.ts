@@ -1,5 +1,5 @@
-import type { Child, Component } from '../types'
-import { withViewContext } from '../view-context'
+import type { Child, Component } from '../core/types'
+import { withViewContext } from '../core/view-context'
 import {
   collectSlotMarkers,
   createSlotMarker,

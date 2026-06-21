@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/framework",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "EchoJS meta-package — app bootstrap, providers, and tree-shakeable subpath re-exports for the full ecosystem",
   "files": [
     "dist"
@@ -27,10 +27,6 @@
     "./hyperdom": {
       "types": "./dist/hyperdom.d.ts",
       "default": "./dist/hyperdom.js"
-    },
-    "./hyperdom/lifecycle/mount": {
-      "types": "./dist/hyperdom-lifecycle-mount.d.ts",
-      "default": "./dist/hyperdom-lifecycle-mount.js"
     },
     "./router": {
       "types": "./dist/router.d.ts",
@@ -160,7 +156,6 @@
     "format:fix": "oxfmt ."
   },
   "dependencies": {
-    "@echojs-ecosystem/core": "workspace:*",
     "@echojs-ecosystem/devtools": "workspace:*",
     "@echojs-ecosystem/form": "workspace:*",
     "@echojs-ecosystem/hyperdom": "workspace:*",

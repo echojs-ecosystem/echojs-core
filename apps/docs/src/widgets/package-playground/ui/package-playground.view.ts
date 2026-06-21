@@ -5,7 +5,6 @@ import {
   p,
   pre,
 } from '@echojs-ecosystem/framework/hyperdom'
-import { mount as onMount } from '@echojs-ecosystem/framework/hyperdom/lifecycle/mount'
 
 import { playgroundStyles } from '@widgets/package-playground/ui/package-playground.view.styles'
 
@@ -24,7 +23,6 @@ export const PackagePlaygroundView = createView(
     }
 
     return div({ class: styles.root() }, [
-      onMount(() => () => instance.dispose?.()),
       div({ class: styles.header() }, [
         div(null, [
           p({ class: styles.title() }, def.title),

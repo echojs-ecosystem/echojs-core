@@ -75,6 +75,7 @@ const rawStructureTree: StructureTreeNode[] = [
                 children: [
                   { id: 'routes-index', name: 'index.ts', kind: 'file' },
                   { id: 'routes-app', name: 'app.routes.ts', kind: 'file' },
+                  { id: 'routes-workspace', name: 'workspace.routes.ts', kind: 'file' },
                 ],
               },
               {
@@ -109,6 +110,7 @@ const rawStructureTree: StructureTreeNode[] = [
                 name: 'workspace',
                 kind: 'folder',
                 children: [
+                  { id: 'ws-index', name: 'index.ts', kind: 'file' },
                   { id: 'ws-layout', name: 'workspace.layout.ts', kind: 'file' },
                   {
                     id: 'ws-dashboard',
@@ -286,12 +288,6 @@ const rawStructureTree: StructureTreeNode[] = [
             name: 'entities',
             kind: 'folder',
             children: [
-              {
-                id: 'entities-routes',
-                name: '__routes__',
-                kind: 'folder',
-                children: [{ id: 'routes-entity', name: 'workspace.routes.ts', kind: 'file' }],
-              },
               {
                 id: 'entities-session',
                 name: 'session',

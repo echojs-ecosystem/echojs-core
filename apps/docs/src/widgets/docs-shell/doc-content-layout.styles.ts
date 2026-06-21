@@ -9,7 +9,8 @@ export const docContentLayoutStyles = tv({
     main: ['flex min-w-0 flex-1 justify-center', docsShellPadding].join(' '),
     mainInner: 'w-full min-w-0',
     tocAside: 'hidden w-72 shrink-0 xl:block xl:pr-8 2xl:w-80',
-    tocSticky: 'sticky top-24 flex flex-col gap-5 pb-8',
+    tocSticky: 'sticky top-24 flex min-h-[calc(100dvh-6rem)] flex-col gap-5 pb-8',
+    sponsorsRail: 'mt-auto shrink-0',
   },
   variants: {
     width: {

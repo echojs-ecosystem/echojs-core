@@ -54,13 +54,6 @@
       "brotliBytes": 5016
     },
     {
-      "package": "core",
-      "entry": "packages/core/src/index.ts",
-      "bytes": 16504,
-      "gzipBytes": 5869,
-      "brotliBytes": 5327
-    },
-    {
       "package": "form",
       "entry": "packages/form/src/index.ts",
       "bytes": 18241,

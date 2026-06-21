@@ -147,7 +147,7 @@ no template compiler in CI.
 | `shallowRef` / `shallowReactive` | flat signals per field                  | Prefer explicit over shallow proxies                |
 | `toRef` / `toRefs`               | pass signals from store/model           | No unwrap magic                                     |
 | `provide` / `inject`             | `provide` / `inject` (framework)        | Typed tokens                                        |
-| `onMounted` etc.                 | view mount / `effect` with cleanup      | See HyperDOM lifecycle                              |
+| `onMounted` etc.                 | `effect.mount` / `ref` in model or view | See [Models & Components](/docs/packages/hyperdom/guides/models-and-components) |
 | `nextTick`                       | `batch` or microtask after signal flush | Rare if bindings correct                            |
 | `defineProps`                    | view function args                      | Props from parent view                              |
 | `defineEmits`                    | callbacks on model/view                 | Explicit functions                                  |
@@ -667,7 +667,7 @@ is what `tsc` checks.
 | `computed`         | `computed`                      |
 | `watch`            | `effect`                        |
 | `watchEffect`      | `effect`                        |
-| `onMounted`        | view lifecycle / effect         |
+| `onMounted`        | `effect.mount` / `ref` in model or view |
 | `useRoute`         | route view args + router inject |
 | `useRouter`        | `inject(router)`                |
 | `storeToRefs`      | store fields as signals         |

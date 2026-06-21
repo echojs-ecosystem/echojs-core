@@ -46,7 +46,6 @@ const packageOverviewAside = (doc: DocDocument): Child | null => {
   if (!overview) return null
   return PackageAside({
     packageId: overview.packageId,
-    keywords: doc.frontmatter.keywords,
     npmPackage: doc.frontmatter.package,
   })
 }
@@ -78,7 +77,10 @@ export const DocArticleView = createView((vm: DocArticleVM): Child => {
             const packageAside = packageOverviewAside(doc)
             return DocContentLayout({
               width: packageAside ? 'wide' : 'prose',
-              toc: div(null, [packageAside, DocToc(toc, tocSpy(vm))]),
+              toc: div({ class: 'flex flex-col gap-5' }, [
+                DocToc(toc, tocSpy(vm)),
+                packageAside,
+              ]),
               children: [
                 div({ class: articleChrome.toolbar() }, [
                   button(

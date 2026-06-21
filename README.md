@@ -31,8 +31,7 @@ bun run format
 ## Пакеты
 
 - **`@echojs-ecosystem/reactivity`** — сигналы/эффекты/батчинг.
-- **`@echojs-ecosystem/core`** — минимальный UI runtime: `createComponent`, `mount`, директивы, вставка/пропсы/события.
-- **`@echojs-ecosystem/hyperdom`** — DSL/рендер без JSX (и control primitives).
+- **`@echojs-ecosystem/hyperdom`** — UI runtime: `h()`, `createComponent`, `createModel`, `mount`, control primitives (`Show`, `List`).
 - **`@echojs-ecosystem/router`** — программируемый роутер (есть bindings: `@echojs-ecosystem/router/hyperdom`).
 - **`@echojs-ecosystem/form`** — поля/формы + валидация (Standard Schema) + bindings для Hyperdom.
 - **`@echojs-ecosystem/persist`** — универсальный слой persistence для store/form-like primitives.
@@ -56,28 +55,24 @@ $count.set(1);
 $count.update((v) => v + 1);
 ```
 
-### 2) Минимальный UI: `createComponent` + `mount`
+### 2) UI: `createComponent` + `mount` (Hyperdom)
 
 ```ts
-import { createComponent, mount, signal } from "@echojs-ecosystem/core";
+import { createComponent, createModel, createView, h, mount } from "@echojs-ecosystem/hyperdom";
+import { signal } from "@echojs-ecosystem/reactivity";
 
-const Counter = createComponent(
-  ({ signal }) => {
-    const $count = signal(0);
-    return { $count };
-  },
-  (vm) => {
-    const btn = document.createElement("button");
-    btn.onclick = () => vm.$count.update((v) => v + 1);
-    btn.textContent = `count: ${vm.$count.value()}`;
-    return btn;
-  },
+const CounterModel = createModel(() => {
+  const $count = signal(0);
+  return { $count, increment: () => $count.update((v) => v + 1) };
+}, "CounterModel");
+
+const CounterView = createView((vm) =>
+  h("button", { onClick: vm.increment }, () => `count: ${vm.$count.value()}`),
 );
 
-mount(document.getElementById("app")!, Counter());
+const Counter = createComponent(CounterModel, CounterView);
+mount(Counter(), { container: document.getElementById("app")! });
 ```
-
-Примечание: `@echojs-ecosystem/core` ре-экспортирует reactivity-примитивы (например `signal`, `effect`) для удобства.
 
 ### 3) Router: дерево routes + `createRouter`
 
@@ -176,7 +171,7 @@ import { createForm } from "@echojs-ecosystem/framework/form";
 
 Доступные под-импорты:
 
-- `@echojs-ecosystem/framework/core`
+- `@echojs-ecosystem/framework/core` — alias для hyperdom + reactivity (legacy path)
 - `@echojs-ecosystem/framework/reactivity`
 - `@echojs-ecosystem/framework/hyperdom`
 - `@echojs-ecosystem/framework/router`

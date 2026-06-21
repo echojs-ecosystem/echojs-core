@@ -92,19 +92,6 @@ setStrictContextChecks(true)
 
 See [Important Defaults](/docs/packages/hyperdom/guides/important-defaults).
 
-## Lifecycle mount subpath
-
-The **lifecycle hook** `mount` is a separate subpath export (not the app
-`mount()` helper):
-
-```ts
-import { mount } from '@echojs-ecosystem/hyperdom/lifecycle/mount'
-```
-
-Use it as a **child** inside a view tree for after-insert hooks. See
-[Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount) and
-[API: lifecycle/mount](/docs/packages/hyperdom/api/lifecycle-mount).
-
 ## Next steps
 
 - [Important Defaults](/docs/packages/hyperdom/guides/important-defaults) —

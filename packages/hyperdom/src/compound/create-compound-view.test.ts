@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { signal } from '@echojs-ecosystem/reactivity'
 
-import { createView } from '../create-view'
-import { div, header, main, span, table, tbody, td, thead, tr } from '../dsl'
-import { render } from '../render'
+import { createView } from '../view/create-view'
+import { div, header, main, span, table, tbody, td, thead, tr } from '../dsl/dsl'
+import { render } from '../render/render'
 import { createCompoundView } from './create-compound-view'
 import { isSlotMarker } from './slot-marker'
 

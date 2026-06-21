@@ -30,10 +30,6 @@ export default defineConfig({
         replacement: resolve(frameworkRoot, 'router.ts'),
       },
       {
-        find: '@echojs-ecosystem/framework/hyperdom/lifecycle/mount',
-        replacement: resolve(frameworkRoot, 'hyperdom-lifecycle-mount.ts'),
-      },
-      {
         find: '@echojs-ecosystem/framework/ui',
         replacement: resolve(frameworkRoot, 'ui.ts'),
       },

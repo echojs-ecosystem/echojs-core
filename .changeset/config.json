@@ -5,7 +5,6 @@
   "fixed": [
     [
       "@echojs-ecosystem/reactivity",
-      "@echojs-ecosystem/core",
       "@echojs-ecosystem/hyperdom",
       "@echojs-ecosystem/framework",
       "@echojs-ecosystem/router",

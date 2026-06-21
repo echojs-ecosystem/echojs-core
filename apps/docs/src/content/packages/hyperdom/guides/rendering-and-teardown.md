@@ -45,18 +45,13 @@ Returns `{ node: HTMLElement, dispose: () => void }`. The `node` may expose
 
 See [API: mount](/docs/packages/hyperdom/api/mount).
 
-> [!NOTE] Do not confuse this with **`mount` from
-> `@echojs-ecosystem/hyperdom/lifecycle/mount`** — that is a lifecycle **child
-> hook**, not an app mount helper. See
-> [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount).
-
 ## What `dispose()` cleans up
 
 Calling `dispose()`:
 
 - Disposes reactive effects registered by dynamic children and props
 - Removes event listeners attached through HyperDOM
-- Runs lifecycle cleanup callbacks from `mount()` hooks
+- Runs model lifecycle cleanup (`effect`, `effect.mount`, `effect.unmount`, …)
 - Clears mounted DOM under the container
 
 Always call `dispose()` when removing a view — leaked effects cause stale
@@ -70,5 +65,5 @@ tests use `render()` / `mount()` directly.
 ## Related
 
 - [Important Defaults](/docs/packages/hyperdom/guides/important-defaults)
-- [Lifecycle Mount](/docs/packages/hyperdom/guides/lifecycle-mount)
+- [Models & Components](/docs/packages/hyperdom/guides/models-and-components)
 - [Examples: Counter](/docs/packages/hyperdom/examples/counter)

@@ -4,7 +4,7 @@ import type { UIContextValue } from "../theme/theme-context";
 import { getUIContextOrDefault } from "../theme/theme-context";
 import type { ComponentThemeConfig } from "../theme/types";
 import { resolveVariantClasses } from "../theme/variants";
-import { cn } from "../utils/cn";
+import { cn, type ClassValue } from "../utils/cn";
 import { mergeProps } from "../utils/merge-props";
 import {
   buildStripKeys,
@@ -14,14 +14,16 @@ import {
   toDomProps,
 } from "./props-types";
 import type { UIComponentBaseProps } from "./types";
+import { hTag } from "./h-tag";
 import { resolveVariantOptions } from "./variant-keys";
 
 export type UIComponentRenderContext<
   TTag extends keyof HTMLElementTagNameMap,
   TOwnProps extends Record<string, unknown>,
+  TOmit extends keyof Props<ElementForTag<TTag>> = never,
 > = {
   /** Full merged props (own + DOM + theme). */
-  props: UIComponentProps<TTag, TOwnProps>;
+  props: UIComponentProps<TTag, TOwnProps, TOmit>;
   /** Props safe for `h(tag, domProps)` — component-only keys removed. */
   domProps: DomPropsForTag<TTag>;
   headless: boolean;
@@ -32,6 +34,7 @@ export type UIComponentRenderContext<
 export type CreateUIComponentConfig<
   TTag extends keyof HTMLElementTagNameMap,
   TOwnProps extends Record<string, unknown>,
+  TOmit extends keyof Props<ElementForTag<TTag>> = never,
 > = {
   /** PascalCase name (`Button` → theme key `button`). */
   name: string;
@@ -39,9 +42,9 @@ export type CreateUIComponentConfig<
   tag: TTag;
   /** Keys that never reach the DOM (icons, variants, layout flags, …). */
   ownKeys: readonly (keyof TOwnProps | keyof UIComponentBaseProps)[];
-  defaultProps?: Partial<UIComponentProps<TTag, TOwnProps>>;
+  defaultProps?: Partial<UIComponentProps<TTag, TOwnProps, TOmit>>;
   variants?: (options?: Record<string, unknown>) => string;
-  render?: (context: UIComponentRenderContext<TTag, TOwnProps>) => Child;
+  render?: (context: UIComponentRenderContext<TTag, TOwnProps, TOmit>) => Child;
 };
 
 const themeKeyFromName = (name: string): string => name.charAt(0).toLowerCase() + name.slice(1);
@@ -67,7 +70,13 @@ const resolveVisualClass = (
 ): string | undefined => {
   if (headless) return undefined;
 
-  return cn(themeSlice?.baseClass, themeSlice?.className, variantClass, props.className, props.class);
+  return cn(
+    themeSlice?.baseClass,
+    themeSlice?.className,
+    variantClass,
+    props.className as ClassValue | undefined,
+    props.class as ClassValue | undefined,
+  );
 };
 
 /**
@@ -80,13 +89,14 @@ const resolveVisualClass = (
 export const createUIComponent = <
   TTag extends keyof HTMLElementTagNameMap,
   TOwnProps extends Record<string, unknown>,
+  TOmit extends keyof Props<ElementForTag<TTag>> = never,
 >(
-  config: CreateUIComponentConfig<TTag, TOwnProps>,
-): ((props: UIComponentProps<TTag, TOwnProps>) => Child) => {
+  config: CreateUIComponentConfig<TTag, TOwnProps, TOmit>,
+): ((props: UIComponentProps<TTag, TOwnProps, TOmit>) => Child) => {
   const themeKey = themeKeyFromName(config.name);
   const stripKeys = buildStripKeys(config.ownKeys as readonly string[], config.variants);
 
-  return (props: UIComponentProps<TTag, TOwnProps>): Child => {
+  return (props: UIComponentProps<TTag, TOwnProps, TOmit>): Child => {
     const ctx = getUIContextOrDefault();
     const themeSlice = ctx.theme.components?.[themeKey];
     const headless = resolveHeadless(props, ctx);
@@ -95,7 +105,7 @@ export const createUIComponent = <
       config.defaultProps as Record<string, unknown> | undefined,
       themePropsFromSlice(themeSlice),
       props as Record<string, unknown>,
-    ) as UIComponentProps<TTag, TOwnProps> & Record<string, unknown>;
+    ) as UIComponentProps<TTag, TOwnProps, TOmit> & Record<string, unknown>;
 
     const variantOptions = resolveVariantOptions(config.variants, themeSlice?.defaultVariants, merged);
     const variantClass = resolveVariantClasses(config.variants, variantOptions, headless);
@@ -110,13 +120,14 @@ export const createUIComponent = <
 
     const finalProps = { ...merged, className: visualClass, class: visualClass } as UIComponentProps<
       TTag,
-      TOwnProps
+      TOwnProps,
+      TOmit
     >;
 
     if (config.render) {
       return config.render({ props: finalProps, domProps, headless, className: visualClass, ctx });
     }
 
-    return h(config.tag, domProps as Props<ElementForTag<TTag>>, children);
+    return hTag(config.tag, domProps as Props<ElementForTag<TTag>>, children);
   };
 };

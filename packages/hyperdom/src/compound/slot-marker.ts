@@ -1,4 +1,4 @@
-import type { Child, Component } from '../types'
+import type { Child, Component } from '../core/types'
 
 /** @internal */
 export const slotMarkerToken = Symbol('hyperdom.compound.slot')

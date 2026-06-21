@@ -95,7 +95,6 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'rendering-and-teardown', title: 'Rendering & Teardown' },
       { slug: 'refs-and-dom-access', title: 'Refs & DOM Access' },
       { slug: 'styling-and-classes', title: 'Styling & Classes' },
-      { slug: 'lifecycle-mount', title: 'Lifecycle Mount' },
       { slug: 'trusted-html', title: 'Trusted HTML' },
     ],
     functions: { slug: 'functions', title: 'Functions' },
@@ -108,7 +107,6 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'conditional-ui', title: 'Conditional UI' },
       { slug: 'todo-list', title: 'Todo List' },
       { slug: 'doc-article', title: 'Doc Article' },
-      { slug: 'lifecycle-resize', title: 'Lifecycle Mount' },
     ],
   },
   {

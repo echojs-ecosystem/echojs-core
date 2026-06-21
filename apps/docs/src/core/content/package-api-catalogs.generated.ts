@@ -11,13 +11,6 @@ export const hyperdomDocCategories = [
     ],
   },
   {
-    id: 'lifecycle',
-    title: 'Lifecycle',
-    entries: [
-      { slug: 'lifecycle-mount', name: 'lifecycle/mount', description: 'lifecycle/mount — see API page.' },
-    ],
-  },
-  {
     id: 'model-view',
     title: 'Model & View',
     entries: [

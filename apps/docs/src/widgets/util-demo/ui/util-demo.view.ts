@@ -1,5 +1,4 @@
 import { type Child, createView, div, p } from '@echojs-ecosystem/framework/hyperdom'
-import { mount as onMount } from '@echojs-ecosystem/framework/hyperdom/lifecycle/mount'
 
 import type { UtilDemoVM } from '@widgets/util-demo/model/util-demo.model'
 import { ud } from '@widgets/util-demo/util-demo-ui'
@@ -14,8 +13,5 @@ export const UtilDemoView = createView((vm: UtilDemoVM): Child => {
     )
   }
 
-  return div({ class: ud.root() }, [
-    onMount(() => () => instance.dispose?.()),
-    () => instance.view(),
-  ])
+  return div({ class: ud.root() }, [() => instance.view()])
 }, 'UtilDemoView')

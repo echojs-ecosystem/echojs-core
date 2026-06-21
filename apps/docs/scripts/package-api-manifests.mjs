@@ -15,11 +15,6 @@ export const packageApiManifests = {
         ],
       },
       {
-        id: 'lifecycle',
-        title: 'Lifecycle',
-        pages: [{ slug: 'lifecycle-mount', name: 'lifecycle/mount', importBadge: '@echojs-ecosystem/hyperdom/lifecycle/mount' }],
-      },
-      {
         id: 'model-view',
         title: 'Model & View',
         pages: [

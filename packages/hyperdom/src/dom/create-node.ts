@@ -1,4 +1,4 @@
-import type { Child, Component, Props } from "../types";
+import type { Child, Component, Props } from "../core/types";
 import { setProps } from "./props";
 import { mountChild, mountChildren } from "./children";
 

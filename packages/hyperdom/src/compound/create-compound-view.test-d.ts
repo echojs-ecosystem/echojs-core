@@ -1,6 +1,6 @@
 import { describe, expectTypeOf, it } from 'vitest'
 
-import type { Child } from '../types'
+import type { Child } from '../core/types'
 import { createCompoundView } from './create-compound-view'
 
 describe('createCompoundView types', () => {

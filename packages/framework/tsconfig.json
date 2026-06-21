@@ -5,11 +5,9 @@
     "types": [],
     "baseUrl": ".",
     "paths": {
-      "@echojs-ecosystem/core": ["../core/src/index.ts"],
       "@echojs-ecosystem/reactivity": ["../reactivity/src/index.ts"],
       "@echojs-ecosystem/router": ["../router/src/index.ts"],
       "@echojs-ecosystem/hyperdom": ["../hyperdom/src/index.ts"],
-      "@echojs-ecosystem/hyperdom/lifecycle/mount": ["../hyperdom/src/lifecycle/mount.ts"],
       "@echojs-ecosystem/form": ["../form/src/index.ts"],
       "@echojs-ecosystem/persist": ["../persist/src/index.ts"],
       "@echojs-ecosystem/store": ["../store/src/index.ts"],

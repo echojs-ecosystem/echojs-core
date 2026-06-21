@@ -1,4 +1,4 @@
-import { createModel } from '@echojs-ecosystem/framework/hyperdom'
+import { createModel, effect } from '@echojs-ecosystem/framework/hyperdom'
 
 import type { PlaygroundInstance, PackagePlaygroundDef } from '../types'
 import { getPackagePlayground } from '../registry'
@@ -19,6 +19,10 @@ export const createPackagePlaygroundModel = (
   createModel((): PackagePlaygroundVM => {
     const def = getPackagePlayground(props.packageId)
     const instance = def?.create()
+
+    if (instance) {
+      effect.unmount(() => instance.dispose?.())
+    }
 
     return {
       def,

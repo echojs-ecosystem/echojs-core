@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { signal } from "@echojs-ecosystem/reactivity";
-import { h } from "../h";
-import { render } from "../render";
+import { h } from "../hyperscript/h";
+import { render } from "../render/render";
 
 describe("dynamic regions", () => {
   it("удаляет/добавляет DOM внутри региона без затрагивания соседей", async () => {

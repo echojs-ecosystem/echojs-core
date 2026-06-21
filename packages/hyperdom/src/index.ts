@@ -1,7 +1,6 @@
-export { h } from "./h";
-export { render } from "./render";
-export { mount } from "./mount";
-export { createModel, isInModelContext } from "./create-model";
+export { h } from "./hyperscript";
+export { render, mount } from "./render";
+export { createModel, isInModelContext } from "./model";
 export type {
   CreateModelOptions,
   ModelFactory,
@@ -9,8 +8,8 @@ export type {
   ModelSection,
   ModelSectionRecord,
   StructuredModelShape,
-} from "./create-model";
-export { createView } from "./create-view";
+} from "./model";
+export { createView } from "./view";
 export {
   createCompoundView,
   createSlotView,
@@ -29,23 +28,29 @@ export {
   type SlotMarker,
   type SlotRenderers,
 } from "./compound";
-export { isInViewContext } from "./view-context";
+export { isInViewContext, getStrictContextChecks, setStrictContextChecks } from "./core";
 export {
   createComponent,
+  createAsyncComponent,
   type ViewFn,
   type CreateComponentOptions,
-} from "./component";
-export {
-  createAsyncComponent,
   type AsyncComponent,
   type AsyncComponentChunk,
   type AsyncComponentLoader,
   type AsyncErrorComponent,
   type AsyncLoadingComponent,
   type CreateAsyncComponentOptions,
-} from "./create-async-component";
-export { setStrictContextChecks, getStrictContextChecks } from "./config";
+} from "./component/index";
+export {
+  effect,
+  type ModelEffect,
+  type ModelLifecycleCleanup,
+  type WatchCallback,
+  type WatchOptions,
+  type WatchSource,
+} from "./model";
 export { Show } from "./control/show";
+export { If, IfBuilder } from "./control/if";
 export { List } from "./control/list";
 export {
   Match,
@@ -64,4 +69,4 @@ export {
 } from "./control/match";
 export * from "./dsl";
 
-export type { Child, Props, Component } from "./types";
+export type { Child, Props, Component } from "./core";

@@ -4,10 +4,9 @@ import { PackageAsideView } from './ui/package-aside.view'
 
 export type PackageAsideProps = {
   packageId: string
-  keywords?: string[]
   npmPackage?: string
 }
 
-/** Right-rail metadata for package overview pages (Kubb-style). */
+/** Right-rail links for package overview pages. */
 export const PackageAside = (props: PackageAsideProps): Child =>
   PackageAsideView(props)

@@ -1,6 +1,6 @@
 import { beforeEach } from "vitest";
 
-import { setStrictContextChecks } from "./config";
+import { setStrictContextChecks } from "./core/config";
 
 beforeEach(() => {
   setStrictContextChecks(false);

@@ -1,6 +1,6 @@
-import { h } from "@echojs-ecosystem/hyperdom";
-
 import { createUIComponent } from "../../core/component";
+import { hTag } from "../../core/h-tag";
+import { asOptionalBool } from "../input-shared/as-optional-bool";
 import { dataDisabled, dataInvalid } from "../../utils/data-attributes";
 import { textareaStyles } from "./textarea.styles";
 import { TEXTAREA_OWN_KEYS, type TextareaOwnProps } from "./textarea.types";
@@ -16,13 +16,14 @@ export const Textarea = createUIComponent<"textarea", TextareaOwnProps>({
   },
   variants: textareaStyles,
   render: ({ props, domProps, className, headless }) => {
-    const { invalid, disabled, readonly, required } = props;
+    const { invalid, disabled, readOnly, required } = props;
+    const readonly = asOptionalBool(readOnly);
     const visualClass = headless ? undefined : className;
 
-    return h("textarea", {
+    return hTag("textarea", {
       ...domProps,
       disabled,
-      readonly,
+      readOnly: readonly,
       required,
       "aria-invalid": invalid ? "true" : domProps["aria-invalid"],
       ...dataDisabled(Boolean(disabled)),

@@ -1,6 +1,6 @@
 {
   "name": "@echojs-ecosystem/hyperdom",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "files": [
     "dist"
   ],
@@ -10,10 +10,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./lifecycle/mount": {
-      "types": "./dist/lifecycle/mount.d.ts",
-      "default": "./dist/lifecycle/mount.js"
     },
     "./package.json": "./package.json"
   },

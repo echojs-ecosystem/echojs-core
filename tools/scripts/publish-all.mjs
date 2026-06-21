@@ -18,7 +18,6 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 /** Dependency-safe publish order (framework meta-package last). */
 const PUBLISHABLE = [
   "reactivity",
-  "core",
   "devtools",
   "store",
   "hyperdom",

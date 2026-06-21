@@ -13,7 +13,6 @@ const ecosystemPackages = (version: string): string[] => [
   `@echojs-ecosystem/i18n@${version}`,
   `@echojs-ecosystem/ui@${version}`,
   `@echojs-ecosystem/devtools@${version}`,
-  `@echojs-ecosystem/core@${version}`,
 ]
 
 export const changelogReleases: ChangelogRelease[] = [

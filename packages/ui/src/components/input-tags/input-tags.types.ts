@@ -7,6 +7,7 @@ export type InputTagsOwnProps = InputFieldOwnProps & {
   separators?: string[];
   allowDuplicates?: boolean;
   maxTags?: number;
+  placeholder?: string;
 };
 
 export type InputTagsProps = Omit<InputFieldProps, "value" | "defaultValue"> & InputTagsOwnProps;
@@ -18,4 +19,5 @@ export const INPUT_TAGS_OWN_KEYS = [
   "separators",
   "allowDuplicates",
   "maxTags",
+  "placeholder",
 ] as const;

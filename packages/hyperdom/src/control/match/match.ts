@@ -1,4 +1,4 @@
-import type { Child } from '../../types'
+import type { Child } from '../../core/types'
 import type { InvertPattern } from './infer-pattern'
 import { matches } from './patterns'
 import type { MatchCase, Pattern } from './types'

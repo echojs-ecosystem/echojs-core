@@ -20,7 +20,10 @@ export const DocContentLayout = ({
   return div({ class: layout.article() }, [
     div({ class: layout.main() }, [div({ class: layout.mainInner() }, children)]),
     div({ class: layout.tocAside() }, [
-      div({ class: layout.tocSticky() }, [toc ?? null, DocAsideSponsors()]),
+      div({ class: layout.tocSticky() }, [
+        toc ?? null,
+        div({ class: layout.sponsorsRail() }, [DocAsideSponsors()]),
+      ]),
     ]),
   ])
 }

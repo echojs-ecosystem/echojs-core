@@ -13,7 +13,6 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 /** Must match `.changeset/config.json` fixed group. */
 const PUBLISHABLE = [
   "reactivity",
-  "core",
   "hyperdom",
   "framework",
   "router",

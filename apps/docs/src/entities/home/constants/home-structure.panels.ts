@@ -280,28 +280,40 @@ export { storeProvider } from "@core/store"`,
     'routes-index',
     'src/app/router/index.ts',
     `export { appRouter } from "./app.routes"
-export { homePage, workspaceSection } from "@entities/__routes__"`,
-    'Router barrel — route objects, not string paths'
+export {
+  homePage,
+  dashboardPage,
+  settingsPage,
+  workspaceSection,
+} from "./app.routes"`,
+    'Router barrel — app routes and page objects for NavLink'
   ),
   'routes-app': panel(
     'routes-app',
     'src/app/router/app.routes.ts',
     `import { createRoutes } from "@echojs-ecosystem/framework/router"
-import { homePage } from "@pages/home/home.page"
-import { workspaceSection } from "@entities/__routes__/workspace.routes"
+
+import { homePage } from "@pages/home"
+import { workspaceSection } from "./workspace.routes"
 
 export const appRouter = createRoutes([
   { path: "/", routeView: homePage },
   workspaceSection,
-])`,
-    'router — compose feature route trees from entities/__routes__'
+])
+
+export { homePage } from "@pages/home"
+export { dashboardPage, settingsPage } from "@pages/workspace"
+export { workspaceSection } from "./workspace.routes"`,
+    'router — compose route trees in app/routes, import pages from slice barrels'
   ),
-  'routes-entity': panel(
-    'routes-entity',
-    'src/entities/__routes__/workspace.routes.ts',
-    `import { dashboardPage } from "@pages/workspace/dashboard/dashboard.page"
-import { settingsPage } from "@pages/workspace/settings/settings.page"
-import { workspaceLayoutPage } from "@pages/workspace/workspace.layout"
+  'routes-workspace': panel(
+    'routes-workspace',
+    'src/app/router/workspace.routes.ts',
+    `import {
+  dashboardPage,
+  settingsPage,
+  workspaceLayoutPage,
+} from "@pages/workspace"
 
 export const workspaceSection = {
   path: "/workspace",
@@ -312,14 +324,15 @@ export const workspaceSection = {
     { path: "settings", name: "settings", routeView: settingsPage },
   ],
 }`,
-    'Route slices live in entities/__routes__ — reusable across apps'
+    'Nested workspace section — pages imported via @pages/workspace barrels'
   ),
   'pages-home-index': panel(
     'pages-home-index',
     'src/pages/home/index.ts',
     `export { Home } from "./component/home.component"
 export { createHomeModel } from "./model/home.model"
-export { HomeView } from "./view/home.view"`,
+export { HomeView } from "./view/home.view"
+export { homePage } from "./home.page"`,
     'Public slice API — re-exports from component/, model/, view/'
   ),
   'pages-home-component': panel(
@@ -352,9 +365,15 @@ export const homePage = createRouteView({
     'pages-home-model',
     'src/pages/home/model/home.model.ts',
     `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
-export const createHomeModel = createModel(() => ({
-  heroTitle: () => "Build with EchoJS",
-}), "HomeModel")`,
+
+export const createHomeModel = createModel(
+  () => ({
+    state: {
+      heroTitle: () => "Build with EchoJS",
+    },
+  }),
+  { name: "HomeModel", structExports: true },
+)`,
     'Page model — behavior only; features mount as components in the view'
   ),
   'pages-home-view': panel(
@@ -365,12 +384,20 @@ import { Search } from "@features/search"
 
 export const HomeView = createView((vm) =>
   main([
-    section(vm.heroTitle()),
+    section(vm.state.heroTitle()),
     Search(),
   ]),
   "HomeView",
 )`,
     'hyperdom — createView maps VM → DOM, features stay imported slices'
+  ),
+  'ws-index': panel(
+    'ws-index',
+    'src/pages/workspace/index.ts',
+    `export { workspaceLayoutPage } from "./workspace.layout"
+export { dashboardPage } from "./dashboard"
+export { settingsPage } from "./settings"`,
+    'Workspace slice barrel — layout + child pages for @pages/workspace'
   ),
   'ws-layout': panel(
     'ws-layout',
@@ -394,7 +421,8 @@ export const workspaceLayoutPage = createLayoutView({
     'src/pages/workspace/dashboard/index.ts',
     `export { Dashboard } from "./component/dashboard.component"
 export { createDashboardModel } from "./model/dashboard.model"
-export { DashboardView } from "./view/dashboard.view"`,
+export { DashboardView } from "./view/dashboard.view"
+export { dashboardPage } from "./dashboard.page"`,
     'Page slice barrel — component + model + view'
   ),
   'ws-dashboard-component': panel(
@@ -433,15 +461,23 @@ export const dashboardPage = createRouteView({
 import { dashboardStatsQuery } from "@entities/user/api/users.query"
 import { sessionStore } from "@entities/session"
 
-export const createDashboardModel = createModel(() => {
-  const stats = dashboardStatsQuery.with()
-  return {
-    userName: () => sessionStore.displayName(),
-    stats,
-    isLoading: () => stats.isPending(),
-    totalUsers: () => stats.data()?.users ?? 0,
-  }
-}, "DashboardModel")`,
+export const createDashboardModel = createModel(
+  () => {
+    const stats = dashboardStatsQuery.with()
+
+    return {
+      state: {
+        userName: () => sessionStore.displayName(),
+        isLoading: () => stats.isPending(),
+        totalUsers: () => stats.data()?.users ?? 0,
+      },
+      data: {
+        stats,
+      },
+    }
+  },
+  { name: "DashboardModel", structExports: true },
+)`,
     'async .with() in models — views read data() and isPending()'
   ),
   'ws-dashboard-view': panel(
@@ -452,11 +488,11 @@ import { Skeleton } from "@echojs-ecosystem/framework/ui"
 
 export const DashboardView = createView((vm) =>
   div([
-    h1(() => \`Hello, \${vm.userName()}\`),
+    h1(() => \`Hello, \${vm.state.userName()}\`),
     Show(
-      vm.isLoading,
+      vm.state.isLoading,
       () => Skeleton({ class: "h-8 w-32" }),
-      () => div(() => \`\${vm.totalUsers()} users\`),
+      () => div(() => \`\${vm.state.totalUsers()} users\`),
     ),
   ]),
   "DashboardView",
@@ -468,7 +504,8 @@ export const DashboardView = createView((vm) =>
     'src/pages/workspace/settings/index.ts',
     `export { Settings } from "./component/settings.component"
 export { createSettingsModel } from "./model/settings.model"
-export { SettingsView } from "./view/settings.view"`,
+export { SettingsView } from "./view/settings.view"
+export { settingsPage } from "./settings.page"`,
     'Settings slice barrel next to component/'
   ),
   'ws-settings-component': panel(
@@ -503,15 +540,23 @@ export const settingsPage = createRouteView({
     'ws-settings-model',
     'src/pages/workspace/settings/model/settings.model.ts',
     `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
-import { parseAsString, useQueryState } from "@echojs-ecosystem/url-state"
+import { parseAsString, createQueryState } from "@echojs-ecosystem/url-state"
 
-export const createSettingsModel = createModel(() => {
-  const $tab = useQueryState("tab", parseAsString.withDefault("profile"))
-  return {
-    activeTab: () => $tab.value(),
-    setTab: (tab: string) => $tab.set(tab),
-  }
-}, "SettingsModel")`,
+export const createSettingsModel = createModel(
+  () => {
+    const $tab = createQueryState("tab", parseAsString.withDefault("profile"))
+
+    return {
+      state: {
+        activeTab: () => $tab.value(),
+      },
+      functions: {
+        setTab: (tab: string) => $tab.set(tab),
+      },
+    }
+  },
+  { name: "SettingsModel", structExports: true },
+)`,
     'url-state — filters and tabs synced with the URL'
   ),
   'ws-settings-view': panel(
@@ -525,8 +570,8 @@ export const SettingsView = createView((vm) =>
   div([
     ["profile", "security"].map((tab) =>
       button({
-        class: () => (vm.activeTab() === tab ? "active" : ""),
-        onClick: () => vm.setTab(tab),
+        class: () => (vm.state.activeTab() === tab ? "active" : ""),
+        onClick: () => vm.functions.setTab(tab),
       }, tab),
     ),
     LoginForm(),
@@ -559,7 +604,7 @@ export const AppShellLayout = createView(
     `import { createView, header } from "@echojs-ecosystem/framework/hyperdom"
 import { NavLink } from "@echojs-ecosystem/framework/router"
 import { ThemeToggle } from "@features/theme-toggle"
-import { homePage, dashboardPage } from "@entities/__routes__"
+import { homePage, dashboardPage } from "@app/router"
 
 export const AppHeaderView = createView(() =>
   header([
@@ -577,7 +622,7 @@ export const AppHeaderView = createView(() =>
     `import { createView, nav } from "@echojs-ecosystem/framework/hyperdom"
 import { NavLink } from "@echojs-ecosystem/framework/router"
 
-import { dashboardPage, settingsPage } from "@entities/__routes__"
+import { dashboardPage, settingsPage } from "@app/router"
 import { i18n } from "@core/i18n"
 
 export const AppSidebarView = createView(() =>
@@ -594,20 +639,27 @@ export const AppSidebarView = createView(() =>
     'src/features/search/model/search.model.ts',
     `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
 import { signal, computed } from "@echojs-ecosystem/framework/reactivity"
-import { parseAsString, useQueryState } from "@echojs-ecosystem/url-state"
+import { parseAsString, createQueryState } from "@echojs-ecosystem/url-state"
 
-export const createSearchModel = createModel(() => {
-  const $q = useQueryState("q", parseAsString.withDefault(""))
-  const $draft = signal($q.value())
-  const hasQuery = computed(() => $draft.value().trim().length > 0)
+export const createSearchModel = createModel(
+  () => {
+    const $q = createQueryState("q", parseAsString.withDefault(""))
+    const $draft = signal($q.value())
+    const hasQuery = computed(() => $draft.value().trim().length > 0)
 
-  return {
-    draft: () => $draft.value(),
-    setDraft: (v: string) => $draft.set(v),
-    commit: () => $q.set($draft.value()),
-    hasQuery,
-  }
-}, "SearchModel")`,
+    return {
+      state: {
+        draft: () => $draft.value(),
+        hasQuery,
+      },
+      functions: {
+        setDraft: (v: string) => $draft.set(v),
+        commit: () => $q.set($draft.value()),
+      },
+    }
+  },
+  { name: "SearchModel", structExports: true },
+)`,
     'reactivity + url-state — draft locally, commit to URL on submit'
   ),
   'feat-search-index': panel(
@@ -638,11 +690,11 @@ export const Search = createComponent(createSearchModel, SearchView, {
 
 export const SearchView = createView((vm) =>
   form({
-    onSubmit: (e) => { e.preventDefault(); vm.commit() },
+    onSubmit: (e) => { e.preventDefault(); vm.functions.commit() },
   }, [
     input({
-      value: vm.draft,
-      onInput: (e) => vm.setDraft(e.target.value),
+      value: vm.state.draft,
+      onInput: (e) => vm.functions.setDraft(e.target.value),
       placeholder: "Search…",
     }),
     button({ type: "submit" }, "Go"),
@@ -694,16 +746,23 @@ import { signInMutation } from "@entities/session"
 
 import { loginForm } from "./login-form.form"
 
-export const createLoginFormModel = createModel(() => ({
-  fields: loginForm.fields,
-  submit: async () => {
-    const result = await loginForm.submit(async (value) => {
-      await signInMutation.create().mutate(value)
-    })
-    return result.ok
-  },
-  reset: () => loginForm.reset(),
-}), "LoginFormModel")`,
+export const createLoginFormModel = createModel(
+  () => ({
+    form: {
+      fields: loginForm.fields,
+    },
+    functions: {
+      submit: async () => {
+        const result = await loginForm.submit(async (value) => {
+          await signInMutation.create().mutate(value)
+        })
+        return result.ok
+      },
+      reset: () => loginForm.reset(),
+    },
+  }),
+  { name: "LoginFormModel", structExports: true },
+)`,
     'model wires submit — form tree lives in *.form.ts'
   ),
   'feat-login-index': panel(
@@ -739,9 +798,9 @@ import { bindField } from "@echojs-ecosystem/form/hyperdom"
 import type { LoginFormVM } from "../model/login-form.model"
 
 export const LoginFormView = createView((vm: LoginFormVM) => {
-  const { email, password } = vm.fields
+  const { email, password } = vm.form.fields
 
-  return form({ onSubmit: (e) => { e.preventDefault(); void vm.submit() } }, [
+  return form({ onSubmit: (e) => { e.preventDefault(); void vm.functions.submit() } }, [
     input({ type: "email", ...bindField(email) }),
     input({
       ...bindField(password),
@@ -763,11 +822,18 @@ export const themeStore = createStore({
   theme: persist("theme", "light" as "light" | "dark"),
 })
 
-export const createThemeToggleModel = createModel(() => ({
-  theme: () => themeStore.theme(),
-  toggle: () =>
-    themeStore.theme.set(themeStore.theme() === "light" ? "dark" : "light"),
-}), "ThemeToggleModel")`,
+export const createThemeToggleModel = createModel(
+  () => ({
+    state: {
+      theme: () => themeStore.theme(),
+    },
+    functions: {
+      toggle: () =>
+        themeStore.theme.set(themeStore.theme() === "light" ? "dark" : "light"),
+    },
+  }),
+  { name: "ThemeToggleModel", structExports: true },
+)`,
     'store + persist — client preferences survive reloads'
   ),
   'feat-theme-index': panel(
@@ -803,8 +869,8 @@ export const ThemeToggleView = createView((vm) =>
   Button({
     variant: "ghost",
     size: "sm",
-    onClick: vm.toggle,
-    children: () => (vm.theme() === "dark" ? "🌙" : "☀️"),
+    onClick: vm.functions.toggle,
+    children: () => (vm.state.theme() === "dark" ? "🌙" : "☀️"),
   }),
   "ThemeToggleView",
 )`,
@@ -878,14 +944,24 @@ export const productsInfiniteQuery = createInfiniteQuery({
     `import { createModel } from "@echojs-ecosystem/framework/hyperdom"
 import { usersQuery } from "../api/users.query"
 
-export const createUserListModel = createModel(() => {
-  const users = usersQuery.with()
-  return {
-    users,
-    names: () => users.data()?.map((u) => u.name) ?? [],
-    refetch: () => users.refetch(),
-  }
-}, "UserListModel")`,
+export const createUserListModel = createModel(
+  () => {
+    const users = usersQuery.with()
+
+    return {
+      data: {
+        users,
+      },
+      state: {
+        names: () => users.data()?.map((u) => u.name) ?? [],
+      },
+      functions: {
+        refetch: () => users.refetch(),
+      },
+    }
+  },
+  { name: "UserListModel", structExports: true },
+)`,
     'Entity model wraps queries — pages import the entity, not raw fetch'
   ),
   'counter-index': panel(
@@ -915,14 +991,22 @@ export const Counter = createComponent(createCounterModel, CounterView, {
     `import { signal } from "@echojs-ecosystem/framework/reactivity"
 import { createModel } from "@echojs-ecosystem/framework/hyperdom"
 
-export const createCounterModel = createModel(() => {
-  const $count = signal(0)
-  return {
-    count: () => $count.value(),
-    increment: () => $count.update((n) => n + 1),
-    reset: () => $count.set(0),
-  }
-}, "CounterModel")`,
+export const createCounterModel = createModel(
+  () => {
+    const $count = signal(0)
+
+    return {
+      state: {
+        count: () => $count.value(),
+      },
+      functions: {
+        increment: () => $count.update((n) => n + 1),
+        reset: () => $count.set(0),
+      },
+    }
+  },
+  { name: "CounterModel", structExports: true },
+)`,
     'reactivity signals — surgical updates, easy to unit-test'
   ),
   'counter-view': panel(
@@ -931,7 +1015,7 @@ export const createCounterModel = createModel(() => {
     `import { button, createView } from "@echojs-ecosystem/framework/hyperdom"
 
 export const CounterView = createView((vm) =>
-  button({ onClick: vm.increment }, () => String(vm.count())),
+  button({ onClick: vm.functions.increment }, () => String(vm.state.count())),
   "CounterView",
 )`,
     'hyperdom view — thin mapping from VM to DOM'
@@ -945,8 +1029,8 @@ import { createCounterModel } from "./counter.model"
 describe("CounterModel", () => {
   it("increments", () => {
     const vm = createCounterModel()
-    vm.increment()
-    expect(vm.count()).toBe(1)
+    vm.functions.increment()
+    expect(vm.state.count()).toBe(1)
   })
 })`,
     'Vitest on models — no DOM for most unit tests',
@@ -1175,15 +1259,22 @@ export const DataTable = createCompoundView({
 
 import { usersQuery } from "@entities/user/api/users.query"
 
-export const createUsersListModel = createModel(() => {
-  const users = usersQuery.with()
+export const createUsersListModel = createModel(
+  () => {
+    const users = usersQuery.with()
 
-  return {
-    rows: () => users.data() ?? [],
-    isPending: () => users.isPending(),
-    refetch: () => users.refetch(),
-  }
-}, "UsersListModel")`,
+    return {
+      state: {
+        rows: () => users.data() ?? [],
+        isPending: () => users.isPending(),
+      },
+      functions: {
+        refetch: () => users.refetch(),
+      },
+    }
+  },
+  { name: "UsersListModel", structExports: true },
+)`,
     'feature model — server state from entity queries'
   ),
   'feat-users-list-view': panel(
@@ -1212,7 +1303,7 @@ export const UsersListView = createView((vm: UsersListVM) =>
         ]),
       ]),
       DataTable.Body(() =>
-        vm.rows().map((user) =>
+        vm.state.rows().map((user) =>
           DataTable.Row([
             DataTable.Cell(user.name),
             DataTable.Cell(user.role),

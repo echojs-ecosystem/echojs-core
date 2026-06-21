@@ -1,5 +1,27 @@
 # @echojs-ecosystem/framework
 
+## 0.9.0
+
+### Minor Changes
+
+- release v0.9.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @echojs-ecosystem/hyperdom@0.9.0
+  - @echojs-ecosystem/async@0.9.0
+  - @echojs-ecosystem/devtools@0.9.0
+  - @echojs-ecosystem/form@0.9.0
+  - @echojs-ecosystem/i18n@0.9.0
+  - @echojs-ecosystem/network@0.9.0
+  - @echojs-ecosystem/persist@0.9.0
+  - @echojs-ecosystem/reactivity@0.9.0
+  - @echojs-ecosystem/router@0.9.0
+  - @echojs-ecosystem/store@0.9.0
+  - @echojs-ecosystem/ui@0.9.0
+  - @echojs-ecosystem/url-state@0.9.0
+
 ## 0.8.0
 
 ### Minor Changes

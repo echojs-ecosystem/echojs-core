@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { signal } from "@echojs-ecosystem/reactivity";
-import { h } from "../h";
-import { render } from "../render";
-import { mount } from "../mount";
+import { h } from "../hyperscript/h";
+import { render } from "../render/render";
+import { mount } from "../render/mount";
 
 describe("props", () => {
   it("ставит class/className/id/title/data-*/aria-*", () => {

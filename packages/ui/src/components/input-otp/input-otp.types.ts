@@ -6,15 +6,16 @@ export type InputOtpOwnProps = Omit<InputFieldOwnProps, "startContent" | "endCon
   value?: string;
   defaultValue?: string;
   onValueChange?: (value: string) => void;
+  autocomplete?: "one-time-code" | string;
+  disabled?: boolean;
+  required?: boolean;
 };
 
 export type InputOtpProps = Omit<
   InputFieldProps,
   "startContent" | "endContent" | "placeholder" | "value" | "defaultValue"
 > &
-  InputOtpOwnProps & {
-    autocomplete?: "one-time-code" | string;
-  };
+  InputOtpOwnProps;
 
 export const INPUT_OTP_OWN_KEYS = [
   ...INPUT_FIELD_OWN_KEYS.filter((key) => key !== "startContent" && key !== "endContent"),
@@ -22,4 +23,7 @@ export const INPUT_OTP_OWN_KEYS = [
   "value",
   "defaultValue",
   "onValueChange",
+  "autocomplete",
+  "disabled",
+  "required",
 ] as const;

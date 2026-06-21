@@ -2,10 +2,7 @@ import { tv } from 'tailwind-variants'
 
 export const docAsideSponsorsStyles = tv({
   slots: {
-    root: [
-      'shrink-0 rounded-2xl border border-border/80 bg-surface-elevated/60 p-4',
-      'dark:border-white/10 dark:bg-surface-elevated/40',
-    ].join(' '),
+    root: 'shrink-0 space-y-3',
     title:
       'mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-fg-subtle',
     list: 'flex flex-col gap-2',
@@ -17,7 +14,7 @@ export const docAsideSponsorsStyles = tv({
       'min-w-0 flex-1 truncate text-[13px] font-medium text-fg-muted transition',
       'group-hover:text-echo-800 dark:group-hover:text-echo-200',
     ].join(' '),
-    footer: 'mt-3 flex flex-col gap-2 border-t border-border/70 pt-3 dark:border-white/10',
+    footer: 'mt-3 flex flex-col gap-2 pt-1',
     cta: [
       'text-center text-xs font-semibold text-echo-700 transition hover:text-echo-900',
       'dark:text-echo-400 dark:hover:text-echo-200',

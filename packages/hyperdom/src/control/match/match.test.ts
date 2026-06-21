@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
 import { signal } from '@echojs-ecosystem/reactivity'
 
-import { h } from '../../h'
-import { render } from '../../render'
+import { h } from '../../hyperscript/h'
+import { render } from '../../render/render'
 import { Match, P } from './index'
 
 type Status =

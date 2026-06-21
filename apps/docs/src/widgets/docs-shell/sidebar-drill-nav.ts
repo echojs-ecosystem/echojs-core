@@ -55,6 +55,14 @@ const rowChevron = (): Child =>
 
 const rowSpacer = (): Child => span({ class: drill.chevronSlot() })
 
+/** Package drill: icons only on Overview / Installation (first block). */
+const packageDrillItemIcon = (item: DocsNavItem): NavIconId | undefined => {
+  if (item.slug === 'overview' || item.slug === 'installation') {
+    return resolveNavIcon(item.contentId, item.slug)
+  }
+  return undefined
+}
+
 const DrillPageLink = (props: {
   page: AnyPage
   label: string
@@ -76,7 +84,7 @@ const DrillPageLink = (props: {
               cn(drill.iconGlyph(), props.iconClassName)
             ),
           ])
-        : span({ class: drill.iconSlot() }),
+        : null,
       span({ class: drill.label() }, props.label),
       props.badge
         ? span({ class: drill.badge() }, props.badge)
@@ -115,6 +123,13 @@ const DrillDocLink = (item: DocsNavItem): Child =>
     page: docPageByContentId[item.contentId]!,
     label: item.title,
     icon: resolveNavIcon(item.contentId, item.slug),
+  })
+
+const DrillPackageDocLink = (item: DocsNavItem): Child =>
+  DrillPageLink({
+    page: docPageByContentId[item.contentId]!,
+    label: item.title,
+    icon: packageDrillItemIcon(item),
   })
 
 const packageOverviewPage = (packageId: string) =>
@@ -233,7 +248,7 @@ const PackageDrillPanel = (group: PackageNavGroup): Child[] => {
     DrillGroup(
       sections.flatMap((section) => [
         section.label ? DrillGroupLabel(section.label) : null,
-        ...section.items.map((item) => DrillDocLink(item)),
+        ...section.items.map((item) => DrillPackageDocLink(item)),
       ])
     ),
   ]
