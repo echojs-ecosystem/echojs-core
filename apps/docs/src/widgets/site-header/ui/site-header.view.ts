@@ -14,7 +14,7 @@ import { docPageByContentId, homePage } from '@app/router'
 import { EchoBrandLogo, GitHubIcon, MenuIcon } from '@widgets/icons'
 import { LocaleDropdown } from '@widgets/locale-dropdown'
 import { DocsSearch } from '@widgets/search'
-import { ThemeToggle } from '@widgets/theme-toggle'
+import { AppearancePicker } from '@widgets/appearance-picker'
 import { VersionDropdown } from '@widgets/version-dropdown'
 
 import type { SiteHeaderVM } from '../model/site-header.model'
@@ -95,7 +95,7 @@ export const SiteHeaderView = createView((vm: SiteHeaderVM): Child => {
             },
             [GitHubIcon()]
           ),
-          ThemeToggle(),
+          AppearancePicker(),
         ]),
       ]),
     ]),

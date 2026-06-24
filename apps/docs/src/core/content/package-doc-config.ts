@@ -55,6 +55,7 @@ export const modernPackageDocConfigs: ModernPackageDocConfig[] = [
       { slug: 'effects', title: 'Effects' },
       { slug: 'batching', title: 'Batching' },
       { slug: 'scopes-and-cleanup', title: 'Scopes & Cleanup' },
+      { slug: 'events', title: 'Events' },
       { slug: 'readonly-signals', title: 'Readonly Signals' },
       { slug: 'immutable-updates', title: 'Immutable Updates' },
       { slug: 'hyperdom-integration', title: 'HyperDOM Integration' },

@@ -28,11 +28,12 @@ const btn = homeButtonStyles()
 
 export const HomeView = createView((vm: HomeVM): Child => {
   return div({ class: home.page() }, [
-    HomeHeader(),
-    div({ class: home.shell() }, [
+    div({ class: home.backdrop() }, [
       div({ class: home.mesh() }),
       div({ class: home.glow() }),
-
+    ]),
+    HomeHeader(),
+    div({ class: home.shell() }, [
       main({ class: home.main() }, [
         section({ class: home.hero() }, [
           div({ class: home.heroContent() }, [

@@ -22,9 +22,9 @@ const btn = homeButtonStyles()
 export const SponsorsView = createView(
   (_vm: SponsorsVM): Child =>
     div({ class: page.page() }, [
+      div({ class: page.backdrop() }, [div({ class: page.mesh() })]),
       HomeHeader(),
       div({ class: page.root() }, [
-        div({ class: page.mesh() }),
         main({ class: page.main() }, [
         div({ class: page.container() }, [
           div({ class: page.header() }, [

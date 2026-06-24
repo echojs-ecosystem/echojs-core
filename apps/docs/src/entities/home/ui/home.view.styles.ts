@@ -2,10 +2,11 @@ import { tv } from 'tailwind-variants'
 
 export const homeStyles = tv({
   slots: {
-    page: 'min-h-dvh bg-surface',
-    shell: 'relative overflow-x-clip',
-    mesh: 'pointer-events-none absolute inset-0 bg-hero-mesh',
-    glow: 'pointer-events-none absolute -top-32 left-1/2 h-[20rem] max-w-[min(40rem,100%)] w-[85%] -translate-x-1/2 rounded-full bg-echo-400/12 blur-[90px] dark:bg-echo-500/8',
+    page: 'relative min-h-dvh overflow-x-clip bg-surface',
+    backdrop: 'pointer-events-none absolute inset-0',
+    mesh: 'absolute inset-0 bg-hero-mesh',
+    glow: 'absolute -top-32 left-1/2 h-[20rem] max-w-[min(40rem,100%)] w-[85%] -translate-x-1/2 rounded-full bg-echo-400/12 blur-[90px] dark:bg-echo-500/8',
+    shell: 'relative z-10 overflow-x-clip',
     main: 'relative min-w-0 overflow-x-clip',
     container: 'relative mx-auto w-full min-w-0 max-w-7xl px-4 pb-20 sm:px-8',
 

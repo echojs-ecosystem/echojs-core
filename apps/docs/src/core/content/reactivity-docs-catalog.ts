@@ -33,6 +33,17 @@ export const reactivityDocCategories: ReactivityDocCategory[] = [
     ],
   },
   {
+    id: 'events',
+    title: 'Events',
+    entries: [
+      {
+        slug: 'event-emitter',
+        name: 'createEventEmitter',
+        description: 'Typed chainable pub/sub bus.',
+      },
+    ],
+  },
+  {
     id: 'types',
     title: 'Types & guards',
     entries: [

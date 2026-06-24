@@ -24,6 +24,10 @@
       "types": "./dist/reactivity.d.ts",
       "default": "./dist/reactivity.js"
     },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "default": "./dist/utils.js"
+    },
     "./hyperdom": {
       "types": "./dist/hyperdom.d.ts",
       "default": "./dist/hyperdom.js"
@@ -167,6 +171,7 @@
     "@echojs-ecosystem/router": "workspace:*",
     "@echojs-ecosystem/store": "workspace:*",
     "@echojs-ecosystem/ui": "workspace:*",
+    "@echojs-ecosystem/utils": "workspace:*",
     "@echojs-ecosystem/url-state": "workspace:*"
   },
   "devDependencies": {

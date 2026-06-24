@@ -15,6 +15,8 @@ import type {
   ReadonlySignal,
   ReadValue,
   DeepReadonly,
+  EventEmitter,
+  EventMap,
 } from '@echojs-ecosystem/reactivity'
 ```
 
@@ -42,6 +44,14 @@ export type DeepReadonly<T> = T extends (...args: any[]) => any
     : T extends object
       ? { readonly [K in keyof T]: DeepReadonly<T[K]> }
       : T
+
+export type EventMap = Record<string, unknown>
+
+export interface EventEmitter<Events extends EventMap> {
+  on<Event extends keyof Events>(event: Event, listener: (payload: Events[Event]) => void): EventEmitter<Events>
+  emit<Event extends keyof Events>(event: Event, payload: Events[Event]): EventEmitter<Events>
+  // …see createEventEmitter for full surface
+}
 ```
 
 ## API
@@ -54,8 +64,11 @@ export type DeepReadonly<T> = T extends (...args: any[]) => any
 | `ReadonlySignal<T>` | interface | Read + subscribe only |
 | `ReadValue<T>` | type | Result of `.value()` / `.peek()` |
 | `DeepReadonly<T>` | type | Recursive readonly for object reads |
+| `EventMap` | type | String-keyed map of event payloads for `createEventEmitter` |
+| `EventEmitter<Events>` | interface | Chainable typed event bus |
 
 ### Related
 
 - [signal](/docs/packages/reactivity/api/signal)
 - [Type guards](/docs/packages/reactivity/api/type-guards)
+- [createEventEmitter](/docs/packages/reactivity/api/event-emitter)

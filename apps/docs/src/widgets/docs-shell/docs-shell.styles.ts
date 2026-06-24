@@ -25,7 +25,7 @@ export const shellStyles = tv({
     sidebarQuick:
       'mb-1 flex flex-col gap-0.5 border-b border-border/60 pb-3 dark:border-white/10',
     sidebarNavIcon:
-      'text-fg-subtle transition group-hover:text-fg group-[.font-medium]:text-amber-600 dark:group-[.font-medium]:text-amber-400',
+      'text-fg-subtle transition group-hover:text-fg group-[.font-medium]:text-echo-600 dark:group-[.font-medium]:text-echo-400',
     sidebarNavLabel: 'min-w-0 flex-1 truncate',
     sidebarNavBadge:
       'shrink-0 rounded-md border border-border/80 px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle dark:border-white/10',
@@ -80,7 +80,7 @@ export const shellStyles = tv({
       'hover:bg-surface-muted/60 hover:text-fg',
     ].join(' '),
     packageChildIcon:
-      'text-fg-subtle/90 group-hover:text-fg group-[.font-medium]:text-amber-600 dark:group-[.font-medium]:text-amber-400',
+      'text-fg-subtle/90 group-hover:text-fg group-[.font-medium]:text-echo-600 dark:group-[.font-medium]:text-echo-400',
     packageChildNested: 'text-[13px]',
     packageNavGroupLabel:
       'px-2 pb-0.5 pt-2.5 text-[10px] font-semibold uppercase tracking-[0.1em] text-fg-subtle/75 first:pt-1',
@@ -142,11 +142,11 @@ export const drillSidebarStyles = tv({
     panel: 'flex flex-col gap-0',
     backRow: [
       'group relative mb-3 flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm font-semibold text-fg-muted transition',
-      'hover:text-amber-950 dark:hover:text-amber-50',
-      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+      'hover:text-echo-950 dark:hover:text-echo-50',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-echo-500',
     ].join(' '),
     backIcon:
-      'h-4 w-4 shrink-0 rotate-180 text-fg-muted transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+      'h-4 w-4 shrink-0 rotate-180 text-fg-muted transition group-hover:text-echo-600 dark:group-hover:text-echo-400',
     backLabel: 'min-w-0 truncate',
     sectionTitle:
       'mb-1.5 mt-5 text-[11px] font-bold uppercase tracking-[0.14em] text-fg-subtle first:mt-1',
@@ -157,13 +157,13 @@ export const drillSidebarStyles = tv({
     packageRowMain: 'min-w-0 flex-1 pr-1',
     packageRowChevron: [
       'group relative inline-flex shrink-0 items-center justify-center rounded-md px-1.5 text-fg-subtle transition',
-      'hover:text-amber-600 dark:hover:text-amber-400',
-      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1.5 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+      'hover:text-echo-600 dark:hover:text-echo-400',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1.5 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-echo-500',
     ].join(' '),
     row: [
       'group relative flex w-full items-center gap-2.5 rounded-md px-2 py-2 pr-1 text-left text-sm text-fg-muted transition',
-      'hover:text-amber-950 dark:hover:text-amber-50',
-      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-amber-500',
+      'hover:text-echo-950 dark:hover:text-echo-50',
+      'hover:before:pointer-events-none hover:before:absolute hover:before:inset-y-1 hover:before:left-0 hover:before:w-0.5 hover:before:rounded-full hover:before:bg-echo-500',
     ].join(' '),
     featuredWrap: [
       'mb-2 rounded-xl border border-echo-500/30 bg-gradient-to-br from-echo-50/70 via-surface-elevated/40 to-transparent p-1',
@@ -172,17 +172,17 @@ export const drillSidebarStyles = tv({
     rowFeatured: 'font-medium text-fg',
     iconFeatured: 'text-echo-600 dark:text-echo-400',
     rowActive: [
-      'bg-amber-500/12 font-medium text-amber-50',
-      'before:pointer-events-none before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:rounded-full before:bg-amber-500',
-      'dark:bg-amber-500/15',
+      'bg-echo-500/12 font-medium text-echo-50',
+      'before:pointer-events-none before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:rounded-full before:bg-echo-500',
+      'dark:bg-echo-500/15',
     ].join(' '),
     iconSlot:
-      'inline-flex h-4 w-4 shrink-0 items-center justify-center text-fg-subtle transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+      'inline-flex h-4 w-4 shrink-0 items-center justify-center text-fg-subtle transition group-hover:text-echo-600 dark:group-hover:text-echo-400',
     iconGlyph: 'h-3.5 w-3.5',
     label: 'min-w-0 flex-1 truncate',
     chevronSlot: 'inline-flex h-4 w-4 shrink-0 items-center justify-center',
     chevronIcon:
-      'h-3.5 w-3.5 text-fg-subtle/70 transition group-hover:text-amber-600 dark:group-hover:text-amber-400',
+      'h-3.5 w-3.5 text-fg-subtle/70 transition group-hover:text-echo-600 dark:group-hover:text-echo-400',
     externalIcon: 'h-3 w-3 text-fg-subtle/70',
     badge:
       'shrink-0 rounded-md border border-border/70 px-1.5 py-0.5 text-[10px] font-medium text-fg-subtle dark:border-white/10',
@@ -203,9 +203,9 @@ export const navLinkStyles = tv({
     },
     active: {
       true: [
-        'bg-amber-50/90 font-medium text-amber-950',
-        'before:absolute before:inset-y-1.5 before:left-0 before:w-0.5 before:rounded-full before:bg-amber-500',
-        'dark:bg-amber-500/15 dark:text-amber-50 dark:ring-1 dark:ring-amber-500/25',
+        'bg-echo-50/90 font-medium text-echo-950',
+        'before:absolute before:inset-y-1.5 before:left-0 before:w-0.5 before:rounded-full before:bg-echo-500',
+        'dark:bg-echo-500/15 dark:text-echo-50 dark:ring-1 dark:ring-echo-500/25',
       ].join(' '),
       false: '',
     },

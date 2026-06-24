@@ -1,0 +1,225 @@
+/**
+ * Surface / base palettes — override neutral tokens via html[data-surface].
+ * Default warm stone lives in global.css @theme + .dark.
+ * Accent color remains independent (accent-palettes.css + data-accent).
+ */
+
+html[data-surface='slate'] {
+  --color-surface: #f8fafc;
+  --color-surface-elevated: #ffffff;
+  --color-surface-muted: #e2e8f0;
+  --color-border: #cbd5e1;
+  --color-fg: #0f172a;
+  --color-fg-muted: #475569;
+  --color-fg-subtle: #94a3b8;
+  --color-code-bg: #0f172a;
+}
+
+html.dark[data-surface='slate'] {
+  --color-surface: #0f172a;
+  --color-surface-elevated: #1e293b;
+  --color-surface-muted: #334155;
+  --color-border: #475569;
+  --color-fg: #f8fafc;
+  --color-fg-muted: #cbd5e1;
+  --color-fg-subtle: #64748b;
+  --color-code-bg: #020617;
+}
+
+html[data-surface='zinc'] {
+  --color-surface: #fafafa;
+  --color-surface-elevated: #ffffff;
+  --color-surface-muted: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-fg: #18181b;
+  --color-fg-muted: #52525b;
+  --color-fg-subtle: #a1a1aa;
+  --color-code-bg: #18181b;
+}
+
+html.dark[data-surface='zinc'] {
+  --color-surface: #09090b;
+  --color-surface-elevated: #18181b;
+  --color-surface-muted: #27272a;
+  --color-border: #3f3f46;
+  --color-fg: #fafafa;
+  --color-fg-muted: #a1a1aa;
+  --color-fg-subtle: #71717a;
+  --color-code-bg: #09090b;
+}
+
+html[data-surface='sand'] {
+  --color-surface: #faf7f2;
+  --color-surface-elevated: #fffdf9;
+  --color-surface-muted: #f0ebe3;
+  --color-border: #e8dfd2;
+  --color-fg: #292019;
+  --color-fg-muted: #6b5c4a;
+  --color-fg-subtle: #a89582;
+  --color-code-bg: #1c1917;
+}
+
+html.dark[data-surface='sand'] {
+  --color-surface: #14110e;
+  --color-surface-elevated: #1f1b17;
+  --color-surface-muted: #2c2720;
+  --color-border: #3d352c;
+  --color-fg: #faf6f0;
+  --color-fg-muted: #b8aa98;
+  --color-fg-subtle: #7a6e60;
+  --color-code-bg: #0a0908;
+}
+
+html[data-surface='sage'] {
+  --color-surface: #f3f6f3;
+  --color-surface-elevated: #f9fbf9;
+  --color-surface-muted: #e4ebe4;
+  --color-border: #cdd9cd;
+  --color-fg: #141a14;
+  --color-fg-muted: #4a574a;
+  --color-fg-subtle: #849584;
+  --color-code-bg: #1a211a;
+}
+
+html.dark[data-surface='sage'] {
+  --color-surface: #0a0f0a;
+  --color-surface-elevated: #141a14;
+  --color-surface-muted: #1f281f;
+  --color-border: #2f3d2f;
+  --color-fg: #f0f5f0;
+  --color-fg-muted: #a3b0a3;
+  --color-fg-subtle: #6b7a6b;
+  --color-code-bg: #050805;
+}
+
+html[data-surface='ocean'] {
+  --color-surface: #f0f7ff;
+  --color-surface-elevated: #f8fbff;
+  --color-surface-muted: #dbeafe;
+  --color-border: #bfdbfe;
+  --color-fg: #0c1929;
+  --color-fg-muted: #3d5a80;
+  --color-fg-subtle: #7ba3c9;
+  --color-code-bg: #0f172a;
+}
+
+html.dark[data-surface='ocean'] {
+  --color-surface: #0a1018;
+  --color-surface-elevated: #111827;
+  --color-surface-muted: #1e2a3f;
+  --color-border: #2d3f5c;
+  --color-fg: #eef4ff;
+  --color-fg-muted: #94b0d4;
+  --color-fg-subtle: #5a7a9e;
+  --color-code-bg: #030712;
+}
+
+html[data-surface='dusk'] {
+  --color-surface: #f7f5fa;
+  --color-surface-elevated: #fcfbfd;
+  --color-surface-muted: #ebe6f2;
+  --color-border: #d8cfe6;
+  --color-fg: #1a1523;
+  --color-fg-muted: #5c5270;
+  --color-fg-subtle: #968aa8;
+  --color-code-bg: #1a1523;
+}
+
+html.dark[data-surface='dusk'] {
+  --color-surface: #100e14;
+  --color-surface-elevated: #1a1720;
+  --color-surface-muted: #28232f;
+  --color-border: #3d3548;
+  --color-fg: #f5f0fa;
+  --color-fg-muted: #b0a3c0;
+  --color-fg-subtle: #756888;
+  --color-code-bg: #0a080c;
+}
+
+html[data-surface='graphite'] {
+  --color-surface: #f4f4f4;
+  --color-surface-elevated: #ffffff;
+  --color-surface-muted: #e8e8e8;
+  --color-border: #d4d4d4;
+  --color-fg: #0a0a0a;
+  --color-fg-muted: #404040;
+  --color-fg-subtle: #737373;
+  --color-code-bg: #171717;
+}
+
+html.dark[data-surface='graphite'] {
+  --color-surface: #0a0a0a;
+  --color-surface-elevated: #141414;
+  --color-surface-muted: #1f1f1f;
+  --color-border: #333333;
+  --color-fg: #f5f5f5;
+  --color-fg-muted: #a3a3a3;
+  --color-fg-subtle: #666666;
+  --color-code-bg: #050505;
+}
+
+html[data-surface='midnight'] {
+  --color-surface: #eef1f8;
+  --color-surface-elevated: #f8f9fc;
+  --color-surface-muted: #dde3f0;
+  --color-border: #c5cfe3;
+  --color-fg: #0b1020;
+  --color-fg-muted: #3d4660;
+  --color-fg-subtle: #7a849e;
+  --color-code-bg: #0b1020;
+}
+
+html.dark[data-surface='midnight'] {
+  --color-surface: #060912;
+  --color-surface-elevated: #0e1424;
+  --color-surface-muted: #171f33;
+  --color-border: #24304a;
+  --color-fg: #eef2ff;
+  --color-fg-muted: #9aa8c9;
+  --color-fg-subtle: #5c6a8a;
+  --color-code-bg: #030508;
+}
+
+html[data-surface='cream'] {
+  --color-surface: #faf6ef;
+  --color-surface-elevated: #fffdf8;
+  --color-surface-muted: #efe8da;
+  --color-border: #e0d4c0;
+  --color-fg: #2a2218;
+  --color-fg-muted: #6e5f4a;
+  --color-fg-subtle: #a8957a;
+  --color-code-bg: #221c14;
+}
+
+html.dark[data-surface='cream'] {
+  --color-surface: #16130e;
+  --color-surface-elevated: #211c15;
+  --color-surface-muted: #2e271d;
+  --color-border: #42392b;
+  --color-fg: #faf4ea;
+  --color-fg-muted: #c4b49a;
+  --color-fg-subtle: #877862;
+  --color-code-bg: #0c0a07;
+}
+
+html[data-surface='rose-fog'] {
+  --color-surface: #faf5f6;
+  --color-surface-elevated: #fffbfb;
+  --color-surface-muted: #f2e6e9;
+  --color-border: #e5d2d8;
+  --color-fg: #24181c;
+  --color-fg-muted: #6b5058;
+  --color-fg-subtle: #a88992;
+  --color-code-bg: #24181c;
+}
+
+html.dark[data-surface='rose-fog'] {
+  --color-surface: #140e10;
+  --color-surface-elevated: #1f1518;
+  --color-surface-muted: #2d2024;
+  --color-border: #453036;
+  --color-fg: #faf0f2;
+  --color-fg-muted: #c4a3ab;
+  --color-fg-subtle: #876870;
+  --color-code-bg: #0a0708;
+}

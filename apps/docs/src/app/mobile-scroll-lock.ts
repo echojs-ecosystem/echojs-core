@@ -82,5 +82,6 @@ export const bindMobileNavCloseOnNavigate = (): void => {
     appRouter.$path.value()
     closeMobileNav()
     closeHomeNav()
+    syncDocsHeaderScrolled()
   })
 }

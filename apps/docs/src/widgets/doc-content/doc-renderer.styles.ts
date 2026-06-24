@@ -82,10 +82,10 @@ export const calloutStyles = tv({
         body: 'text-yellow-900/85 dark:text-yellow-50/90',
       },
       warning: {
-        root: 'bg-amber-400/12 dark:bg-amber-400/10',
-        icon: 'text-amber-600 dark:text-amber-400',
-        title: 'text-amber-950 dark:text-amber-50',
-        body: 'text-amber-900/85 dark:text-amber-50/90',
+        root: 'bg-echo-400/12 dark:bg-echo-400/10',
+        icon: 'text-echo-600 dark:text-echo-400',
+        title: 'text-echo-950 dark:text-echo-50',
+        body: 'text-echo-900/85 dark:text-echo-50/90',
       },
       danger: {
         root: 'bg-rose-500/10 dark:bg-rose-400/10',

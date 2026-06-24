@@ -91,3 +91,4 @@ public object API.
 - [Signals](/docs/packages/reactivity/guides/signals) — writable cells
 - [Computed Values](/docs/packages/reactivity/guides/computed) — derived state
 - [Effects](/docs/packages/reactivity/guides/effects) — side work
+- [Events](/docs/packages/reactivity/guides/events) — typed pub/sub buses

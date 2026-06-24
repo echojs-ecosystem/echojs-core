@@ -18,6 +18,12 @@ export const bindDocsHeaderScroll = (): void => {
   if (bound || typeof window === 'undefined') return
   bound = true
 
+  const onScroll = (): void => {
+    syncDocsHeaderScrolled()
+  }
+
   syncDocsHeaderScrolled()
-  window.addEventListener('scroll', syncDocsHeaderScrolled, { passive: true })
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('scrollend', onScroll, { passive: true })
+  window.addEventListener('resize', onScroll, { passive: true })
 }

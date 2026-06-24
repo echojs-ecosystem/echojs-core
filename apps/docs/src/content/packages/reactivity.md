@@ -20,6 +20,7 @@ keywords: [signals, computed, effect, batch, scope, reactivity]
 | [`effect`](/docs/packages/reactivity/api/effect) | Side effect that re-runs when dependencies change |
 | [`batch`](/docs/packages/reactivity/api/batch) | Coalesce multiple writes before notifications |
 | [`scope`](/docs/packages/reactivity/api/scope) | Group effects with `cleanup()` for disposal |
+| [`createEventEmitter`](/docs/packages/reactivity/api/event-emitter) | Typed chainable event bus (`on`, `emit`, `once`) |
 
 ## Common patterns
 

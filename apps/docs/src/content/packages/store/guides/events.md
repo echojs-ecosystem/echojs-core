@@ -61,6 +61,11 @@ effect(() => {
 Prefer `subscribe` or events when you need `prevValue`. Prefer `$value` inside
 existing reactive contexts (effects, computed, HyperDOM reactive children).
 
+For **multi-event buses** or module-level hooks without a store instance, use
+[`createEventEmitter`](/docs/packages/reactivity/api/event-emitter) from
+`@echojs-ecosystem/reactivity` — see the
+[Events guide](/docs/packages/reactivity/guides/events).
+
 ## `withDebug`
 
 Logs `{ prevValue, value }` on each change to `console` (no-op if `console`
@@ -79,3 +84,4 @@ Use `name` in `createStore` options for readable logs.
 - [Creating Stores](/docs/packages/store/guides/creating-stores)
 - [API: createStore](/docs/packages/store/api/create-store)
 - [API: Extensions](/docs/packages/store/api/extensions)
+- [Reactivity: Events](/docs/packages/reactivity/guides/events) — `createEventEmitter`

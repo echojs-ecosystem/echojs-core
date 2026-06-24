@@ -19,6 +19,7 @@ The reactive foundation of EchoJS. Built on a fast signal engine, wrapped in a *
 - **`computed`** — lazy derived values with automatic dependency tracking
 - **`effect` / `scope`** — side effects with automatic cleanup
 - **`batch`** — coalesce multiple writes into one notification wave
+- **`createEventEmitter`** — typed chainable event bus for named pub/sub
 - **`DeepReadonly`** — object reads cannot be mutated through `.value()`; use `.set()` / `.update()`
 
 ## Install
@@ -57,6 +58,7 @@ batch(() => {
 | `scope(fn)` | Effect scope — nested effects cleaned up together |
 | `batch(fn)` | Defer reactions until the batch completes |
 | `readonly($sig)` | Readonly facade without `.set()` / `.update()` |
+| `createEventEmitter()` | Typed chainable event bus (`on`, `emit`, `once`, `off`) |
 | `isSignal` / `isReadonlySignal` | Runtime type guards |
 
 ### Design notes

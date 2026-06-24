@@ -5,7 +5,7 @@ import { docsShellPadding } from '@core/styles/docs-shell'
 export const homeHeaderStyles = tv({
   slots: {
     root: [
-      'top-0 z-50 border-b',
+      'top-0 z-50',
       'transition-[background-color,box-shadow,border-color,backdrop-filter] duration-200',
     ].join(' '),
     inner:
@@ -58,24 +58,11 @@ export const homeHeaderStyles = tv({
       },
     },
     {
-      layout: 'home',
+      layout: ['home', 'docs'],
       scrolled: false,
       scrollLocked: false,
       class: {
-        root: [
-          'border-transparent bg-transparent shadow-none',
-          'max-sm:border-border/60 max-sm:bg-surface/90 max-sm:shadow-sm',
-          'max-sm:backdrop-blur-xl max-sm:backdrop-saturate-150',
-          'max-sm:dark:border-white/10 max-sm:dark:bg-surface/90',
-        ].join(' '),
-      },
-    },
-    {
-      layout: 'docs',
-      scrolled: false,
-      scrollLocked: false,
-      class: {
-        root: 'border-transparent bg-transparent shadow-none',
+        root: 'border-b-0 bg-transparent shadow-none backdrop-blur-none',
       },
     },
     {
@@ -83,9 +70,8 @@ export const homeHeaderStyles = tv({
       scrolled: true,
       class: {
         root: [
-          'border-border/60 bg-surface/90 shadow-sm shadow-black/10',
-          'backdrop-blur-xl backdrop-saturate-150',
-          'dark:border-white/10 dark:bg-surface/90',
+          'border-b border-border/60 bg-surface-elevated shadow-sm shadow-black/10',
+          'dark:border-white/10',
         ].join(' '),
       },
     },
@@ -93,9 +79,8 @@ export const homeHeaderStyles = tv({
       scrollLocked: true,
       class: {
         root: [
-          'border-border/60 bg-surface/90 shadow-sm shadow-black/10',
-          'backdrop-blur-xl backdrop-saturate-150',
-          'dark:border-white/10 dark:bg-surface/90',
+          'border-b border-border/60 bg-surface-elevated shadow-sm shadow-black/10',
+          'dark:border-white/10',
         ].join(' '),
       },
     },

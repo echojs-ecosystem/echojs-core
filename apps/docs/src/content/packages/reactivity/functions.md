@@ -27,6 +27,12 @@ Core reactive primitives — signals, derived values, effects, and scopes.
 | [scope](/docs/packages/reactivity/api/scope) | Disposable effect scope |
 | [cleanup](/docs/packages/reactivity/api/cleanup) | Register scope teardown |
 
+## Events
+
+| Export | Description |
+| ------ | ----------- |
+| [createEventEmitter](/docs/packages/reactivity/api/event-emitter) | Typed chainable pub/sub bus |
+
 ## Types & guards
 
 | Export | Description |
